@@ -1,0 +1,123 @@
+
+@icomoon-font-path: "../fonts";
+@icon-architect-designer: \e900;
+@icon-builders: \e901;
+@icon-ceiling: \e902;
+@icon-cornice: \e903;
+@icon-finishes: \e904;
+@icon-insulation: \e905;
+@icon-interiorlining: \e906;
+@icon-plasteringdiy: \e907;
+@icon-steelframing: \e908;
+@icon-homeowner: \e909;
+
+
+@font-face {
+  font-family: 'usgbicon';
+  src:  url('@{icomoon-font-path}/usgbicon.eot?4q6yei');
+  src:  url('@{icomoon-font-path}/usgbicon.eot?4q6yei#iefix') format('embedded-opentype'),
+    url('@{icomoon-font-path}/usgbicon.ttf?4q6yei') format('truetype'),
+    url('@{icomoon-font-path}/usgbicon.woff?4q6yei') format('woff'),
+    url('@{icomoon-font-path}/usgbicon.svg?4q6yei#usgbicon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+
+.icon {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'usgbicon' !important;
+ // speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  //font-size: 150px;
+  margin: auto;
+  position: relative;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  
+  /* Better Font Rendering  */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+ 
+}
+
+
+//sizes
+.icon-150{
+  font-size: 150px;
+}
+
+.icon-100{
+  font-size: 100px;
+}
+
+.icon-80{
+  font-size: 80px;
+}
+.icon-50{
+  font-size: 50px;
+}
+
+
+
+//types
+.icon-homeowner {
+  &:before {
+    content: unicode(@icon-homeowner); 
+  }
+}
+
+
+.icon-architect-designer {
+  &:before {
+    content: unicode(@icon-architect-designer); 
+  }
+}
+.icon-builders {
+  &:before {
+    content: unicode(@icon-builders); 
+  }
+}
+.icon-ceiling {
+  &:before {
+    content: unicode(@icon-ceiling); 
+  }
+}
+.icon-cornice {
+  &:before {
+    content: unicode(@icon-cornice); 
+  }
+}
+.icon-finishes {
+  &:before {
+    content: unicode(@icon-finishes); 
+  }
+}
+.icon-insulation {
+  &:before {
+    content: unicode(@icon-insulation); 
+  }
+}
+.icon-interiorlining {
+  &:before {
+    content: unicode(@icon-interiorlining); 
+  }
+}
+.icon-plasteringdiy {
+  &:before {
+    content: unicode(@icon-plasteringdiy); 
+  }
+}
+.icon-steelframing {
+  &:before {
+    content: unicode(@icon-steelframing); 
+  }
+}
+

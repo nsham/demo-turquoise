@@ -1,0 +1,470 @@
+html, body {
+  width: 100%;
+  height: 100%;
+  font-family: @noto, sans-serif;
+  font-size: @regularSize;
+}
+
+p{
+  line-height: 1.5;
+	margin: 0 0 15px 0;
+}
+
+svg {
+  /*to fix jagged line on curve path*/
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+// reset desktop container to 1240px
+.container{
+  width: 1240px;
+}
+@media (max-width: 1240px){
+  .container {
+    width: 100%;
+    //padding-left:15px;
+    //padding-right:15px;
+  }
+}
+
+.img-responsive{
+  width: 100%;
+}
+
+.content-main{
+  margin-top: 65px;
+  position: relative;
+  z-index: 10;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.hide-text {
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.weight-normal{
+  font-weight: normal;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.no-txt-transform {
+  text-transform: none;
+}
+
+.underline{
+  text-decoration: underline;
+}
+
+.inline-block {
+  display: inline-block !important;
+}
+
+//TODO: naming not standardize
+.inline-block-md {
+  @media only screen and (min-width: @min-bp-md) {
+    display: inline-block !important;
+  }
+}
+
+//TODO: naming not standardize
+.inline-block-sm {
+  @media only screen and (min-width: @min-bp-sm) {
+    display: inline-block !important;
+  }
+}
+
+//TODO: naming not standardize
+.inline-block-min-sm {
+  @media only screen and (min-width: @min-bp-sm) {
+    display: inline-block !important;
+  }
+}
+
+.block {
+  display: block !important;
+}
+
+.block-md {
+  @media only screen and (min-width: @min-bp-md) {
+    display: block !important;
+  }
+}
+
+.block-sm {
+  @media only screen and (min-width: @min-bp-sm) {
+    display: block !important;
+  }
+}
+
+
+.block-min-sm{
+  @media only screen and (min-width: @min-bp-sm) {
+    display: block !important;
+  }
+}
+
+.inline {
+  display: inline !important;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.absolute-mid {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.relative {
+  position: relative;
+}
+
+.static {
+  position: static;
+}
+
+.height-full {
+  height: 100%;
+}
+
+.text-shadow{
+  text-shadow: 1px 1px 10px #222;
+}
+
+.text-sm-center {
+  @media only screen and (min-width: @min-bp-sm) {
+    text-align: center;
+  }
+}
+
+.text-md-center {
+  @media only screen and (min-width: @min-bp-md) {
+    text-align: center;
+  }
+}
+
+.text-sm-left {
+  @media only screen and (min-width: @min-bp-sm) {
+    text-align: left;
+  }
+}
+
+.text-sm-right {
+  @media only screen and (min-width: @min-bp-sm) {
+    text-align: right;
+  }
+}
+
+
+.text-capitalize {
+  text-transform: capitalize !important;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.width-full {
+  width: 100%;
+}
+
+.width-half{
+  width:55%;
+}
+
+.height-full {
+  height: 100%;
+}
+
+.float-left{
+  float: left;
+}
+
+.float-right{
+  float: right;
+}
+
+// ----------------------------------------------------------------------
+// Grid System Responsive Padding
+// ----------------------------------------------------------------------
+
+// .row-0 {
+//   &:extend(.row);
+//   margin: {
+//     left: 0;
+//     right: 0;
+//   }
+// }
+// 
+// .row-2 {
+//   &:extend(.row);
+//   margin: {
+//     left: -2px;
+//     right: -2px;
+//   }
+// }
+// 
+// .row-5 {
+//   &:extend(.row);
+//   margin: {
+//     left: -5px;
+//     right: -5px;
+//   }
+// }
+// 
+// .row-10 {
+//   &:extend(.row);
+//   margin: {
+//     left: -10px;
+//     right: -10px;
+//   }
+// }
+// 
+// .row-20 {
+//   &:extend(.row);
+//   margin: {
+//     left: -20px;
+//     right: -20px;
+//   }
+// }
+// 
+
+.col-p-30 {
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.col-md-p-30 {
+  @media only screen and (min-width: @min-bp-md) {
+      padding-left: 30px;
+      padding-right: 30px;
+  }
+}
+
+.col-sm-p-30 {
+  @media only screen and (min-width: @min-bp-sm) {
+      padding-left: 30px;
+      padding-right: 30px;
+  }
+}
+
+.col-p-15 {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.col-md-p-15 {
+  @media only screen and (min-width: @min-bp-md) {
+      padding-left: 15px;
+      padding-right: 15px;
+  }
+}
+
+.col-sm-p-15 {
+  @media only screen and (min-width: @min-bp-sm) {
+      padding-left: 15px;
+      padding-right: 15px;
+  }
+}
+
+.col-p-7 {
+    padding-left: 7px;
+    padding-right: 7px;
+}
+
+.col-sm-p-7 {
+  @media only screen and (min-width: @min-bp-sm) {
+      padding-left: 7px;
+      padding-right: 7px;
+  }
+}
+
+.col-p-5 {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.col-sm-p-5 {
+  @media only screen and (min-width: @min-bp-sm) {
+      padding-left: 5px;
+      padding-right: 5px;
+  }
+}
+
+.col-p-2 {
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
+.col-p-0 {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.col-sm-p-0 {
+  @media only screen and (min-width: @min-bp-sm) {
+      padding-left: 0;
+      padding-right: 0;
+  }
+}
+
+.col-md-p-0 {
+  @media only screen and (min-width: @min-bp-md) {
+      padding-left: 0;
+      padding-right: 0;
+  }
+}
+
+
+
+// ----------------------------------------------------------------------
+// Flex Grid System
+// ----------------------------------------------------------------------
+
+.flex-row {
+  display: flex;
+  align-items: center;
+
+  &.align-top {
+    align-items: flex-start;
+  }
+  &.align-baseline {
+    align-items: baseline;
+  }
+}
+
+.no-wrap {
+  flex-wrap: nowrap;
+}
+
+.align-self-left {
+  margin-right: auto;
+}
+
+.align-self-right {
+  margin-left: auto;
+}
+
+@flex-grow-count: 12;
+
+.for(@i: 1) when (@i <= @flex-grow-count) {
+  .flex-grow-@{i} {
+    flex-grow: @i;
+  }
+  .for((@i + 1));
+}
+.for();
+
+// ----------------------------------------------------------------------
+// Responsive Text Alignment
+// ----------------------------------------------------------------------
+
+.text-center{
+  text-align: center;
+}
+
+.text-left{
+  text-align: left;
+}
+
+.text-right{
+  text-align: right;
+}
+
+@media only screen and (min-width: @min-bp-sm) {
+  .text-sm-center{
+    text-align: center;
+  }
+
+  .text-sm-left{
+    text-align: left;
+  }
+
+  .text-sm-right{
+    text-align: right;
+  }
+}
+
+@media only screen and (min-width: @min-bp-md) {
+  .width-half{
+    width: 80%;
+  }
+  .text-md-center{
+    text-align: center;
+  }
+
+  .text-md-left{
+    text-align: left;
+  }
+
+  .text-md-right{
+    text-align: right;
+  }
+}
+
+@media only screen and (min-width: @min-bp-lg) {
+  .text-lg-center{
+    text-align: center;
+  }
+
+  .text-lg-left{
+    text-align: left;
+  }
+
+  .text-lg-right{
+    text-align: right;
+  }
+}
+
+/*
+ * Row with equal height columns
+ * --------------------------------------------------
+ */
+ .row-eq-height {
+  @media only screen and (min-width: @min-bp-sm) {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display:         flex;
+  }
+}
+
+.flexi-height{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  left: 0;
+  min-height: 100%;
+  height: 100%;
+}
+
+
+
+/*
+ * Overlay image color
+ * --------------------------------------------------
+ */
+ .bg-overlay{
+   width: 100%;
+   height: 100%;
+   background-color:rgba(0, 0, 0, 0.6);
+   top: 0;
+   left:0;
+   position: relative;
+ }
+
+
+

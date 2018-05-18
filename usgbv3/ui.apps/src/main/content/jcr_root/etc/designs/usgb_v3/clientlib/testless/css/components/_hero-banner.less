@@ -1,0 +1,112 @@
+// ----------------------------------------------------------------------
+// Component: Hero Banner
+// ----------------------------------------------------------------------
+
+.ico-indicator{
+    position: absolute;
+    bottom:10px;
+    right:15px;
+    z-index: 100;
+}
+
+.hero-banner-wrapper{
+    position: relative;
+    padding: 25px 15px;
+    .banner-big{
+        min-height: 500px;
+    }
+
+    .banner-small{
+        min-height: 250px;
+    }
+
+    .content-area{
+        width: 100%;
+        @media (min-width: 768px) {
+            width: 60%;
+        }
+    }
+
+    h2{
+        font-family: @noto;
+        font-weight: 700;
+    }
+
+    p{
+        font-weight: normal;
+    }
+
+    /* Content Vertical Alignment */
+    .va-top{
+        position: absolute;
+        top: 0;
+    }
+
+    .va-sm-top{
+        @media(min-width: 768px){
+            position: absolute;
+            top: 0;
+        }
+    }
+
+    .va-md-top{
+        .breakpoint(@bp-md) {
+            position: absolute;
+            top: 0;
+        }
+    }
+
+    .va-middle{
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .va-sm-middle{
+        @media(min-width: 768px){
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+    }
+
+    .va-bottom{
+        position: absolute;
+        bottom: 0;
+    }
+    /* END of Content Vertical Alignment */
+
+    /* Content Horizontal Alignment */
+    .ha-left{
+        position: absolute;
+        left: 0;
+    }
+
+  
+
+  
+
+    .ha-center{
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .ha-right{
+        position: absolute;
+        right: 0;
+    }
+
+    /* END of Content Horizontal Alignment */
+
+    /* Centerise Content*/
+    .center{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+    }
+    /* END of Centerise Content*/
+
+}

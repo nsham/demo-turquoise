@@ -1,0 +1,24 @@
+// ----------------------------------------------------------------------
+
+  // Display inline block cross browser
+
+// ----------------------------------------------------------------------
+
+// example: .inline-block();
+
+.center-of-the-unknown(@offset: null) {
+  &:before {
+	content: '';
+	display: inline-block;
+	height: 100%;
+	vertical-align: middle;
+	& when (@offset != null) {
+	  margin-right: @offset;
+	}
+  }
+  & > * {
+	display: inline-block;
+	vertical-align: middle;
+	max-width: 100%;
+  }
+}

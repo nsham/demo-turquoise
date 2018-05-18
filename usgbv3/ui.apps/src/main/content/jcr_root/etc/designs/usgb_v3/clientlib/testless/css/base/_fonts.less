@@ -1,0 +1,208 @@
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans:400,700');
+// ----------------------------------------------------------------------
+// Responsive Fonts
+// Header Text Font Size
+// ----------------------------------------------------------------------
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.ht1,
+.ht2,
+.ht3,
+.ht4,
+.ht5,
+.ht6,
+.footer-title {
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-family: 'Noto Sans', sans-serif;
+    line-height: 1.2;
+}
+
+.noto-regular{
+    font-family: @noto;
+    font-weight: 400;
+}
+
+.noto-bold{
+    font-family: @noto;
+    font-weight: 700;
+}
+
+.font-awesome{
+    font-family: @font-awesome;
+}
+
+h1,
+.ht1 {
+    font-size: 56px;
+}
+
+h2,
+.ht2 {
+    font-size: 48px;
+}
+
+h3,
+.ht3{
+    font-size: 40px;
+}
+
+h4,
+.ht4 {
+    font-size: 32px;
+}
+
+h5,
+.ht5{
+    font-size: 24px;
+}
+
+h6,
+.ht6 {
+    font-size: 16px;
+}
+
+@media(max-width:768px) {
+    h1,
+    .ht1 {
+        font-size: 36px;
+    }
+    h2,
+    .ht2 {
+        font-size: 32px;
+    }
+    h3,
+    .ht3 {
+        font-size: 28px;
+    }
+    h4,
+    .ht4 {
+        font-size: 24px;
+    }
+    h5,
+    .ht5 {
+        font-size: 20px;
+    }
+    h6,
+    .ht6 {
+        font-size: 16px;
+    }
+
+
+}
+
+// ----------------------------------------------------------------------
+// Responsive Fonts
+// output: fs-{font-sizes}
+// Body Text Font Size
+// ----------------------------------------------------------------------
+
+// @font-sizes: (20, 14, 12, 10); reference only
+
+
+//.loop-font(@bp: null) {
+//    @each @size in @font-sizes {
+//      .fs-@{size} {
+//        font-size: @size+ px;
+//      }
+//    }
+//}
+
+.fs-1 { font-size: 16px; line-height:1.5; }
+.fs-2 { font-size: 14px; line-height:1.5; }
+.fs-3 { font-size: 12px; line-height:1.2; }
+
+@media (min-width: 768px) {
+	.fs-1 { font-size: 16px; line-height:1.5; }
+	.fs-2 { font-size: 14px; line-height:1.5; }
+	.fs-3 { font-size: 12px; line-height:1.2; }
+}
+
+
+
+// ----------------------------------------------------------------------
+// Headline Sub-Text
+// ----------------------------------------------------------------------
+.sub-heading {
+    font-size: 19px; 
+    line-height: 1.5;
+    font-weight: 700;
+    @media (min-width: 768px) {
+        font-size: 18px;
+    }
+}
+
+
+// ----------------------------------------------------------------------
+// Header Title Yellow Icon
+// ----------------------------------------------------------------------
+.yellow-label{
+    &:before{
+            content: " ";
+            position: absolute;
+            background: url(../images/yellow-header-icon-l.png) no-repeat transparent;
+            background-size: 100%;
+            width: 56px;
+            height: 70px;
+            left:0;
+            margin-top:0px;
+    }
+}
+
+
+.ht1{
+    .yellow-label{
+        &:before{ 
+            width: 41px;
+            left: -67px;
+            margin-top: -6px;
+            .breakpoint (@min-bp-sm){
+                width: 26px;
+                left: -40px;
+                margin-top: -3px;
+            }
+        }
+    }
+}
+
+.ht4{
+    .yellow-label{
+        &:before{ 
+            width: 23px;
+            left: -40px;
+            margin-top: -2px;
+            .breakpoint (@min-bp-sm){
+                width: 17px;
+                left: -27px;
+                margin-top: -2px;
+            }
+        }
+    }
+}
+
+.ht5{
+    .yellow-label{
+        &:before{ 
+            width: 56px;
+            left: -3px;
+            margin-top: -1px;
+        }
+    }
+}
+
+.footer-title{
+    font-size: 14px;
+    .yellow-label{
+        &:before{ 
+            width: 11px;
+            left: -4px;
+            margin-top: -2px;
+        }
+    }
+}

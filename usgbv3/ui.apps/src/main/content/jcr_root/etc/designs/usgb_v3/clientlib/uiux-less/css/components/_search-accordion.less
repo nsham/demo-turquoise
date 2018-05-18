@@ -1,0 +1,64 @@
+// ----------------------------------------------------------------------
+// Component: accordionfc
+// ----------------------------------------------------------------------
+
+.accordionfc{
+	
+	.content{
+		
+		margin: 0;
+		
+		.radio{
+			&:last-child{
+			/*fix toggle flickering issue*/
+			margin: 0;
+			}
+		}
+	}
+
+	.heading {
+		cursor:pointer;
+		position: relative;;
+
+		span{
+		    &:first-child {
+			    padding-right: 18px;
+			    display: block;
+			}
+
+			&.glyphicon {
+			    position: absolute;
+			    top: 4px;
+			    right: 0;
+			}
+
+		}
+
+		
+		
+
+	}
+
+	&:before{
+		content: '';
+	    display: block;
+	    margin-top: 20px;
+	    margin-bottom: 20px;
+	    border: 0;
+	    border-top: 1px solid #eee;
+	}
+
+	&:after{
+		content: '';
+	    display: block;
+	    margin-top: 20px;
+	    margin-bottom: 20px;
+	    border: 0;
+	    border-top: 1px solid #eee;
+	}
+
+	//default state
+	.closeac{
+		display: none;
+	}
+}

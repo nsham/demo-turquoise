@@ -1,0 +1,29 @@
+// ----------------------------------------------------------------------
+
+  // Transform
+
+// ----------------------------------------------------------------------
+
+// example: .transform("origin", 0, 0);
+
+.transform(@type, @values...) {
+  @n: length(@values);
+  @i: 1;
+
+  @originVal: ();
+
+  @while @i <= @n {
+    @itemVal: (extract(@values, @i));
+    & when (@type =) "rotate" or @type == "rotateY" or @type == "rotateX" {
+      @originVal: append(@originVal, @itemVal + deg);
+    }
+& when not (@type =) {
+      @originVal: append(@originVal, @itemVal + px);
+    }
+
+    @i: @i + 1;
+  }
+  -webkit-transform: @{type}(@originVal);
+     -moz-transform: @{type}(@originVal);
+          transform: @{type}(@originVal);
+}

@@ -1,0 +1,81 @@
+// ----------------------------------------------------------------------
+
+  // Table Responsive (Product Slider)
+
+// ----------------------------------------------------------------------
+
+//reset
+.table-responsive{
+    border:none;
+    margin:0;
+    padding:0;
+}
+
+
+//product page slider
+.slider-wrapper{
+    width: 100%;
+    position: relative;
+    overflow-y: hidden;
+    overflow-x: auto;
+    white-space: nowrap;
+  //  display:table;
+   .slider-items{
+       display: table-cell;
+    //    .breakpoint(@min-bp-sm){
+    //        float:none;
+    //        display:inline-block;
+           
+    //    }
+
+   }
+   .col-sm-2-1{
+        width: 13%;
+       @media (min-width:768px) {
+            width:21%;
+       }
+       @media (min-width:800px) {
+        width: 19.3333%;
+        }
+   }
+
+   
+}
+//////////////////
+//Align Items 
+//////////////////
+.s-items-middle{
+    position: absolute;
+    top: 40%;
+}
+
+.s-items-right{
+    position: absolute;
+    right: 0;
+}
+.s-items-left{
+    position: absolute;
+    left: 0;
+}
+
+/// slider with btns///
+.s-items-btn-middle{
+    position: absolute;
+    top: 35%;
+}
+
+.s-items-btn-right{
+    position: absolute;
+    right: 0;
+}
+
+.s-items-btn-left{
+    position: absolute;
+    left: 0;
+}
+
+
+
+
+
+

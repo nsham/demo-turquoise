@@ -1,0 +1,125 @@
+// ----------------------------------------------------------------------
+// checkbox
+// ----------------------------------------------------------------------
+
+.checkbox-wrapper{
+        display:block;
+        color:#5f575c;
+        font-size:16px;
+}
+
+
+// ----------------------------------------------------------------------
+// styling checkbox
+// --------------------------------------------------------------------
+
+
+/* The container */
+.container-checkbox {
+   
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    
+    position: relative;
+    width: auto;
+    /* min-height: 18px; */
+    padding-left: 10px;
+    padding-right: 40px;
+    /* margin-bottom: 0; */
+    font-weight: normal;
+    cursor: pointer;
+
+}
+
+/* Hide the browser's default checkbox */
+.container-checkbox input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+    position: absolute;
+    top: 0px;
+    bottom:0px;
+    margin: auto;
+    left: 0px;
+    width: 16px;
+    height: 16px;
+    border-radius: 3px;
+    background-color: #e6e6e6;
+
+    &.fs-2{
+        width: 14px;
+        height: 14px;
+    }
+
+    &.fs-3{
+        width: 12px;
+        height: 12px;
+    }
+
+}
+
+
+.radio label, .checkbox label {
+    padding-left: 25px;
+    min-height: auto;
+}
+
+/* On mouse-over, add a grey background color */
+/*hover color before check*/
+.container-checkbox input:hover ~ .checkmark {
+     background-color: #01963a;
+}
+
+
+/* When the checkbox is checked, add a blue background */
+.container-checkbox input:checked ~ .checkmark {
+    background-color: #01963a;
+
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when checked */
+.container-checkbox input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+// tick sign
+.container-checkbox .checkmark {
+
+
+    &:after {
+        left: 6px;
+        top: 3px;
+        width: 4px;
+        height: 9px;
+        border: solid white;
+        border-width: 0 2px 2px 0;
+        -webkit-transform: rotate(45deg);
+        transform: rotate(45deg);
+    }
+    
+    &.fs-2:after{
+      left: 5px;
+      top: 2px;
+    }
+
+    &.fs-3:after{
+      left: 4px;
+      top: 1px;
+      transform: rotate(45deg) scaleY(.7);
+    }
+
+}

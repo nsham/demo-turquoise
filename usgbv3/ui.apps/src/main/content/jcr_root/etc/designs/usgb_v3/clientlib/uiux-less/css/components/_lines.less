@@ -1,0 +1,73 @@
+
+
+.v-line-1{
+    li:not(:first-child):after{
+        content: '';
+        height: 10px;
+        width: 2px;
+        position: absolute; 
+        top: 5px; 
+        padding-right: 8px;  
+        border-left:2px  solid #d2d2d2;
+        .breakpoint (@min-bp-sm){
+            display: none;
+        }
+    }
+}
+
+.v-line-2{
+    margin-right: -2%;
+    li:not(:first-child):after{
+          content: '';
+          height: 10px;
+          width: 2px;
+          position: absolute;
+          padding-right: 8px;
+          border-left: 2px solid #d2d2d2;
+          bottom: 26px;
+          .breakpoint (@min-bp-sm){
+              display: none;
+          }
+      }
+  }
+  
+
+  .vertical-line{
+    height: 100%;
+    width: 1px;
+    background: @color-white;
+    position: absolute;
+    top: 0;
+  }
+
+
+.bottom-line{
+  border-bottom:1px solid @color-white;
+}
+
+
+
+.top-line-dark-grey{
+    border-top:1px solid @color-darker-grey;
+}
+.top-line-grey{
+    border-top:1px solid #d2d2d2;
+}
+
+.left-line-dark-grey{
+    border-left:0.5px solid @color-dark-grey;
+}
+
+.right-line-dark-grey{
+    border-right:0.5px solid @color-dark-grey;
+}
+.right-line-light-grey{
+    border-right:0.5px solid #d2d2d2;
+}
+
+
+//for btn
+
+.line-light-grey{
+ background: #d2d2d2;
+}

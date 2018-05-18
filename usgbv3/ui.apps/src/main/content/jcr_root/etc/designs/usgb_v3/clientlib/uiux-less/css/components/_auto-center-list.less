@@ -1,0 +1,32 @@
+.c-auto-center-list {
+    .each {
+        display: flex;
+        flex-direction:  row;
+        justify-content: flex-start;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-bottom: 15px;
+    }
+    .left {
+        flex-basis: 100%;
+        margin-bottom: 5px;
+        @media only screen and (min-width:450px) {
+            flex-basis: 40%;
+            margin-bottom: 0;
+        }
+    }
+    .right {
+        flex-basis: 100%;
+        @media only screen and (min-width:450px) {
+          flex-basis: 60%;
+          padding: 0 10px;
+        }
+    }
+    p {
+        margin: 0;
+    }
+    img {
+        width: 100%;
+        max-width: 100%;
+    }
+}

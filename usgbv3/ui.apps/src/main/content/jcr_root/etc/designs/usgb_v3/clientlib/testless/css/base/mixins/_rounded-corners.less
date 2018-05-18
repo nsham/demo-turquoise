@@ -1,0 +1,51 @@
+// ----------------------------------------------------------------------
+
+  // Rounded Corners
+
+// ----------------------------------------------------------------------
+
+ // example: .roundedCorners(10);
+
+.roundedCorners(@size) {
+  border-radius: @size + px;
+}
+
+// Rounded Corners Top Only
+.roundedTop(@size) {
+  border-radius: @size + px @size + px 0 0;
+}
+
+// Rounded Corner Top Left Only
+.roundedTopLeft(@size) {
+  border-radius: @size + px 0 0 0;
+}
+
+// Rounded Corner Top Right Only
+.roundedTopRight(@size) {
+  border-radius: 0 @size + px 0 0;
+}
+
+// Rounded Corners Bottom Only
+.roundedBottom(@size) {
+  border-radius: 0 0 @size + px @size + px;
+}
+
+// Rounded Corner Bottom Left Only
+.roundedBottomLeft(@size) {
+  border-radius: 0 0 0 @size + px;
+}
+
+// Rounded Corner Bottom Right Only
+.roundedBottomRight(@size) {
+  border-radius: 0 0 @size + px 0;
+}
+
+// Rounded Corners Left Only
+.roundedLeft(@size) {
+  border-radius: @size + px 0 0 @size + px;
+}
+
+// Rounded Corners Right Only
+.roundedRight(@size) {
+  border-radius: 0 @size + px @size + px 0;
+}

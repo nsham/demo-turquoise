@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:granite="http://www.adobe.com/jcr/granite/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="nt:unstructured"
+    jcr:title="Inspiration Widget"
+    sling:resourceType="cq/gui/components/authoring/dialog">
+    <content
+        jcr:primaryType="nt:unstructured"
+        sling:resourceType="granite/ui/components/foundation/container">
+        <layout
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="granite/ui/components/foundation/layouts/tabs"
+            type="nav"/>
+        <items jcr:primaryType="nt:unstructured">
+            <config
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Config"
+                sling:resourceType="granite/ui/components/foundation/section">
+                <layout
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="granite/ui/components/foundation/layouts/fixedcolumns"/>
+                <items jcr:primaryType="nt:unstructured">
+                    <column
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/foundation/container">
+                        <items jcr:primaryType="nt:unstructured">
+                            <title
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/foundation/form/textfield"
+                                fieldLabel="Title"
+                                name="./title"/>
+                            <icon
+                                granite:class="cq-dialog-dropdown-showhide"
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/coral/foundation/form/select"
+                                fieldLabel="Icon"
+                                name="./icon">
+                                <granite:data
+                                    jcr:primaryType="nt:unstructured"
+                                    cq-dialog-dropdown-showhide-target=".text-showhide-target"/>
+                                <items jcr:primaryType="nt:unstructured">
+                                    <homeowner
+                                        jcr:primaryType="nt:unstructured"
+                                        text="Homeowner"
+                                        value="icon-homeowner"/>
+                                    <architectdesigner
+                                        jcr:primaryType="nt:unstructured"
+                                        text="Architect Designer"
+                                        value="icon-architect-designer"/>
+                                    <builders
+                                        jcr:primaryType="nt:unstructured"
+                                        text="Builders"
+                                        value="icon-builders"/>
+                                    <ceiling
+                                        jcr:primaryType="nt:unstructured"
+                                        text="Ceiling"
+                                        value="icon-ceiling"/>
+                                    <cornice
+                                        jcr:primaryType="nt:unstructured"
+                                        text="Cornice"
+                                        value="icon-cornice"/>
+                                    <finishes
+                                        jcr:primaryType="nt:unstructured"
+                                        text="Finishes"
+                                        value="icon-finishes"/>
+                                    <insulation
+                                        jcr:primaryType="nt:unstructured"
+                                        text="Insulation"
+                                        value="icon-insulation"/>
+                                    <interiorlining
+                                        jcr:primaryType="nt:unstructured"
+                                        text="Interiorlining"
+                                        value="icon-interiorlining"/>
+                                    <plasteringdiy
+                                        jcr:primaryType="nt:unstructured"
+                                        text="Plasteringdiy"
+                                        value="icon-plasteringdiy"/>
+                                    <steelframing
+                                        jcr:primaryType="nt:unstructured"
+                                        text="Steelframing"
+                                        value="icon-steelframing"/>
+                                </items>
+                            </icon>
+                            <description
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/foundation/form/textfield"
+                                fieldLabel="Description"
+                                name="./description"/>
+                            <pageurl
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/foundation/form/pathbrowser"
+                                fieldLabel="Page Url"
+                                name="./pageUrl"
+                                rootPath="/content/v2"/>
+                        </items>
+                    </column>
+                </items>
+            </config>
+        </items>
+    </content>
+</jcr:root>

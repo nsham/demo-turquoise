@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <workspaceFilter version="1.0">
-    <filter root="/apps/${artifactId}"/>
-    <filter root="/apps/sling" />
+    <filter root="/apps/usgbv3"/>
+    <filter root="/etc/designs/usgb_v3" />
+    <filter root="/etc/designs/usgb_Australia" />
 </workspaceFilter>
