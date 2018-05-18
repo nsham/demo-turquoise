@@ -1,0 +1,10 @@
+package com.usgb.core.models;
+
+public class RotatingBanner {
+	
+	
+	private String imagePath;
+	private String title;
+	private String description;
+
+}

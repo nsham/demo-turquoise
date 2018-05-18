@@ -1,0 +1,57 @@
+package com.usgb.core.services.impl;
+
+import java.util.ArrayList;
+
+import java.util.List;
+import javax.jcr.Node;
+import javax.jcr.PathNotFoundException;
+import javax.jcr.RepositoryException;
+import javax.jcr.NodeIterator;
+
+
+import org.apache.felix.scr.annotations.Component;
+import org.apache.felix.scr.annotations.Service;
+
+
+import com.usgb.core.models.RotatingBanner;
+import com.usgb.core.services.BannerService;
+
+@Component
+@Service
+public class BannerServiceImpl implements BannerService {
+	
+	@Override
+	public List<RotatingBanner> getBanners(Node currentNode)
+			throws PathNotFoundException, RepositoryException {
+
+		javax.jcr.Node childNode = currentNode.getNode("banners");
+
+		List<RotatingBanner> bannersList = new ArrayList<RotatingBanner>();
+		NodeIterator ni = childNode.getNodes(); 
+
+		while(ni.hasNext()) {
+
+			Node bannerNode = ni.nextNode();
+
+			RotatingBanner bannerBean = new RotatingBanner();
+
+			if (bannerNode.hasProperty("imagePath")) {
+				bannerBean.setImagePath(bannerNode.getProperty("imagepath")
+						.getValue().getString());
+			}
+			if (bannerNode.hasProperty("title")) {
+				bannerBean.setTitle(bannerNode.getProperty("title").getValue()
+						.getString());
+			}
+			if (bannerNode.hasProperty("description")) {
+				bannerBean.setDescription(bannerNode.getProperty("description")
+						.getValue().getString());
+			}
+
+			bannersList.add(bannerBean);
+		}
+
+		return bannersList;
+
+	}
+}

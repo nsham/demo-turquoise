@@ -1,0 +1,13 @@
+package com.usgb.core.services;
+import  com.usgb.core.models.RotatingBanner;
+
+public abstract interface BannerService
+{
+  public abstract List<BannerBean> getBanners(Node currentNode);
+  
+  
+
+}
+
+
+

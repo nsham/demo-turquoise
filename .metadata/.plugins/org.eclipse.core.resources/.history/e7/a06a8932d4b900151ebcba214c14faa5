@@ -1,0 +1,97 @@
+package com.usgb.core.services.impl;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.jcr.Node;
+import javax.jcr.NodeIterator;
+
+
+
+
+
+import org.apache.felix.scr.annotations.*;
+import org.apache.sling.jcr.api.SlingRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import javax.jcr.Session;
+
+import com.usgb.core.models.RotatingBanner;
+import com.usgb.core.services.BannerService;
+
+@Component
+@Service
+public class BannerServiceImpl implements BannerService {
+	
+	 /** Default log. */
+    protected final Logger log = LoggerFactory.getLogger(this.getClass());
+
+	@Override
+	public List<RotatingBanner> getBanners(Node currentNode) {
+		
+		List<RotatingBanner> bannersList = null;
+		javax.jcr.Node childNode = null;
+		try {
+			if (currentNode.hasNode("banners")) {
+				childNode = currentNode.getNode("banners");
+
+				bannersList = new ArrayList<RotatingBanner>();
+			}
+			log.error("Bannersnode.....: "+childNode.getName());
+			NodeIterator ni = childNode.getNodes();
+
+			while (ni.hasNext()) {
+
+				Node bannerNode = ni.nextNode();
+
+				RotatingBanner bannerBean = new RotatingBanner();
+
+				if (bannerNode.hasProperty("imagePath")) {
+					bannerBean.setImagePath(bannerNode.getProperty("imagepath")
+							.getValue().getString());
+				}
+				if (bannerNode.hasProperty("title")) {
+					bannerBean.setTitle(bannerNode.getProperty("title")
+							.getValue().getString());
+				}
+				if (bannerNode.hasProperty("description")) {
+					bannerBean.setDescription(bannerNode
+							.getProperty("description").getValue().getString());
+				}
+
+				bannersList.add(bannerBean);
+			}
+			return bannersList;
+
+		} catch (Exception e) {
+
+		}
+
+		return null;
+
+	}
+	
+	@Reference
+    protected SlingRepository repository;
+
+    protected Session session;
+
+    @SuppressWarnings("deprecation")
+	@Activate
+    protected void activate() throws Exception {
+        session = repository.loginAdministrative(null);
+    }
+
+    @Deactivate
+    protected void deactivate() throws Exception {
+        session.logout();
+        session = null;
+    }
+	
+	
+	
+	
+	
+	
+}

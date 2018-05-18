@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="com.usgb.core.services.BannerService"/>
+<fullyQualifiedTypeName name="com.usgb.core.models.RotatingBanner"/>
+<fullyQualifiedTypeName name="com.day.cq.searchpromote.xml.result.BannerList"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="org.slf4j.Logger"/>
+<fullyQualifiedTypeName name="org.slf4j.LoggerFactory"/>
+<fullyQualifiedTypeName name="java.io.FileInputStream"/>
+<fullyQualifiedTypeName name="org.apache.sling.commons.json.JSONObject"/>
+<fullyQualifiedTypeName name="org.apache.sling.commons.json.JSONArray"/>
+<fullyQualifiedTypeName name="org.apache.poi.hssf.model.Workbook"/>
+<fullyQualifiedTypeName name="org.apache.poi.ss.usermodel.Workbook"/>
+<fullyQualifiedTypeName name="org.apache.poi.ss.usermodel.WorkbookFactory"/>
+</qualifiedTypeNameHistroy>

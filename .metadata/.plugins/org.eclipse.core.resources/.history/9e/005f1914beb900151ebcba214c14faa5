@@ -1,0 +1,10 @@
+package com.usgb.core.services;
+
+public abstract interface BannerService
+{
+  public abstract List<BannerBean> getBanners(Node currentNode);
+
+}
+
+
+

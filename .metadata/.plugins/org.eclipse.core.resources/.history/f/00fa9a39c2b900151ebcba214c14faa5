@@ -1,0 +1,26 @@
+package com.usgb.core.services.impl;
+
+import java.util.List;
+
+import javax.jcr.Node;
+
+import org.apache.felix.scr.annotations.Component;
+import org.apache.felix.scr.annotations.Service;
+
+import com.usgb.core.models.RotatingBanner;
+import com.usgb.core.services.BannerService;
+@Component
+@Service
+public class BannerServiceImpl implements BannerService
+{
+
+	  
+	
+	public List<RotatingBanner> getBanners(Node currentNode){
+		
+		
+		
+		return null;
+		
+	}
+}

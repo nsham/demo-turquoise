@@ -1,0 +1,20 @@
+<%--
+
+  Rotating bannner component.
+
+  Rotating bannner
+
+--%><%
+%><%@include file="/apps/usgb/global/global.jsp"%><%
+%><%@page session="false" %><%
+
+
+
+
+%>
+
+
+
+
+
+

@@ -1,0 +1,17 @@
+package com.usgb.core.services;
+import  com.usgb.core.models.RotatingBanner;
+
+import java.util.List;
+
+import javax.jcr.Node;
+import javax.jcr.PathNotFoundException;
+import javax.jcr.RepositoryException;
+
+public abstract interface BannerService
+{
+  public abstract List<RotatingBanner> getBanners(Node currentNode) throws PathNotFoundException, RepositoryException;
+  
+}
+
+
+
