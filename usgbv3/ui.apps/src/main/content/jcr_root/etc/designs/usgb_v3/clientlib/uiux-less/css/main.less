@@ -2,219 +2,93 @@
 // Variables
 // ----------------------------------------------------------------------
 
-@import (optional) "base/variables.scss";
-@import (optional) "base/_variables.scss";
+@import "base/_variables.less";
 
 // ----------------------------------------------------------------------
 // Vendors import
 // ----------------------------------------------------------------------
-@import (optional) "base/_imports.scss";
-@import (optional) "base/__imports.scss";
+@import "base/_imports.less";
 
 // ----------------------------------------------------------------------
 // Base
 // ----------------------------------------------------------------------
-@import (optional) "base/mixins.scss";
-@import (optional) "base/_mixins.scss";
-@import (optional) "base/extends.scss";
-@import (optional) "base/_extends.scss";
-@import (optional) "base/fonts.scss";
-@import (optional) "base/_fonts.scss";
-@import (optional) "base/reset.scss";
-@import (optional) "base/_reset.scss";
-@import (optional) "base/color.scss";
-@import (optional) "base/_color.scss";
-@import (optional) "base/buttons.scss";
-@import (optional) "base/_buttons.scss";
-@import (optional) "base/form.scss";
-@import (optional) "base/_form.scss";
-@import (optional) "base/dropdown.scss";
-@import (optional) "base/_dropdown.scss";
-@import (optional) "base/icons.scss";
-@import (optional) "base/_icons.scss";
+@import "base/_mixins.less";
+@import "base/_extends.less";
+@import "base/_fonts.less";
+@import "base/_reset.less";
+@import "base/_color.less";
+@import "base/_buttons.less";
+@import "base/_form.less";
+@import "base/_dropdown.less";
+@import "base/_icons.less";
 
 
 //To make misc classes able to overwrite most of the styling
-@import (optional) "base/misc.scss";
-@import (optional) "base/_misc.scss";
+@import "base/_misc.less";
 
 
 // ----------------------------------------------------------------------
 // Modules
 // ----------------------------------------------------------------------
-@import (optional) "modules/row-table.scss";
-@import (optional) "modules/_row-table.scss";
-@import (optional) "modules/responsive-float.scss";
-@import (optional) "modules/_responsive-float.scss";
-@import (optional) "modules/margin-by-power.scss";
-@import (optional) "modules/_margin-by-power.scss";
-@import (optional) "modules/padding-by-power.scss";
-@import (optional) "modules/_padding-by-power.scss";
 
 // ----------------------------------------------------------------------
 // Components
 // ----------------------------------------------------------------------
 
 //vincent (base components)
-@import (optional) "components/base-additional.scss";
-@import (optional) "components/_base-additional.scss";
+@import "components/_base-additional.less";
 
+@import "components/_hero-banner.less";
+@import "components/_carousel-parallax-hero-banner.less";
+@import "components/_cta-hover-tile.less";
+@import "components/_cta-hover-slideup-tile.less";
+@import "components/_cta-video-popup.less";
+@import "components/_carousel-featured-item.less";
+@import "components/_floating-component.less";
+@import "components/_mid-container.less";
 
-@import (optional) "components/hero-banner.scss";
-@import (optional) "components/_hero-banner.scss";
-@import (optional) "components/carousel-parallax-hero-banner.scss";
-@import (optional) "components/_carousel-parallax-hero-banner.scss";
-@import (optional) "components/cta-hover-tile.scss";
-@import (optional) "components/_cta-hover-tile.scss";
-@import (optional) "components/cta-hover-slideup-tile.scss";
-@import (optional) "components/_cta-hover-slideup-tile.scss";
-@import (optional) "components/cta-video-popup.scss";
-@import (optional) "components/_cta-video-popup.scss";
-@import (optional) "components/carousel-featured-item.scss";
-@import (optional) "components/_carousel-featured-item.scss";
-@import (optional) "components/floating-component.scss";
-@import (optional) "components/_floating-component.scss";
-@import (optional) "components/mid-container.scss";
-@import (optional) "components/_mid-container.scss";
-// NEW ----
 //ky
-@import (optional) "components/carousel-home-banner.scss";
-@import (optional) "components/_carousel-home-banner.scss";
-@import (optional) "components/yellow-icon.scss";
-@import (optional) "components/_yellow-icon.scss";
-@import (optional) "components/carousel-feature-card.scss";
-@import (optional) "components/_carousel-feature-card.scss";
-@import (optional) "components/checkbox-style.scss";
-@import (optional) "components/_checkbox-style.scss";
-@import (optional) "components/search-box-style.scss";
-@import (optional) "components/_search-box-style.scss";
-@import (optional) "components/header-footer-navigation.scss";
-@import (optional) "components/_header-footer-navigation.scss";
-@import (optional) "components/megamenu.scss";
-@import (optional) "components/_megamenu.scss";
+@import "components/_carousel-home-banner.less";
+@import "components/_yellow-icon.less";
+@import "components/_carousel-feature-card.less";
+@import "components/_checkbox-style.less";
+@import "components/_search-box-style.less";
+@import "components/_header-footer-navigation.less";
+@import "components/_megamenu.less";
+
 
 //vincent
-@import (optional) "components/breadcrumb-box.scss";
-@import (optional) "components/_breadcrumb-box.scss";
-@import (optional) "components/custom-block.scss";
-@import (optional) "components/_custom-block.scss";
-@import (optional) "components/search-input.scss";
-@import (optional) "components/_search-input.scss";
-@import (optional) "components/search-accordion.scss";
-@import (optional) "components/_search-accordion.scss";
-@import (optional) "components/subscribe-newsletter.scss";
-@import (optional) "components/_subscribe-newsletter.scss";
-@import (optional) "components/video-popup.scss";
-@import (optional) "components/_video-popup.scss";
-@import (optional) "components/article-bar.scss";
-@import (optional) "components/_article-bar.scss";
-@import (optional) "components/box-custom.scss";
-@import (optional) "components/_box-custom.scss";
-@import (optional) "components/flex-items.scss";
-@import (optional) "components/_flex-items.scss";
-@import (optional) "components/make-sticky.scss";
-@import (optional) "components/_make-sticky.scss";
-@import (optional) "components/socialmedia-row.scss";
-@import (optional) "components/_socialmedia-row.scss";
-@import (optional) "components/download-list.scss";
-@import (optional) "components/_download-list.scss";
-@import (optional) "components/three-imgs.scss";
-@import (optional) "components/_three-imgs.scss";
-@import (optional) "components/two-imgs.scss";
-@import (optional) "components/_two-imgs.scss";
-@import (optional) "components/single-img.scss";
-@import (optional) "components/_single-img.scss";
-@import (optional) "components/auto-center-list.scss";
-@import (optional) "components/_auto-center-list.scss";
-@import (optional) "components/sidebar.scss";
-@import (optional) "components/_sidebar.scss";
+@import "components/_breadcrumb-box.less";
+@import "components/_custom-block.less";
+@import "components/_search-input.less";
+@import "components/_search-accordion.less";
+@import "components/_subscribe-newsletter.less";
+@import "components/_video-popup.less";
+@import "components/_article-bar.less";
+@import "components/_box-custom.less";
+@import "components/_flex-items.less";
+@import "components/_make-sticky.less";
+@import "components/_socialmedia-row.less";
+@import "components/_download-list.less";
+@import "components/_three-imgs.less";
+@import "components/_two-imgs.less";
+@import "components/_single-img.less";
+@import "components/_auto-center-list.less";
+@import "components/_sidebar.less";
 
 
 //ky added
-@import (optional) "components/accordion-list-item.scss";
-@import (optional) "components/_accordion-list-item.scss";
-@import (optional) "components/lines.scss";
-@import (optional) "components/_lines.scss";
-@import (optional) "components/table-responsive.scss";
-@import (optional) "components/_table-responsive.scss"; 
-@import (optional) "components/submenu-product-page.scss";
-@import (optional) "components/_submenu-product-page.scss";
-@import (optional) "components/base-mixin-new.scss";
-@import (optional) "components/_base-mixin-new.scss";
-@import (optional) "components/limit-text.scss";
-@import (optional) "components/_limit-text.scss";
-@import (optional) "components/popup-content.scss";
-@import (optional) "components/_popup-content.scss";
-@import (optional) "components/icon-group.scss";
-@import (optional) "components/_icon-group.scss";
-@import (optional) "components/product-media-gallery.scss";
-@import (optional) "components/_product-media-gallery.scss";
-@import (optional) "components/product-compare.scss";
-@import (optional) "components/_product-compare.scss";
-@import (optional) "components/product-data-table.scss";
-@import (optional) "components/_product-data-table.scss";
-@import (optional) "components/compare-popup.scss";
-@import (optional) "components/_compare-popup.scss";
-@import (optional) "components/download-add-submittal.scss";
-@import (optional) "components/_download-add-submittal.scss";
-
-
-@import (optional) "components/where-to-buy.scss";
-@import (optional) "components/_where-to-buy.scss";
-
-
-
-
-//temporary will follow scss 
-//additional base
-.border-bottom{
-   border-bottom: 1px solid white;
-}
- 
- //store under  row-eq-height in misc.scss
- .row-wrap{
-     flex-wrap: wrap;
- }
- 
- //store under  flex-row in misc.scss
- .flex-column {
-   display: flex;
-   align-items: stretch;
-   flex-direction:column;
-   &.justify-space-between {
-    justify-content: space-between;
-   } 
- }
- 
- //add below flex-row in misc.scss
- .flex-row {
-   &.align-bottom {
-     align-items: flex-end;
-   }
-   &.justify-end {
-   	justify-content: flex-end;
-   }
- }
-
- .p-side-6xl {
-     padding-left: 60px;
-     padding-right: 60px;
- }
-
- .p-side-7xl {
-     padding-left: 75px;
-     padding-right: 75px;
- }
-
-.icon-align-top{
-	vertical-align: top;
-}
-
-.icon-align-middle{
-	vertical-align: middle;
-}
-
-.icon-align-bottom{
-	vertical-align: bottom;
-}
- 
+@import "components/_accordion-list-item.less";
+@import "components/_lines.less";
+@import "components/_table-responsive.less";
+@import "components/_submenu-product-page.less";
+@import "components/_base-mixin-new.less";
+@import "components/_limit-text.less";
+@import "components/_popup-content.less";
+@import "components/_icon-group.less";
+@import "components/_product-media-gallery.less";
+@import "components/_product-compare.less";
+@import "components/_product-data-table.less";
+@import "components/_compare-popup.less";
+@import "components/_download-add-submittal.less";
+@import "components/_where-to-buy.less";
