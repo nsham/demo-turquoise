@@ -7,12 +7,16 @@
 // ----------------------------------------------------------------------
 // Vendors import
 // ----------------------------------------------------------------------
-@import "base/_imports.less";
+@import "vendors/slick.less";
+@import "vendors/slick-theme.less";
+@import "vendors/slick-lightbox.less";
+@import "vendors/side-scroll.less";
 
 // ----------------------------------------------------------------------
 // Base
 // ----------------------------------------------------------------------
-@import "base/_mixins.less";
+@import "base/mixins/_lesshat.less";
+@import "base/mixins/_linear-gradient.less"; 
 @import "base/_extends.less";
 @import "base/_fonts.less";
 @import "base/_reset.less";
@@ -30,6 +34,7 @@
 // ----------------------------------------------------------------------
 // Modules
 // ----------------------------------------------------------------------
+@import "modules/_modules.less";
 
 // ----------------------------------------------------------------------
 // Components
@@ -37,7 +42,7 @@
 
 //vincent (base components)
 @import "components/_base-additional.less";
-
+@import "components/_font-awesome-icon.less";
 @import "components/_hero-banner.less";
 @import "components/_carousel-parallax-hero-banner.less";
 @import "components/_cta-hover-tile.less";
@@ -46,8 +51,7 @@
 @import "components/_carousel-featured-item.less";
 @import "components/_floating-component.less";
 @import "components/_mid-container.less";
-
-//ky
+// NEW ----
 @import "components/_carousel-home-banner.less";
 @import "components/_yellow-icon.less";
 @import "components/_carousel-feature-card.less";
@@ -55,8 +59,6 @@
 @import "components/_search-box-style.less";
 @import "components/_header-footer-navigation.less";
 @import "components/_megamenu.less";
-
-
 //vincent
 @import "components/_breadcrumb-box.less";
 @import "components/_custom-block.less";
@@ -80,12 +82,13 @@
 //ky added
 @import "components/_accordion-list-item.less";
 @import "components/_lines.less";
-@import "components/_table-responsive.less";
+@import "components/_table-responsive.less"; 
 @import "components/_submenu-product-page.less";
 @import "components/_base-mixin-new.less";
 @import "components/_limit-text.less";
 @import "components/_popup-content.less";
 @import "components/_icon-group.less";
+@import "components/_box-size.less";
 @import "components/_product-media-gallery.less";
 @import "components/_product-compare.less";
 @import "components/_product-data-table.less";

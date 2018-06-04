@@ -1,56 +1,44 @@
 // ----------------------------------------------------------------------
 // Component: Mega menu
 // ----------------------------------------------------------------------
+
 .mega-menu-wrapper{
   float:right;
   width: 100%;
+  
 
-  //Level 1 style
+  ul>li>a{
+    font-weight: bold;
+    padding-bottom:20px;
+    text-transform:uppercase;
+  }
+
   ul{
-
-    >li{
-      >a{
-        font-weight: bold;
-        padding-bottom:20px;
-        text-transform:uppercase;
-      }
-    }
-
-
-    //Level 2 style - default
     .mega-dropdown {
       position: static !important; 
+      
 
-
-      .mega-dropdown-separator:after {
-          content: '';
-          display: block;
-          height: 1px;
-          background: @color-white;
-          position: absolute;
-          bottom: 0;
-          margin: auto;
-          width: 89.5%;
-          left: 0;
-          right: 0;
+      &.open .mega-dropdown-menu {  
+        max-height: 700px;
       }
 
-      //when open
-      &.open{  
-        .mega-dropdown-menu {
-            max-height: 550px;
-        }
-      }
       .mega-dropdown-menu {   
         background:@color-darker-grey;
+        color: @color-white;
+
         float: left;
         position: absolute;
         border:none;
+        cursor:pointer;
+       
         text-align: left;
         width: 100%;
         left: 0;
         right: 0;
         top:90px;
+
+
+
         max-height: 0;
         overflow: hidden;
         display:block;
@@ -60,141 +48,74 @@
         -o-transition: max-height 1s ease;
         transition: max-height 1s ease;
 
-        color: @color-white;
 
-        //create inner scrollbar on mobile and tablet but not desktop
-        >*{
-          overflow: auto;
-          height: 350px;
-          @media only screen and (min-width:992px) {
-            overflow: hidden;
-            height: 100%;
-          }
-        }
-        
-
-        a{
-          color: @color-primary-yellow;
-
-          padding-left: 0;
-          padding-right: 0;
-          padding-top: 0;
-          padding-bottom: 0;
-
-
-          &:hover{
-            color:@color-primary-yellow;
-          }
-        }
-
-        
-      }
-
-      //Level 2 style - head
-      .mega-dropdown-menu-head{
-        // font-size: 18px;
-        // line-height: 1.2;
-
-
-        //overwrite .fs-nav-2 a
-        a{
-          // font-size: 18px;
-          // line-height: 1.2;
-        }
-        
-        //consistent line-height for accurate vertical alignment
-        >*{
-          //line-height: 1.2;
-        }
-
-        .glyphicon {
-          position: relative;
-          top: 0px;
-        }
-      }
-
-
-
-      //Level 2 style - content 
-      .mega-dropdown-menu-list{
         li{
-          font-size:13px;
-          margin-bottom: 5px;
-          //to hide "|"" from parent selector 
-          &:after{
-            display: none;
-          }
-        }
-        a{
-          color: @color-white;
-          padding-left: 0;
-          padding-right: 0;
-          padding-top: 0;
-          padding-bottom: 0;
-          font-weight: normal;
-          text-transform: none;
-
-          font-size:13px;
-
-          &:hover{
-            color:@color-primary-yellow;
+          font-size:14px;
+          line-height: 1.9;
+          &:not(:first-child):after{
+            display:none;
           }
         }
       }
-
-
-      //Level 2 style - content 
-      .mega-dropdown-menu-sidelist{
+      .mega-dropdown-list{
         li{
-          font-size:13px;
-          margin-bottom: 5px;
-          //to hide "|"" from parent selector 
-          &:after{
-            display: none;
-          }
-        }
-        a{
-          color: @color-white;
-          padding-left: 0;
-          padding-right: 0;
-          padding-top: 0;
-          padding-bottom: 0;
-          font-weight: normal;
-          text-transform: none;
-
-          font-size:13px;
-
           &:hover{
             color:@color-primary-yellow;
           }
         }
-        .glyphicon {
-          position: relative;
-          top: -1px;
+      }
+
+
+
+
+
+
+      a{
+        padding-bottom:24px;
+        z-index: 1;
+        &:hover{
+          &:after{
+            content: '';
+            position: absolute;
+            left: 40%;
+            bottom: 3px;
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-bottom: 10px solid #006a22;
+            z-index: 100;
+          }
         }
       }
-      
+
+
+
+
 
     }
-    //end Level 2 style - default
-
-
   }
-  //end Level 1 style
+  
+
+  
 
 } 
 //end
-// .arrow-up{
-//   &:before{
-//     content: '';
-//     position: absolute;
-//     left: 40%;
-//     bottom: 3px;
-//     width: 0;
-//     height: 0;
-//     border-left: 8px solid transparent;
-//     border-right: 8px solid transparent;
-//     border-bottom: 10px solid #006a22;
-//     z-index: 100;
-//   }
-// }
+
+
+
+.arrow-up{
+  &:before{
+    content: '';
+    position: absolute;
+    left: 40%;
+    bottom: 3px;
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 10px solid #006a22;
+    z-index: 100;
+  }
+}
+

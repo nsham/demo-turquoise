@@ -1,25 +1,15 @@
 
 @icomoon-font-path: "../fonts";
-
-//update viarables here
-@icon-architect-designer: \e900;
-@icon-builder-installers: \e901;
-@icon-ceiling: \e902;
-@icon-cornice: \e903;
-@icon-stc: \e922;
-@icon-homeowner: \e923;
-@icon-installationguide: \e924;
-@icon-firerating: \e925;
-@icon-finishes: \e904;
-@icon-industrial-plaster: \e91c;
-@icon-Industrial-plaster-two: \e91d;
-@icon-insulation: \e91e;
-@icon-interior-lining: \e91f;
-@icon-plasteringdiy: \e920;
-@icon-steel-framing: \e921;
-
-
-
+@icon-architect-designer: "\e900";
+@icon-builders: "\e901";
+@icon-ceiling: "\e902";
+@icon-cornice: "\e903";
+@icon-finishes: "\e904";
+@icon-insulation: "\e905";
+@icon-interiorlining: "\e906";
+@icon-plasteringdiy: "\e907";
+@icon-steelframing: "\e908";
+@icon-homeowner: "\e909";
 
 
 @font-face {
@@ -47,28 +37,19 @@
   //font-size: 150px;
   margin: auto;
   position: relative;
-  //left: 50%;
-  //-webkit-transform: translateX(-50%);
-  //transform: translateX(-50%);
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
   
-  //  Better Font Rendering  
+  /* Better Font Rendering  */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-}
-
-.function-unicode(@str) {
-  return: ~"\"") + @str + unquote("\"";
+ 
 }
 
 
-
-
-.icon-left-0{
-  left:0;
-}
-
-// main sizes
+//sizes
 .icon-150{
   font-size: 150px;
 }
@@ -84,88 +65,59 @@
   font-size: 50px;
 }
 
-//extra size
-.icon-30{
-  font-size: 30px;
-}
 
-//update here
+
 //types
-
-
-.icon-stc {
-  &:before {
-    content: unicode(@icon-stc); 
-  }
-}
 .icon-homeowner {
   &:before {
-    content: unicode(@icon-homeowner); 
+    content: @icon-homeowner; 
   }
 }
-.icon-installation-guide {
-  &:before {
-    content: unicode(@icon-installationguide); 
-  }
-}
-.icon-firerating {
-  &:before {
-    content: unicode(@icon-firerating); 
-  }
-}
+
+
 .icon-architect-designer {
   &:before {
-    content: unicode(@icon-architect-designer); 
+    content: @icon-architect-designer; 
   }
 }
-.icon-builder-installers {
+.icon-builders {
   &:before {
-    content: unicode(@icon-builder-installers); 
+    content: @icon-builders; 
   }
 }
 .icon-ceiling {
   &:before {
-    content: unicode(@icon-ceiling); 
+    content: @icon-ceiling; 
   }
 }
 .icon-cornice {
   &:before {
-    content: unicode(@icon-cornice); 
+    content: @icon-cornice; 
   }
 }
 .icon-finishes {
   &:before {
-    content: unicode(@icon-finishes); 
-  }
-}
-.icon-industrial-plaster {
-  &:before {
-    content: unicode(@icon-industrial-plaster); 
-  }
-}
-.icon-industrial-plaster-two {
-  &:before {
-    content: unicode(@icon-Industrial-plaster-two); 
+    content: @icon-finishes; 
   }
 }
 .icon-insulation {
   &:before {
-    content: unicode(@icon-insulation); 
+    content: @icon-insulation; 
   }
 }
-.icon-interior-lining {
+.icon-interiorlining {
   &:before {
-    content: unicode(@icon-interior-lining); 
+    content: @icon-interiorlining; 
   }
 }
 .icon-plasteringdiy {
   &:before {
-    content: unicode(@icon-plasteringdiy); 
+    content: @icon-plasteringdiy; 
   }
 }
-.icon-steel-framing {
+.icon-steelframing {
   &:before {
-    content: unicode(@icon-steel-framing); 
+    content: @icon-steelframing; 
   }
 }
 

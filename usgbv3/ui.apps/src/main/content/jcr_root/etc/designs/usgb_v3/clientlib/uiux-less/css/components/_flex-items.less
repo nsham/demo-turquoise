@@ -9,16 +9,12 @@
 		flex-wrap: nowrap;
 	}
 
-	//flex:1 and flex:initial shorthand doesnt woork on IE11
-	//must include unit for flex-basis for IE11 to work -> eg flex:0 1 0%;
-	//dynamic fix width do not add flex to it for IE11 to work
 	.item-fix {
-	    // flex: 1 1 0%;
-	    width: 100%;
+	    flex: 1;
+	    width: auto;
 
 	    @media only screen and (min-width:768px) {
-	    	// flex: 0 1 0%;
-	    	width: auto;
+	    	flex: initial;
 	    }
 	}
 
@@ -26,7 +22,7 @@
 	    width: auto;
 
 	    @media only screen and (min-width:768px) {
-	    	flex: 1 1 0%;
+	    	flex: 1;
 	    }
 	}
 }
