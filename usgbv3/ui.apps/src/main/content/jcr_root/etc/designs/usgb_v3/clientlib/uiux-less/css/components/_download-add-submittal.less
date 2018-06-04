@@ -1,0 +1,116 @@
+.c-download-add-submittal-list{
+    background:@color-white;
+    @media only screen and (min-width:768px) {
+        width:100%;
+        background:@color-light-grey;
+      }
+    >.each {
+        display: inline-block;
+        margin: 0;
+        width: 100%;
+        @media only screen and (min-width:768px) {
+          width:100%;
+        }
+        img {
+           display: inline-block;
+           width: 37px;
+           height: auto;
+           float: left;
+           @media only screen and (min-width:370px) {
+            width: 50px;
+            }
+            @media only screen and (min-width:768px) {
+              display: inline-block;
+              margin-bottom: 10px;
+              margin-left: 4px;
+              width: 50px;
+              height: auto;
+            }
+         
+        }
+        .text-content{
+            display: inline-block;
+            margin-top: 0px;
+            margin-left: 4px;
+            width: 100px;
+            float:left;
+            @media only screen and (min-width:370px) {
+                width: 55%;
+                margin-left: 10px;
+            }
+            @media only screen and (min-width:480px) {
+                width: 65%;
+            }
+            @media only screen and (min-width:768px) {
+                display: inline-block;
+                margin-top: 5px;
+                margin-left: 5px;
+                margin-bottom: 5px;
+                text-align: left;
+                width: 71%;
+            }
+        }
+
+        .two-btn{              
+            display: inline-block;
+            width: auto;
+            position: relative;
+            cursor: pointer;
+            @media only screen and (min-width:768px) {
+                display: -moz-inline-flex;
+                display: -webkit-inline-flex;
+                display: inline-flex;
+                width: 100%;
+            }
+
+            a{
+                background:@color-primary-green;
+                padding:10px 15px;
+                color:@color-white;
+                font-weight: bold;
+                text-align: center;
+                &:hover{
+                    background:@color-primary-yellow;
+                    color:@color-darker-grey;
+                }
+            }
+            .btn-one{
+                flex-basis: 40%;
+                -webkit-flex-basis: 40%; 
+                border-radius: 0 0 0px 10px;
+                border-right:1px solid @color-white; 
+
+
+            }
+            .btn-two{
+                flex-basis:60%;
+                -webkit-flex-basis: 60%;
+                border-radius: 0 0 10px 0px; 
+                .glyphicon{
+                    left:-12px;
+                }
+            }
+            
+        }
+        .two-btn-m{              
+            display: inline-block;
+            position: relative;
+            float: right;
+            margin-top: -6px;
+            a{
+                background:@color-primary-green;
+                padding:5px 10px;
+                color:@color-white;
+                font-weight: bold;
+                text-align: center;
+                &:hover{
+                    background:transparent;
+                    color:@color-darker-grey;
+                }
+            }
+        }  
+
+
+        
+    }
+}

@@ -3,46 +3,63 @@
 // ----------------------------------------------------------------------
 
 
-header{
-    height: 90px;
+.header{
+    .wrapper{
+        
+    }
+}
+
+.top{
+    height: 65px;
     position: relative;
 
-    .breakpoint(@min-bp-sm){
-        height: 65px;
-    }
-    
-}
-.header{
-    height: 90px;
-    background:@color-white;
-    border:none;
-    border-radius:0px;
-    .breakpoint(@min-bp-sm){
-        height: 65px;
+    @media only screen and (min-width:768px) {
+        height: 90px;
     }
 
     .logo{
-        width: 0px;
+       
+        max-width: 150px;
+        height: 33px;
+        position: absolute;
+        top: 0;
+        left: 15px;
+        bottom: 0;
+        margin: auto;
+
         img{
-            width:220px;
-            .breakpoint(@bp-lg){
-                width: 150px;
-            }
-            .breakpoint(@min-bp-sm){
-                width: 145px;
-            }
+            width:100%;
         }
     }
-    .navbar{
-        border: none;
-        border-radius:0px;
-        overflow: hidden;
+
+    .mobile-nav{
+        height: 100%;
     }
+
+    .hamburger {
+        // position: absolute;
+        // top: 0;
+        // right: 15px;
+        // bottom: 0;
+        // margin: auto;
+        // height: 42px;
+
+        a {
+            color: #333;
+        }
+
+        .navbar-toggle {
+            border-color: #ddd;
+            margin: 0;
+        }
+    }
+
+
+
+
     .navbar-nav{
         float: right;
-        .breakpoint(@min-bp-sm){
-            float: none;
-        }
+     
         li {
 
             a {
@@ -52,9 +69,7 @@ header{
                 padding-top: 0;
                 padding-bottom: 5px;
             }
-            // &:not(:first-child):after{
-            //     display:none;
-            // }
+
         }
     }
 
@@ -156,45 +171,27 @@ header{
 }
 
 
-
 //border gradient
-.gradient-line {
-    position: absolute;
+.rule {
+    // position: absolute;
     width: 100%;
     height: 7px;
-    bottom: 0;
-    left: 0;
+    // bottom: 0;
+    // left: 0;
 }
 
- 
-//reset nav
-.cd-auto-hide-header{
-    height: 90px;
-    .breakpoint(@min-bp-sm){
-        height: 65px;
-    }
-}
-.cd-secondary-nav{
-  background-color:@color-white;
-  a {
-    opacity: 1;
-    color:@color-darker-grey;
-    box-shadow:none;
-    &:active{
-      color: @color-darker-grey;
-    }
-  }
-}
+
+
 
 
 .fs-nav-1 {
-  a{
+  li>a{
     font-size: 11px;
   }
 
 }
 .fs-nav-2 {
-    a{
+    .nav-dropdown-wrapper>a{
       font-size: 15px;
     }
 
