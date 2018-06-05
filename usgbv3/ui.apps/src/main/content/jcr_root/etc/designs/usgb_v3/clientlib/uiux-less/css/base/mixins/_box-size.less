@@ -120,6 +120,10 @@
 /** hover with border green **/
 .box-type-2{
         // border:3px solid @color-white;
+        border: 2px solid @color-primary-green;
+        @media (min-width:768px) {
+            border: none;
+        }
         &:hover{
             .bg-box-hover{
                 border:2px solid @color-primary-green;
@@ -131,12 +135,12 @@
 }
 
 .box-type-3{
-
-    .breakpoint(@bp-sm){
+    width: 230px;
+    @media (min-width:768px){
         width:260px;
     }
-    .breakpoint(@min-bp-xxs ){
-        width:230px;
+    @media (min-width:1024px){
+        width:auto;
     }
 }
 
@@ -237,3 +241,4 @@
 
 
 
+ 
