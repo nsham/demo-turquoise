@@ -9,4 +9,6 @@ jquery.matchHeight-min.js
 header.js
 scrollReveal.js
 sticky-sidebar.js
+sideScroll.js
+slick-lightbox.js
 main.js
