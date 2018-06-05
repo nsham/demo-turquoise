@@ -12,3 +12,4 @@ sticky-sidebar.js
 sideScroll.js
 slick-lightbox.js
 main.js
+
