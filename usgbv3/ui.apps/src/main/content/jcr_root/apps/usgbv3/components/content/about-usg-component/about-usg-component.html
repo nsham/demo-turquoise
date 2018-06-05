@@ -1,0 +1,55 @@
+<sly data-sly-test="${wcmmode.edit || wcmmode.design}">
+	Edit here for About USG Component
+</sly>
+
+<style>
+	${properties.cssoverwrite @ context='unsafe'}
+</style>
+
+<div class="${properties.classid }">
+	<sly data-sly-test.assetExist="${properties.imgPath}">
+    	<div class="box-size-l  cta-hover-tile" style="z-index:1; background:transparent url(${properties.imgPath @ context='unsafe'}) center center no-repeat; background-size:cover;"  data-scroll-reveal="wait 0.2s, then enter over 500ms after 0.3s"  >
+	</sly>
+    <sly data-sly-test="${!assetExist}">
+		<div class="box-size-l cta-hover-tile" style="z-index:1; background-color: ${properties.bgColor @ context='unsafe'};"  data-scroll-reveal="wait 0.2s, then enter over 500ms after 0.3s"  >
+    </sly>
+		<!-- bg-overlay start -->
+        <div class="bg-overlay">
+            <div class="p-side-xxl p-vertical-5xl">
+                <div class="text-center text-sm-center text-md-left m-bottom-l">
+                    <h2 class="ht4 color-white uppercase">${properties.title @ context='html'}</h2>
+                    <div class="color-white">${properties.description @ context='html'}</div>
+
+					<sly data-sly-test="${properties.buttonText}">
+                    	<div class="btn btn-top-border ${properties.buttonStyle } m-top-s">${properties.buttonText}<span class="glyphicon glyphicon-menu-right"></span></div> 
+					</sly>
+
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 text-center text-sm-center text-md-left">
+                        <h2 class="ht5 color-white uppercase m-bottom-m">${'Contact USG Boral' @ i18n}</h2>
+
+                        <form>
+                            <div class="dropdown dp-form" style="min-width: 280px; display: inline-block;">
+                                <button class="btn btn-default color-dark-grey dropdown-toggle text-left dp-clickable" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span class="dp-text">${'Select Enquiry Type' @ i18n}</span>
+                                        <input type="hidden" name="selectenquirytype" value="">
+                                    <span class="color-primary-green glyphicon glyphicon-menu-down right"></span>
+                                </button>
+                                <ul class="dropdown-menu dp-list" aria-labelledby="dropdownMenu1">
+                                    <li><a data-val="Lorem Ipsum">Lorem Ipsum</a></li>
+                                    <li><a data-val="Quisque imperdiet">Quisque imperdiet</a></li>
+                                    <li><a data-val="Quisque a tortor">Quisque a tortor</a></li>
+                                    <li><a data-val="Proin ut elit">Proin ut elit</a></li>
+                                </ul>
+                            </div>
+                            <button type="submit" class="btn btn-brand-default button-yellow m-left-s m-md-top-no m-top-s">${'CONTACT US' @ i18n}</button>
+                        </form>
+    
+                    </div> 
+                </div>
+            </div>
+        </div> 
+        <!-- bg-overlay end -->
+    </div>   
+</div>

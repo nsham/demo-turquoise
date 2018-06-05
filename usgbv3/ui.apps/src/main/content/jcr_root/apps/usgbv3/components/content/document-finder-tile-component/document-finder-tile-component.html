@@ -1,0 +1,28 @@
+<sly data-sly-test="${wcmmode.edit || wcmmode.design}">
+	Edit here for Document Finder Tile Component
+</sly>
+
+<style>
+	${properties.cssoverwrite @ context='unsafe'}
+</style>
+
+<div class="p-md-xl ${properties.classid }">
+    <div class="text-center">
+        <h2 class="ht4 color-darker-grey uppercase m-bottom-xl">${properties.title @ context='html'}</h2>
+        <div class="color-darker-grey m-md-left-3xl m-md-right-3xl p-md-left-5xl p-md-right-5xl">${properties.description @ context='html'}</div>      
+    </div>
+    <div class="p-m">
+        
+
+        <form>
+            <div class="search-box color-dark-grey center-block input-lg add-drop-shadow">
+                <input class="" placeholder="${'Search' @ i18n}" >
+                <button type="submit" class=" search-btn">
+                    <span class="color-primary-green glyphicon glyphicon-search p-no m-no"></span>
+                </button>
+            </div>
+        </form>
+    
+
+    </div>
+</div> 
