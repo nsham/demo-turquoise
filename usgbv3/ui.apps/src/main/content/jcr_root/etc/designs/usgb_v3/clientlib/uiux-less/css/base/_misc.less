@@ -68,10 +68,6 @@ svg {
   display: inline-block !important;
 }
 
-.border-bottom{
-   border-bottom: 1px solid white;
-}
-
 //TODO: naming not standardize
 .inline-block-md {
   @media only screen and (min-width: @min-bp-md) {
@@ -341,37 +337,16 @@ svg {
   display: flex;
   align-items: center;
 
-  &.align-baseline {
-    align-items: baseline;
-  }
   &.align-top {
     align-items: flex-start;
   }
-  &.align-bottom {
-    align-items: flex-end;
+  &.align-baseline {
+    align-items: baseline;
   }
-  &.justify-end {
-    justify-content: flex-end;
-  }
-}
-
-.flex-column {
-  display: flex;
-  align-items: stretch;
-  flex-direction:column;
-
-  &.justify-space-between {
-   justify-content: space-between;
-  }
-
 }
 
 .no-wrap {
   flex-wrap: nowrap;
-}
-
-.row-wrap{
-    flex-wrap: wrap;
 }
 
 .align-self-left {

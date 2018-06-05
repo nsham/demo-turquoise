@@ -39,29 +39,28 @@ h6,
 }
 
 /* font awesome icons default */
-.stacked-default{
-    vertical-align: bottom;
-    display: inline-block;
+.f-awe{
+    vertical-align: middle;
     margin: -2px;
 }
-.stacked-default>* {
+.f-awe>* {
     font-size: 11px;
 }
 
 
-.stacked-default .fa-2x {
+.f-awe .fa-2x {
     font-size: 13px;
 }
 
-.stacked-default .fa-3x {
+.f-awe .fa-3x {
     font-size: 15px;
 }
 
-.stacked-default .fa-4x {
+.f-awe .fa-4x {
     font-size: 17px;
 }
 
-.stacked-default .fa-5x {
+.f-awe .fa-5x {
     font-size: 19px;
     position: relative;
     top: -1px;
@@ -69,7 +68,7 @@ h6,
 /* end font awesome icons default */
 
 /*icon colors & sizes*/
-.icon-color-white{
+.f-ico-color-white{
     color: @color-white;
     &:hover,
     &:focus,
@@ -78,7 +77,7 @@ h6,
     }
 }
 
-.icon-color-green{
+.f-ico-color-green{
     color: @color-primary-green;
     &:hover,
     &:focus,
@@ -87,7 +86,7 @@ h6,
     }
 }
 
-.icon-color-darker-grey{
+.f-ico-color-darker-grey{
     color: @color-darker-grey;
     &:hover,
     &:focus,
@@ -96,50 +95,36 @@ h6,
     }
 }
 
-.icon-size{  
+.f-ico-size{  
     font-size: 30px;
     
     
 }
 
-.icon-size-lg{
+.f-ico-size-lg{
     font-size: 40px;
     
     
 }
 
-.icon-size-md{
+.f-ico-size-md{
     font-size: 35px;
     
     
 }
 
-.icon-size-sm{
+.f-ico-size-sm{
     font-size: 25px;
     
     
 }
 
-.icon-size-xs{
+.f-ico-size-xs{
     font-size: 20px;
     
     
 }
 /*end icon colors & sizes*/
-
-/*icon vertical alignment*/
-.icon-align-top{
-    vertical-align: top;
-}
-
-.icon-align-middle{
-    vertical-align: middle;
-}
-
-.icon-align-bottom{
-    vertical-align: bottom;
-}
-/*end icon vertical alignments*/
 
 h1,
 .ht1 {
@@ -265,7 +250,7 @@ h6,
             width: 41px;
             left: -67px;
             margin-top: -6px;
-            .breakpoint (@min-bp-sm){
+            @media only screen and (min-width: @min-bp-sm){
                 width: 26px;
                 left: -40px;
                 margin-top: -3px;
@@ -280,7 +265,7 @@ h6,
             width: 23px;
             left: -40px;
             margin-top: -2px;
-            .breakpoint (@min-bp-sm){
+            @media only screen and (min-width: @min-bp-sm){
                 width: 17px;
                 left: -27px;
                 margin-top: -2px;

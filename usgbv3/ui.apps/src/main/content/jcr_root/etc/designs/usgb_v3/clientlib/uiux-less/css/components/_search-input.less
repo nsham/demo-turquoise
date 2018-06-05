@@ -127,19 +127,9 @@
 	.each{
 		flex-grow: 0;
 	    flex-shrink: 0;
-	    flex-basis: 100%;
-	    max-width: 100%;
+	    flex-basis: 33.33%;
 	    display: flex;
-		justify-content: center;
-
-		@media (min-width:550px){
-			flex-basis: 50%;
-			max-width: 50%;
-		}
-		@media (min-width:1024px){
-			flex-basis:33.33%;
-			max-width: 33.33%;
-		}
+    	justify-content: center;
 	}
 	
 }
@@ -204,8 +194,7 @@
 
 .relevant-content {
 
-	//template structure
-
+	/*template structure*/
 	.each{
 
 		display: flex;
@@ -214,27 +203,23 @@
 		.right {
 		    display: flex;
 		    align-items: flex-end;
-		    justify-content: space-between;
-		    //explicitly declare for IE11
-		    width: 100%;
 
 		    &>a{
-			 	//1 1 0
-				flex: 1 1 0%;
+			 	/*1 1 0*/
+				flex: 1;
 			}
 
 			.side-functions {
-
-				flex:0 1 auto;
-				//flex: initial;
+				/*0 1 auto*/
+				flex: initial;
 			}
 
 		}
 
 	}
-	//end template structure
+	/*end template structure*/
 
-	//style buttons
+	/*style buttons*/
 	.bookmark,
 	.addto {
 	    display: inline-block;
@@ -255,7 +240,7 @@
 	    	}
 	    }
 	}
-	//end style buttons
+	/*end style buttons*/
 
 }
 
@@ -263,163 +248,6 @@
 // END Component: Relevant Content
 // ----------------------------------------------------------------------
 
-
-
-
-// ----------------------------------------------------------------------
-// Component: Bookmark Relevant Content
-// ----------------------------------------------------------------------
-
-.bookmark-wrap > .relevant-content {
-	
-
-		.button-green{
-			color: #FFF;
-		}
-		.btn-brand-default{
-			min-width: auto;
-			padding: 5px 8px;
-			min-height: auto;
-			@media screen and ( min-width: 768px ){
-				min-width: 120px;
-				padding: 10px 15px;
-			}
-		}
-		.each:first-child{
-			padding-top:0;
-		}
-		.each:last-child{
-			border-bottom: 0;
-		}
-		.each{
-			border-bottom: 1px solid #ccc;
-			padding: 30px 0;
-			display: flex;
-			align-items: flex-start;
-				@media screen and ( min-width: 768px ){
-					align-items: center;
-					padding:0 0 40px 0;
-					border-bottom: 0;
-				}
-			.left .thumbs a img{
-				width:120px;
-				@media screen and ( min-width: 768px ){
-					width:250px;
-				}
-			}
-	
-			.right {
-					display: flex;
-					align-items: flex-end;
-	
-					&>a{
-					flex: 1;
-				}
-				.description{
-					overflow: hidden;
-					/* for set '...' in absolute position */
-					position: relative; 
-					/* use this value to count block height */
-					line-height: 1.2em;
-					/* max-height = line-height (1.2) * lines max number (3) */
-					height: 3.6em; 
-					/* place for '...' */
-					margin-right: -1em;
-					padding-right: 1em;
-					font-size:12px;
-					display: -webkit-box;
-					-webkit-line-clamp: 3;
-					-webkit-box-orient: vertical; 
-					@media screen and ( min-width: 768px ){
-					display: block;
-					font-size:16px;
-					line-height:1.5;
-					height: auto;
-					overflow: inherit; 
-					}
-					.description:before {
-						/* points in the end */
-						content: '...';
-						/* absolute position */
-						position: absolute;
-						/* set position to right bottom corner of block */
-						right: 0;
-						bottom: 0;
-					}
-					/* hide ... if we have text, which is less than or equal to max lines */
-					.description:after {
-						/* points in the end */
-						content: '';
-						/* absolute position */
-						position: absolute;
-						/* set position to right bottom corner of text */
-						right: 0;
-						/* set width and height */
-						width: 1em;
-						height: 1em;
-						margin-top: 0.2em;
-						/* bg color = bg color under block */
-						background: white;
-					}
-				}
-			}
-	
-		}
-	
-		a {
-				color:@color-darker-grey;
-	
-				&:hover{
-					h6, p, span{
-						color: @color-primary-green;
-					}
-				}
-		}
-		/*end style buttons*/
-	
-	}
-	
-	// ----------------------------------------------------------------------
-	// END Component: Bookmark Relevant Content
-	// ----------------------------------------------------------------------
-	
-.thumbs img{
-	width:100%;
-}
-
-#modalContactUs{
-	width: 100%;
-	margin: 0;
-	padding: 0!important;
-	top:0%;
-	@media screen and ( min-width: 768px ){
-		top:10%;
-	}
-}
-#modalContactUs > .modal-dialog{
-	width: 100%;
-	margin: 0;
-	padding: 0;
-}
-
-#modalContactUs > .modal-dialog .modal-content{
-	border-radius:0px;
-}
-.btn-usg-blue:hover {
-	background-color: #2e3f75;
-}
-.btn-usg-blue {
-	background-color: #3c539a;
-}
-.btn-usg-red {
-	background-color: #ec001e;
-}
-.btn-usg-red:hover {
-	background-color: #b90018;
-}
-.social-account .btn{
-	color: white;
-}
 
 // ----------------------------------------------------------------------
 // Component: Search Filter & related-search

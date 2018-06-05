@@ -2,14 +2,17 @@
 <jcr:root xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dam="http://www.day.com/dam/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:mix="http://www.jcp.org/jcr/mix/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
     jcr:mixinTypes="[mix:referenceable]"
     jcr:primaryType="dam:Asset"
-    jcr:uuid="c39ed508-3bc7-4061-bf4f-3aad867b1733">
+    jcr:uuid="6708d8ff-05cc-46d1-8c87-2d594cff0fd3">
     <jcr:content
         dam:assetState="processed"
-        dam:relativePath="USGBoral/sample/usgbicon.ttf"
-        jcr:lastModified="{Date}2018-04-12T12:38:46.671+08:00"
+        dam:relativePath="USGBoral/Global/Website/Images/component/carousel-home-banner/usgbicon.ttf"
+        jcr:lastModified="{Date}2018-06-05T00:50:16.575+08:00"
         jcr:lastModifiedBy="admin"
         jcr:primaryType="dam:AssetContent">
         <metadata
+            dam:extracted="{Date}2018-06-05T00:50:16.464+08:00"
+            dam:sha1="ac9afedf102a9fe640814c4cf17ef141dbe88f05"
+            dam:size="{Long}10528"
             dc:format="application/x-font-ttf"
             jcr:mixinTypes="[cq:Taggable]"
             jcr:primaryType="nt:unstructured"/>

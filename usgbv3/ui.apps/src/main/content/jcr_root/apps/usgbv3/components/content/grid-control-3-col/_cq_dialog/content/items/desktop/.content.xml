@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="nt:unstructured"
+    jcr:title="Desktop"
+    sling:resourceType="granite/ui/components/foundation/section">
+    <layout
+        jcr:primaryType="nt:unstructured"
+        sling:resourceType="granite/ui/components/foundation/layouts/fixedcolumns"/>
+    <items jcr:primaryType="nt:unstructured">
+        <column
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="granite/ui/components/foundation/container">
+            <items jcr:primaryType="nt:unstructured">
+                <column1width
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="granite/ui/components/foundation/form/select"
+                    fieldLabel="Column 1 Width"
+                    name="./dcolumn1width">
+                    <datasource
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="usgbv3/components/structure/common/datasources/colwidth"/>
+                </column1width>
+                <c1hidepadding
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="granite/ui/components/foundation/form/checkbox"
+                    name="./dc1hidepadding"
+                    text="Hide Column 1 Padding"
+                    value="true"/>
+                <column2width
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="granite/ui/components/foundation/form/select"
+                    fieldLabel="Column 2 Width"
+                    name="./dcolumn2width">
+                    <datasource
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="usgbv3/components/structure/common/datasources/colwidth"/>
+                </column2width>
+                <c2hidepadding
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="granite/ui/components/foundation/form/checkbox"
+                    name="./dc2hidepadding"
+                    text="Hide Column 2 Padding"
+                    value="true"/>
+                <column3width
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="granite/ui/components/foundation/form/select"
+                    fieldLabel="Column 3 Width"
+                    name="./dcolumn3width">
+                    <datasource
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="usgbv3/components/structure/common/datasources/colwidth"/>
+                </column3width>
+                <c3hidepadding
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="granite/ui/components/foundation/form/checkbox"
+                    name="./dc3hidepadding"
+                    text="Hide Column 3 Padding"
+                    value="true"/>
+                <offset
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="granite/ui/components/foundation/form/select"
+                    fieldLabel="Offset"
+                    name="./doffset">
+                    <datasource
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="usgbv3/components/structure/common/datasources/offset"/>
+                </offset>
+                <margintop
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="granite/ui/components/foundation/form/select"
+                    fieldLabel="Margin (Top)"
+                    name="./dmargintop">
+                    <datasource
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="usgbv3/components/structure/common/datasources/margin"/>
+                </margintop>
+                <marginbottom
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="granite/ui/components/foundation/form/select"
+                    fieldLabel="Margin (Bottom)"
+                    name="./dmarginbottom">
+                    <datasource
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="usgbv3/components/structure/common/datasources/margin"/>
+                </marginbottom>
+                <gutter
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="granite/ui/components/foundation/form/select"
+                    fieldLabel="Gutter"
+                    name="./gutter">
+                    <items jcr:primaryType="nt:unstructured">
+                        <default
+                            jcr:primaryType="nt:unstructured"
+                            text="default"
+                            value=""/>
+                        <small
+                            jcr:primaryType="nt:unstructured"
+                            text="small"
+                            value="row-pad-5"/>
+                        <medium
+                            jcr:primaryType="nt:unstructured"
+                            text="medium"
+                            value="row-pad-6"/>
+                        <large
+                            jcr:primaryType="nt:unstructured"
+                            text="large"
+                            value="row-pad-10"/>
+                    </items>
+                </gutter>
+            </items>
+        </column>
+    </items>
+</jcr:root>
