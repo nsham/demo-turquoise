@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:granite="http://www.adobe.com/jcr/granite/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
     jcr:primaryType="nt:unstructured"
-    jcr:title="Hover Icon Tile"
+    jcr:title="Hero Banner Component"
     sling:resourceType="cq/gui/components/authoring/dialog">
     <content
         jcr:primaryType="nt:unstructured"
@@ -15,31 +15,93 @@
                 jcr:primaryType="nt:unstructured"
                 jcr:title="Basic"
                 sling:resourceType="granite/ui/components/foundation/section">
-                <layout
-                    jcr:primaryType="nt:unstructured"
-                    sling:resourceType="granite/ui/components/foundation/layouts/fixedcolumns"/>
                 <items jcr:primaryType="nt:unstructured">
                     <column
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="granite/ui/components/foundation/container">
                         <items jcr:primaryType="nt:unstructured">
-                            <styleType
+                            <bgColor
                                 jcr:primaryType="nt:unstructured"
-                                sling:resourceType="granite/ui/components/coral/foundation/form/select"
-                                fieldLabel="Style Type"
-                                name="./styleType">
-                                <items jcr:primaryType="nt:unstructured">
-                                    <style1
+                                sling:resourceType="usgb/widgets/colorpicker"
+                                classicPaletteType="{Boolean}false"
+                                fieldLabel="Background Color"
+                                freestylePaletteType="{Boolean}true"
+                                name="./bgColor">
+                                <mappings jcr:primaryType="nt:unstructured">
+                                    <color-primary-green
                                         jcr:primaryType="nt:unstructured"
-                                        text="Style 1"
-                                        value="style1"/>
-                                    <style2
+                                        name="color-primary-green"
+                                        value="#009b3a"/>
+                                    <color-primary-yellow
                                         jcr:primaryType="nt:unstructured"
-                                        text="Style 2"
-                                        value="style2"/>
-                                </items>
-                            </styleType>
-                            <hiddenStyle1/>
+                                        name="color-primary-yellow"
+                                        value="#fed100"/>
+                                    <color-secondary-red
+                                        jcr:primaryType="nt:unstructured"
+                                        name="color-secondary-red"
+                                        value="#c20051"/>
+                                    <color-secondary-blue
+                                        jcr:primaryType="nt:unstructured"
+                                        name="color-secondary-blue"
+                                        value="#00a5dd"/>
+                                    <color-secondary-brown
+                                        jcr:primaryType="nt:unstructured"
+                                        name="color-secondary-brown"
+                                        value="#845023"/>
+                                    <color-secondary-purple
+                                        jcr:primaryType="nt:unstructured"
+                                        name="color-secondary-purple"
+                                        value="#292182"/>
+                                    <color-secondary-orange
+                                        jcr:primaryType="nt:unstructured"
+                                        name="color-secondary-orange"
+                                        value="#e85314"/>
+                                    <color-secondary-gold
+                                        jcr:primaryType="nt:unstructured"
+                                        name="color-secondary-gold"
+                                        value="#70772a"/>
+                                    <color-secondary-grey
+                                        jcr:primaryType="nt:unstructured"
+                                        name="color-secondary-grey"
+                                        value="#4c4d4f"/>
+                                    <color-secondary-teal
+                                        jcr:primaryType="nt:unstructured"
+                                        name="color-secondary-teal"
+                                        value="#006870"/>
+                                    <color-white
+                                        jcr:primaryType="nt:unstructured"
+                                        name="color-white"
+                                        value="#FFFFFF"/>
+                                    <color-light-grey
+                                        jcr:primaryType="nt:unstructured"
+                                        name="color-light-grey"
+                                        value="#CCCCCC"/>
+                                    <color-grey
+                                        jcr:primaryType="nt:unstructured"
+                                        name="color-grey"
+                                        value="#999999"/>
+                                    <color-dark-grey
+                                        jcr:primaryType="nt:unstructured"
+                                        name="color-dark-grey"
+                                        value="#666666"/>
+                                    <color-deep-dark-grey
+                                        jcr:primaryType="nt:unstructured"
+                                        name="color-deep-dark-grey"
+                                        value="#333333"/>
+                                    <color-black
+                                        jcr:primaryType="nt:unstructured"
+                                        name="color-black"
+                                        value="#000000"/>
+                                </mappings>
+                            </bgColor>
+                            <imgPath/>
+                            <video/>
+                            <title
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                fieldLabel="Title"
+                                name="./title"
+                                useFixedInlineToolbar="{Boolean}true"/>
                             <description
                                 jcr:primaryType="nt:unstructured"
                                 sling:resourceType="cq/gui/components/authoring/dialog/richtext"
@@ -202,33 +264,45 @@
                                     </cui>
                                 </uiSettings>
                             </description>
-                            <link
+                            <contentAlign
                                 jcr:primaryType="nt:unstructured"
-                                sling:resourceType="granite/ui/components/foundation/form/pathbrowser"
-                                fieldLabel="Link Path"
-                                name="./link"
-                                rootPath="/content/usgboral"/>
-                            <title
-                                jcr:primaryType="nt:unstructured"
-                                sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
-                                fieldLabel="Title"
-                                name="./title"
-                                useFixedInlineToolbar="{Boolean}true"/>
-                            <icon
-                                granite:class="cq-dialog-dropdown-showhide"
-                                jcr:primaryType="nt:unstructured"
-                                sling:resourceType="granite/ui/components/coral/foundation/form/select"
-                                fieldLabel="Icon"
-                                name="./icon">
+                                sling:resourceType="granite/ui/components/foundation/form/select"
+                                fieldLabel="Content Alignment"
+                                name="./contentAlignment">
                                 <datasource
                                     jcr:primaryType="nt:unstructured"
-                                    sling:resourceType="usgbv3/components/structure/common/datasources/iconcode"/>
-                            </icon>
-                            <imgPath/>
+                                    sling:resourceType="usgbv3/components/structure/common/datasources/buttonstyle"/>
+                            </contentAlign>
                         </items>
                     </column>
                 </items>
+                <layout
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="granite/ui/components/foundation/layouts/fixedcolumns"/>
             </basic>
+            <mobile
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Mobile"
+                sling:resourceType="granite/ui/components/foundation/section">
+                <items jcr:primaryType="nt:unstructured">
+                    <column
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/foundation/container">
+                        <items jcr:primaryType="nt:unstructured">
+                            <mblTitle
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                fieldLabel="Title"
+                                name="./mblTitle"
+                                useFixedInlineToolbar="{Boolean}true"/>
+                            <mblImgPath/>
+                        </items>
+                    </column>
+                </items>
+                <layout
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="granite/ui/components/foundation/layouts/fixedcolumns"/>
+            </mobile>
         </items>
     </content>
 </jcr:root>

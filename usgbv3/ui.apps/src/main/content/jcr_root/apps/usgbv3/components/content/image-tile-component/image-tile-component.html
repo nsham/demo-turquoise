@@ -6,23 +6,49 @@
 	${properties.cssoverwrite @ context='unsafe'}
 </style>
 
-<div class="feature-card-wrapper ${properties.classid} ">
-	<div class="feature-card-wrapper">
-    	<sly data-sly-test.assetExist="${properties.imgPath }">
-        	<a href="${properties.link}.html" target="${properties.targettype == properties.hiddentarget ? properties.targetName : properties.targettype}" class="cta-hover-tile subhero" style="background:transparent url(${properties.imgPath @ context='unsafe'}) center center no-repeat; background-size:cover;">
-        </sly>
-        <sly data-sly-test="${!assetExist}">
-        	<a href="${properties.link}.html" target="${properties.targettype == properties.hiddentarget ? properties.targetName : properties.targettype}" class="hero-banner-wrapper" style="background-color: ${properties.bgColor @ context='unsafe'};" >
-        </sly>
-          <div class="box-size-m p-md-no p-s p-sm-no">
-              <div class="cta-hover-tile-label  text-left va-middle va-sm-middle m-md-left-4xl m-sm-left-4xl m-left-m">
-                 <h2 class=" ht4 uppercase color-white"><span class="yellow-label"></span>${properties.title @ context='html'}</h2>
-                 <div class="color-white">${properties.description @ context='html'}</div>
-                 <div class="btn btn-top-border ${properties.buttonStyle} ">Read More<span class="glyphicon glyphicon-menu-right"></span></div>
-              </div>
-           </div>
-           <span class="bg-overlay"></span>
-        </a>
-        </a>
-    </div>
+<div class="${properties.classid}" >
+   	<sly data-sly-test.style1="${properties.styleType == properties.hiddenstyle1}">
+        <div class="feature-card-wrapper ">
+            <div class="feature-card-wrapper">
+                <sly data-sly-test.assetExist="${properties.imgPath }">
+                    <a href="${properties.link}.html" target="${properties.targettype == properties.hiddentarget ? properties.targetName : properties.targettype}" class="cta-hover-tile subhero" style="background:transparent url(${properties.imgPath @ context='unsafe'}) center center no-repeat; background-size:cover;">
+                </sly>
+                <sly data-sly-test="${!assetExist}">
+                    <a href="${properties.link}.html" target="${properties.targettype == properties.hiddentarget ? properties.targetName : properties.targettype}" class="hero-banner-wrapper" style="background-color: ${properties.bgColor @ context='unsafe'};" >
+                </sly>
+                  <div class="box-size-m p-md-no p-s p-sm-no">
+                      <div class="cta-hover-tile-label  text-left va-middle va-sm-middle m-md-left-4xl m-sm-left-4xl m-left-m">
+                         <h2 class=" ht4 uppercase color-white"><span class="yellow-label"></span>${properties.title @ context='html'}</h2>
+                         <div class="color-white">${properties.description @ context='html'}</div>
+                         <div class="btn btn-top-border ${properties.buttonStyle} ">
+        					${properties.buttonText @ context='html'}
+        					<span class="glyphicon glyphicon-menu-right"></span>
+        				 </div>
+                      </div>
+                   </div>
+                   <span class="bg-overlay"></span>
+                </a>
+                </a>
+            </div>
+        </div>
+     </sly>
+
+     <sly data-sly-test="${!style1}">
+		<div class="c-box-custom">
+            <div class="each bg-light-grey">
+                <div class="content p-side-xxl p-vertical-5xl text-center text-sm-center text-md-left">
+                    <a href="#">
+                        <p class="fs-3 color-darker-grey uppercase">${properties.category @ context='html'}</p>
+                        	<h2 class="ht5 color-darker-grey uppercase m-bottom-no">${properties.title @ context='html'}</h2>
+                        <div class="color-darker-grey">${properties.description @ context='html'}</div>
+                    </a>
+                    <a href="${properties.link}.html" target="${properties.targettype == properties.hiddentarget ? properties.targetName : properties.targettype}" class="btn btn-top-border ${properties.buttonStyle}">
+        				${properties.buttonText @ context='html'}
+        				<span class="glyphicon glyphicon-menu-right"></span>
+        			</a> 
+                </div>
+            </div>
+        </div>
+
+     </sly>
 </div>

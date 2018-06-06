@@ -1,0 +1,32 @@
+<sly data-sly-test="${wcmmode.edit || wcmmode.design}">
+	Edit here for Hero Banner Component
+</sly>
+
+	<div class="container-fluid">
+        <div class="row relative">
+    
+            <div style="background:transparent url(${properties.imgPath @ context='unsafe'}) center right no-repeat; background-size:cover;" data-img-mobile="background:transparent url(${properties.mblImgPath ? item.properties.mblImgPath : item.properties.imgPath @ context='unsafe'}) bottom right no-repeat; background-size:cover;">
+                <div class="container">
+                    <div class="row p-top-5xl p-bottom-5xl m-no">
+                            <div class="col-xs-12">
+                                <div class="banner-small">
+                                    <div class=" relative m-left-s m-sm-left-3xl text-left ">
+                                        <h2 class="ht1 uppercase color-white sanimated sfadeInDown">
+                                            <span class="yellow-label"></span>
+                                            ${properties.title @ context='html'}
+        								</h2>
+                                        <div class="color-white sanimated sfadeInUp delay-500-ms">${properties.description @ context='html'}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+                    </div>
+    
+                <div class="ico-indicator">
+                    <img src="/content/dam/USGBoral/Global/Website/Images/component/allsample/indicator-btn.png">
+                </div>
+    
+            </div>
+    
+        </div>
+    </div>

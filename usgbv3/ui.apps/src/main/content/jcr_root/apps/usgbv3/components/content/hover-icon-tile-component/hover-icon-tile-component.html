@@ -7,24 +7,48 @@
 </style>
 
 <div class="${properties.classid }">
-	<a href="#" target="_blank">
-        <div class="bg-light-grey box-size-m box-type-1 p-md-xs p-xs">
-            <div class="center width-full">
-                <div class="box-inner-img">
-                	<img src="${properties.imgPath @ context='unsafe'}" />
+	<sly data-sly-test.style1="${properties.styleType == properties.hiddenstyle1}">
+        <a href="${properties.pageUrl}.html" target="${properties.targettype == properties.hiddentarget ? properties.targetName : properties.targettype}">
+            <div class="bg-light-grey box-size-m box-type-1 p-md-xs p-xs">
+                <div class="center width-full">
+                    <div class="box-inner-img">
+                        <img src="${properties.imgPath @ context='unsafe'}" />
+                    </div>
+                    <h2 class="m-top-m m-bottom-xs ht5 color-darker-grey text-center uppercase">${properties.title @ context='html'}</h2>  
+                    <div class="color-darker-grey text-center fs-2 m-no">${properties.description @ context='html'}</div>
                 </div>
-                <h2 class="m-top-m m-bottom-xs ht5 color-darker-grey text-center uppercase">${properties.title @ context='html'}</h2>  
-                <div class="color-darker-grey text-center fs-2 m-no">${properties.description @ context='html'}</div>
-            </div>
-            <div class="bg-box-hover">
-                <div class="box-text text-center va-middle">
-                    <span class="main-icon ${properties.icon }"></span> 
-                    <div class=" fs-2 text-hover ">
-                        <p class="color-white">${properties.title @ context='html'}</p>    
-                        <p class="bottom-line ha-center"></p>
+                <div class="bg-box-hover">
+                    <div class="box-text text-center va-middle">
+                        <span class="main-icon ${properties.icon }"></span> 
+                        <div class=" fs-2 text-hover ">
+                            <p class="color-white">${properties.title @ context='html'}</p>    
+                            <p class="bottom-line ha-center"></p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </a> 
+        </a>
+    </sly>
+
+    <sly data-sly-test="${!style1}">
+		<a href="${properties.pageUrl}.html" target="${properties.targettype == properties.hiddentarget ? properties.targetName : properties.targettype}">
+            <div class="box-type-4 bg-primary-green box-size-m">
+                
+                <div class="center width-full">
+                    <div class="box-inner-img"><img src="${properties.imgPath @ context='unsafe'}" /></div>
+                </div>
+    
+                <div class="bg-box-hover">
+                    <h2 class="main-text p-top-l color-white ht5 text-center uppercase">${properties.title @ context='html'}</h2>
+            
+                    <div class="sub-text p-m">
+                        <h2 class="color-darker-grey bold ht6 uppercase">${properties.title @ context='html'}</h2>
+                        <div class="color-darker-grey">${properties.description @ context='html'}</div>  
+                    </div>
+                </div>
+            
+    
+            </div>
+        </a>
+    </sly>
 </div>
