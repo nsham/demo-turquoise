@@ -1,33 +1,32 @@
-
-
 .v-line-1{
-    li:not(:first-child):after{
-        content: '';
-        height: 10px;
-        width: 2px;
-        position: absolute; 
-        top: 5px; 
-        padding-right: 8px;  
-        border-left:2px  solid #d2d2d2;
-        .breakpoint (@min-bp-sm){
-            display: none;
-        }
+    >li:after{
+       content: '';
+       height: 12px;
+       width: 2px;
+       position: relative;
+       top: 0;
+       padding: 0;
+       margin: 0;
+       background: #d2d2d2;
+       display: inline-block;
+       vertical-align: middle;
+       
     }
 }
 
 .v-line-2{
     margin-right: -2%;
-    li:not(:first-child):after{
+    >li:after{
+
           content: '';
-          height: 10px;
+          height: 14px;
           width: 2px;
-          position: absolute;
-          padding-right: 8px;
-          border-left: 2px solid #d2d2d2;
-          bottom: 26px;
-          .breakpoint (@min-bp-sm){
-              display: none;
-          }
+          background: #d2d2d2;
+          display: inline-block;
+          vertical-align: middle;
+          position: relative;
+          left: 0px;
+         
       }
   }
   
@@ -42,6 +41,11 @@
 
 
 .bottom-line{
+    // .slick-dots li.slick-active,
+    // .slick-dots li.slick-active + li,
+    // .slick-dots li.slick-active + li + li {
+    //     display: block;
+    // }
   border-bottom:1px solid @color-white;
 }
 
@@ -57,7 +61,9 @@
 .left-line-dark-grey{
     border-left:0.5px solid @color-dark-grey;
 }
-
+.left-line-light-grey{
+    border-left:0.5px solid #F6F6F6;
+}
 .right-line-dark-grey{
     border-right:0.5px solid @color-dark-grey;
 }
@@ -71,3 +77,6 @@
 .line-light-grey{
  background: #d2d2d2;
 }
+
+
+

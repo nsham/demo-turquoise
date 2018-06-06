@@ -105,6 +105,14 @@ background:transparent;
     }
 
 
+    &:last-child{
+        > *:not(ul) {
+            > *{
+                margin-right: 0;
+            }
+        }
+    }
+
     &>*:not(ul) {
         width: 100%;
         position: relative;
