@@ -16,9 +16,8 @@
     
     Map<String, String> kv = new LinkedHashMap<String, String>();
 
-    kv.put("White", "bg-white");
-    kv.put("Grey", "bg-grey");
-    kv.put("Light Grey", "bg-light-grey");
+    kv.put("Dark", "btn-dark");
+    kv.put("Light", "btn-light");
 
 
     for (String key : kv.keySet()) {

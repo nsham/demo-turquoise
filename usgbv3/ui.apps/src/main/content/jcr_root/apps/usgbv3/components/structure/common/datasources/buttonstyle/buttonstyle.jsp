@@ -16,9 +16,12 @@
     
     Map<String, String> kv = new LinkedHashMap<String, String>();
 
-    kv.put("White", "bg-white");
-    kv.put("Grey", "bg-grey");
-    kv.put("Light Grey", "bg-light-grey");
+    kv.put("Green", "button-green");
+    kv.put("Yellow", "button-yellow");
+    kv.put("Red", "button-red");
+    kv.put("Outline Green", "button-outline-green");
+    kv.put("Outline Yellow", "button-outline-yellow");
+    kv.put("Outline Red", "button-outline-red");
 
 
     for (String key : kv.keySet()) {
