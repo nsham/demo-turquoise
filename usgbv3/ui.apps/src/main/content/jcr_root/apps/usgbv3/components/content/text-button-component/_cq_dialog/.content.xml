@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:granite="http://www.adobe.com/jcr/granite/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
     jcr:primaryType="nt:unstructured"
-    jcr:title="Icon Button Tile"
+    jcr:title="Text and Button Component"
     sling:resourceType="cq/gui/components/authoring/dialog">
     <content
         jcr:primaryType="nt:unstructured"
         sling:resourceType="granite/ui/components/foundation/container">
-        <layout
-            jcr:primaryType="nt:unstructured"
-            sling:resourceType="granite/ui/components/foundation/layouts/tabs"
-            type="nav"/>
         <items jcr:primaryType="nt:unstructured">
             <basic
                 jcr:primaryType="nt:unstructured"
@@ -20,7 +16,12 @@
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="granite/ui/components/foundation/container">
                         <items jcr:primaryType="nt:unstructured">
-                            <buttonText/>
+                            <title
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                fieldLabel="Title"
+                                name="./title"
+                                useFixedInlineToolbar="{Boolean}true"/>
                             <description
                                 jcr:primaryType="nt:unstructured"
                                 sling:resourceType="cq/gui/components/authoring/dialog/richtext"
@@ -183,6 +184,7 @@
                                     </cui>
                                 </uiSettings>
                             </description>
+                            <buttonText/>
                             <link
                                 jcr:primaryType="nt:unstructured"
                                 sling:resourceType="granite/ui/components/foundation/form/pathbrowser"
@@ -198,23 +200,6 @@
                                     jcr:primaryType="nt:unstructured"
                                     sling:resourceType="usgbv3/components/structure/common/datasources/buttonstyle"/>
                             </buttonStyle>
-                            <title
-                                jcr:primaryType="nt:unstructured"
-                                sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
-                                fieldLabel="Title"
-                                name="./title"
-                                useFixedInlineToolbar="{Boolean}true"/>
-                            <icon
-                                granite:class="cq-dialog-dropdown-showhide"
-                                jcr:primaryType="nt:unstructured"
-                                sling:resourceType="granite/ui/components/coral/foundation/form/select"
-                                fieldLabel="Icon"
-                                name="./icon">
-                                <datasource
-                                    jcr:primaryType="nt:unstructured"
-                                    sling:resourceType="usgbv3/components/structure/common/datasources/iconcode"/>
-                            </icon>
-                            <imgPath/>
                         </items>
                     </column>
                 </items>
@@ -223,5 +208,9 @@
                     sling:resourceType="granite/ui/components/foundation/layouts/fixedcolumns"/>
             </basic>
         </items>
+        <layout
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="granite/ui/components/foundation/layouts/tabs"
+            type="nav"/>
     </content>
 </jcr:root>
