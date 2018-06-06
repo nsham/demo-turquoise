@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <workspaceFilter version="1.0">
-    <filter root="/apps/usgbv3/templates" />
+    <filter root="/apps/usgbv3/components/content/page-product-compare" />
+    <filter root="/apps/usgbv3/components/content/page-product-listing" />
+    <filter root="/apps/usgbv3/components/content/page-system-content" />
 </workspaceFilter>
