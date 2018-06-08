@@ -16,8 +16,9 @@
     
     Map<String, String> kv = new LinkedHashMap<String, String>();
 
-	kv.put("Same Tab/Window", "_self");
-	kv.put("New Tab/New Window", "_blank");
+	kv.put("Same Tab", "_self");
+	kv.put("New Tab", "_blank");
+	kv.put("Targated Tab", "target");
 /*
     kv.put("Form Modal", "modal");
 	kv.put("Form Modal (Full Width)", "modal-full");
