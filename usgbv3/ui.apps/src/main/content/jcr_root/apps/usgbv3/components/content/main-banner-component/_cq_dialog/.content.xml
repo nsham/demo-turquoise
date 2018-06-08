@@ -6,10 +6,6 @@
     <content
         jcr:primaryType="nt:unstructured"
         sling:resourceType="granite/ui/components/foundation/container">
-        <layout
-            jcr:primaryType="nt:unstructured"
-            sling:resourceType="granite/ui/components/foundation/layouts/tabs"
-            type="nav"/>
         <items jcr:primaryType="nt:unstructured">
             <basic
                 jcr:primaryType="nt:unstructured"
@@ -200,7 +196,7 @@
                                                 <contentAlign
                                                     jcr:primaryType="nt:unstructured"
                                                     sling:resourceType="granite/ui/components/foundation/form/select"
-                                                    fieldLabel="Content Alignment"
+                                                    fieldLabel="Desktop Content Alignment"
                                                     name="./contentAlignment">
                                                     <datasource
                                                         jcr:primaryType="nt:unstructured"
@@ -304,6 +300,15 @@
                                                 </color>
                                                 <mblImgPath/>
                                                 <imgPath/>
+                                                <opacity
+                                                    jcr:primaryType="nt:unstructured"
+                                                    sling:resourceType="granite/ui/components/foundation/form/select"
+                                                    fieldLabel="Opacity"
+                                                    name="./opacity">
+                                                    <datasource
+                                                        jcr:primaryType="nt:unstructured"
+                                                        sling:resourceType="usgbv3/components/structure/common/datasources/opacity"/>
+                                                </opacity>
                                             </items>
                                         </column>
                                     </items>
@@ -317,5 +322,9 @@
                     sling:resourceType="granite/ui/components/foundation/layouts/fixedcolumns"/>
             </basic>
         </items>
+        <layout
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="granite/ui/components/foundation/layouts/tabs"
+            type="nav"/>
     </content>
 </jcr:root>
