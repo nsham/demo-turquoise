@@ -11,5 +11,6 @@ scrollReveal.js
 sticky-sidebar.js
 sideScroll.js
 slick-lightbox.js
+aos.js
 main.js
 

@@ -218,7 +218,51 @@ function viewport() {
 })();
 
 
+// ----------------------------------------------------------------------
+// Header Scroll Function
+// ----------------------------------------------------------------------
+(function(){
+    "use strict";
+    $(document).ready(function(){
 
+        var lastScrollY = 0;
+        var $floater = $('.header .wrapper');
+
+        $(window).scroll(scrollStatus);
+
+        function scrollStatus()
+        {
+
+            var currScroll = $(this).scrollTop();
+            
+            //scroll 
+            //scroll down && scroll down more than 100px && activate when 768px and higher
+            if ( (currScroll > lastScrollY) && (currScroll > 100) && (viewport().width >= 768) )
+            {
+                //scroll down 
+                //console.log('down');
+
+                $floater.removeClass('scroll-up').removeClass('desktop-slide-down');
+                $floater.addClass('scroll-down').addClass('desktop-slide-up');
+
+            }else if( currScroll < lastScrollY )
+                {
+                    //scroll up
+                    //console.log('up');
+                    $floater.removeClass('scroll-down').removeClass('desktop-slide-up');
+                    $floater.addClass('scroll-up').addClass('desktop-slide-down');
+
+                }
+
+            lastScrollY = currScroll;
+            //end scroll 
+
+        }
+
+
+
+    });
+})();
 
 // ----------------------------------------------------------------------
 // Mega Menu Hover
@@ -292,6 +336,68 @@ function viewport() {
         if ( $(".mega-menu-wrapper .nav-dropdown-wrapper").length )megadropdownfc();
 
 
+    });
+})();
+
+// ----------------------------------------------------------------------
+// Hamburger menu
+// ----------------------------------------------------------------------
+(function(){
+    "use strict";
+    $(document).ready(function(){
+        $(".header .hamburger").on( "click",  function() {         
+            var $hamburgerContent = $('.hamburger-content');
+
+            if( $hamburgerContent.hasClass('hidden') ){
+                $hamburgerContent.removeClass('hidden');
+            }else
+            {
+                $hamburgerContent.addClass('hidden');
+            }
+        });
+    });
+})();
+
+
+// ----------------------------------------------------------------------
+// Mobile navigation link to function (level 1, 2 & 3)
+// ----------------------------------------------------------------------
+(function(){
+    "use strict";
+    $(document).ready(function(){
+        $("[data-link-to]").on( "click",  function() {         
+            
+            var $this = $(this);
+            
+            var $allSections = $('.hamburger-content>.section');
+
+            var $thisAttrVal = $this.attr('data-link-to');
+
+            var $allContents = $("[data-link-to-content]");
+            var allContentsAttrValue = $allContents.attr('data-link-to-content');
+
+            function compareAttrValue(){
+                $allContents.each(function( index ) {
+                  //console.log( index + ": " + $( this ).text() );
+                  var $eachContent = $(this);
+                  var eachContentAttrValue = $eachContent.attr('data-link-to-content');
+                  console.log(eachContentAttrValue);
+                });
+            }
+            compareAttrValue();
+
+            //console.log("This attr: " + $thisAttrVal);
+            //console.log("All attr: " + $allAttrVal);
+
+            //if($thisAttrVal === $allContentsAttrValue){
+                //console.log('match');
+                //$allSections.addClass('hidden');
+                //$("[data-link-to]").removeClass('hidden');
+                //console.log($this);
+            //}
+
+            //console.log($thisAttrVal);
+        });
     });
 })();
 

@@ -1,28 +1,35 @@
 .c-flex-items{
+	
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	justify-content: space-between;
+	justify-content: center;
 	flex-wrap: wrap;
 
+	&.justify-left{
+		justify-content:flex-start;
+
+		@media only screen and (min-width:768px) {
+			justify-content: space-between;
+		}
+
+	}
+
 	@media only screen and (min-width:768px) {
+		justify-content: space-between;
 		flex-wrap: nowrap;
 	}
 
 	.item-fix {
-	    flex: 1;
-	    width: auto;
 
-	    @media only screen and (min-width:768px) {
-	    	flex: initial;
+		//need to force overwrite when add inline on mobile, hence max-width
+	    @media only screen and (max-width:767px) {
+	    	min-width: auto !important;
 	    }
 	}
 
 	.item-stretch{
-	    width: auto;
+	    
 
-	    @media only screen and (min-width:768px) {
-	    	flex: 1;
-	    }
 	}
 }

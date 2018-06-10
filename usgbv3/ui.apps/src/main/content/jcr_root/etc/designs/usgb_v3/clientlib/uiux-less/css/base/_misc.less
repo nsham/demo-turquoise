@@ -89,6 +89,18 @@ svg {
   }
 }
 
+.align-top{
+  vertical-align: top;
+}
+
+.align-middle{
+  vertical-align: middle;
+}
+
+.align-bottom{
+  vertical-align: bottom;
+}
+
 .block {
   display: block !important;
 }
@@ -196,9 +208,6 @@ svg {
   float: right;
 }
 
-.border-bottom{
-   border-bottom: 1px solid white;
-}
 
 // ----------------------------------------------------------------------
 // Grid System Responsive Padding
@@ -364,6 +373,19 @@ svg {
     -ms-flex-align: flex-end;
     align-items: flex-end;
   }
+
+  &.align-stretch {
+    -webkit-box-align: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+  }
+
+
+  &.justify-center {
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+  }
   
   &.justify-end {
     -webkit-box-pack: end;
@@ -393,6 +415,47 @@ svg {
           flex-direction:column;
 
 
+    &.align-top {
+      -webkit-box-align: start;
+      -ms-flex-align: start;
+      align-items: flex-start;
+    }
+    &.align-baseline {
+      -webkit-box-align: baseline;
+      -ms-flex-align: baseline;
+      align-items: baseline;
+  
+    }
+  
+    &.align-bottom {
+      -webkit-box-align: flex-end;
+      -ms-flex-align: flex-end;
+      align-items: flex-end;
+    }
+
+  &.align-top {
+    -webkit-box-align: start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+  }
+  &.align-baseline {
+    -webkit-box-align: baseline;
+    -ms-flex-align: baseline;
+    align-items: baseline;
+
+  }
+
+  &.align-bottom {
+    -webkit-box-align: flex-end;
+    -ms-flex-align: flex-end;
+    align-items: flex-end;
+  }
+  &.align-stretch {
+    -webkit-box-align: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+  }
+
   &.justify-space-between {
     -webkit-box-pack: justify;
         -ms-flex-pack: justify;
@@ -419,6 +482,19 @@ svg {
   margin-left: auto;
 }
 
+// useful for fixing IE11 responsive image bug
+//used on product listing page
+.flex-shrink-0{
+ -ms-flex-negative: 0;
+         flex-shrink: 0;
+}
+
+.flex-grow-0{
+  -webkit-box-flex: 0;
+      -ms-flex-positive: 0;
+          flex-grow: 0;
+}
+
 @flex-grow-count: 12;
 
 .for(@i: 1) when (@i <= @flex-grow-count) {
@@ -430,6 +506,8 @@ svg {
   .for((@i + 1));
 }
 .for();
+
+
 
 // ----------------------------------------------------------------------
 // Responsive Text Alignment
@@ -543,7 +621,16 @@ svg {
 }
 
 
-
+/*
+ * Animation
+ * --------------------------------------------------
+ */
+ .animation-direction{
+   animation-direction: normal;
+ }
+.animation-direction-reverse{
+  animation-direction:reverse;
+}
 
 
 
