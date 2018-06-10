@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:granite="http://www.adobe.com/jcr/granite/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
     jcr:primaryType="nt:unstructured"
-    jcr:title="Icon Button Tile"
+    jcr:title="Big Small Image Tile"
     sling:resourceType="cq/gui/components/authoring/dialog">
     <content
         jcr:primaryType="nt:unstructured"
@@ -16,14 +16,12 @@
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="granite/ui/components/foundation/container">
                         <items jcr:primaryType="nt:unstructured">
-                            <buttonText/>
-                            <description
+                            <richtext
                                 jcr:primaryType="nt:unstructured"
                                 sling:resourceType="cq/gui/components/authoring/dialog/richtext"
-                                fieldLabel="description"
-                                name="./description"
+                                fieldLabel="richtext"
+                                name="./richText"
                                 useFixedInlineToolbar="{Boolean}true">
-                                <buttonText/>
                                 <rtePlugins jcr:primaryType="nt:unstructured">
                                     <format
                                         jcr:primaryType="nt:unstructured"
@@ -36,7 +34,30 @@
                                         features="*"/>
                                     <paraformat
                                         jcr:primaryType="nt:unstructured"
-                                        features="*"/>
+                                        features="*">
+                                        <formats jcr:primaryType="cq:WidgetCollection">
+                                            <p
+                                                jcr:primaryType="nt:unstructured"
+                                                description="Paragraph"
+                                                tag="p"/>
+                                            <h1
+                                                jcr:primaryType="nt:unstructured"
+                                                description="Heading1"
+                                                tag="h1"/>
+                                            <h2
+                                                jcr:primaryType="nt:unstructured"
+                                                description="Heading2"
+                                                tag="h2"/>
+                                            <h3
+                                                jcr:primaryType="nt:unstructured"
+                                                description="Heading3"
+                                                tag="h3"/>
+                                            <h4
+                                                jcr:primaryType="nt:unstructured"
+                                                description="Heading4"
+                                                tag="h4"/>
+                                        </formats>
+                                    </paraformat>
                                     <links
                                         jcr:primaryType="nt:unstructured"
                                         features="*"/>
@@ -178,39 +199,7 @@
                                         </inline>
                                     </cui>
                                 </uiSettings>
-                            </description>
-                            <link
-                                jcr:primaryType="nt:unstructured"
-                                sling:resourceType="granite/ui/components/foundation/form/pathbrowser"
-                                fieldLabel="Link Path"
-                                name="./link"
-                                rootPath="/content/usgboral"/>
-                            <buttonStyle
-                                jcr:primaryType="nt:unstructured"
-                                sling:resourceType="granite/ui/components/foundation/form/select"
-                                fieldLabel="Button Style"
-                                name="./buttonStyle">
-                                <datasource
-                                    jcr:primaryType="nt:unstructured"
-                                    sling:resourceType="usgbv3/components/structure/common/datasources/buttonstyle"/>
-                            </buttonStyle>
-                            <title
-                                jcr:primaryType="nt:unstructured"
-                                sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
-                                fieldLabel="Title"
-                                name="./title"
-                                useFixedInlineToolbar="{Boolean}true"/>
-                            <icon
-                                granite:class="cq-dialog-dropdown-showhide"
-                                jcr:primaryType="nt:unstructured"
-                                sling:resourceType="granite/ui/components/coral/foundation/form/select"
-                                fieldLabel="Icon"
-                                name="./icon">
-                                <datasource
-                                    jcr:primaryType="nt:unstructured"
-                                    sling:resourceType="usgbv3/components/structure/common/datasources/iconcode"/>
-                            </icon>
-                            <imgPath/>
+                            </richtext>
                         </items>
                     </column>
                 </items>
