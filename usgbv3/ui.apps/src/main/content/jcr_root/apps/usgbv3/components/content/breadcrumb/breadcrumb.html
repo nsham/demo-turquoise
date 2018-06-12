@@ -1,0 +1,17 @@
+<div class="container ">
+    <div class="row m-vertical-m hidden-xs">
+        <div class="c-flex-items col-xs-12">
+            <div class="item-stretch breadcrumb-box">
+                <ol class="breadcrumb m-no p-no bg-white"
+					data-sly-use.breadcrumb="com.adobe.cq.wcm.core.components.models.Breadcrumb"
+					data-sly-list.navItem="${breadcrumb.items}">
+                    <li class="breadcrumb-item ${navItem.active ? 'active bold' : ''}">
+                        <a href="${navItem.page.path @ extension='html'}" data-sly-unwrap="${navItem.active}">
+                            ${navItem.page.navigationTitle || navItem.page.title || navItem.page.name}
+						</a>
+					</li>
+				</ol>
+			</div>
+		</div>
+	</div>
+</div>
