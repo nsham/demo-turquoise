@@ -20,14 +20,14 @@ function viewport() {
     $(document).ready(function(){
 
 
-            var mobileWidth = window.matchMedia("(max-width: 768px)").matches;
-            var target = $('.hero-banner-wrapper');
-            for( var i=0, len = target.length; i<len; i++ ){
-                var src = $(target[i]).data('img-mobile');
-                if( mobileWidth && src.replace(/\s/g,"") != "" ){
-                    $(target[i]).attr('style', src);
-                } 
-            }
+            // var mobileWidth = window.matchMedia("(max-width: 768px)").matches;
+            // var target = $('.hero-banner-wrapper');
+            // for( var i=0, len = target.length; i<len; i++ ){
+            //     var src = $(target[i]).data('img-mobile');
+            //     if( mobileWidth && src.replace(/\s/g,"") != "" ){
+            //         $(target[i]).attr('style', src);
+            //     } 
+            // }
        
     });
     
