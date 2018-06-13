@@ -46,10 +46,10 @@
                         <a href="#"><span class="glyphicon glyphicon-map-marker p-right-xxs"></span>where to buy</a>
                     </li>
                     <li>
-                        <a href="#"><span class="glyphicon glyphicon-search p-right-xxs"></span>search</a>
+                        <a href="#" data-search-pop-up ><span class="glyphicon glyphicon-search p-right-xxs"></span>search</a>
                     </li>
                     <li class="nav-dropdown-wrapper dropdown">
-                        <a href="#">
+                        <a href="#" >
                             <div class="bold country-wrapper">
                                 <img class="flag-icon" src="/content/dam/USGBoral/Global/Website/Images/component/allsample/my-icon.png"> EN
                                 <span class="m-left-xxs glyphicon glyphicon-menu-down"></span>
@@ -519,7 +519,7 @@
                 
                 <!-- search -->
                 <div class="search p-xs">
-                        <a  href="#" class="glyphicon glyphicon-search color-dark-2-grey icon-size-xs"></a>
+                        <a href="#" data-search-pop-up class="glyphicon glyphicon-search color-dark-2-grey icon-size-xs"></a>
                 </div>
                 <!-- end search -->
 
@@ -853,34 +853,43 @@
 <!-- end mobile content placeholder -->
 
 <!-- search pop up -->
-<div class="search-pop-up">
+<div class="search-pop-up hidden">
     <div class="bg-overlay">
+
+        <div class="close-pop-up p-3xl">
+            <a href="#" class="stacked-default">
+                <span class="fa-stack fa-5x">
+                    <i class="color-white fa fa-circle fa-stack-2x"></i>
+                    <i class="color-dark-grey fa fa-close fa-inverse fa-stack-1x"></i>
+                </span>
+            </a>
+        </div>
 
         <div class="container-fluid flex-column height-full justify-center">
             <div class="row width-full">
                 <div class="col-xs-12 p-no text-center">
 
-                    
+
                     <h4 class="color-white ht4 m-bottom-m text-center uppercase">Lorem IPSUM DOLOR SIT AMER</h4>
 
-<form>
-        <div class="input-same-line">
+                    <form>
+                        <div class="flex-row justify-center m-bottom-m">
 
-                <div class="center-block color-dark-grey m-bottom-m search-box">
-                    <input class="" placeholder="Search" autocomplete="off">
-                    <button type="submit" class=" search-btn">
-                        <span class="color-primary-green glyphicon glyphicon-search p-no m-no"></span>
-                    </button>
-                </div>
-                <div class="side-button">
-                    <button type="submit" class=" search-btn">
-                        <span class="color-primary-green glyphicon glyphicon-search p-no m-no"></span>
-                    </button>
-                </div>
-        </div>
-</form>
+                            <div class="flex-row input-same-line line-dark-grey-3">
+                                <div class="color-dark-grey search-box">
+                                    <input class="" placeholder="Search" autocomplete="off">
+                                </div>
+                                <div class="side-button">
+                                    <button type="submit" class="bg-primary-yellow p-side-m p-vertical-s search-btn">
+                                        <span class="color-dark-grey glyphicon glyphicon-search m-no p-no"></span>
+                                    </button>
+                                </div>
+                            </div>
 
-<p class="color-white fs-3">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium</p>
+                        </div>
+                    </form>
+
+                    <p class="color-white fs-3">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium</p>
                     
 
                 </div>
