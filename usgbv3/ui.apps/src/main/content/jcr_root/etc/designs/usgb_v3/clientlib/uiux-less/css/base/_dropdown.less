@@ -224,7 +224,24 @@ background:transparent;
 // END dropdown (Bootstrap 3 overwrite)
 // ----------------------------------------------------------------------
 
+// ----------------------------------------------------------------------
+// Desktop & mobile dropdown
+// ----------------------------------------------------------------------
+.dp-form {
+    display: none;
+    @media only screen and (min-width: 768px){
+        display: inline-block;
+    }
+}
 
-
+.dp-form-mobile{
+    display: inline-block;
+    @media only screen and (min-width: 768px){
+            display: none;
+    }
+}
+// ----------------------------------------------------------------------
+// END desktop & mobile dropdown
+// ----------------------------------------------------------------------
 
 

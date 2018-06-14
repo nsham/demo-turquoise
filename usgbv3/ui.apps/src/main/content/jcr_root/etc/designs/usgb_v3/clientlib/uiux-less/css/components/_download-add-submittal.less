@@ -5,17 +5,16 @@
         background:@color-light-grey;
       }
     >.each {
-        display: inline-block;
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        align-items: center;
         margin: 0;
         width: 100%;
-        @media only screen and (min-width:768px) {
-          width:100%;
-        }
         img {
-           display: inline-block;
-           width: 37px;
+            display:inline-block;
+           width: 40px;
            height: auto;
-           float: left;
            @media only screen and (min-width:370px) {
             width: 50px;
             }
@@ -28,26 +27,36 @@
             }
          
         }
-        .text-content{
-            display: inline-block;
-            margin-top: 0px;
-            margin-left: 4px;
-            width: 100px;
-            float:left;
-            @media only screen and (min-width:370px) {
-                width: 55%;
-                margin-left: 10px;
+        .content-left{
+            display:inline-block;
+            margin:0;
+            @media (min-width:768px){
+                margin:0 auto;
+                display:block;
             }
-            @media only screen and (min-width:480px) {
-                width: 65%;
-            }
-            @media only screen and (min-width:768px) {
-                display: inline-block;
-                margin-top: 5px;
-                margin-left: 5px;
-                margin-bottom: 5px;
-                text-align: left;
-                width: 71%;
+            .text-content{
+                display:inline-block;
+                margin-top: 0px;
+                margin: 0 5px 0px 0px;
+                vertical-align: middle;
+                width: 134px;
+                @media only screen and (min-width:370px) {
+                     width: auto;
+                }
+                // @media only screen and (min-width:480px) {
+                //     width: 65%;
+                // }
+                // @media only screen and (min-width:768px) {
+                //     display: inline-block;
+                //     margin-top: 5px;
+                //     margin-left: 5px;
+                //     margin-bottom: 5px;
+                //     text-align: left;
+                //     width: 71%;
+                // }
+                p{
+                    margin:0;
+                }
             }
         }
 
@@ -97,17 +106,6 @@
             position: relative;
             float: right;
             margin-top: -6px;
-            a{
-                background:@color-primary-green;
-                padding:5px 10px;
-                color:@color-white;
-                font-weight: bold;
-                text-align: center;
-                &:hover{
-                    background:transparent;
-                    color:@color-darker-grey;
-                }
-            }
         }  
 
 

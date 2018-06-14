@@ -19,6 +19,11 @@
                     <a href="#" class="btn btn-brand-default button-red">Find out more</a>
 
 
+                    <a href="#" class="btn btn-brand-default button-grey">Find out more</a>
+                    <a href="#" class="btn btn-brand-default button-grey"><span class="glyphicon glyphicon-arrow-down "></span></a>
+                    <a href="#" class="btn button-grey"><span class="glyphicon glyphicon-arrow-down "></span></a>
+
+
                 </div>
             </div>
         </div>
@@ -755,7 +760,7 @@
                     <h4 class="m-vertical-xl">Form submission (data involved)</h4>
 
                     <form>
-                        <div class="dropdown dp-form" style="min-width: 280px; display: inline-block;">
+                        <div class="dropdown dp-form" style="min-width: 280px;">
                             <button class="btn btn-default color-dark-grey dropdown-toggle text-left dp-clickable" type="button" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
                                 <span class="dp-text">Select Enquiry Type</span>
@@ -777,7 +782,16 @@
                                 </li>
                             </ul>
                         </div>
-                        <button type="submit" class="m-md-top-no m-top-s m-left-s btn button-yellow btn-brand-default">Submit</button>
+                        <div class="dropdown dp-form-mobile btn-default">
+                            <select>
+                              <option value="Select Enquiry Type">Select Enquiry Type</option>
+                              <option value="Lorem Ipsum">Lorem Ipsum</option>
+                              <option value="Quisque imperdiet">Quisque imperdiet</option>
+                              <option value="Quisque a tortor">Quisque a tortor</option>
+                              <option value="Proin ut elit">Proin ut elit</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="m-top-no m-left-s btn button-yellow btn-brand-default">Submit</button>
                     </form>
 
                     <h4 class="m-vertical-xl">Dropdown Filter mobile (data involved)</h4>
@@ -785,7 +799,7 @@
                     <!-- <div class="container-fluid"> -->
                     <div class="row m-bottom-l">
                         <form action="" class="flex-row justify-space-between">
-                            <div class="dropdown p-no   " style="width:100%; display: inline-block;">
+                            <div class="dropdown p-no" style="width:100%; display: inline-block;">
                                 <button class="btn bg-light-grey color-dark-grey  dropdown-toggle text-left" type="button" id="dropdownMenu1" data-toggle="dropdown"
                                     aria-haspopup="true" aria-expanded="false">
                                     <span>Acoustic Panels & Ceiling Tiles </span>
@@ -807,7 +821,7 @@
                                 </ul>
                             </div>
 
-                            <div class=" p-no m-left-xs" style="display: inline-block;">
+                            <div class="p-no m-left-xs" style="display: inline-block;">
                                 <button class="btn p-s bg-light-grey color-dark-grey " type="button" style="border-radius:0px">
                                     <span class=" p-left-s color-primary-green glyphicon glyphicon-filter "></span>
                                 </button>
@@ -2282,10 +2296,11 @@
                         <div class="row">
                             <div class="col-xs-12 text-center text-sm-center text-md-left">
                                 <h2 class="ht5 color-white uppercase m-bottom-m">Contact USG Boral</h2>
+
+
                                 <form>
-                                    <div class="dropdown dp-form" style="min-width: 280px; display: inline-block;">
-                                        <button class="btn btn-default color-dark-grey dropdown-toggle text-left dp-clickable" type="button" data-toggle="dropdown"
-                                            aria-haspopup="true" aria-expanded="false">
+                                    <div class="dropdown dp-form" style="min-width: 280px;">
+                                        <button class="btn btn-default color-dark-grey dp-clickable dropdown-toggle text-left" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <span class="dp-text">Select Enquiry Type</span>
                                             <input type="hidden" name="selectenquirytype" value="">
                                             <span class="color-primary-green glyphicon glyphicon-menu-down right"></span>
@@ -2305,8 +2320,17 @@
                                             </li>
                                         </ul>
                                     </div>
-                                    <button type="submit" class="btn btn-brand-default button-yellow m-left-s m-md-top-no m-top-s">CONTACT US</button>
-                                </form>
+                                    <div class="dropdown dp-form-mobile" style="min-width: 280px;">
+                                        <select class="btn btn-default">
+                                          <option value="Select Enquiry Type">Select Enquiry Type</option>
+                                          <option value="Lorem Ipsum">Lorem Ipsum</option>
+                                          <option value="Quisque imperdiet">Quisque imperdiet</option>
+                                          <option value="Quisque a tortor">Quisque a tortor</option>
+                                          <option value="Proin ut elit">Proin ut elit</option>
+                                      </select>
+                                  </div>
+                                  <button type="submit" class="m-top-no m-left-s btn button-yellow btn-brand-default">Submit</button>
+                              </form>
 
                             </div>
                         </div>

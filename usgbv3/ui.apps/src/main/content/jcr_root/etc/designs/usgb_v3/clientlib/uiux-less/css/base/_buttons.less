@@ -114,6 +114,29 @@ button {
     }
 }
 
+.button-grey{
+    border: 2px solid @color-darker-grey;
+    background-color: @color-darker-grey;
+    color: white;
+    &:hover{
+        border: 2px solid @color-primary-green;
+        background-color: @color-primary-green;
+        color: white !important;
+    }
+    &:focus{
+        color: white;
+    }
+
+    svg{
+        fill: #FFF;
+    }
+    &:active svg, 
+    &:focus svg, 
+    &:hover svg {
+        fill: #222;
+    }
+}
+
 .button-yellow{
     border: 2px solid @color-primary-yellow;
     background-color: @color-primary-yellow;

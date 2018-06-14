@@ -643,21 +643,61 @@ function viewport() {
     "use strict";
     $(document).ready(function(){
             $('.dp-form').on( "click", '.dp-list a', function() {
-                
 
                 var dataVal = $(this).data("val");
                 var $dpText = $(this).parent().parent().prev().find($('.dp-text'));
                 var $hiddenField = $dpText.next(); 
-             
 
                 $dpText.html(dataVal);
                 $hiddenField.val(dataVal);
-                
+
                 //console.log(dataVal);
                 // console.log($(this).parent().parent().prev().find($('.dp-text')));
      
 
             });
+    });
+})();
+
+
+// ----------------------------------------------------------------------
+// Default movile dropdown submission (syn with desktop)
+// ----------------------------------------------------------------------
+(function(){
+    "use strict";
+
+    $(document).ready(function(){
+
+            $('.dp-form-mobile select').change( unniversalSelectSync );
+
+            function unniversalSelectSync(){
+                
+                $(this).each(function() {
+                    console.log('sssss');
+                    if( $(this).val() ){
+                        $(this).parent().prev().find($("input[type=hidden]")).val( $(this).val() );
+                    }
+                });
+
+            }
+
+
+
+            // $('.dp-form-mobile').on( "click", '.dp-list a', function() {
+                
+
+            //     var dataVal = $(this).data("val");
+            //     var $dpText = $(this).parent().parent().prev().find($('.dp-text'));
+            //     var $hiddenField = $dpText.next(); 
+
+            //     $dpText.html(dataVal);
+            //     $hiddenField.val(dataVal);
+
+
+            // });
+
+
+
     });
 })();
 
