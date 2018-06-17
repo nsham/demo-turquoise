@@ -12,9 +12,20 @@
 	
 	/*downloadable row*/
 	.downloadable {
-	    display: flex;
-	    justify-content: space-evenly;
-	    align-items:  center;
+	    display: -webkit-box;
+	         display: -ms-flexbox;
+	         display: flex;
+	    -webkit-box-pack: space-evenly;
+	             -ms-flex-pack: space-evenly;
+	                 justify-content: space-evenly;
+	                 @media screen and (-ms-high-contrast: active), screen and (-ms-high-contrast: none) { 
+	                 	-webkit-box-pack: center;
+	                 	         -ms-flex-pack: center;
+	                 	             justify-content: center;
+	                 }
+	    -webkit-box-align:  center;
+	        -ms-flex-align:  center;
+	            align-items:  center;
 	     padding: 10px 0;
 	    p {
 		    margin: 0;

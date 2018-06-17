@@ -16,6 +16,7 @@ svg {
   backface-visibility: hidden;
 }
 
+
 // reset desktop container to 1240px
 .container{
   width: 1240px;
@@ -89,15 +90,15 @@ svg {
   }
 }
 
-.align-top{
+.v-align-top{
   vertical-align: top;
 }
 
-.align-middle{
+.v-align-middle{
   vertical-align: middle;
 }
 
-.align-bottom{
+.v-lign-bottom{
   vertical-align: bottom;
 }
 
@@ -199,6 +200,12 @@ svg {
 .height-full {
   height: 100%;
 }
+.height-sm-full{
+  height: none;
+  @media (min-width:768px) {
+    height: 100%;
+  }
+}
 
 .float-left{
   float: left;
@@ -208,6 +215,9 @@ svg {
   float: right;
 }
 
+.disable-scroll{
+  overflow: hidden;
+}
 
 // ----------------------------------------------------------------------
 // Grid System Responsive Padding
@@ -358,6 +368,50 @@ svg {
 
 }
 
+
+@media only screen and (min-width: @min-bp-sm) {
+  .flex-sm-row {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+
+
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+
+  }
+}
+
+@media only screen and (min-width: @min-bp-md) {
+  .flex-md-row {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+
+
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+
+  }
+}
+
+@media only screen and (min-width: @min-bp-lg) {
+  .flex-lg-row {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+
+
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+
+  }
+}
+
+
 .flex-column {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -372,6 +426,61 @@ svg {
 
 }
 
+@media only screen and (min-width: @min-bp-sm) {
+
+  .flex-sm-column {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-orient:vertical;
+    -webkit-box-direction:normal;
+        -ms-flex-direction:column;
+            flex-direction:column;
+
+  }
+
+}
+
+
+@media only screen and (min-width: @min-bp-md) {
+
+  .flex-md-column {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-orient:vertical;
+    -webkit-box-direction:normal;
+        -ms-flex-direction:column;
+            flex-direction:column;
+
+  }
+  
+}
+
+@media only screen and (min-width: @min-bp-lg) {
+
+  .flex-lg-column {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-orient:vertical;
+    -webkit-box-direction:normal;
+        -ms-flex-direction:column;
+            flex-direction:column;
+
+  }
+  
+}
+
 .align-top {
   -webkit-box-align: start;
   -ms-flex-align: start;
@@ -381,7 +490,6 @@ svg {
   -webkit-box-align: baseline;
   -ms-flex-align: baseline;
   align-items: baseline;
-
 }
 
 .align-bottom {
@@ -396,7 +504,7 @@ svg {
   align-items: stretch;
 }
 
-
+/*space-evenly doesn't work in IE11 use center instead*/
 .justify-center {
   -webkit-box-pack: center;
   -ms-flex-pack: center;
@@ -435,18 +543,30 @@ svg {
   margin-left: auto;
 }
 
-// useful for fixing IE11 responsive image bug
+
+//ps useful for fixing IE11 responsive image bug
 //used on product listing page
 .flex-shrink-0{
  -ms-flex-negative: 0;
          flex-shrink: 0;
 }
 
+
+//ps avoid using flex-basis:0; with flex-grow in IE11, leads to uneven space distribution
 .flex-grow-0{
   -webkit-box-flex: 0;
       -ms-flex-positive: 0;
           flex-grow: 0;
 }
+
+@media screen and (-ms-high-contrast: active), screen and (-ms-high-contrast: none) {  
+   /* IE10+ specific styles go here */ 
+   .flex-IE-grow-auto{
+   -ms-flex-preferred-size: auto !important;
+            flex-basis: auto !important;
+   }
+}
+
 
 @flex-grow-count: 12;
 
@@ -461,6 +581,273 @@ svg {
 .for();
 
 
+.flex-basis-no{
+  flex-basis: 0;
+}
+
+@media only screen and (min-width: @min-bp-sm) {
+
+  .align-sm-top {
+    -webkit-box-align: start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+  }
+  .align-sm-baseline {
+    -webkit-box-align: baseline;
+    -ms-flex-align: baseline;
+    align-items: baseline;
+  }
+
+  .align-sm-bottom {
+    -webkit-box-align: flex-end;
+    -ms-flex-align: flex-end;
+    align-items: flex-end;
+  }
+
+  .align-sm-stretch {
+    -webkit-box-align: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+  }
+
+
+  .justify-sm-center {
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+  }
+
+  .justify-sm-end {
+    -webkit-box-pack: end;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+  }
+
+  .justify-sm-space-between {
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between; 
+
+  }
+
+
+  .no-sm-wrap {
+    -ms-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+  }
+
+  .row-sm-wrap{
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap;
+  }
+
+  .align-sm-self-left {
+    margin-right: auto;
+  }
+
+  .align-sm-self-right {
+    margin-left: auto;
+  }
+
+  .flex-sm-shrink-0{
+   -ms-flex-negative: 0;
+           flex-shrink: 0;
+  }
+
+  .flex-sm-grow-0{
+    -webkit-box-flex: 0;
+        -ms-flex-positive: 0;
+            flex-grow: 0;
+  }
+
+  .for(@i: 1) when (@i <= @flex-grow-count) {
+    .flex-sm-grow-@{i} {
+      -webkit-box-flex: @i;
+          -ms-flex-positive: @i;
+              flex-grow: @i;
+    }
+    .for((@i + 1));
+  }
+  .for();
+}
+
+@media only screen and (min-width: @min-bp-md) {
+
+  .align-md-top {
+    -webkit-box-align: start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+  }
+  .align-md-baseline {
+    -webkit-box-align: baseline;
+    -ms-flex-align: baseline;
+    align-items: baseline;
+  }
+
+  .align-md-bottom {
+    -webkit-box-align: flex-end;
+    -ms-flex-align: flex-end;
+    align-items: flex-end;
+  }
+
+  .align-md-stretch {
+    -webkit-box-align: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+  }
+
+
+  .justify-md-center {
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+  }
+
+  .justify-md-end {
+    -webkit-box-pack: end;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+  }
+
+  .justify-md-space-between {
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between; 
+
+  }
+
+
+  .no-md-wrap {
+    -ms-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+  }
+
+  .row-md-wrap{
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap;
+  }
+
+  .align-md-self-left {
+    margin-right: auto;
+  }
+
+  .align-md-self-right {
+    margin-left: auto;
+  }
+
+  .flex-md-shrink-0{
+   -ms-flex-negative: 0;
+           flex-shrink: 0;
+  }
+
+  .flex-md-shrink-0{
+   -ms-flex-negative: 0;
+           flex-shrink: 0;
+  }
+
+  .flex-md-grow-0{
+    -webkit-box-flex: 0;
+        -ms-flex-positive: 0;
+            flex-grow: 0;
+  }
+
+  .for(@i: 1) when (@i <= @flex-grow-count) {
+    .flex-md-grow-@{i} {
+      -webkit-box-flex: @i;
+          -ms-flex-positive: @i;
+              flex-grow: @i;
+    }
+    .for((@i + 1));
+  }
+  .for();
+}
+
+@media only screen and (min-width: @min-bp-lg) {
+
+  .align-lg-top {
+    -webkit-box-align: start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+  }
+  .align-lg-baseline {
+    -webkit-box-align: baseline;
+    -ms-flex-align: baseline;
+    align-items: baseline;
+  }
+
+  .align-lg-bottom {
+    -webkit-box-align: flex-end;
+    -ms-flex-align: flex-end;
+    align-items: flex-end;
+  }
+
+  .align-lg-stretch {
+    -webkit-box-align: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+  }
+
+
+  .justify-lg-center {
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+  }
+
+  .justify-lg-end {
+    -webkit-box-pack: end;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+  }
+
+  .justify-lg-space-between {
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between; 
+
+  }
+
+
+  .no-lg-wrap {
+    -ms-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+  }
+
+  .row-lg-wrap{
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap;
+  }
+
+  .align-lg-self-left {
+    margin-right: auto;
+  }
+
+  .align-lg-self-right {
+    margin-left: auto;
+  }
+
+
+  .flex-lg-shrink-0{
+   -ms-flex-negative: 0;
+           flex-shrink: 0;
+  }
+
+  .flex-lg-grow-0{
+    -webkit-box-flex: 0;
+        -ms-flex-positive: 0;
+            flex-grow: 0;
+  }
+
+  .for(@i: 1) when (@i <= @flex-grow-count) {
+    .flex-lg-grow-@{i} {
+      -webkit-box-flex: @i;
+          -ms-flex-positive: @i;
+              flex-grow: @i;
+    }
+    .for((@i + 1));
+  }
+  .for();
+}
 
 // ----------------------------------------------------------------------
 // Responsive Text Alignment
@@ -556,6 +943,15 @@ svg {
    width: 100%;
    height: 100%;
    background-color:rgba(0, 0, 0, 0.5);
+   top: 0;
+   left:0;
+   position: relative;
+ }
+
+ .bg-overlay-dark{
+   width: 100%;
+   height: 100%;
+   background-color:rgba(53, 53, 53, 0.95);
    top: 0;
    left:0;
    position: relative;

@@ -30,42 +30,38 @@
     <!-- SEARCH INPUT (GROUP) -->
     <!-- SEARCH FORM -->
     <div class="container-fluid bg-light-grey p-vertical-l m-vertical-m">
-        <div class="row">
-            <div class="col-xs-12 p-no">
+        <div class="container">
 
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xs-5">
-                            <form class="search-form">
-                             <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Ceiling">
-                                <span class="input-group-btn">
-                                    <button type="submit" class="btn btn-default glyphicon glyphicon-search color-primary-green"></button>
-                                </span>
-                            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-5 p-no">
 
-                            </form>
+                    <form class="search-form">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Ceiling" autocomplete="off">
+                            <span class="input-group-btn">
+                                <button type="submit" class="btn btn-default glyphicon glyphicon-search color-primary-green"></button>
+                            </span>
                         </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-xs-12 m-top-xs">
-                            <p class="result-caption m-left-xxs m-no fs-2"><strong><em>33 search results found for : ceiling</em></strong></p>
-                        </div>
-                    </div>
+                    </form>
 
                 </div>
+            </div>
 
+            <div class="row">
+                <div class="col-xs-12 m-top-xs p-no">
+                    <p class="result-caption m-left-xxs m-no fs-3"><strong>33 search results found for : ceiling</strong></p>
+                </div>
             </div>
         </div>
+
     </div>
     <!-- SEARCH FORM END -->
 
     <!-- SUB-SEARCH-SECTION -->
-    <div class="container m-vertical-xl">
-        <div class="row">
-            <div class="col-xs-12">
-                <ul class="sub-search-section fs-2">
+    <div class="container">
+        <div class="row m-vertical-xl">
+            <div class="col-xs-12 text-center text-sm-left">
+                <ul class="sub-search-section">
                     <li><a href="#">Content</a></li>
                     <li><a href="#">Document Finder</a></li>
                     <li class="active"><a href="#">CAD Drawing</a></li>
@@ -79,84 +75,95 @@
     
     <div class="container m-vertical-m">
         <div class="row">
-            <div class="col-xs-3">
+            <div class="hidden-xs col-sm-3">
                 <!-- SEARCH FILTER -->
                 <div class="search-filter bg-light-grey m-bottom-xxl">
-                    <div class="wrapper">
-                        <div class="top">
-                            <p class="uppercase text-center m-no p-side-l p-top-m fs-2"><strong>refine your search</strong></p>
-                            <hr class="m-vertical-m" />
-                        </div>
-                        <div class="middle p-side-l p-bottom-l">
-                            <form action="" method="get">
-                                <p class="fs-2"><strong>Product Category</strong></p>
-                                <div class="checkbox-wrapper">
-                                    <div class="radio">
-                                        <label class="container-checkbox fs-2" >
-                                            Ceilings
-                                            <input type="checkbox" name="Ceilings">
-                                            <span class="checkmark fs-2"></span>
-                                        </label>
-                                    </div>
-                                    <div class="radio">
-                                        <label class="container-checkbox fs-2">
-                                            Interior Linings
-                                            <input type="checkbox" name="Interior Linings">
-                                            <span class="checkmark fs-2"></span>
-                                        </label>
-                                    </div>
-                                    <div class="radio">
-                                        <label class="container-checkbox fs-2">
-                                            Finishes
-                                            <input type="checkbox" name="Finishes">
-                                            <span class="checkmark fs-2"></span>
-                                        </label>
-                                    </div>
-                                    <div class="radio">
-                                        <label class="container-checkbox fs-2">
-                                            Steel Framing
-                                            <input type="checkbox" name="Steel Framing">
-                                            <span class="checkmark fs-2"></span>
-                                        </label>
-                                    </div>
-                                    <div class="radio">
-                                        <label class="container-checkbox fs-2">
-                                            Cornice
-                                            <input type="checkbox" name="Cornice">
-                                            <span class="checkmark fs-2"></span>
-                                        </label>
-                                    </div>
-                                    <div class="radio">
-                                        <label class="container-checkbox fs-2">
-                                            Plastering DIY
-                                            <input type="checkbox" name="Plastering DIY">
-                                            <span class="checkmark fs-2"></span>
-                                        </label>
-                                    </div>
-                                    <div class="radio">
-                                        <label class="container-checkbox fs-2">
-                                            Insulation
-                                            <input type="checkbox" name="Insulation">
-                                            <span class="checkmark fs-2"></span>
-                                        </label>
-                                    </div>
-                                    <div class="radio">
-                                        <label class="container-checkbox fs-2">
-                                            Industrial Plaster
-                                            <input type="checkbox" name="Industrial Plaster">
-                                            <span class="checkmark fs-2"></span>
-                                        </label>
+                    <form action="" method="get">
+                        <div class="wrapper">
+                            <div class="top">
+
+                                <p class="uppercase text-center m-no p-side-l p-top-m fs-2"><strong>refine your search</strong></p>
+
+                            </div>
+                            <div class="middle p-bottom-l">
+                                    
+                                <div class="accordionfc">
+                                    <p class="heading fs-2 uppercase p-no m-no m-side-l" data-target="#product_category" data-toggle="collapse"><strong><span>Product Category</span><span class="glyphicon glyphicon-minus"></span><span class="glyphicon glyphicon-plus"></strong></p>
+                                    <div class="content collapse in p-side-l" id="product_category">
+                                        
+                                        <!-- expandable content -->
+                                        <div class="checkbox-wrapper">
+                                            <div class="radio">
+                                                <label class="container-checkbox fs-2">
+                                                    Ceilings
+                                                    <input type="checkbox" name="Ceilings">
+                                                    <span class="checkmark fs-2"></span>
+                                                </label>
+                                            </div>
+                                            <div class="radio">
+                                                <label class="container-checkbox fs-2">
+                                                    Interior Linings
+                                                    <input type="checkbox" name="Interior Linings">
+                                                    <span class="checkmark fs-2"></span>
+                                                </label>
+                                            </div>
+                                            <div class="radio">
+                                                <label class="container-checkbox fs-2">
+                                                    Finishes
+                                                    <input type="checkbox" name="Finishes">
+                                                    <span class="checkmark fs-2"></span>
+                                                </label>
+                                            </div>
+                                            <div class="radio">
+                                                <label class="container-checkbox fs-2">
+                                                    Steel Framing
+                                                    <input type="checkbox" name="Steel Framing">
+                                                    <span class="checkmark fs-2"></span>
+                                                </label>
+                                            </div>
+                                            <div class="radio">
+                                                <label class="container-checkbox fs-2">
+                                                    Cornice
+                                                    <input type="checkbox" name="Cornice">
+                                                    <span class="checkmark fs-2"></span>
+                                                </label>
+                                            </div>
+                                            <div class="radio">
+                                                <label class="container-checkbox fs-2">
+                                                    Plastering DIY
+                                                    <input type="checkbox" name="Plastering DIY">
+                                                    <span class="checkmark fs-2"></span>
+                                                </label>
+                                            </div>
+                                            <div class="radio">
+                                                <label class="container-checkbox fs-2">
+                                                    Insulation
+                                                    <input type="checkbox" name="Insulation">
+                                                    <span class="checkmark fs-2"></span>
+                                                </label>
+                                            </div>
+                                            <div class="radio">
+                                                <label class="container-checkbox fs-2">
+                                                    Industrial Plaster
+                                                    <input type="checkbox" name="Industrial Plaster">
+                                                    <span class="checkmark fs-2"></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <!-- END expandable content -->
+
                                     </div>
                                 </div>
+                                
+                            </div>
+                            <div class="bottom text-center p-side-l p-bottom-l">
 
+                                <a href="#" class="btn btn-brand-default button-green btn-sm">APPLY FILTER</a>
 
-                            </form>
+                            </div>
+                            
                         </div>
-                        <div class="bottom text-center p-side-l p-bottom-l">
-                            <a href="#" class="btn btn-brand-default button-green btn-sm">APPLY FILTER</a>
-                        </div>
-                        
-                    </div>
+                    </form>
                 </div>
                 <!-- END SEARCH FILTER -->
 
@@ -184,23 +191,37 @@
                 <!-- END RELATED SERACH -->
             </div>
 
-            <div class="col-xs-9">
+            <div class="col-xs-12 col-sm-9">
 
-                <!-- SORT BY -->                
-                <div class="dropdown pull-right p-right-m m-vertical-m d-small" style="min-width: 280px; display: inline-block;">
-                    <button class="btn btn-default color-dark-grey dropdown-toggle text-left" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span>Sort By</span>
-                        <span class="color-primary-green glyphicon glyphicon-menu-down right"></span>
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                        <li><a href="#">Alphabet</a></li>
-                        <li><a href="#">Oldest to Latest</a></li>
-                        <li><a href="#">Price</a></li>
-                        <li><a href="#">Date Added</a></li>
-                    </ul>
+
+                <div class="row">
+                    <div class="col-xs-12 col-xs-offset-0 col-sm-4 col-sm-offset-8">
+
+                        <div class="search-filter-sort">
+                            <!-- SORT BY --> 
+                            <div class="dropdown dropdown-menu-right m-vertical-m d-small">
+                                <button class="btn btn-default color-dark-grey dropdown-toggle text-left" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span>Sort By</span>
+                                    <span class="color-primary-green glyphicon glyphicon-menu-down right"></span>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                    <li><a href="#">Alphabet</a></li>
+                                    <li><a href="#">Oldest to Latest</a></li>
+                                    <li><a href="#">Price</a></li>
+                                    <li><a href="#">Date Added</a></li>
+                                </ul>
+                            </div>
+                            
+                            <!-- END SORT BY -->
+                            <!-- filter --> 
+                            <a href="#" class="filter-icon btn visible-xs btn-smd m-left-m"><span class="color-primary-green glyphicon glyphicon-filter"></span></a>
+                            <!-- end filter --> 
+                        </div>
+
+                        <div class="clearfix"></div>
+
+                    </div>
                 </div>
-                <div class="clearfix"></div>
-                <!-- END SORT BY -->
 
                 <!-- SEARCH CONTENT -->
                 <div class="search-main-content">
@@ -368,155 +389,215 @@
                 </nav>
                 <!-- END SEARCH PAGINATION -->
                 <hr />
-                <!-- RELEVANT SEARCH CONTENT -->
+                
                 <h5 class="ht5 uppercase p-side-m m-bottom-xl">We also found relevant “ceiling” in Document Finder</h5>
-
+                <!-- RELEVANT SEARCH CONTENT -->
                 <div class="relevant-content p-side-m">
                     <div class="inner">
-                        <div class="each m-bottom-4xl">
-                            <div class="left">
+
+
+                        <!-- each -->
+                        <div class="each flex-md-row m-bottom-4xl">
+                            <div class="left hidden-xs hidden-sm">
                                 <div class="thumbs">
                                     <img src="https://dummyimage.com/250x145/000000/fff">
                                 </div>
                             </div>
-
-                            <div class="right">
-                                    <a href="#">
-                                        <div class="content p-left-l">
-                                            <p class="sub-headline fs-2">Ceilings - ASONA Acoustical Range | Brochures Catalogues</p>
-                                            <h6 class="headline ht6 uppercase m-bottom-xxs">Sonatex Colour Guide</h6>
-                                            <p class="description m-no">
-                                                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonum    
-                                            </p>
-                                        </div>
-                                    </a>
-                                    <div class="side-functions p-left-l">
-                                        <div class="bookmark text-center uppercase"><a href="#"><span class="glyphicon glyphicon-bookmark m-right-xxs"></span><span><strong>Bookmark</strong></span></a></div><span class="m-side-l">|</span><div class="addto text-center uppercase"><a href="#"><span class="glyphicon glyphicon-plus m-right-xxs"></span><span><strong>Add to submittal</strong></span></a></div>
+                            <div class="align-center align-md-bottom flex-row right width-full">
+                                <a href="#" class="flex-basis-no flex-IE-grow-auto flex-grow-1 m-right-m">
+                                    <div class="content p-left-no p-md-left-l">
+                                        <p class="sub-headline fs-2">Ceilings - ASONA Acoustical Range | Brochures Catalogues </p>
+                                        <h6 class="headline ht6 uppercase m-bottom-xxs">Sonatex Colour Guide</h6>
+                                        <p class="description m-no">
+                                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonum
+                                        </p>
                                     </div>
-                               
+                                </a>
+                                <div class="align-center flex-basis-no flex-IE-grow-auto flex-grow-0 flex-row justify-end side-functions">
+                                    <div class="bookmark uppercase fs-3"><a href="#" class="btn button-grey visible-xs btn-sm"><span class="glyphicon glyphicon-bookmark"></span></a><a href="#" class="hidden-xs">
+
+                                        <span class="glyphicon glyphicon-bookmark m-right-xxs"></span><span class=""><strong class="">Bookmark</strong></span></a>
+                                    </div>
+                                    <span class="hidden-xs m-side-s">|</span>
+                                    <div class="addto uppercase fs-3 m-left-xxs">
+                                        <a href="#" class="btn button-grey visible-xs btn-sm"><span class="glyphicon glyphicon-plus"></span></a>
+                                        <a href="#" class="hidden-xs"><span class="glyphicon glyphicon-plus m-right-xxs"></span><span class=""><strong class="">Add to submittal</strong></span></a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="each m-bottom-4xl">
+                        <!-- each  -->
 
-                            <div class="left">
+                        <!-- each -->
+                        <div class="each flex-md-row m-bottom-4xl">
+                            <div class="left hidden-xs hidden-sm">
                                 <div class="thumbs">
                                     <img src="https://dummyimage.com/250x145/000000/fff">
                                 </div>
                             </div>
-
-                            <div class="right">
-                                    <a href="#">
-                                        <div class="content p-left-l">
-                                            <p class="sub-headline fs-2">Ceilings - ASONA Acoustical Range | Brochures Catalogues</p>
-                                            <h6 class="headline ht6 uppercase m-bottom-xxs">Sonatex Colour Guide</h6>
-                                            <p class="description m-no">
-                                                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonum    
-                                            </p>
-                                        </div>
-                                    </a>
-                                    <div class="side-functions p-left-l">
-                                        <div class="bookmark text-center uppercase"><a href="#"><span class="glyphicon glyphicon-bookmark m-right-xxs"></span><span><strong>Bookmark</strong></span></a></div><span class="m-side-l">|</span><div class="addto text-center uppercase"><a href="#"><span class="glyphicon glyphicon-plus m-right-xxs"></span><span><strong>Add to submittal</strong></span></a></div>
+                            <div class="align-center align-md-bottom flex-row right width-full">
+                                <a href="#" class="flex-basis-no flex-IE-grow-auto flex-grow-1 m-right-m">
+                                    <div class="content p-left-no p-md-left-l">
+                                        <p class="sub-headline fs-2">Ceilings - ASONA Acoustical Range | Brochures Catalogues </p>
+                                        <h6 class="headline ht6 uppercase m-bottom-xxs">Sonatex Colour Guide</h6>
+                                        <p class="description m-no">
+                                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonum
+                                        </p>
                                     </div>
-                               
+                                </a>
+                                <div class="align-center flex-basis-no flex-IE-grow-auto flex-grow-0 flex-row justify-end side-functions">
+                                    <div class="bookmark uppercase fs-3"><a href="#" class="btn button-grey visible-xs btn-sm"><span class="glyphicon glyphicon-bookmark"></span></a><a href="#" class="hidden-xs">
+
+                                        <span class="glyphicon glyphicon-bookmark m-right-xxs"></span><span class=""><strong class="">Bookmark</strong></span></a>
+                                    </div>
+                                    <span class="hidden-xs m-side-s">|</span>
+                                    <div class="addto uppercase fs-3 m-left-xxs">
+                                        <a href="#" class="btn button-grey visible-xs btn-sm"><span class="glyphicon glyphicon-plus"></span></a>
+                                        <a href="#" class="hidden-xs"><span class="glyphicon glyphicon-plus m-right-xxs"></span><span class=""><strong class="">Add to submittal</strong></span></a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="each m-bottom-4xl">
-                            <div class="left">
+                        <!-- each  -->
+
+                        <!-- each -->
+                        <div class="each flex-md-row m-bottom-4xl">
+                            <div class="left hidden-xs hidden-sm">
                                 <div class="thumbs">
                                     <img src="https://dummyimage.com/250x145/000000/fff">
                                 </div>
                             </div>
-
-                            <div class="right">
-                                    <a href="#">
-                                        <div class="content p-left-l">
-                                            <p class="sub-headline fs-2">Ceilings - ASONA Acoustical Range | Brochures Catalogues</p>
-                                            <h6 class="headline ht6 uppercase m-bottom-xxs">Sonatex Colour Guide</h6>
-                                            <p class="description m-no">
-                                                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonum    
-                                            </p>
-                                        </div>
-                                    </a>
-                                    <div class="side-functions p-left-l">
-                                        <div class="bookmark text-center uppercase"><a href="#"><span class="glyphicon glyphicon-bookmark m-right-xxs"></span><span><strong>Bookmark</strong></span></a></div><span class="m-side-l">|</span><div class="addto text-center uppercase"><a href="#"><span class="glyphicon glyphicon-plus m-right-xxs"></span><span><strong>Add to submittal</strong></span></a></div>
+                            <div class="align-center align-md-bottom flex-row right width-full">
+                                <a href="#" class="flex-basis-no flex-IE-grow-auto flex-grow-1 m-right-m">
+                                    <div class="content p-left-no p-md-left-l">
+                                        <p class="sub-headline fs-2">Ceilings - ASONA Acoustical Range | Brochures Catalogues </p>
+                                        <h6 class="headline ht6 uppercase m-bottom-xxs">Sonatex Colour Guide</h6>
+                                        <p class="description m-no">
+                                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonum
+                                        </p>
                                     </div>
-                               
+                                </a>
+                                <div class="align-center flex-basis-no flex-IE-grow-auto flex-grow-0 flex-row justify-end side-functions">
+                                    <div class="bookmark uppercase fs-3"><a href="#" class="btn button-grey visible-xs btn-sm"><span class="glyphicon glyphicon-bookmark"></span></a><a href="#" class="hidden-xs">
+
+                                        <span class="glyphicon glyphicon-bookmark m-right-xxs"></span><span class=""><strong class="">Bookmark</strong></span></a>
+                                    </div>
+                                    <span class="hidden-xs m-side-s">|</span>
+                                    <div class="addto uppercase fs-3 m-left-xxs">
+                                        <a href="#" class="btn button-grey visible-xs btn-sm"><span class="glyphicon glyphicon-plus"></span></a>
+                                        <a href="#" class="hidden-xs"><span class="glyphicon glyphicon-plus m-right-xxs"></span><span class=""><strong class="">Add to submittal</strong></span></a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+                        <!-- each  -->
+
                     </div>
                 </div>
                 <!-- END RELEVANT SEARCH CONTENT -->
                 <a href="#" class="btn btn-top-border btn-dark float-right">Read More <span class="glyphicon glyphicon-menu-right"></span></a>
                 <div class="clearfix"></div>
                 <hr />
-                <!-- RELEVANT SEARCH CONTENT -->
+                
                 <h5 class="ht5 uppercase p-side-m m-bottom-xl">We also found relevant “ceiling” in Content</h5>
-
+                <!-- RELEVANT SEARCH CONTENT -->
                 <div class="relevant-content p-side-m">
                     <div class="inner">
-                        <div class="each m-bottom-4xl">
-                            <div class="left">
+
+
+                        <!-- each -->
+                        <div class="each flex-md-row m-bottom-4xl">
+                            <div class="left hidden-xs hidden-sm">
                                 <div class="thumbs">
                                     <img src="https://dummyimage.com/250x145/000000/fff">
                                 </div>
                             </div>
-                            <div class="right">
-                                    <a href="#">
-                                        <div class="content p-left-l">
-                                            <p class="sub-headline fs-2">Knowledge Hub</p>
-                                            <h6 class="headline ht6 uppercase m-bottom-xxs">How to reduce retail project challenges – fast!</h6>
-                                            <p class="description m-no">
-                                                Retail projects present significant logistical and code compliance challenges,especially refurbishments and extensions to existing shopping centres...
-                                            </p>
-                                        </div>
-                                    </a>
-                                    <div class="side-functions p-left-l">
-                                        <div class="bookmark text-center uppercase"><a href="#"><span class="glyphicon glyphicon-bookmark m-right-xxs"></span><span><strong>Bookmark</strong></span></a></div>
+                            <div class="align-center align-md-bottom flex-row right width-full">
+                                <a href="#" class="flex-basis-no flex-IE-grow-auto flex-grow-1 m-right-m">
+                                    <div class="content p-left-no p-md-left-l">
+                                        <p class="sub-headline fs-2">Knowledge Hub </p>
+                                        <h6 class="headline ht6 uppercase m-bottom-xxs">How to reduce retail project challenges – fast!</h6>
+                                        <p class="description m-no">
+                                            Retail projects present significant logistical and code compliance challenges,especially refurbishments and extensions to existing shopping centres...
+                                        </p>
                                     </div>
+                                </a>
+                                <div class="align-center flex-basis-no flex-IE-grow-auto flex-grow-0 flex-row justify-end side-functions-short">
+                                    <div class="bookmark uppercase fs-3"><a href="#" class="btn button-grey visible-xs btn-sm"><span class="glyphicon glyphicon-bookmark"></span></a><a href="#" class="hidden-xs">
+
+                                        <span class="glyphicon glyphicon-bookmark m-right-xxs"></span><span class=""><strong class="">Bookmark</strong></span></a>
+                                    </div>
+                                    
+                                    
+                                </div>
                             </div>
                         </div>
-                        <div class="each m-bottom-4xl">
-                            <div class="left">
+                        <!-- each  -->
+
+                        <!-- each -->
+                        <div class="each flex-md-row m-bottom-4xl">
+                            <div class="left hidden-xs hidden-sm">
+                                <!-- c-video-popup -->
+                                <div class="c-video-popup">
+                                    <a data-fancybox="" href="https://www.youtube.com/watch?v=Ous3ffTXRFw">
+                                        <span class="ico-play-video color-white fa fa-play-circle"></span>
+                                        <img src="https://dummyimage.com/500x290/000000/fff" alt="">
+                                    </a>
+                                </div>
+                                <!-- end c-video-popup -->
+                            </div>
+                            <div class="align-center align-md-bottom flex-row right width-full">
+                                <a href="#" class="flex-basis-no flex-IE-grow-auto flex-grow-1 m-right-m">
+                                    <div class="content p-left-no p-md-left-l">
+                                        <p class="sub-headline fs-2">Knowledge Hub </p>
+                                        <h6 class="headline ht6 uppercase m-bottom-xxs">How to reduce retail project challenges – fast!</h6>
+                                        <p class="description m-no">
+                                            Retail projects present significant logistical and code compliance challenges,especially refurbishments and extensions to existing shopping centres...
+                                        </p>
+                                    </div>
+                                </a>
+                                <div class="align-center flex-basis-no flex-IE-grow-auto flex-grow-0 flex-row justify-end side-functions-short">
+                                    <div class="bookmark uppercase fs-3"><a href="#" class="btn button-grey visible-xs btn-sm"><span class="glyphicon glyphicon-bookmark"></span></a><a href="#" class="hidden-xs">
+
+                                        <span class="glyphicon glyphicon-bookmark m-right-xxs"></span><span class=""><strong class="">Bookmark</strong></span></a>
+                                    </div>
+                                    
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <!-- each  -->
+
+                        <!-- each -->
+                        <div class="each flex-md-row m-bottom-4xl">
+                            <div class="left hidden-xs hidden-sm">
                                 <div class="thumbs">
                                     <img src="https://dummyimage.com/250x145/000000/fff">
                                 </div>
                             </div>
-                            <div class="right">
-                                    <a href="#">
-                                        <div class="content p-left-l">
-                                            <p class="sub-headline fs-2">Knowledge Hub</p>
-                                            <h6 class="headline ht6 uppercase m-bottom-xxs">How to reduce retail project challenges – fast!</h6>
-                                            <p class="description m-no">
-                                                Retail projects present significant logistical and code compliance challenges,especially refurbishments and extensions to existing shopping centres...
-                                            </p>
-                                        </div>
-                                    </a>
-                                    <div class="side-functions p-left-l">
-                                        <div class="bookmark text-center uppercase"><a href="#"><span class="glyphicon glyphicon-bookmark m-right-xxs"></span><span><strong>Bookmark</strong></span></a></div>
+                            <div class="align-center align-md-bottom flex-row right width-full">
+                                <a href="#" class="flex-basis-no flex-IE-grow-auto flex-grow-1 m-right-m">
+                                    <div class="content p-left-no p-md-left-l">
+                                        <p class="sub-headline fs-2">Knowledge Hub </p>
+                                        <h6 class="headline ht6 uppercase m-bottom-xxs">How to reduce retail project challenges – fast!</h6>
+                                        <p class="description m-no">
+                                            Retail projects present significant logistical and code compliance challenges,especially refurbishments and extensions to existing shopping centres...
+                                        </p>
                                     </div>
-                            </div>
-                        </div>
-                        <div class="each m-bottom-4xl">
-                            <div class="left">
-                                <div class="thumbs">
-                                    <img src="https://dummyimage.com/250x145/000000/fff">
+                                </a>
+                                <div class="align-center flex-basis-no flex-IE-grow-auto flex-grow-0 flex-row justify-end side-functions-short">
+                                    <div class="bookmark uppercase fs-3"><a href="#" class="btn button-grey visible-xs btn-sm"><span class="glyphicon glyphicon-bookmark"></span></a><a href="#" class="hidden-xs">
+
+                                        <span class="glyphicon glyphicon-bookmark m-right-xxs"></span><span class=""><strong class="">Bookmark</strong></span></a>
+                                    </div>
+                                    
+                                    
                                 </div>
                             </div>
-                            <div class="right">
-                                    <a href="#">
-                                        <div class="content p-left-l">
-                                            <p class="sub-headline fs-2">Knowledge Hub</p>
-                                            <h6 class="headline ht6 uppercase m-bottom-xxs">How to reduce retail project challenges – fast!</h6>
-                                            <p class="description m-no">
-                                                Retail projects present significant logistical and code compliance challenges,especially refurbishments and extensions to existing shopping centres...
-                                            </p>
-                                        </div>
-                                    </a>
-                                    <div class="side-functions p-left-l">
-                                        <div class="bookmark text-center uppercase"><a href="#"><span class="glyphicon glyphicon-bookmark m-right-xxs"></span><span><strong>Bookmark</strong></span></a></div>
-                                    </div>
-                            </div>
                         </div>
+                        <!-- each  -->                        
+
+
                     </div>
                 </div>
                 <!-- END RELEVANT SEARCH CONTENT -->

@@ -251,20 +251,27 @@ function viewport() {
             
             //scroll 
             //scroll down && scroll down more than 100px && activate when 768px and higher
-            if ( (currScroll > lastScrollY) && (currScroll > 100) && (viewport().width >= 768) )
+            //if ( (currScroll > lastScrollY) && (currScroll > 100) && (viewport().width >= 768) )
+            if ( (currScroll > lastScrollY) && (currScroll >= 100) )
             {
                 //scroll down 
                 //console.log('down');
+                $floater.removeClass('notransition');
+                $floater.removeClass('scroll-up').removeClass('desktop-mobile-slide-down');
+                $floater.addClass('scroll-down').addClass('desktop-mobile-slide-up');
 
-                $floater.removeClass('scroll-up').removeClass('desktop-slide-down');
-                $floater.addClass('scroll-down').addClass('desktop-slide-up');
-
-            }else if( currScroll < lastScrollY )
+            }else if( (currScroll < lastScrollY) )
                 {
                     //scroll up
                     //console.log('up');
-                    $floater.removeClass('scroll-down').removeClass('desktop-slide-up');
-                    $floater.addClass('scroll-up').addClass('desktop-slide-down');
+                    $floater.removeClass('notransition');
+                    if(currScroll < 100) {
+                        $floater.addClass('notransition');
+                    }
+
+                    $floater.removeClass('scroll-down').removeClass('desktop-mobile-slide-up');
+                    $floater.addClass('scroll-up').addClass('desktop-mobile-slide-down');
+
 
                 }
 
@@ -272,6 +279,13 @@ function viewport() {
             //end scroll 
 
         }
+
+
+        // html, body {
+        //     overflow: hidden;
+        // }
+
+
 
 
 
@@ -359,6 +373,7 @@ function viewport() {
 (function(){
     "use strict";
     $(document).ready(function(){
+
         $(".header .hamburger").on( "click",  function() {         
             var $hamburgerContent = $('.hamburger-content');
 
@@ -369,6 +384,24 @@ function viewport() {
                 $hamburgerContent.addClass('hidden');
             }
         });
+
+        function mobileExpandStateMonitor(){
+            setInterval(function () {
+                //if hidden show scrollbar
+                if( $('.hamburger-content').hasClass('hidden') ){
+
+                    $('html, body').removeClass('disable-scroll');
+                    //$('html, body').css({ "overflow":"visible" });
+
+                }else{
+                    //else hide scrollbar
+                    $('html, body').addClass('disable-scroll');
+                    //$('html, body').css({ "overflow":"hidden" });
+                }
+            }, 200);
+        }
+        if ( $(".hamburger-content").length )mobileExpandStateMonitor();
+
     });
 })();
 
@@ -612,29 +645,19 @@ function viewport() {
 // ----------------------------------------------------------------------
 // Accordion
 // ----------------------------------------------------------------------
-(function(){
-    "use strict";
-    $(document).ready(function(){
-            $('body').on( "click", '.accordionfc .heading', function() {
+// (function(){
+//     "use strict";
+//     $(document).ready(function(){
+//             $('body').on( "click", '.accordionfc .heading', function() {
                 
-                var $contentToExpand = $(this).parent().children().next(); //content div
+//                 var $contentToExpand = $(this).parent().children().next(); //content div
      
 
-                $contentToExpand.stop().slideToggle("slow");
-                /* buggy when interact to quickly, use setInterval instead
-                function animate(){
-                    if( $contentToExpand.hasClass('closeac') ){
-                        $contentToExpand.removeClass('closeac');
-                        $contentToExpand.addClass('openac');
-                    } else if( $contentToExpand.hasClass('openac') ){
-                        $contentToExpand.removeClass('openac');
-                        $contentToExpand.addClass('closeac');
-                    }
-                }
-                */
-            });
-    });
-})();
+//                 $contentToExpand.stop().slideToggle("slow");
+              
+//             });
+//     });
+// })();
 
 // ----------------------------------------------------------------------
 // Custom dropdown submission
@@ -986,14 +1009,13 @@ $(window).on('load', function() {
 
 
 // ----------------------------------------------------------------------
-// test video
+// test video (KY)
 // ----------------------------------------------------------------------
 (function () {
     "use strict";
     $(document).ready(function () {
 
         var player;
-
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('video-placeholder', {
                 width: 600,
@@ -1027,7 +1049,6 @@ $(window).on('load', function() {
         
         }
 
-
         $('#play').on('click', function () {
             player.playVideo();
         });
@@ -1045,10 +1066,8 @@ $(window).on('load', function() {
 
 
 
-
-
 // ----------------------------------------------------------------------
-// test homebanner video
+// test homebanner video (KY)
 // ----------------------------------------------------------------------
 
 (function () {
@@ -1206,3 +1225,48 @@ $(window).on('load', function() {
 })();
 
 
+
+
+
+
+// ----------------------------------------------------------------------
+// Checkbox Count
+// ----------------------------------------------------------------------
+(function () {
+    "use strict";
+    $(document).ready(function () {
+
+        $('#mobile-sub-dropdown').change(function(){ 
+            var value = $(this).val();
+            console.log(value);
+        });
+
+        $('#mobile-sub-dropdown').change( scrollToSection );
+
+        function scrollToSection(){ 
+            console.log('clickhappen');
+            
+          //  $(this).each(function() {
+
+                    // if( $(this).val() ){
+                    //     $(this).parent().prev().find($("input[type=hidden]")).val( $(this).val() );
+                    // }
+
+                    //var offset = 20; //Offset of 20px
+                    // $('html, body').animate({
+                    //     scrollTop: $("#technical-data").offset().top + offset
+                    // }, 2000);
+
+            //});
+
+        }
+
+
+    });
+})();
+
+
+
+
+
+    
