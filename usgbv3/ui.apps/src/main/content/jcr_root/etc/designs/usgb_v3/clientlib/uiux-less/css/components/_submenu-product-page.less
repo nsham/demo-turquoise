@@ -3,18 +3,42 @@
 // ----------------------------------------------------------------------
 
 .product-menu-list-wrapper{
-    .list-inline>li{    
-        padding-left:20px;
-        padding-right:20px;
-    }
-}
+   
+    .list-inline{
+        li{    
+            position: relative;
+            cursor: pointer;
+            padding-left:20px;
+            padding-right:20px;
+            &:hover{
+                color:@color-white;
+            }
+
+            &.arrow-up::before{ 
+                content:"";
+                position: absolute;
+                bottom:-15px;
+                left:44%;
+                width:0;
+                height: 0;
+                margin: 0px auto; 
+                border-left: 10px solid transparent;
+                border-right: 10px solid transparent;
+                border-bottom: 10px solid @color-white; 
+
+            } 
+        }
+       
+    } 
+      
+} 
 
 
 .product-menu-sticky{
-	position:fixed;
+	position:relative;
 	top:0px;
 	width:100%; 
-	color: #FFFFFF;
+	color: #FFFFFF; 
 	z-index:100;
     display: none;
     .icon-bg{
@@ -30,5 +54,22 @@
     .border-line{
       border-bottom:2px solid @color-dark-grey;
     }
+
+    .product-menu-list-wrapper>.list-inline>li{
+        &.arrow-up::before{
+            bottom:-9px; 
+            content:"";
+            position: absolute;
+            left:44%;
+            width:0;
+            height: 0;
+            margin: 0px auto; 
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-bottom: 10px solid @color-white; 
+        }
+    }
+  
 }
+
 

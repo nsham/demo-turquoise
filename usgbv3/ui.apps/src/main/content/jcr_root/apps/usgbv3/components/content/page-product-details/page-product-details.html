@@ -335,42 +335,37 @@
 
     <!-- Product SUB NAVI START -->
     <div class="container-fluid">
-        <div class="row bg-gradient-yellow-x hidden-xs">
+        <div class="row bg-gradient-yellow-x hidden-xs product-menu-desktop ">
             <div class="container">
-                <div class="row product-menu-list-wrapper">
+                <div class="row product-menu-list-wrapper ">
                     <ul class="color-darker-grey list-inline m-m bold fs-2 text-center">
-                        <li class="list-inline-item">Product Information</li>
-                        <li class="list-inline-item">Additional Information</li>
-                        <li class="list-inline-item">Technical Data & Notes </li>
-                        <li class="list-inline-item">CAD</li>
-                        <li class="list-inline-item">Resources</li>
-                        <li class="list-inline-item">System content</li>
+                        <li class="arrow-up" class="list-inline-item" data-product-list="product-information" >Product Information1</li>
+                        <li class="list-inline-item" data-product-list="additional-information">Additional Information</li>
+                        <li class="list-inline-item" data-product-list="technical-data">Technical Data & Notes </li>
+                        <li class="list-inline-item" data-product-list="cad">CAD</li>
+                        <li class="list-inline-item" data-product-list="resources">Resources</li>
+                        <li class="list-inline-item" data-product-list="system-content">System content</li>
                     </ul>
                 </div>
             </div>
         </div>
-    </div>
+    </div> 
 
+    <!-- mobile dropdowns -->
     <div class="container-fluid ">
         <div class="row bg-light-grey visible-xs">
             <div class="container">
                 <div class="row">
-                    <div class="uppercase color-darker-grey list-inline m-m bold fs-2 text-left">
-                        <p>Product Information
-                            <span class="float-right  color-primary-green glyphicon glyphicon-menu-down"></span>
-                        </p>
-                    </div>
-                    <div class="dropdown  width-full bg-light-grey" data-toggle="dropdown">
-                        <select id="#mobile-sub-dropdown"  class="btn-default color-darker-grey">
-                            <option value="Select Enquiry Type">Select Enquiry mobile dropdown</option>
-                            <option id="btn-tech" value="Tech"> TEch </option>
-                            <option value="Quisque imperdiet">Quisque imperdiet</option>
-                            <option value="Quisque a tortor">Quisque a tortor</option>
-                            <option value="Proin ut elit">Proin ut elit</option>
+                    <div class="dropdown  width-full" data-toggle="dropdown">
+                        <select id="mobile-sub-dropdown"  class=" bg-light-grey btn-default color-darker-grey">
+                            <option value="product-information">Product Information</option>
+                            <option value="additional-information">Additional Information</option>
+                            <option value="technical-data">Technical Data </option>
+                            <option value="cad">CAD</option>
+                            <option value="resources">Resources</option>
+                            <option value="system-content">System Content</option>
                         </select>
                     </div>
-                    <!-- <button type="submit" class="m-top-no m-left-s btn button-yellow btn-brand-default">Submit</button> -->
-                    <!-- test -->
  
                 </div>
             </div>
@@ -379,63 +374,15 @@
     <!--Product SUB NAVI END -->
 
 
-    <!--Mobile product SUB NAVI -->
-    <div class="container-fluid">
-        <div class="row product-menu-sticky bg-white">
-            <div class="container">
-                <div class=" m-vertical-xs row">
-                    <div class="col-xs-12 col-sm-6 p-bottom-s p-sm-bottom-no float-left">
-                        <span class="float-left p-right-s hidden-xs">
-                            <img src="/content/dam/USGBoral/Global/Website/Images/component/allsample/shaft-img.png" alt="" class="img-width">
-                        </span>
-                        <span class="float-left p-sm-top-xs p-top-no color-darker-grey uppercase ht6">
-                            Highland
-                            <sup>tm</sup> ceiling system
-                        </span>
-                    </div>
-
-                    <div class="col-xs-12 col-sm-6  text-left text-sm-right p-bottom-no float-sm-right">
-                        <a href="#" class="btn btn-sm btn-brand-default button-green">Request Sample</a>
-                        <a href="#" class="icon-min-width btn btn-sm btn-brand-default icon-bg color-white">
-                            <span class=" glyphicon glyphicon-earphone"></span>
-                        </a>
-                        <a href="#" class="icon-min-width btn btn-sm btn-brand-default icon-bg color-white">
-                            <span class=" glyphicon glyphicon-map-marker"></span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row bg-gradient-yellow-x  product-menu-list-wrapper">
-                <ul class="color-darker-grey list-inline m-xxs bold fs-2 text-center hidden-xs">
-                    <li>Product Information</li>
-                    <li>Additional Information</li>
-                    <li>Technical Data & Notes </li>
-                    <li>CAD</li>
-                    <li>Resources</li>
-                    <li>System content</li>
-                </ul>
-
-                <!-- only mobile -->
-                <ul class="color-darker-grey list-inline m-xxs bold fs-2 text-center visible-xs">
-                    <li> Product InformationSuvMenu</li>
-                </ul>
-                <!-- only mobile end -->
-            </div>
-
-            <div class="row border-line"> </div>
-        </div>
-    </div>
-    <!--Mobile Product SUB NAVI END -->
 
 
         <!-- SECTION 3  -->
-        <div class="container-fluid">
-            <div data-product-menu="start" class="row bg-white m-top-3xl m-sm-top-4xl">
+        <div  class="container-fluid">
+            <div data-product-menu="start" class="row bg-white m-top-3xl m-sm-top-4xl" data-product-list="product-information" data-scroll="product-information">
                 <div data-offset="0" class="container">
                     <div class="row product-menu">
 
-                        <div class="col-xs-12 m-bottom-s">
+                        <div class="col-xs-12 m-bottom-s" >
                             <h2 class="uppercase color-darker-grey ht5">Product Information</h2>
                         </div>
                         <div class="col-xs-12 col-sm-6 text-left">
@@ -465,8 +412,8 @@
         <!-- SECTION 3 END -->
 
         <!-- SECTION 4 -->
-        <div class="container-fluid">
-            <div class="row bg-white m-vertical-l m-sm-vertical xl">
+        <div  class="container-fluid">
+            <div class="row bg-white m-vertical-l m-sm-vertical xl" data-product-list="additional-information" data-scroll="additional-information">
                 <div class="container">
                     <div class="row">
                         <div class="col-xs-12 m-bottom-s">
@@ -564,8 +511,8 @@
 
         <!-- SECTION 5 -->
         <div class="container-fluid">
-            <div class="row bg-white m-vertical-l m-sm-vertical-xl">
-                <div id="tech" class="container">
+            <div class="row bg-white m-vertical-l m-sm-vertical-xl" data-product-list="technical-data"  data-scroll="technical-data">
+                <div  class="container">
                     <div class="row">
                         <div class="col-xs-12 m-bottom-s">
                             <h2 class="uppercase color-darker-grey ht5">Technical data &amp; Notes</h2>
@@ -584,7 +531,7 @@
 
         <!-- SECTION 6 -->
         <div class="container-fluid">
-            <div class="row bg-white m-vertical-l m-sm-vertical-xl">
+            <div class="row bg-white m-vertical-l m-sm-vertical-xl" data-product-list="cad" data-scroll="cad">
                 <div class="container">
                     <div class="row">
                         <div class="col-xs-12 m-bottom-s">
@@ -730,7 +677,7 @@
 
         <!-- SECTION 7 -->
         <div class="container-fluid">
-            <div class="row bg-white m-vertical-l m-sm-vertical-xl">
+            <div class="row bg-white m-vertical-l m-sm-vertical-xl" data-product-list="resources" data-scroll="resources">
                 <div class="container">
 
                     <div class="row m-bottom-4xl">
@@ -1221,8 +1168,8 @@
 
 
         <!-- SECTION 8 -->
-        <div class="container-fluid">
-            <div class="row m-vertical-l m-sm-vertical-xl">
+        <div class="container-fluid"> 
+            <div class="row m-vertical-l m-sm-vertical-xl" data-product-list="system-content" data-scroll="system-content">
                 <div class="container">
 
                     <div class="row m-bottom-s">

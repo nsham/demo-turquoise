@@ -12,5 +12,6 @@ sticky-sidebar.js
 sideScroll.js
 slick-lightbox.js
 aos.js
+jquery.fancybox.js
 main.js
 

@@ -21,26 +21,43 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    
     position: relative;
     width: auto;
-    /* min-height: 18px; */
     padding-left: 10px;
     padding-right: 40px;
-    /* margin-bottom: 0; */
     font-weight: normal;
     cursor: pointer;
 
+    &.mobile {
+        display: inline-block;
+        border: 2px solid transparent;
+        border-radius: 4px;
+        padding: 10px 15px;
+        margin: 10px 4px 0px 4px;
+    }
+
+    &.checked {
+        border: 2px solid #009b3a;
+        background-color: #009b3a;
+        color: #FFF;
+    }
+
+   
+
+    /* Hide the browser's default checkbox */
+    input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        display: none;
+    }
+
+
 }
 
-/* Hide the browser's default checkbox */
-.container-checkbox input {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
 
-    display: none;
-}
+
+
 
 /* Create a custom checkbox */
 .checkmark {
