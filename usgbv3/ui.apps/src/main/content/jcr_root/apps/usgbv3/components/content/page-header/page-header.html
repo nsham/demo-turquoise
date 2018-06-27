@@ -568,18 +568,18 @@
                 </div>
 
                 <div class="row bg-gradient-yellow-x  product-menu-list-wrapper">
-                    <ul class="color-darker-grey list-inline m-xxs p-vertical-xxs bold fs-2 text-center hidden-xs">
-                        <li data-product-list="product-information">Product Informationttt</li>
-                        <li data-product-list="additional-information" >Additional Information</li>
+                    <ul class="color-darker-grey list-inline desktop-list-inline m-xxs p-vertical-xxs bold fs-2 text-center hidden-xs">
+                        <li data-product-list="product-information">Product Information</li>
+                        <li data-product-list="additional-information">Additional Information</li>
                         <li data-product-list="technical-data">Technical Data & Notes </li>
                         <li data-product-list="cad">CAD</li>
                         <li data-product-list="resources">Resources</li>
-                        <li data-product-list="system-content">System content</li>
+                        <li data-product-list="system-content">System Content</li>
                     </ul>
 
                     <!-- only mobile -->
-                    <ul class="color-darker-grey list-inline m-xxs bold fs-2 text-center visible-xs">
-                        <li data-m-product="title"> Product InformationSuvMenu</li>
+                    <ul class="color-darker-grey list-inline mobile-list-inline m-xxs bold fs-2 text-center visible-xs">
+                        <li data-m-product="title">Product Information</li>
                     </ul>
                     <!-- only mobile end -->
                 </div>
@@ -588,6 +588,56 @@
             </div>
         
         <!--Mobile Product SUB NAVI END -->        
+
+        <!-- float-title-share (solution & case studies page only) -->
+        <div class="float-title-share hidden">
+            <div class="inner">
+
+                <div class="content flex-row justify-space-between p-m">
+                    <div class="left">
+                        <h1 class="ht4"><strong>EDUCATION</strong></h1>
+                    </div>
+                    <div class="right">
+
+                        <!--desktop version-->
+                        <div class="desktop-share-buttons p-left-m hidden-xs">
+                            <span class="color-dark-grey fs-2 v-align-middle">Share us on:</span>
+                            <a href="#" class="fa fa-facebook-square icon-color-darker-grey icon-size v-align-middle"></a>
+                            <a href="#" class="fa fa-twitter-square icon-color-darker-grey icon-size v-align-middle"></a>
+                            <a href="#" class="fa fa-linkedin-square icon-color-darker-grey icon-size v-align-middle"></a>
+                        </div>
+                        <!--end desktop version-->
+                        
+                        <!--mobile version-->
+                        <div class="mobile-share-buttons p-left-m visible-xs">
+                            <div class="share-icon">
+                                <span class="expand-share icon-color-darker-grey icon-size fa fa-share-alt-square"></span>
+                            </div>
+                        </div>
+                        <!--end mobile version-->
+                    </div>
+                </div>
+
+                <div class="slide-content visible-xs">
+                    <div class="flex-row justify-center p-m">
+                        <a href="#" class="align-self-right fa fa-facebook-square icon-color-darker-grey icon-size p-side-xxs"></a>
+                        <a href="#" class="fa fa-twitter-square icon-color-darker-grey icon-size p-side-xxs"></a>
+                        <a href="#" class="fa fa-linkedin-square icon-color-darker-grey icon-size p-side-xxs"></a>
+                        <a href="#" class="icon-color-darker-grey p-side-xxs stacked-default">
+                            <span class="fa-stack fa-3x">
+                                <i class="fa fa-square fa-stack-2x"></i>
+                                <i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                        <span class="close-share align-self-right fa fa-close icon-color-darker-grey icon-size"></span>
+                    </div>
+                </div>
+
+            </div>
+            <hr class="m-no dark-2-grey">
+        </div>
+        <!-- end float-title-share (solution & case studies page only) -->
+
 
     </div> 
 </header>
@@ -951,5 +1001,60 @@
 
 </div>
 <!-- end search pop up -->
+
+<script>
+    
+    $(document).ready(function () {
+
+        function shareExpander(){
+            var $floatTitleShare = $('.float-title-share');
+            var $shareIcon = $('.share-icon');
+            var $closeShare = $('.close-share');
+            var $slideContent = $('.slide-content');
+
+            var $floatTitleSharePlaceholder = $('.float-title-share-placeholder');
+            //var $floatTitleSharePlaceholderYpos = $floatTitleSharePlaceholder.position().top;
+
+            $floatTitleShare.removeClass('hidden');
+
+            //console.log($floatTitleSharePlaceholderYpos);
+
+            $shareIcon.on('click', function(){             
+                $slideContent.addClass('active');
+            });
+
+            $closeShare.on('click', function(){
+                $slideContent.removeClass('active');
+            });
+
+
+            var trigger = new Waypoint({
+              element: $floatTitleSharePlaceholder,
+              handler: function(direction) {
+                console.log(direction);
+
+                //if down (scroll beyond placeholder)
+                if(direction === "down"){
+                    $floatTitleShare.addClass('floater-slide-in');
+                }
+
+                //if down (scroll above placeholder)
+                if(direction === "up"){
+                    $floatTitleShare.removeClass('floater-slide-in');
+                }
+
+                
+              }
+            })
+
+
+        }
+
+        //only show when floater (in template) and placeholder (in content) exist.
+        if ( $('.float-title-share').length && $('.float-title-share-placeholder').length ) shareExpander();
+
+    });
+
+</script>
 
 <sly data-sly-use.clientLib="/libs/granite/sightly/templates/clientlib.html" data-sly-call="${clientLib.all @ categories='uiux.header'}" data-sly-unwrap/>

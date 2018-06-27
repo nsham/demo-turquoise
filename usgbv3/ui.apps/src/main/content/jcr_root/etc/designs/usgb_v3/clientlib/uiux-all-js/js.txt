@@ -13,5 +13,6 @@ sideScroll.js
 slick-lightbox.js
 aos.js
 jquery.fancybox.js
+jquery.waypoints.js
 main.js
 

@@ -1,28 +1,55 @@
 .c-article-bar {
-    position: relative;
-    >.inner {
-      h1 {
-          margin-bottom: 10px;
-          padding-right:  65px;
-          @media only screen and (min-width:768px) {
-            padding-top: 5px;
-            padding-right: 140px;
-          }
-      }
-      .dbtn-group {
+  position: relative;
+
+
+  &.with-contact{
+
+    .inner {
+
+      >*:first-child {
+        margin-bottom: 10px;
+        padding-right: 0px;
         @media only screen and (min-width:768px) {
-          position: absolute;
-          top: 0;
-          right: 0;
+          padding-top: 3px;
+          padding-right: 140px;
         }
       }
-      .mbtn-group {}
-      .f-awe {}
-      .btn {}
-      .mbtn-group {
+
+    }
+
+  }
+
+
+
+  .inner {
+
+    >*:first-child {
+
+      margin-bottom: 10px;
+      padding-right:  0px;
+
+    }
+
+
+
+    .dbtn-group {
+      @media only screen and (min-width:768px) {
         position: absolute;
         top: 0;
         right: 0;
       }
     }
+
+    .mbtn-group {}
+    .f-awe {}
+    .btn {}
+    .mbtn-group {
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+
+  }
+
+
 }
