@@ -74,9 +74,9 @@
 
 	<!-- BREADCUMB-BOX -->
 	<div class="container ">
-		<div class="row m-vertical-m hidden-xs">
-			<div class="c-flex-items col-xs-12">
-				<div class="item-stretch breadcrumb-box">
+		<div class="row m-vertical-m">
+			<div class="col-xs-12">
+				<div class="col-sm-6 breadcrumb-box  hidden-xs">
 					<ol class="breadcrumb m-no p-no bg-white">
 						<li>Products</li>
 						<li>Ceilings</li>
@@ -87,10 +87,10 @@
 				</div>
 
 				<!-- dropdown desktop -->
-				<div class="item-fix p-no text-center">
+				<div class="col-sm-6 col-xs-12 p-no text-center">
 					<div class="search-filter-sort">
 						<!-- SORT BY -->
-						<div class="dropdown dp-form dropdown-menu-right m-vertical-m d-small">
+						<div class="dropdown dp-form dropdown-menu-right m-bottom-m d-small">
 							<button class="btn btn-default color-dark-grey dropdown-toggle text-left" type="button" id="dropdownMenu1" data-toggle="dropdown"
 							 aria-haspopup="true" aria-expanded="false">
 								<span>Sort By</span>
@@ -139,7 +139,7 @@
 	</div>
 
 	<!-- dropdown mobile -->
-	<div class="container-fluid">
+	<!-- <div class="container-fluid">
 		<div class="row visible-xs m-bottom-l">
 			<form action="" class="flex-row justify-space-between">
 				<div class="dropdown p-no   " style="width:100%; display: inline-block;">
@@ -172,7 +172,7 @@
 			</form>
 
 		</div>
-	</div>
+	</div> -->
 	<!-- dropdown mobile -->
 	<!-- BREADCUMB-BOX END -->
 
@@ -218,28 +218,42 @@
 							<div class="each">
 								<h5 class="color-dark-grey bold ht6 uppercase m-bottom-xs">Refine your search</h5>
 
-								<!-- dropdown -->
-								<div class="dropdown width-full" style="display: inline-block;">
-									<button class="btn btn-default color-dark-grey dropdown-toggle text-left" type="button" id="dropdownMenu1" data-toggle="dropdown"
-									 aria-haspopup="true" aria-expanded="false">
-										<span>Texture</span>
-										<span class="color-primary-green glyphicon glyphicon-menu-down right"></span>
-									</button>
-									<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-										<li>
-											<a href="#">Fine</a>
-										</li>
-										<li>
-											<a href="#">Smooth</a>
-										</li>
-										<li>
-											<a href="#">Medium</a>
-										</li>
-										<li>
-											<a href="#">Lightly texture</a>
-										</li>
-									</ul>
+								<div class="search-filter-sort">
+									<!-- SORT BY -->
+									<div class="dropdown dp-form dropdown-menu-right d-small">
+										<button class="btn btn-default color-dark-grey dropdown-toggle text-left" type="button" id="dropdownMenu1" data-toggle="dropdown"
+										 aria-haspopup="true" aria-expanded="false">
+											<span>Sort By</span>
+											<span class="color-primary-green glyphicon glyphicon-menu-down right"></span>
+										</button>
+										<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+											<li>
+												<a href="#">Alphabet</a>
+											</li>
+											<li>
+												<a href="#">Oldest to Latest</a>
+											</li>
+											<li>
+												<a href="#">Price</a>
+											</li>
+											<li>
+												<a href="#">Date Added</a>
+											</li>
+										</ul>
+									</div>
+			
+									<div class="dropdown dp-form-mobile dropdown-menu-right m-vertical-m d-small">
+										<select class="btn-default">
+											<option value="Alphabet">Alphabet</option>
+											<option value="Oldest to Latest">Oldest to Latest</option>
+											<option value="Price">Price</option>
+											<option value="Date Added">Date Added</option>
+										</select>
+									</div>
+									<!-- END SORT BY -->
+			
 								</div>
+
 								<!-- checkbox -->
 								<div class="checkbox-wrapper">
 									<div class="radio radio-split-two">
@@ -966,6 +980,284 @@
 
 </div>
 <!-- END of PAGE CONTENT -->
+
+<!-- filter mobile content -->
+<div class="filter-mobile-content hidden">
+
+
+    <section class="section">
+
+        <div class="container-fluid">
+            <div class="row">
+                
+
+
+                <div class="col-xs-12 p-no ">
+                                                    
+
+
+                    <div class="close-filter-mobile-content p-l">
+                        <a href="#" class="icon-color-darker-grey icon-size-xs glyphicon glyphicon-remove"></a>
+                    </div>
+
+    
+                    <!-- SEARCH FILTER -->
+                    <div class="search-filter m-bottom-xxl">
+                        <form action="" method="get">
+                            <div class="wrapper">
+                                <div class="top">
+
+                                    <p class="uppercase text-center m-no p-side-l fs-2"><strong>refine your search</strong></p>
+                                    <hr class="m-vertical-m">
+
+                                </div>
+                                <div class="middle p-bottom-l">
+
+                                    <div class="accordionfc">
+                                        <p class="heading fs-2 uppercase p-no m-no m-side-l" data-target="#m_product_type" data-toggle="collapse" aria-expanded="true"><strong><span>Type</span><span class="glyphicon glyphicon-minus"></span><span class="glyphicon glyphicon-plus"></span></strong></p>
+                                        <div class="content p-side-l collapse in" id="m_product_type" aria-expanded="true" style="">
+
+                                            <!-- expandable content -->
+                                            <div class="checkbox-wrapper">
+                                                
+                                                <label class="container-checkbox mobile fs-2">
+                                                    Products
+                                                    <input type="checkbox" name="t_products">
+                                                </label>
+                                            
+                                            
+                                                <label class="container-checkbox mobile fs-2">
+                                                    Solutions
+                                                    <input type="checkbox" name="t_solutions">
+                                                </label>
+                                            
+                                            
+                                                <label class="container-checkbox mobile fs-2">
+                                                    System
+                                                    <input type="checkbox" name="t_system">
+                                                </label>
+                                                
+                                            </div>
+                                            <!-- END expandable content -->
+
+                                        </div>
+                                    </div>
+
+                                    <div class="accordionfc">
+                                        <p class="heading fs-2 uppercase p-no m-no m-side-l collapsed" data-target="#m_product_category" data-toggle="collapse" aria-expanded="false"><strong><span>Product Category</span><span class="glyphicon glyphicon-minus"></span><span class="glyphicon glyphicon-plus"></span></strong></p>
+                                        <div class="content p-side-l collapse" id="m_product_category" aria-expanded="false" style="height: 0px;">
+
+                                            <!-- expandable content -->
+                                            <div class="checkbox-wrapper">
+
+                                                <label class="container-checkbox mobile fs-2">
+                                                    All
+                                                    <input type="checkbox" name="pc_all">
+                                                </label>
+
+                                                <label class="container-checkbox mobile fs-2">
+                                                    Walls
+                                                    <input type="checkbox" name="pc_walls">
+                                                </label>
+
+                                                <label class="container-checkbox mobile fs-2">
+                                                    Ceilings
+                                                    <input type="checkbox" name="pc_ceilings">
+                                                </label>
+
+                                                <label class="container-checkbox mobile fs-2">
+                                                    Interior Linings
+                                                    <input type="checkbox" name="pc_interior-linings">
+                                                </label>
+
+                                                <label class="container-checkbox mobile fs-2">
+                                                    Finishes
+                                                    <input type="checkbox" name="pc_finishes">
+                                                </label>
+
+                                                <label class="container-checkbox mobile fs-2">
+                                                    Steel Framing
+                                                    <input type="checkbox" name="pc_steel-framing">
+                                                </label>
+
+                                                <label class="container-checkbox mobile fs-2">
+                                                    Cornice
+                                                    <input type="checkbox" name="pc_cornice">
+                                                </label>
+
+                                                <label class="container-checkbox mobile fs-2">
+                                                    Plastering DIY
+                                                    <input type="checkbox" name="pc_plastering-diy">
+                                                </label>
+
+                                                <label class="container-checkbox mobile fs-2">
+                                                    Insulation
+                                                    <input type="checkbox" name="pc_insulation">
+                                                </label>
+                                
+                                                <label class="container-checkbox mobile fs-2">
+                                                  Industrial Plaster
+                                                  <input type="checkbox" name="pc_industrial-plaster">
+                                                </label>
+                
+                                            </div>
+                                            <!-- END expandable content -->
+
+                                        </div>
+                                    </div>
+
+                                    <div class="accordionfc">
+                                        <p class="heading fs-2 uppercase p-no m-no m-side-l collapsed" data-target="#m_product_system_category" data-toggle="collapse" aria-expanded="false"><strong><span>System Category</span><span class="glyphicon glyphicon-minus"></span><span class="glyphicon glyphicon-plus"></span></strong></p>
+                                        <div class="content p-side-l collapse" id="m_product_system_category" aria-expanded="false" style="height: 0px;">
+
+                                            <!-- expandable content -->
+                                            <div class="checkbox-wrapper">
+
+                                                <label class="container-checkbox mobile fs-2">
+                                                    All
+                                                    <input type="checkbox" name="sc_all">
+                                                </label>
+
+                                                <label class="container-checkbox mobile fs-2">
+                                                    Non-Fire Rated
+                                                    <input type="checkbox" name="sc_non-fire-rated">
+                                                </label>
+
+                                                <label class="container-checkbox mobile fs-2">
+                                                    Fire Rated
+                                                    <input type="checkbox" name="sc_fire-rated">
+                                                </label>
+
+                                                <label class="container-checkbox mobile fs-2">
+                                                    Fire Rated Hybrid
+                                                    <input type="checkbox" name="sc_fire-rated-hybrid">
+                                                </label>
+
+                                                <label class="container-checkbox mobile fs-2">
+                                                    Impact Resistance
+                                                    <input type="checkbox" name="sc_impact-resistance">
+                                                </label>
+
+                                                <label class="container-checkbox mobile fs-2">
+                                                    Acoustic Performance
+                                                    <input type="checkbox" name="sc_acoustic-performance">
+                                                </label>
+
+                                                <label class="container-checkbox mobile fs-2">
+                                                    Moisture Resistance
+                                                    <input type="checkbox" name="sc_moisture-resistance">
+                                                </label>
+
+                                            </div>
+                                            <!-- END expandable content -->
+
+                                        </div>
+                                    </div>
+
+                                    <div class="accordionfc">
+                                        <p class="heading fs-2 uppercase p-no m-no m-side-l collapsed" data-target="#m_product_document_type" data-toggle="collapse" aria-expanded="false"><strong><span>Document Type</span><span class="glyphicon glyphicon-minus"></span><span class="glyphicon glyphicon-plus"></span></strong></p>
+                                        <div class="content p-side-l collapse" id="m_product_document_type" aria-expanded="false" style="height: 0px;">
+
+                                            <!-- expandable content -->
+                                            <div class="checkbox-wrapper">
+
+                                                <label class="container-checkbox mobile fs-2">
+                                                    All
+                                                    <input type="checkbox" name="dt_all">
+                                                </label>
+
+                                                <label class="container-checkbox mobile fs-2">
+                                                    Brochures Catalogues
+                                                    <input type="checkbox" name="dt_brochures-catalogues">
+                                                </label>
+
+                                                <label class="container-checkbox mobile fs-2">
+                                                    Technical Data
+                                                    <input type="checkbox" name="dt_technical-data">
+                                                </label>
+
+                                                <label class="container-checkbox mobile fs-2">
+                                                    Warranties
+                                                    <input type="checkbox" name="dt_warranties">
+                                                </label>
+
+                                                <label class="container-checkbox mobile fs-2">
+                                                    Certificates
+                                                    <input type="checkbox" name="dt_certificates">
+                                                </label>
+
+                                                <label class="container-checkbox mobile fs-2">
+                                                    MSDS
+                                                    <input type="checkbox" name="dt_msds">
+                                                </label>
+
+                                                <label class="container-checkbox mobile fs-2">
+                                                    Evaluation Reports
+                                                    <input type="checkbox" name="dt_evaluation-reports">
+                                                </label>
+
+                                                <label class="container-checkbox mobile fs-2">
+                                                    Installation Guide
+                                                    <input type="checkbox" name="dt_installation-guide">
+                                                </label>
+
+                                                <label class="container-checkbox mobile fs-2">
+                                                    Case Studies
+                                                    <input type="checkbox" name="dt_case-studies">
+                                                </label>
+
+                                            </div>
+                                            <!-- END expandable content -->
+
+                                        </div>
+                                    </div>                                
+                                </div>
+                                <div class="bottom text-center p-side-l p-bottom-l">
+
+                                    <button type="submit" class="btn btn-brand-default button-green btn-sm">APPLY FILTER</button>
+
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+                    <!-- END SEARCH FILTER -->
+
+                    <!-- RELATED SEARCH -->
+                    <div class="related-search m-bottom-xxl">
+                        <div class="wrapper p-l">
+                            <p class="fs-2"><strong>Searches related to "ceiling"</strong></p>
+                            <p class="fs-2"><a href="#">
+                                ceiling tiles
+                            </a></p>
+                            <p class="fs-2"><a href="#">
+                                ceiling grids
+                            </a></p>
+                            <p class="fs-2"><a href="#">
+                                ceiling texture
+                            </a></p>
+                            <p class="fs-2"><a href="#">
+                                ceiling board
+                            </a></p>
+                            <p class="fs-2"><a href="#">
+                                ceiling calculator
+                            </a></p>
+                        </div>
+                    </div>
+                    <!-- END RELATED SERACH -->
+
+
+
+                </div>
+
+
+                
+            </div>
+        </div>
+
+    </section>
+
+</div>
 
 
 <sly data-sly-use.clientLib="/libs/granite/sightly/templates/clientlib.html" data-sly-call="${clientLib.js @ categories='uiux.alljs'}"
