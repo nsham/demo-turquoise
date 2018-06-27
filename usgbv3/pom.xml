@@ -52,11 +52,11 @@
 
         <!--     UAT -->
         <aem.host.uat>usgbuataut.cloudapp.net</aem.host.uat>
-        <aem.port.uat>4502</aem.port.uat>
+        <aem.port.uat>4504</aem.port.uat>
         <aem.slng.user.uat>admin</aem.slng.user.uat>
         <!-- WARNING! to avoid accidental deployment, manually copy password and DON'T COMMIT POM changes! -->
         <!-- manually copy this password to below: Usg_boral@Apd16 -->
-        <aem.slng.password.uat>Usgb@123</aem.slng.password.uat>
+        <aem.slng.password.uat>admin</aem.slng.password.uat>
 
         <!--     PROD 2 -->
         <aem.host.prod2>usgbproaut2.cloudapp.net</aem.host.prod2>
