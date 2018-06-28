@@ -369,9 +369,12 @@ function viewport() {
 // ----------------------------------------------------------------------
 (function () {
     "use strict";
+
     $(document).ready(function () {
 
         function shareExpander() {
+
+
             var $floatTitleShare = $('.float-title-share');
             var $shareIcon = $('.share-icon');
             var $closeShare = $('.close-share');
@@ -419,7 +422,8 @@ function viewport() {
         if ($('.float-title-share').length && $('.float-title-share-placeholder').length) shareExpander();
 
     });
-});
+
+})();
 
 // ----------------------------------------------------------------------
 // Filter content (mobile filter menu with slide in & out)
@@ -823,7 +827,7 @@ function viewport() {
 
         });
 
-        $('.close-pop-up>*').on("click", function () {
+        $('.search-pop-up .close-pop-up>*').on("click", function () {
 
             var $searchPopUp = $('.search-pop-up');
 
@@ -833,6 +837,33 @@ function viewport() {
         });
 
     });
+})();
+
+
+// ----------------------------------------------------------------------
+// Sticky icons
+// ----------------------------------------------------------------------
+(function () {
+    "use strict";
+    
+    $(document).ready(function(){
+
+        $('.sticky-icons-button a, .sticky-icons-expander .close-pop-up').on("click", function(e){
+            e.preventDefault();
+
+            var $stickyIconsExpander = $('.sticky-icons-expander');
+
+            if ($stickyIconsExpander.hasClass('hidden')) {
+                $stickyIconsExpander.removeClass('hidden');
+                setTimeout(function () { $stickyIconsExpander.addClass('active') }, 50);
+            }else{
+                $stickyIconsExpander.removeClass('active')
+                setTimeout(function () { $stickyIconsExpander.addClass('hidden'); }, 600);
+            }
+        });
+
+    })
+
 })();
 
 
@@ -980,7 +1011,7 @@ $(window).on('load', function () {
                     $('.product-menu-sticky').removeClass("hidden");
                 }
 
-                if ($(this).scrollTop() == posEqual ) {
+                if ($(this).scrollTop() == posEqual) {
                     $('.product-menu-sticky').fadeOut(10);
                     $('.product-menu-desktop').css({ 'visibility': 'visible' });
                 }
@@ -1247,31 +1278,138 @@ $(window).on('load', function () {
 
 
 // ----------------------------------------------------------------------
-// Checkbox Count
+// Checkbox Count (product listing)
 // ----------------------------------------------------------------------
 (function () {
     "use strict";
     $(document).ready(function () {
 
-        var countCheck = 0;
-        $(".popup-content").hide()
 
-        // detect change for checkbox
-        $('.listing-search-content div input[type="checkbox"]').change(function () {
+        function productListingFeatures() {
 
-            var numberOfChecked = $('.listing-search-content div input:checkbox:checked').length;
-            $(".popup-content").show();
 
-            if (numberOfChecked > 3) {
-                $(this).prop('checked', false);
-                console.log("reached max 3")
+            var countCheck = 0;
+            $(".popup-content").hide()
+
+            // detect change for checkbox
+            $('.listing-search-content div input[type="checkbox"]').change(function () {
+                var numberOfChecked = $('.listing-search-content div input:checkbox:checked').length;
+                $(".popup-content").show();
+
+                //$( "p" ).append( $( "strong" ) );
+                console.log($('.listing-search-content div input[type="checkbox"]').attr("name"))
+
+                if (numberOfChecked > 3) {
+                    $(this).prop('checked', false);
+                    console.log("reached max 3")
+                }
+                if (numberOfChecked == 0) {
+                    $(".popup-content").hide();
+                }
+            });
+
+
+            var dataSearchVal
+            var dataTitleVal
+            $(".checkbox-wrapper").hide();
+            $('.refine-search').on("click", '.refine-list a', function () {
+                dataSearchVal = $(this).data("search-val");
+                dataTitleVal = $(this).data("val");
+                //console.log(dataSearchVal);
+                if (dataSearchVal = dataSearchVal) {
+                    $(".checkbox-wrapper").hide();
+                    //   console.log( $("."+dataSearchVal+"-wrapper"))
+                    $("." + dataSearchVal + "-wrapper").show();
+                } else {
+                    $(".checkbox-wrapper").hide();
+                }
+                // console.log($(this).parent().parent().prev().find($('.dp-text')));
+                // console.log( $('.'+dataSearchVal+'-wrapper div input[type="checkbox"]'))
+
+                  $('.'+dataSearchVal+'-wrapper div input[type="checkbox"]').change(function () {
+               // $('.' + dataSearchVal + '-wrapper div input:checkbox:checked').change(function () {
+                    var numberOfChecked = $('.' + dataSearchVal + '-wrapper div input:checkbox:checked').length;
+                   // console.log(numberOfChecked)
+                    var checkboxName = $(this).attr("name");
+                    if ($(this).is(':checked')) {
+                        console.log("Aaa")
+                        $('.search-checkbox-text').append("<p id='"+dataSearchVal+"'>"+dataTitleVal+"</p>" );
+                       // $('.search-checkbox-text').append("<button class='m-xs bold btn btn-xs' type='button'>"+checkboxName+"
+                       // <span class='fs-1 p-left-s'>&times;</span></button>");
+
+                        
+                        // Append the div from out of the loop
+
+                    }else {
+                        // if ($('.search-checkbox-text').has('#'+textId)) {
+                        //     $('#'+textId).remove();
+                        // }
+                     }
+                });
+
+
+
+            });
+
+
+
+            // detect change for checkbox
+            $('.lr-rating-wrapper div input[type="checkbox"]').change(function () {
+                console.log("aaaa")
+
+                var test = $(this).attr("name");
+                console.log(test)
+                // var numberOfChecked = $('.listing-search-content div input:checkbox:checked').length;
+                // $(".popup-content").show();
+
+                // //$( "p" ).append( $( "strong" ) );
+                // // console.log($(".listing-search-content div img").attr("src"))
+
+                // if (numberOfChecked > 3) {
+                //     $(this).prop('checked', false);
+                //     console.log("reached max 3")
+                // }
+                // if (numberOfChecked == 0) {
+                //     $(".popup-content").hide();
+                // }
+            });
+
+
+
+
+            // $(".refine-search li a").change(function () {
+            //     var getValue = $(this).attr("data-val");
+            //     //scrollToSection();
+            //     console.log(getValue);
+            // });
+
+            $('.refine-mobile select').change(refineSearchMobile);
+            function refineSearchMobile() {
+                $(this).each(function () {
+                    var mobileVal = $(this).val();
+                    console.log(mobileVal);
+                    // console.log('sssss');
+                    if ($(this).val()) {
+                        $(this).parent().prev().find($("input[type=hidden]")).val($(this).val());
+                    }
+                });
             }
 
-            if (numberOfChecked == 0) {
-                $(".popup-content").hide();
-            }
 
-        });
+        }
+        if ($('.page-product-listing section').length) productListingFeatures();
+
+
+
+
+        // // $('.dp-form-mobile').on( "click", '.dp-list a', function() {
+        // //     var dataVal = $(this).data("val");
+        // //     var $dpText = $(this).parent().parent().prev().find($('.dp-text'));
+        // //     var $hiddenField = $dpText.next(); 
+        // //     $dpText.html(dataVal);
+        // //     $hiddenField.val(dataVal);
+        // // });
+
 
 
     });
@@ -1286,7 +1424,7 @@ $(window).on('load', function () {
 (function () {
     "use strict";
     $(document).ready(function () {
-    
+
         var getID = "all";
         var dataCategory
 
@@ -1324,12 +1462,12 @@ $(window).on('load', function () {
             var newDivHeight = getDivHeight + 380;
             $('.content-wrapper').css('height', newDivHeight);
         }
-        
+
 
         // get data content to filter
         $('.tab-tiles-wrapper ul li').click(function () {
             getID = $(this).attr('data-btn-category');
-            dataCategory = $('[data-category='+ getID +']')
+            dataCategory = $('[data-category=' + getID + ']')
             checkFilterData();
             //btn add active class
             $(this).parent().find('li.active').removeClass('active');
@@ -1349,22 +1487,22 @@ $(window).on('load', function () {
             } else {
                 //hide all divs and load according to category
                 $('.content-wrapper [data-category]').fadeOut(500);
-              //  $('.content-wrapper [data-category]').not(dataCategory).fadeOut(500);
+                //  $('.content-wrapper [data-category]').not(dataCategory).fadeOut(500);
                 if (dataCategory.length > 12) {
                     loadMoreBtn();
                     dataCategory.slice(0, 12).fadeIn(900);
                 } else {
                     completeLoadMore();
                     dataCategory.slice(0, 12).fadeIn(900);
-                  
+
                 }
                 //hide show scroll top btn
                 if (dataCategory.length < 4) {
                     $(".btn-scroll-top").fadeOut();
-                }else{
+                } else {
                     $(".btn-scroll-top").fadeIn();
                 }
-                
+
             }
         }
 
@@ -1377,13 +1515,13 @@ $(window).on('load', function () {
             if (getID == "all") {
                 $('[data-category]' + ":hidden").slice(0, 4).fadeIn(600).slideDown(900);
                 if ($('[data-category]' + ":hidden").length == 0) {
-                    completeLoadMore();        
+                    completeLoadMore();
                 }
                 if ($('[data-category]' + ":hidden").length != 0) {
                     loadMoreContent();
                 }
             } else {
-                $(dataCategory2 +":hidden").slice(0, 4).fadeIn(600).slideDown(900);
+                $(dataCategory2 + ":hidden").slice(0, 4).fadeIn(600).slideDown(900);
                 if ($(dataCategory2 + ":hidden").length == 0) {
                     completeLoadMore();
                 }
@@ -1394,7 +1532,7 @@ $(window).on('load', function () {
 
         });
 
-        
+
         $(".btn-scroll-top").on('click', function (e) {
             e.preventDefault();
             $('html, body').animate({
@@ -1407,236 +1545,5 @@ $(window).on('load', function () {
 
     });
 })();
-
-
-
-
-
-
-// ----------------------------------------------------------------------
-// test video (KY)
-// ----------------------------------------------------------------------
-(function () {
-    "use strict";
-    $(document).ready(function () {
-
-        var player;
-        function onYouTubeIframeAPIReady() {
-            player = new YT.Player('video-placeholder', {
-                width: 600,
-                height: 400,
-                videoId: 'Xa0Q0J5tOP0',
-                playerVars: {
-                    color: 'white',
-                    playlist: 'taJ60kskkns,FG0fTKAqZ5g'
-                },
-                events: {
-                    onReady: initialize
-                }
-            });
-        }
-
-        function initialize() {
-
-            // Update the controls on load
-            updateTimerDisplay();
-            updateProgressBar();
-
-            // Clear any old interval.
-            clearInterval(time_update_interval);
-
-            // Start interval to update elapsed time display and
-            // the elapsed part of the progress bar every second.
-            time_update_interval = setInterval(function () {
-                updateTimerDisplay();
-                updateProgressBar();
-            }, 1000)
-
-        }
-
-        $('#play').on('click', function () {
-            player.playVideo();
-        });
-
-        $('#pause').on('click', function () {
-            player.pauseVideo();
-        });
-
-
-
-    });
-})();
-
-
-
-
-
-// ----------------------------------------------------------------------
-// test homebanner video (KY)
-// ----------------------------------------------------------------------
-
-(function () {
-    "use strict";
-    $(document).ready(function () {
-
-
-        var slideWrapper = $(".main-slider"),
-            iframes = slideWrapper.find('.embed-player'),
-            lazyImages = slideWrapper.find('.slide-image'),
-            lazyCounter = 0;
-
-        // POST commands to YouTube or Vimeo API
-        function postMessageToPlayer(player, command) {
-            if (player == null || command == null) return;
-            player.contentWindow.postMessage(JSON.stringify(command), "*");
-        }
-
-        // When the slide is changing
-        function playPauseVideo(slick, control) {
-            var currentSlide, slideType, startTime, player, video;
-
-            currentSlide = slick.find(".slick-current");
-            slideType = currentSlide.attr("class").split(" ")[1];
-            player = currentSlide.find("iframe").get(0);
-            startTime = currentSlide.data("video-start");
-
-            if (slideType === "vimeo") {
-                switch (control) {
-                    case "play":
-                        if ((startTime != null && startTime > 0) && !currentSlide.hasClass('started')) {
-                            currentSlide.addClass('started');
-                            postMessageToPlayer(player, {
-                                "method": "setCurrentTime",
-                                "value": startTime
-                            });
-                        }
-                        postMessageToPlayer(player, {
-                            "method": "play",
-                            "value": 1
-                        });
-                        break;
-                    case "pause":
-                        postMessageToPlayer(player, {
-                            "method": "pause",
-                            "value": 1
-                        });
-                        break;
-                }
-            } else if (slideType === "youtube") {
-                switch (control) {
-                    case "play":
-                        postMessageToPlayer(player, {
-                            "event": "command",
-                            "func": "mute"
-                        });
-                        postMessageToPlayer(player, {
-                            "event": "command",
-                            "func": "playVideo"
-                        });
-                        break;
-                    case "pause":
-                        postMessageToPlayer(player, {
-                            "event": "command",
-                            "func": "pauseVideo"
-                        });
-                        break;
-                }
-            } else if (slideType === "video") {
-                video = currentSlide.children("video").get(0);
-                if (video != null) {
-                    if (control === "play") {
-                        video.play();
-                    } else {
-                        video.pause();
-                    }
-                }
-            }
-        }
-
-        // Resize player
-        function resizePlayer(iframes, ratio) {
-            if (!iframes[0]) return;
-            var win = $(".main-slider"),
-                width = win.width(),
-                playerWidth,
-                height = win.height(),
-                playerHeight,
-                ratio = ratio || 16 / 9;
-
-            iframes.each(function () {
-                var current = $(this);
-                if (width / ratio < height) {
-                    playerWidth = Math.ceil(height * ratio);
-                    current.width(playerWidth).height(height).css({
-                        left: (width - playerWidth) / 2,
-                        top: 0
-                    });
-                } else {
-                    playerHeight = Math.ceil(width / ratio);
-                    current.width(width).height(playerHeight).css({
-                        left: 0,
-                        top: (height - playerHeight) / 2
-                    });
-                }
-            });
-        }
-
-        // DOM Ready
-        $(function () {
-            // Initialize
-            slideWrapper.on("init", function (slick) {
-                slick = $(slick.currentTarget);
-                setTimeout(function () {
-                    playPauseVideo(slick, "play");
-                }, 1000);
-                resizePlayer(iframes, 16 / 9);
-            });
-            slideWrapper.on("beforeChange", function (event, slick) {
-                slick = $(slick.$slider);
-                playPauseVideo(slick, "pause");
-            });
-            slideWrapper.on("afterChange", function (event, slick) {
-                slick = $(slick.$slider);
-                playPauseVideo(slick, "play");
-            });
-            slideWrapper.on("lazyLoaded", function (event, slick, image, imageSource) {
-                lazyCounter++;
-                if (lazyCounter === lazyImages.length) {
-                    lazyImages.addClass('show');
-                    // slideWrapper.slick("slickPlay");
-                }
-            });
-
-            //start the slider
-            slideWrapper.slick({
-                // fade:true,
-                autoplaySpeed: 4000,
-                lazyLoad: "progressive",
-                speed: 600,
-                arrows: false,
-                dots: true,
-                cssEase: "cubic-bezier(0.87, 0.03, 0.41, 0.9)"
-            });
-        });
-
-        // Resize event
-        $(window).on("resize.slickVideoPlayer", function () {
-            resizePlayer(iframes, 16 / 9);
-        });
-
-
-
-    });
-})();
-
-
-
-
-
-
-
-
-
-
 
 

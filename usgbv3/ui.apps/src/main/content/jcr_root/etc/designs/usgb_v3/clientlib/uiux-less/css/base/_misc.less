@@ -196,6 +196,24 @@ svg {
   width:55%;
 }
 
+.width-auto {
+  width: auto;
+}
+
+@media (min-width:768px) {
+  .width-sm-full {
+    width: 100%;
+  }
+
+  .width-sm-half{
+    width:55%;
+  }
+
+  .width-sm-auto {
+    width: auto;
+  }
+}
+
 .height-full {
   height: 100%;
 }
@@ -409,6 +427,12 @@ svg {
   align-items: stretch;
 }
 
+.justify-top {
+  -webkit-box-pack: top;
+  -ms-flex-pack: top;
+  justify-content: top;
+}
+
 /*space-evenly doesn't work in IE11 use center instead*/
 .justify-center {
   -webkit-box-pack: center;
@@ -429,6 +453,34 @@ svg {
 
 }
 
+@media only screen and (min-width: @min-bp-sm) {
+
+  .justify-sm-top {
+    -webkit-box-pack: top;
+    -ms-flex-pack: top;
+    justify-content: top;
+  }
+
+  .justify-sm-center {
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+  }
+
+  .justify-sm-end {
+    -webkit-box-pack: end;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+  }
+
+  .justify-sm-space-between {
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between; 
+
+  }
+
+}
 
 .no-wrap {
   -ms-flex-wrap: nowrap;
