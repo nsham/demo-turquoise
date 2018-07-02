@@ -1,5 +1,4 @@
 
-
 // ----------------------------------------------------------------------
 // dropdown
 // ----------------------------------------------------------------------
@@ -28,6 +27,12 @@ background:transparent;
     border:1px solid #d0d0d0;
 }
 
+// overwrite bootstrap
+.open > .dropdown-menu {
+    top: 102%;
+    width: 100.4%;
+}
+
 .dropdown-menu{
     color: @color-dark-grey;
     border-radius: 0px;
@@ -48,7 +53,7 @@ background:transparent;
         transform: translateX(-50%);
     }
     li a{
-            padding:5px 20px;
+            padding:10px 20px;
             &:hover{
             background-color:@color-primary-green;
             color:@color-white;

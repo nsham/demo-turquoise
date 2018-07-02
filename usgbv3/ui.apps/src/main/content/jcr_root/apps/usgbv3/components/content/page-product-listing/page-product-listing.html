@@ -275,7 +275,7 @@
 											<div class="item-inner">
 												<label class=" container-checkbox fs-3">
 													Lightly Texture
-													<input type="checkbox" name="Lightly Texture">
+													<input type="checkbox" name="Lightly Texture" data-checkname="lightly-texture">
 													<span class="checkmark fs-3"></span>
 												</label>
 											</div>
@@ -284,7 +284,7 @@
 											<div class="item-inner">
 												<label class=" container-checkbox fs-3">
 													Lightly
-													<input type="checkbox" name="Lightly">
+													<input type="checkbox" name="Lightly" data-checkname="lightly">
 													<span class="checkmark fs-3"></span>
 												</label>
 											</div>
@@ -293,7 +293,7 @@
 											<div class="item-inner">
 												<label class=" container-checkbox fs-3">
 													Medium Texture
-													<input type="checkbox" name="Mexdium Texture">
+													<input type="checkbox" name="Mexdium Texture" data-checkname="medium-texture">
 													<span class="checkmark fs-3"></span>
 												</label>
 											</div>
@@ -303,7 +303,7 @@
 											<div class="item-inner">
 												<label class=" container-checkbox fs-3">
 													Smooth Texture
-													<input type="checkbox" name="Smooth Texture">
+													<input type="checkbox" name="Smooth Texture" data-checkname="smooth-texture">
 													<span class="checkmark fs-3"></span>
 												</label>
 											</div>
@@ -313,7 +313,7 @@
 											<div class="item-inner">
 												<label class=" container-checkbox fs-3">
 													Medium smooth
-													<input type="checkbox" name="Medium Smooth">
+													<input type="checkbox" name="Medium Smooth" data-checkname="medium-smooth">
 													<span class="checkmark fs-3"></span>
 												</label>
 											</div>
@@ -323,7 +323,7 @@
 											<div class="item-inner">
 												<label class=" container-checkbox fs-3">
 													Medium
-													<input type="checkbox" name="Medium">
+													<input type="checkbox" name="Medium" data-checkname="medium">
 													<span class="checkmark fs-3"></span>
 												</label>
 											</div>
@@ -333,7 +333,7 @@
 											<div class="item-inner">
 												<label class=" container-checkbox fs-3">
 													Hard
-													<input type="checkbox" name="Hard">
+													<input type="checkbox" name="Hard" data-checkname="hard">
 													<span class="checkmark fs-3"></span>
 												</label>
 											</div>
@@ -349,7 +349,7 @@
 											<div class="item-inner">
 												<label class=" container-checkbox fs-3">
 													5mm
-													<input type="checkbox" name="5mm">
+													<input type="checkbox" name="5mm" data-checkname="5mm">
 													<span class="checkmark fs-3"></span>
 												</label>
 											</div>
@@ -359,7 +359,7 @@
 											<div class="item-inner">
 												<label class=" container-checkbox fs-3">
 													4mm
-													<input type="checkbox" name="4mm">
+													<input type="checkbox" name="4mm" data-checkname="4mm">
 													<span class="checkmark fs-3"></span>
 												</label>
 											</div>
@@ -369,7 +369,7 @@
 											<div class="item-inner">
 												<label class=" container-checkbox fs-3">
 													3mm
-													<input type="checkbox" name="3mm">
+													<input type="checkbox" name="3mm" data-checkname="3mm">
 													<span class="checkmark fs-3"></span>
 												</label>
 											</div>
@@ -379,7 +379,7 @@
 											<div class="item-inner">
 												<label class=" container-checkbox fs-3">
 													2mm
-													<input type="checkbox" name="2mm">
+													<input type="checkbox" name="2mm" data-checkname="2mm">
 													<span class="checkmark fs-3"></span>
 												</label>
 											</div>
@@ -389,7 +389,7 @@
 											<div class="item-inner">
 												<label class=" container-checkbox fs-3">
 													1MM
-													<input type="checkbox" name="1MM">
+													<input type="checkbox" name="1MM" data-checkname="1MM">
 													<span class="checkmark fs-3"></span>
 												</label>
 											</div>
@@ -405,7 +405,7 @@
 											<div class="item-inner">
 												<label class=" container-checkbox fs-3">
 													5.00
-													<input type="checkbox" name="5.00">
+													<input type="checkbox" name="5.00" data-checkname="500">
 													<span class="checkmark fs-3"></span>
 												</label>
 											</div>
@@ -415,7 +415,7 @@
 											<div class="item-inner">
 												<label class=" container-checkbox fs-3">
 													4.0
-													<input type="checkbox" name="4.00">
+													<input type="checkbox" name="4.00" data-checkname="400">
 													<span class="checkmark fs-3"></span>
 												</label>
 											</div>
@@ -425,7 +425,7 @@
 											<div class="item-inner">
 												<label class=" container-checkbox fs-3">
 													3.0
-													<input type="checkbox" name="3.00">
+													<input type="checkbox" name="3.00" data-checkname="300">
 													<span class="checkmark fs-3"></span>
 												</label>
 											</div>
@@ -438,10 +438,16 @@
 								<!-- checkbox end -->
 							</div>
 							<hr class="m-no" />
-							<div class="each">
-
-								<div class="search-checkbox-text">
-									<!-- <p class="fs-3 color-grey m-no">Texture</p>
+							<div class="each checkbox-button-wrapper">
+								<p>
+									test
+								</p>
+								<div data-checkbutton="texture"><p class=" m-no">Texture</p></div>
+								<div data-checkbutton="thickness"><p class=" m-no">Thickness</p></div>
+								<div data-checkbutton="lr-rating"><p class=" m-no">LR Rating</p></div>
+							</div>
+							<!-- <div class="search-checkbox-text"> -->
+							<!-- <p class="fs-3 color-grey m-no">Texture</p>
 									<button class="m-xs bold btn btn-xs" type="button">Medium
 										<span class="fs-1 p-left-s">&times;</span>
 									</button>
@@ -450,9 +456,9 @@
 										<span class="fs-1 p-left-s">&times;</span>
 									</button> -->
 
-								</div>
+							<!-- </div> -->
 
-								<!-- <div>
+							<!-- <div>
 									<p class="fs-3 color-grey m-top-s m-bottom-no">LR Rating</p>
 									<button class="m-xs bold btn btn-xs" type="button">0.73
 										<span class="fs-1 p-left-s">&times;</span>
@@ -463,7 +469,7 @@
 									</button>
 								</div> -->
 
-							</div>
+
 
 
 							<div class="each">

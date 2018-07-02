@@ -131,14 +131,24 @@
 
 .video-banner-wrapper{
     
-    //  iframe {
-    //     position: absolute;
-    //     top: 0;
-    //     left: 0;
-    //     width: 100%;
-    //     height: 100%;
-    //     pointer-events: none;
-    //   }
+    
+    iframe { 
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        @media (min-width:320px){
+            height: 220%;
+        }
+        @media (min-width:1000px){
+            height: 350%;
+        }
+        @media (min-width:1300px){
+            height: 520%;
+        }
+    }
 
     video {
         max-width: 100%;
