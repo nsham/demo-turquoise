@@ -14,5 +14,6 @@ slick-lightbox.js
 aos.js
 jquery.fancybox.js
 jquery.waypoints.js
+pagination.js
 main.js
 

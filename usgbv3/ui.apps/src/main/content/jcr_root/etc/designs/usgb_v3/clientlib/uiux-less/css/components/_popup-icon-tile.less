@@ -1,0 +1,88 @@
+.popup-icon-tile{
+
+	.r-icon{
+		position: absolute;
+		bottom: 4%;
+		right: 29%;
+
+		.stacked-default{
+
+			.fa-circle{
+				color: @color-light-grey;
+				text-shadow: 0 0 5px rgba(0,0,0,0.5);
+			}
+			.fa-arrow-right{
+				color:#009b3a;
+				transition: all 0.4s;
+				-moz-transition: all 0.4s;
+				-webkit-transition: all 0.4s;
+			}
+		}
+
+	
+	}
+
+	img{
+		transition: all 0.4s;
+		-moz-transition: all 0.4s;
+		-webkit-transition: all 0.4s;
+	}
+
+	a:hover {
+
+		img {
+			
+			border: 6px solid @color-primary-yellow;
+		}
+
+		.fa-arrow-right{
+			
+			color:@color-primary-yellow !important;
+		}
+
+
+
+	}
+	
+}
+
+.popup-icon-tile-modal{
+	
+	&.modal.in .modal-dialog{
+
+
+		max-width: 300px;
+		margin: 0 auto;
+		justify-content: flex-start;
+
+		box-sizing: content-box;
+
+		padding: 15px;
+		margin-bottom: 25px;
+
+
+
+		@media only screen and (min-width: @min-bp-sm) {
+
+			max-width: none;
+			margin: 0 auto;
+			justify-content: center;
+			box-sizing: content-box;
+			padding: 0;
+
+		}
+
+		.modal-body{
+			padding: 0;
+		}
+
+	}
+
+
+	&.modal .modal-dialog{
+		.modal-body{
+			padding: 0;
+		}
+
+	}
+}

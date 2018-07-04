@@ -993,9 +993,9 @@ $(window).on('load', function () {
         if ($('div[data-product-menu="start"]').length > 0) {
 
             $(window).scroll(function () {
-                var posSub = $(".product-menu").offset().top - 125;
-                var posSubEnd = $(".product-menu-end").offset().top - 300;
-                var posEqual = $(".product-menu").offset().bottom + 50;
+                var posSub = $(".data-scroll-wrapper .product-menu-start").offset().top - 125;
+                var posSubEnd = $(".data-scroll-wrapper .product-menu-end").offset().top - 200;
+                var posEqual = $(".data-scroll-wrapper .product-menu-start").offset().bottom + 50;
 
                 if ($(this).scrollTop() > posSub) {
                     $('.product-menu-sticky').fadeIn(600).slideDown(700);
@@ -1287,6 +1287,8 @@ $(window).on('load', function () {
 
         function productListingFeatures() {
 
+
+            // readjust sticky side bar
             var stickySidebar = new StickySidebar('.make-sticky', {
                 topSpacing: 105,
                 bottomSpacing: 0,
@@ -1298,11 +1300,13 @@ $(window).on('load', function () {
             });
 
 
+            //////COMPARE POPUP start//////
             var countCheck = 0;
             $(".popup-content").hide()
 
-            // detect change for checkbox
+            // detect change for cardcheckbox
             $('.listing-search-content div input[type="checkbox"]').change(function () {
+
                 var numberOfChecked = $('.listing-search-content div input:checkbox:checked').length;
                 $(".popup-content").show();
 
@@ -1318,22 +1322,33 @@ $(window).on('load', function () {
                 }
             });
 
-            // REFINE SEARCH  FEATURE //
+            //////COMPARE POPUP END//////
+
+
+
+
+
+
+            ////// REFINE SEARCH  FEATURE start //////
             var dataSearchVal
-            var dataTitleVal
             var checkname
+            var countCheckboxSelect
+            var checkboxName
+
+            // hide html divs
             $(".checkbox-wrapper").hide();
-            $(".checkbox-button-wrapper").hide();
-            $('.checkbox-button-wrapper').show();
-            // $('[data-checkbutton]').hide();
+            $('.checkbox-button-wrapper').hide();
+            $('[data-checkbutton]').hide();
+
+            // get value of ul dropdown click function wraps all functions
             $('.refine-search').on("click", '.refine-list a', function () {
                 stickySidebar.updateSticky();
+                $('.checkbox-button-wrapper').show();
 
+                // get value of dropdown ul
                 dataSearchVal = $(this).data("search-val");
-                dataTitleVal = $(this).data("val");
-                console.log(" div - " + dataSearchVal);
 
-                // target differnt dropdown
+                // target different dropdown
                 if (dataSearchVal = dataSearchVal) {
                     $(".checkbox-wrapper").hide();
                     $("." + dataSearchVal + "-wrapper").show();
@@ -1342,72 +1357,85 @@ $(window).on('load', function () {
                 }
 
 
-                // append checkbox to button 
+                // function check data changes in checkbox to button 
                 $('.' + dataSearchVal + '-wrapper div input[type="checkbox"]').change(function () {
                     stickySidebar.updateSticky();
 
-                    var checkboxName = $(this).attr("name");
+                    dataSearchVal = $('.' + dataSearchVal + '-wrapper').data("checkbox-wrapper");
+                    checkboxName = $(this).attr("name");
                     // checkname of the checkbox to pass to button
                     checkname = $(this).data("checkname");
-                    //console.log("checkboxName" + checkboxName)
+                    //count how many checkbox is checked
+                    countCheckboxSelect = $('.' + dataSearchVal + '-wrapper div input:checkbox:checked').length;
+                    appendCheckboxToButton();
 
+                });
 
-                    //title
-                    // var checkSelectionCount = $('.' + dataSearchVal + '-wrapper div input:checkbox:checked').length;
-                    //  console.log('see=' + checkSelectionCount)
-
-                    var checkSelectionCount = $('.' + dataSearchVal + '-wrapper div input:checkbox:checked').length;
-                    // console.log(checkSelectionCount);
-                    // selections
-                    if ($(this).is(':checked')) {
-                        //  $('[data-checkbutton=' + dataSearchVal+']').append("<p class='m-no'>"+dataTitleVal+"</p>");
-                        $('[data-checkbutton=' + dataSearchVal + ']').append("<button data-selection=" + checkname + " class='m-xs bold btn btn-xs' type='button'>" + checkboxName + "<span class='btn-close fs-1 p-left-s'>&times;</span></button>");
-                        console.log(checkname)
-
-                    } else {
+                // append checkbox to button 
+                function appendCheckboxToButton() {
+                    // pass checked to button
+                    console.log("checbox data= " + dataSearchVal)
+                    if ($('.' + dataSearchVal + '-wrapper input[data-checkname=' + checkname + ']').is(':checked')) {
+                        $('[data-checkbutton=' + dataSearchVal + ']').append("<div data-selection=" + checkname + " class='bg-grey m-xs bold btn btn-xs'>" + checkboxName + "<span class='btn-close fs-1 p-left-s'>&times;</span></div>");
+                        // remove duplicates
+                        if ($('[data-selection=' + checkname + ']').length > 1) {
+                            $('[data-selection=' + checkname + ']').last().remove();
+                        }
+                    }
+                    else {
                         if ($('[data-checkbutton=' + dataSearchVal + ']').has('[data-selection =' + checkname + ']')) {
                             $('[data-selection=' + checkname + ']').remove();
+                            $('.' + dataSearchVal + '-wrapper input[data-checkname=' + checkname + ']').attr('checked', false)
                         }
                     }
 
+                    // hide/show title
+                    if (countCheckboxSelect < 1) {
+                        $('[data-checkbutton=' + dataSearchVal + ']').hide();
+                    } else {
+                        $('[data-checkbutton=' + dataSearchVal + ']').show();
+                    }
+                }
 
-                    //console.log($('input[name="locationthemes"]:checked').serialize());
 
-                    $('.' + dataSearchVal + '-wrapper div input type=checkbox:checked').each(function () {
-                    console.log(checkname);
-                    });
+                //target selected buttons to remove and uncheck checkbox
+                $('body').on("click", "[data-selection]", function () {
+                    stickySidebar.updateSticky();
+                    // remove the target button     
+                    checkname = $(this).data("selection")
+                    $('[data-selection=' + checkname + ']').remove();
+                    $("[data-checkname="+ checkname +"]").attr('checked', false);
+                  //  var test = $('[data-checkbutton] [data-selection=' + checkname + ']').parent().data('checkbutton')
+                    //console.log(test)
+
+                   // console.log( $("[data-checkname="+ checkname +"]") );
+                   
 
 
+                  //  $('.' + dataSearchVal + '-wrapper input[data-checkname=' + checkname + ']').removeAttr('checked');
+                  //  countCheckboxSelect = $('.' + dataSearchVal + '-wrapper div input:checkbox:checked').length;
+                   countSelection();
+                  //  console.log("currDATA- "+ $("[data-selection=hard]").parent().data("checkbutton"));
+                  //  console.log("aaaaaa")
                 });
-                // append checkbox to button end
 
 
-
-
-
-
-
+                function countSelection() {
+                    //count again current checkbox
+                    countCheckboxSelect = $('.' + dataSearchVal + '-wrapper div input:checkbox:checked').length;
+                    console.log(countCheckboxSelect)
+                    if (countCheckboxSelect < 1) {
+                        $('[data-checkbutton=' + dataSearchVal + ']').hide();
+                    } else {
+                        $('[data-checkbutton=' + dataSearchVal + ']').show();
+                    }
+                }
 
             });
             // REFINE SEARCH  FEATURE end//
 
-
-            
-
-
-
         }
         if ($('.page-product-listing section').length) productListingFeatures();
-
-
-
-        // // $('.dp-form-mobile').on( "click", '.dp-list a', function() {
-        // //     var dataVal = $(this).data("val");
-        // //     var $dpText = $(this).parent().parent().prev().find($('.dp-text'));
-        // //     var $hiddenField = $dpText.next(); 
-        // //     $dpText.html(dataVal);
-        // //     $hiddenField.val(dataVal);
-        // // });
 
 
 
