@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <workspaceFilter version="1.0">
-    <filter root="/etc/designs/usgb_v3/clientlib/uiux-less-ct" />
-    <filter root="/etc/designs/usgb_v3/clientlib/uiux-less-sherif" />
-    <filter root="/apps/usgbv3/components/content/page-order-sample-listing" />
-    <filter root="/apps/usgbv3/components/structure/mastertemplate_content/partials/headlibs.html" />
-    
+    <filter root="/apps/usgbv3/components/content/page-leadership" />
+   
 </workspaceFilter>
