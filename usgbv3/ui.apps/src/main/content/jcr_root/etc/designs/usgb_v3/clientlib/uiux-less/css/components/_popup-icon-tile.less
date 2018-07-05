@@ -1,9 +1,29 @@
 .popup-icon-tile{
 
+	.back-image{
+		width: 200px;
+		height: 200px;
+		margin: 0 auto;
+
+		transition: all 0.4s;
+		-moz-transition: all 0.4s;
+		-webkit-transition: all 0.4s;
+
+		@media only screen and (min-width: @min-bp-sm) {
+
+
+		}
+	}
+
 	.r-icon{
 		position: absolute;
-		bottom: 4%;
-		right: 29%;
+		z-index: 1;
+		width: 34px;
+		height: 34px;
+		right: 0;
+		left: 120px;
+		bottom: 0px;
+		margin: auto;
 
 		.stacked-default{
 
@@ -22,15 +42,11 @@
 	
 	}
 
-	img{
-		transition: all 0.4s;
-		-moz-transition: all 0.4s;
-		-webkit-transition: all 0.4s;
-	}
+	
 
 	a:hover {
 
-		img {
+		.back-image {
 			
 			border: 6px solid @color-primary-yellow;
 		}
@@ -39,8 +55,6 @@
 			
 			color:@color-primary-yellow !important;
 		}
-
-
 
 	}
 	

@@ -237,6 +237,65 @@
 
 
 
+.box-type-5{
+
+    .title{
+
+        -webkit-transition: all 0.5s;
+        -o-transition: all 0.5s;
+        transition: all 0.5s;
+        color: white;
+        width: 100%;
+
+        >*{
+            display: block;
+        }
+
+    }
+
+    .content{
+
+        position: absolute;
+        width: 100%;
+        bottom: 0;
+        background-color: #009b3a;
+        -webkit-transition: all 0.5s;
+        -o-transition: all 0.5s;
+        transition: all 0.5s;
+
+    }
+
+    .description{
+
+        -webkit-transition: all 1s;
+        -o-transition: all 1s;
+        transition: all 1s;
+        /* height: 0px; */
+        overflow: hidden;
+        max-height: 0;
+
+    }
+
+    &:hover{
+
+        .title{
+            color:#353535;
+            // width: 0;
+
+        }
+
+        .content{
+            background: #fed100;
+        }
+
+        .description{
+            /* height: 100px; */
+            max-height: 300px;
+        }
+
+    }
+
+}
 
 
 

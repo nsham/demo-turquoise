@@ -1278,9 +1278,6 @@
 <script>
     $(document).ready(function () {
 
-        
-
-
 
        
         //object
@@ -1293,7 +1290,7 @@
         // getAllUrlParams('http://test.com/?a=abc').a; // 'abc'
 
 
-        function searchFilter(){ 
+        function allFilter(){ 
 
             this.init = function(){
                 this.checkBasedOnURL();
@@ -1385,65 +1382,57 @@
         };
 
 
-        var instance1 = new searchFilter();
-        instance1.init();
+        var searchFilter = new allFilter();
+        searchFilter.init();
 
 
 
-        // localStorage.setItem("lastname", "Smssith");
-        // localStorage.setItem("a", "vin");
-        // localStorage.setItem("ac", "sssss");
+        // local storage
+
+        // var arrk = [];
+        // var arrv = [];
+
+        // $('.checkbox-wrapper input').change(function() {
 
 
+        //     // var obj = {};
+        //     // obj["filter"] = {
+        //     //     name: $(this).attr('name'),
+        //     //     value: $(this).is(':checked') 
+        //     // };
 
 
-
-
-
-        var arrk = [];
-        var arrv = [];
-
-        $('.checkbox-wrapper input').change(function() {
-
-
-            // var obj = {};
-            // obj["filter"] = {
-            //     name: $(this).attr('name'),
-            //     value: $(this).is(':checked') 
-            // };
-
-
-            //console.log(obj);
+        //     //console.log(obj);
 
 
 
             
-            console.log( $.inArray( $(this).attr('name'), arrk ) );//if no match -1, if match return index number
+        //     console.log( $.inArray( $(this).attr('name'), arrk ) );//if no match -1, if match return index number
 
-            if( $.inArray( $(this).attr('name'), arrk ) === -1 ){//if not exist, push
-                console.log(arrk);
-                arrk.push( $(this).attr('name') );
-                arrv.push( $(this).is(':checked') );
-            }else{
-                arrk[$.inArray( $(this).attr('name'), arrk )] = $(this).attr('name'); //update val
-            }
+        //     if( $.inArray( $(this).attr('name'), arrk ) === -1 ){//if not exist, push
+        //         console.log(arrk);
+        //         arrk.push( $(this).attr('name') );
+        //         arrv.push( $(this).is(':checked') );
+        //     }else{
+        //         arrk[$.inArray( $(this).attr('name'), arrk )] = $(this).attr('name'); //update val
+        //     }
             
            
 
 
-             //console.log(arrv);
+        //      //console.log(arrv);
 
 
-            // if($(this).is(":checked")) {
-            //     var returnVal = confirm("Are you sure?");
-            //     $(this).attr("checked", returnVal);
-            // }
+        //     // if($(this).is(":checked")) {
+        //     //     var returnVal = confirm("Are you sure?");
+        //     //     $(this).attr("checked", returnVal);
+        //     // }
 
-            // $('#textbox1').val($(this).is(':checked'));
+        //     // $('#textbox1').val($(this).is(':checked'));
             
-            //localStorage.setItem( $(this).attr('name'), $(this).is(':checked') );
+        //     //localStorage.setItem( $(this).attr('name'), $(this).is(':checked') );
 
-        });
+        // });
 
 
     });
