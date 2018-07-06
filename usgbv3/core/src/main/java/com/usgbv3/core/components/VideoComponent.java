@@ -1,0 +1,170 @@
+package com.usgbv3.core.components;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import javax.jcr.Node;
+import javax.jcr.NodeIterator;
+import javax.jcr.RepositoryException;
+
+import org.apache.sling.api.resource.Resource;
+import org.apache.sling.api.resource.ValueMap;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.adobe.cq.sightly.WCMUsePojo;
+import com.day.cq.dam.api.Asset;
+import com.day.cq.dam.api.AssetManager;
+import com.day.cq.dam.api.Rendition;
+import com.day.cq.wcm.api.Page;
+import com.usgbv3.core.models.FeaturedProduct;
+
+/**
+ * @author Prashanth
+ * This class would be called Featured Product component to compute the components logic
+ * Called by:/apps/usgb/components/content/featuredproducts/featuredproducts.html
+ * Revision: 
+ * 			Date 					Modified by 					Reason
+ *
+ */
+public class VideoComponent extends WCMUsePojo {
+	private static final Logger LOG = LoggerFactory.getLogger(VideoComponent.class);
+	
+	final String youTubeUrlRegEx = "^(https?)?(://)?(www.)?(m.)?((youtube.com)|(youtu.be))/";
+    final String[] videoIdRegex = { "\\?vi?=([^&]*)","watch\\?.*v=([^&]*)", "(?:embed|vi?)/([^/?]*)", "^([A-Za-z0-9\\-]*)"};
+    
+	private String thumbnail;
+	private String videoMP4;
+	private String videoOGG;
+	private String componentId;
+	private String error;
+
+	public String getThumbnail() {
+		return thumbnail;
+	}
+
+	public void setThumbnail(String thumbnail) {
+		this.thumbnail = thumbnail;
+	}
+	
+	public String getVideoMP4() {
+		return videoMP4;
+	}
+
+	public void setVideoMP4(String videoMP4) {
+		this.videoMP4 = videoMP4;
+	}
+
+	public String getVideoOGG() {
+		return videoOGG;
+	}
+
+	public void setVideoOGG(String videoOGG) {
+		this.videoOGG = videoOGG;
+	}
+
+	public String getComponentId() {
+		return componentId;
+	}
+
+	public void setComponentId(String componentId) {
+		this.componentId = componentId;
+	}
+
+	public String getError() {
+		return error;
+	}
+
+	public void setError(String error) {
+		this.error = error;
+	}
+
+	@Override
+	public void activate() throws Exception {		
+		
+		//LOG.info("defaultInherit:");
+		String videoType = (String) getProperties().get("videoType");
+		String damThumb = (String) getProperties().get("thumbnail");
+		componentId = "vid_" + String.valueOf(getProperties().hashCode());
+		
+		if(damThumb != null && !damThumb.isEmpty()) {
+			thumbnail = damThumb;
+			
+		}else {
+
+			if("youtube".equalsIgnoreCase(videoType)) {
+				
+				String youtubeUrl = (String) getProperties().get("youtube");
+				String youtubeId = extractVideoIdFromUrl(youtubeUrl);
+				thumbnail = "http://img.youtube.com/vi/" + youtubeId + "/maxresdefault.jpg";
+				
+			}else {
+				try {
+					String videoDam = (String) getProperties().get("videoDam");
+					if(videoDam != null && !videoDam.isEmpty()) {
+
+						Resource res = getResourceResolver().getResource(videoDam);
+						Asset asset = res.adaptTo(Asset.class);
+						
+						//get the video thumbnail
+						Rendition renditionThumnail = asset.getRendition("cq5dam.thumbnail.319.319.png");
+						thumbnail = renditionThumnail.getPath();
+						
+						//get the MP4 video
+						Rendition renditionMP4 = asset.getRendition("cq5dam.video.iehq.mp4");
+						videoMP4 = renditionMP4.getPath();
+						
+						//get the OGG video
+						Rendition renditionOGG = asset.getRendition("cq5dam.video.firefoxhq.ogg");
+						videoOGG = renditionOGG.getPath();
+						
+					}else {
+						thumbnail = "";
+						videoMP4 = "";
+						videoOGG = "";
+					}
+					
+				}catch (Exception e) {
+					error = e.getMessage();
+				}
+				
+				
+			}
+			
+		}
+		
+		
+		
+		
+
+	}
+	
+	public String extractVideoIdFromUrl(String url) {
+        String youTubeLinkWithoutProtocolAndDomain = youTubeLinkWithoutProtocolAndDomain(url);
+
+        for(String regex : videoIdRegex) {
+            Pattern compiledPattern = Pattern.compile(regex);
+            Matcher matcher = compiledPattern.matcher(youTubeLinkWithoutProtocolAndDomain);
+
+            if(matcher.find()){
+                return matcher.group(1);
+            }
+        }
+
+        return null;
+    }
+
+    private String youTubeLinkWithoutProtocolAndDomain(String url) {
+        Pattern compiledPattern = Pattern.compile(youTubeUrlRegEx);
+        Matcher matcher = compiledPattern.matcher(url);
+
+        if(matcher.find()){
+            return url.replace(matcher.group(), "");
+        }
+        return url;
+    }
+    
+
+}
