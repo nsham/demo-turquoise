@@ -1365,10 +1365,14 @@ $(window).on('load', function () {
 
             var addNum = 0;
             // detect change for cardcheckbox
-            $('.listing-search-content div input[type="checkbox"]').click(function () {
+            $('.listing-search-content .container-checkbox input[type="checkbox"]').change(function () {
+
+               var test = $(this).attr("[data-title-text]")
+                console.log(test)
+
 
                 var numberOfChecked = $('.listing-search-content div input:checkbox:checked').length;
-                //console.log(numberOfChecked)
+                console.log(numberOfChecked)
                 $(".popup-content").show();
                
                 if (numberOfChecked >= 4) {
@@ -1379,14 +1383,7 @@ $(window).on('load', function () {
                     $(".popup-content").hide();
                 }
  
-                var getImg = $(".listing-search-content div img").attr("src");
-                var getText = $(this).parent().text();
-                // console.log(getImg)
-                // console.log(getText)
-                // $(".popup-content .img-content").append("<img src="+getImg" alt="">");
-
-               // $("[data-content-wrapper="+numberOfChecked+"]").show();
-
+              
             });
 
             //////COMPARE POPUP END//////
