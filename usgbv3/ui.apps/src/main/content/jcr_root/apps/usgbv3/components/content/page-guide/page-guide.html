@@ -1273,16 +1273,17 @@
         </div>
     </section>
 
-    <section class="p-vertical-5xl">
+    <section id="video-pop-up-inline" class="p-vertical-5xl">
         <div class="container">
             <div class="row">
                 <div class="col-xs-12">
-                    <h2>Video Pop Up</h2>
+                    <h2>Video Pop Up & inline video</h2>
                     <hr>
 
                     <div class="row">
-                        
 
+
+                        <!-- pop up html5 video -->
                         <div class="col-xs-12 col-sm-4 p-md-bottom-m p-md-left-m p-md-right-m p-md-top-m p-no">
                             <button class="cta-video-popup p-no" style="background:transparent url('/content/dam/USGBoral/Global/Website/Images/component/allsample/bg-banner-tile-3.jpg') center center no-repeat; background-size:cover;" type="button" data-toggle="modal" data-target="#modal-video-002" data-backdrop="static" data-keyboard="false" data-video-type="html5">
                                 <span class="bg-overlay"></span>
@@ -1323,10 +1324,11 @@
                             </div>
                             <!-- END of Modal -->
                         </div>
+                        <!-- pop up html5 video -->
 
-
+                        <!-- pop up youtube video -->
                         <div class="col-xs-12 col-sm-4 p-md-bottom-m p-md-left-m p-md-right-m p-md-top-m p-no">
-                            <button class="cta-video-popup p-no" style="background:transparent url('/content/dam/USGBoral/Global/Website/Images/component/allsample/bg-banner-tile-3.jpg') center center no-repeat; background-size:cover;" type="button" data-toggle="modal" data-target="#modal-video-003" data-backdrop="static" data-keyboard="false" data-video-type="html5">
+                            <button class="cta-video-popup p-no" style="background:transparent url('/content/dam/USGBoral/Global/Website/Images/component/allsample/bg-banner-tile-3.jpg') center center no-repeat; background-size:cover;" type="button" data-toggle="modal" data-target="#modal-video-003" data-backdrop="static" data-keyboard="false" data-video-type="youtube">
                                 <span class="bg-overlay"></span>
                                 <div class="box-size-m-2">
                                     <div class="center va-middle">
@@ -1338,7 +1340,7 @@
                                 </div>
                             </button>
                             <!-- Modal -->
-                            <div id="modal-video-003" class="modal modal-video-popup" role="dialog" data-video="html5" style="display: none;">
+                            <div id="modal-video-003" class="modal modal-video-popup" role="dialog" data-video="youtube" style="display: none;">
                                 <div class="modal-dialog">
                                     <!-- Modal content-->
                                     <div class="modal-content">
@@ -1347,8 +1349,8 @@
                                             <h6 class="modal-title bg-green">Video Title #002</h6>
                                         </div>
                                         <div class="modal-body clearfix"> 
-                                            <!-- Youtube Embed Video -->
-                                            <iframe class="modal-video-elem" width="560" height="315" src="https://www.youtube.com/embed/47vJhiwchKU?rel=0&enablejsapi=1" frameborder="0" allowfullscreen></iframe>
+                                            <!-- Youtube Embed Video --> 
+                                            <iframe class="modal-video-elem" width="560" height="315" src="https://www.youtube.com/embed/YE7VzlLtp-4?rel=0&enablejsapi=1" frameborder="0" allowfullscreen></iframe>
                                             <!-- END of Youtube Embed Video -->
                                         </div>
                                     </div>
@@ -1356,10 +1358,13 @@
                             </div>
                             <!-- END of Modal -->
                         </div>
+                        <!-- end pop up youtube video -->
 
+
+                        <!-- inline html5 video -->
                         <div class="col-xs-12 col-sm-6">
 
-                            <div class="inline-video">
+                            <div class="inline-video" data-video="html5">
 
                                 <button class="cta-video-inline p-no" style="background:transparent url('/content/dam/USGBoral/Global/Website/Images/component/allsample/bg-banner-tile-3.jpg') center center no-repeat; background-size:cover;" type="button">
                                     <span class="bg-overlay"></span>
@@ -1382,21 +1387,33 @@
 
                             </div>
                         </div>
+                        <!-- end inline html5 video -->
 
+                        <!-- inline youtube video -->
+                        <div class="col-xs-12 col-sm-6">
 
-                       <!--  <div class="col-xs-6">
+                            <div class="inline-video" data-video="youtube">
 
-                            
-                            <div class="c-video-popup m-bottom-m">
-                                <a data-fancybox="" href="https://www.youtube.com/watch?v=Ous3ffTXRFw">
-                                    <span class="ico-play-video color-white fa fa-play-circle"></span>
-                                    <img src="https://dummyimage.com/910x500/9e599e/35b1b8&text=+" alt="">
-                                </a>
+                                <button class="cta-video-inline p-no" style="background:transparent url('/content/dam/USGBoral/Global/Website/Images/component/allsample/bg-banner-tile-3.jpg') center center no-repeat; background-size:cover;" type="button">
+                                    <span class="bg-overlay"></span>
+                                    <div class="box-size-m-2">
+                                        <div class="center va-middle">
+                                            <span class="ico-play-video color-white fa fa-play-circle"></span>
+                                            <div class="m-top-m btn btn-top-border btn-light btn btn-top-border btn-light">Play Video
+                                                <span class="glyphicon glyphicon-menu-right"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </button>
+
+                                <div class="video">
+                                    <div id="ranID" class="YouTubeVideoPlayer" data-youtubeId="aqz-KE-bpKQ"></div>
+                                </div>
+
                             </div>
-            
-
-                        </div> -->
-
+                        </div>
+                        <!-- end inline youtube video -->
+ 
                
                     </div>
 

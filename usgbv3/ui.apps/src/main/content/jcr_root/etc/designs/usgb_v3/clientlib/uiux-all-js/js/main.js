@@ -36,10 +36,71 @@ function defaultScrollUpdate(element) {
 };
 /*end defaultScrollUpdate====================*/
 
+/*load script before body====================*/
+function hookHeadScript(url, async, callback){
+
+if( document.getElementsByTagName('html')[0].innerHTML.indexOf(url) === -1 )
+    {
+        var script = document.createElement("script")
+        script.type = "text/javascript";
+        script.onload = callback;
+        script.src = url;
+        if( async === true ){
+            script.setAttribute("async", "");
+        }
+        document.getElementsByTagName("head")[0].appendChild(script);
+    }
+}
+/*end load script before body====================*/
+
+/*load youtube video via api====================*/
+function onYouTubeIframeAPIReady(name, id)
+{
+   // console.log(name);
+   // console.log(id);
+    var player;
+    player = new YT.Player(name,
+    {
+          videoId: id, 
+          width: 560, 
+          height: 316,   
+          playerVars:
+          {
+              autoplay: 0, 
+              controls: 1,
+              showinfo: 1, 
+              modestbranding: 1,
+              loop: 0, 
+              fs: 1,
+              cc_load_policy: 0, 
+              autohide: 0 
+          },
+          events:
+          {
+              onReady: function(e)
+              {
+                //e.target.mute();//chrome need to set to mute to autoplay
+                e.target.playVideo();
+              }
+          }
+    });
+}
+/*end load youtube video via api====================*/
+
 // ----------------------------------------------------------------------
 //END Default reusable functions
 // ----------------------------------------------------------------------
 
+// ----------------------------------------------------------------------
+//Default script to append
+// ----------------------------------------------------------------------
+hookHeadScript("https://www.youtube.com/iframe_api",true, function()
+{ 
+    console.log('youtbe iframe api loaded');
+});
+// ----------------------------------------------------------------------
+//END Default script to append
+// ----------------------------------------------------------------------
 
 // ----------------------------------------------------------------------
 // Component: Hero Banner
@@ -62,7 +123,19 @@ function defaultScrollUpdate(element) {
 
 })();
 
+// ----------------------------------------------------------------------
+// Social media buttons
+// ----------------------------------------------------------------------
+(function () {
+    "use strict";
 
+    $('.social-media-pop-up').click(function(e) {
+        e.preventDefault();
+       window.open($(this).attr('href'), 'shareWindow', 'height=450, width=550, toolbar=0, location=0, menubar=0, directories=0, scrollbars=0');
+       return false;
+    });
+
+})();
 
 // ----------------------------------------------------------------------
 // Component: CTA Video Popup
@@ -74,7 +147,7 @@ function defaultScrollUpdate(element) {
             $('.cta-video-popup').on('click', function () {
                 switch ($(this).data('video-type')) {
                     case "youtube":
-                        togglePopupYoutubeVideo();
+                        togglePopupYoutubeVideo('show', this);
                         $(this).parent().find('.modal').attr('data-video', 'youtube');
                         break;
 
@@ -86,10 +159,10 @@ function defaultScrollUpdate(element) {
             });
 
 
-            $('.modal-video-popup .close').on('click', function () {
+            $('.modal-video-popup .close').on('click', function (e) {
                 switch ($(this).closest('.modal').data('video')) {
                     case "youtube":
-                        togglePopupYoutubeVideo('hide');
+                        togglePopupYoutubeVideo('hide', this);
                         break;
 
                     case "html5":
@@ -109,19 +182,140 @@ function defaultScrollUpdate(element) {
         }
     }
 
-    function togglePopupYoutubeVideo(state) {
+    function togglePopupYoutubeVideo(state, element) {
+
+        //autoplay video not supported unless set to mute by default
+        //if state == 'hide', hide. Else: show video
+
+        if (state == "hide") {
+
+            var youtubevideo = $(element).next().find($('.modal-video-elem'));
+
+            //pause/stop videos using iframe only, for more customization use youtube api instead
+            $('iframe.modal-video-elem').each(function(){
+              this.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*')
+            });
+
+        }
+
         // if state == 'hide', hide. Else: show video
-        var func;
-        var div = document.getElementById("modal-video");
-        var iframe = div.getElementsByTagName("iframe")[0].contentWindow;
-        div.style.display = state == 'hide' ? 'none' : '';
-        func = state == 'hide' ? 'pauseVideo' : 'playVideo';
-        iframe.postMessage('{"event":"command","func":"' + func + '","args":""}', '*');
+        // var func;
+        // var div = document.getElementById("modal-video");
+        // var iframe = div.getElementsByTagName("iframe")[0].contentWindow;
+        // div.style.display = state == 'hide' ? 'none' : '';
+        // func = state == 'hide' ? 'pauseVideo' : 'playVideo';
+        // iframe.postMessage('{"event":"command","func":"' + func + '","args":""}', '*');
     }
 
 })();
 
+// ----------------------------------------------------------------------
+// Inline videos
+// ----------------------------------------------------------------------
+(function () {
+    "use strict";
 
+    $(document).ready(function () {
+
+        $('.inline-video').on("click", function () {
+            
+            var $this = $(this);
+            var thumbs = $this.children('.cta-video-inline');
+            var video = $this.find('video');
+
+            if( $this.data('video') === "html5" )
+            {
+
+
+
+                //retain image for video responsiveness
+                thumbs.css({ "z-index": -1 });
+                video.css({ "z-index": 1 });
+                video[0].play();
+
+            }else if( $this.data('video') === "youtube" )
+                {
+
+                    var videoWrapper = $this.find('.video');
+                    var video = $this.find('.YouTubeVideoPlayer');
+                    var videoIdName = video.attr('id');
+                    //YT.Player name parameter must be an ID not class
+                    //var videoClassName = video.attr('class');
+                    var videoId = video.attr('data-youtubeId');
+
+                    // $('.inline-video').find('.video').append('ssss');
+                    // console.log(videoWrapper);
+                    //videoWrapper.append('ssss');
+
+                    onYouTubeIframeAPIReady(videoIdName, videoId);             
+
+                    //retain image for video responsiveness
+                    thumbs.css({ "z-index": -1 });
+                    video.css({ "z-index": 1 });
+              
+
+                }
+            
+
+
+
+        });
+
+
+
+        // <script async src="https://www.youtube.com/iframe_api"></script>
+        // <script>
+        //  function onYouTubeIframeAPIReady() {
+        //   var player;
+        //   player = new YT.Player('muteYouTubeVideoPlayer', {
+        //     videoId: '5DEdR5lqnDE', // YouTube Video ID
+        //     width: 560,               // Player width (in px)
+        //     height: 316,              // Player height (in px)
+        //     playerVars: {
+        //       //playlist: '5DEdR5lqnDE', //must be included for autoplay to work
+        //       //list:'5DEdR5lqnDE', //id of listType
+        //       //listType:'search', // search, user upload and playlist base on the list's id
+        //       autoplay: 0,        // Auto-play the video on load
+        //       controls: 1,        // Show pause/play buttons in player
+        //       showinfo: 1,        // Hide the video title
+        //       modestbranding: 1,  // Hide the Youtube Logo
+        //       loop: 0,            // Run the video in a loop
+        //       fs: 1,              // fullscreen
+        //       cc_load_policy: 0, // Hide closed captions
+        //       autohide: 0         // Hide video controls when playing
+        //     },
+        //     events: {
+        //       onReady: function(e) {
+        //         //e.target.mute();//chrome need to set to mute to autoplay
+        //         //e.target.playVideo();
+                
+                
+
+                
+                
+        //           // bind events
+        //   var playButton = document.getElementById("vv");
+        //   playButton.addEventListener("click", function() {
+        //     player.playVideo();
+        //   });
+                
+                        
+          
+                
+                
+        //       }
+        //     }
+        //   });
+        //  }
+
+        //  // Written by @labnol 
+        // </script>
+
+
+
+    })
+
+})();
 
 // ----------------------------------------------------------------------
 // CTA Hover Slideup Tile
@@ -916,30 +1110,6 @@ function defaultScrollUpdate(element) {
 
 })();
 
-
-// ----------------------------------------------------------------------
-// Inline video
-// ----------------------------------------------------------------------
-(function () {
-    "use strict";
-
-    $(document).ready(function () {
-
-        $('.inline-video').on("click", function () {
-
-            var thumbs = $(this).children('.cta-video-inline');
-            var video = $(this).children('.video');
-
-            thumbs.css({ "z-index": -1 });
-            video.css({ "z-index": 1 });
-            video[0].play();
-
-
-        });
-
-    })
-
-})();
 
 // ----------------------------------------------------------------------
 // Custom dropdown submission
