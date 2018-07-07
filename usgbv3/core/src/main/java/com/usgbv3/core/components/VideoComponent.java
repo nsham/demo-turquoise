@@ -21,14 +21,7 @@ import com.day.cq.dam.api.Rendition;
 import com.day.cq.wcm.api.Page;
 import com.usgbv3.core.models.FeaturedProduct;
 
-/**
- * @author Prashanth
- * This class would be called Featured Product component to compute the components logic
- * Called by:/apps/usgb/components/content/featuredproducts/featuredproducts.html
- * Revision: 
- * 			Date 					Modified by 					Reason
- *
- */
+
 public class VideoComponent extends WCMUsePojo {
 	private static final Logger LOG = LoggerFactory.getLogger(VideoComponent.class);
 	

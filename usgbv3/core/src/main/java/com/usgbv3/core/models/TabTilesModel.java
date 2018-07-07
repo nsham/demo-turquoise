@@ -1,9 +1,6 @@
 package com.usgbv3.core.models;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import com.day.cq.tagging.Tag;
 import com.day.cq.wcm.api.Page;
 
 public class TabTilesModel {
