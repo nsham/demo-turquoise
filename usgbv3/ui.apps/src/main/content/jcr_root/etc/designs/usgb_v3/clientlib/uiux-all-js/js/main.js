@@ -1341,10 +1341,7 @@ $(window).on('load', function () {
     "use strict";
     $(document).ready(function () {
 
-
         function productListingFeatures() {
-
-
             // readjust sticky side bar
             var stickySidebar = new StickySidebar('.make-sticky', {
                 topSpacing: 105,
@@ -1356,38 +1353,85 @@ $(window).on('load', function () {
                 minWidth: 0
             });
 
-
             //////COMPARE POPUP start//////
-            var countCheck = 0;
-            $(".popup-content").show()
+            $(".popup-content").hide()
             $(".popup-content .content-wrapper").hide();
-            $(".popup-content .btn-compare").hide();
+            $(".compare-popup .btn-compare").hide();
+            $(".compare-popup .btn-menu-down").hide();
 
-            var addNum = 0;
+            var getCard
+            var inputVal
+            var numberOfChecked
             // detect change for cardcheckbox
             $('.listing-search-content .container-checkbox input[type="checkbox"]').change(function () {
+                //data-title-value is card wrapper val
+                //data-input-value is checkbox input val
+                //data-content-title is popup content title
+                //data-content-value is content of title 
+                getCard = $(this);
+                //get html data-text-value from input
+                inputVal = getCard.data("input-value");
+                //console.log("CURRinputVal = " + inputVal)
+                var getIMG = $("[data-title-value=" + inputVal + "]  img").attr("src");
+                var getTitle = $("[data-title-value=" + inputVal + "]  .title").text();
 
-               var test = $(this).attr("[data-title-text]")
-                console.log(test)
+                if ($('.listing-search-content .container-checkbox input[data-input-value=' + inputVal + ']').is(':checked')) {
+                    //append  to popup
+                    $(".popup-content").append("<div class='each content-wrapper' data-content-title=" + inputVal + "><div class='left img-content'><img src=" + getIMG + "></div><div class='right title-content'data-content-value=" + inputVal + ">" + getTitle + "</div><button class='close-btn-box'><span class='bold'>x</span></button><hr class='col-xs-12 m-no m-top-m'></div>")
 
+                    if ($(".compare-popup .title").hasClass("selected")) {
+                        $(".compare-popup .title").removeClass("selected");
+                    }
+                }
+                else {
+                    //check popup if has the value
+                    if ($("[data-content-title=" + inputVal + "]").has("[data-content-value=" + inputVal + "]")) {
+                        $("[data-content-title=" + inputVal + "]").remove();
+                    }
+                }
+                checkNumberOfCheckbox();
+            });
 
-                var numberOfChecked = $('.listing-search-content div input:checkbox:checked').length;
-                console.log(numberOfChecked)
+            // close btn on popup to remove content
+            $('body').on("click", ".close-btn-box", function () {
+                inputVal = $("[data-content-title]").data("content-title");
+                $("[data-content-title=" + inputVal + "]").remove();
+                $("[data-input-value =" + inputVal + "]").attr('checked', false);
+                checkNumberOfCheckbox()
+            });
+
+            //hide show popup
+            $(".compare-popup .btn-menu-down").click(function () {
+                $(".popup-content").toggle();
+                $(".compare-popup .btn-compare").toggle();
+                $(".compare-popup .title").toggleClass("selected")
+                //check to toggle compare-btn
+                if (numberOfChecked <= 1) {
+                    $(".compare-popup .btn-compare").toggle();
+                }
+            });
+
+            function checkNumberOfCheckbox() {
+                numberOfChecked = $('.listing-search-content div input:checkbox:checked').length;
                 $(".popup-content").show();
-               
                 if (numberOfChecked >= 4) {
                     $(this).prop('checked', false);
-                    console.log("reached max 3")
+                    $("[data-content-title=" + inputVal + "]").remove();
+                }
+                if (numberOfChecked > 1) {
+                    $(".compare-popup .btn-compare").show();
+                    $(".compare-popup .btn-menu-down").show();
+                } else {
+                    $(".compare-popup .btn-compare").hide();
                 }
                 if (numberOfChecked == 0) {
                     $(".popup-content").hide();
+                    $(".compare-popup .btn-menu-down").hide();
+                    $(".compare-popup .btn-compare").hide();
                 }
- 
-              
-            });
+            }
 
             //////COMPARE POPUP END//////
-
 
 
 
@@ -1406,13 +1450,12 @@ $(window).on('load', function () {
             $('.checkbox-button-wrapper').hide();
             $('[data-checkbutton]').hide();
 
-
             // REFINE SEARCH DESKTOP//
             // get value of ul dropdown click function wraps all functions
             $('.refine-search').on("click", '.refine-list a', function () {
                 stickySidebar.updateSticky();
-                $('.checkbox-button-wrapper').show();
 
+                $('.checkbox-button-wrapper').show();
                 // get value of dropdown ul
                 dataSearchVal = $(this).data("search-val");
 
@@ -1423,31 +1466,27 @@ $(window).on('load', function () {
                 } else {
                     $(".checkbox-wrapper").hide();
                 }
-
                 // function get data and check data changes in checkbox to button 
                 $('.' + dataSearchVal + '-wrapper div input[type="checkbox"]').change(function () {
                     stickySidebar.updateSticky();
 
                     // update wrapper to currentDATA
                     dataSearchVal = $('.' + dataSearchVal + '-wrapper').data("checkbox-wrapper");
-
+                    //get checkbox name to pass to text
                     checkboxName = $(this).attr("name");
                     // checkname of the checkbox to pass to button
                     checkname = $(this).data("checkname");
                     //count how many checkbox is checked
                     countCheckboxSelect = $('.' + dataSearchVal + '-wrapper div input:checkbox:checked').length;
                     appendCheckboxToButton();
-
                 });
             });
             //desktop dropown ul end
 
             // append checkbox to button  [desktop]
             function appendCheckboxToButton() {
-
                 // pass checked to button
                 if ($('.' + dataSearchVal + '-wrapper  input[data-checkname=' + checkname + ']').is(':checked')) {
-                    console.log("Aa desktop")
                     $('[data-checkbutton=' + dataSearchVal + ']').append("<div data-selection=" + checkname + " class='bg-grey m-xs bold btn btn-xs'>" + checkboxName + "<span class='btn-close fs-1 p-left-s'>&times;</span></div>");
                     // remove duplicates
                     if ($('[data-selection=' + checkname + ']').length > 1) {
@@ -1525,10 +1564,10 @@ $(window).on('load', function () {
                     $('[data-checkbutton=' + dataSearchVal + ']').show();
                 }
             }
-            //REFINE SEARCH MOBILE END//
+            /////REFINE SEARCH MOBILE END//////
 
 
-            // share between desktop and mobile//
+            // function share between desktop and mobile//
 
             //target selected buttons to remove and uncheck checkbox
             $('body').on("click", "[data-selection]", function () {
@@ -1536,18 +1575,13 @@ $(window).on('load', function () {
 
                 //get current data-selection button  
                 checkname = $(this).data("selection")
-
                 //uncheck the checkbox (desktop)
                 $("[data-checkname=" + checkname + "]").attr('checked', false);
-
                 //remove class for Mobile
                 $('label >[data-checkname=' + checkname + ']').parent().removeClass('checked');
-
-
                 //get current wrapper data when button click
                 currentData = $('[data-checkbutton]>[data-selection=' + checkname + ']').parent().data('checkbutton')
                 MobilecurrentData = $('.mobile-checkbox-button-wrapper > [data-checkbutton] > [data-selection=' + checkname + '] ').parent().data('checkbutton')
-
                 //remove target button
                 $('[data-selection=' + checkname + ']').remove();
                 //count how many buttons remaning in selected wrapper
@@ -1569,7 +1603,7 @@ $(window).on('load', function () {
                     $('.mobile-checkbox-button-wrapper >[data-checkbutton=' + MobilecurrentData + ']').show();
                 }
             }
-            // share between desktop and mobile end//
+            // function share between desktop and mobile end//
 
         }
 
