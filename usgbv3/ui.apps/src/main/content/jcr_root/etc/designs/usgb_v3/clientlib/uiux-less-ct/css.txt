@@ -1,3 +1,4 @@
 #base=css
 
+vendors/autocomplete.css
 main.less
