@@ -15,14 +15,7 @@ import com.day.cq.dam.api.Asset;
 import com.day.cq.dam.api.Rendition;
 import com.usgbv3.core.models.ProductModel;
 
-/**
- * @author Prashanth
- * This class would be called Featured Product component to compute the components logic
- * Called by:/apps/usgb/components/content/featuredproducts/featuredproducts.html
- * Revision: 
- * 			Date 					Modified by 					Reason
- *
- */
+
 public class ProductCharacteristicComponent extends WCMUsePojo {
 	private static final Logger LOG = LoggerFactory.getLogger(ProductCharacteristicComponent.class);
 	

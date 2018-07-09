@@ -14,14 +14,7 @@ import com.google.common.collect.Lists;
 import com.usgbv3.core.models.ProductModel;
 import com.usgbv3.core.models.TabTilesModel;
 
-/**
- * @author Prashanth
- * This class would be called Featured Product component to compute the components logic
- * Called by:/apps/usgb/components/content/featuredproducts/featuredproducts.html
- * Revision: 
- * 			Date 					Modified by 					Reason
- *
- */
+
 public class TabTilesComponent extends WCMUsePojo {
 	private static final Logger LOG = LoggerFactory.getLogger(TabTilesComponent.class);
 	
