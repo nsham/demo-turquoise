@@ -1,5 +1,4 @@
 #base=js
 
-vendors/jquery.validate.min.js
 where-to-buy.js
 contact-us.js
