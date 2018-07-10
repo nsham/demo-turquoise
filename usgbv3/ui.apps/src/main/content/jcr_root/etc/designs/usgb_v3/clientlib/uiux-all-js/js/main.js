@@ -1448,72 +1448,53 @@ $(window).on('load', function () {
 
         // $(".test-slider-for").slick();
         // $(".test-slider-nav").slick();
-        
 
-        $('.test-slider-for').slick({
+
+        $('.gallery-slider-for').slick({
             // slidesToShow: 1,
             // slidesToScroll: 1,
             // arrows: true,
             // fade: true,
-             asNavFor: '.test-slider-nav'
+            asNavFor: '.gallery-slider-nav'
         });
-        $('.test-slider-nav').slick({
+        $('.gallery-slider-nav').slick({
             // slidesToShow: 3,
             // slidesToScroll: 1,
-            asNavFor: '.test-slider-for'
+            asNavFor: '.gallery-slider-for'
             // dots: false,
             // centerMode: true,
             // focusOnSelect: true
         });
 
 
-     //   $('#default-demo').slickLightbox();
-
-        // $('.product-gallery-wrapper').slick({
-        //     customPaging: function (slick, index) {
-        //         var image_title = slick.$slides.eq(index).find('img').attr('src') || '';
-        //         return '<img src=' + image_title + '> </img>';
-        //     },
-        // });
+        ///  MIX MEDIA  GALLERY/// 
+        if ($(".mix-media-gallery-wrapper").length) {
+            console.log("test")
+            // videoType();
 
 
-        // $('.product-gallery-wrapper').slickLightbox({
-        //     closeOnBackdropClick: true,
-        //     slick: function ($e) {
+            $(".mix-media-gallery-wrapper .slick-arrow").click(function () {
+                //   videoType();
+                console.log("test1")
+                $(".modal-video-elem").get(0).pause();
+                if ($(".mix-media-gallery-wrapper .slick-slide .video #ranID").hasClass('YouTubeVideoPlayer')) {
+                    console.log("bb")
+                    $('.YouTubeVideoPlayer')[0].contentWindow.postMessage('{"event":"command","func":"' + 'stopVideo' + '","args":""}', '*');
+                }
+            });
+            function videoType() {
 
-        //         $e.find('.slick-lightbox-slick-iframe').each(function () {
-        //             $(this)
-        //                 .attr('data-src', $(this).attr('src'))
-        //                 .attr('src', '')
-        //         })
-
-        //         function clearIframe(slick, index) {
-        //             var $iframe = $(slick.$slides.get(index)).find('.slick-lightbox-slick-iframe')
-        //             if ($iframe.length) {
-        //                 setTimeout(function () {
-        //                     $iframe.attr('src', '')
-        //                 }, slick.options.speed)
-        //             }
-        //         }
-
-        //         function loadIframe(slick, index) {
-        //             var $iframe = $(slick.$slides.get(index)).find('.slick-lightbox-slick-iframe')
-        //             if ($iframe.length) $iframe.attr('src', $iframe.attr('data-src'))
-        //         }
-
-
-        //         //Return slick instance
-        //         return $e.find('.slick-lightbox-slick')
-        //             .on('init', function (event, slick) {
-        //                 loadIframe(slick, slick.currentSlide)
-        //             })
-        //             .on('beforeChange', function (event, slick, currentSlide, nextSlide) {
-        //                 clearIframe(slick, currentSlide)
-        //                 loadIframe(slick, nextSlide)
-        //             })
-        //             .slick()
-        //     }
-        // }); //lightbox end
+                if ($(".mix-media-gallery-wrapper .slick-current .video").prev().hasClass('modal-video-elem')) {
+                    console.log("aaa")
+                    $(".modal-video-elem").get(0).pause();
+                }
+                if ($(".mix-media-gallery-wrapper .slick-current .video").prev().hasClass('YouTubeVideoPlayer')) {
+                    console.log("bb")
+                    $('.YouTubeVideoPlayer')[0].contentWindow.postMessage('{"event":"command","func":"' + 'stopVideo' + '","args":""}', '*');
+                }
+            }
+        }
+        ///  MIX MEDIA  GALLERY///
 
     });
 })();
