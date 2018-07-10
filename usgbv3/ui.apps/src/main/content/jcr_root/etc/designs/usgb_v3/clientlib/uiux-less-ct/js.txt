@@ -2,3 +2,4 @@
 
 where-to-buy.js
 contact-us.js
+global-landing.js
