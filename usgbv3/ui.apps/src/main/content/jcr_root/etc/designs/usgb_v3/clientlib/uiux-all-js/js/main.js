@@ -37,15 +37,14 @@ function defaultScrollUpdate(element) {
 /*end defaultScrollUpdate====================*/
 
 /*load script before body====================*/
-function hookHeadScript(url, async, callback){
+function hookHeadScript(url, async, callback) {
 
-if( document.getElementsByTagName('html')[0].innerHTML.indexOf(url) === -1 )
-    {
+    if (document.getElementsByTagName('html')[0].innerHTML.indexOf(url) === -1) {
         var script = document.createElement("script")
         script.type = "text/javascript";
         script.onload = callback;
         script.src = url;
-        if( async === true ){
+        if (async === true) {
             script.setAttribute("async", "");
         }
         document.getElementsByTagName("head")[0].appendChild(script);
@@ -54,36 +53,34 @@ if( document.getElementsByTagName('html')[0].innerHTML.indexOf(url) === -1 )
 /*end load script before body====================*/
 
 /*load youtube video via api====================*/
-function onYouTubeIframeAPIReady(name, id)
-{
-   // console.log(name);
-   // console.log(id);
+function onYouTubeIframeAPIReady(name, id) {
+    // console.log(name);
+    // console.log(id);
     var player;
     player = new YT.Player(name,
-    {
-          videoId: id, 
-          width: 560, 
-          height: 316,   
-          playerVars:
-          {
-              autoplay: 0, 
-              controls: 1,
-              showinfo: 1, 
-              modestbranding: 1,
-              loop: 0, 
-              fs: 1,
-              cc_load_policy: 0, 
-              autohide: 0 
-          },
-          events:
-          {
-              onReady: function(e)
-              {
-                //e.target.mute();//chrome need to set to mute to autoplay
-                e.target.playVideo();
-              }
-          }
-    });
+        {
+            videoId: id,
+            width: 560,
+            height: 316,
+            playerVars:
+            {
+                autoplay: 0,
+                controls: 1,
+                showinfo: 1,
+                modestbranding: 1,
+                loop: 0,
+                fs: 1,
+                cc_load_policy: 0,
+                autohide: 0
+            },
+            events:
+            {
+                onReady: function (e) {
+                    //e.target.mute();//chrome need to set to mute to autoplay
+                    e.target.playVideo();
+                }
+            }
+        });
 }
 /*end load youtube video via api====================*/
 
@@ -94,8 +91,7 @@ function onYouTubeIframeAPIReady(name, id)
 // ----------------------------------------------------------------------
 //Default script to append
 // ----------------------------------------------------------------------
-hookHeadScript("https://www.youtube.com/iframe_api",true, function()
-{ 
+hookHeadScript("https://www.youtube.com/iframe_api", true, function () {
     console.log('youtbe iframe api loaded');
 });
 // ----------------------------------------------------------------------
@@ -129,10 +125,10 @@ hookHeadScript("https://www.youtube.com/iframe_api",true, function()
 (function () {
     "use strict";
 
-    $('.social-media-pop-up').click(function(e) {
+    $('.social-media-pop-up').click(function (e) {
         e.preventDefault();
-       window.open($(this).attr('href'), 'shareWindow', 'height=450, width=550, toolbar=0, location=0, menubar=0, directories=0, scrollbars=0');
-       return false;
+        window.open($(this).attr('href'), 'shareWindow', 'height=450, width=550, toolbar=0, location=0, menubar=0, directories=0, scrollbars=0');
+        return false;
     });
 
 })();
@@ -192,8 +188,8 @@ hookHeadScript("https://www.youtube.com/iframe_api",true, function()
             var youtubevideo = $(element).next().find($('.modal-video-elem'));
 
             //pause/stop videos using iframe only, for more customization use youtube api instead
-            $('iframe.modal-video-elem').each(function(){
-              this.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*')
+            $('iframe.modal-video-elem').each(function () {
+                this.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*')
             });
 
         }
@@ -218,13 +214,12 @@ hookHeadScript("https://www.youtube.com/iframe_api",true, function()
     $(document).ready(function () {
 
         $('.inline-video').on("click", function () {
-            
+
             var $this = $(this);
             var thumbs = $this.children('.cta-video-inline');
             var video = $this.find('video');
 
-            if( $this.data('video') === "html5" )
-            {
+            if ($this.data('video') === "html5") {
 
 
 
@@ -233,29 +228,28 @@ hookHeadScript("https://www.youtube.com/iframe_api",true, function()
                 video.css({ "z-index": 1 });
                 video[0].play();
 
-            }else if( $this.data('video') === "youtube" )
-                {
+            } else if ($this.data('video') === "youtube") {
 
-                    var videoWrapper = $this.find('.video');
-                    var video = $this.find('.YouTubeVideoPlayer');
-                    var videoIdName = video.attr('id');
-                    //YT.Player name parameter must be an ID not class
-                    //var videoClassName = video.attr('class');
-                    var videoId = video.attr('data-youtubeId');
+                var videoWrapper = $this.find('.video');
+                var video = $this.find('.YouTubeVideoPlayer');
+                var videoIdName = video.attr('id');
+                //YT.Player name parameter must be an ID not class
+                //var videoClassName = video.attr('class');
+                var videoId = video.attr('data-youtubeId');
 
-                    // $('.inline-video').find('.video').append('ssss');
-                    // console.log(videoWrapper);
-                    //videoWrapper.append('ssss');
+                // $('.inline-video').find('.video').append('ssss');
+                // console.log(videoWrapper);
+                //videoWrapper.append('ssss');
 
-                    onYouTubeIframeAPIReady(videoIdName, videoId);             
+                onYouTubeIframeAPIReady(videoIdName, videoId);
 
-                    //retain image for video responsiveness
-                    thumbs.css({ "z-index": -1 });
-                    video.css({ "z-index": 1 });
-              
+                //retain image for video responsiveness
+                thumbs.css({ "z-index": -1 });
+                video.css({ "z-index": 1 });
 
-                }
-            
+
+            }
+
 
 
 
@@ -288,21 +282,21 @@ hookHeadScript("https://www.youtube.com/iframe_api",true, function()
         //       onReady: function(e) {
         //         //e.target.mute();//chrome need to set to mute to autoplay
         //         //e.target.playVideo();
-                
-                
 
-                
-                
+
+
+
+
         //           // bind events
         //   var playButton = document.getElementById("vv");
         //   playButton.addEventListener("click", function() {
         //     player.playVideo();
         //   });
-                
-                        
-          
-                
-                
+
+
+
+
+
         //       }
         //     }
         //   });
@@ -1445,60 +1439,81 @@ $(window).on('load', function () {
 })();
 
 
-
 // ----------------------------------------------------------------------
-//[TEST] Product details gallery slickjs thumbnail
+// Product details gallery slickjs mix media 
 // ----------------------------------------------------------------------
 (function () {
     "use strict";
     $(document).ready(function () {
 
+        // $(".test-slider-for").slick();
+        // $(".test-slider-nav").slick();
+        
 
-        $('.product-gallery-wrapper').slick({
-            customPaging: function (slick, index) {
-                var image_title = slick.$slides.eq(index).find('img').attr('src') || '';
-                return '<img src=' + image_title + '> </img>';
-            },
+        $('.test-slider-for').slick({
+            // slidesToShow: 1,
+            // slidesToScroll: 1,
+            // arrows: true,
+            // fade: true,
+             asNavFor: '.test-slider-nav'
+        });
+        $('.test-slider-nav').slick({
+            // slidesToShow: 3,
+            // slidesToScroll: 1,
+            asNavFor: '.test-slider-for'
+            // dots: false,
+            // centerMode: true,
+            // focusOnSelect: true
         });
 
 
-        $('.product-gallery-wrapper').slickLightbox({
-            closeOnBackdropClick: true,
-            slick: function ($e) {
+     //   $('#default-demo').slickLightbox();
 
-                $e.find('.slick-lightbox-slick-iframe').each(function () {
-                    $(this)
-                        .attr('data-src', $(this).attr('src'))
-                        .attr('src', '')
-                })
-
-                function clearIframe(slick, index) {
-                    var $iframe = $(slick.$slides.get(index)).find('.slick-lightbox-slick-iframe')
-                    if ($iframe.length) {
-                        setTimeout(function () {
-                            $iframe.attr('src', '')
-                        }, slick.options.speed)
-                    }
-                }
-
-                function loadIframe(slick, index) {
-                    var $iframe = $(slick.$slides.get(index)).find('.slick-lightbox-slick-iframe')
-                    if ($iframe.length) $iframe.attr('src', $iframe.attr('data-src'))
-                }
+        // $('.product-gallery-wrapper').slick({
+        //     customPaging: function (slick, index) {
+        //         var image_title = slick.$slides.eq(index).find('img').attr('src') || '';
+        //         return '<img src=' + image_title + '> </img>';
+        //     },
+        // });
 
 
-                //Return slick instance
-                return $e.find('.slick-lightbox-slick')
-                    .on('init', function (event, slick) {
-                        loadIframe(slick, slick.currentSlide)
-                    })
-                    .on('beforeChange', function (event, slick, currentSlide, nextSlide) {
-                        clearIframe(slick, currentSlide)
-                        loadIframe(slick, nextSlide)
-                    })
-                    .slick()
-            }
-        }); //lightbox end
+        // $('.product-gallery-wrapper').slickLightbox({
+        //     closeOnBackdropClick: true,
+        //     slick: function ($e) {
+
+        //         $e.find('.slick-lightbox-slick-iframe').each(function () {
+        //             $(this)
+        //                 .attr('data-src', $(this).attr('src'))
+        //                 .attr('src', '')
+        //         })
+
+        //         function clearIframe(slick, index) {
+        //             var $iframe = $(slick.$slides.get(index)).find('.slick-lightbox-slick-iframe')
+        //             if ($iframe.length) {
+        //                 setTimeout(function () {
+        //                     $iframe.attr('src', '')
+        //                 }, slick.options.speed)
+        //             }
+        //         }
+
+        //         function loadIframe(slick, index) {
+        //             var $iframe = $(slick.$slides.get(index)).find('.slick-lightbox-slick-iframe')
+        //             if ($iframe.length) $iframe.attr('src', $iframe.attr('data-src'))
+        //         }
+
+
+        //         //Return slick instance
+        //         return $e.find('.slick-lightbox-slick')
+        //             .on('init', function (event, slick) {
+        //                 loadIframe(slick, slick.currentSlide)
+        //             })
+        //             .on('beforeChange', function (event, slick, currentSlide, nextSlide) {
+        //                 clearIframe(slick, currentSlide)
+        //                 loadIframe(slick, nextSlide)
+        //             })
+        //             .slick()
+        //     }
+        // }); //lightbox end
 
     });
 })();
