@@ -53,10 +53,16 @@ function hookHeadScript(url, async, callback) {
 /*end load script before body====================*/
 
 /*load youtube video via api====================*/
+
+//if ($('[data-video=youtube]').length) playYouTubeVideo();
+
+//function playYouTubeVideo (){
 function onYouTubeIframeAPIReady(name, id) {
-    // console.log(name);
-    // console.log(id);
+
+    //  console.log(name);
+    //  console.log(id);
     var player;
+
     player = new YT.Player(name,
         {
             videoId: id,
@@ -82,6 +88,12 @@ function onYouTubeIframeAPIReady(name, id) {
             }
         });
 }
+//}
+
+
+
+
+
 /*end load youtube video via api====================*/
 
 // ----------------------------------------------------------------------
@@ -213,6 +225,10 @@ hookHeadScript("https://www.youtube.com/iframe_api", true, function () {
 
     $(document).ready(function () {
 
+        //   if($('.inline-video').length)playVideoPlayer()
+
+        // function playVideoPlayer(){
+
         $('.inline-video').on("click", function () {
 
             var $this = $(this);
@@ -220,8 +236,6 @@ hookHeadScript("https://www.youtube.com/iframe_api", true, function () {
             var video = $this.find('video');
 
             if ($this.data('video') === "html5") {
-
-
 
                 //retain image for video responsiveness
                 thumbs.css({ "z-index": -1 });
@@ -246,14 +260,13 @@ hookHeadScript("https://www.youtube.com/iframe_api", true, function () {
                 //retain image for video responsiveness
                 thumbs.css({ "z-index": -1 });
                 video.css({ "z-index": 1 });
-
-
             }
-
-
-
-
         });
+
+
+        //}
+
+
 
 
 
@@ -300,7 +313,7 @@ hookHeadScript("https://www.youtube.com/iframe_api", true, function () {
         //       }
         //     }
         //   });
-        //  }
+        //  } 
 
         //  // Written by @labnol 
         // </script>
@@ -711,7 +724,7 @@ hookHeadScript("https://www.youtube.com/iframe_api", true, function () {
                     $('html, body').removeClass('disable-scroll');
                     //$('html, body').css({ "overflow":"visible" });
 
-
+ 
                 } else {
                     //else hide scrollbar
                     $('html, body').addClass('disable-scroll');
@@ -731,11 +744,10 @@ hookHeadScript("https://www.youtube.com/iframe_api", true, function () {
         $('[type="checkbox"]').each(iterate);//run once when page ready
 
         //everytime when click on any of the checkbox
-        $(".container-checkbox.mobile").on("click", function () {
+        $(document).on("click", ".container-checkbox.mobile", function () {
             //iterate through 'all' instead of one just to be save
             $('.container-checkbox.mobile input[type="checkbox"]').each(iterate);
         });
-
 
 
 
@@ -1449,7 +1461,10 @@ $(window).on('load', function () {
         // $(".test-slider-for").slick();
         // $(".test-slider-nav").slick();
 
-
+        $('[data-fancybox]').fancybox({
+            loop : true
+        });
+        
         $('.gallery-slider-for').slick({
             // slidesToShow: 1,
             // slidesToScroll: 1,

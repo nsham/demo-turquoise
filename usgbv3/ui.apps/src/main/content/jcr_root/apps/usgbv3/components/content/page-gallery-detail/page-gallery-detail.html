@@ -29,9 +29,9 @@
                 <h2 class="ht4 uppercase text-left color-darker-grey hidden-xs">Gallery</h2>
                 <p class="text-left color-darker-grey p-s p-md-no">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempaor</p>
             </div>
-
-            <div class="col-xs-12 m-top-m">
-                <div class="gallery-slider-for  product-gallery-wrapper mix-media-gallery-wrapper  bg-dark-grey" data-slick='{
+            <div class="col-sm-2"></div>
+            <div class="col-sm-8 col-xs-12 m-top-m">
+                <div class="gallery-slider-for  product-gallery-wrapper mix-media-gallery-wrapper  bg-lighter-grey" data-slick='{
                     "slidesToShow": 1,
                     "slidesToScroll": 1,
                     "infinite": true,
@@ -59,10 +59,19 @@
                     ]
                 }'>
 
-                    <div class="inline-video" data-video="html5">
+                    <!-- video popup only  mobile -->
+                    <div class="visible-xs">
+                        <a data-fancybox="gallery" data-width="640" data-height="360" href="https://www.w3schools.com/html/mov_bbb.mp4">
+                            <span class="m-gallery-ico-play ico-play-video color-white fa fa-play-circle"></span>
+                            <img src="/content/dam/USGBoral/Global/Website/Images/component/allsample/test.png">
+                        </a>
+                    </div>
+
+                    <!-- video inline only desktop -->
+                    <div class="hidden-xs inline-video" data-video="html5">
                         <a class="cta-video-inline p-no">
                             <span class="bg-overlay">
-                                <img src="/content/dam/USGBoral/Global/Website/Images/component/allsample/bg-hover-tile.jpg" alt="">
+                                <img src="/content/dam/USGBoral/Global/Website/Images/component/allsample/test.png" alt="">
                             </span>
                             <div class="box-size-m-2">
                                 <div class="center va-middle">
@@ -82,8 +91,16 @@
                         </div>
                     </div>
 
-                    <div class="inline-video" data-video="youtube">
-                        <button class="cta-video-inline p-no" type="button">
+                    <!-- video popup only  mobile -->
+                    <div class="visible-xs">
+                        <a data-fancybox="gallery" data-width="640" data-height="360" href="https://www.youtube.com/embed/aqz-KE-bpKQ">
+                            <span class="m-gallery-ico-play ico-play-video color-white fa fa-play-circle"></span>
+                            <img src="/content/dam/USGBoral/Global/Website/Images/component/allsample/bg-banner-tile.jpg">
+                        </a>
+                    </div>
+                    <!-- video inline only desktop -->
+                    <div class="hidden-xs inline-video" data-video="youtube">
+                        <a class="cta-video-inline p-no">
                             <span class="bg-overlay">
                                 <img src="/content/dam/USGBoral/Global/Website/Images/component/allsample/bg-banner-tile.jpg" alt="">
                             </span>
@@ -95,7 +112,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </button>
+                        </a>
 
                         <div class="video">
                             <div id="ranID" class="YouTubeVideoPlayer" data-youtubeid="aqz-KE-bpKQ"></div>
@@ -103,24 +120,36 @@
                     </div>
 
                     <div>
-                        <img src="/content/dam/USGBoral/Global/Website/Images/component/allsample/bg-banner-tile-2.jpg" alt="">
+                        <!-- imag popup only mobile -->
+                        <a data-fancybox="gallery" class="visible-xs" href="/content/dam/USGBoral/Global/Website/Images/component/allsample/bg-banner-tile-2.jpg">
+                            <img src="/content/dam/USGBoral/Global/Website/Images/component/allsample/bg-banner-tile-2.jpg" alt="">
+                        </a>
+                        <!-- img only desktop -->
+                        <img class="hidden-xs" src="/content/dam/USGBoral/Global/Website/Images/component/allsample/bg-banner-tile-2.jpg" alt="">
 
                     </div>
 
                     <div>
-                        <img src="/content/dam/USGBoral/Global/Website/Images/component/allsample/bg-hover-tile.jpg" alt="">
+                        <a data-fancybox="gallery" class="visible-xs" href="/content/dam/USGBoral/Global/Website/Images/component/allsample/test.png">
+                            <img src="/content/dam/USGBoral/Global/Website/Images/component/allsample/test.png" alt="">
+                        </a>
+                        <img class="hidden-xs" src="/content/dam/USGBoral/Global/Website/Images/component/allsample/test.png" alt="">
+
                     </div>
 
                     <div>
-                        <img src="/content/dam/USGBoral/Global/Website/Images/component/allsample/bg-banner-tile.jpg" alt="">
+                        <a data-fancybox="gallery" class="visible-xs" href="/content/dam/USGBoral/Global/Website/Images/component/allsample/bg-banner-tile.jpg">
+                            <img src="/content/dam/USGBoral/Global/Website/Images/component/allsample/bg-banner-tile.jpg" alt="">
+                        </a>
+                        <img class="hidden-xs" src="/content/dam/USGBoral/Global/Website/Images/component/allsample/bg-banner-tile.jpg" alt="">
+
                     </div>
 
 
 
                 </div>
 
-
-                <!-- gallery items -->
+                <!-- gallery items thumbnails -->
                 <div class="gallery-slider-nav  mix-media-gallery-item-wrapper m-bottom-m " data-slick='{
                     "slidesToShow": 4,
                     "slidesToScroll": 1,
@@ -164,29 +193,39 @@
                     ] 
                 }'>
                     <div class="gallery-item">
-                        <div class="bg-overlay text-center" style="background:transparent url('/content/dam/USGBoral/Global/Website/Images/component/allsample/bg-hover-tile.jpg') center center no-repeat; background-size:cover; ">
+                        <div class="thumbnail-border" style="background:transparent url('/content/dam/USGBoral/Global/Website/Images/component/allsample/test.png') center center no-repeat; background-size:cover; ">
                             <span class="ico-play-video color-white fa fa-play-circle"></span>
-                            <img style="opacity:0;" src="/content/dam/USGBoral/Global/Website/Images/component/allsample/bg-hover-tile.jpg" alt="">
+                            <img style="opacity:0;" src="/content/dam/USGBoral/Global/Website/Images/component/allsample/test.png" alt="">
                         </div>
                     </div>
                     <div class="gallery-item">
-                        <div class="bg-overlay text-center" style="background:transparent url('/content/dam/USGBoral/Global/Website/Images/component/allsample/bg-banner-tile.jpg') center center no-repeat; background-size:cover;">
+                        <div class="bg-overlay thumbnail-border text-center" style="background:transparent url('/content/dam/USGBoral/Global/Website/Images/component/allsample/bg-banner-tile.jpg') center center no-repeat; background-size:cover;">
                             <span class="ico-play-video color-white fa fa-play-circle"></span>
                             <img style="opacity:0;" src="/content/dam/USGBoral/Global/Website/Images/component/allsample/bg-banner-tile.jpg" alt="">
                         </div>
                     </div>
                     <div class="gallery-item">
-                        <img src="/content/dam/USGBoral/Global/Website/Images/component/allsample/bg-banner-tile-2.jpg" alt="">
+                        <div class="thumbnail-border" style=" background:transparent url('/content/dam/USGBoral/Global/Website/Images/component/allsample/bg-banner-tile-2.jpg') center no-repeat; background-size:cover;">
+                            <img style="opacity:0;" src="/content/dam/USGBoral/Global/Website/Images/component/allsample/bg-banner-tile-2.jpg">
+                        </div>
                     </div>
 
                     <div class="gallery-item">
-                        <img src="/content/dam/USGBoral/Global/Website/Images/component/allsample/bg-hover-tile.jpg" alt="">
+                        <div class="thumbnail-border" style=" background:transparent url('/content/dam/USGBoral/Global/Website/Images/component/allsample/test.png') center no-repeat; background-size:cover;">
+                            <img style="opacity:0;" src="/content/dam/USGBoral/Global/Website/Images/component/allsample/test.png">
+                        </div>
                     </div>
                     <div class="gallery-item">
-                        <img src="/content/dam/USGBoral/Global/Website/Images/component/allsample/bg-banner-tile-3.jpg" alt="">
+                        <div class="thumbnail-border" style=" background:transparent url('/content/dam/USGBoral/Global/Website/Images/component/allsample/bg-banner-tile-3.jpg') center no-repeat; background-size:cover;">
+                            <img style="opacity:0;" src="/content/dam/USGBoral/Global/Website/Images/component/allsample/bg-banner-tile-3.jpg">
+                        </div>
                     </div>
 
                 </div>
+            </div>
+            <div class="col-sm-2"></div>
+            <div class="col-xs-12 m-top-4xxl m-sm-top-5xl">
+                <p class="text-left color-darker-grey p-s p-md-no">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.</p>
             </div>
         </div>
     </div>
