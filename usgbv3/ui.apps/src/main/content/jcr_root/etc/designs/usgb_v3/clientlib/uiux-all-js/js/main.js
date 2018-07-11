@@ -37,7 +37,7 @@ function defaultScrollUpdate(element) {
 /*end defaultScrollUpdate====================*/
 
 /*load script before body====================*/
-function hookHeadScript(url, async, callback) {
+function hookHeadScript(url, async, defer, callback) {
 
     if (document.getElementsByTagName('html')[0].innerHTML.indexOf(url) === -1) {
         var script = document.createElement("script")
@@ -47,68 +47,102 @@ function hookHeadScript(url, async, callback) {
         if (async === true) {
             script.setAttribute("async", "");
         }
+        if (defer === true) {
+            script.setAttribute("defer", "");
+        }
         document.getElementsByTagName("head")[0].appendChild(script);
     }
 }
 /*end load script before body====================*/
-
-/*load youtube video via api====================*/
-
-//if ($('[data-video=youtube]').length) playYouTubeVideo();
-
-//function playYouTubeVideo (){
-function onYouTubeIframeAPIReady(name, id) {
-
-    //  console.log(name);
-    //  console.log(id);
-    var player;
-
-    player = new YT.Player(name,
-        {
-            videoId: id,
-            width: 560,
-            height: 316,
-            playerVars:
-            {
-                autoplay: 0,
-                controls: 1,
-                showinfo: 1,
-                modestbranding: 1,
-                loop: 0,
-                fs: 1,
-                cc_load_policy: 0,
-                autohide: 0
-            },
-            events:
-            {
-                onReady: function (e) {
-                    //e.target.mute();//chrome need to set to mute to autoplay
-                    e.target.playVideo();
-                }
-            }
-        });
-}
-//}
-
-
-
-
-
-/*end load youtube video via api====================*/
 
 // ----------------------------------------------------------------------
 //END Default reusable functions
 // ----------------------------------------------------------------------
 
 // ----------------------------------------------------------------------
-//Default script to append
+// Load inline youtube video(s) in background
 // ----------------------------------------------------------------------
-hookHeadScript("https://www.youtube.com/iframe_api", true, function () {
-    console.log('youtbe iframe api loaded');
-});
-// ----------------------------------------------------------------------
-//END Default script to append
-// ----------------------------------------------------------------------
+(function () {
+    "use strict";
+    $(document).ready(function () {
+
+
+        //load youtube api
+        hookHeadScript("//www.youtube.com/iframe_api", true, false, function ()
+        {
+
+            //console.log('youtbe iframe api loaded');
+
+            //add youtube video
+
+            $( ".YouTubeVideoPlayer" ).each(function( index ) {
+              var youtubeID = $(this).attr('id');
+              var youtubeVideoID = $(this).attr('data-youtubeid');
+
+              //console.log(youtubeVideoID);
+
+              //load all youtube videos in background when page load
+              onYouTubeIframeAPIReady(youtubeID, youtubeVideoID);
+              
+            });
+
+
+            function onYouTubeIframeAPIReady(name, id) {
+
+                //The callback is fired once the api script has been loaded but not necessarily executed.
+                if( (typeof YT !== "undefined") && YT && YT.Player )
+                {
+
+                    //console.log('not ready');
+                    var player;
+
+                    player = new YT.Player(name,
+                        {
+                            videoId: id,
+                            width: 560,
+                            height: 316,
+                            playerVars:
+                            {
+                                autoplay: 0,
+                                controls: 1,
+                                showinfo: 1,
+                                modestbranding: 1,
+                                loop: 0,
+                                fs: 1,
+                                cc_load_policy: 0,
+                                autohide: 0
+                            },
+                            events:
+                            {
+                                onReady: function (e) {
+                                    //e.target.mute();//chrome need to set to mute to autoplay
+                                    //e.target.playVideo();
+                                  
+                                    //bind play buttons to each player
+                                    var playButton = $("#"+name).parent().prev('button');
+                                    playButton.on('click', function() {
+                                      player.playVideo();
+                                    });
+
+                                }
+                            }
+                        });
+
+                }else
+                {
+                    //console.log('ready');
+                    setTimeout(function(){ onYouTubeIframeAPIReady(name, id); }, 100);
+                }
+
+            }
+
+
+        });
+
+
+    });
+
+})();
 
 // ----------------------------------------------------------------------
 // Component: Hero Banner
@@ -246,16 +280,71 @@ hookHeadScript("https://www.youtube.com/iframe_api", true, function () {
 
                 var videoWrapper = $this.find('.video');
                 var video = $this.find('.YouTubeVideoPlayer');
-                var videoIdName = video.attr('id');
                 //YT.Player name parameter must be an ID not class
-                //var videoClassName = video.attr('class');
+                var videoIdName = video.attr('id');
                 var videoId = video.attr('data-youtubeId');
 
-                // $('.inline-video').find('.video').append('ssss');
-                // console.log(videoWrapper);
-                //videoWrapper.append('ssss');
 
-                onYouTubeIframeAPIReady(videoIdName, videoId);
+               /* load youtube api with video based on click
+
+                //load youtube api
+                hookHeadScript("//www.youtube.com/iframe_api", true, false, function ()
+                {
+
+                    console.log('youtbe iframe api loaded');
+
+
+
+                    //add youtube video
+                    onYouTubeIframeAPIReady('ranID', 'aqz-KE-bpKQ');
+
+                    function onYouTubeIframeAPIReady(name, id) {
+
+                        //The callback is fired once the api script has been loaded but not necessarily executed.
+                        if( (typeof YT !== "undefined") && YT && YT.Player )
+                        {
+
+                            //console.log('not ready');
+                            var player;
+
+                            player = new YT.Player(name,
+                                {
+                                    videoId: id,
+                                    width: 560,
+                                    height: 316,
+                                    playerVars:
+                                    {
+                                        autoplay: 0,
+                                        controls: 1,
+                                        showinfo: 1,
+                                        modestbranding: 1,
+                                        loop: 0,
+                                        fs: 1,
+                                        cc_load_policy: 0,
+                                        autohide: 0
+                                    },
+                                    events:
+                                    {
+                                        onReady: function (e) {
+                                            //e.target.mute();//chrome need to set to mute to autoplay
+                                            e.target.playVideo();
+                                        }
+                                    }
+                                });
+
+                        }else
+                        {
+                            //console.log('ready');
+                            setTimeout(function(){ onYouTubeIframeAPIReady(name, id); }, 100);
+                        }
+
+                    }
+
+
+                });
+
+                */
+
 
                 //retain image for video responsiveness
                 thumbs.css({ "z-index": -1 });
