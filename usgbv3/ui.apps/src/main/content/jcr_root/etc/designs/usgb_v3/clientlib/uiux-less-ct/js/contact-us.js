@@ -1,7 +1,10 @@
 // ----------------------------------------------------------------------
-	// contact us
-	// ----------------------------------------------------------------------
-	
+// contact us
+// ----------------------------------------------------------------------
+
+function recaptchaCallback() {
+    $('#hiddenRecaptcha').valid();
+    };
 (function () {
     "use strict";
 
@@ -17,7 +20,9 @@
                 }
             });
     
-            $(".form-validate").validate({
+
+        $(".form-validate").validate({
+            ignore: ".ignore",
             rules: {
                 dropdownselect: "required",
                 name: "required",
@@ -28,6 +33,15 @@
                 contact: {
                     required: true,
                     digits: true
+                },
+                hiddenRecaptcha: {
+                    required: function () {
+                        if (grecaptcha.getResponse() == '') {
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    }
                 },
                 message: "required",
                 agree: "required",
@@ -41,7 +55,8 @@
                 message: "Please enter a valid message",
                 agree: "Please accept our policy",
                 i_work_with: "Please select one",
-                i_am_interested: "Please select one"
+                i_am_interested: "Please select one",
+                hiddenRecaptcha: "Please complete the Captcha"
             },
             errorElement: "em",
             errorPlacement: function (error, element) {
@@ -76,3 +91,4 @@
     }
 
 })();
+    

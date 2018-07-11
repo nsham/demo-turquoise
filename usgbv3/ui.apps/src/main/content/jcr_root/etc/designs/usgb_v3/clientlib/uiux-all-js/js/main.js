@@ -1215,11 +1215,12 @@ function hookHeadScript(url, async, defer, callback) {
         $('.dp-form').on("click", '.dp-list a', function () {
 
             var dataVal = $(this).data("val");
+            var dataHtml = $(this).html();
             var $dpText = $(this).parent().parent().prev().find($('.dp-text'));
             var $hiddenField = $dpText.next();
 
-            $dpText.html(dataVal);
-            $hiddenField.val(dataVal);
+            $dpText.html(dataHtml);
+            $hiddenField.val(dataHtml);
 
             //console.log(dataVal);
             // console.log($(this).parent().parent().prev().find($('.dp-text')));
@@ -1243,9 +1244,8 @@ function hookHeadScript(url, async, defer, callback) {
         function unniversalSelectSync() {
 
             $(this).each(function () {
-                console.log('sssss');
                 if ($(this).val()) {
-                    $(this).parent().prev().find($("input[type=hidden]")).val($(this).val());
+                    $(this).parent().prev().find($("input[type=hidden]")).val($(this).html());
                 }
             });
 

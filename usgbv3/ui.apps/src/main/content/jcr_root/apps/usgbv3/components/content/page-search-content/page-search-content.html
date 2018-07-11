@@ -29,13 +29,11 @@
 
     <!-- SEARCH INPUT (GROUP) -->
     <!-- SEARCH FORM -->
-    <div class="container-fluid bg-light-grey p-vertical-l m-vertical-m">
+    <div class="bg-light-grey p-vertical-l m-vertical-m">
         <div class="container">
-
             <div class="row">
-                <div class="col-xs-12 col-sm-5 p-no">
-
-                    <form class="search-form">
+                <div class="col-xs-12 col-sm-5">
+                    <form id="search-form" class="search-form">
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="Ceiling" autocomplete="off">
                             <span class="input-group-btn">
@@ -43,125 +41,44 @@
                             </span>
                         </div>
                     </form>
-
                 </div>
             </div>
-
             <div class="row">
-                <div class="col-xs-12 m-top-xs p-no">
-                    <p class="result-caption m-left-xxs m-no fs-3"><strong>33 search results found for : ceiling</strong></p>
+                <div class="col-xs-12">
+                    <p class="result-caption m-top-xs m-left-xxs m-no fs-3 hidden"><strong><span class="num">0</span> search results found for : <span class="keyword"></span></strong></p>
                 </div>
             </div>
         </div>
-
     </div>
     <!-- SEARCH FORM END -->
 
     <!-- SUB-SEARCH-SECTION -->
-    <div class="container">
+    <div class="container search-category-controller-container hidden">
         <div class="row m-vertical-xl">
             <div class="col-xs-12 text-center text-sm-left">
                 <ul class="sub-search-section">
-                    <li class="active"><a href="#">Content</a></li>
-                    <li><a href="#">Document Finder</a></li>
-                    <li><a href="#">CAD Drawing</a></li>
+                    <li class="active"><a href="#" data-category="content">Content</a></li>
+                    <li><a href="#" data-category="docFinder">Document Finder</a></li>
+                    <li><a href="#" data-category="cad">CAD Drawing</a></li>
                 </ul>
             </div>
         </div>
     </div>
     <!-- SUB-SEARCH-SECTION END-->
     
-
     
-    <div class="container m-vertical-m">
+    <div class="container m-vertical-m search-result-container hidden">
         <div class="row">
             <div class="hidden-xs col-sm-3">
                 <!-- SEARCH FILTER -->
                 <div class="search-filter bg-light-grey m-bottom-xxl">
-                    <form action="" method="get">
+                    <form id="search-filter-desktop-form">
                         <div class="wrapper">
                             <div class="top">
-
                                 <p class="uppercase text-center m-no p-side-l p-top-m fs-2"><strong>refine your search</strong></p>
-
+                                <hr class="m-vertical-m">
                             </div>
-                            <div class="middle p-bottom-l">
-                                    
-                                <div class="accordionfc">
-                                    <p class="heading fs-2 uppercase p-no m-no m-side-l" data-target="#product_type" data-toggle="collapse"><strong><span>Type</span><span class="glyphicon glyphicon-minus"></span><span class="glyphicon glyphicon-plus"></strong></p>
-                                    <div class="content collapse in p-side-l" id="product_type">
-                                        
-                                        <!-- expandable content -->
-                                        <div class="checkbox-wrapper">
-                                            <div class="checkbox">
-                                                <label class="container-checkbox fs-2">
-                                                    Pages
-                                                    <input type="checkbox" name="Pages">
-                                                    <span class="checkmark fs-2"></span>
-                                                </label>
-                                            </div>
-                                            <div class="checkbox">
-                                                <label class="container-checkbox fs-2">
-                                                    Videos
-                                                    <input type="checkbox" name="Videos">
-                                                    <span class="checkmark fs-2"></span>
-                                                </label>
-                                            </div>
-                                            <div class="checkbox">
-                                                <label class="container-checkbox fs-2">
-                                                    General Information
-                                                    <input type="checkbox" name="General Information">
-                                                    <span class="checkmark fs-2"></span>
-                                                </label>
-                                            </div>
-                                            <div class="checkbox">
-                                                <label class="container-checkbox fs-2">
-                                                    Products
-                                                    <input type="checkbox" name="Products">
-                                                    <span class="checkmark fs-2"></span>
-                                                </label>
-                                            </div>
-                                            <div class="checkbox">
-                                                <label class="container-checkbox fs-2">
-                                                    Solutions
-                                                    <input type="checkbox" name="Solutions">
-                                                    <span class="checkmark fs-2"></span>
-                                                </label>
-                                            </div>
-                                            <div class="checkbox">
-                                                <label class="container-checkbox fs-2">
-                                                    Systems
-                                                    <input type="checkbox" name="Systems">
-                                                    <span class="checkmark fs-2"></span>
-                                                </label>
-                                            </div>
-                                            <div class="checkbox">
-                                                <label class="container-checkbox fs-2">
-                                                    Tools & Resources
-                                                    <input type="checkbox" name="Tools & Resources">
-                                                    <span class="checkmark fs-2"></span>
-                                                </label>
-                                            </div>
-                                            <div class="checkbox">
-                                                <label class="container-checkbox fs-2">
-                                                    Inspirations
-                                                    <input type="checkbox" name="Inspirations">
-                                                    <span class="checkmark fs-2"></span>
-                                                </label>
-                                            </div>
-                                            <div class="checkbox">
-                                                <label class="container-checkbox fs-2">
-                                                    What's New
-                                                    <input type="checkbox" name="What's New">
-                                                    <span class="checkmark fs-2"></span>
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <!-- END expandable content -->
-
-                                    </div>
-                                </div>
-                                
+                            <div class="middle">
                             </div>
                             <div class="bottom text-center p-side-l p-bottom-l">
 
@@ -175,447 +92,95 @@
                 <!-- END SEARCH FILTER -->
 
                 <!-- RELATED SEARCH -->
-                <div class="related-search bg-light-grey m-bottom-xxl">
-                    <div class="wrapper p-l">
-                        <p class="fs-2"><strong>Searches related to "ceiling"</strong></p>
-                        <p class="fs-2"><a href="#">
-                            ceiling tiles
-                        </a></p>
-                        <p class="fs-2"><a href="#">
-                            ceiling grids
-                        </a></p>
-                        <p class="fs-2"><a href="#">
-                            ceiling texture
-                        </a></p>
-                        <p class="fs-2"><a href="#">
-                            ceiling board
-                        </a></p>
-                        <p class="fs-2"><a href="#">
-                            ceiling calculator
-                        </a></p>
-                    </div>
-                </div>
+                <div class="related-search bg-light-grey m-bottom-xxl"></div>
                 <!-- END RELATED SERACH -->
             </div>
 
             <div class="col-xs-12 col-sm-9">
-
-
-                <div class="row">
-                    <div class="col-xs-12 col-xs-offset-0 col-sm-4 col-sm-offset-8">
-
-                        <div class="search-filter-sort">
-                            <!-- SORT BY --> 
-                            <div class="dropdown dropdown-menu-right m-vertical-m d-small">
-                                <button class="btn btn-default color-dark-grey dropdown-toggle text-left" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <span>Sort By</span>
-                                    <span class="color-primary-green glyphicon glyphicon-menu-down right"></span>
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                    <li><a href="#">Alphabet</a></li>
-                                    <li><a href="#">Oldest to Latest</a></li>
-                                    <li><a href="#">Price</a></li>
-                                    <li><a href="#">Date Added</a></li>
-                                </ul>
-                            </div>
-                            
-                            <!-- END SORT BY -->
-                            <!-- filter --> 
-                            <a href="#" class="filter-icon btn visible-xs btn-smd m-left-m"><span class="color-primary-green glyphicon glyphicon-filter"></span></a>
-                            <!-- end filter --> 
-                        </div>
-
-                        <div class="clearfix"></div>
-
-                    </div>
-                </div>
-
                 <!-- SEARCH CONTENT -->
-                <div class="search-main-content">
-                    <div class="inner">
-
-                        <div class="each m-bottom-xxl p-side-m">
-                            <div class="custom-block bg-light-grey">
-                                <h6 class="title ht6 uppercase text-center p-m">Donn™ DX™ Join 02 CAD<br />AUS (English)</h6>
-                                <div class="thumbs">
-                                    <img src="https://dummyimage.com/280x165/000000/fff" />
-                                </div>
-                                <div class="downloadable">
-                                    <p class="fs-2"><a href="#">PDF</a></p>
-                                    <p class="fs-2"><a href="#">Revit</a></p>
-                                    <p class="fs-2"><a href="#">Auto CAD</a></p>
-                                </div>
-                                <div class="addto text-center uppercase"><a href="#"><span class="glyphicon glyphicon-plus fs-2"></span><span class="fs-2"><strong>Add to submittal</strong></span></a></div>
-                            </div>
+                <div class="relevant-content main-search-result-wrapper">
+                    <div class="search-filter-sort justify-end">
+                        <!-- SORT BY -->
+                        <div class="dropdown dp-form d-small m-bottom-3xl float-right" style="max-width: 280px;">
+                            <button class="btn btn-default color-dark-grey dropdown-toggle text-left dp-clickable" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="dp-text">A - Z</span>
+                                <input type="hidden" name="selectenquirytype" value="a_z">
+                                <span class="color-primary-green glyphicon glyphicon-menu-down right"></span>
+                            </button>
+                            <ul class="dropdown-menu dp-list" aria-labelledby="dropdownMenu1">
+                                <li>
+                                    <a data-val="a_z">A - Z</a>
+                                </li>
+                                <li>
+                                    <a data-val="z_a">Z - A</a>
+                                </li>
+                                <li>
+                                    <a data-val="latest">Latest to oldest</a>
+                                </li>
+                                <li>
+                                    <a data-val="oldest">Oldest to latest</a>
+                                </li>
+                            </ul>
                         </div>
 
-                        <div class="each m-bottom-xxl p-side-m">
-                            <div class="custom-block bg-light-grey">
-                                <h6 class="title ht6 uppercase text-center p-m">Donn™ DX™ Join 02 CAD<br />AUS (English)</h6>
-                                <div class="thumbs">
-                                    <img src="https://dummyimage.com/280x165/000000/fff" />
-                                </div>
-                                <div class="downloadable">
-                                    <p class="fs-2"><a href="#">PDF</a></p>
-                                    <p class="fs-2"><a href="#">Revit</a></p>
-                                    <p class="fs-2"><a href="#">Auto CAD</a></p>
-                                </div>
-                                <div class="addto text-center uppercase"><a href="#"><span class="glyphicon glyphicon-plus fs-2"></span><span class="fs-2"><strong>Add to submittal</strong></span></a></div>
-                            </div>
+                        <div class="dropdown dp-form-mobile dropdown-menu-right m-vertical-m d-small">
+                            <select class="btn-default">
+                                <option value="a_z">A - Z</option>
+                                <option value="z_a">Z - A</option>
+                                <option value="latest">Latest to oldest</option>
+                                <option value="oldest">Oldest to latest</option>
+                            </select>
                         </div>
+                        <!-- END SORT BY -->
 
-                        <div class="each m-bottom-xxl p-side-m">
-                            <div class="custom-block bg-light-grey">
-                                <h6 class="title ht6 uppercase text-center p-m">Donn™ DX™ Join 02 CAD<br />AUS (English)</h6>
-                                <div class="thumbs">
-                                    <img src="https://dummyimage.com/280x165/000000/fff" />
-                                </div>
-                                <div class="downloadable">
-                                    <p class="fs-2"><a href="#">PDF</a></p>
-                                    <p class="fs-2"><a href="#">Revit</a></p>
-                                    <p class="fs-2"><a href="#">Auto CAD</a></p>
-                                </div>
-                                <div class="addto text-center uppercase"><a href="#"><span class="glyphicon glyphicon-plus fs-2"></span><span class="fs-2"><strong>Add to submittal</strong></span></a></div>
-                            </div>
-                        </div>
-
-                        <div class="each m-bottom-xxl p-side-m">
-                            <div class="custom-block bg-light-grey">
-                                <h6 class="title ht6 uppercase text-center p-m">Donn™ DX™ Join 02 CAD<br />AUS (English)</h6>
-                                <div class="thumbs">
-                                    <img src="https://dummyimage.com/280x165/000000/fff" />
-                                </div>
-                                <div class="downloadable">
-                                    <p class="fs-2"><a href="#">PDF</a></p>
-                                    <p class="fs-2"><a href="#">Revit</a></p>
-                                    <p class="fs-2"><a href="#">Auto CAD</a></p>
-                                </div>
-                                <div class="addto text-center uppercase"><a href="#"><span class="glyphicon glyphicon-plus fs-2"></span><span class="fs-2"><strong>Add to submittal</strong></span></a></div>
-                            </div>
-                        </div>
-
-                        <div class="each m-bottom-xxl p-side-m">
-                            <div class="custom-block bg-light-grey">
-                                <h6 class="title ht6 uppercase text-center p-m">Donn™ DX™ Join 02 CAD<br />AUS (English)</h6>
-                                <div class="thumbs">
-                                    <img src="https://dummyimage.com/280x165/000000/fff" />
-                                </div>
-                                <div class="downloadable">
-                                    <p class="fs-2"><a href="#">PDF</a></p>
-                                    <p class="fs-2"><a href="#">Revit</a></p>
-                                    <p class="fs-2"><a href="#">Auto CAD</a></p>
-                                </div>
-                                <div class="addto text-center uppercase"><a href="#"><span class="glyphicon glyphicon-plus fs-2"></span><span class="fs-2"><strong>Add to submittal</strong></span></a></div>
-                            </div>
-                        </div>
-
-                        <div class="each m-bottom-xxl p-side-m">
-                            <div class="custom-block bg-light-grey">
-                                <h6 class="title ht6 uppercase text-center p-m">Donn™ DX™ Join 02 CAD<br />AUS (English)</h6>
-                                <div class="thumbs">
-                                    <img src="https://dummyimage.com/280x165/000000/fff" />
-                                </div>
-                                <div class="downloadable">
-                                    <p class="fs-2"><a href="#">PDF</a></p>
-                                    <p class="fs-2"><a href="#">Revit</a></p>
-                                    <p class="fs-2"><a href="#">Auto CAD</a></p>
-                                </div>
-                                <div class="addto text-center uppercase"><a href="#"><span class="glyphicon glyphicon-plus fs-2"></span><span class="fs-2"><strong>Add to submittal</strong></span></a></div>
-                            </div>
-                        </div>
-
-                        <div class="each m-bottom-xxl p-side-m">
-                            <div class="custom-block bg-light-grey">
-                                <h6 class="title ht6 uppercase text-center p-m">Donn™ DX™ Join 02 CAD<br />AUS (English)</h6>
-                                <div class="thumbs">
-                                    <img src="https://dummyimage.com/280x165/000000/fff" />
-                                </div>
-                                <div class="downloadable">
-                                    <p class="fs-2"><a href="#">PDF</a></p>
-                                    <p class="fs-2"><a href="#">Revit</a></p>
-                                    <p class="fs-2"><a href="#">Auto CAD</a></p>
-                                </div>
-                                <div class="addto text-center uppercase"><a href="#"><span class="glyphicon glyphicon-plus fs-2"></span><span class="fs-2"><strong>Add to submittal</strong></span></a></div>
-                            </div>
-                        </div>
-
-                        <div class="each m-bottom-xxl p-side-m">
-                            <div class="custom-block bg-light-grey">
-                                <h6 class="title ht6 uppercase text-center p-m">Donn™ DX™ Join 02 CAD<br />AUS (English)</h6>
-                                <div class="thumbs">
-                                    <img src="https://dummyimage.com/280x165/000000/fff" />
-                                </div>
-                                <div class="downloadable">
-                                    <p class="fs-2"><a href="#">PDF</a></p>
-                                    <p class="fs-2"><a href="#">Revit</a></p>
-                                    <p class="fs-2"><a href="#">Auto CAD</a></p>
-                                </div>
-                                <div class="addto text-center uppercase"><a href="#"><span class="glyphicon glyphicon-plus fs-2"></span><span class="fs-2"><strong>Add to submittal</strong></span></a></div>
-                            </div>
-                        </div>
-
-                        <div class="each m-bottom-xxl p-side-m">
-                            <div class="custom-block bg-light-grey">
-                                <h6 class="title ht6 uppercase text-center p-m">Donn™ DX™ Join 02 CAD<br />AUS (English)</h6>
-                                <div class="thumbs">
-                                    <img src="https://dummyimage.com/280x165/000000/fff" />
-                                </div>
-                                <div class="downloadable">
-                                    <p class="fs-2"><a href="#">PDF</a></p>
-                                    <p class="fs-2"><a href="#">Revit</a></p>
-                                    <p class="fs-2"><a href="#">Auto CAD</a></p>
-                                </div>
-                                <div class="addto text-center uppercase"><a href="#"><span class="glyphicon glyphicon-plus fs-2"></span><span class="fs-2"><strong>Add to submittal</strong></span></a></div>
-                            </div>
-                        </div>
-                                                                      
+                        <!-- filter -->
+                        <a href="#" class="filter-icon btn visible-xs btn-smd m-left-m">
+                            <span class="color-primary-green glyphicon glyphicon-filter"></span>
+                        </a>
+                        <!-- end filter -->
                     </div>
+                    <div id="data-container" class="inner"></div>
+                    <!-- SEARCH PAGINATION -->
+                    <!-- <nav aria-label="Page navigation">
+                        <ul class="pagination pull-right m-top-no">
+                            <li>
+                                <a href="#" aria-label="Previous">
+                                    <span aria-hidden="true">&lt;</span>
+                                </a>
+                            </li>
+                            <li><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">5</a></li>
+                            <li>
+                                <a href="#" aria-label="Next">
+                                    <span aria-hidden="true">&gt;</span>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </nav> -->
+                    <div id="pagination-container"></div>
+                    <!-- END SEARCH PAGINATION -->
                 </div>
                 <!-- END SEARCH CONTENT -->
 
-                <!-- SEARCH PAGINATION -->
-                <nav aria-label="Page navigation">
-                    <ul class="pagination pull-right m-top-no">
-                        <li>
-                            <a href="#" aria-label="Previous">
-                                <span aria-hidden="true">&lt;</span>
-                            </a>
-                        </li>
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                        <li>
-                            <a href="#" aria-label="Next">
-                                <span aria-hidden="true">&gt;</span>
-                            </a>
-                        </li>
-                    </ul>
-                    <div class="clearfix"></div>
-                </nav>
-                <!-- END SEARCH PAGINATION -->
-                <hr />
-                
-                <h5 class="ht5 uppercase p-side-m m-bottom-xl">We also found relevant “ceiling” in Document Finder</h5>
-                <!-- RELEVANT SEARCH CONTENT -->
-                <div class="relevant-content p-side-m">
-                    <div class="inner">
-
-
-                        <!-- each -->
-                        <div class="each flex-md-row m-bottom-4xl">
-                            <div class="left hidden-xs hidden-sm">
-                                <div class="thumbs">
-                                    <img src="https://dummyimage.com/250x145/000000/fff">
-                                </div>
-                            </div>
-                            <div class="align-center align-md-bottom flex-row right width-full">
-                                <a href="#" class="flex-basis-no flex-IE-grow-auto flex-grow-1 m-right-m">
-                                    <div class="content p-left-no p-md-left-l">
-                                        <p class="sub-headline fs-2">Ceilings - ASONA Acoustical Range | Brochures Catalogues </p>
-                                        <h6 class="headline ht6 uppercase m-bottom-xxs">Sonatex Colour Guide</h6>
-                                        <p class="description m-no">
-                                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonum
-                                        </p>
-                                    </div>
-                                </a>
-                                <div class="align-center flex-basis-no flex-IE-grow-auto flex-grow-0 flex-row justify-end side-functions">
-                                    <div class="bookmark uppercase fs-3"><a href="#" class="btn button-grey visible-xs btn-sm"><span class="glyphicon glyphicon-bookmark"></span></a><a href="#" class="hidden-xs">
-
-                                        <span class="glyphicon glyphicon-bookmark m-right-xxs"></span><span class=""><strong class="">Bookmark</strong></span></a>
-                                    </div>
-                                    <span class="hidden-xs m-side-s">|</span>
-                                    <div class="addto uppercase fs-3 m-left-xxs">
-                                        <a href="#" class="btn button-grey visible-xs btn-sm"><span class="glyphicon glyphicon-plus"></span></a>
-                                        <a href="#" class="hidden-xs"><span class="glyphicon glyphicon-plus m-right-xxs"></span><span class=""><strong class="">Add to submittal</strong></span></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- each  -->
-
-                        <!-- each -->
-                        <div class="each flex-md-row m-bottom-4xl">
-                            <div class="left hidden-xs hidden-sm">
-                                <div class="thumbs">
-                                    <img src="https://dummyimage.com/250x145/000000/fff">
-                                </div>
-                            </div>
-                            <div class="align-center align-md-bottom flex-row right width-full">
-                                <a href="#" class="flex-basis-no flex-IE-grow-auto flex-grow-1 m-right-m">
-                                    <div class="content p-left-no p-md-left-l">
-                                        <p class="sub-headline fs-2">Ceilings - ASONA Acoustical Range | Brochures Catalogues </p>
-                                        <h6 class="headline ht6 uppercase m-bottom-xxs">Sonatex Colour Guide</h6>
-                                        <p class="description m-no">
-                                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonum
-                                        </p>
-                                    </div>
-                                </a>
-                                <div class="align-center flex-basis-no flex-IE-grow-auto flex-grow-0 flex-row justify-end side-functions">
-                                    <div class="bookmark uppercase fs-3"><a href="#" class="btn button-grey visible-xs btn-sm"><span class="glyphicon glyphicon-bookmark"></span></a><a href="#" class="hidden-xs">
-
-                                        <span class="glyphicon glyphicon-bookmark m-right-xxs"></span><span class=""><strong class="">Bookmark</strong></span></a>
-                                    </div>
-                                    <span class="hidden-xs m-side-s">|</span>
-                                    <div class="addto uppercase fs-3 m-left-xxs">
-                                        <a href="#" class="btn button-grey visible-xs btn-sm"><span class="glyphicon glyphicon-plus"></span></a>
-                                        <a href="#" class="hidden-xs"><span class="glyphicon glyphicon-plus m-right-xxs"></span><span class=""><strong class="">Add to submittal</strong></span></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- each  -->
-
-                        <!-- each -->
-                        <div class="each flex-md-row m-bottom-4xl">
-                            <div class="left hidden-xs hidden-sm">
-                                <div class="thumbs">
-                                    <img src="https://dummyimage.com/250x145/000000/fff">
-                                </div>
-                            </div>
-                            <div class="align-center align-md-bottom flex-row right width-full">
-                                <a href="#" class="flex-basis-no flex-IE-grow-auto flex-grow-1 m-right-m">
-                                    <div class="content p-left-no p-md-left-l">
-                                        <p class="sub-headline fs-2">Ceilings - ASONA Acoustical Range | Brochures Catalogues </p>
-                                        <h6 class="headline ht6 uppercase m-bottom-xxs">Sonatex Colour Guide</h6>
-                                        <p class="description m-no">
-                                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonum
-                                        </p>
-                                    </div>
-                                </a>
-                                <div class="align-center flex-basis-no flex-IE-grow-auto flex-grow-0 flex-row justify-end side-functions">
-                                    <div class="bookmark uppercase fs-3"><a href="#" class="btn button-grey visible-xs btn-sm"><span class="glyphicon glyphicon-bookmark"></span></a><a href="#" class="hidden-xs">
-
-                                        <span class="glyphicon glyphicon-bookmark m-right-xxs"></span><span class=""><strong class="">Bookmark</strong></span></a>
-                                    </div>
-                                    <span class="hidden-xs m-side-s">|</span>
-                                    <div class="addto uppercase fs-3 m-left-xxs">
-                                        <a href="#" class="btn button-grey visible-xs btn-sm"><span class="glyphicon glyphicon-plus"></span></a>
-                                        <a href="#" class="hidden-xs"><span class="glyphicon glyphicon-plus m-right-xxs"></span><span class=""><strong class="">Add to submittal</strong></span></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- each  -->
-
-                    </div>
-                </div>
-                <!-- END RELEVANT SEARCH CONTENT -->
-                <a href="#" class="btn btn-top-border btn-dark float-right">Read More <span class="glyphicon glyphicon-menu-right"></span></a>
-                <div class="clearfix"></div>
-                <hr />
-                
-                <h5 class="ht5 uppercase p-side-m m-bottom-xl">We also found relevant “ceiling” in Content</h5>
-                <!-- RELEVANT SEARCH CONTENT -->
-                <div class="relevant-content p-side-m">
-                    <div class="inner">
-
-
-                        <!-- each -->
-                        <div class="each flex-md-row m-bottom-4xl">
-                            <div class="left hidden-xs hidden-sm">
-                                <div class="thumbs">
-                                    <img src="https://dummyimage.com/250x145/000000/fff">
-                                </div>
-                            </div>
-                            <div class="align-center align-md-bottom flex-row right width-full">
-                                <a href="#" class="flex-basis-no flex-IE-grow-auto flex-grow-1 m-right-m">
-                                    <div class="content p-left-no p-md-left-l">
-                                        <p class="sub-headline fs-2">Knowledge Hub </p>
-                                        <h6 class="headline ht6 uppercase m-bottom-xxs">How to reduce retail project challenges – fast!</h6>
-                                        <p class="description m-no">
-                                            Retail projects present significant logistical and code compliance challenges,especially refurbishments and extensions to existing shopping centres...
-                                        </p>
-                                    </div>
-                                </a>
-                                <div class="align-center flex-basis-no flex-IE-grow-auto flex-grow-0 flex-row justify-end side-functions-short">
-                                    <div class="bookmark uppercase fs-3"><a href="#" class="btn button-grey visible-xs btn-sm"><span class="glyphicon glyphicon-bookmark"></span></a><a href="#" class="hidden-xs">
-
-                                        <span class="glyphicon glyphicon-bookmark m-right-xxs"></span><span class=""><strong class="">Bookmark</strong></span></a>
-                                    </div>
-                                    
-                                    
-                                </div>
-                            </div>
-                        </div>
-                        <!-- each  -->
-
-                        <!-- each -->
-                        <div class="each flex-md-row m-bottom-4xl">
-                            <div class="left hidden-xs hidden-sm">
-                                <!-- c-video-popup -->
-                                <div class="c-video-popup">
-                                    <a data-fancybox="" href="https://www.youtube.com/watch?v=Ous3ffTXRFw">
-                                        <span class="ico-play-video color-white fa fa-play-circle"></span>
-                                        <img src="https://dummyimage.com/500x290/000000/fff" alt="">
-                                    </a>
-                                </div>
-                                <!-- end c-video-popup -->
-                            </div>
-                            <div class="align-center align-md-bottom flex-row right width-full">
-                                <a href="#" class="flex-basis-no flex-IE-grow-auto flex-grow-1 m-right-m">
-                                    <div class="content p-left-no p-md-left-l">
-                                        <p class="sub-headline fs-2">Knowledge Hub </p>
-                                        <h6 class="headline ht6 uppercase m-bottom-xxs">How to reduce retail project challenges – fast!</h6>
-                                        <p class="description m-no">
-                                            Retail projects present significant logistical and code compliance challenges,especially refurbishments and extensions to existing shopping centres...
-                                        </p>
-                                    </div>
-                                </a>
-                                <div class="align-center flex-basis-no flex-IE-grow-auto flex-grow-0 flex-row justify-end side-functions-short">
-                                    <div class="bookmark uppercase fs-3"><a href="#" class="btn button-grey visible-xs btn-sm"><span class="glyphicon glyphicon-bookmark"></span></a><a href="#" class="hidden-xs">
-
-                                        <span class="glyphicon glyphicon-bookmark m-right-xxs"></span><span class=""><strong class="">Bookmark</strong></span></a>
-                                    </div>
-                                    
-                                    
-                                </div>
-                            </div>
-                        </div>
-                        <!-- each  -->
-
-                        <!-- each -->
-                        <div class="each flex-md-row m-bottom-4xl">
-                            <div class="left hidden-xs hidden-sm">
-                                <div class="thumbs">
-                                    <img src="https://dummyimage.com/250x145/000000/fff">
-                                </div>
-                            </div>
-                            <div class="align-center align-md-bottom flex-row right width-full">
-                                <a href="#" class="flex-basis-no flex-IE-grow-auto flex-grow-1 m-right-m">
-                                    <div class="content p-left-no p-md-left-l">
-                                        <p class="sub-headline fs-2">Knowledge Hub </p>
-                                        <h6 class="headline ht6 uppercase m-bottom-xxs">How to reduce retail project challenges – fast!</h6>
-                                        <p class="description m-no">
-                                            Retail projects present significant logistical and code compliance challenges,especially refurbishments and extensions to existing shopping centres...
-                                        </p>
-                                    </div>
-                                </a>
-                                <div class="align-center flex-basis-no flex-IE-grow-auto flex-grow-0 flex-row justify-end side-functions-short">
-                                    <div class="bookmark uppercase fs-3"><a href="#" class="btn button-grey visible-xs btn-sm"><span class="glyphicon glyphicon-bookmark"></span></a><a href="#" class="hidden-xs">
-
-                                        <span class="glyphicon glyphicon-bookmark m-right-xxs"></span><span class=""><strong class="">Bookmark</strong></span></a>
-                                    </div>
-                                    
-                                    
-                                </div>
-                            </div>
-                        </div>
-                        <!-- each  -->                        
-
-
-                    </div>
-                </div>
-                <!-- END RELEVANT SEARCH CONTENT -->
-                <a href="#" class="btn btn-top-border btn-dark float-right">Read More <span class="glyphicon glyphicon-menu-right"></span></a>
-                <div class="clearfix"></div>
+                <div class="sub-search-result-wrapper"></div>
                 
             </div>
         </div>
     </div>
-
     <!-- SEARCH INPUT (GROUP) END-->
+
+    <div class="no-search-result-container container hidden">
+        <div class="row">
+            <div class="col-xs-12">
+                <h5 class="ht5 color-primary-green m-vertical-l m-bottom-s">Currently no result has been found.</h5>
+                <p>Please search again.</p>
+            </div>
+        </div>
+    </div>
     <!-- SECTION SEARCH END -->
 
 
@@ -629,4 +194,295 @@
 </div>
 <!-- END of PAGE CONTENT -->
 
+<!-- filter mobile content -->
+<div class="filter-mobile-content hidden">
+    <section class="section">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-12 p-no ">         
+                    <div class="close-filter-mobile-content p-l">
+                        <a href="#" class="icon-color-darker-grey icon-size-xs glyphicon glyphicon-remove"></a>
+                    </div>
+                    <!-- SEARCH FILTER -->
+                    <div class="search-filter m-bottom-xxl">
+                        <form id="search-filter-mobile-form">
+                            <div class="wrapper">
+                                <div class="top">
+                                    <p class="uppercase text-center m-no p-side-l fs-2"><strong>refine your search</strong></p>
+                                    <hr class="m-vertical-m">
+                                </div>
+                                <div class="middle p-bottom-l">
+                                </div>
+                                <div class="bottom text-center p-side-l p-bottom-l">
+                                    <button type="submit" class="btn btn-brand-default button-green btn-sm">APPLY FILTER</button>
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+                    <!-- END SEARCH FILTER -->
+
+                    <!-- RELATED SEARCH -->
+                    <div class="related-search m-bottom-xxl"></div>
+                    <!-- END RELATED SERACH -->
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script id="templSearchFilterMobile" type="text/x-handlebars-template">
+    {{#each this}} 
+    <div class="accordionfc">
+        <p class="heading fs-2 uppercase p-no m-no m-side-l" data-target="#m_filter_{{key}}" data-toggle="collapse" aria-expanded="true">
+            <strong>
+                <span>{{title}}</span>
+                <span class="glyphicon glyphicon-minus"></span>
+                <span class="glyphicon glyphicon-plus"></span>
+            </strong>
+        </p>
+        <div class="content p-side-l collapse in" id="m_filter_{{key}}" aria-expanded="true">
+            <!-- expandable content -->
+            <div class="checkbox-wrapper">
+                {{#each child}} 
+                <label class="container-checkbox mobile fs-2">
+                    {{name}}
+                    <input type="checkbox" name="{{key}}" value="{{key}}">
+                </label>
+                {{/each}}
+            </div>
+            <!-- END expandable content -->
+        </div>
+    </div>
+    {{/each}}
+</script>
+
+<script id="templSearchFilterDesktop" type="text/x-handlebars-template">
+    {{#each this}}
+        <div class="accordionfc">
+            <p class="heading fs-2 uppercase p-no m-no m-side-l" data-target="#d_filter_{{key}}" data-toggle="collapse">
+                <strong>
+                    <span>{{title}}</span>
+                    <span class="glyphicon glyphicon-minus"></span>
+                    <span class="glyphicon glyphicon-plus">
+                </strong>
+            </p>
+            <div class="content collapse in p-side-l" id="d_filter_{{key}}">
+                <!-- expandable content -->
+                <div class="checkbox-wrapper">
+                    {{#each child}}
+                    <div class="checkbox">
+                        <label class="container-checkbox fs-2">
+                            {{name}}
+                            <input type="checkbox" name="{{key}}" value="{{key}}">
+                            <span class="checkmark fs-2"></span>
+                        </label>
+                    </div>
+                    {{/each}}
+                </div>
+                <!-- END expandable content -->
+            </div>
+        </div>
+    {{/each}}
+</script>
+
+
+<script id="templSearchRelated" type="text/x-handlebars-template">
+    <div class="wrapper p-l">
+        <p class="fs-2"><strong>Searches related to "{{searched_text}}"</strong></p>
+        {{#each searches_related}}
+        <p class="fs-2">
+            <a href="#">
+                {{this}}
+            </a>
+        </p>
+        {{/each}}
+    </div>
+</script>
+
+<script id="templSearchResult" type="text/x-handlebars-template">
+    {{#each this}} 
+    <div class="each width-full flex-md-row m-bottom-4xl" data-key="{{key}}">
+        <div class="left hidden-xs hidden-sm">
+            {{#ifEquals this.type "pages"}}
+            <div class="thumbs">
+                <a href="{{link}}">
+                    <img src="{{image}}">
+                </a>
+            </div>
+            {{else}}
+            <div class="c-video-popup">
+                <a data-fancybox="" href="{{link}}">
+                    <span class="ico-play-video color-white fa fa-play-circle"></span>
+                    <img src="{{image}}" alt="">
+                </a>
+            </div>
+            {{/ifEquals}}
+        </div>
+        <div class="align-center align-md-bottom flex-row right width-full">
+            <a href="{{link}}" class="flex-basis-no flex-IE-grow-auto flex-grow-1 m-right-m">
+                <div class="content p-left-no p-md-left-l">
+                    <p class="sub-headline fs-2">{{category}}</p>
+                    <h6 class="headline ht6 uppercase m-bottom-xxs">{{title}}</h6>
+                    <p class="description m-no">
+                        {{desc}}
+                    </p>
+                </div>
+            </a>
+            <div class="align-center flex-basis-no flex-IE-grow-auto flex-grow-0 flex-row justify-end side-functions-short">
+                <div class="bookmark uppercase fs-3">
+                    <a href="#">
+                        <div class="btn button-grey visible-xs">
+                            <span class="glyphicon glyphicon-bookmark"></span>
+                        </div>
+                        <div class="hidden-xs">
+                            <span class="glyphicon glyphicon-bookmark m-right-xxs"></span>
+                            <span>
+                                <strong>Bookmark</strong>
+                            </span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{/each}}
+</script>
+
+
+<script id="templSubSearchResult_docFinder" type="text/x-handlebars-template">
+    <hr />
+    <h5 class="ht5 uppercase m-bottom-xl">We also found relevant "<span>{{searched_text}}</span>" in Document Finder</h5>
+    <!-- RELEVANT SEARCH CONTENT -->
+    <div class="relevant-content">
+        <div class="inner">
+            {{#each docFinder}}
+            <div class="each flex-md-row m-bottom-4xl" data-key="{{key}}">
+                <div class="left hidden-xs hidden-sm">
+                    <div class="thumbs">
+                        <a href="#"><img src="https://dummyimage.com/250x145/000000/fff"></a>
+                    </div>
+                </div>
+                <div class="align-center align-md-bottom flex-row right width-full">
+                    <a href="#" class="flex-basis-no flex-IE-grow-auto flex-grow-1 m-right-m">
+                        <div class="content p-left-no p-md-left-l">
+                            <p class="sub-headline fs-2">{{category}}</p>
+                            <h6 class="headline ht6 uppercase m-bottom-xxs">{{title}}</h6>
+                            <p class="description m-no">
+                                {{desc}}
+                            </p>
+                        </div>
+                    </a>
+                    <div class="align-center flex-basis-no flex-IE-grow-auto flex-grow-0 flex-row justify-end side-functions">
+                        <div class="bookmark uppercase fs-3">
+                            <a href="#" class="btn button-grey visible-xs btn-sm">
+                                <span class="glyphicon glyphicon-bookmark"></span>
+                            </a>
+                            <a href="#" class="hidden-xs">
+                                <span class="glyphicon glyphicon-bookmark m-right-xxs"></span>
+                                <span class="">
+                                    <strong class="">Bookmark</strong>
+                                </span>
+                            </a>
+                        </div>
+                        <span class="hidden-xs m-side-s">|</span>
+                        <div class="addto uppercase fs-3 m-left-xxs">
+                            <a href="#" class="btn button-grey visible-xs btn-sm">
+                                <span class="glyphicon glyphicon-plus"></span>
+                            </a>
+                            <a href="#" class="hidden-xs">
+                                <span class="glyphicon glyphicon-plus m-right-xxs"></span>
+                                <span class="">
+                                    <strong class="">Add to submittal</strong>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+    <!-- END RELEVANT SEARCH CONTENT -->
+    <a href="#" class="btn btn-top-border btn-dark float-right">Read More <span class="glyphicon glyphicon-menu-right"></span></a>
+    <div class="clearfix"></div>
+</script>
+
+<script id="templSubSearchResult_content" type="text/x-handlebars-template">
+    <hr />
+    <h5 class="ht5 uppercase m-bottom-xl">We also found relevant "<span>{{searched_text}}</span>" in Content</h5>
+    <!-- RELEVANT SEARCH CONTENT -->
+    <div class="relevant-content">
+        <div class="inner">
+            {{#each content}}
+                <div class="each width-full flex-md-row m-bottom-4xl" data-key="{{key}}">
+                    <div class="left hidden-xs hidden-sm">
+                        {{#ifEquals this.type "pages"}}
+                        <div class="thumbs">
+                            <a href="{{link}}">
+                                <img src="{{image}}">
+                            </a>
+                        </div>
+                        {{else}}
+                        <div class="c-video-popup">
+                            <a data-fancybox="" href="{{link}}">
+                                <span class="ico-play-video color-white fa fa-play-circle"></span>
+                                <img src="{{image}}" alt="">
+                            </a>
+                        </div>
+                        {{/ifEquals}}
+                    </div>
+                    <div class="align-center align-md-bottom flex-row right width-full">
+                        <a href="{{link}}" class="flex-basis-no flex-IE-grow-auto flex-grow-1 m-right-m">
+                            <div class="content p-left-no p-md-left-l">
+                                <p class="sub-headline fs-2">{{category}}</p>
+                                <h6 class="headline ht6 uppercase m-bottom-xxs">{{title}}</h6>
+                                <p class="description m-no">
+                                    {{desc}}
+                                </p>
+                            </div>
+                        </a>
+                        <div class="align-center flex-basis-no flex-IE-grow-auto flex-grow-0 flex-row justify-end side-functions-short">
+                            <div class="bookmark uppercase fs-3">
+                                <a href="#">
+                                    <div class="btn button-grey visible-xs">
+                                        <span class="glyphicon glyphicon-bookmark"></span>
+                                    </div>
+                                    <div class="hidden-xs">
+                                        <span class="glyphicon glyphicon-bookmark m-right-xxs"></span>
+                                        <span>
+                                            <strong>Bookmark</strong>
+                                        </span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {{/each}}
+        </div>
+    </div>
+    <!-- END RELEVANT SEARCH CONTENT -->
+    <a href="#" class="btn btn-top-border btn-dark float-right">Read More <span class="glyphicon glyphicon-menu-right"></span></a>
+    <div class="clearfix"></div>
+</script>
+
+
+
 <sly data-sly-use.clientLib="/libs/granite/sightly/templates/clientlib.html" data-sly-call="${clientLib.js @ categories='uiux.alljs'}" data-sly-unwrap/>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
+<script src="/etc/designs/usgb_v3/clientlib/uiux-less-ct/js/vendors/pagination.js"></script>
+<script src="/etc/designs/usgb_v3/clientlib/uiux-less-ct.js"></script>
+
+<style>
+.page-search-content .search-filter-sort{
+    -webkit-box-pack: flex-end;
+    -ms-flex-pack: flex-end;
+    justify-content: flex-end;
+}
+
+.search-filter-sort button{
+    height: 36px;
+}
+</style>
