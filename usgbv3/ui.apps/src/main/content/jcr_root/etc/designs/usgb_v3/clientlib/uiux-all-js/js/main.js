@@ -1596,7 +1596,7 @@ $(window).on('load', function () {
                 numberOfChecked = $('.listing-search-content div input:checkbox:checked').length;
                 $(".popup-content").show();
                 if (numberOfChecked >= 4) {
-                    $(this).prop('checked', false);
+                    $("[data-input-value =" + inputVal + "]").attr('checked', false);
                     $("[data-content-title=" + inputVal + "]").remove();
                 }
                 if (numberOfChecked > 1) {
