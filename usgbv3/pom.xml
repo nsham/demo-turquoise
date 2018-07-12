@@ -33,7 +33,7 @@
     <properties>
     
         <aem.host.local>localhost</aem.host.local>
-        <aem.port.local>4502</aem.port.local>
+        <aem.port.local>4504</aem.port.local>
         <aem.slng.user.local>admin</aem.slng.user.local>
         <aem.slng.password.local>admin</aem.slng.password.local>
         <aem.vlt.user.local>admin</aem.vlt.user.local>
@@ -539,6 +539,18 @@
     <!-- ====================================================================== -->
     <dependencyManagement>
         <dependencies>
+            <!-- excel file reading dependencies -->
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi</artifactId>
+                <version>3.10-FINAL</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi-ooxml</artifactId>
+                <version>3.9</version>
+            </dependency>
+
             <!-- OSGi Dependencies -->
             <dependency>
                 <groupId>org.osgi</groupId>
