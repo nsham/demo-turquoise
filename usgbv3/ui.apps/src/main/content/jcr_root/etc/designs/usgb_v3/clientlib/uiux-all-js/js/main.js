@@ -1534,7 +1534,6 @@ $(window).on('load', function () {
         $('[data-img-height="img-height"]').matchHeight();
         $('.gallery-listing-search-content .box-type-2 .center').matchHeight(); 
         $('.listing-search-content .each .custom-block').matchHeight(); 
-
     });
 })();
  
@@ -1779,6 +1778,7 @@ $(window).on('load', function () {
                 if ($('.' + dataSearchVal + '-wrapper  input[data-checkname=' + checkname + ']').is(':checked')) {
                     $('[data-checkbutton=' + dataSearchVal + ']').append("<div data-selection=" + checkname + " class='bg-grey m-xs bold btn btn-xs'>" + checkboxName + "<span class='btn-close fs-1 p-left-s'>&times;</span></div>");
                     // remove duplicates
+            
                     if ($('[data-selection=' + checkname + ']').length > 1) {
                         $('[data-selection=' + checkname + ']').last().remove();
                     }
