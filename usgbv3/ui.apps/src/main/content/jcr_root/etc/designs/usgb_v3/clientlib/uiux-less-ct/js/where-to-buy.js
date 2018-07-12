@@ -4,7 +4,7 @@
 (function () {
     "use strict";
 
-    if($('#filter-list-controller')){
+    if($('#filter-list-controller').length > 0){
         var map;
         var infoWindow;
         var markersData = [];

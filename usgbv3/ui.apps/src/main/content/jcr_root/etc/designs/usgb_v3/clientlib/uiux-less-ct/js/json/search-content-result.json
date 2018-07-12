@@ -1,0 +1,201 @@
+{
+    "searched_text": "ceiling",
+    "result": true,
+    "num_result": 99,
+    "filter_listing": [
+        {
+            "key": "type",
+            "title": "Type",
+            "child": [
+                {
+                    "key": "pages",
+                    "name": "Pages"
+                },
+                {
+                    "key": "videos",
+                    "name": "Videos"
+                }
+            ]
+        },
+        {
+            "key": "product_category",
+            "title": "Product Category",
+            "child": [
+                {
+                    "key": "pages1",
+                    "name": "Pages1"
+                },
+                {
+                    "key": "videos1",
+                    "name": "Videos1"
+                }
+            ]
+        }
+    ],
+    "content": [
+        {
+            "key": "content_123",
+            "link": "https://www.youtube.com/watch?v=Ous3ffTXRFw",
+            "image": "https://dummyimage.com/250x145/000000/fff",
+            "category": "Knowledge Hub",
+            "title": "Sonatex Colour Guide",
+            "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonum",
+            "type": "videos",
+            "created_date": 2018070723050508
+        },
+        {
+            "key": "content_456",
+            "link": "https://www.youtube.com/watch?v=Ous3ffTXRFw",
+            "image": "https://dummyimage.com/250x145/000000/fff",
+            "category": "Knowledge Hub",
+            "title": "Sonatex Colour Guide",
+            "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonum",
+            "type": "videos",
+            "created_date": 2018070723050508
+        },
+        {
+            "key": "content_789",
+            "link": "http://usgbuataut.cloudapp.net:4504/content/v3/usgboral/samplepage/product-details.html?wcmmode=disabled",
+            "image": "https://dummyimage.com/250x145/000000/fff",
+            "category": "Knowledge Hub",
+            "title": "Sonatex Colour Guide",
+            "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonum",
+            "type": "pages",
+            "created_date": 2018070723050508
+        },
+        {
+            "key": "content_123",
+            "link": "https://www.youtube.com/watch?v=Ous3ffTXRFw",
+            "image": "https://dummyimage.com/250x145/000000/fff",
+            "category": "Knowledge Hub",
+            "title": "Sonatex Colour Guide",
+            "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonum",
+            "type": "videos",
+            "created_date": 2018070723050508
+        },
+        {
+            "key": "content_456",
+            "link": "https://www.youtube.com/watch?v=Ous3ffTXRFw",
+            "image": "https://dummyimage.com/250x145/000000/fff",
+            "category": "Knowledge Hub",
+            "title": "Sonatex Colour Guide",
+            "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonum",
+            "type": "videos",
+            "created_date": 2018070723050508
+        },
+        {
+            "key": "content_789",
+            "link": "http://usgbuataut.cloudapp.net:4504/content/v3/usgboral/samplepage/product-details.html?wcmmode=disabled",
+            "image": "https://dummyimage.com/250x145/000000/fff",
+            "category": "Knowledge Hub",
+            "title": "Sonatex Colour Guide",
+            "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonum",
+            "type": "pages",
+            "created_date": 2018070723050508
+        },
+        {
+            "key": "content_123",
+            "link": "https://www.youtube.com/watch?v=Ous3ffTXRFw",
+            "image": "https://dummyimage.com/250x145/000000/fff",
+            "category": "Knowledge Hub",
+            "title": "Sonatex Colour Guide",
+            "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonum",
+            "type": "videos",
+            "created_date": 2018070723050508
+        },
+        {
+            "key": "content_456",
+            "link": "https://www.youtube.com/watch?v=Ous3ffTXRFw",
+            "image": "https://dummyimage.com/250x145/000000/fff",
+            "category": "Knowledge Hub",
+            "title": "Sonatex Colour Guide",
+            "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonum",
+            "type": "videos",
+            "created_date": 2018070723050508
+        },
+        {
+            "key": "content_789",
+            "link": "http://usgbuataut.cloudapp.net:4504/content/v3/usgboral/samplepage/product-details.html?wcmmode=disabled",
+            "image": "https://dummyimage.com/250x145/000000/fff",
+            "category": "Knowledge Hub",
+            "title": "Sonatex Colour Guide",
+            "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonum",
+            "type": "pages",
+            "created_date": 2018070723050508
+        },
+        {
+            "key": "content_123",
+            "link": "https://www.youtube.com/watch?v=Ous3ffTXRFw",
+            "image": "https://dummyimage.com/250x145/000000/fff",
+            "category": "Knowledge Hub",
+            "title": "Sonatex Colour Guide",
+            "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonum",
+            "type": "videos",
+            "created_date": 2018070723050508
+        },
+        {
+            "key": "content_456",
+            "link": "https://www.youtube.com/watch?v=Ous3ffTXRFw",
+            "image": "https://dummyimage.com/250x145/000000/fff",
+            "category": "Knowledge Hub",
+            "title": "Sonatex Colour Guide",
+            "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonum",
+            "type": "videos",
+            "created_date": 2018070723050508
+        },
+        {
+            "key": "content_789",
+            "link": "http://usgbuataut.cloudapp.net:4504/content/v3/usgboral/samplepage/product-details.html?wcmmode=disabled",
+            "image": "https://dummyimage.com/250x145/000000/fff",
+            "category": "Knowledge Hub",
+            "title": "Sonatex Colour Guide",
+            "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonum",
+            "type": "pages",
+            "created_date": 2018070723050508
+        }
+    ],
+    "docFinder": [
+        {
+            "key": "docFinder_123",
+            "link": "http://usgbuataut.cloudapp.net:4504/content/v3/usgboral/samplepage/product-details.html?wcmmode=disabled",
+            "image": "https://dummyimage.com/250x145/000000/fff",
+            "category": "Knowledge Hub",
+            "title": "Sonatex Colour Guide",
+            "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonum",
+            "type": "pages",
+            "created_date": 2018070723050508
+        },
+        {
+            "key": "docFinder_456",
+            "link": "http://usgbuataut.cloudapp.net:4504/content/v3/usgboral/samplepage/product-details.html?wcmmode=disabled",
+            "image": "https://dummyimage.com/250x145/000000/fff",
+            "category": "Knowledge Hub",
+            "title": "Sonatex Colour Guide",
+            "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonum",
+            "type": "pages",
+            "created_date": 2018070723050508
+        },{
+            "key": "docFinder_789",
+            "link": "http://usgbuataut.cloudapp.net:4504/content/v3/usgboral/samplepage/product-details.html?wcmmode=disabled",
+            "image": "https://dummyimage.com/250x145/000000/fff",
+            "category": "Knowledge Hub",
+            "title": "Sonatex Colour Guide",
+            "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonum",
+            "type": "pages",
+            "created_date": 2018070723050508
+        }
+    ],
+    "cad": [
+        {
+            "key": "articleKey",
+            "link": "http://usgbuataut.cloudapp.net:4504/content/v3/usgboral/samplepage/product-details.html?wcmmode=disabled",
+            "image": "https://dummyimage.com/250x145/000000/fff",
+            "category": "Knowledge Hub",
+            "title": "Sonatex Colour Guide",
+            "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonum",
+            "type": "pages",
+            "created_date": 2018070723050508
+        }
+    ],
+    "searches_related": ["ceiling tiles", "ceiling grids"]
+}

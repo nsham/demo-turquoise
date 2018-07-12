@@ -37,70 +37,112 @@ function defaultScrollUpdate(element) {
 /*end defaultScrollUpdate====================*/
 
 /*load script before body====================*/
-function hookHeadScript(url, async, callback){
+function hookHeadScript(url, async, defer, callback) {
 
-if( document.getElementsByTagName('html')[0].innerHTML.indexOf(url) === -1 )
-    {
+    if (document.getElementsByTagName('html')[0].innerHTML.indexOf(url) === -1) {
         var script = document.createElement("script")
         script.type = "text/javascript";
         script.onload = callback;
         script.src = url;
-        if( async === true ){
+        if (async === true) {
             script.setAttribute("async", "");
+        }
+        if (defer === true) {
+            script.setAttribute("defer", "");
         }
         document.getElementsByTagName("head")[0].appendChild(script);
     }
 }
 /*end load script before body====================*/
 
-/*load youtube video via api====================*/
-function onYouTubeIframeAPIReady(name, id)
-{
-   // console.log(name);
-   // console.log(id);
-    var player;
-    player = new YT.Player(name,
-    {
-          videoId: id, 
-          width: 560, 
-          height: 316,   
-          playerVars:
-          {
-              autoplay: 0, 
-              controls: 1,
-              showinfo: 1, 
-              modestbranding: 1,
-              loop: 0, 
-              fs: 1,
-              cc_load_policy: 0, 
-              autohide: 0 
-          },
-          events:
-          {
-              onReady: function(e)
-              {
-                //e.target.mute();//chrome need to set to mute to autoplay
-                e.target.playVideo();
-              }
-          }
-    });
-}
-/*end load youtube video via api====================*/
-
 // ----------------------------------------------------------------------
 //END Default reusable functions
 // ----------------------------------------------------------------------
 
 // ----------------------------------------------------------------------
-//Default script to append
+// Load inline youtube video(s) in background
 // ----------------------------------------------------------------------
-hookHeadScript("https://www.youtube.com/iframe_api",true, function()
-{ 
-    console.log('youtbe iframe api loaded');
-});
-// ----------------------------------------------------------------------
-//END Default script to append
-// ----------------------------------------------------------------------
+(function () {
+    "use strict";
+    $(document).ready(function () {
+
+
+        //load youtube api
+        hookHeadScript("//www.youtube.com/iframe_api", true, false, function ()
+        {
+
+            //console.log('youtbe iframe api loaded');
+
+            //add youtube video
+
+            $( ".YouTubeVideoPlayer" ).each(function( index ) {
+              var youtubeID = $(this).attr('id');
+              var youtubeVideoID = $(this).attr('data-youtubeid');
+
+              //console.log(youtubeVideoID);
+
+              //load all youtube videos in background when page load
+              onYouTubeIframeAPIReady(youtubeID, youtubeVideoID);
+              
+            });
+
+
+            function onYouTubeIframeAPIReady(name, id) {
+
+                //The callback is fired once the api script has been loaded but not necessarily executed.
+                if( (typeof YT !== "undefined") && YT && YT.Player )
+                {
+
+                    //console.log('not ready');
+                    var player;
+
+                    player = new YT.Player(name,
+                        {
+                            videoId: id,
+                            width: 560,
+                            height: 316,
+                            playerVars:
+                            {
+                                autoplay: 0,
+                                controls: 1,
+                                showinfo: 1,
+                                modestbranding: 1,
+                                loop: 0,
+                                fs: 1,
+                                cc_load_policy: 0,
+                                autohide: 0
+                            },
+                            events:
+                            {
+                                onReady: function (e) {
+                                    //e.target.mute();//chrome need to set to mute to autoplay
+                                    //e.target.playVideo();
+                                  
+                                    //bind play buttons to each player
+                                    var playButton = $("#"+name).parent().prev('button');
+                                    playButton.on('click', function() {
+                                      player.playVideo();
+                                    });
+
+                                }
+                            }
+                        });
+
+                }else
+                {
+                    //console.log('ready');
+                    setTimeout(function(){ onYouTubeIframeAPIReady(name, id); }, 100);
+                }
+
+            }
+
+
+        });
+
+
+    });
+
+})();
 
 // ----------------------------------------------------------------------
 // Component: Hero Banner
@@ -129,10 +171,10 @@ hookHeadScript("https://www.youtube.com/iframe_api",true, function()
 (function () {
     "use strict";
 
-    $('.social-media-pop-up').click(function(e) {
+    $('.social-media-pop-up').click(function (e) {
         e.preventDefault();
-       window.open($(this).attr('href'), 'shareWindow', 'height=450, width=550, toolbar=0, location=0, menubar=0, directories=0, scrollbars=0');
-       return false;
+        window.open($(this).attr('href'), 'shareWindow', 'height=450, width=550, toolbar=0, location=0, menubar=0, directories=0, scrollbars=0');
+        return false;
     });
 
 })();
@@ -192,8 +234,8 @@ hookHeadScript("https://www.youtube.com/iframe_api",true, function()
             var youtubevideo = $(element).next().find($('.modal-video-elem'));
 
             //pause/stop videos using iframe only, for more customization use youtube api instead
-            $('iframe.modal-video-elem').each(function(){
-              this.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*')
+            $('iframe.modal-video-elem').each(function () {
+                this.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*')
             });
 
         }
@@ -217,49 +259,103 @@ hookHeadScript("https://www.youtube.com/iframe_api",true, function()
 
     $(document).ready(function () {
 
+        //   if($('.inline-video').length)playVideoPlayer()
+
+        // function playVideoPlayer(){
+
         $('.inline-video').on("click", function () {
-            
+
             var $this = $(this);
             var thumbs = $this.children('.cta-video-inline');
             var video = $this.find('video');
 
-            if( $this.data('video') === "html5" )
-            {
-
-
+            if ($this.data('video') === "html5") {
 
                 //retain image for video responsiveness
                 thumbs.css({ "z-index": -1 });
                 video.css({ "z-index": 1 });
                 video[0].play();
 
-            }else if( $this.data('video') === "youtube" )
+            } else if ($this.data('video') === "youtube") {
+
+                var videoWrapper = $this.find('.video');
+                var video = $this.find('.YouTubeVideoPlayer');
+                //YT.Player name parameter must be an ID not class
+                var videoIdName = video.attr('id');
+                var videoId = video.attr('data-youtubeId');
+
+
+               /* load youtube api with video based on click
+
+                //load youtube api
+                hookHeadScript("//www.youtube.com/iframe_api", true, false, function ()
                 {
 
-                    var videoWrapper = $this.find('.video');
-                    var video = $this.find('.YouTubeVideoPlayer');
-                    var videoIdName = video.attr('id');
-                    //YT.Player name parameter must be an ID not class
-                    //var videoClassName = video.attr('class');
-                    var videoId = video.attr('data-youtubeId');
-
-                    // $('.inline-video').find('.video').append('ssss');
-                    // console.log(videoWrapper);
-                    //videoWrapper.append('ssss');
-
-                    onYouTubeIframeAPIReady(videoIdName, videoId);             
-
-                    //retain image for video responsiveness
-                    thumbs.css({ "z-index": -1 });
-                    video.css({ "z-index": 1 });
-              
-
-                }
-            
+                    console.log('youtbe iframe api loaded');
 
 
 
+                    //add youtube video
+                    onYouTubeIframeAPIReady('ranID', 'aqz-KE-bpKQ');
+
+                    function onYouTubeIframeAPIReady(name, id) {
+
+                        //The callback is fired once the api script has been loaded but not necessarily executed.
+                        if( (typeof YT !== "undefined") && YT && YT.Player )
+                        {
+
+                            //console.log('not ready');
+                            var player;
+
+                            player = new YT.Player(name,
+                                {
+                                    videoId: id,
+                                    width: 560,
+                                    height: 316,
+                                    playerVars:
+                                    {
+                                        autoplay: 0,
+                                        controls: 1,
+                                        showinfo: 1,
+                                        modestbranding: 1,
+                                        loop: 0,
+                                        fs: 1,
+                                        cc_load_policy: 0,
+                                        autohide: 0
+                                    },
+                                    events:
+                                    {
+                                        onReady: function (e) {
+                                            //e.target.mute();//chrome need to set to mute to autoplay
+                                            e.target.playVideo();
+                                        }
+                                    }
+                                });
+
+                        }else
+                        {
+                            //console.log('ready');
+                            setTimeout(function(){ onYouTubeIframeAPIReady(name, id); }, 100);
+                        }
+
+                    }
+
+
+                });
+
+                */
+
+
+                //retain image for video responsiveness
+                thumbs.css({ "z-index": -1 });
+                video.css({ "z-index": 1 });
+            }
         });
+
+
+        //}
+
+
 
 
 
@@ -288,25 +384,25 @@ hookHeadScript("https://www.youtube.com/iframe_api",true, function()
         //       onReady: function(e) {
         //         //e.target.mute();//chrome need to set to mute to autoplay
         //         //e.target.playVideo();
-                
-                
 
-                
-                
+
+
+
+
         //           // bind events
         //   var playButton = document.getElementById("vv");
         //   playButton.addEventListener("click", function() {
         //     player.playVideo();
         //   });
-                
-                        
-          
-                
-                
+
+
+
+
+
         //       }
         //     }
         //   });
-        //  }
+        //  } 
 
         //  // Written by @labnol 
         // </script>
@@ -717,7 +813,7 @@ hookHeadScript("https://www.youtube.com/iframe_api",true, function()
                     $('html, body').removeClass('disable-scroll');
                     //$('html, body').css({ "overflow":"visible" });
 
-
+ 
                 } else {
                     //else hide scrollbar
                     $('html, body').addClass('disable-scroll');
@@ -737,11 +833,10 @@ hookHeadScript("https://www.youtube.com/iframe_api",true, function()
         $('[type="checkbox"]').each(iterate);//run once when page ready
 
         //everytime when click on any of the checkbox
-        $(".container-checkbox.mobile").on("click", function () {
+        $(document).on("click", ".container-checkbox.mobile", function () {
             //iterate through 'all' instead of one just to be save
             $('.container-checkbox.mobile input[type="checkbox"]').each(iterate);
         });
-
 
 
 
@@ -1120,11 +1215,12 @@ hookHeadScript("https://www.youtube.com/iframe_api",true, function()
         $('.dp-form').on("click", '.dp-list a', function () {
 
             var dataVal = $(this).data("val");
+            var dataHtml = $(this).html();
             var $dpText = $(this).parent().parent().prev().find($('.dp-text'));
             var $hiddenField = $dpText.next();
 
-            $dpText.html(dataVal);
-            $hiddenField.val(dataVal);
+            $dpText.html(dataHtml);
+            $hiddenField.val(dataHtml);
 
             //console.log(dataVal);
             // console.log($(this).parent().parent().prev().find($('.dp-text')));
@@ -1148,9 +1244,8 @@ hookHeadScript("https://www.youtube.com/iframe_api",true, function()
         function unniversalSelectSync() {
 
             $(this).each(function () {
-                console.log('sssss');
                 if ($(this).val()) {
-                    $(this).parent().prev().find($("input[type=hidden]")).val($(this).val());
+                    $(this).parent().prev().find($("input[type=hidden]")).val($(this).html());
                 }
             });
 
@@ -1445,60 +1540,65 @@ $(window).on('load', function () {
 })();
 
 
-
 // ----------------------------------------------------------------------
-//[TEST] Product details gallery slickjs thumbnail
+// Product details gallery slickjs mix media 
 // ----------------------------------------------------------------------
 (function () {
     "use strict";
     $(document).ready(function () {
 
+        // $(".test-slider-for").slick();
+        // $(".test-slider-nav").slick();
 
-        $('.product-gallery-wrapper').slick({
-            customPaging: function (slick, index) {
-                var image_title = slick.$slides.eq(index).find('img').attr('src') || '';
-                return '<img src=' + image_title + '> </img>';
-            },
+        $('[data-fancybox]').fancybox({
+            loop : true
+        });
+        
+        $('.gallery-slider-for').slick({
+            // slidesToShow: 1,
+            // slidesToScroll: 1,
+            // arrows: true,
+            // fade: true,
+            asNavFor: '.gallery-slider-nav'
+        });
+        $('.gallery-slider-nav').slick({
+            // slidesToShow: 3,
+            // slidesToScroll: 1,
+            asNavFor: '.gallery-slider-for'
+            // dots: false,
+            // centerMode: true,
+            // focusOnSelect: true
         });
 
 
-        $('.product-gallery-wrapper').slickLightbox({
-            closeOnBackdropClick: true,
-            slick: function ($e) {
+        ///  MIX MEDIA  GALLERY/// 
+        if ($(".mix-media-gallery-wrapper").length) {
+            console.log("test")
+            // videoType();
 
-                $e.find('.slick-lightbox-slick-iframe').each(function () {
-                    $(this)
-                        .attr('data-src', $(this).attr('src'))
-                        .attr('src', '')
-                })
 
-                function clearIframe(slick, index) {
-                    var $iframe = $(slick.$slides.get(index)).find('.slick-lightbox-slick-iframe')
-                    if ($iframe.length) {
-                        setTimeout(function () {
-                            $iframe.attr('src', '')
-                        }, slick.options.speed)
-                    }
+            $(".mix-media-gallery-wrapper .slick-arrow").click(function () {
+                //   videoType();
+                console.log("test1")
+                $(".modal-video-elem").get(0).pause();
+                if ($(".mix-media-gallery-wrapper .slick-slide .video #ranID").hasClass('YouTubeVideoPlayer')) {
+                    console.log("bb")
+                    $('.YouTubeVideoPlayer')[0].contentWindow.postMessage('{"event":"command","func":"' + 'stopVideo' + '","args":""}', '*');
                 }
+            });
+            function videoType() {
 
-                function loadIframe(slick, index) {
-                    var $iframe = $(slick.$slides.get(index)).find('.slick-lightbox-slick-iframe')
-                    if ($iframe.length) $iframe.attr('src', $iframe.attr('data-src'))
+                if ($(".mix-media-gallery-wrapper .slick-current .video").prev().hasClass('modal-video-elem')) {
+                    console.log("aaa")
+                    $(".modal-video-elem").get(0).pause();
                 }
-
-
-                //Return slick instance
-                return $e.find('.slick-lightbox-slick')
-                    .on('init', function (event, slick) {
-                        loadIframe(slick, slick.currentSlide)
-                    })
-                    .on('beforeChange', function (event, slick, currentSlide, nextSlide) {
-                        clearIframe(slick, currentSlide)
-                        loadIframe(slick, nextSlide)
-                    })
-                    .slick()
+                if ($(".mix-media-gallery-wrapper .slick-current .video").prev().hasClass('YouTubeVideoPlayer')) {
+                    console.log("bb")
+                    $('.YouTubeVideoPlayer')[0].contentWindow.postMessage('{"event":"command","func":"' + 'stopVideo' + '","args":""}', '*');
+                }
             }
-        }); //lightbox end
+        }
+        ///  MIX MEDIA  GALLERY///
 
     });
 })();
@@ -1511,10 +1611,7 @@ $(window).on('load', function () {
     "use strict";
     $(document).ready(function () {
 
-
         function productListingFeatures() {
-
-
             // readjust sticky side bar
             var stickySidebar = new StickySidebar('.make-sticky', {
                 topSpacing: 105,
@@ -1526,38 +1623,85 @@ $(window).on('load', function () {
                 minWidth: 0
             });
 
-
             //////COMPARE POPUP start//////
-            var countCheck = 0;
-            $(".popup-content").show()
+            $(".popup-content").hide()
             $(".popup-content .content-wrapper").hide();
-            $(".popup-content .btn-compare").hide();
+            $(".compare-popup .btn-compare").hide();
+            $(".compare-popup .btn-menu-down").hide();
 
-            var addNum = 0;
+            var getCard
+            var inputVal
+            var numberOfChecked
             // detect change for cardcheckbox
             $('.listing-search-content .container-checkbox input[type="checkbox"]').change(function () {
+                //data-title-value is card wrapper val
+                //data-input-value is checkbox input val
+                //data-content-title is popup content title
+                //data-content-value is content of title 
+                getCard = $(this);
+                //get html data-text-value from input
+                inputVal = getCard.data("input-value");
+                //console.log("CURRinputVal = " + inputVal)
+                var getIMG = $("[data-title-value=" + inputVal + "]  img").attr("src");
+                var getTitle = $("[data-title-value=" + inputVal + "]  .title").text();
 
-               var test = $(this).attr("[data-title-text]")
-                console.log(test)
+                if ($('.listing-search-content .container-checkbox input[data-input-value=' + inputVal + ']').is(':checked')) {
+                    //append  to popup
+                    $(".popup-content").append("<div class='each content-wrapper' data-content-title=" + inputVal + "><div class='left img-content'><img src=" + getIMG + "></div><div class='right title-content'data-content-value=" + inputVal + ">" + getTitle + "</div><button class='close-btn-box'><span class='bold'>x</span></button><hr class='col-xs-12 m-no m-top-m'></div>")
 
+                    if ($(".compare-popup .title").hasClass("selected")) {
+                        $(".compare-popup .title").removeClass("selected");
+                    }
+                }
+                else {
+                    //check popup if has the value
+                    if ($("[data-content-title=" + inputVal + "]").has("[data-content-value=" + inputVal + "]")) {
+                        $("[data-content-title=" + inputVal + "]").remove();
+                    }
+                }
+                checkNumberOfCheckbox();
+            });
 
-                var numberOfChecked = $('.listing-search-content div input:checkbox:checked').length;
-                console.log(numberOfChecked)
+            // close btn on popup to remove content
+            $('body').on("click", ".close-btn-box", function () {
+                inputVal = $("[data-content-title]").data("content-title");
+                $("[data-content-title=" + inputVal + "]").remove();
+                $("[data-input-value =" + inputVal + "]").attr('checked', false);
+                checkNumberOfCheckbox()
+            });
+
+            //hide show popup
+            $(".compare-popup .btn-menu-down").click(function () {
+                $(".popup-content").toggle();
+                $(".compare-popup .btn-compare").toggle();
+                $(".compare-popup .title").toggleClass("selected")
+                //check to toggle compare-btn
+                if (numberOfChecked <= 1) {
+                    $(".compare-popup .btn-compare").toggle();
+                }
+            });
+
+            function checkNumberOfCheckbox() {
+                numberOfChecked = $('.listing-search-content div input:checkbox:checked').length;
                 $(".popup-content").show();
-               
                 if (numberOfChecked >= 4) {
-                    $(this).prop('checked', false);
-                    console.log("reached max 3")
+                    $("[data-input-value =" + inputVal + "]").attr('checked', false);
+                    $("[data-content-title=" + inputVal + "]").remove();
+                }
+                if (numberOfChecked > 1) {
+                    $(".compare-popup .btn-compare").show();
+                    $(".compare-popup .btn-menu-down").show();
+                } else {
+                    $(".compare-popup .btn-compare").hide();
                 }
                 if (numberOfChecked == 0) {
                     $(".popup-content").hide();
+                    $(".compare-popup .btn-menu-down").hide();
+                    $(".compare-popup .btn-compare").hide();
                 }
- 
-              
-            });
+            }
 
             //////COMPARE POPUP END//////
-
 
 
 
@@ -1576,13 +1720,12 @@ $(window).on('load', function () {
             $('.checkbox-button-wrapper').hide();
             $('[data-checkbutton]').hide();
 
-
             // REFINE SEARCH DESKTOP//
             // get value of ul dropdown click function wraps all functions
             $('.refine-search').on("click", '.refine-list a', function () {
                 stickySidebar.updateSticky();
-                $('.checkbox-button-wrapper').show();
 
+                $('.checkbox-button-wrapper').show();
                 // get value of dropdown ul
                 dataSearchVal = $(this).data("search-val");
 
@@ -1593,31 +1736,27 @@ $(window).on('load', function () {
                 } else {
                     $(".checkbox-wrapper").hide();
                 }
-
                 // function get data and check data changes in checkbox to button 
                 $('.' + dataSearchVal + '-wrapper div input[type="checkbox"]').change(function () {
                     stickySidebar.updateSticky();
 
                     // update wrapper to currentDATA
                     dataSearchVal = $('.' + dataSearchVal + '-wrapper').data("checkbox-wrapper");
-
+                    //get checkbox name to pass to text
                     checkboxName = $(this).attr("name");
                     // checkname of the checkbox to pass to button
                     checkname = $(this).data("checkname");
                     //count how many checkbox is checked
                     countCheckboxSelect = $('.' + dataSearchVal + '-wrapper div input:checkbox:checked').length;
                     appendCheckboxToButton();
-
                 });
             });
             //desktop dropown ul end
 
             // append checkbox to button  [desktop]
             function appendCheckboxToButton() {
-
                 // pass checked to button
                 if ($('.' + dataSearchVal + '-wrapper  input[data-checkname=' + checkname + ']').is(':checked')) {
-                    console.log("Aa desktop")
                     $('[data-checkbutton=' + dataSearchVal + ']').append("<div data-selection=" + checkname + " class='bg-grey m-xs bold btn btn-xs'>" + checkboxName + "<span class='btn-close fs-1 p-left-s'>&times;</span></div>");
                     // remove duplicates
                     if ($('[data-selection=' + checkname + ']').length > 1) {
@@ -1695,10 +1834,10 @@ $(window).on('load', function () {
                     $('[data-checkbutton=' + dataSearchVal + ']').show();
                 }
             }
-            //REFINE SEARCH MOBILE END//
+            /////REFINE SEARCH MOBILE END//////
 
 
-            // share between desktop and mobile//
+            // function share between desktop and mobile//
 
             //target selected buttons to remove and uncheck checkbox
             $('body').on("click", "[data-selection]", function () {
@@ -1706,18 +1845,13 @@ $(window).on('load', function () {
 
                 //get current data-selection button  
                 checkname = $(this).data("selection")
-
                 //uncheck the checkbox (desktop)
                 $("[data-checkname=" + checkname + "]").attr('checked', false);
-
                 //remove class for Mobile
                 $('label >[data-checkname=' + checkname + ']').parent().removeClass('checked');
-
-
                 //get current wrapper data when button click
                 currentData = $('[data-checkbutton]>[data-selection=' + checkname + ']').parent().data('checkbutton')
                 MobilecurrentData = $('.mobile-checkbox-button-wrapper > [data-checkbutton] > [data-selection=' + checkname + '] ').parent().data('checkbutton')
-
                 //remove target button
                 $('[data-selection=' + checkname + ']').remove();
                 //count how many buttons remaning in selected wrapper
@@ -1739,7 +1873,7 @@ $(window).on('load', function () {
                     $('.mobile-checkbox-button-wrapper >[data-checkbutton=' + MobilecurrentData + ']').show();
                 }
             }
-            // share between desktop and mobile end//
+            // function share between desktop and mobile end//
 
         }
 
