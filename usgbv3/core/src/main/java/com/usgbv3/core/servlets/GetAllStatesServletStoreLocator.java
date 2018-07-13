@@ -15,8 +15,11 @@
  */
 package com.usgbv3.core.servlets;
 
+import com.usgbv3.core.constants.ApplicationConstants;
+import com.usgbv3.core.services.StoreLocatorService;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.SlingHttpServletResponse;
+import org.apache.sling.api.request.RequestParameter;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.servlets.HttpConstants;
 import org.apache.sling.api.servlets.SlingAllMethodsServlet;
@@ -24,33 +27,42 @@ import org.apache.sling.api.servlets.SlingSafeMethodsServlet;
 import org.apache.sling.api.resource.ValueMap;
 import org.osgi.framework.Constants;
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 import javax.servlet.Servlet;
 import javax.servlet.ServletException;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 /**
- * Servlet that writes some sample content into the response. It is mounted for
- * all resources of a specific Sling resource type. The
  * {@link SlingSafeMethodsServlet} shall be used for HTTP methods that are
  * idempotent. For write operations use the {@link SlingAllMethodsServlet}.
  */
 @Component(service=Servlet.class,
            property={
-                   Constants.SERVICE_DESCRIPTION + "=Simple Demo Servlet",
+                   Constants.SERVICE_DESCRIPTION + "=Get All States",
                    "sling.servlet.methods=" + HttpConstants.METHOD_GET,
-                   "sling.servlet.resourceTypes="+ "${artifactId}/components/structure/page",
-                   "sling.servlet.extensions=" + "txt"
+                   "sling.servlet.paths="+ "/bin/usg/getAllStates"
            })
-public class SimpleServlet extends SlingSafeMethodsServlet {
+public class GetAllStatesServletStoreLocator extends SlingSafeMethodsServlet {
 
     private static final long serialVersionUid = 1L;
 
+    @Reference
+    StoreLocatorService storeLocatorService;
+
     @Override
-    protected void doGet(final SlingHttpServletRequest req,
-            final SlingHttpServletResponse resp) throws ServletException, IOException {
-        final Resource resource = req.getResource();
-        resp.setContentType("text/plain");
-        resp.getWriter().write("Title = " + resource.adaptTo(ValueMap.class).get("jcr:title"));
+    protected void doGet(final SlingHttpServletRequest request,
+            final SlingHttpServletResponse response) throws IOException {
+        RequestParameter countryParameter = request.getRequestParameter(ApplicationConstants.COUNTRY);
+        String jsonResponse = "";
+        if(countryParameter != null){
+            jsonResponse = storeLocatorService.getAllStates(countryParameter.getString(), request.getResourceResolver());
+        }
+
+        response.setContentType("application/json");
+        PrintWriter out = response.getWriter();
+        out.print(jsonResponse);
+        out.flush();
     }
 }

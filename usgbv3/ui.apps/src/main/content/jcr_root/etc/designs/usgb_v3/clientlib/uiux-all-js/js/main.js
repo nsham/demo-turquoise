@@ -68,30 +68,28 @@ function hookHeadScript(url, async, defer, callback) {
 
 
         //load youtube api
-        hookHeadScript("//www.youtube.com/iframe_api", true, false, function ()
-        {
+        hookHeadScript("//www.youtube.com/iframe_api", true, false, function () {
 
             //console.log('youtbe iframe api loaded');
 
             //add youtube video
 
-            $( ".YouTubeVideoPlayer" ).each(function( index ) {
-              var youtubeID = $(this).attr('id');
-              var youtubeVideoID = $(this).attr('data-youtubeid');
+            $(".YouTubeVideoPlayer").each(function (index) {
+                var youtubeID = $(this).attr('id');
+                var youtubeVideoID = $(this).attr('data-youtubeid');
 
-              //console.log(youtubeVideoID);
+                //console.log(youtubeVideoID);
 
-              //load all youtube videos in background when page load
-              onYouTubeIframeAPIReady(youtubeID, youtubeVideoID);
-              
+                //load all youtube videos in background when page load
+                onYouTubeIframeAPIReady(youtubeID, youtubeVideoID);
+
             });
 
 
             function onYouTubeIframeAPIReady(name, id) {
 
                 //The callback is fired once the api script has been loaded but not necessarily executed.
-                if( (typeof YT !== "undefined") && YT && YT.Player )
-                {
+                if ((typeof YT !== "undefined") && YT && YT.Player) {
 
                     //console.log('not ready');
                     var player;
@@ -117,21 +115,20 @@ function hookHeadScript(url, async, defer, callback) {
                                 onReady: function (e) {
                                     //e.target.mute();//chrome need to set to mute to autoplay
                                     //e.target.playVideo();
-                                  
+
                                     //bind play buttons to each player
-                                    var playButton = $("#"+name).parent().prev('button');
-                                    playButton.on('click', function() {
-                                      player.playVideo();
+                                    var playButton = $("#" + name).parent().prev('button');
+                                    playButton.on('click', function () {
+                                        player.playVideo();
                                     });
 
                                 }
                             }
                         });
 
-                }else
-                {
+                } else {
                     //console.log('ready');
-                    setTimeout(function(){ onYouTubeIframeAPIReady(name, id); }, 100);
+                    setTimeout(function () { onYouTubeIframeAPIReady(name, id); }, 100);
                 }
 
             }
@@ -285,65 +282,65 @@ function hookHeadScript(url, async, defer, callback) {
                 var videoId = video.attr('data-youtubeId');
 
 
-               /* load youtube api with video based on click
-
-                //load youtube api
-                hookHeadScript("//www.youtube.com/iframe_api", true, false, function ()
-                {
-
-                    console.log('youtbe iframe api loaded');
-
-
-
-                    //add youtube video
-                    onYouTubeIframeAPIReady('ranID', 'aqz-KE-bpKQ');
-
-                    function onYouTubeIframeAPIReady(name, id) {
-
-                        //The callback is fired once the api script has been loaded but not necessarily executed.
-                        if( (typeof YT !== "undefined") && YT && YT.Player )
-                        {
-
-                            //console.log('not ready');
-                            var player;
-
-                            player = new YT.Player(name,
-                                {
-                                    videoId: id,
-                                    width: 560,
-                                    height: 316,
-                                    playerVars:
-                                    {
-                                        autoplay: 0,
-                                        controls: 1,
-                                        showinfo: 1,
-                                        modestbranding: 1,
-                                        loop: 0,
-                                        fs: 1,
-                                        cc_load_policy: 0,
-                                        autohide: 0
-                                    },
-                                    events:
-                                    {
-                                        onReady: function (e) {
-                                            //e.target.mute();//chrome need to set to mute to autoplay
-                                            e.target.playVideo();
-                                        }
-                                    }
-                                });
-
-                        }else
-                        {
-                            //console.log('ready');
-                            setTimeout(function(){ onYouTubeIframeAPIReady(name, id); }, 100);
-                        }
-
-                    }
-
-
-                });
-
-                */
+                /* load youtube api with video based on click
+ 
+                 //load youtube api
+                 hookHeadScript("//www.youtube.com/iframe_api", true, false, function ()
+                 {
+ 
+                     console.log('youtbe iframe api loaded');
+ 
+ 
+ 
+                     //add youtube video
+                     onYouTubeIframeAPIReady('ranID', 'aqz-KE-bpKQ');
+ 
+                     function onYouTubeIframeAPIReady(name, id) {
+ 
+                         //The callback is fired once the api script has been loaded but not necessarily executed.
+                         if( (typeof YT !== "undefined") && YT && YT.Player )
+                         {
+ 
+                             //console.log('not ready');
+                             var player;
+ 
+                             player = new YT.Player(name,
+                                 {
+                                     videoId: id,
+                                     width: 560,
+                                     height: 316,
+                                     playerVars:
+                                     {
+                                         autoplay: 0,
+                                         controls: 1,
+                                         showinfo: 1,
+                                         modestbranding: 1,
+                                         loop: 0,
+                                         fs: 1,
+                                         cc_load_policy: 0,
+                                         autohide: 0
+                                     },
+                                     events:
+                                     {
+                                         onReady: function (e) {
+                                             //e.target.mute();//chrome need to set to mute to autoplay
+                                             e.target.playVideo();
+                                         }
+                                     }
+                                 });
+ 
+                         }else
+                         {
+                             //console.log('ready');
+                             setTimeout(function(){ onYouTubeIframeAPIReady(name, id); }, 100);
+                         }
+ 
+                     }
+ 
+ 
+                 });
+ 
+                 */
 
 
                 //retain image for video responsiveness
@@ -813,7 +810,7 @@ function hookHeadScript(url, async, defer, callback) {
                     $('html, body').removeClass('disable-scroll');
                     //$('html, body').css({ "overflow":"visible" });
 
- 
+
                 } else {
                     //else hide scrollbar
                     $('html, body').addClass('disable-scroll');
@@ -1535,10 +1532,11 @@ $(window).on('load', function () {
     $(document).ready(function () {
         $('[data-img-height="div-height"]').matchHeight();
         $('[data-img-height="img-height"]').matchHeight();
-
+        $('.gallery-listing-search-content .box-type-2 .center').matchHeight(); 
+        $('.listing-search-content .each .custom-block').matchHeight(); 
     });
 })();
-
+ 
 
 // ----------------------------------------------------------------------
 // Product details gallery slickjs mix media 
@@ -1551,9 +1549,9 @@ $(window).on('load', function () {
         // $(".test-slider-nav").slick();
 
         $('[data-fancybox]').fancybox({
-            loop : true
+            loop: true
         });
-        
+
         $('.gallery-slider-for').slick({
             // slidesToShow: 1,
             // slidesToScroll: 1,
@@ -1612,6 +1610,7 @@ $(window).on('load', function () {
     $(document).ready(function () {
 
         function productListingFeatures() {
+
             // readjust sticky side bar
             var stickySidebar = new StickySidebar('.make-sticky', {
                 topSpacing: 105,
@@ -1623,10 +1622,23 @@ $(window).on('load', function () {
                 minWidth: 0
             });
 
+
+            $(document).on("scroll", alignSticky);
+            function alignSticky(event) {
+                var scrollPos = $(document).scrollTop();
+               // console.log(scrollPos)
+                if ( scrollPos <= 500  || scrollPos > 1000) {
+                    stickySidebar.updateSticky();     
+                }                
+            }
+
+
+
             //////COMPARE POPUP start//////
-            $(".popup-content").hide()
+            $(".compare-popup").hide()
             $(".popup-content .content-wrapper").hide();
             $(".compare-popup .btn-compare").hide();
+            $(".compare-popup .instruction-text").hide();
             $(".compare-popup .btn-menu-down").hide();
 
             var getCard
@@ -1683,6 +1695,7 @@ $(window).on('load', function () {
 
             function checkNumberOfCheckbox() {
                 numberOfChecked = $('.listing-search-content div input:checkbox:checked').length;
+                $(".compare-popup").show();
                 $(".popup-content").show();
                 if (numberOfChecked >= 4) {
                     $("[data-input-value =" + inputVal + "]").attr('checked', false);
@@ -1691,14 +1704,20 @@ $(window).on('load', function () {
                 if (numberOfChecked > 1) {
                     $(".compare-popup .btn-compare").show();
                     $(".compare-popup .btn-menu-down").show();
+                    $(".compare-popup").show();
+                    $(".compare-popup .instruction-text").hide();
                 } else {
+                    $(".compare-popup .instruction-text").show();
                     $(".compare-popup .btn-compare").hide();
+                
                 }
                 if (numberOfChecked == 0) {
+                    $(".compare-popup").hide();
                     $(".popup-content").hide();
                     $(".compare-popup .btn-menu-down").hide();
                     $(".compare-popup .btn-compare").hide();
                 }
+               
             }
 
             //////COMPARE POPUP END//////
@@ -1759,6 +1778,7 @@ $(window).on('load', function () {
                 if ($('.' + dataSearchVal + '-wrapper  input[data-checkname=' + checkname + ']').is(':checked')) {
                     $('[data-checkbutton=' + dataSearchVal + ']').append("<div data-selection=" + checkname + " class='bg-grey m-xs bold btn btn-xs'>" + checkboxName + "<span class='btn-close fs-1 p-left-s'>&times;</span></div>");
                     // remove duplicates
+            
                     if ($('[data-selection=' + checkname + ']').length > 1) {
                         $('[data-selection=' + checkname + ']').last().remove();
                     }
