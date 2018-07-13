@@ -18,14 +18,17 @@
 
                 <!-- first nav -->
                 <ul class="header-side-nav nav navbar-nav fs-nav-1 v-line-1 uppercase text-right">
-                    <li class="nav-dropdown-wrapper">
-                        <a href="#">Hi User
+                    <li class="pre-login-nav">
+                        <a href="#">Login</a>
+                    </li>
+                    <li class="nav-dropdown-wrapper post-login-nav" style="display:none">
+                        <a href="#">Hi <span class="post-login-user">User</span>
                             <span class="m-left-xxs glyphicon glyphicon-menu-down"></span>
                         </a>
                         <ul class="nav-dropdown-menu dropdown-show">
                             <li><a href="#">USER 1</a></li>
-                            <li><a href="#">user 2</a></li>
-                            <li><a href="#">user 3</a></li>
+                            <li><a href="#"onclick="$.ssoManager.sso.manageProfile()">Manage Profile</a></li>
+                            <li><a href="#" onclick="$.ssoManager.sso.logout()">LOGOUT</a></li>
                         </ul>
                     </li>
                     <li> <a href="#">My Bookmark</a> </li>
