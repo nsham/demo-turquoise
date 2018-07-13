@@ -4,12 +4,16 @@
 
 /*viewport width====================*/
 function viewport() {
-    var e = window, a = 'inner';
+    var e = window,
+        a = 'inner';
     if (!('innerWidth' in window)) {
         a = 'client';
         e = document.documentElement || document.body;
     }
-    return { width: e[a + 'Width'], height: e[a + 'Height'] };
+    return {
+        width: e[a + 'Width'],
+        height: e[a + 'Height']
+    };
 }
 /*end viewport width====================*/
 
@@ -94,41 +98,40 @@ function hookHeadScript(url, async, defer, callback) {
                     //console.log('not ready');
                     var player;
 
-                    player = new YT.Player(name,
-                        {
-                            videoId: id,
-                            width: 560,
-                            height: 316,
-                            playerVars:
-                            {
-                                autoplay: 0,
-                                controls: 1,
-                                showinfo: 1,
-                                modestbranding: 1,
-                                loop: 0,
-                                fs: 1,
-                                cc_load_policy: 0,
-                                autohide: 0
-                            },
-                            events:
-                            {
-                                onReady: function (e) {
-                                    //e.target.mute();//chrome need to set to mute to autoplay
-                                    //e.target.playVideo();
+                    player = new YT.Player(name, {
+                        videoId: id,
+                        width: 560,
+                        height: 316,
+                        playerVars: {
+                            autoplay: 0,
+                            controls: 1,
+                            showinfo: 1,
+                            modestbranding: 1,
+                            loop: 0,
+                            fs: 1,
+                            cc_load_policy: 0,
+                            autohide: 0
+                        },
+                        events: {
+                            onReady: function (e) {
+                                //e.target.mute();//chrome need to set to mute to autoplay
+                                //e.target.playVideo();
 
-                                    //bind play buttons to each player
-                                    var playButton = $("#" + name).parent().prev('button');
-                                    playButton.on('click', function () {
-                                        player.playVideo();
-                                    });
+                                //bind play buttons to each player
+                                var playButton = $("#" + name).parent().prev('button');
+                                playButton.on('click', function () {
+                                    player.playVideo();
+                                });
 
-                                }
                             }
-                        });
+                        }
+                    });
 
                 } else {
                     //console.log('ready');
-                    setTimeout(function () { onYouTubeIframeAPIReady(name, id); }, 100);
+                    setTimeout(function () {
+                        onYouTubeIframeAPIReady(name, id);
+                    }, 100);
                 }
 
             }
@@ -269,8 +272,12 @@ function hookHeadScript(url, async, defer, callback) {
             if ($this.data('video') === "html5") {
 
                 //retain image for video responsiveness
-                thumbs.css({ "z-index": -1 });
-                video.css({ "z-index": 1 });
+                thumbs.css({
+                    "z-index": -1
+                });
+                video.css({
+                    "z-index": 1
+                });
                 video[0].play();
 
             } else if ($this.data('video') === "youtube") {
@@ -344,8 +351,12 @@ function hookHeadScript(url, async, defer, callback) {
 
 
                 //retain image for video responsiveness
-                thumbs.css({ "z-index": -1 });
-                video.css({ "z-index": 1 });
+                thumbs.css({
+                    "z-index": -1
+                });
+                video.css({
+                    "z-index": 1
+                });
             }
         });
 
@@ -626,7 +637,9 @@ function hookHeadScript(url, async, defer, callback) {
                 var $this = $(this);
 
 
-                $this.addClass('open').find($('.mega-dropdown-menu')).css({ "z-index": calc() });
+                $this.addClass('open').find($('.mega-dropdown-menu')).css({
+                    "z-index": calc()
+                });
 
                 //provide a decent scrollbar when mega menu out of screen
                 //setTimeout(delay, 1000);
@@ -649,7 +662,9 @@ function hookHeadScript(url, async, defer, callback) {
 
                 function delay() {
                     //$this.addClass('open').find($('.mega-dropdown-menu')).css({"z-index": calc() });
-                    $('.mega-dropdown-menu').css({ "overflow": 'auto' });
+                    $('.mega-dropdown-menu').css({
+                        "overflow": 'auto'
+                    });
                 }
 
 
@@ -827,7 +842,7 @@ function hookHeadScript(url, async, defer, callback) {
         });
 
 
-        $('[type="checkbox"]').each(iterate);//run once when page ready
+        $('[type="checkbox"]').each(iterate); //run once when page ready
 
         //everytime when click on any of the checkbox
         $(document).on("click", ".container-checkbox.mobile", function () {
@@ -1093,7 +1108,9 @@ function hookHeadScript(url, async, defer, callback) {
         //  This data attribute will do the magic, data-scroll-reveal="wait 0.2s, then enter over 500ms after 0.3s"
         if (!(/msie [6|7|8|9]/i.test(navigator.userAgent))) {
             (function () {
-                window.scrollReveal = new scrollReveal({ reset: false });
+                window.scrollReveal = new scrollReveal({
+                    reset: false
+                });
             })();
         };
     });
@@ -1112,7 +1129,9 @@ function hookHeadScript(url, async, defer, callback) {
             if ($searchPopUp.hasClass('hidden')) {
 
                 $searchPopUp.removeClass('hidden');
-                setTimeout(function () { $searchPopUp.addClass('active') }, 50);
+                setTimeout(function () {
+                    $searchPopUp.addClass('active')
+                }, 50);
 
                 defaultScrollUpdate(".search-pop-up");
 
@@ -1125,7 +1144,9 @@ function hookHeadScript(url, async, defer, callback) {
             var $searchPopUp = $('.search-pop-up');
 
             $searchPopUp.removeClass('active')
-            setTimeout(function () { $searchPopUp.addClass('hidden'); }, 600);
+            setTimeout(function () {
+                $searchPopUp.addClass('hidden');
+            }, 600);
 
             defaultScrollUpdate(".search-pop-up");
 
@@ -1150,7 +1171,9 @@ function hookHeadScript(url, async, defer, callback) {
             if ($searchPopUp.hasClass('hidden')) {
 
                 $searchPopUp.removeClass('hidden');
-                setTimeout(function () { $searchPopUp.addClass('active') }, 50);
+                setTimeout(function () {
+                    $searchPopUp.addClass('active')
+                }, 50);
 
             }
 
@@ -1164,7 +1187,9 @@ function hookHeadScript(url, async, defer, callback) {
             var $searchPopUp = $('.countries-pop-up');
 
             $searchPopUp.removeClass('active')
-            setTimeout(function () { $searchPopUp.addClass('hidden'); }, 600);
+            setTimeout(function () {
+                $searchPopUp.addClass('hidden');
+            }, 600);
 
             defaultScrollUpdate(".countries-pop-up");
 
@@ -1188,10 +1213,14 @@ function hookHeadScript(url, async, defer, callback) {
 
             if ($stickyIconsExpander.hasClass('hidden')) {
                 $stickyIconsExpander.removeClass('hidden');
-                setTimeout(function () { $stickyIconsExpander.addClass('active') }, 50);
+                setTimeout(function () {
+                    $stickyIconsExpander.addClass('active')
+                }, 50);
             } else {
                 $stickyIconsExpander.removeClass('active')
-                setTimeout(function () { $stickyIconsExpander.addClass('hidden'); }, 600);
+                setTimeout(function () {
+                    $stickyIconsExpander.addClass('hidden');
+                }, 600);
             }
 
             defaultScrollUpdate(".sticky-icons-expander");
@@ -1209,7 +1238,8 @@ function hookHeadScript(url, async, defer, callback) {
 (function () {
     "use strict";
     $(document).ready(function () {
-        $('.dp-form').on("click", '.dp-list a', function () {
+
+        $(document).on("click", '.dp-form .dp-list a', function () {
 
             var dataVal = $(this).data("val");
             var dataHtml = $(this).html();
@@ -1222,9 +1252,8 @@ function hookHeadScript(url, async, defer, callback) {
             //console.log(dataVal);
             // console.log($(this).parent().parent().prev().find($('.dp-text')));
 
-
         });
-    });
+    }); 
 })();
 
 
@@ -1296,7 +1325,9 @@ $(window).on('load', function () {
 
     if ($('.make-sticky').length) {
 
-        setTimeout(function () { makeSticky(); }, 100); //for stupid cacat IE browser
+        setTimeout(function () {
+            makeSticky();
+        }, 100); //for stupid cacat IE browser
 
     }
 });
@@ -1318,10 +1349,14 @@ $(window).on('load', function () {
 
                 if ($(this).scrollTop() > posSub) {
                     $('.product-menu-sticky').fadeIn(600).slideDown(700);
-                    $('.product-menu-desktop').delay(100).css({ 'visibility': 'hidden' });
+                    $('.product-menu-desktop').delay(100).css({
+                        'visibility': 'hidden'
+                    });
                 } else {
                     $('.product-menu-sticky').slideUp(10).fadeOut(10);
-                    $('.product-menu-desktop').css({ 'visibility': 'visible' });
+                    $('.product-menu-desktop').css({
+                        'visibility': 'visible'
+                    });
                 }
 
                 if ($(this).scrollTop() > posSubEnd) {
@@ -1332,7 +1367,9 @@ $(window).on('load', function () {
 
                 if ($(this).scrollTop() == posEqual) {
                     $('.product-menu-sticky').fadeOut(10);
-                    $('.product-menu-desktop').css({ 'visibility': 'visible' });
+                    $('.product-menu-desktop').css({
+                        'visibility': 'visible'
+                    });
                 }
 
             });
@@ -1396,8 +1433,7 @@ $(window).on('load', function () {
                     if (getTopPos <= scrollPos && getTopPos + getHeightPos > scrollPos) {
                         $(".mobile-list-inline li").text(getText);
                         currLink.addClass("arrow-up");
-                    }
-                    else {
+                    } else {
                         currLink.removeClass("arrow-up");
                     }
                 });
@@ -1532,11 +1568,11 @@ $(window).on('load', function () {
     $(document).ready(function () {
         $('[data-img-height="div-height"]').matchHeight();
         $('[data-img-height="img-height"]').matchHeight();
-        $('.gallery-listing-search-content .box-type-2 .center').matchHeight(); 
-        $('.listing-search-content .each .custom-block').matchHeight(); 
+        $('.gallery-listing-search-content .box-type-2 .center').matchHeight();
+        $('.listing-search-content .each .custom-block').matchHeight();
     });
 })();
- 
+
 
 // ----------------------------------------------------------------------
 // Product details gallery slickjs mix media 
@@ -1584,6 +1620,7 @@ $(window).on('load', function () {
                     $('.YouTubeVideoPlayer')[0].contentWindow.postMessage('{"event":"command","func":"' + 'stopVideo' + '","args":""}', '*');
                 }
             });
+
             function videoType() {
 
                 if ($(".mix-media-gallery-wrapper .slick-current .video").prev().hasClass('modal-video-elem')) {
@@ -1624,12 +1661,13 @@ $(window).on('load', function () {
 
 
             $(document).on("scroll", alignSticky);
+
             function alignSticky(event) {
                 var scrollPos = $(document).scrollTop();
-               // console.log(scrollPos)
-                if ( scrollPos <= 500  || scrollPos > 1000) {
-                    stickySidebar.updateSticky();     
-                }                
+                // console.log(scrollPos)
+                if (scrollPos <= 500 || scrollPos > 1000) {
+                    stickySidebar.updateSticky();
+                }
             }
 
 
@@ -1646,6 +1684,7 @@ $(window).on('load', function () {
             var numberOfChecked
             // detect change for cardcheckbox
             $('.listing-search-content .container-checkbox input[type="checkbox"]').change(function () {
+
                 //data-title-value is card wrapper val
                 //data-input-value is checkbox input val
                 //data-content-title is popup content title
@@ -1664,8 +1703,7 @@ $(window).on('load', function () {
                     if ($(".compare-popup .title").hasClass("selected")) {
                         $(".compare-popup .title").removeClass("selected");
                     }
-                }
-                else {
+                } else {
                     //check popup if has the value
                     if ($("[data-content-title=" + inputVal + "]").has("[data-content-value=" + inputVal + "]")) {
                         $("[data-content-title=" + inputVal + "]").remove();
@@ -1709,7 +1747,7 @@ $(window).on('load', function () {
                 } else {
                     $(".compare-popup .instruction-text").show();
                     $(".compare-popup .btn-compare").hide();
-                
+
                 }
                 if (numberOfChecked == 0) {
                     $(".compare-popup").hide();
@@ -1717,7 +1755,7 @@ $(window).on('load', function () {
                     $(".compare-popup .btn-menu-down").hide();
                     $(".compare-popup .btn-compare").hide();
                 }
-               
+
             }
 
             //////COMPARE POPUP END//////
@@ -1726,6 +1764,7 @@ $(window).on('load', function () {
 
             ////// REFINE SEARCH  FEATURE start //////
             var dataSearchVal
+            var mdataSearchVal
             var checkname
             var countCheckboxSelect
             var checkboxName
@@ -1733,15 +1772,18 @@ $(window).on('load', function () {
             var countButton
             var MobilecurrentData
             var MobileCountButton
-
             // hide html divs desktop and mobile
             $(".checkbox-wrapper").hide();
             $('.checkbox-button-wrapper').hide();
             $('[data-checkbutton]').hide();
+            //mobile
+            $(".m-checkbox-wrapper").hide();
+
 
             // REFINE SEARCH DESKTOP//
             // get value of ul dropdown click function wraps all functions
             $('.refine-search').on("click", '.refine-list a', function () {
+
                 stickySidebar.updateSticky();
 
                 $('.checkbox-button-wrapper').show();
@@ -1778,12 +1820,11 @@ $(window).on('load', function () {
                 if ($('.' + dataSearchVal + '-wrapper  input[data-checkname=' + checkname + ']').is(':checked')) {
                     $('[data-checkbutton=' + dataSearchVal + ']').append("<div data-selection=" + checkname + " class='bg-grey m-xs bold btn btn-xs'>" + checkboxName + "<span class='btn-close fs-1 p-left-s'>&times;</span></div>");
                     // remove duplicates
-            
+
                     if ($('[data-selection=' + checkname + ']').length > 1) {
                         $('[data-selection=' + checkname + ']').last().remove();
                     }
-                }
-                else {
+                } else {
                     if ($('[data-checkbutton=' + dataSearchVal + ']').has('[data-selection =' + checkname + ']')) {
                         $('[data-selection=' + checkname + ']').remove();
                         $('.' + dataSearchVal + '-wrapper input[data-checkname=' + checkname + ']').attr('checked', false)
@@ -1804,28 +1845,28 @@ $(window).on('load', function () {
             $('#refine-search-mobile').change(function () {
                 $('.mobile-checkbox-button-wrapper').show();
                 //get mobile option val
-                dataSearchVal = $(this).val();
+                mdataSearchVal = $(this).val();
                 // target different dropdown
-                if (dataSearchVal = dataSearchVal) {
-                    $(".checkbox-wrapper").hide();
-                    $(".mobile-" + dataSearchVal + "-wrapper").show();
+                if (mdataSearchVal = mdataSearchVal) {
+                    $(".m-checkbox-wrapper").hide();
+                    $(".mobile-" + mdataSearchVal + "-wrapper").show();
                 } else {
-                    $(".checkbox-wrapper").hide();
+                    $(".m-checkbox-wrapper").hide();
                 }
 
                 // mobile function get data and check data changes in checkbox to button 
-                $('.mobile-' + dataSearchVal + '-wrapper label input[type="checkbox"]').change(function () {
+                $('.mobile-' + mdataSearchVal + '-wrapper label input[type="checkbox"]').change(function () {
                     stickySidebar.updateSticky();
 
                     // update wrapper to currentDATA
-                    dataSearchVal = $('.mobile-' + dataSearchVal + '-wrapper').data("checkbox-wrapper");
+                    mdataSearchVal = $('.mobile-' + mdataSearchVal + '-wrapper').data("checkbox-wrapper");
 
                     checkboxName = $(this).attr("name");
                     // checkname of the checkbox to pass to button
                     checkname = $(this).data("checkname");
                     //count how many checkbox is checked
-                    countCheckboxSelect = $('.mobile-' + dataSearchVal + '-wrapper label input:checkbox:checked').length;
-                    $(".mobile-checkbox-button-wrapper >[data-checkbutton=" + dataSearchVal + "]").show();
+                    countCheckboxSelect = $('.mobile-' + mdataSearchVal + '-wrapper label input:checkbox:checked').length;
+                    $(".mobile-checkbox-button-wrapper >[data-checkbutton=" + mdataSearchVal + "]").show();
 
                     MobileAppendCheckboxToButton();
                 });
@@ -1834,24 +1875,24 @@ $(window).on('load', function () {
             // mobile append checkbox to button 
             function MobileAppendCheckboxToButton() {
 
-                if ($('.mobile-' + dataSearchVal + '-wrapper label input[data-checkname=' + checkname + ']').is(':checked')) {
+                if ($('.mobile-' + mdataSearchVal + '-wrapper label input[data-checkname=' + checkname + ']').is(':checked')) {
 
-                    $('.mobile-checkbox-button-wrapper > [data-checkbutton=' + dataSearchVal + ']').append("<div data-selection=" + checkname + " class='bg-grey m-xs bold btn btn-xs'>" + checkboxName + "<span class='btn-close fs-1 p-left-s'>&times;</span></div>");
+                    $('.mobile-checkbox-button-wrapper > [data-m-checkbutton=' + mdataSearchVal + ']').append("<div data-selection=" + checkname + " class='bg-grey m-xs bold btn btn-xs'>" + checkboxName + "<span class='btn-close fs-1 p-left-s'>&times;</span></div>");
                     //remove duplicates
                     if ($('[data-selection=' + checkname + ']').length > 1) {
                         $('[data-selection=' + checkname + ']').last().remove();
                     }
                 } else {
-                    if ($('.mobile-checkbox-button-wrapper > [data-checkbutton=' + dataSearchVal + ']').has('[data-selection =' + checkname + ']')) {
+                    if ($('.mobile-checkbox-button-wrapper > [data-checkbutton=' + mdataSearchVal + ']').has('[data-selection =' + checkname + ']')) {
                         $('[data-selection=' + checkname + ']').remove();
-                        $('.mobile-' + dataSearchVal + '-wrapper >[data-checkname=' + checkname + ']').parent().removeClass('checked');
+                        $('.mobile-' + mdataSearchVal + '-wrapper >[data-checkname=' + checkname + ']').parent().removeClass('checked');
                     }
                 }
                 // hide/show title
                 if (countCheckboxSelect < 1) {
-                    $('[data-checkbutton=' + dataSearchVal + ']').hide();
+                    $('[data-checkbutton=' + mdataSearchVal + ']').hide();
                 } else {
-                    $('[data-checkbutton=' + dataSearchVal + ']').show();
+                    $('[data-checkbutton=' + mdataSearchVal + ']').show();
                 }
             }
             /////REFINE SEARCH MOBILE END//////
@@ -1916,30 +1957,28 @@ $(window).on('load', function () {
     $(document).ready(function () {
 
 
-        $(".left-circle-tile").slick(
-            {
-                "dots": true,
-                "infinite": false,
-                "speed": 300,
-                "slidesToShow": 3,
-                "slidesToScroll": 1,
-                "responsive": [
-                    {
-                        breakpoint: 950,
-                        settings: {
-                            slidesToShow: 2,
-                            slidesToScroll: 1
-                        }
-                    },
-                    {
-                        breakpoint: 768,
-                        settings: {
-                            slidesToShow: 1,
-                            slidesToScroll: 1
-                        }
+        $(".left-circle-tile").slick({
+            "dots": true,
+            "infinite": false,
+            "speed": 300,
+            "slidesToShow": 3,
+            "slidesToScroll": 1,
+            "responsive": [{
+                    breakpoint: 950,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 1
                     }
-                ]
-            });
+                },
+                {
+                    breakpoint: 768,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1
+                    }
+                }
+            ]
+        });
 
     });
 
@@ -1959,6 +1998,7 @@ $(window).on('load', function () {
         var dataCategory
 
         loadAllDiv();
+
         function loadAllDiv() {
             $('[data-category]').fadeOut(500);
             $('[data-category]').slice(0, 12).fadeIn(500);
@@ -1982,6 +2022,7 @@ $(window).on('load', function () {
             $(".fade-bg").fadeIn(500);
             $('.content-wrapper').css('height', '780px');
         }
+
         function completeLoadMore() {
             $("#loadMore").fadeOut(500);
             $(".fade-bg").fadeOut(500);
@@ -2069,7 +2110,6 @@ $(window).on('load', function () {
 
         });
 
-
         $(".btn-scroll-top").on('click', function (e) {
             e.preventDefault();
             $('html, body').animate({
@@ -2077,10 +2117,43 @@ $(window).on('load', function () {
             }, 600);
         });
 
-
-
-
     });
 })();
 
 
+
+
+// ----------------------------------------------------------------------
+// Gallery Listing Search  (filter) [ky]
+// ----------------------------------------------------------------------
+// (function () {
+//     "use strict";
+//     $(document).ready(function () {
+
+//         if ($('.gallery-listing-sidebar').length) {
+
+//             $.ajax({
+//                 // url: "/etc/designs/usgb_v3/clientlib/uiux-less-ct/js/json/search-content-result.json",
+//                 url: "/etc/designs/usgb_v3/clientlib/uiux-all-js/js/json/gallery-filter.json",
+//                 type: "GET",
+//                 cache: false,
+//                 success: function (response) {
+
+//                     var galleryResult = $('#gallery-filter').html();
+//                     var temptGalleryResult = Handlebars.compile(galleryResult);
+//                     //console.log(galleryResult)
+//                     $('#gallery-filter').html(temptGalleryResult(response));
+//                   var test = 
+//                     //  $($('#gallery-filter')[0]).html(temptGalleryResult(response));
+//                     // console.log(response)
+//                     //  response = response
+//                 },
+//                 beforeSend: function () {},
+//                 complete: function () {}
+//             });
+//         }
+
+
+
+//     });
+// })();

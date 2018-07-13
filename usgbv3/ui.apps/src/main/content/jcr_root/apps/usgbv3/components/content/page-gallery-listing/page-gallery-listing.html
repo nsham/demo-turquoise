@@ -41,92 +41,59 @@
                     <form action="" method="get">
                         <div class="c-sidebar rounded-corners">
 
-                            <div class="each">
-                                <h5 class=" text-left color-dark-grey bold ht6 uppercase m-bottom-m">Refine your search</h5>
-                                <p class="color-grey m-bottom-xs">View By</p>
+                            <div class="p-xl p-bottom-no">
+                                <h5 class=" text-left color-dark-grey bold ht6 uppercase">Refine your search</h5>
+                            </div>
 
-                                <div class="search-filter-sort">
-                                    <!-- SORT BY -->
-                                    <div class="refine-search  dropdown dp-form dropdown-menu-right d-small">
-                                        <button class=" btn btn-default color-dark-grey dropdown-toggle text-left dp-clickable" type="button" id="dropdownMenu1"
-                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <span class="dp-text">All</span>
-                                            <input type="hidden" name="selectenquirytype" value="Proin ut elit">
-                                            <span class="color-primary-green glyphicon glyphicon-menu-down right"></span>
-                                        </button>
+                            <div class=" gallery-filter-wrapper"></div>
 
-                                        <ul class="dropdown-menu dp-list refine-list" aria-labelledby="dropdownMenu1">
-                                            <li>
-                                                <a data-search-val="all" data-val="All">All</a>
-                                            </li>
-                                            <li>
-                                                <a data-search-val="thickness" data-val="Thickness">Thickness</a>
-                                            </li>
-                                            <li>
-                                                <a data-search-val="lr-rating" data-val="LR Rating">LR Rating</a>
-                                            </li>
+                            <script id="gallery-filter" type="text/x-handlebars-template">
+                                {{#each gallery_filter}}
+                                <div class="gallery-filter-content">
+                                    <p class="color-grey ">{{category_title}}</p>
+                                    <div class="search-filter-sort">
+                                        <div class="refine-search  dropdown dp-form dropdown-menu-right d-small">
+                                            <button class=" btn btn-default color-dark-grey dropdown-toggle text-left dp-clickable" type="button" id="dropdownMenu1"
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <span class="dp-text">All</span>
+                                                <input type="hidden" name="selectenquirytype" value="Proin ut elit">
+                                                <span class="color-primary-green glyphicon glyphicon-menu-down right"></span>
+                                            </button>
 
-                                        </ul>
+                                            <ul class="dropdown-menu dp-list refine-list" aria-labelledby="dropdownMenu1">
+                                                {{#each child}}
+                                                <li>
+                                                    <a data-description="{{desc}}" data-search-val="{{key}}" data-val="{{value}}">{{value}}</a>
+                                                </li>
+                                                {{/each}}
+                                            </ul>
+                                        </div>
                                     </div>
-
+                                    <!-- <hr> -->
                                     <div class="dropdown refine-mobile  visible-xs dropdown-menu-right m-vertical-m d-small">
-                                        <select class="btn-default">All
-                                            <option value="alll" data-val="All">All</option>
-                                            <option value="thickness" data-val="Thickness">Thickness</option>
-                                            <option value="Price" data-val="Texture">Price</option>
-                                            <option value="Date Added" data-val="Texture">Date Added</option>
+                                        <select class="btn-default">All {{#each child}}
+                                            <option value="{{key}}" data-val="{{value}}">{{value}}</option>
+                                            {{/each}}
                                         </select>
                                     </div>
-                                    <!-- END SORT BY -->
                                 </div>
 
 
-                            </div>
-                            <hr class="m-no" />
+                                {{/each}}
 
-                            <div class="each">
-                                <p class="color-grey m-bottom-xs">Type</p>
+                                <diiv class="type-desc"></div>
 
-                                <div class="search-filter-sort">
-                                    <!-- SORT BY -->
-                                    <div class="refine-search  dropdown dp-form dropdown-menu-right d-small">
-                                        <button class=" btn btn-default color-dark-grey dropdown-toggle text-left dp-clickable" type="button" id="dropdownMenu1"
-                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <span class="dp-text">Select Type</span>
-                                            <input type="hidden" name="selectenquirytype" value="Proin ut elit">
-                                            <span class="color-primary-green glyphicon glyphicon-menu-down right"></span>
-                                        </button>
 
-                                        <ul class="dropdown-menu dp-list refine-list" aria-labelledby="dropdownMenu1">
-                                            <li>
-                                                <a data-search-val="texture" data-val="Texture">Classic</a>
-                                            </li>
-                                            <li>
-                                                <a data-search-val="thickness" data-val="Thickness">Thickness</a>
-                                            </li>
-                                            <li>
-                                                <a data-search-val="lr-rating" data-val="LR Rating">LR Rating</a>
-                                            </li>
+                            </script>
 
-                                        </ul>
-                                    </div>
 
-                                    <div class="dropdown refine-mobile  visible-xs dropdown-menu-right m-vertical-m d-small">
-                                        <select class="btn-default">Select Type
-                                            <option value="TEst1" data-val="Classic">Classic</option>
-                                            <option value="Oldest to Latest" data-val="Texture">Oldest to Latest</option>
-                                            <option value="Price" data-val="Texture">Price</option>
-                                            <option value="Date Added" data-val="Texture">Date Added</option>
-                                        </select>
-                                    </div>
-                                    <!-- END SORT BY -->
-                                </div>
-                            </div>
+                            <!-- <hr class="m-no" /> -->
 
-                            <div class="each">
+
+                            <!-- <div class="each">
                                 <p class="color-grey">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
                                     Aenean massa.</p>
-                            </div>
+                            </div> -->
 
 
 
@@ -347,8 +314,49 @@
     </div>
     <!-- section 2 end -->
 </div>
+
+
 <!-- END of PAGE CONTENT -->
 
+<script>
+    (function () {
+        "use strict";
+        $(document).ready(function () {
 
+            if ($('.gallery-listing-sidebar').length) {
+
+                $.ajax({
+                    url: "/etc/designs/usgb_v3/clientlib/uiux-all-js/js/json/gallery-filter.json",
+                    type: "GET",
+                    cache: false,
+                    success: function (response) {
+                        console.log(response);
+
+                        var galleryFilterHtml = $('#gallery-filter').html();
+                        var temptGalleryFilterHtml = Handlebars.compile(galleryFilterHtml);
+                        $('.gallery-filter-wrapper').html(temptGalleryFilterHtml(response));
+                        //console.log(test)
+                    },
+                    beforeSend: function () {},
+                    complete: function () {}
+                });
+
+                $(document).on("click", '.gallery-filter-wrapper [data-val]', function () {
+                    console.log(this)
+                    var typeDesc = $(this).data('description');
+                    $(".type-desc").html("<p class='p-xl color-grey'>"+typeDesc+"</p>")
+                });
+
+
+            }
+
+
+
+
+
+
+        });
+    })();
+</script>
 <sly data-sly-use.clientLib="/libs/granite/sightly/templates/clientlib.html" data-sly-call="${clientLib.js @ categories='uiux.alljs'}"
     data-sly-unwrap/>

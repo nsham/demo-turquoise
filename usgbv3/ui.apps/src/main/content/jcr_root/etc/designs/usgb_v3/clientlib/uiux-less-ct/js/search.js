@@ -258,8 +258,6 @@
                             break; 
                     }
 
-                    
-
                 }else{
                     $('.search-category-controller-container').addClass('hidden');
                     $('.search-result-container').addClass('hidden');
