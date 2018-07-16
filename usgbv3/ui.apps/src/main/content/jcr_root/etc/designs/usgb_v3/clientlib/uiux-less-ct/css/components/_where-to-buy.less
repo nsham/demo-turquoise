@@ -168,9 +168,9 @@
 
     }
     .dropdown{
-      position: initial;
+      position: initial !important;
       @media(min-width:768px){
-        position: relative;
+        position: relative !important;
       }
     }
     .dropdown.dropdown-lg {
@@ -178,9 +178,14 @@
       .dropdown-menu {
         position: absolute;
         width: 100%;
+        top: 100%;
         right: 0;
         padding: 0;
-        // border: 1px #ccc solid;
+        left: auto;
+        transform: none;
+        min-width: 0;
+        -webkit-transform: translateX(none);
+        transform: translateX(none);
         box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
         @media(min-width:768px){
           width: 345px;
@@ -190,9 +195,7 @@
           margin-right: 0px;
           padding:5px;
         }
-        & ul{
-    
-        }
+        
         & div:first-child{
           border-bottom: 1px solid #ccc;
         }
@@ -252,7 +255,9 @@
     height: 500px;
     right: 100%;
     left: auto;
-    -webkit-transition: all .3s;
+    padding: 0;
+    overflow-y: hidden;
+    -webkit-transition: all .3s; 
     transition: all .3s;
     @media(min-width:768px){
       width: 505px;
