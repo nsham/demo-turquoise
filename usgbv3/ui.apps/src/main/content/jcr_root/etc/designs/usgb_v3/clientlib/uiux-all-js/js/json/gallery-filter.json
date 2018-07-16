@@ -41,9 +41,9 @@
         }
     ],
     "result": [{
-            "num": 19,
+            "num": 12,
             "img": "/content/dam/USGBoral/Global/Website/Images/component/allsample/test.png",
-            "title": "Lorem ipsum dolor sita met, consectetuer adipiscin",
+            "title": "bedLorem ipsum dolor sita met, consectetuer adipiscin",
             "desc": " blablablabal blablabal blablalba",
             "view": "bedroom",
             "type": "classic",
@@ -52,7 +52,7 @@
         {
             "num": 20,
             "img": "/content/dam/USGBoral/Global/Website/Images/component/allsample/product-img-870x569.jpg",
-            "title": "Lorem ipsum dolor sita met, consectetuer adipiscin",
+            "title": "bed Lorem ipsum dolor sita met, consectetuer adipiscin",
             "desc": " blablablabal blablabal blablalba",
             "view": "bedroom",
             "type": "modern",

@@ -16,5 +16,6 @@ jquery.fancybox.js
 jquery.waypoints.js
 pagination.js
 handlebars.js
+clamp.js
 main.js
 
