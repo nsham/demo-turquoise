@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <workspaceFilter version="1.0">
-    <filter root="/apps/usgbv3/components/content/page-leadership" />
-   
+    <filter root="/apps/usgbv3" />
+    <filter root="/etc/designs/usgb_Australia" />
+    <filter root="/etc/designs/usgb_v3" />
 </workspaceFilter>
