@@ -10,6 +10,7 @@ import com.day.cq.wcm.api.Page;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.usgbv3.core.services.MixedMediaService;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.SlingHttpServletResponse;
 import org.apache.sling.api.request.RequestParameter;
@@ -43,6 +44,9 @@ public class GetGalleryDetails  extends SlingSafeMethodsServlet {
 
     @Reference
     QueryBuilder queryBuilder;
+
+    @Reference
+    MixedMediaService mixedMediaService;
 
     @Override
     protected void doGet(SlingHttpServletRequest request, SlingHttpServletResponse response)
@@ -78,12 +82,12 @@ public class GetGalleryDetails  extends SlingSafeMethodsServlet {
                 JsonObject tempJsonObject ;
                 while(pageIterator.hasNext()){
                     Page childPage = pageIterator.next();
-                    LOG.info("childPage path :"+childPage.getPath());
+                   // LOG.info("childPage path :"+childPage.getPath());
                     Tag[] tags = childPage.getTags();
                     if(tags != null && tags.length>0){
                         for(int i=0; i< tags.length; i++){
                             Tag tag = tags[i];
-                            LOG.info("tag id:"+tag.getTagID());
+                            //LOG.info("tag id:"+tag.getTagID());
                             if(tag.getTagID().indexOf(":specifics/") != -1){
                                 // it is a specifics page.
                                 if(!specificsMap.containsKey(tag.getName())){
@@ -104,7 +108,7 @@ public class GetGalleryDetails  extends SlingSafeMethodsServlet {
                                     styleMap.put(tag.getTagID(), tempJsonObject);
                                 }
                                 // add to the data
-                                tempJsonObject = getPageProperiesForGallery(childPage, tag.getName());
+                                tempJsonObject = getPageProperiesForGallery(childPage, tag.getName(), resourceResolver);
                                 galleryList.add(tempJsonObject);
                                 // dont look for other tags
                                 break;
@@ -169,11 +173,17 @@ public class GetGalleryDetails  extends SlingSafeMethodsServlet {
         return gson.toJson(finalJsonData);
     }
 
-    private JsonObject getPageProperiesForGallery(Page childPage, String tagName) {
+    private JsonObject getPageProperiesForGallery(Page childPage, String tagName, ResourceResolver resourceResolver) {
         ValueMap pageProperties = childPage.getContentResource().getValueMap();
         JsonObject tempJsonObject = new JsonObject();
-        // TODO
-        tempJsonObject.addProperty("num", 12);
+
+        if(mixedMediaService != null){
+            int mixedMediaCountInPage = mixedMediaService.getMixedMediaCountInPage(childPage.getPath(), resourceResolver);
+            if(mixedMediaCountInPage>-1){
+                tempJsonObject.addProperty("num", mixedMediaCountInPage);
+            }
+        }
+
 
         if(pageProperties.containsKey("socialImage")){
             tempJsonObject.addProperty("img", pageProperties.get("socialImage").toString());
@@ -184,7 +194,7 @@ public class GetGalleryDetails  extends SlingSafeMethodsServlet {
         if(pageProperties.containsKey("jcr:description")) {
             tempJsonObject.addProperty("desc", pageProperties.get("jcr:description").toString());
         }
-        //TODO
+
         Page parentPage = childPage.getParent();
         if(parentPage != null){
             Tag[] parentTags = parentPage.getTags();
