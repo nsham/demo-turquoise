@@ -1,0 +1,98 @@
+{
+    "gallery_filter": [{
+            "category_key": "view",
+            "category_title": "View By",
+            "child": [{
+                    "key": "all",
+                    "value": "All"
+                },
+                {
+                    "key": "bathroom",
+                    "value": "Bathroom"
+                },
+                {
+                    "key": "bedroom",
+                    "value": "Bedroom"
+                },
+                {
+                    "key": "showroom",
+                    "value": "Showroom"
+                }
+            ]
+        },
+        {
+            "category_key": "type",
+            "category_title": "Type",
+            "child": [{
+                "key": "all",
+                "value": "All"
+            },
+                {
+                    "key": "modern",
+                    "value": "Modern",
+                    "desc": "modern desc modern desc"
+                },
+                {
+                    "key": "classic",
+                    "value": "Classic",
+                    "desc": "clasic desc desc desc"
+                }
+            ]
+        }
+    ],
+    "result": [{
+            "num": 19,
+            "img": "/content/dam/USGBoral/Global/Website/Images/component/allsample/test.png",
+            "title": "Lorem ipsum dolor sita met, consectetuer adipiscin",
+            "desc": " blablablabal blablabal blablalba",
+            "view": "bedroom",
+            "type": "classic",
+            "link": "/content/v3/usgboral/samplepage/gallery-detail.html"
+        },
+        {
+            "num": 20,
+            "img": "/content/dam/USGBoral/Global/Website/Images/component/allsample/product-img-870x569.jpg",
+            "title": "Lorem ipsum dolor sita met, consectetuer adipiscin",
+            "desc": " blablablabal blablabal blablalba",
+            "view": "bedroom",
+            "type": "modern",
+            "link": "/content/v3/usgboral/samplepage/gallery-detail.html"
+        },
+        {
+            "num": 15,
+            "img": "/content/dam/USGBoral/Global/Website/Images/component/allsample/test.png",
+            "title": "Lorem ipsum dolor sita met, consectetuer adipiscin",
+            "desc": " blablablabal blablabal blablalba",
+            "view": "bathroom",
+            "type": "classic",
+            "link": "/content/v3/usgboral/samplepage/gallery-detail.html"
+        },
+        {
+            "num": 16,
+            "img": "/content/dam/USGBoral/Global/Website/Images/component/allsample/product-img-870x569.jpg",
+            "title": "Lorem ipsum dolor sita met, consectetuer adipiscin",
+            "desc": " blablablabal blablabal blablalba",
+            "view": "bathroom",
+            "type": "modern",
+            "link": "/content/v3/usgboral/samplepage/gallery-detail.html"
+        },
+        {
+            "num": 10,
+            "img": "/content/dam/USGBoral/Global/Website/Images/component/allsample/test.png",
+            "title": "Lorem ipsum dolor sita met, consectetuer adipiscin",
+            "desc": " blablablabal blablabal blablalba",
+            "view": "showroom",
+            "type": "classic",
+            "link": "/content/v3/usgboral/samplepage/gallery-detail.html"
+        },
+        {
+            "num": 25,
+            "img": "/content/dam/USGBoral/Global/Website/Images/component/allsample/product-img-870x569.jpg",
+            "title": "Lorem ipsum dolor sita met, consectetuer adipiscin",
+            "desc": " blablablabal blablabal blablalba",
+            "view": "showroom",
+            "type": "modern",
+            "link": "/content/v3/usgboral/samplepage/gallery-detail.html"
+        }
+    ]
+}
