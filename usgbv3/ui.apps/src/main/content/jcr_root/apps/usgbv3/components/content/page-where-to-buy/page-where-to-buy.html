@@ -31,14 +31,14 @@
 <div class="container-fluid ">
 	<div class="row">
 		<div class="col-xs-12 p-no">
-			<form id="search-controller" onkeypress="return event.keyCode != 13;">
+			<form id="map-search-controller" onkeypress="return event.keyCode != 13;">
 				<div class="wtb-search-bar">
 					<div class="filter-back-btn">
 						Back
 					</div>
 					<div class="input-group search-group">
-						<input type="text" id="input-search-location" name="search_text" class="form-control placeholder" placeholder="City, postcode, Store name or address">
-						<div class="inputSearch-myLocation hidden"><img class="myLocation-pin" src="/images/storeLocator/blue_pin.png">Use Current location</div>
+						<input type="text" id="input-search-location" name="search_text" class="form-control placeholder" placeholder="City, postcode, Store name or address" data-length-autocomplete-start="1">
+						<div class="inputSearch-myLocation hidden"><img class="myLocation-pin" src="/content/dam/USGBoral/Global/Website/Images/component/allsample/blue_pin.png">Use Current location</div>
 						<div class="dropdown dropdown-lg">
 							<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
 								<span class="sr-only">Toggle navigation</span>
@@ -48,22 +48,7 @@
 							</button>
 							<div class="dropdown-menu dropdown-menu-right" role="menu">
 								<div value="" selected="selected">ALL States</div>
-								<div class="option">Kuala Lumpur</div>
-								<div class="option">Selangor</div>
-								<div class="option">Penang</div>
-								<div class="option">Johor Baharu</div>
-								<div class="option">Malacca</div>
-								<div class="option">Kedah</div>
-								<div class="option">Kelantan </div>
-								<div class="option">Terengganu</div>
-								<div class="option">Negeri Sembilan</div>
-								<div class="option">Pahang </div>
-								<div class="option">Perlis</div>
-								<div class="option">Putrajaya</div>
-								<div class="option">Labuan</div>
-								<div class="option">Sabah</div>
-								<div class="option">Sarawak</div>
-								<!-- <div class="inputSearch-myLocation"><img class="myLocation-pin" src="/images/storeLocator/blue_pin.png">Use Current location</div> -->
+								<!-- <div class="inputSearch-myLocation"><img class="myLocation-pin" src="/content/dam/USGBoral/Global/Website/Images/component/allsample/blue_pin.png">Use Current location</div> -->
 							</div>
 						</div>
 						<button type="button" class="btn btn-primary btn-search"><span class="glyphicon glyphicon-search icon-size-xs" aria-hidden="true"></span></button>
@@ -88,12 +73,12 @@
 								<div class="row">
 									<div class="col-xs-8">
 										<a href="#" class="cta-location bold color-primary-green uppercase">{{companyName}}</a>
-										<p>
+										{{#if address1}}<p>
 											{{address1}}<br>
 											{{address2}}
-										</p>
-										<p><i class="fa fa-phone icon-color-darker-grey icon-size-xs"></i>&nbsp;&nbsp; <a href="tel:+{{phoneNumber}}">{{phoneNumber}}</a></p>
-										<p><i class="fa fa-envelope icon-color-darker-grey icon-size-xs"></i>&nbsp; <a href="mailto:+{{email}}">{{email}}</a></p>
+										</p>{{/if}}
+										{{#if phoneNumber}}<p><i class="fa fa-phone icon-color-darker-grey icon-size-xs"></i>&nbsp;&nbsp; <a href="tel:+{{phoneNumber}}">{{phoneNumber}}</a></p>{{/if}}
+										{{#if email}}<p><i class="fa fa-envelope icon-color-darker-grey icon-size-xs"></i>&nbsp; <a href="mailto:+{{email}}">{{email}}</a></p>{{/if}}
 									</div>
 
 									<div class="col-xs-4">
@@ -102,7 +87,7 @@
 										{{/if}}
 									</div>
 								</div>
-								<span class="float-right"><a href="{{directionUrl}}" target="_blank"><u>Get Direction</u></a></span>
+								<span class="float-right"><a href="https://www.google.com/maps?daddr={{latitude}},{{longitude}}" target="_blank"><u>Get Direction</u></a></span>
 								<div class="accordion-wrap clearfix">
 									<div class="btn-accordion">
 										<div class="col-l bold">
@@ -262,13 +247,13 @@
 </div>
 
 
-<sly data-sly-use.clientLib="/libs/granite/sightly/templates/clientlib.html" data-sly-call="${clientLib.js @ categories='uiux.alljs'}" data-sly-unwrap/>
+<!-- <sly data-sly-use.clientLib="/libs/granite/sightly/templates/clientlib.html" data-sly-call="${clientLib.js @ categories='uiux.alljs'}" data-sly-unwrap/> -->
 
 
-<!-- <script type="text/javascript" src="/etc/designs/usgb_v3/clientlib/uiux-all-js.js"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
+
 
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDylpywGh8XxHMztw-kBRtXCnqyAHZqPwQ"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
 <script src="/etc/designs/usgb_v3/clientlib/uiux-less-ct/js/vendors/autocomplete.js"></script>
 <script src="/etc/designs/usgb_v3/clientlib/uiux-less-ct/js/vendors/markerclusterer.js"></script>
 <script src="/etc/designs/usgb_v3/clientlib/uiux-less-ct.js"></script>

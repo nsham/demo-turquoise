@@ -1253,7 +1253,7 @@ function hookHeadScript(url, async, defer, callback) {
             // console.log($(this).parent().parent().prev().find($('.dp-text')));
 
         });
-    }); 
+    });
 })();
 
 
@@ -1770,7 +1770,7 @@ $(window).on('load', function () {
             var checkboxName
             var currentData
             var countButton
-            var MobilecurrentData
+            var MobileCurrentData
             var MobileCountButton
             // hide html divs desktop and mobile
             $(".checkbox-wrapper").hide();
@@ -1778,6 +1778,9 @@ $(window).on('load', function () {
             $('[data-checkbutton]').hide();
             //mobile
             $(".m-checkbox-wrapper").hide();
+            $('.mobile-checkbox-button-wrapper').hide();
+            $('[data-m-checkbutton]').hide();
+
 
 
             // REFINE SEARCH DESKTOP//
@@ -1888,11 +1891,12 @@ $(window).on('load', function () {
                         $('.mobile-' + mdataSearchVal + '-wrapper >[data-checkname=' + checkname + ']').parent().removeClass('checked');
                     }
                 }
+
                 // hide/show title
                 if (countCheckboxSelect < 1) {
-                    $('[data-checkbutton=' + mdataSearchVal + ']').hide();
+                    $('[data-m-checkbutton=' + mdataSearchVal + ']').hide();
                 } else {
-                    $('[data-checkbutton=' + mdataSearchVal + ']').show();
+                    $('[data-m-checkbutton=' + mdataSearchVal + ']').show();
                 }
             }
             /////REFINE SEARCH MOBILE END//////
@@ -1908,30 +1912,39 @@ $(window).on('load', function () {
                 checkname = $(this).data("selection")
                 //uncheck the checkbox (desktop)
                 $("[data-checkname=" + checkname + "]").attr('checked', false);
+                //get current wrapper data when button click desktop
+                currentData = $('[data-checkbutton]>[data-selection=' + checkname + ']').parent().data('checkbutton')
+                //count how many buttons remaning in selected wrapper desktop
+                countButton = $('[data-checkbutton=' + currentData + ']>[data-selection]').length
+
+
+                /////MOBILE///////
                 //remove class for Mobile
                 $('label >[data-checkname=' + checkname + ']').parent().removeClass('checked');
-                //get current wrapper data when button click
-                currentData = $('[data-checkbutton]>[data-selection=' + checkname + ']').parent().data('checkbutton')
-                MobilecurrentData = $('.mobile-checkbox-button-wrapper > [data-checkbutton] > [data-selection=' + checkname + '] ').parent().data('checkbutton')
-                //remove target button
-                $('[data-selection=' + checkname + ']').remove();
-                //count how many buttons remaning in selected wrapper
-                countButton = $('[data-checkbutton=' + currentData + ']>[data-selection]').length
-                MobileCountButton = $('.mobile-checkbox-button-wrapper >[data-checkbutton=' + currentData + ']>[data-selection]').length
+                //get current wrapper data when button click mobile
+                MobileCurrentData = $('[data-m-checkbutton] > [data-selection=' + checkname + '] ').parent().data('m-checkbutton')
+                //count how many buttons remaning in selected wrapper desktop
+                MobileCountButton = $('[data-m-checkbutton=' + MobileCurrentData + ']>[data-selection]').length
+
+
                 countSelection();
+
+                //remove target button desktop and mobile
+                //after checking for name
+                $('[data-selection=' + checkname + ']').remove();
 
             });
 
             function countSelection() {
-                if (countButton < 1) {
+                if (countButton <= 1) {
                     $('[data-checkbutton=' + currentData + ']').hide();
                 } else {
                     $('[data-checkbutton=' + currentData + ']').show();
                 }
-                if (MobileCountButton < 1) {
-                    $('.mobile-checkbox-button-wrapper > [data-checkbutton=' + MobilecurrentData + ']').hide("p");
+                if (MobileCountButton <= 1) {
+                    $('.mobile-checkbox-button-wrapper > [data-m-checkbutton=' + MobileCurrentData + ']').hide("p");
                 } else {
-                    $('.mobile-checkbox-button-wrapper >[data-checkbutton=' + MobilecurrentData + ']').show();
+                    $('.mobile-checkbox-button-wrapper >[data-m-checkbutton=' + MobileCurrentData + ']').show();
                 }
             }
             // function share between desktop and mobile end//
@@ -1994,6 +2007,15 @@ $(window).on('load', function () {
     "use strict";
     $(document).ready(function () {
 
+        //make text to ellipsis when more than 4 lines
+        $('[data-category] .content-box .text-container p').each(function (index, element) {
+            $clamp(element, {
+                clamp: 4,
+                useNativeClamp: false
+            });
+        });
+
+
         var getID = "all";
         var dataCategory
 
@@ -2011,16 +2033,14 @@ $(window).on('load', function () {
             if ($('[data-category]').length < 4) {
                 $(".btn-scroll-top").fadeOut(500);
             }
-
             $('[data-category]').matchHeight();
-
-
         }
 
         function loadMoreBtn() {
             $("#loadMore").fadeIn(500);
             $(".fade-bg").fadeIn(500);
             $('.content-wrapper').css('height', '780px');
+            $('[data-category]').matchHeight();
         }
 
         function completeLoadMore() {
@@ -2036,22 +2056,27 @@ $(window).on('load', function () {
             var getDivHeight = $(".content-wrapper").height();
             var newDivHeight = getDivHeight + 380;
             $('.content-wrapper').css('height', newDivHeight);
+            $('[data-category=' + getID + ']').matchHeight();
         }
 
 
         // get data content to filter
         $('.tab-tiles-wrapper ul li').click(function () {
+
             getID = $(this).attr('data-btn-category');
             dataCategory = $('[data-category=' + getID + ']')
             checkFilterData();
             //btn add active class
             $(this).parent().find('li.active').removeClass('active');
             $(this).addClass('active');
+            $('[data-category]').matchHeight();
 
         });
 
         function checkFilterData() {
 
+            console.log(getID)
+            $('[data-category=' + getID + ']').matchHeight();
             if (getID == "all") {
                 if ($('[data-category]').length > 12) {
                     loadAllDiv();
@@ -2062,15 +2087,20 @@ $(window).on('load', function () {
                 }
 
             } else {
+
                 //hide all divs and load according to category
                 $('.content-wrapper [data-category]').fadeOut(500);
                 //  $('.content-wrapper [data-category]').not(dataCategory).fadeOut(500);
                 if (dataCategory.length > 12) {
                     loadMoreBtn();
                     dataCategory.slice(0, 12).fadeIn(900);
+                    $('[data-category=' + getID + ']').matchHeight();
+
                 } else {
                     completeLoadMore();
                     dataCategory.slice(0, 12).fadeIn(900);
+                    $('[data-category=' + getID + ']').matchHeight();
+
 
                 }
                 //hide show scroll top btn

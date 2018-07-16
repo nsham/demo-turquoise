@@ -38,68 +38,50 @@
             <div class="col-xs-12 col-sm-3 col-md-3  p-sm-left-no ">
                 <!-- make-sticky_inner -->
                 <div class="gallery-listing-sidebar">
-                    <form action="" method="get">
+                    <form id="gallery-filter-form">
                         <div class="c-sidebar rounded-corners">
-
                             <div class="p-xl p-bottom-no">
                                 <h5 class=" text-left color-dark-grey bold ht6 uppercase">Refine your search</h5>
                             </div>
-
-                            <div class=" gallery-filter-wrapper"></div>
-
-                            <script id="gallery-filter" type="text/x-handlebars-template">
-                                {{#each gallery_filter}}
-                                <div class="gallery-filter-content">
-                                    <p class="color-grey ">{{category_title}}</p>
-                                    <div class="search-filter-sort">
-                                        <div class="refine-search  dropdown dp-form dropdown-menu-right d-small">
-                                            <button class=" btn btn-default color-dark-grey dropdown-toggle text-left dp-clickable" type="button" id="dropdownMenu1"
-                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <span class="dp-text">All</span>
-                                                <input type="hidden" name="selectenquirytype" value="Proin ut elit">
-                                                <span class="color-primary-green glyphicon glyphicon-menu-down right"></span>
-                                            </button>
-
-                                            <ul class="dropdown-menu dp-list refine-list" aria-labelledby="dropdownMenu1">
-                                                {{#each child}}
-                                                <li>
-                                                    <a data-description="{{desc}}" data-search-val="{{key}}" data-val="{{value}}">{{value}}</a>
-                                                </li>
-                                                {{/each}}
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <!-- <hr> -->
-                                    <div class="dropdown refine-mobile  visible-xs dropdown-menu-right m-vertical-m d-small">
-                                        <select class="btn-default">All {{#each child}}
-                                            <option value="{{key}}" data-val="{{value}}">{{value}}</option>
-                                            {{/each}}
-                                        </select>
-                                    </div>
-                                </div>
-
-
-                                {{/each}}
-
-                                <diiv class="type-desc"></div>
-
-
-                            </script>
-
-
-                            <!-- <hr class="m-no" /> -->
-
-
-                            <!-- <div class="each">
-                                <p class="color-grey">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-                                    Aenean massa.</p>
-                            </div> -->
-
-
-
+                            <div class=" gallery-filter-wrapper">
+                            </div>
                         </div>
                     </form>
+                    <!-- handlecar gallery-filter-wrapper -->
+                    <script id="gallery-filter" type="text/x-handlebars-template">
+                        {{#each gallery_filter}}
+                        <div class="gallery-filter-content">
+                            <p class="color-grey ">{{category_title}}</p>
+                            <div class="search-filter-sort">
+                                <div class="refine-search  dropdown dp-form dropdown-menu-right d-small">
+                                    <button class=" btn btn-default color-dark-grey dropdown-toggle text-left dp-clickable" type="button" id="dropdownMenu1"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <span class="dp-text">All</span>
+                                        <input type="hidden" name="{{category_key}}" value="all">
+                                        <span class="color-primary-green glyphicon glyphicon-menu-down right"></span>
+                                    </button>
 
+                                    <ul class="dropdown-menu dp-list refine-list" aria-labelledby="dropdownMenu1">
+                                        {{#each child}}
+                                        <li>
+                                            <a data-description="{{desc}}" data-search-val="{{key}}" data-val="{{value}}">{{value}}</a>
+                                        </li>
+                                        {{/each}}
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- <hr> -->
+                            <div class="dropdown refine-mobile  visible-xs dropdown-menu-right m-vertical-m d-small">
+                                <select class="btn-default">All {{#each child}}
+                                    <option data-description="{{desc}}" value="{{key}}" data-val="{{value}}">{{value}}</option>
+                                    {{/each}}
+                                </select>
+                            </div>
+                        </div>
+                        {{/each}}
+                        <div class="type-desc hidden-xs"></div>
+                        <div class="m-type-desc visible-xs"></div>
+                    </script>
                     <!-- end c-sidebar -->
 
                 </div>
@@ -109,9 +91,34 @@
             <!--  make-sticky_limit -->
             <div class="col-xs-12 col-sm-9 col-md-9">
 
+                <script id="result" type="text/x-handlebars-template">
+                    {{#each result}}
+                    <div class="each m-bottom-xxl p-side-m" data-view="{{view}}" data-type="{{type}}">
+                        <a href="#" target="_blank">
+                            <div class="box-size-l box-type-2 bg-white p-md-s p-s">
+                                <div class="green-tag">
+                                    <p class="fs-3 bold color-white m-no">{{num}} Images</p>
+                                </div>
+                                <div class="center width-full p-bottom-s bg-light-grey">
+                                    <div class="box-inner-img-gallery">
+                                        <img src={{img}}>
+                                    </div>
+                                    <h6 class="m-top-m m-bottom-s m-side-xxs uppercase color-darker-grey text-center bold">{{title}}</h6>
+                                    <p class="color-darker-grey m-no p-side-m text-center">{{desc}}</p>
+                                </div>
+                                <span class="bg-box-hover">
+                                </span>
+                            </div>
+                        </a>
+                    </div>
+                    {{/each}}
+
+                </script>
+
                 <!-- SEARCH CONTENT -->
                 <div class="search-main-content gallery-listing-search-content">
-                    <div class="inner">
+                    <div class="inner results-gallery">
+
 
                         <div class="each m-bottom-xxl p-side-m">
                             <a href="#" target="_blank">
@@ -318,6 +325,13 @@
 
 <!-- END of PAGE CONTENT -->
 
+
+<sly data-sly-use.clientLib="/libs/granite/sightly/templates/clientlib.html" data-sly-call="${clientLib.js @ categories='uiux.alljs'}"
+    data-sly-unwrap/>
+
+
+
+
 <script>
     (function () {
         "use strict";
@@ -330,25 +344,106 @@
                     type: "GET",
                     cache: false,
                     success: function (response) {
-                        console.log(response);
+                        //console.log(response);
+
+                        galleryData = response
 
                         var galleryFilterHtml = $('#gallery-filter').html();
                         var temptGalleryFilterHtml = Handlebars.compile(galleryFilterHtml);
                         $('.gallery-filter-wrapper').html(temptGalleryFilterHtml(response));
                         //console.log(test)
+
+                        var resultFilterHtml = $("#result").html();
+                        var temptResultFilterHtml = Handlebars.compile(resultFilterHtml);
+                        $('.results-gallery').html(temptResultFilterHtml(response));
+
                     },
                     beforeSend: function () {},
                     complete: function () {}
                 });
 
                 $(document).on("click", '.gallery-filter-wrapper [data-val]', function () {
-                    console.log(this)
                     var typeDesc = $(this).data('description');
-                    $(".type-desc").html("<p class='p-xl color-grey'>"+typeDesc+"</p>")
+                    $(".type-desc").html("<p class='p-top-no p-xl color-grey'>" + typeDesc + "</p>");
+
+                });
+
+                $(document).on("click", '.refine-mobile select', function () {
+                    var mtypeDesc = $('option:selected', this).attr('data-description');
+                    $(".m-type-desc").html("<p class='p-top-no p-xl color-grey'>" + mtypeDesc +
+                        "</p>");
+
                 });
 
 
+                var galleryData = []
+              //  var categoryContent = "results";
+
+                //'#search-filter-mobile-form button[type="submit"], #search-filter-desktop-form button[type="submit"]'
+                $(document).on('click', '[data-search-val]',
+                    function (e) {
+                        e.preventDefault();
+                        // var categoryKEY = $(this).data("search-val");
+                        var form = $(this).closest('form');
+                        var selectedFilterData = ($(form).serializeObject());
+                        var filteredData = multiFilter(galleryData["result"], selectedFilterData);
+
+                        //  var filteredData = multiFilter(galleryData, selectedFilterData);
+
+                        console.log(galleryData["result"])
+                        //console.log(categoryKEY)
+                        //console.log('filter', selectedFilterData);
+                        // console.log('filteredData', filteredData);
+
+                        //  currOnStageMainResultData = filteredData;
+                        //console.log(currOnStageMainResultData);
+                        // paginationResult(currOnStageMainResultData);
+
+                        // scrollTop();
+                    });
+
+            } // if end
+ 
+
+
+            // serialize form data to object
+            $.fn.serializeObject = function () {
+                var o = {};
+                var a = this.serializeArray();
+                $.each(a, function () {
+                    if (o[this.name] !== undefined) {
+                        if (!o[this.name].push) {
+                            o[this.name] = [o[this.name]];
+                        }
+                        o[this.name].push(this.value || '');
+                    } else {
+                        o[this.name] = this.value || '';
+                    }
+                });
+                return o;
+            };
+
+            function multiFilter(array, filters) {
+                const filterKeys = Object.keys(filters);
+                // filters all elements passing the criteria
+                return array.filter((item) => {
+                    // dynamically validate all filter criteria
+                    return filterKeys.every(function (key) {
+                        if (Array.isArray(item[key]) && item[key].length > 0) {
+                            // if data is tagging array, one matches in the array, return the object true
+                            for (var i = 0; i < item[key].length; i++) {
+                                if (!!~filters[key].indexOf(item[key][i])) {
+                                    return filters[key];
+                                };
+                            }
+                        } else {
+                            return !!~filters[key].indexOf(item[key]);
+                        }
+                    });
+                });
             }
+
+
 
 
 
@@ -358,5 +453,3 @@
         });
     })();
 </script>
-<sly data-sly-use.clientLib="/libs/granite/sightly/templates/clientlib.html" data-sly-call="${clientLib.js @ categories='uiux.alljs'}"
-    data-sly-unwrap/>

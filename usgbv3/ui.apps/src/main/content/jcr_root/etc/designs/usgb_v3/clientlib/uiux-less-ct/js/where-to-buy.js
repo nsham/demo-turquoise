@@ -17,6 +17,22 @@
         var curLocationMarker;
         var circleOnMap = [];
         var markerCluster;
+        var currSenario = "";
+        var choosenState = "";
+        var chooseProximity = "";
+
+        var urlString = window.location.href;
+        var url = new URL(urlString);
+        var countryCode = window.location.href.indexOf("/usgboral/") > -1? "en_au" : "en_au";
+        var locationPath = function() {
+            var pathArray = window.location.pathname.split('/').filter(Boolean).slice(0, -1);
+            var newPathname = "";
+            for (var i = 0; i < pathArray.length; i++) {
+                newPathname += "/";
+                newPathname += pathArray[i];
+            }
+            return newPathname;
+        }();
 
         $(document).ready(function(){
 
@@ -24,27 +40,112 @@
 
             $(document).on('click','.wtb-search-bar .option', function(e){
                 e.preventDefault();
-                //console.log('text');
                 
                 $('.wtb-search-bar').addClass('add-bg');
                 $('.search-bar-toggle-button').addClass('open');
                 $('#input-search-location').val(this.innerHTML); 
                 $(this).closest('.dropdown').remove('open');
-                
+                currSenario = "searchState";
+                choosenState = $(this).html();
                 
                 resetFilter();
-                // if ($('.state-wrap').hasClass('open')){
-                //     $('.filter-list-item').removeClass('open')
-                // }
-        
                 loadStoreListResult();
             });
         
             $(document).on('change keyup','#input-search-location', function(e){
                 e.preventDefault();
+                var num = Number($(this).attr('data-length-autocomplete-start'));
+                var target = $(this);
                 if ($(this).val()) {
                     $('.wtb-search-bar').addClass('add-bg');
-                } else { 
+                    if($(this).val().length >= num){
+                        $.ajax({
+                            url: "/bin/usg/storeAutoComplete",
+                            // data: "text=" + $(this).val() + "&pageurl=" + locationPath,
+                            data: "text=" + $(this).val() + "&pageurl=" + "/content/usgboral/en_au/samplepage/",
+                            type: "GET",
+                            cache: false,
+                            success: function (response) {
+                                var data = response.Items;
+                                var autocompleteData = data;
+                                var values = Object.keys(autocompleteData).map(function(e) {
+                                    return autocompleteData[e].address1 || autocompleteData[e].companyName || autocompleteData[e].city || autocompleteData[e].state || autocompleteData[e].zip || autocompleteData[e].en_locationPage;
+                                });
+                                //console.log(values);
+                                // new autoComplete({
+                                //     selector: '#input-search-location',
+                                //     minChars: 1,
+                                //     source: function(term, suggest){
+                                //         term = term.toLowerCase();
+                                //         var choices = values;
+                                //         var matches = [];
+                                //         for (var i=0; i<choices.length; i++){
+                                //             if (~choices[i].toLowerCase().indexOf(term)){
+                                //                 matches.push(choices[i]);
+                                //             } 
+                                //         }
+                                //         suggest(matches);
+                                //     }
+                                // });
+                            },
+                            beforeSend: function () {
+                                //$('.loader').fadeIn("fast");
+                            },
+                            complete: function () {
+                                //$('.loader').fadeOut("slow");
+                            }
+                        });
+
+                        //var values = ["7 Barrier Street, Fyshwick"];
+
+                        // new autoComplete({
+                        //     selector: '#input-search-location',
+                        //     minChars: 1,
+                        //     source: function(term, suggest){
+                        //         term = term.toLowerCase();
+                        //         var choices = values;
+                        //         var matches = [];
+                        //         for (var i=0; i<choices.length; i++){
+                        //             if (~choices[i].toLowerCase().indexOf(term)){
+                        //                 matches.push(choices[i]);
+                        //             } 
+                        //         }
+                        //         suggest(matches);
+                        //     }
+                        // });
+                        var xhr;
+                        new autoComplete({
+                            selector: '#input-search-location',
+                            source: function(term, response){
+                                try { xhr.abort(); } catch(e){}
+                                xhr = $.getJSON('/bin/usg/storeAutoComplete', {
+                                    text: term,
+                                    pageurl: "/content/usgboral/en_au/samplepage/"
+                                }, function (data) {
+                                    var autocompleteData = data.Items;
+                                    var values = Object.keys(autocompleteData).map(function(e) {
+                                        return autocompleteData[e].address1 || autocompleteData[e].companyName || autocompleteData[e].city || autocompleteData[e].state || autocompleteData[e].zip || autocompleteData[e].en_locationPage;
+                                    });
+                                    response(values);
+                                    console.log('data',data);
+                                    console.log('autocompleteData',autocompleteData);
+                                    console.log('values',values);
+                                });
+                            },
+                            renderItem: function (item, search){
+                                console.log('item', item);
+                                search = search.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+                                var re = new RegExp("(" + search.split(' ').join('|') + ")", "gi");
+                                return '<div class="autocomplete-suggestion" data-langname="'+item+'" data-val="'+search+'">'+item.replace(re, "<b>$1</b>")+'</div>';
+                            },
+                            onSelect: function(e, term, item){
+                                return $(target).val(item.getAttribute('data-langname'));
+                                //alert('Item "'+item.getAttribute('data-langname')+' ('+item.getAttribute('data-lang')+')" selected by '+(e.type == 'keydown' ? 'pressing enter' : 'mouse click')+'.');
+                            }
+                        });
+                    }
+                    
+                } else {  
                     $('.wtb-search-bar').removeClass('add-bg').removeClass('open');
                     $('.state-wrap').removeClass('open');
                     $('.search-bar-toggle-button').removeClass('open');
@@ -136,7 +237,7 @@
                 $('.filter-list-item').removeClass('open');
             })
         
-            $(document).on('click', '#search-controller .btn-search', function(e){
+            $(document).on('click', '#map-search-controller .btn-search', function(e){
                 // jsonDataToCall = JSON.parse(JSON.stringify($(form).serializeObject()));
                 resetFilter();
                 loadStoreListResult();
@@ -150,7 +251,7 @@
                 $(".content-accordion").not($(this).next()).slideUp('fast').removeClass('a-collapse');
             });
 
-            $('#input-search-location').keyup(function(event) {
+            $('#input-search-location').on('keyup', function(event) {
                 var target = $(event.currentTarget);
                 var currentValue = target.val();
                 var placeholderValue = $('#input-search-location').attr('placeholder');
@@ -166,7 +267,6 @@
                         $('.inputSearch-myLocation').addClass('hidden');
                     }
                 }
-                
             });
             
             $('#input-search-location').on('focus', function(event) {
@@ -192,6 +292,7 @@
                 $('.wtb-search-bar').addClass('add-bg');
                 $('.inputSearch-myLocation').addClass('hidden');
                 $('#input-search-location').val('Use My Location');
+                currSenario = "searchUserLocation";
                 loadStoreListResult();
             });
 
@@ -207,29 +308,15 @@
 
             if($("#input-search-location").length){
                 $.ajax({
-                    url: "/json/autocomplete.json",
-                    data: "",
+                    url: "/bin/usg/getAllStates",
+                    data: "country="+ countryCode,
                     type: "GET",
                     cache: false,
                     success: function (response) {
-                        var data = response.Items;
-                        var autocompleteData = data;
-                        var values = Object.keys(autocompleteData).map(function(e) {
-                            return autocompleteData[e].address1 || autocompleteData[e].companyName || autocompleteData[e].city || autocompleteData[e].state || autocompleteData[e].zip || autocompleteData[e].en_locationPage;
-                        });
-                        console.log(values);
-                        new autoComplete({
-                            selector: '#input-search-location',
-                            minChars: 1,
-                            source: function(term, suggest){
-                                term = term.toLowerCase();
-                                var choices = values;
-                                var matches = [];
-                                for (var i=0; i<choices.length; i++)
-                                    if (~choices[i].toLowerCase().indexOf(term)) matches.push(choices[i]);
-                                suggest(matches);
-                            }
-                        });
+                        console.log(response);
+                        for(var i=0; i<response.length; i++){
+                            $('#map-search-controller .dropdown-menu').append('<div class="option">'+ response[i] +'</div>');
+                        }
                     },
                     beforeSend: function () {
                         //$('.loader').fadeIn("fast");
@@ -238,6 +325,37 @@
                         //$('.loader').fadeOut("slow");
                     }
                 });
+
+                // var xhr;
+                // new autoComplete({
+                //     selector: '#input-search-location',
+                //     source: function(term, response){
+                //         try { xhr.abort(); } catch(e){}
+                //         xhr = $.getJSON('/bin/usg/storeAutoComplete', {
+                //             text: term,
+                //             pageurl: "/content/usgboral/en_au/samplepage/"
+                //         }, function (data) {
+                //             var autocompleteData = data.Items;
+                //             var values = Object.keys(autocompleteData).map(function(e) {
+                //                 return autocompleteData[e].address1 || autocompleteData[e].companyName || autocompleteData[e].city || autocompleteData[e].state || autocompleteData[e].zip || autocompleteData[e].en_locationPage;
+                //             });
+                //             response(values);
+                //             console.log('data',data);
+                //             console.log('autocompleteData',autocompleteData);
+                //             console.log('values',values);
+                //         });
+                //     },
+                //     renderItem: function (item, search){
+                //         search = search.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+                //         var re = new RegExp("(" + search.split(' ').join('|') + ")", "gi");
+                //         return '<div class="autocomplete-suggestion" data-langname="'+item[0]+'" data-lang="'+item[1]+'" data-val="'+search+'"><img src="img/'+item[1]+'.png"> '+item[0].replace(re, "<b>$1</b>")+'</div>';
+                //     },
+                //     onSelect: function(e, term, item){
+                //         alert('Item "'+item.getAttribute('data-langname')+' ('+item.getAttribute('data-lang')+')" selected by '+(e.type == 'keydown' ? 'pressing enter' : 'mouse click')+'.');
+                //     }
+                // });
+
+              
             }
         });
 
@@ -330,12 +448,12 @@
             // Finally the bounds variable is used to set the map bounds
             // with fitBounds() function
             map.fitBounds(bounds);
-            map.setZoom(8);
+            map.setZoom(6);
         }
         
         // This function creates each marker and it sets their Info Window content
         function createMarker(latlng, companyName, address1, address2, phoneNumber, email, directionUrl){
-            var var_pin = 'images/marker.png';
+            var var_pin = '/content/dam/USGBoral/Global/Website/Images/component/allsample/marker.png';
             var marker = new google.maps.Marker({
                 map: map,
                 position: latlng,
@@ -386,7 +504,7 @@
 
                 // pan to clicked marker
                 var divHeightOfTheMap = document.getElementById('map-canvas').clientHeight;
-                var offSetFromBottom = 50;
+                var offSetFromBottom = 100;
                 map.setCenter(marker.getPosition());
                 map.panBy(0, -(divHeightOfTheMap / 2 - offSetFromBottom));
 
@@ -395,19 +513,19 @@
                 
                 // opening the Info Window in the current map and at the current marker location.
                 infoWindow.open(map, marker);
-                marker.setIcon('images/marker-active.png');
+                marker.setIcon('/content/dam/USGBoral/Global/Website/Images/component/allsample/marker-active.png');
             });
 
             google.maps.event.addListener(map, 'click', function () {
                 infoWindow.close();
                 //Change the marker icon
-                marker.setIcon('images/marker.png');
+                marker.setIcon('/content/dam/USGBoral/Global/Website/Images/component/allsample/marker.png');
             });
 
             google.maps.event.addListener(infoWindow, 'closeclick', function () {
                 infoWindow.close();
                 // then, remove the infowindows name from the array
-                marker.setIcon('images/marker.png');
+                marker.setIcon('/content/dam/USGBoral/Global/Website/Images/component/allsample/marker.png');
             });
             
         }
@@ -430,18 +548,35 @@
         function loadStoreListResult(){
             console.log("jsonDataToCall", jsonDataToCall);
             $.ajax({
-                url: "/json/storelist.json",
-                data:   (jsonDataToCall.search_text? "search_text=" + JSON.stringify(jsonDataToCall.search_text) : "")
-                        + (jsonDataToCall.storetype? "&storetype=" + JSON.stringify(jsonDataToCall.storetype) : "")
-                        + (jsonDataToCall.distance? "&distance=" + JSON.stringify(jsonDataToCall.distance) : "")
-                        + (jsonDataToCall.product_cat? "&product_cat=" + JSON.stringify(jsonDataToCall.product_cat) : ""),
+                url: "/bin/usg/storeSearch",
+                    
+                data:   
+                        // (jsonDataToCall.search_text? "search_text=" + JSON.stringify(jsonDataToCall.search_text) : "")
+                        // + (jsonDataToCall.storetype? "&storetype=" + JSON.stringify(jsonDataToCall.storetype) : "")
+                        // + (jsonDataToCall.distance? "&distance=" + JSON.stringify(jsonDataToCall.distance) : "")
+                        // + (jsonDataToCall.product_cat? "&product_cat=" + JSON.stringify(jsonDataToCall.product_cat) : "")
+                        function(){
+                            switch (currSenario) {
+                                case "userCurrLocation1":
+                                   
+                                    break; 
+                                case "searchProximity":
+                                    return "key=proximity&country=" + countryCode + "&text=" + chooseProximity;
+                                    break;
+                                case "searchState":
+                                    return "key=statename&text=" + choosenState + "&country=" + countryCode;
+                                    break; 
+                                case "searchUserLocation":
+                                    return "country=" + countryCode + "&currentlocation=true";
+                                    break; 
+                            }
+                        }()
+                        ,
                 type: "GET",
                 cache: false,
                 success: function (response) {
                     // 1. data come in
-                    markersData = function(){ 
-                        return response.MatchItems || response.SimilarItems || response.ProximityItems;
-                    }();
+                    markersData = response;
 
                     geolocation(function (pos) {
                         if(pos.lat !== null){
@@ -505,7 +640,7 @@
         function geolocation(callback){
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(function(position) {
-                    var var_pin = 'images/storeLocator/icon_marker_red.png';
+                    var var_pin = '/content/dam/USGBoral/Global/Website/Images/component/allsample/icon_marker_red.png';
                     curLocationMarker = new google.maps.Marker({
                         map: map,
                         icon: var_pin

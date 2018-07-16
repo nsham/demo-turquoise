@@ -2,146 +2,115 @@
 // Component: Tab Tiles Filter
 // ----------------------------------------------------------------------
 
-.tab-tiles-wrapper{
-    .btn-scroll-top{
-        cursor: pointer;
-        position: absolute;
-        bottom: 57px;
-        right: 0px;
-        z-index: 4;
-        @media (min-width:768px){
-            bottom:50px;
-            right: 11px;
-        }
+.tab-tiles-wrapper {
+  .btn-scroll-top {
+    cursor: pointer;
+    position: absolute;
+    bottom: 57px;
+    right: 0px;
+    z-index: 4;
+    @media (min-width: 768px) {
+      bottom: 50px;
+      right: 11px;
     }
-    ul{
-        font-size:14px;
-        @media (min-width:400px){
-            font-size: 16px;
-        }
+  }
+  ul {
+    font-size: 14px;
+    @media (min-width: 400px) {
+      font-size: 16px;
     }
-    ul>li{
-        cursor: pointer;
-        padding: 0 5px;
-        border-right: 1px solid @color-grey;
-        position: relative;
-        display: inline-block;
-        width: auto;
-      //  text-align: center;
-    
-    //    &:before{
-    //        content:"";
-    //        position: absolute;
-    //        bottom:0;
-    //        left: 0;
-    //        height: 16px;
-    //    }
-        @media (min-width:400px){
-            padding: 0 15px
-        }
-        a{
-            color:@color-darker-grey;
-        }
+  }
+  ul > li {
+    cursor: pointer;
+    padding: 0 5px;
+    border-right: 1px solid @color-grey;
+    position: relative;
+    display: inline-block;
+    width: auto;
 
-        &:first-child{
-          //  text-align: right;
-        }
-        &:last-child{
-           // text-align: left;
-            border-right:none;
-        }
-        &.active{
-            a{
-                padding-top:8px;
-                border-bottom: 2px solid @color-primary-green;
-                font-weight: bold;
-            }
-           
-        
-        }
+    @media (min-width: 400px) {
+      padding: 0 15px;
+    }
+    a {
+      color: @color-darker-grey;
     }
 
-    .no-crop{
-        height: 100%;
-        overflow: auto;
+    &:last-child {
+      // text-align: left;
+      border-right: none;
     }
-    .crop-height{
-        height: 780px;
-        overflow: hidden;
+    &.active {
+      a {
+        padding-top: 8px;
+        border-bottom: 2px solid @color-primary-green;
+        font-weight: bold;
+      }
     }
-    .content-wrapper{
-       
-        .content-box{
+  }
 
-             display:flex;
-             flex-direction: row;
-             flex-wrap:nowrap;
-             align-items:center;
-             text-align: left;
-             @media (min-width:768px){
-                flex-wrap: wrap;
-                text-align: center;
-             }
-             
-            .box-img {
-                width: 79%;
-          
-               @media(min-width:400px){
-                    width: 50%;
-                }
-                @media(min-width:500px){
-                    width: 20%;
-                }
-                @media(min-width:768px){
-                    width: 100%;
-                }
-                
+  .no-crop {
+    height: 100%;
+    overflow: auto;
+  }
+  .crop-height {
+    height: 780px;
+    overflow: hidden;
+  }
+  .content-wrapper {
+    .content-box {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      align-items: center;
+      text-align: left;
+      @media (min-width: 768px) {
+        flex-wrap: wrap;
+        text-align: center;
+      }
 
-                img{
-                    width: 100%;
-                }
-            }
-            .text-container{
-                margin-left: 10px;
-                @media (min-width:768px){
-                    width: 100%; 
-                }
-                p{
-                    margin:0;
-                    width: 150px;
-                    text-overflow: ellipsis;
-                    white-space: nowrap; 
-                    overflow: hidden;
-                    @media (min-width:320px){
-                        white-space: pre-wrap; 
-                        width: 100%;
-                        word-break: break-word;
-                    }
-                }
-                
-            }
-          
+      .box-img {
+        margin: none;
+        @media (min-width: 768px) {
+          margin: auto;
         }
-        .bg-box-hover:hover{
-            border:2px solid @color-primary-green;
-        }
+        img {
+          width: 70px;
 
-        .fade-bg{
+          @media (min-width: 768px) {
             width: 100%;
-            height: 100px;
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            z-index: 2;
-            background: url("/content/dam/USGBoral/Global/Website/Images/component/allsample/fade-bottom.png");
-            background-repeat: repeat-x;
-        } 
+          }
+        }
+      }
+      .text-container {
+        margin-left: 10px;
+        @media (min-width: 768px) {
+          width: 100%;
+        }
+        p {
+         text-align:left;
+          @media (min-width: 768px) {
+            text-align: center;
+          }
+        }
+      }
     }
-    #loadMore{
-        z-index: 3;
-        position: relative;
+    .bg-box-hover:hover {
+      border: 2px solid @color-primary-green;
     }
-   
 
-
+    .fade-bg {
+      width: 100%;
+      height: 100px;
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      z-index: 2;
+      background: url("/content/dam/USGBoral/Global/Website/Images/component/allsample/fade-bottom.png");
+      background-repeat: repeat-x;
+    }
+  }
+  #loadMore {
+    z-index: 3;
+    position: relative;
+  }
 }
