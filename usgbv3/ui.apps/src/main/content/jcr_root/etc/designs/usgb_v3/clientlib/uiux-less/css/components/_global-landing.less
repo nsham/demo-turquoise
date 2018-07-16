@@ -52,6 +52,10 @@
   padding-bottom: 30px;
   float: none;
   height: 100%;
+  @media (min-width:768px){
+    max-width: 900px;
+    margin: 0 auto;
+  }
   ul{
     & > li{
       display: flex;
@@ -85,6 +89,11 @@
           }
         }
       } 
+    }
+  }
+  a{
+    &:hover{
+      color:@color-primary-yellow;
     }
   }
 }

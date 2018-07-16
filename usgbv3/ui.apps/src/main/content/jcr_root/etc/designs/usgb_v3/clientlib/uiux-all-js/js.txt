@@ -15,5 +15,6 @@ aos.js
 jquery.fancybox.js
 jquery.waypoints.js
 pagination.js
+handlebars.js
 main.js
 
