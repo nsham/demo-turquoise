@@ -377,33 +377,41 @@
 
 
                 var galleryData = []
-              //  var categoryContent = "results";
+                var categoryContent = "result";
 
                 //'#search-filter-mobile-form button[type="submit"], #search-filter-desktop-form button[type="submit"]'
                 $(document).on('click', '[data-search-val]',
                     function (e) {
                         e.preventDefault();
-                        // var categoryKEY = $(this).data("search-val");
                         var form = $(this).closest('form');
                         var selectedFilterData = ($(form).serializeObject());
-                        var filteredData = multiFilter(galleryData["result"], selectedFilterData);
+                        var filteredData = multiFilter(galleryData[categoryContent], selectedFilterData);
 
                         //  var filteredData = multiFilter(galleryData, selectedFilterData);
 
-                        console.log(galleryData["result"])
-                        //console.log(categoryKEY)
-                        //console.log('filter', selectedFilterData);
-                        // console.log('filteredData', filteredData);
+                       // console.log(galleryData[categoryContent])
+                        console.log('f-', selectedFilterData);
+                        //console.log('filteredData', filteredData);
 
                         //  currOnStageMainResultData = filteredData;
                         //console.log(currOnStageMainResultData);
                         // paginationResult(currOnStageMainResultData);
 
-                        // scrollTop();
+                        //pass to handle bar the filter data and run again. fillter again
+                        //if all pass from response .html to handle bar again
+
+
+                        // var categoryKEY = $("input[name=view]").val();
+                        // console.log(categoryKEY)
+                        //  if(categoryKEY = "all"){
+                        //      console.log("aaaa")
+                        //  }
+
+
                     });
 
-            } // if end
- 
+            } // if end 
+
 
 
             // serialize form data to object

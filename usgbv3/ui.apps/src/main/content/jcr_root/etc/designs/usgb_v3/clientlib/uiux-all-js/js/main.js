@@ -2009,11 +2009,8 @@ $(window).on('load', function () {
 
         //make text to ellipsis when more than 4 lines
         $('[data-category] .content-box .text-container p').each(function (index, element) {
-            $clamp(element, {
-                clamp: 4,
-                useNativeClamp: false
-            });
-        });
+            $clamp(element, { clamp: 4, useNativeClamp: false }); 
+        }); 
 
 
         var getID = "all";
@@ -2186,4 +2183,4 @@ $(window).on('load', function () {
 
 
 //     });
-// })();
+// })();   
