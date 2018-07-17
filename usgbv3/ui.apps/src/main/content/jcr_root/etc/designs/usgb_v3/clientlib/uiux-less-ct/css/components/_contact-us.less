@@ -1,7 +1,6 @@
 .floating-type-form {
     .form-control {
-        background: transparent;
-        position: relative;
+        background: transparent; // position: relative;
         padding: 0;
     }
     .float-label {
@@ -21,6 +20,17 @@
         }
         .h150 {
             height: 150px;
+        }
+        input[type=file] {
+            z-index: 100;
+            cursor: pointer;
+            position: absolute;
+            height: 3.1em;
+            width: 100%;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            filter: alpha(opacity=0);
         }
     }
     .float-label label {
@@ -137,6 +147,24 @@
     }
 }
 
-#hiddenRecaptcha-error{
+#hiddenRecaptcha-error {
     margin-top: -13px;
+}
+
+.file-upload {
+    font-size: 14px;
+    border: 1px solid #ccc;
+    height: 3.5em;
+    .file-select {
+        display: block;
+        color: #34495e;
+        cursor: pointer;
+        text-align: left;
+        overflow: hidden;
+        position: relative;
+        .file-select-name {
+            display: inline-block;
+            padding: 20px 8px 5px 8px;
+        }
+    }
 }

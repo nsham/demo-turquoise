@@ -551,10 +551,12 @@ function hookHeadScript(url, async, defer, callback) {
 // ----------------------------------------------------------------------
 // Carousel Feature Card
 // ----------------------------------------------------------------------
-(function () {
+(function(){
     "use strict";
     $(document).ready(function () {
-        $(".carousel-feature-card").slick();
+        if($(".carousel-feature-card").length > 0){
+            $(".carousel-feature-card").slick();
+        }
     });
 })();
 
