@@ -5,16 +5,24 @@ import com.usgbv3.core.services.StoreLocatorService;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.SlingHttpServletResponse;
 import org.apache.sling.api.request.RequestParameter;
+import org.apache.sling.api.request.RequestParameterMap;
 import org.apache.sling.api.servlets.HttpConstants;
 import org.apache.sling.api.servlets.SlingSafeMethodsServlet;
 import org.osgi.framework.Constants;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.Servlet;
 import javax.servlet.ServletException;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.Enumeration;
+import java.util.Iterator;
+import java.util.Set;
 
 @Component(service=Servlet.class,
         property={
@@ -23,6 +31,7 @@ import java.io.PrintWriter;
                 "sling.servlet.paths="+ "/bin/usg/storeAutoComplete"
         })
 public class GetAutoSearchStoreSearch extends SlingSafeMethodsServlet {
+    private static Logger LOG = LoggerFactory.getLogger(GetAutoSearchStoreSearch.class);
 
     @Reference
     StoreLocatorService storeLocatorService;
@@ -30,12 +39,22 @@ public class GetAutoSearchStoreSearch extends SlingSafeMethodsServlet {
     @Override
     protected void doGet(SlingHttpServletRequest request, SlingHttpServletResponse response)
             throws ServletException, IOException {
-        RequestParameter pageURLParameter = request.getRequestParameter(ApplicationConstants.PAGE_URL);
         RequestParameter textParameter = request.getRequestParameter(ApplicationConstants.TEXT);
+       // RequestParameter pageURL = request.getRequestParameter(ApplicationConstants.PAGE_URL);
         String jsonResponse = "";
-        if(pageURLParameter != null && textParameter != null){
-            jsonResponse = storeLocatorService.getAutoSearch(pageURLParameter.getString()
-                    , textParameter.getString(), request.getResourceResolver());
+        if(textParameter != null && request.getHeader("referer") != null){
+            try {
+                String refererURI = new URI(request.getHeader("referer")).getPath();
+                if(refererURI != null && refererURI.endsWith(".html")){
+                    refererURI = refererURI.replace(".html", "");
+                }
+                jsonResponse = storeLocatorService.getAutoSearch(refererURI
+                        , textParameter.getString(), request.getResourceResolver());
+            } catch (URISyntaxException e) {
+                LOG.error("URI SyntaxExvception is :"+e);
+            }
+            /*jsonResponse = storeLocatorService.getAutoSearch(pageURL.getString()
+                    , textParameter.getString(), request.getResourceResolver());*/
         }
 
         response.setContentType("application/json");

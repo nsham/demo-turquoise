@@ -81,6 +81,7 @@ public class StoreLocatorServiceImpl implements StoreLocatorService{
 
     @Override
     public String getAutoSearch(String pageURL, String text, ResourceResolver resourceResolver) {
+        LOG.info("pageURL:"+pageURL);
         JsonArray resultJsonArray = null;
         Gson gson = new Gson();
         Map<String, String> autoSearchConfiguration = new LinkedHashMap<>();
@@ -200,7 +201,7 @@ public class StoreLocatorServiceImpl implements StoreLocatorService{
                     queryMap = new LinkedHashMap<>();
                     queryMap.put("path", path);
                     queryMap.put("type", "nt:unstructured");
-                    queryMap.put("fulltext", searchText);
+                    queryMap.put("fulltext", "*"+searchText+"*");
                     queryMap.put("fulltext.relPath", "@"+matchField);
                     // logging the querymap
                     GenericUtils.logQuery(LOG, queryMap);

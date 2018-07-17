@@ -57,14 +57,14 @@
                                     <button class=" btn btn-default color-dark-grey dropdown-toggle text-left dp-clickable" type="button" id="dropdownMenu1"
                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <span class="dp-text">All</span>
-                                        <input type="hidden" name="{{category_key}}" value="all">
+                                        <input type="hidden" name="{{category_key}}" value="">
                                         <span class="color-primary-green glyphicon glyphicon-menu-down right"></span>
                                     </button>
 
                                     <ul class="dropdown-menu dp-list refine-list" aria-labelledby="dropdownMenu1">
                                         {{#each child}}
                                         <li>
-                                            <a data-description="{{desc}}" data-search-val="{{key}}" data-val="{{value}}">{{value}}</a>
+                                            <a data-description="{{desc}}" data-search-val="{{key}}" data-val="{{key}}">{{value}}</a>
                                         </li>
                                         {{/each}}
                                     </ul>
@@ -72,7 +72,8 @@
                             </div>
                             <!-- <hr> -->
                             <div class="dropdown refine-mobile  visible-xs dropdown-menu-right m-vertical-m d-small">
-                                <select class="btn-default">All {{#each child}}
+                                <select class="btn-default">
+                                    {{#each child}}
                                     <option data-description="{{desc}}" value="{{key}}" data-val="{{value}}">{{value}}</option>
                                     {{/each}}
                                 </select>
@@ -87,18 +88,20 @@
                 </div>
             </div>
             <!-- sidebar end -->
-
+ 
             <!--  make-sticky_limit -->
             <div class="col-xs-12 col-sm-9 col-md-9">
 
                 <script id="result" type="text/x-handlebars-template">
-                    {{#each result}}
+                    {{#each this}}
                     <div class="each m-bottom-xxl p-side-m" data-view="{{view}}" data-type="{{type}}">
-                        <a href="#" target="_blank">
-                            <div class="box-size-l box-type-2 bg-white p-md-s p-s">
+                        <a href="{{link}}" target="_blank">
+                            <div class="relative box-type-2 bg-white p-md-s p-s">
+                                {{#if num}}
                                 <div class="green-tag">
-                                    <p class="fs-3 bold color-white m-no">{{num}} Images</p>
+                                    <p class="fs-3 bold color-white m-no">{{num}} Images</p> 
                                 </div>
+                                {{/if}}
                                 <div class="center width-full p-bottom-s bg-light-grey">
                                     <div class="box-inner-img-gallery">
                                         <img src={{img}}>
@@ -112,153 +115,17 @@
                         </a>
                     </div>
                     {{/each}}
-
-                </script>
-
+                </script> 
+  
                 <!-- SEARCH CONTENT -->
                 <div class="search-main-content gallery-listing-search-content">
-                    <div class="inner results-gallery">
-
-
-                        <div class="each m-bottom-xxl p-side-m">
-                            <a href="#" target="_blank">
-                                <div class="box-size-l box-type-2 bg-white p-md-s p-s">
-                                    <div class="green-tag">
-                                        <p class="fs-3 bold color-white m-no">19 Images</p>
-                                    </div>
-                                    <div class="center width-full p-bottom-s bg-light-grey">
-                                        <div class="box-inner-img-gallery">
-                                            <img src="/content/dam/USGBoral/Global/Website/Images/component/allsample/test.png">
-                                        </div>
-                                        <h6 class="m-top-m m-bottom-s m-side-xxs uppercase color-darker-grey text-center bold">Lorem ipsum dolor sita met, consectetuer adipiscin</h6>
-                                        <p class="color-darker-grey m-no p-side-m text-center">Nullam dictum felis eu pede mollis</p>
-                                    </div>
-                                    <span class="bg-box-hover">
-                                    </span>
-                                </div>
-                            </a>
-                        </div>
-
-                        <div class="each m-bottom-xxl p-side-m">
-                            <a href="#" target="_blank">
-                                <div class="box-size-l box-type-2 bg-white p-md-s p-s">
-                                    <div class="green-tag">
-                                        <p class="fs-3 bold color-white m-no">19 Images</p>
-                                    </div>
-                                    <div class="center width-full p-bottom-s bg-light-grey">
-                                        <div class="box-inner-img-gallery">
-                                            <img src="/content/dam/USGBoral/Global/Website/Images/component/allsample/product-img-870x569.jpg">
-                                        </div>
-                                        <h6 class="m-top-m m-bottom-s m-side-xxs uppercase color-darker-grey text-center bold">Lorem ipsum dolor sita met</h6>
-                                        <p class="color-darker-grey m-no p-side-m text-center">Nullam dictum felis eu pede mollis</p>
-                                    </div>
-                                    <span class="bg-box-hover">
-                                    </span>
-                                </div>
-                            </a>
-                        </div>
-
-                        <div class="each m-bottom-xxl p-side-m">
-                            <a href="#" target="_blank">
-                                <div class="box-size-l box-type-2 bg-white p-md-s p-s">
-                                    <div class="green-tag">
-                                        <p class="fs-3 bold color-white m-no">19 Images</p>
-                                    </div>
-                                    <div class="center width-full p-bottom-s bg-light-grey">
-                                        <div class="box-inner-img-gallery">
-                                            <img src="/content/dam/USGBoral/Global/Website/Images/component/allsample/bg-banner-tile.jpg">
-                                        </div>
-                                        <h6 class="m-top-m m-bottom-s m-side-xxs uppercase color-darker-grey text-center bold">Lorem ipsum dolor sita met, consectetuer adipiscin</h6>
-                                        <p class="color-darker-grey m-no p-side-m text-center">Nullam dictum felis eu pede mollis, felis eu pede mollis,</p>
-                                    </div>
-                                    <span class="bg-box-hover">
-                                    </span>
-                                </div>
-                            </a>
-                        </div>
-
-                        <div class="each m-bottom-xxl p-side-m">
-                            <a href="#" target="_blank">
-                                <div class="box-size-l box-type-2 bg-white p-md-s p-s">
-                                    <div class="green-tag">
-                                        <p class="fs-3 bold color-white m-no">19 Images</p>
-                                    </div>
-                                    <div class="center width-full p-bottom-s bg-light-grey">
-                                        <div class="box-inner-img-gallery">
-                                            <img src="/content/dam/USGBoral/Global/Website/Images/component/allsample/test.png">
-                                        </div>
-                                        <h6 class="m-top-m m-bottom-s m-side-xxs uppercase color-darker-grey text-center bold">Lorem ipsum dolor sita met, consectetuer adipiscin</h6>
-                                        <p class="color-darker-grey m-no p-side-m text-center">Nullam dictum felis eu pede mollis</p>
-                                    </div>
-                                    <span class="bg-box-hover">
-                                    </span>
-                                </div>
-                            </a>
-                        </div>
-
-                        <div class="each m-bottom-xxl p-side-m">
-                            <a href="#" target="_blank">
-                                <div class="box-size-l box-type-2 bg-white p-md-s p-s">
-                                    <div class="green-tag">
-                                        <p class="fs-3 bold color-white m-no">19 Images</p>
-                                    </div>
-                                    <div class="center width-full p-bottom-s bg-light-grey">
-                                        <div class="box-inner-img-gallery">
-                                            <img src="/content/dam/USGBoral/Global/Website/Images/component/allsample/product-img-870x569.jpg">
-                                        </div>
-                                        <h6 class="m-top-m m-bottom-s m-side-xxs uppercase color-darker-grey text-center bold">Lorem ipsum dolor sita met</h6>
-                                        <p class="color-darker-grey m-no p-side-m text-center">Nullam dictum felis eu pede mollis</p>
-                                    </div>
-                                    <span class="bg-box-hover">
-                                    </span>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="each m-bottom-xxl p-side-m">
-                            <a href="#" target="_blank">
-                                <div class="box-size-l box-type-2 bg-white p-md-s p-s">
-                                    <div class="green-tag">
-                                        <p class="fs-3 bold color-white m-no">19 Images</p>
-                                    </div>
-                                    <div class="center width-full p-bottom-s bg-light-grey">
-                                        <div class="box-inner-img-gallery">
-                                            <img src="/content/dam/USGBoral/Global/Website/Images/component/allsample/test.png">
-                                        </div>
-                                        <h6 class="m-top-m m-bottom-s m-side-xxs uppercase color-darker-grey text-center bold">Lorem ipsum dolor sita met, consectetuer adipiscin</h6>
-                                        <p class="color-darker-grey m-no p-side-m text-center">Nullam dictum felis eu pede mollis</p>
-                                    </div>
-                                    <span class="bg-box-hover">
-                                    </span>
-                                </div>
-                            </a>
-                        </div>
-
-                        <div class="each m-bottom-xxl p-side-m">
-                            <a href="#" target="_blank">
-                                <div class="box-size-l box-type-2 bg-white p-md-s p-s">
-                                    <div class="green-tag">
-                                        <p class="fs-3 bold color-white m-no">19 Images</p>
-                                    </div>
-                                    <div class="center width-full p-bottom-s bg-light-grey">
-                                        <div class="box-inner-img-gallery">
-                                            <img src="/content/dam/USGBoral/Global/Website/Images/component/allsample/product-img-870x569.jpg">
-                                        </div>
-                                        <h6 class="m-top-m m-bottom-s m-side-xxs uppercase color-darker-grey text-center bold">Lorem ipsum dolor sita met</h6>
-                                        <p class="color-darker-grey m-no p-side-m text-center">Nullam dictum felis eu pede mollis</p>
-                                    </div>
-                                    <span class="bg-box-hover">
-                                    </span>
-                                </div>
-                            </a>
-                        </div>
-
-
-                    </div>
-                </div>
+                    <div class="inner results-gallery"></div>   
+                </div>   
                 <!-- END SEARCH CONTENT -->
 
                 <!-- SEARCH PAGINATION -->
-                <nav aria-label="Page navigation">
+                <div id="pagination-container" class="pull-right"></div>
+                <!-- <nav aria-label="Page navigation">
                     <ul class="pagination pull-right m-top-no">
                         <li>
                             <a href="#" aria-label="Previous">
@@ -288,7 +155,7 @@
                     </ul>
                     <div class="clearfix"></div>
 
-                </nav>
+                </nav> -->
                 <!-- END SEARCH PAGINATION -->
 
                 <!-- social icon -->
@@ -322,7 +189,6 @@
     <!-- section 2 end -->
 </div>
 
-
 <!-- END of PAGE CONTENT -->
 
 
@@ -331,133 +197,4 @@
 
 
 
-
-<script>
-    (function () {
-        "use strict";
-        $(document).ready(function () {
-
-            if ($('.gallery-listing-sidebar').length) {
-
-                $.ajax({
-                    url: "/etc/designs/usgb_v3/clientlib/uiux-all-js/js/json/gallery-filter.json",
-                    type: "GET",
-                    cache: false,
-                    success: function (response) {
-                        //console.log(response);
-
-                        galleryData = response
-
-                        var galleryFilterHtml = $('#gallery-filter').html();
-                        var temptGalleryFilterHtml = Handlebars.compile(galleryFilterHtml);
-                        $('.gallery-filter-wrapper').html(temptGalleryFilterHtml(response));
-                        //console.log(test)
-
-                        var resultFilterHtml = $("#result").html();
-                        var temptResultFilterHtml = Handlebars.compile(resultFilterHtml);
-                        $('.results-gallery').html(temptResultFilterHtml(response));
-
-                    },
-                    beforeSend: function () {},
-                    complete: function () {}
-                });
-
-                $(document).on("click", '.gallery-filter-wrapper [data-val]', function () {
-                    var typeDesc = $(this).data('description');
-                    $(".type-desc").html("<p class='p-top-no p-xl color-grey'>" + typeDesc + "</p>");
-
-                });
-
-                $(document).on("click", '.refine-mobile select', function () {
-                    var mtypeDesc = $('option:selected', this).attr('data-description');
-                    $(".m-type-desc").html("<p class='p-top-no p-xl color-grey'>" + mtypeDesc +
-                        "</p>");
-
-                });
-
-
-                var galleryData = []
-                var categoryContent = "result";
-
-                //'#search-filter-mobile-form button[type="submit"], #search-filter-desktop-form button[type="submit"]'
-                $(document).on('click', '[data-search-val]',
-                    function (e) {
-                        e.preventDefault();
-                        var form = $(this).closest('form');
-                        var selectedFilterData = ($(form).serializeObject());
-                        var filteredData = multiFilter(galleryData[categoryContent], selectedFilterData);
-
-                        //  var filteredData = multiFilter(galleryData, selectedFilterData);
-
-                       // console.log(galleryData[categoryContent])
-                        console.log('f-', selectedFilterData);
-                        //console.log('filteredData', filteredData);
-
-                        //  currOnStageMainResultData = filteredData;
-                        //console.log(currOnStageMainResultData);
-                        // paginationResult(currOnStageMainResultData);
-
-                        //pass to handle bar the filter data and run again. fillter again
-                        //if all pass from response .html to handle bar again
-
-
-                        // var categoryKEY = $("input[name=view]").val();
-                        // console.log(categoryKEY)
-                        //  if(categoryKEY = "all"){
-                        //      console.log("aaaa")
-                        //  }
-
-
-                    });
-
-            } // if end 
-
-
-
-            // serialize form data to object
-            $.fn.serializeObject = function () {
-                var o = {};
-                var a = this.serializeArray();
-                $.each(a, function () {
-                    if (o[this.name] !== undefined) {
-                        if (!o[this.name].push) {
-                            o[this.name] = [o[this.name]];
-                        }
-                        o[this.name].push(this.value || '');
-                    } else {
-                        o[this.name] = this.value || '';
-                    }
-                });
-                return o;
-            };
-
-            function multiFilter(array, filters) {
-                const filterKeys = Object.keys(filters);
-                // filters all elements passing the criteria
-                return array.filter((item) => {
-                    // dynamically validate all filter criteria
-                    return filterKeys.every(function (key) {
-                        if (Array.isArray(item[key]) && item[key].length > 0) {
-                            // if data is tagging array, one matches in the array, return the object true
-                            for (var i = 0; i < item[key].length; i++) {
-                                if (!!~filters[key].indexOf(item[key][i])) {
-                                    return filters[key];
-                                };
-                            }
-                        } else {
-                            return !!~filters[key].indexOf(item[key]);
-                        }
-                    });
-                });
-            }
-
-
-
-
-
-
-
-
-        });
-    })();
-</script>
+ 
