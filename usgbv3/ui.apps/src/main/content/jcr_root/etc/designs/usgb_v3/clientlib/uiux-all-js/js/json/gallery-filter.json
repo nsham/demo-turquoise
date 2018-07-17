@@ -4,19 +4,19 @@
             "category_title": "View By",
             "child": [{
                     "key": "all",
-                    "value": "All"
+                    "value": "all"
                 },
                 {
                     "key": "bathroom",
-                    "value": "Bathroom"
+                    "value": "bathroom"
                 },
                 {
                     "key": "bedroom",
-                    "value": "Bedroom"
+                    "value": "bedroom"
                 },
                 {
                     "key": "showroom",
-                    "value": "Showroom"
+                    "value": "showroom"
                 }
             ]
         },
@@ -25,16 +25,16 @@
             "category_title": "Type",
             "child": [{
                 "key": "all",
-                "value": "All"
+                "value": "all"
             },
                 {
                     "key": "modern",
-                    "value": "Modern",
+                    "value": "modern",
                     "desc": "modern desc modern desc"
                 },
                 {
                     "key": "classic",
-                    "value": "Classic",
+                    "value": "classic",
                     "desc": "clasic desc desc desc"
                 }
             ]
