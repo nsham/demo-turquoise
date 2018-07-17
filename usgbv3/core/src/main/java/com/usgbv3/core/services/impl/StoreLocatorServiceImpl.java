@@ -172,7 +172,7 @@ public class StoreLocatorServiceImpl implements StoreLocatorService{
                 LOG.info("resultJsonArray is null so searching in  proximity data");
                 String proximityMatchFieldCSV = autoSearchConfiguration.get("proximityMatchField");
                 resultJsonArray = getAutoSearchJsonElements(text, resourceResolver, resultJsonArray
-                        , proximityLocationPath, proximityMatchFieldCSV, "proximity-");
+                        , proximityLocationPath, proximityMatchFieldCSV, "proximity_");
             }
 
         }
@@ -262,7 +262,7 @@ public class StoreLocatorServiceImpl implements StoreLocatorService{
                 if(storeLocatorResource != null){
                     Iterable<Resource> children = storeLocatorResource.getChildren();
                     for(Resource store : children){
-                        tempJson = convertResourceToStoreJson(store);
+                        tempJson = convertResourceToStoreJson(store, gson);
                         resultJsonArray.add(tempJson);
                     }
                     jsonData = gson.toJson(resultJsonArray);
@@ -288,7 +288,7 @@ public class StoreLocatorServiceImpl implements StoreLocatorService{
                         hitsList = result.getHits();
                         for(Hit hit:hitsList){
                             try {
-                                tempJson = convertResourceToStoreJson(hit.getResource());
+                                tempJson = convertResourceToStoreJson(hit.getResource(), gson);
                                 resultJsonArray.add(tempJson);
                             } catch (RepositoryException e) {
                                 LOG.error("Repository Exception:"+e);
@@ -313,7 +313,7 @@ public class StoreLocatorServiceImpl implements StoreLocatorService{
                     hitsList = result.getHits();
                     for(Hit hit:hitsList){
                         try {
-                            tempJson = convertResourceToStoreJson(hit.getResource());
+                            tempJson = convertResourceToStoreJson(hit.getResource(), gson);
                             resultJsonArray.add(tempJson);
                         } catch (RepositoryException e) {
                             LOG.error("Repository Exception:"+e);
@@ -325,7 +325,7 @@ public class StoreLocatorServiceImpl implements StoreLocatorService{
                     if(storeLocatorResource != null){
                         Iterable<Resource> children = storeLocatorResource.getChildren();
                         for(Resource store : children){
-                            tempJson = convertResourceToStoreJson(store);
+                            tempJson = convertResourceToStoreJson(store, gson);
                             resultJsonArray.add(tempJson);
                         }
                         resultJsonObject.add("StoreResults", resultJsonArray);
@@ -349,7 +349,7 @@ public class StoreLocatorServiceImpl implements StoreLocatorService{
                         hitsList = result.getHits();
                         for(Hit hit:hitsList){
                             try {
-                                tempJson = convertResourceToStoreJson(hit.getResource());
+                                tempJson = convertResourceToStoreJson(hit.getResource(), gson);
                                 resultJsonArray.add(tempJson);
                             } catch (RepositoryException e) {
                                 LOG.error("Repository Exception:"+e);
@@ -363,13 +363,23 @@ public class StoreLocatorServiceImpl implements StoreLocatorService{
         return jsonData;
     }
 
-    private JsonObject convertResourceToStoreJson(Resource store) {
+    private JsonObject convertResourceToStoreJson(Resource store, Gson gson) {
         JsonObject jsonObject = new JsonObject();
         if(store != null){
             ValueMap valueMap = store.getValueMap();
+            List<String> productList= null;
             for(Map.Entry<String, Object> entry : valueMap.entrySet()) {
                 if(entry.getValue() != null){
-                    jsonObject.addProperty(entry.getKey(), entry.getValue().toString());
+                    if(entry.getKey().startsWith("product")){
+                        if(productList == null){
+                            productList = new ArrayList<>();
+                        }
+                        productList.add(entry.getValue().toString());
+                        jsonObject.add("product", gson.toJsonTree(productList));
+                    }else{
+                        jsonObject.addProperty(entry.getKey(), entry.getValue().toString());
+                    }
+
                 }
             }
         }
