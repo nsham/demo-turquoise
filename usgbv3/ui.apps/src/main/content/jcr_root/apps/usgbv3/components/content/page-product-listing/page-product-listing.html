@@ -128,7 +128,7 @@
 
 	<!-- section 2 -->
 	<div class="container">
-		<div class="row m-bottom-xxl m-top-s">
+		<div class="row m-bottom-xxl m-top-s  product-listing-sidebar ">
 			<!-- set p-left-no, avoid sticy width's glitch -->
 			<div class="col-xs-12 col-sm-3 col-md-3 hidden-xs p-left-no make-sticky">
 				<div class="make-sticky_inner">
@@ -161,261 +161,74 @@
 
 					</div>
 
+
+					<!-- handlebar product-listing-filter-wrapper -->
+					<script id="product-listing-filter" type="text/x-handlebars-template">
+
+						<h5 class="color-dark-grey bold ht6 uppercase m-bottom-xs">{{category_title}}</h5>
+
+						<div class="search-filter-sort">
+							<div class="refine-search  dropdown dp-form dropdown-menu-right d-small">
+								<button class=" btn btn-default color-dark-grey dropdown-toggle text-left dp-clickable" type="button" id="dropdownMenu1"
+								    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									<span class="dp-text">Select Filtering Category</span>
+									<input type="hidden" name="" value="">
+									<span class="color-primary-green glyphicon glyphicon-menu-down right"></span>
+								</button>
+
+								<ul class="dropdown-menu dp-list refine-list" aria-labelledby="dropdownMenu1">
+									{{#each category_child}}
+									<li>
+										<a data-search-val="{{key}}" data-val="{{value}}">{{value}}</a>
+									</li>
+									{{/each}}
+								</ul>
+							</div>
+
+							<div class="dropdown refine-mobile  visible-xs dropdown-menu-right m-vertical-m d-small">
+								<select class="btn-default">Select Filtering Category {{#each category_child}}
+									<option value="{{key}}" data-val="{{value}}">{{value}}</option>
+									{{/each}}
+
+								</select>
+							</div>
+						</div>
+
+						{{#each category_child}}
+						<div class="checkbox-wrapper {{key}}-wrapper" data-checkbox-wrapper="{{key}}">
+							<div class="radio radio-split-two">
+								{{#each child }}
+								<div class="radio-item">
+									<div class="item-inner">
+										<label class=" container-checkbox fs-3">
+											{{value}}
+											<input type="checkbox" name="{{value}}" data-checkname="{{key}}">
+											<span class="checkmark fs-3"></span>
+										</label>
+									</div>
+								</div>
+								{{/each}}
+							</div>
+						</div>
+						{{/each}}
+						<hr class="m-no" />
+						<div class="each checkbox-button-wrapper">
+							{{#each category_child}}
+							<div data-checkbutton="{{key}}">
+								<p class=" m-no">{{value}}</p>
+							</div>
+							{{/each}}
+
+						</div>
+
+					</script>
+					<!-- handlebar product-listing-filter-wrapper end-->
+
 					<form action="" method="get">
 						<div class="c-sidebar m-top-m rounded-corners">
 
-							<div class="each">
-								<h5 class="color-dark-grey bold ht6 uppercase m-bottom-xs">Refine your search</h5>
-
-								<div class="search-filter-sort">
-									<!-- SORT BY -->
-									<div class="refine-search  dropdown dp-form dropdown-menu-right d-small">
-										<button class=" btn btn-default color-dark-grey dropdown-toggle text-left dp-clickable" type="button" id="dropdownMenu1"
-										    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-											<span class="dp-text">Select Filtering Category</span>
-											<input type="hidden" name="selectenquirytype" value="Proin ut elit">
-											<span class="color-primary-green glyphicon glyphicon-menu-down right"></span>
-										</button>
-										<!-- <button class="btn btn-default color-dark-grey dropdown-toggle text-left dp-clickable" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-											<span class="dp-text">Proin ut elit</span>
-											<input type="hidden" name="selectenquirytype" value="Proin ut elit">
-											<span class="color-primary-green glyphicon glyphicon-menu-down right"></span>
-										</button> -->
-										<ul class="dropdown-menu dp-list refine-list" aria-labelledby="dropdownMenu1">
-											<li>
-												<a data-search-val="texture" data-val="Texture">Texture</a>
-											</li>
-											<li>
-												<a data-search-val="thickness" data-val="Thickness">Thickness</a>
-											</li>
-											<li>
-												<a data-search-val="lr-rating" data-val="LR Rating">LR Rating</a>
-											</li>
-
-										</ul>
-									</div>
-
-									<div class="dropdown refine-mobile  visible-xs dropdown-menu-right m-vertical-m d-small">
-										<select class="btn-default">Texture
-											<option value="TEst1" data-val="Texture">Alphabet</option>
-											<option value="Oldest to Latest" data-val="Texture">Oldest to Latest</option>
-											<option value="Price" data-val="Texture">Price</option>
-											<option value="Date Added" data-val="Texture">Date Added</option>
-										</select>
-									</div>
-									<!-- END SORT BY -->
-
-								</div>
-
-								<!-- checkbox -->
-								<div class="checkbox-wrapper texture-wrapper" data-checkbox-wrapper="texture">
-									<div class="radio radio-split-two">
-
-										<div class="radio-item">
-											<div class="item-inner">
-												<label class=" container-checkbox fs-3">
-													Lightly Texture
-													<input type="checkbox" name="Lightly Texture" data-checkname="lightly-texture">
-													<span class="checkmark fs-3"></span>
-												</label>
-											</div>
-										</div>
-										<div class="radio-item">
-											<div class="item-inner">
-												<label class=" container-checkbox fs-3">
-													Lightly
-													<input type="checkbox" name="Lightly" data-checkname="lightly">
-													<span class="checkmark fs-3"></span>
-												</label>
-											</div>
-										</div>
-										<div class="radio-item">
-											<div class="item-inner">
-												<label class=" container-checkbox fs-3">
-													Medium Texture
-													<input type="checkbox" name="Mexdium Texture" data-checkname="medium-texture">
-													<span class="checkmark fs-3"></span>
-												</label>
-											</div>
-										</div>
-
-										<div class="radio-item">
-											<div class="item-inner">
-												<label class=" container-checkbox fs-3">
-													Smooth Texture
-													<input type="checkbox" name="Smooth Texture" data-checkname="smooth-texture">
-													<span class="checkmark fs-3"></span>
-												</label>
-											</div>
-										</div>
-
-										<div class="radio-item">
-											<div class="item-inner">
-												<label class=" container-checkbox fs-3">
-													Medium smooth
-													<input type="checkbox" name="Medium Smooth" data-checkname="medium-smooth">
-													<span class="checkmark fs-3"></span>
-												</label>
-											</div>
-										</div>
-
-										<div class="radio-item">
-											<div class="item-inner">
-												<label class=" container-checkbox fs-3">
-													Medium
-													<input type="checkbox" name="Medium" data-checkname="medium">
-													<span class="checkmark fs-3"></span>
-												</label>
-											</div>
-										</div>
-
-										<div class="radio-item">
-											<div class="item-inner">
-												<label class=" container-checkbox fs-3">
-													Hard
-													<input type="checkbox" name="Hard" data-checkname="hard">
-													<span class="checkmark fs-3"></span>
-												</label>
-											</div>
-										</div>
-
-
-									</div>
-								</div>
-								<div class="checkbox-wrapper thickness-wrapper" data-checkbox-wrapper="thickness">
-									<div class="radio radio-split-two">
-
-										<div class="radio-item">
-											<div class="item-inner">
-												<label class=" container-checkbox fs-3">
-													5mm
-													<input type="checkbox" name="5mm" data-checkname="5mm">
-													<span class="checkmark fs-3"></span>
-												</label>
-											</div>
-										</div>
-
-										<div class="radio-item">
-											<div class="item-inner">
-												<label class=" container-checkbox fs-3">
-													4mm
-													<input type="checkbox" name="4mm" data-checkname="4mm">
-													<span class="checkmark fs-3"></span>
-												</label>
-											</div>
-										</div>
-
-										<div class="radio-item">
-											<div class="item-inner">
-												<label class=" container-checkbox fs-3">
-													3mm
-													<input type="checkbox" name="3mm" data-checkname="3mm">
-													<span class="checkmark fs-3"></span>
-												</label>
-											</div>
-										</div>
-
-										<div class="radio-item">
-											<div class="item-inner">
-												<label class=" container-checkbox fs-3">
-													2mm
-													<input type="checkbox" name="2mm" data-checkname="2mm">
-													<span class="checkmark fs-3"></span>
-												</label>
-											</div>
-										</div>
-
-										<div class="radio-item">
-											<div class="item-inner">
-												<label class=" container-checkbox fs-3">
-													1MM
-													<input type="checkbox" name="1MM" data-checkname="1MM">
-													<span class="checkmark fs-3"></span>
-												</label>
-											</div>
-										</div>
-
-
-									</div>
-								</div>
-								<div class="checkbox-wrapper lr-rating-wrapper" data-checkbox-wrapper="lr-rating">
-									<div class="radio radio-split-two">
-
-										<div class="radio-item">
-											<div class="item-inner">
-												<label class=" container-checkbox fs-3">
-													5.00
-													<input type="checkbox" name="5.00" data-checkname="500">
-													<span class="checkmark fs-3"></span>
-												</label>
-											</div>
-										</div>
-
-										<div class="radio-item">
-											<div class="item-inner">
-												<label class=" container-checkbox fs-3">
-													4.0
-													<input type="checkbox" name="4.00" data-checkname="400">
-													<span class="checkmark fs-3"></span>
-												</label>
-											</div>
-										</div>
-
-										<div class="radio-item">
-											<div class="item-inner">
-												<label class=" container-checkbox fs-3">
-													3.0
-													<input type="checkbox" name="3.00" data-checkname="300">
-													<span class="checkmark fs-3"></span>
-												</label>
-											</div>
-										</div>
-
-
-
-									</div>
-								</div>
-								<!-- checkbox end -->
-							</div>
-							<hr class="m-no" />
-							<div class="each checkbox-button-wrapper">
-
-								<div data-checkbutton="texture">
-									<p class=" m-no">Texture</p>
-
-								</div>
-
-								<div data-checkbutton="thickness">
-									<p class=" m-no">Thickness</p>
-								</div>
-								<div data-checkbutton="lr-rating">
-									<p class=" m-no">LR Rating</p>
-								</div>
-							</div>
-							<!-- <div class="search-checkbox-text"> -->
-							<!-- <p class="fs-3 color-grey m-no">Texture</p>
-									<button class="m-xs bold btn btn-xs" type="button">Medium
-										<span class="fs-1 p-left-s">&times;</span>
-									</button>
-
-									<button class="m-xs bold btn btn-xs" type="button">Medium smooth
-										<span class="fs-1 p-left-s">&times;</span>
-									</button> -->
-
-							<!-- </div> -->
-
-							<!-- <div>
-									<p class="fs-3 color-grey m-top-s m-bottom-no">LR Rating</p>
-									<button class="m-xs bold btn btn-xs" type="button">0.73
-										<span class="fs-1 p-left-s">&times;</span>
-									</button>
-
-									<button class="m-xs bold btn btn-xs" type="button">0.83
-										<span class="fs-1 p-left-s">&times;</span>
-									</button>
-								</div> -->
-
-
+							<div class="each product-listing-filter"></div>
+							
 							<div class="each">
 								<button type="submit" class="btn width-full button-green btn-brand-default">apply filter</button>
 							</div>
@@ -435,20 +248,35 @@
 				<div class="search-main-content listing-search-content">
 					<div class="inner">
 
-						<div class="each each-2 m-bottom-xxl p-side-m">
-							<div class="bg-light-grey custom-block flex-column justify-center p-m text-center">
-								<!-- <div class="thumbs flex-shrink-0">
+
+
+						<div class="each shoutout-txt  m-bottom-xxl p-side-m" data-title-value="0">
+							<div class=" bg-light-grey custom-block flex-column justify-space-between align-stretch">
+								<div class="thumbs flex-shrink-0">
 									<img src="/content/dam/USGBoral/Global/Website/Images/component/allsample/bg-banner-tile.jpg">
-								</div> -->
-								<h6 class="title ht5 uppercase text-center p-s"> SHOUT OUT TEXT SHOUT OUT TEXT SHOUT OUT TEXT SHOUT OUT TEXT SHOUT OUT TEXT
-								</h6>
-								<p>
-									Lorem ipsum dolor sit amet, consectetuer adipiscin Nullam dictum felis eu pede mollis.consectetuer adipiscin Nullam dictum
-									felis eu pede mollis.
-								</p>
+								</div>
+								<h2 class="title ht6 uppercase text-center p-s">TEST SHOUTOUT Title Title CEILING PANEL
+								</h2>
+
+								<div class="checkbox-content">
+									<div class="radio">
+										<label class="container-checkbox fs-2">
+											Compare Products
+											<input type="checkbox" name="" data-input-value="1">
+											<span class="checkmark fs-2"></span>
+										</label>
+									</div>
+								</div>
+
+								<div class="addto text-center uppercase">
+									<a href="#">
+										<span class="fs-2">
+											<strong>View Product</strong>
+										</span>
+									</a>
+								</div>
 							</div>
 						</div>
-
 
 						<div class="each m-bottom-xxl p-side-m" data-title-value="1">
 							<div class=" bg-light-grey custom-block flex-column justify-space-between align-stretch">
@@ -915,6 +743,57 @@
 
 
 
+<!-- handlebar mobile product-listing-filter-wrapper -->
+<script id="m-product-listing-filter" type="text/x-handlebars-template">
+
+	<div class="top">
+		<p class="uppercase text-center m-no p-side-l fs-2">
+			<strong>{{category_title}}</strong>
+		</p>
+	</div>
+
+	<div class="m-top-m mobile-refine-search">
+		<div class="each m-vertical-xl">
+			<div class="search-filter-sort">
+				<div class="dropdown visible-xs dropdown-menu-right m-vertical-m d-small">
+					<select id="refine-search-mobile" class=" btn-default">
+						<option class="hidden" disabled selected>Select Filtering Category</option>
+						{{#each category_child}}
+						<option value="{{key}}" data-val="{{value}}">{{value}}</option>
+						{{/each}}
+					</select>
+				</div>
+			</div>
+
+			{{#each category_child}}
+			<div class="m-checkbox-wrapper mobile-{{key}}-wrapper" data-checkbox-wrapper="{{key}}">
+				{{#each child}}
+				<label class="container-checkbox mobile fs-2">
+					{{value}}
+					<input type="checkbox" name="{{value}}" data-checkname="{{key}}">
+				</label>
+				{{/each}}
+			</div>
+			{{/each}}
+		</div>
+
+		<hr class="m-no" />
+
+		<div class=" mobile-checkbox-button-wrapper m-vertical-xl">
+			{{#each category_child}}
+			<div data-m-checkbutton="{{key}}">
+				<p class=" m-no">{{value}}</p>
+			</div>
+			{{/each}}
+		</div>
+	</div>
+
+
+</script>
+<!-- handlebar mobile product-listing-filter-wrapper end-->
+
+
+
 <!-- filter mobile content -->
 <div class="filter-mobile-content hidden">
 	<section class="section">
@@ -928,108 +807,10 @@
 
 					<div class="search-filter m-bottom-xxl p-side-l">
 						<form action="" method="get">
-
-							<div class="wrapper">
-								<div class="top">
-									<p class="uppercase text-center m-no p-side-l fs-2">
-										<strong>refine your search</strong>
-									</p>
-								</div>
-								<div class="m-top-m mobile-refine-search">
-									<div class="each m-vertical-xl">
-										<div class="search-filter-sort">
-											<div class="dropdown visible-xs dropdown-menu-right m-vertical-m d-small">
-												<select id="refine-search-mobile" class=" btn-default">
-													<option value="">Select Filtering Category</option>
-													<option value="texture" data-val="Texture">Texture</option>
-													<option value="thickness" data-val="Thickness">Thickness</option>
-													<option value="lr-rating" data-val="LR Rating">LR Rating</option>
-
-												</select>
-											</div>
-
-										</div>
-
-										<div class="m-checkbox-wrapper mobile-texture-wrapper" data-checkbox-wrapper="texture">
-											<label class="container-checkbox mobile fs-2">
-												Lightly Texture
-												<input type="checkbox" name="Lightly Texture" data-checkname="lightly-texture">
-											</label>
-											<label class="container-checkbox mobile fs-2">
-												Lightly
-												<input type="checkbox" name="Lightly" data-checkname="lightly">
-											</label>
-											<label class="container-checkbox mobile fs-2">
-												Medium Texture
-												<input type="checkbox" name="Medium Texture" data-checkname="medium-texture">
-											</label>
-											<label class="container-checkbox mobile fs-2">
-												Smooth Texture
-												<input type="checkbox" name="Smooth Texture" data-checkname="smooth-texture">
-											</label>
-											<label class="container-checkbox mobile fs-2">
-												Hard
-												<input type="checkbox" name="Hard" data-checkname="hard">
-											</label>
-										</div>
-
-										<div class="m-checkbox-wrapper mobile-thickness-wrapper" data-checkbox-wrapper="thickness">
-											<label class="container-checkbox mobile fs-2">
-												5mm
-												<input type="checkbox" name="5mm" data-checkname="5mm">
-											</label>
-											<label class="container-checkbox mobile fs-2">
-												4mm
-												<input type="checkbox" name="4mm" data-checkname="4mm">
-											</label>
-											<label class="container-checkbox mobile fs-2">
-												3mm
-												<input type="checkbox" name="3mm" data-checkname="3mm">
-											</label>
-											<label class="container-checkbox mobile fs-2">
-												2mm
-												<input type="checkbox" name="2mm" data-checkname="2mm">
-											</label>
-											<label class="container-checkbox mobile fs-2">
-												1MM
-												<input type="checkbox" name="1MM" data-checkname="1MM">
-											</label>
-										</div>
-
-										<div class="m-checkbox-wrapper mobile-lr-rating-wrapper" data-checkbox-wrapper="lr-rating">
-
-											<label class="container-checkbox mobile fs-2">
-												5.00
-												<input type="checkbox" name="5.00" data-checkname="500">
-											</label>
-											<label class="container-checkbox mobile fs-2">
-												4.00
-												<input type="checkbox" name="4.00" data-checkname="400">
-											</label>
-											<label class="container-checkbox mobile fs-2">
-												3.00
-												<input type="checkbox" name="3.00" data-checkname="300">
-											</label>
-										</div>
-
-									</div>
-									<hr class="m-no" />
-									<div class=" mobile-checkbox-button-wrapper m-vertical-xl">
-										<div data-m-checkbutton="texture">
-											<p class=" m-no">Texture</p>
-										</div>
-
-										<div data-m-checkbutton="thickness">
-											<p class=" m-no">Thickness</p>
-										</div>
-										<div data-m-checkbutton="lr-rating">
-											<p class=" m-no">LR Rating</p>
-										</div>
-									</div>
-									<div class=" m-vertical-xl">
-										<button type="submit" class="btn width-full button-green btn-brand-default">apply filter</button>
-									</div>
-
+							<div class=" m-product-listing-filter"> </div>
+							<div class="wrapper ">
+								<div class=" m-vertical-xl">
+									<button type="submit" class="btn width-full button-green btn-brand-default">apply filter</button>
 								</div>
 							</div>
 						</form>

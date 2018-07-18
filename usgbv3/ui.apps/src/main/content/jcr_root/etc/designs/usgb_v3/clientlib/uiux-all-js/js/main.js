@@ -551,10 +551,10 @@ function hookHeadScript(url, async, defer, callback) {
 // ----------------------------------------------------------------------
 // Carousel Feature Card
 // ----------------------------------------------------------------------
-(function(){
+(function () {
     "use strict";
     $(document).ready(function () {
-        if($(".carousel-feature-card").length > 0){
+        if ($(".carousel-feature-card").length > 0) {
             $(".carousel-feature-card").slick();
         }
     });
@@ -1255,7 +1255,7 @@ function hookHeadScript(url, async, defer, callback) {
             // console.log($(this).parent().parent().prev().find($('.dp-text')));
 
         });
-    }); 
+    });
 })();
 
 
@@ -1577,9 +1577,9 @@ $(window).on('load', function () {
     $(document).ready(function () {
         $('[data-img-height="div-height"]').matchHeight();
         $('[data-img-height="img-height"]').matchHeight();
-       //$('.gallery-listing-search-content .box-type-2 ').matchHeight();
+        //$('.gallery-listing-search-content .box-type-2 ').matchHeight();
         $('.listing-search-content .each .custom-block').matchHeight();
-    }); 
+    });
 })();
 
 
@@ -1772,6 +1772,45 @@ $(window).on('load', function () {
 
 
             ////// REFINE SEARCH  FEATURE start //////
+
+
+            ////filtering AJAX ////
+            var productData
+            productListingResult();
+            //load all from json first
+            function productListingResult() {
+                console.log("ajax load")
+                $.ajax({
+                    //url: "/etc/designs/usgb_v3/clientlib/uiux-all-js/js/json/gallery-filter.json",
+                    url: "/etc/designs/usgb_v3/clientlib/uiux-all-js/js/json/product-listing-filter.json",
+                    type: "GET",
+                    cache: false,
+                    success: function (response) {
+                        // store in global
+                        productData = response
+                        console.log(productData.product_listing_filter[0])
+
+                        //desktop
+                        var productFilterHtml = $('#product-listing-filter').html();
+                        var temptProductFilterHtml = Handlebars.compile(productFilterHtml);
+                        $('.product-listing-filter').html(temptProductFilterHtml(productData.product_listing_filter[0]));
+
+                        //mobile
+                        var MobileProductFilterHtml = $('#m-product-listing-filter').html();
+                        var MobileTemptProductFilterHtml = Handlebars.compile(MobileProductFilterHtml);
+                        $('.m-product-listing-filter').html(MobileTemptProductFilterHtml(productData.product_listing_filter[0]));
+
+                        hideAllWrappers();
+                        //console.log(productFilterHtml)
+                        //renderGalleryResultHtml(galleryData.result);
+                    },
+                    beforeSend: function () {},
+                    complete: function () {}
+                });
+            }
+            ////////FILTER END//////
+
+
             var dataSearchVal
             var mdataSearchVal
             var checkname
@@ -1781,21 +1820,23 @@ $(window).on('load', function () {
             var countButton
             var MobileCurrentData
             var MobileCountButton
-            // hide html divs desktop and mobile
-            $(".checkbox-wrapper").hide();
-            $('.checkbox-button-wrapper').hide();
-            $('[data-checkbutton]').hide();
-            //mobile
-            $(".m-checkbox-wrapper").hide();
-            $('.mobile-checkbox-button-wrapper').hide();
-            $('[data-m-checkbutton]').hide();
 
+            function hideAllWrappers() {
+                // hide html divs desktop and mobile
+                $(".checkbox-wrapper").hide();
+                $('.checkbox-button-wrapper').hide();
+                $('[data-checkbutton]').hide();
+                //mobile
+                $(".m-checkbox-wrapper").hide();
+                $('.mobile-checkbox-button-wrapper').hide();
+                $('[data-m-checkbutton]').hide();
+            }
 
 
             // REFINE SEARCH DESKTOP//
             // get value of ul dropdown click function wraps all functions
-            $('.refine-search').on("click", '.refine-list a', function () {
-
+            $(document).on("click", '.refine-search .refine-list a', function () {
+                console.log(this)
                 stickySidebar.updateSticky();
 
                 $('.checkbox-button-wrapper').show();
@@ -1854,7 +1895,8 @@ $(window).on('load', function () {
 
 
             //REFINE SEARCH MOBILE//
-            $('#refine-search-mobile').change(function () {
+            $(document).on("change", '#refine-search-mobile', function () {
+                //$(document).change( '#refine-search-mobile',function () {
                 $('.mobile-checkbox-button-wrapper').show();
                 //get mobile option val
                 mdataSearchVal = $(this).val();
@@ -1959,8 +2001,6 @@ $(window).on('load', function () {
             // function share between desktop and mobile end//
 
         }
-
-
         if ($('.page-product-listing section').length) productListingFeatures();
 
 
@@ -2021,8 +2061,11 @@ $(window).on('load', function () {
 
         //make text to ellipsis when more than 4 lines
         $('[data-category] .content-box .text-container p').each(function (index, element) {
-            $clamp(element, { clamp: 4, useNativeClamp: false }); 
-        }); 
+            $clamp(element, {
+                clamp: 4,
+                useNativeClamp: false
+            });
+        });
 
 
         var getID = "all";
@@ -2064,14 +2107,17 @@ $(window).on('load', function () {
             $(".fade-bg").fadeIn(500);
             var getDivHeight = $(".content-wrapper").height();
             var newDivHeight = getDivHeight + 380;
-            $('.content-wrapper').css('height', newDivHeight);
+            //$('.content-wrapper').css('height', newDivHeight);
+            $('.content-wrapper').css({
+                'transition': 'height 1.5s',
+                'height': newDivHeight
+            });
             $('[data-category=' + getID + ']').matchHeight();
         }
 
 
         // get data content to filter
         $('.tab-tiles-wrapper ul li').click(function () {
-
             getID = $(this).attr('data-btn-category');
             dataCategory = $('[data-category=' + getID + ']')
             checkFilterData();
@@ -2165,7 +2211,7 @@ $(window).on('load', function () {
 // ----------------------------------------------------------------------
 // Gallery Listing Search  (filter) [ky]
 // ----------------------------------------------------------------------
-(function () { 
+(function () {
     "use strict";
     $(document).ready(function () {
 
@@ -2209,114 +2255,117 @@ $(window).on('load', function () {
                     renderGalleryResultHtml();
                 });
 
-        } // if end 
 
 
-        //when dropdown click render result
-        function renderGalleryResultHtml() {
-            var form = $(currTHIS).closest('form');
-            var selectedFilterData = ($(form).serializeObject());
-            filteredData = multiFilter(galleryData[categoryContent], selectedFilterData);
-            //console.log('filter', selectedFilterData);
-            //console.log('filteredData', filteredData);
-            //renderGalleryResultHtml(filteredData);
-            paginationResult(filteredData); 
-        }
+            //when dropdown click render result
+            function renderGalleryResultHtml() {
+                var form = $(currTHIS).closest('form');
+                var selectedFilterData = ($(form).serializeObject());
+                filteredData = multiFilter(galleryData[categoryContent], selectedFilterData);
+                //console.log('filter', selectedFilterData);
+                //console.log('filteredData', filteredData);
+                //renderGalleryResultHtml(filteredData);
+                paginationResult(filteredData);
+            }
 
-        // serialize form data to object
-        $.fn.serializeObject = function () {
-            var o = {};
-            var a = this.serializeArray();
-            $.each(a, function () {
-                if (o[this.name] !== undefined) {
-                    if (!o[this.name].push) {
-                        o[this.name] = [o[this.name]];
-                    }
-                    o[this.name].push(this.value || '');
-                } else {
-                    o[this.name] = this.value || '';
-                }
-            });
-            return o;
-        };
-
-        function multiFilter(array, filters) {
-            const filterKeys = Object.keys(filters);
-            // filters all elements passing the criteria
-            return array.filter((item) => {
-                // dynamically validate all filter criteria
-                return filterKeys.every(function (key) {
-                    if (Array.isArray(item[key]) && item[key].length > 0) {
-                        // if data is tagging array, one matches in the array, return the object true
-                        for (var i = 0; i < item[key].length; i++) {
-                            if (!!~filters[key].indexOf(item[key][i])) {
-                                return filters[key];
-                            };
+            // serialize form data to object
+            $.fn.serializeObject = function () {
+                var o = {};
+                var a = this.serializeArray();
+                $.each(a, function () {
+                    if (o[this.name] !== undefined) {
+                        if (!o[this.name].push) {
+                            o[this.name] = [o[this.name]];
                         }
-                    } else if (filters[key] == "" || filters[key] == "all") {
-                        return true;
+                        o[this.name].push(this.value || '');
                     } else {
-                        return !!~filters[key].indexOf(item[key]);
+                        o[this.name] = this.value || '';
                     }
                 });
-            });
-        }
-        
-        //load all from json first
-        function galleryResult() {
-            $.ajax({
-                //url: "/etc/designs/usgb_v3/clientlib/uiux-all-js/js/json/gallery-filter.json",
-                url: "/etc/designs/usgb_v3/clientlib/uiux-all-js/js/json/test-gallery.json",
-                type: "GET",
-                cache: false,
-                success: function (response) {
-                    // store in global
-                    galleryData = response
+                return o;
+            };
 
-                    var galleryFilterHtml = $('#gallery-filter').html();
-                    var temptGalleryFilterHtml = Handlebars.compile(galleryFilterHtml);
-                    $('.gallery-filter-wrapper').html(temptGalleryFilterHtml(galleryData));
-
-                    renderGalleryResultHtml(galleryData.result);
-                },
-                beforeSend: function () {},
-                complete: function () {}
-            });
-        }
-
-        function paginationResult(dataForPagination) {
-            $('#pagination-container').pagination({
-                dataSource: dataForPagination,
-                pageSize: 9,
-                callback: function (data, pagination) {
-                    var resultFilterHtml = $("#result").html();
-                    var temptResultFilterHtml = Handlebars.compile(resultFilterHtml);
-                    $('.results-gallery').html(temptResultFilterHtml(data));
-                    // console.log('p-', pagination)
-                    //console.log('d-', data)
-                },
-                beforePageOnClick: function () {
-                    scrollTop_one();
-                },
-                beforeNextOnClick: function () {
-                    scrollTop_one();
-                },
-                beforePageOnClick: function () {
-                    scrollTop_one();
-                }
-            });
-        }
-
-        function scrollTop_one(target) {
-            if (target) {
-                $(target).stop().animate({
-                    scrollTop: 0
-                }, 500, 'swing');
-            } else {
-                $("html, body").stop().animate({
-                    scrollTop: 0
-                }, 500, 'swing');
+            function multiFilter(array, filters) {
+                const filterKeys = Object.keys(filters);
+                // filters all elements passing the criteria
+                return array.filter((item) => {
+                    // dynamically validate all filter criteria
+                    return filterKeys.every(function (key) {
+                        if (Array.isArray(item[key]) && item[key].length > 0) {
+                            // if data is tagging array, one matches in the array, return the object true
+                            for (var i = 0; i < item[key].length; i++) {
+                                if (!!~filters[key].indexOf(item[key][i])) {
+                                    return filters[key];
+                                };
+                            }
+                        } else if (filters[key] == "" || filters[key] == "all") {
+                            return true;
+                        } else {
+                            return !!~filters[key].indexOf(item[key]);
+                        }
+                    });
+                });
             }
-        }
+
+            //load all from json first
+            function galleryResult() {
+                $.ajax({
+                    //url: "/etc/designs/usgb_v3/clientlib/uiux-all-js/js/json/gallery-filter.json",
+                    url: "/etc/designs/usgb_v3/clientlib/uiux-all-js/js/json/test-gallery.json",
+                    type: "GET",
+                    cache: false,
+                    success: function (response) {
+                        // store in global
+                        galleryData = response
+
+                        var galleryFilterHtml = $('#gallery-filter').html();
+                        var temptGalleryFilterHtml = Handlebars.compile(galleryFilterHtml);
+                        $('.gallery-filter-wrapper').html(temptGalleryFilterHtml(galleryData));
+
+                        renderGalleryResultHtml(galleryData.result);
+                    },
+                    beforeSend: function () {},
+                    complete: function () {}
+                });
+            }
+
+            function paginationResult(dataForPagination) {
+                $('#pagination-container').pagination({
+                    dataSource: dataForPagination,
+                    pageSize: 9,
+                    callback: function (data, pagination) {
+                        var resultFilterHtml = $("#result").html();
+                        var temptResultFilterHtml = Handlebars.compile(resultFilterHtml);
+                        $('.results-gallery').html(temptResultFilterHtml(data));
+                        // console.log('p-', pagination)
+                        //console.log('d-', data)
+                    },
+                    beforePageOnClick: function () {
+                        scrollTop_one();
+                    },
+                    beforeNextOnClick: function () {
+                        scrollTop_one();
+                    },
+                    beforePageOnClick: function () {
+                        scrollTop_one();
+                    }
+                });
+            }
+
+            function scrollTop_one(target) {
+                if (target) {
+                    $(target).stop().animate({
+                        scrollTop: 0
+                    }, 500, 'swing');
+                } else {
+                    $("html, body").stop().animate({
+                        scrollTop: 0
+                    }, 500, 'swing');
+                }
+            }
+
+        } // if end
+
+
     });
 })();
