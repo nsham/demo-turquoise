@@ -196,6 +196,7 @@ public class StoreLocatorServiceImpl implements StoreLocatorService{
             List<Hit> hitsList = null;
             resultJsonArray = new JsonArray();
             JsonObject tempJsonObject = new JsonObject();
+            Map<String, String> dataMap = new LinkedHashMap<>();
             for(String matchField : matchFieldsArray){
                 if(StringUtils.isNotBlank(matchField)){
                     queryMap = new LinkedHashMap<>();
@@ -213,10 +214,10 @@ public class StoreLocatorServiceImpl implements StoreLocatorService{
                     for(Hit hit: hitsList){
                         try {
                             resultResource = hit.getResource();
+                            LOG.info("for match field :"+matchField+"resultResource:"+resultResource.getPath());
                             ValueMap valueMap = resultResource.getValueMap();
                             if(valueMap.containsKey(matchField)){
-                                tempJsonObject.addProperty(prefix+matchField, valueMap.get(matchField).toString());
-                                resultJsonArray.add(tempJsonObject);
+                                dataMap.put(valueMap.get(matchField).toString(), prefix+matchField);
                             }
 
                         } catch (RepositoryException e) {
@@ -224,6 +225,16 @@ public class StoreLocatorServiceImpl implements StoreLocatorService{
                         }
 
                     }
+                }
+
+            }
+            if(dataMap.size()>0){
+                Iterator it = dataMap.entrySet().iterator();
+                while (it.hasNext()) {
+                    Map.Entry pair = (Map.Entry)it.next();
+                    tempJsonObject = new JsonObject();
+                    tempJsonObject.addProperty(pair.getValue().toString(), pair.getKey().toString());
+                    resultJsonArray.add(tempJsonObject);
                 }
 
             }
