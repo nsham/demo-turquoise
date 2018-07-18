@@ -81,7 +81,7 @@ public class ClearShareDataScheduledTask implements Runnable {
 		Connection connection = null;
 		
 		try{
-			dataSource = (DataSource) source.getDataSource(DATA_SOURCE_NAME_LOCAL);
+			dataSource = (DataSource) source.getDataSource(DATA_SOURCE_NAME_UAT);
 			connection = dataSource.getConnection();
 		} catch (Exception e) {
 			logger.error("getConnection: encountered Exception", e);

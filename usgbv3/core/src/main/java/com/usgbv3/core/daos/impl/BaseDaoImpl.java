@@ -2,7 +2,6 @@ package com.usgbv3.core.daos.impl;
 
 import com.day.commons.datasource.poolservice.DataSourcePool;
 import com.usgbv3.core.daos.BaseDao;
-import com.usgbv3.core.daos.ShareDataDao;
 import com.usgbv3.core.models.QueryDataResult;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -37,7 +36,7 @@ public class BaseDaoImpl implements BaseDao{
 		Connection connection = null;
 		
 		try{
-			dataSource = (DataSource) dataSourcePool.getDataSource(DATA_SOURCE_NAME_LOCAL);
+			dataSource = (DataSource) dataSourcePool.getDataSource(DATA_SOURCE_NAME_UAT);
 			connection = dataSource.getConnection();
 		} catch (Exception e) {
 			log.error("getConnection: encountered Exception", e);

@@ -310,7 +310,7 @@ public class StoreLocatorServiceImpl implements StoreLocatorService{
                     }
                 }else if(key.startsWith("proximity")){
                     // get all the store in country and search for the proximity string sent
-                    key = key.replaceAll("proximity-", "");
+                    key = key.replaceAll("proximity_", "");
                     JsonObject  resultJsonObject = new JsonObject();
                     String text = textParameter.getString();
                     Map<String, String> queryMap = new LinkedHashMap<>();
