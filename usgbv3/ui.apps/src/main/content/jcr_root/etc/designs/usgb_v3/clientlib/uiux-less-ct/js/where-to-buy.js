@@ -54,96 +54,91 @@
         
             $(document).on('change keyup','#input-search-location', function(e){
                 e.preventDefault();
-                var num = Number($(this).attr('data-length-autocomplete-start'));
+                //var num = Number($(this).attr('data-length-autocomplete-start'));
                 var target = $(this);
                 if ($(this).val()) {
                     $('.wtb-search-bar').addClass('add-bg');
-                    if($(this).val().length >= num){
-                        $.ajax({
-                            url: "/bin/usg/storeAutoComplete",
-                            // data: "text=" + $(this).val() + "&pageurl=" + locationPath,
-                            data: "text=" + $(this).val() + "&pageurl=" + "/content/usgboral/en_au/samplepage/",
-                            type: "GET",
-                            cache: false,
-                            success: function (response) {
-                                var data = response.Items;
-                                var autocompleteData = data;
-                                var values = Object.keys(autocompleteData).map(function(e) {
-                                    return autocompleteData[e].address1 || autocompleteData[e].companyName || autocompleteData[e].city || autocompleteData[e].state || autocompleteData[e].zip || autocompleteData[e].en_locationPage;
-                                });
-                                //console.log(values);
-                                // new autoComplete({
-                                //     selector: '#input-search-location',
-                                //     minChars: 1,
-                                //     source: function(term, suggest){
-                                //         term = term.toLowerCase();
-                                //         var choices = values;
-                                //         var matches = [];
-                                //         for (var i=0; i<choices.length; i++){
-                                //             if (~choices[i].toLowerCase().indexOf(term)){
-                                //                 matches.push(choices[i]);
-                                //             } 
-                                //         }
-                                //         suggest(matches);
-                                //     }
-                                // });
-                            },
-                            beforeSend: function () {
-                                //$('.loader').fadeIn("fast");
-                            },
-                            complete: function () {
-                                //$('.loader').fadeOut("slow");
-                            }
-                        });
 
-                        //var values = ["7 Barrier Street, Fyshwick"];
+                    AutoComplete({
+                        EmptyMessage: "No item found",
+                        QueryArg: "text"
+                        // _RenderResponseItems: function(response) {
+                        //     console.log(response);
+                        // }
+                    }, "#input-search-location");
 
-                        // new autoComplete({
-                        //     selector: '#input-search-location',
-                        //     minChars: 1,
-                        //     source: function(term, suggest){
-                        //         term = term.toLowerCase();
-                        //         var choices = values;
-                        //         var matches = [];
-                        //         for (var i=0; i<choices.length; i++){
-                        //             if (~choices[i].toLowerCase().indexOf(term)){
-                        //                 matches.push(choices[i]);
-                        //             } 
-                        //         }
-                        //         suggest(matches);
+                    //if($(this).val().length >= num){
+                        // $.ajax({
+                        //     url: "/bin/usg/storeAutoComplete",
+                        //     // data: "text=" + $(this).val() + "&pageurl=" + locationPath,
+                        //     data: "text=" + $(this).val() + "&pageurl=" + "/content/usgboral/en_au/samplepage/",
+                        //     type: "GET",
+                        //     cache: false,
+                        //     success: function (response) {
+                        //         var data = response.Items;
+                        //         var autocompleteData = data;
+                        //         var values = Object.keys(autocompleteData).map(function(e) {
+                        //             return autocompleteData[e].address1 || autocompleteData[e].companyName || autocompleteData[e].city || autocompleteData[e].state || autocompleteData[e].zip || autocompleteData[e].en_locationPage;
+                        //         });
+                        //         //console.log(values);
+                        //         // new autoComplete({
+                        //         //     selector: '#input-search-location',
+                        //         //     minChars: 1,
+                        //         //     source: function(term, suggest){
+                        //         //         term = term.toLowerCase();
+                        //         //         var choices = values;
+                        //         //         var matches = [];
+                        //         //         for (var i=0; i<choices.length; i++){
+                        //         //             if (~choices[i].toLowerCase().indexOf(term)){
+                        //         //                 matches.push(choices[i]);
+                        //         //             } 
+                        //         //         }
+                        //         //         suggest(matches);
+                        //         //     }
+                        //         // });
+                        //     },
+                        //     beforeSend: function () {
+                        //         //$('.loader').fadeIn("fast");
+                        //     },
+                        //     complete: function () {
+                        //         //$('.loader').fadeOut("slow");
                         //     }
                         // });
-                        var xhr;
-                        new autoComplete({
-                            selector: '#input-search-location',
-                            source: function(term, response){
-                                try { xhr.abort(); } catch(e){}
-                                xhr = $.getJSON('/bin/usg/storeAutoComplete', {
-                                    text: term,
-                                    pageurl: "/content/usgboral/en_au/samplepage/"
-                                }, function (data) {
-                                    var autocompleteData = data.Items;
-                                    var values = Object.keys(autocompleteData).map(function(e) {
-                                        return autocompleteData[e].address1 || autocompleteData[e].companyName || autocompleteData[e].city || autocompleteData[e].state || autocompleteData[e].zip || autocompleteData[e].en_locationPage;
-                                    });
-                                    response(values);
-                                    console.log('data',data);
-                                    console.log('autocompleteData',autocompleteData);
-                                    console.log('values',values);
-                                });
-                            },
-                            renderItem: function (item, search){
-                                console.log('item', item);
-                                search = search.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
-                                var re = new RegExp("(" + search.split(' ').join('|') + ")", "gi");
-                                return '<div class="autocomplete-suggestion" data-langname="'+item+'" data-val="'+search+'">'+item.replace(re, "<b>$1</b>")+'</div>';
-                            },
-                            onSelect: function(e, term, item){
-                                return $(target).val(item.getAttribute('data-langname'));
-                                //alert('Item "'+item.getAttribute('data-langname')+' ('+item.getAttribute('data-lang')+')" selected by '+(e.type == 'keydown' ? 'pressing enter' : 'mouse click')+'.');
-                            }
-                        });
-                    }
+
+                        // var xhr;
+                        // new autoComplete({
+                        //     selector: '#input-search-location',
+                        //     source: function(term, response){
+                        //         try { xhr.abort(); } catch(e){}
+                        //         xhr = $.getJSON('/bin/usg/storeAutoComplete', {
+                        //             text: term,
+                        //             pageurl: "/content/usgboral/en_au/samplepage/"
+                        //         }, function (data) {
+                        //             var autocompleteData = data.Items;
+                        //             var values = Object.keys(autocompleteData).map(function(e) {
+                        //                 return autocompleteData[e].address1 || autocompleteData[e].companyName || autocompleteData[e].city || autocompleteData[e].state || autocompleteData[e].zip || autocompleteData[e].en_locationPage;
+                        //             });
+                        //             response(values);
+                        //             console.log('data',data);
+                        //             console.log('autocompleteData',autocompleteData);
+                        //             console.log('values',values);
+                        //         });
+                        //     },
+                        //     renderItem: function (item, search){
+                        //         console.log('item', item);
+                        //         search = search.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+                        //         var re = new RegExp("(" + search.split(' ').join('|') + ")", "gi");
+                        //         return '<div class="autocomplete-suggestion" data-langname="'+item+'" data-val="'+search+'">'+item.replace(re, "<b>$1</b>")+'</div>';
+                        //     },
+                        //     onSelect: function(e, term, item){
+                        //         console.log(e.type);
+                        //         $(target).val(item.getAttribute('data-langname'));
+                        //         //alert('Item "'+item.getAttribute('data-langname')+' ('+item.getAttribute('data-lang')+')" selected by '+(e.type == 'keydown' ? 'pressing enter' : 'mouse click')+'.');
+                        //     }
+                        // });
+
+                         
+                    //}
                     
                 } else {  
                     $('.wtb-search-bar').removeClass('add-bg').removeClass('open');
@@ -448,7 +443,7 @@
             // Finally the bounds variable is used to set the map bounds
             // with fitBounds() function
             map.fitBounds(bounds);
-            map.setZoom(6);
+            map.setZoom(14);
         }
         
         // This function creates each marker and it sets their Info Window content
@@ -506,7 +501,7 @@
                 var divHeightOfTheMap = document.getElementById('map-canvas').clientHeight;
                 var offSetFromBottom = 100;
                 map.setCenter(marker.getPosition());
-                map.panBy(0, -(divHeightOfTheMap / 2 - offSetFromBottom));
+                map.panBy(-200, -(divHeightOfTheMap / 2 - offSetFromBottom));
 
                 // including content to the Info Window.
                 infoWindow.setContent(iwContent);

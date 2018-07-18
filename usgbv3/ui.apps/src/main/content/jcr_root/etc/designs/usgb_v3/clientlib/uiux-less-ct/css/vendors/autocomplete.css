@@ -1,36 +1,73 @@
-.autocomplete-suggestions {
-    text-align: left;
-    cursor: default;
-    border: 1px solid #ccc;
-    border-top: 0;
-    background: #fff;
-    box-shadow: -1px 1px 3px rgba(0, 0, 0, .1);
-    /* core styles should not be changed */
-    position: absolute;
-    display: none;
-    z-index: 9999;
-    max-height: 254px;
-    overflow: hidden;
-    overflow-y: auto;
-    box-sizing: border-box;
+input[data-autocomplete] {
+  border-color: #808080;
+  border-style: none none solid none;
+  border-width: 0px 0px 1px 0px;
+  margin: 0px;
+  padding: 5px;
+  width: 100%;
 }
-
-.autocomplete-suggestion {
-    position: relative;
-    padding: 0 .6em;
-    line-height: 23px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    font-size: 1.02em;
-    color: #333;
+.autocomplete {
+  position: absolute;
+  transition: all 0.5s ease 0s;
+  max-height: 0;
+  overflow-y: hidden;
+  transition-duration: 0.3s;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
 }
-
-.autocomplete-suggestion b {
-    font-weight: normal;
-    color: #1f8dd6;
+.autocomplete:active,
+.autocomplete:focus,
+.autocomplete:hover {
+  background-color: #FAFAFA;
+  transition: all 0.5s ease 0s;
 }
-
-.autocomplete-suggestion.selected {
-    background: #f0f0f0;
+.autocomplete:empty {
+  display: none;
+}
+.autocomplete > ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.autocomplete > ul > li {
+  cursor: pointer;
+  padding: 5px 0 5px 10px;
+}
+.autocomplete > ul > li.active,
+.autocomplete > ul > li:active,
+.autocomplete > ul > li:focus,
+.autocomplete > ul > li:hover {
+  background-color: #EEEEEE;
+  transition: all 0.5s ease 0s;
+}
+.autocomplete > ul > li.active a:active,
+.autocomplete > ul > li:active a:active,
+.autocomplete > ul > li:focus a:active,
+.autocomplete > ul > li:hover a:active,
+.autocomplete > ul > li.active a:focus,
+.autocomplete > ul > li:active a:focus,
+.autocomplete > ul > li:focus a:focus,
+.autocomplete > ul > li:hover a:focus,
+.autocomplete > ul > li.active a:hover,
+.autocomplete > ul > li:active a:hover,
+.autocomplete > ul > li:focus a:hover,
+.autocomplete > ul > li:hover a:hover {
+  text-decoration: none;
+}
+.autocomplete > ul > li.locked {
+  cursor: inherit;
+}
+.autocomplete.open {
+  display: block;
+  transition: all 0.5s ease 0s;
+  background-color: #FAFAFA;
+  max-height: 500px;
+  overflow-y: auto;
+  transition-duration: 0.3s;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+  z-index: 100;
+}
+.autocomplete.open:empty {
+  display: none;
 }

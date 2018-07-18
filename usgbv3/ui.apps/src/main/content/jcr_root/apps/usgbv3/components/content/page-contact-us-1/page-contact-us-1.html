@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="/etc/designs/usgb_v3/clientlib/uiux-less-vc.css" type="text/css">
+ 
 <!-- BREADCUMB-BOX -->
 <div class="container m-vertical-m ">
 		<div class="row">
@@ -15,7 +17,7 @@
 	</div>
 	<!-- BREADCUMB-BOX END -->
 	
-	
+	 
 	<!-- TITLE -->
 	<div class="container m-vertical-m">
 		<div class="row">
@@ -33,7 +35,7 @@
 	
 	<div class="container m-vertical-m">
 		<div class="row">
-			<form id="contactUsForm2" class="floating-type-form form-validate" method="post" name="htmlform" action="">
+			<form id="contactUsForm1" class="floating-type-form form-validate" method="post" name="htmlform" action="">
 				<div class="col-sm-offset-1 col-xs-offset-0 col-sm-5 col-xs-12">
 					<div class="float-label respond-msg">
 						<label class="uppercase ">Enquiry Type </label>
@@ -94,6 +96,140 @@
 					</div>
 				</div>
 			</form>
+			<form id="contactUsForm2" class="floating-type-form form-validate hidden" method="post" name="htmlform" action="">
+				<div class="col-sm-offset-1 col-xs-offset-0 col-sm-5 col-xs-12">
+					<div class="float-label respond-msg">
+						<input type="text" class="form-control" name="contact" required>
+						<label for="contact" class="uppercase ">contact no</label>
+					</div>
+					<div class="float-label respond-msg m-bottom-xl">
+						<label class="uppercase ">i am </label>
+						<span class="dropdown-arrow color-primary-green glyphicon glyphicon-menu-down fs-1"></span>
+						<select name="dropdownselect" for="dropdownselect" class="drop-down-select form-control" type="select">
+							<option></option>
+							<option value="prog">Programmer </option>
+							<option value="ceo">CEO</option>
+							<option value="designer">Designer</option>
+						</select>
+					</div>
+					<h6 class="ht6 uppercase color-darker-grey m-top-xl">I work with</h6>
+					<div class="checkbox respond-msg">
+						<label class="container-checkbox">
+							Detached homes
+							<input type="checkbox" name="i_work_with">
+							<span class="checkmark"></span>
+						</label>
+						<br>
+						<label class="container-checkbox">
+							Other dwellings
+							<input type="checkbox" name="i_work_with">
+							<span class="checkmark"></span>
+						</label>
+						<br>
+						<label class="container-checkbox">
+							Alterations / renovations
+							<input type="checkbox" name="i_work_with">
+							<span class="checkmark"></span>
+						</label>
+						<br>
+						<label class="container-checkbox">
+							Non-residential
+							<input type="checkbox" name="i_work_with">
+							<span class="checkmark"></span>
+						</label>
+					</div>
+				</div>
+	
+				<div class="col-sm-offset-1 col-xs-offset-0 col-sm-10 col-xs-12 m-bottom-xxl">
+					<div class="row">
+						<div class="col-xs-12">
+							<h6 class="ht6 uppercase color-darker-grey m-top-xl">I AM INTERESTED IN</h6>
+							<p class="color-grey m-bottom-s">Tip: Choose 1 or 2 for a quicker responce.</p>
+							<div class="checkbox respond-msg">
+								<div class="row">
+									<div class="col-xs-12 col-sm-6">
+										<label class="container-checkbox">
+											Acoustic Panels and Ceiling Tiles
+											<input type="checkbox" name="i_am_interested">
+											<span class="checkmark"></span>
+										</label>
+										<br>
+										<label class="container-checkbox">
+											Ceilings
+											<input type="checkbox" name="i_am_interested">
+											<span class="checkmark"></span>
+										</label>
+										<br>
+										<label class="container-checkbox">
+											Cornice
+											<input type="checkbox" name="i_am_interested">
+											<span class="checkmark"></span>
+										</label>
+										<br>
+										<label class="container-checkbox">
+											Finishes
+											<input type="checkbox" name="i_am_interested">
+											<span class="checkmark"></span>
+										</label>
+										<br>
+										<label class="container-checkbox">
+											Industrial Products
+											<input type="checkbox" name="i_am_interested">
+											<span class="checkmark"></span>
+										</label>
+										<br>
+										<label class="container-checkbox">
+											Insulation
+											<input type="checkbox" name="i_am_interested">
+											<span class="checkmark"></span>
+										</label>
+									</div>
+									<div class="col-xs-12 col-sm-6">
+										<label class="container-checkbox">
+											Interior Linings
+											<input type="checkbox" name="i_am_interested">
+											<span class="checkmark"></span>
+										</label>
+										<br>
+										<label class="container-checkbox">
+											Plasterboard Systems
+											<input type="checkbox" name="i_am_interested">
+											<span class="checkmark"></span>
+										</label>
+										<br>
+										<label class="container-checkbox">
+											Sheetrock Brand Plasterboard
+											<input type="checkbox" name="i_am_interested">
+											<span class="checkmark"></span>
+										</label>
+										<br>
+										<label class="container-checkbox">
+											Specialty Ceilings
+											<input type="checkbox" name="i_am_interested">
+											<span class="checkmark"></span>
+										</label>
+										<br>
+										<label class="container-checkbox">
+											Steel Framing
+											<input type="checkbox" name="i_am_interested">
+											<span class="checkmark"></span>
+										</label>
+									</div>
+								</div>
+							</div>
+						</div>
+	
+	
+	
+					</div>
+				</div>
+	
+				<div class="col-xs-12 text-center  m-bottom-4xl">
+					<div class="form-group">
+						<button type="submit" id="myform" class="btn btn-brand-default button-green" value="Submit">SEND</button>
+					</div>
+				</div>
+			</form>
 		</div>
 	</div>
 	
@@ -136,7 +272,7 @@
 	</div>
 
 
-	<div class="container">
+	<!-- <div class="container">
 		<div class="row">
 			<div class="col-xs-12">
 				<h2>Join Us Now</h2>
@@ -253,7 +389,7 @@
 				</form>
 			</div>
 		</div>
-	</div>
+	</div> -->
 
 	
 	
@@ -261,4 +397,4 @@
 	 
 	<script src="/etc/designs/usgb_v3/clientlib/uiux-less-ct/js/vendors/jquery.validate.min.js"></script>
 	<script src='https://www.google.com/recaptcha/api.js'></script>
-	<script src="/etc/designs/usgb_v3/clientlib/uiux-less-ct.js"></script>
+	<script src="/etc/designs/usgb_v3/clientlib/uiux-all-js-vc.js"></script>

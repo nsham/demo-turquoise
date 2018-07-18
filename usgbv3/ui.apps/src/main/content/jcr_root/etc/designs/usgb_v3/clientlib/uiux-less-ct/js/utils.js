@@ -19,3 +19,10 @@ $.fn.serializeObject = function(){
     });
     return o;
 };
+
+// unique array
+var uniqueArray = function (arrArg) {
+    return arrArg.filter(function (elem, pos, arr) {
+        return arr.indexOf(elem) == pos;
+    });
+};

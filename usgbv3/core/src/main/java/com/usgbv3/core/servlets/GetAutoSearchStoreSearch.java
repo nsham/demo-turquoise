@@ -40,7 +40,7 @@ public class GetAutoSearchStoreSearch extends SlingSafeMethodsServlet {
     protected void doGet(SlingHttpServletRequest request, SlingHttpServletResponse response)
             throws ServletException, IOException {
         RequestParameter textParameter = request.getRequestParameter(ApplicationConstants.TEXT);
-       // RequestParameter pageURL = request.getRequestParameter(ApplicationConstants.PAGE_URL);
+       RequestParameter pageURL = request.getRequestParameter(ApplicationConstants.PAGE_URL);
         String jsonResponse = "";
         if(textParameter != null && request.getHeader("referer") != null){
             try {
@@ -53,9 +53,10 @@ public class GetAutoSearchStoreSearch extends SlingSafeMethodsServlet {
             } catch (URISyntaxException e) {
                 LOG.error("URI SyntaxExvception is :"+e);
             }
-            /*jsonResponse = storeLocatorService.getAutoSearch(pageURL.getString()
-                    , textParameter.getString(), request.getResourceResolver());*/
+
         }
+      /*  jsonResponse = storeLocatorService.getAutoSearch(pageURL.getString()
+                , textParameter.getString(), request.getResourceResolver());*/
 
         response.setContentType("application/json");
         PrintWriter out = response.getWriter();
