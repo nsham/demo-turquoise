@@ -5,9 +5,14 @@ import com.day.cq.search.Query;
 import com.day.cq.search.QueryBuilder;
 import com.day.cq.search.result.Hit;
 import com.day.cq.search.result.SearchResult;
+import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.usgbv3.core.models.DistanceLocatorProductCategory;
+import com.usgbv3.core.models.StoreLocatorProductCategory;
+import com.usgbv3.core.models.StoreLocatorStoreCategory;
 import com.usgbv3.core.services.StoreLocatorService;
 import com.usgbv3.core.utils.CountryUtils;
 import com.usgbv3.core.utils.GenericUtils;
@@ -266,7 +271,11 @@ public class StoreLocatorServiceImpl implements StoreLocatorService{
         String proximityLocationPath = countryPath+"/proximitylocations";
         JsonObject tempJson=null;
         JsonArray resultJsonArray = new JsonArray();
-
+        JsonObject resultJsonObject = new JsonObject();
+        Set<String> storeTypeSet = new HashSet<>();
+        Set<String> productTypeSet = new HashSet<>();
+        Set<String> tempSet = null;
+        JsonArray productJsonArray = null;
         if(countryPath != null){
             if(currentLocationParameter != null){
                 // we are searching as per the current location and get all the stores in the country parameter sent
@@ -276,8 +285,35 @@ public class StoreLocatorServiceImpl implements StoreLocatorService{
                     for(Resource store : children){
                         tempJson = convertResourceToStoreJson(store, gson);
                         resultJsonArray.add(tempJson);
+
+                        // populating unique storetype and product
+                        if(tempJson.has("storeType")){
+                            storeTypeSet.add(tempJson.get("storeType").getAsString());
+                        }
+                        if(tempJson.has("product") && tempJson.get("product")!= null){
+                            productJsonArray = tempJson.get("product").getAsJsonArray();
+                            if(productJsonArray != null && productJsonArray.size()>0){
+                                for(JsonElement productJsonElement: productJsonArray){
+                                    if(!"".equals(productJsonElement.getAsString())){
+                                        productTypeSet.add(productJsonElement.getAsString());
+                                    }
+                                }
+                            }
+                        }
                     }
-                    jsonData = gson.toJson(resultJsonArray);
+                    LOG.info("storeTypeSet:"+storeTypeSet);
+                    LOG.info("productTypeSet:"+productTypeSet);
+                    LOG.info("countryPath:"+countryPath);
+                    resultJsonObject.add("storeResults", resultJsonArray);
+                    if(storeTypeSet != null && productTypeSet != null){
+                        JsonArray filterJsonArray = getFilterJsonData(storeTypeSet, productTypeSet
+                                , resourceResolver, countryPath);
+                        if(filterJsonArray != null){
+                            resultJsonObject.add("filterListing", filterJsonArray);
+                        }
+                    }
+                    // converting to json response
+                    jsonData = gson.toJson(resultJsonObject);
                 }
             }else if(keyParameter != null){
                 String key = keyParameter.getString();
@@ -311,7 +347,7 @@ public class StoreLocatorServiceImpl implements StoreLocatorService{
                 }else if(key.startsWith("proximity")){
                     // get all the store in country and search for the proximity string sent
                     key = key.replaceAll("proximity_", "");
-                    JsonObject  resultJsonObject = new JsonObject();
+
                     String text = textParameter.getString();
                     Map<String, String> queryMap = new LinkedHashMap<>();
                     queryMap.put("path", proximityLocationPath);
@@ -332,6 +368,8 @@ public class StoreLocatorServiceImpl implements StoreLocatorService{
                         }
                     }
                     resultJsonObject.add("ProximityResult", resultJsonArray);
+
+                    // store results
                     resultJsonArray = new JsonArray();
                     Resource storeLocatorResource = resourceResolver.resolve(storeLocationPath);
                     if(storeLocatorResource != null){
@@ -342,6 +380,9 @@ public class StoreLocatorServiceImpl implements StoreLocatorService{
                         }
                         resultJsonObject.add("StoreResults", resultJsonArray);
                     }
+
+                    // filter resutls
+
                     jsonData = gson.toJson(resultJsonObject);
 
                 }else{
@@ -375,6 +416,132 @@ public class StoreLocatorServiceImpl implements StoreLocatorService{
         return jsonData;
     }
 
+    private JsonArray getFilterJsonData(Set<String> storeTypeSet, Set<String> productTypeSet
+            , ResourceResolver resourceResolver, String countryPath) {
+        JsonArray filterJsonArray = new JsonArray();
+        Map<String, Object> storeFilter = null;
+        // get country specific data
+        if(countryPath != null){
+            String storeLocatorFilterPagePath = countryPath+"/Configuration/storelocatorfilter";
+            Map<String, String> queryMap = new LinkedHashMap<>();
+            queryMap.put("type", "nt:unstructured");
+            queryMap.put("path", storeLocatorFilterPagePath);
+            queryMap.put("property", "sling:resourceType");
+            queryMap.put("property.1_value", "usgbv3/components/content/storelocatorfilter");
+
+            GenericUtils.logQuery(LOG, queryMap);
+            Session session = resourceResolver.adaptTo(Session.class);
+            Query query = queryBuilder.createQuery(PredicateGroup.create(queryMap), session);
+            SearchResult result = query.getResult();
+            List<Hit> hitsList = result.getHits();
+            if(hitsList != null &&hitsList.size()>0){
+                Hit hit = hitsList.get(0);
+                ValueMap storeLocatorFilterNodeVM= null;
+                try {
+                    storeLocatorFilterNodeVM = hit.getResource().getValueMap();
+                } catch (RepositoryException e) {
+                    LOG.error("RepositoryException in getFilterJsonData:"+e);
+                }
+                if(storeLocatorFilterNodeVM != null){
+                    storeFilter = getStoreFilter(storeLocatorFilterNodeVM);
+                }else{
+                    LOG.error("no storeLocatorFilterNodeVM node value");
+                }
+            }
+        }
+
+        // get matching
+        if(storeFilter != null && storeFilter.size()>0){
+            // populating distance data
+            JsonObject tempJsonObject = new JsonObject();
+            if(storeFilter.containsKey("distanceCategoryTitle")){
+                String name= storeFilter.get("distanceCategoryTitle").toString();
+                tempJsonObject.addProperty("title", name);
+                name = name.toLowerCase();
+                tempJsonObject.addProperty("key", StringUtils.replaceSpecialCharacters(name));
+            }
+            if(storeFilter.containsKey("distanceCategoryList") && storeFilter.get("distanceCategoryList")!= null){
+                List<DistanceLocatorProductCategory> distanceCategoryList = (List<DistanceLocatorProductCategory>)
+                        storeFilter.get("distanceCategoryList");
+                JsonArray categoryArray = new JsonArray();
+                JsonObject categoryJson = null;
+                for(DistanceLocatorProductCategory category : distanceCategoryList){
+                    categoryJson = new JsonObject();
+                    categoryJson.addProperty("icon", category.getDistanceCategoryIconClass());
+                    String distanceCategoryTitle = category.getDistanceCategoryTitle();
+                    if(distanceCategoryTitle != null  ){
+                        categoryJson.addProperty("value", distanceCategoryTitle);
+                        categoryJson.addProperty("key"
+                                , StringUtils.replaceSpecialCharacters(distanceCategoryTitle.toLowerCase()));
+                    }
+                    categoryArray.add(categoryJson);
+                }
+                tempJsonObject.add("child",categoryArray );
+            }
+            filterJsonArray.add(tempJsonObject);
+
+            // populating store type data
+            tempJsonObject = new JsonObject();
+            if(storeFilter.containsKey("storeCategoryTitle")){
+                String name= storeFilter.get("storeCategoryTitle").toString();
+                tempJsonObject.addProperty("title", name);
+                name = name.toLowerCase();
+                tempJsonObject.addProperty("key", StringUtils.replaceSpecialCharacters(name));
+            }
+            if(storeFilter.containsKey("storeCategoryList") && storeFilter.get("storeCategoryList")!= null){
+                List<StoreLocatorStoreCategory> distanceCategoryList = (List<StoreLocatorStoreCategory>)
+                        storeFilter.get("storeCategoryList");
+                JsonArray categoryArray = new JsonArray();
+                JsonObject categoryJson = null;
+                for(StoreLocatorStoreCategory storeCategory : distanceCategoryList){
+                    categoryJson = new JsonObject();
+                    categoryJson.addProperty("icon", storeCategory.getStoreCategoryIconClass());
+                    String distanceCategoryTitle = storeCategory.getStoreCategoryTitle();
+                    if(distanceCategoryTitle != null && storeTypeSet.contains(distanceCategoryTitle)){
+                        categoryJson.addProperty("value", distanceCategoryTitle);
+                        categoryJson.addProperty("key"
+                                , StringUtils.replaceSpecialCharacters(distanceCategoryTitle.toLowerCase()));
+                        categoryArray.add(categoryJson);
+                    }
+
+                }
+                tempJsonObject.add("child",categoryArray );
+            }
+            filterJsonArray.add(tempJsonObject);
+
+
+            // populating product type data
+            tempJsonObject = new JsonObject();
+            if(storeFilter.containsKey("productCategoryTitle")){
+                String name= storeFilter.get("productCategoryTitle").toString();
+                tempJsonObject.addProperty("title", name);
+                name = name.toLowerCase();
+                tempJsonObject.addProperty("key", StringUtils.replaceSpecialCharacters(name));
+            }
+            if(storeFilter.containsKey("productCategoryList") && storeFilter.get("productCategoryList")!= null){
+                List<StoreLocatorProductCategory> distanceCategoryList = (List<StoreLocatorProductCategory>)
+                        storeFilter.get("productCategoryList");
+                JsonArray categoryArray = new JsonArray();
+                JsonObject categoryJson = null;
+                for(StoreLocatorProductCategory productCategory : distanceCategoryList){
+                    categoryJson = new JsonObject();
+                    categoryJson.addProperty("icon", productCategory.getProductCategoryIconClass());
+                    String distanceCategoryTitle = productCategory.getProductCategoryTitle();
+                    if(distanceCategoryTitle != null && productTypeSet.contains(distanceCategoryTitle)){
+                        categoryJson.addProperty("value", distanceCategoryTitle);
+                        categoryJson.addProperty("key"
+                                , StringUtils.replaceSpecialCharacters(distanceCategoryTitle.toLowerCase()));
+                        categoryArray.add(categoryJson);
+                    }
+
+                }
+                tempJsonObject.add("child",categoryArray );
+            }
+            filterJsonArray.add(tempJsonObject);
+        }
+        return filterJsonArray;
+    }
+
     private JsonObject convertResourceToStoreJson(Resource store, Gson gson) {
         JsonObject jsonObject = new JsonObject();
         if(store != null){
@@ -396,5 +563,55 @@ public class StoreLocatorServiceImpl implements StoreLocatorService{
             }
         }
         return jsonObject;
+    }
+
+    public  Map<String, Object> getStoreFilter(ValueMap storeLocatorFilterProperties) {
+        Map<String, Object> storeData  = new HashMap<>();
+        Gson gson = new Gson();
+
+        // store category List
+        if(storeLocatorFilterProperties.containsKey("storeCategoryList")){
+
+            if(storeLocatorFilterProperties.containsKey("storeTitle")){
+                storeData.put("storeCategoryTitle", storeLocatorFilterProperties.get("storeTitle").toString());
+            }
+            String[] storeCategoryListsArray = storeLocatorFilterProperties
+                    .get("storeCategoryList", String[].class);
+            if(storeCategoryListsArray != null && storeCategoryListsArray.length>0) {
+                TypeToken<List<StoreLocatorStoreCategory>> token = new TypeToken<List<StoreLocatorStoreCategory>>() {
+                };
+                storeData.put("storeCategoryList"
+                        , gson.fromJson(Arrays.toString(storeCategoryListsArray), token.getType()));
+            }
+        }
+        // product Category List
+        if(storeLocatorFilterProperties.containsKey("productCategoryList")){
+            if(storeLocatorFilterProperties.containsKey("productTitle")){
+                storeData.put("productCategoryTitle",  storeLocatorFilterProperties.get("productTitle").toString());
+            }
+            String[] productCategoryListsArray = storeLocatorFilterProperties
+                    .get("productCategoryList", String[].class);
+            if(productCategoryListsArray != null && productCategoryListsArray.length>0) {
+                TypeToken<List<StoreLocatorProductCategory>> token = new TypeToken<List<StoreLocatorProductCategory>>() {
+                };
+                storeData.put("productCategoryList"
+                        , gson.fromJson(Arrays.toString(productCategoryListsArray), token.getType()));
+            }
+        }
+        // distance Category List
+        if(storeLocatorFilterProperties.containsKey("distanceCategoryList")){
+            if(storeLocatorFilterProperties.containsKey("distanceTitle")){
+                storeData.put("distanceCategoryTitle",  storeLocatorFilterProperties.get("distanceTitle").toString());
+            }
+            String[] distanceCategoryListsArray = storeLocatorFilterProperties
+                    .get("distanceCategoryList", String[].class);
+            if(distanceCategoryListsArray != null && distanceCategoryListsArray.length>0) {
+                TypeToken<List<DistanceLocatorProductCategory>> token = new TypeToken<List<DistanceLocatorProductCategory>>() {
+                };
+                storeData.put("distanceCategoryList"
+                        , gson.fromJson(Arrays.toString(distanceCategoryListsArray), token.getType()));
+            }
+        }
+        return storeData;
     }
 }

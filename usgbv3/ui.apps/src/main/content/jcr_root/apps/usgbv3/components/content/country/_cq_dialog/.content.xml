@@ -3,7 +3,7 @@
     jcr:primaryType="nt:unstructured"
     jcr:title="Header Component"
     sling:resourceType="cq/gui/components/authoring/dialog"
-    extraClientlibs="[maxis.dialog]">
+    >
     <content
         jcr:primaryType="nt:unstructured"
         sling:resourceType="granite/ui/components/foundation/container">
