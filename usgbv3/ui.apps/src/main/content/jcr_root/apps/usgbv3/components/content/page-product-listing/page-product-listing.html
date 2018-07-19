@@ -74,10 +74,9 @@
 					</ol>
 				</div>
 
-				<!-- dropdown desktop -->
+				<!-- dropdown desktop 
 				<div class="col-sm-3 col-xs-12 p-no pull-right">
 					<div class="search-filter-sort">
-						<!-- SORT BY -->
 						<div class="dropdown dp-form dropdown-menu-right m-bottom-m d-small">
 							<button class="btn btn-default color-dark-grey dropdown-toggle text-left" type="button" id="dropdownMenu1" data-toggle="dropdown"
 							    aria-haspopup="true" aria-expanded="false">
@@ -108,18 +107,15 @@
 								<option value="Date Added">Date Added</option>
 							</select>
 						</div>
-						<!-- END SORT BY -->
 
-						<!-- filter -->
 						<a href="#" class="filter-icon btn visible-xs btn-smd m-left-m">
 							<span class="color-primary-green glyphicon glyphicon-filter"></span>
 						</a>
-						<!-- end filter -->
 					</div>
 
 					<div class="clearfix"></div>
 				</div>
-				<!-- dropdown desktop -->
+				< dropdown desktop -->
 			</div>
 		</div>
 	</div>
@@ -202,7 +198,7 @@
 									<div class="item-inner">
 										<label class=" container-checkbox fs-3">
 											{{value}}
-											<input type="checkbox" name="{{value}}" data-checkname="{{key}}">
+											<input type="checkbox" data-label="{{value}}" name="{{../key}}" value={{key}} data-checkname="{{key}}">
 											<span class="checkmark fs-3"></span>
 										</label>
 									</div>
@@ -224,13 +220,13 @@
 					</script>
 					<!-- handlebar product-listing-filter-wrapper end-->
 
-					<form action="" method="get">
+					<form id="product-listing-form">
 						<div class="c-sidebar m-top-m rounded-corners">
 
 							<div class="each product-listing-filter"></div>
-							
+
 							<div class="each">
-								<button type="submit" class="btn width-full button-green btn-brand-default">apply filter</button>
+								<button type="submit" class="  btn-apply-filter btn width-full button-green btn-brand-default">apply filter</button>
 							</div>
 
 						</div>
@@ -242,216 +238,101 @@
 			</div>
 			<!-- sidebar end -->
 
+
+
+			<!-- handlebar product-listing-result-wrapper -->
+			<script id="product-listing-result" type="text/x-handlebars-template">
+				{{#each this}}
+				<div class="each m-bottom-xxl p-side-m" data-title-value="{{num}}" data-category="{{texture}},{{thickness}},{{lr_rating}}">
+					<div class=" bg-light-grey custom-block flex-column justify-space-between align-stretch">
+						<div class="thumbs flex-shrink-0">
+							<img src="{{img}}">
+						</div>
+						<h6 class="title ht6 uppercase text-center p-s">{{title}}
+						</h6>
+
+						<div class="checkbox-content">
+							<div class="radio">
+								<label class="container-checkbox fs-2">
+									Compare Products
+									<input type="checkbox" name="" data-input-value="{{num}}">
+									<span class="checkmark fs-2"></span>
+								</label>
+							</div>
+						</div>
+
+						<div class="addto text-center uppercase">
+							<a href="#">
+								<span class="fs-2">
+									<strong>View Product</strong>
+								</span>
+							</a>
+						</div>
+					</div>
+				</div>
+				{{/each}}
+
+			</script>
+			<!-- handlebar product-listing-result-wrapper end-->
+
+
+
 			<div class="col-xs-12 col-sm-9 col-md-9 make-sticky_limit">
 
 				<!-- SEARCH CONTENT -->
 				<div class="search-main-content listing-search-content">
-					<div class="inner">
-
-
-
-						<div class="each shoutout-txt  m-bottom-xxl p-side-m" data-title-value="0">
-							<div class=" bg-light-grey custom-block flex-column justify-space-between align-stretch">
-								<div class="thumbs flex-shrink-0">
-									<img src="/content/dam/USGBoral/Global/Website/Images/component/allsample/bg-banner-tile.jpg">
-								</div>
-								<h2 class="title ht6 uppercase text-center p-s">TEST SHOUTOUT Title Title CEILING PANEL
-								</h2>
-
-								<div class="checkbox-content">
-									<div class="radio">
-										<label class="container-checkbox fs-2">
-											Compare Products
-											<input type="checkbox" name="" data-input-value="1">
-											<span class="checkmark fs-2"></span>
-										</label>
-									</div>
-								</div>
-
-								<div class="addto text-center uppercase">
-									<a href="#">
-										<span class="fs-2">
-											<strong>View Product</strong>
-										</span>
-									</a>
-								</div>
-							</div>
+					<div class="search-filter-sort justify-end">
+						<!-- SORT BY -->
+						<div class="dropdown dp-form d-small m-bottom-3xl float-right" style="max-width: 280px;">
+							<button class="btn btn-default color-dark-grey dropdown-toggle text-left dp-clickable" type="button" data-toggle="dropdown"
+							    aria-haspopup="true" aria-expanded="false">
+								<span class="dp-text">A - Z</span>
+								<input type="hidden" name="selectSortType" value="a_z">
+								<span class="color-primary-green glyphicon glyphicon-menu-down right"></span>
+							</button>
+							<ul class="dropdown-menu dp-list" aria-labelledby="dropdownMenu1">
+								<li>
+									<a data-val="a_z">A - Z</a>
+								</li>
+								<li>
+									<a data-val="z_a">Z - A</a>
+								</li>
+								<li>
+									<a data-val="latest">Latest to oldest</a>
+								</li>
+								<li>
+									<a data-val="oldest">Oldest to latest</a>
+								</li>
+							</ul>
 						</div>
 
-						<div class="each m-bottom-xxl p-side-m" data-title-value="1">
-							<div class=" bg-light-grey custom-block flex-column justify-space-between align-stretch">
-								<div class="thumbs flex-shrink-0">
-									<img src="/content/dam/USGBoral/Global/Website/Images/component/allsample/bg-banner-tile.jpg">
-								</div>
-								<h6 class="title ht6 uppercase text-center p-s">Title Title Title CEILING PANEL
-								</h6>
-
-								<div class="checkbox-content">
-									<div class="radio">
-										<label class="container-checkbox fs-2">
-											Compare Products
-											<input type="checkbox" name="" data-input-value="1">
-											<span class="checkmark fs-2"></span>
-										</label>
-									</div>
-								</div>
-
-								<div class="addto text-center uppercase">
-									<a href="#">
-										<span class="fs-2">
-											<strong>View Product</strong>
-										</span>
-									</a>
-								</div>
-							</div>
+						<div class="dropdown dp-form-mobile dropdown-menu-right m-vertical-m d-small">
+							<select class="btn-default">
+								<option value="a_z">A - Z</option>
+								<option value="z_a">Z - A</option>
+								<option value="latest">Latest to oldest</option>
+								<option value="oldest">Oldest to latest</option>
+							</select>
 						</div>
+						<!-- END SORT BY -->
 
-						<div class="each m-bottom-xxl p-side-m" data-title-value="2">
-							<div class=" bg-light-grey custom-block flex-column justify-space-between align-stretch">
-								<div class="thumbs flex-shrink-0">
-									<img src="/content/dam/USGBoral/Global/Website/Images/component/allsample/interior-img.png" />
-
-								</div>
-								<h6 class="title ht6 uppercase text-center p-s">Echostop®Perforated Plasterboard</h6>
-
-								<div class="checkbox-content">
-									<div class="radio">
-										<label class="container-checkbox fs-2">
-											Compare Products
-											<input type="checkbox" name="" data-input-value="2">
-											<span class="checkmark fs-2"></span>
-										</label>
-									</div>
-								</div>
-
-								<div class="addto text-center uppercase">
-									<a href="#">
-										<span class="fs-2">
-											<strong>View Product</strong>
-										</span>
-									</a>
-								</div>
-							</div>
-						</div>
-
-						<div class="each m-bottom-xxl p-side-m" data-title-value="3">
-							<div class="bg-light-grey custom-block flex-column justify-space-between align-stretch">
-								<div class="thumbs flex-shrink-0">
-									<img src="/content/dam/USGBoral/Global/Website/Images/component/allsample/interior-img.png" />
-
-								</div>
-								<h6 class="title ht6 uppercase text-center p-s">Nova White - sLay-In Ceiling Panel</h6>
-
-								<div class="checkbox-content">
-									<div class="radio">
-										<label class="container-checkbox fs-2">
-											Compare Products
-											<input type="checkbox" name="" data-input-value="3">
-											<span class="checkmark fs-2"></span>
-										</label>
-									</div>
-								</div>
-								<div class="addto text-center uppercase">
-									<a href="#">
-										<span class="fs-2">
-											<strong>View Product</strong>
-										</span>
-									</a>
-								</div>
-
-							</div>
-						</div>
-
-						<div class="each m-bottom-xxl p-side-m" data-title-value="4">
-							<div class="bg-light-grey custom-block flex-column justify-space-between align-stretch">
-								<div class="thumbs flex-shrink-0">
-									<img src="/content/dam/USGBoral/Global/Website/Images/component/allsample/interior-img.png" />
-
-								</div>
-								<h6 class="title ht6 uppercase text-center p-s">Donn™ DX™ Join 02 CAD
-									<br />AUS (English)</h6>
-
-								<div class="checkbox-content">
-									<div class="radio">
-										<label class="container-checkbox fs-2">
-											Compare Products
-											<input type="checkbox" name="" data-input-value="4">
-											<span class="checkmark fs-2"></span>
-										</label>
-									</div>
-								</div>
-
-								<div class="addto text-center uppercase">
-									<a href="#">
-										<span class="fs-2">
-											<strong>View Product</strong>
-										</span>
-									</a>
-								</div>
-							</div>
-						</div>
-
-						<div class="each m-bottom-xxl p-side-m" data-title-value="5">
-							<div class="bg-light-grey custom-block flex-column justify-space-between align-stretch">
-								<div class="thumbs flex-shrink-0">
-									<img src="/content/dam/USGBoral/Global/Website/Images/component/allsample/interior-img.png" />
-								</div>
-								<h6 class="title ht6 uppercase text-center p-s">Echostop®Perforated Plasterboard</h6>
-								<div class="checkbox-content">
-									<div class="radio">
-										<label class="container-checkbox fs-2">
-											Compare Products
-											<input type="checkbox" name="" data-input-value="5">
-											<span class="checkmark fs-2"></span>
-										</label>
-									</div>
-								</div>
-
-								<div class="addto text-center uppercase">
-									<a href="#">
-										<span class="fs-2">
-											<strong>View Product</strong>
-										</span>
-									</a>
-								</div>
-							</div>
-						</div>
-
-						<div class="each m-bottom-xxl p-side-m" data-title-value="6">
-							<div class="bg-light-grey custom-block flex-column justify-space-between align-stretch">
-								<div class="thumbs flex-shrink-0">
-									<img src="/content/dam/USGBoral/Global/Website/Images/component/allsample/interior-img.png" />
-
-								</div>
-								<h6 class="title ht6 uppercase text-center p-s">Nova White - sLay-In Ceiling Panel</h6>
-
-								<div class="checkbox-content">
-									<div class="radio">
-										<label class="container-checkbox fs-2">
-											Compare Products
-											<input type="checkbox" name="" data-input-value="6">
-											<span class="checkmark fs-2"></span>
-										</label>
-									</div>
-								</div>
-								<div class="addto text-center uppercase">
-									<a href="#">
-										<span class="fs-2">
-											<strong>View Product</strong>
-										</span>
-									</a>
-								</div>
-
-							</div>
-						</div>
-
+						<!-- filter -->
+						<a href="#" class="filter-icon btn visible-xs btn-smd m-left-m">
+							<span class="color-primary-green glyphicon glyphicon-filter"></span>
+						</a>
+						<!-- end filter -->
 					</div>
+
+					<div class="inner product-listing-result"> </div>
+
+
 				</div>
 				<!-- END SEARCH CONTENT -->
 
 				<!-- SEARCH PAGINATION -->
 				<nav aria-label="Page navigation">
-					<ul class="pagination pull-right m-top-no">
+					<ul id="pagination-container" class="pull-right"></ul>
+					<!-- <ul class="pagination pull-right m-top-no">
 						<li>
 							<a href="#" aria-label="Previous">
 								<span aria-hidden="true">&lt;</span>
@@ -477,7 +358,7 @@
 								<span aria-hidden="true">&gt;</span>
 							</a>
 						</li>
-					</ul>
+					</ul> -->
 					<div class="clearfix"></div>
 
 				</nav>
@@ -620,6 +501,7 @@
 										<div class="center width-full">
 											<div class="box-inner-img"></div>
 											<h2 class="m-top-m fs-1 color-darker-grey text-center bold">Multistop ™ 3HI - Multi Performance Plasterboard</h2>
+
 										</div>
 										<span class="bg-box-hover"> </span>
 									</div>
@@ -770,7 +652,7 @@
 				{{#each child}}
 				<label class="container-checkbox mobile fs-2">
 					{{value}}
-					<input type="checkbox" name="{{value}}" data-checkname="{{key}}">
+					<input type="checkbox" data-label="{{value}}" name="{{../key}}" value="{{key}}" data-checkname="{{key}}">
 				</label>
 				{{/each}}
 			</div>
@@ -806,12 +688,10 @@
 					</div>
 
 					<div class="search-filter m-bottom-xxl p-side-l">
-						<form action="" method="get">
+						<form id="m-product-listing-form">
 							<div class=" m-product-listing-filter"> </div>
-							<div class="wrapper ">
-								<div class=" m-vertical-xl">
-									<button type="submit" class="btn width-full button-green btn-brand-default">apply filter</button>
-								</div>
+							<div class="m-vertical-xl">
+								<button id="test" type="submit" class=" btn width-full button-green btn-brand-default">apply filter</button>
 							</div>
 						</form>
 					</div>

@@ -1692,7 +1692,8 @@ $(window).on('load', function () {
             var inputVal
             var numberOfChecked
             // detect change for cardcheckbox
-            $('.listing-search-content .container-checkbox input[type="checkbox"]').change(function () {
+            $(document).on("change", '.listing-search-content .container-checkbox input[type="checkbox"]', function () {
+
 
                 //data-title-value is card wrapper val
                 //data-input-value is checkbox input val
@@ -1734,9 +1735,11 @@ $(window).on('load', function () {
                 $(".popup-content").toggle();
                 $(".compare-popup .btn-compare").toggle();
                 $(".compare-popup .title").toggleClass("selected")
+
                 //check to toggle compare-btn
                 if (numberOfChecked <= 1) {
                     $(".compare-popup .btn-compare").toggle();
+                    $(".instruction-text").toggle();
                 }
             });
 
@@ -1750,19 +1753,22 @@ $(window).on('load', function () {
                 }
                 if (numberOfChecked > 1) {
                     $(".compare-popup .btn-compare").show();
-                    $(".compare-popup .btn-menu-down").show();
                     $(".compare-popup").show();
                     $(".compare-popup .instruction-text").hide();
+
                 } else {
                     $(".compare-popup .instruction-text").show();
                     $(".compare-popup .btn-compare").hide();
-
                 }
-                if (numberOfChecked == 0) {
+
+                if (numberOfChecked > 0) {
+                    $(".compare-popup .btn-menu-down").show();
+                } else {
                     $(".compare-popup").hide();
                     $(".popup-content").hide();
                     $(".compare-popup .btn-menu-down").hide();
                     $(".compare-popup .btn-compare").hide();
+
                 }
 
             }
@@ -1774,8 +1780,11 @@ $(window).on('load', function () {
             ////// REFINE SEARCH  FEATURE start //////
 
 
-            ////filtering AJAX ////
+            ////filtering ////
             var productData
+            var currOnStageMainResultData = [];
+            var currProductData
+            var shoutout
             productListingResult();
             //load all from json first
             function productListingResult() {
@@ -1788,7 +1797,9 @@ $(window).on('load', function () {
                     success: function (response) {
                         // store in global
                         productData = response
-                        console.log(productData.product_listing_filter[0])
+                        currProductData = productData.product_result
+                        //for sorting
+                        currOnStageMainResultData = productData.product_result
 
                         //desktop
                         var productFilterHtml = $('#product-listing-filter').html();
@@ -1800,15 +1811,198 @@ $(window).on('load', function () {
                         var MobileTemptProductFilterHtml = Handlebars.compile(MobileProductFilterHtml);
                         $('.m-product-listing-filter').html(MobileTemptProductFilterHtml(productData.product_listing_filter[0]));
 
+                        //results
+                        // var productFilterResult = $('#product-listing-result').html();
+                        // var TemptProductFilterResult = Handlebars.compile(productFilterResult);
+                        // $('.product-listing-result').html(TemptProductFilterResult(productData.product_result));
+
+                        //checkshoutout
+                        shoutout = productData.shoutout;
+                        //console.log(shoutout)
                         hideAllWrappers();
-                        //console.log(productFilterHtml)
-                        //renderGalleryResultHtml(galleryData.result);
+                        renderProductListingResult();
+
                     },
                     beforeSend: function () {},
                     complete: function () {}
                 });
             }
+
+
+            function renderProductListingResult() {
+                console.log(currOnStageMainResultData)
+                paginationResult(currOnStageMainResultData);
+            }
+
+            var btnSubmit
+            //desktop
+            $(document).on('click', '#product-listing-form button[type="submit"]', function (e) {
+                e.preventDefault();
+                btnSubmit = this;
+                submitResults();
+            });
+            //mobile
+            $(document).on('click', '#m-product-listing-form button[type="submit"]', function (e) {
+                e.preventDefault();
+                btnSubmit = this;
+                submitResults();
+            });
+
+            function submitResults() {
+                var form = $(btnSubmit).closest('form');
+                var selectedFilterData = ($(form).serializeObject());
+                var filteredData = multiFilter(productData.product_result, selectedFilterData);
+                console.log('filter', selectedFilterData);
+                console.log('filteredData', filteredData);
+                currOnStageMainResultData = filteredData;
+                console.log(currOnStageMainResultData)
+                paginationResult(currOnStageMainResultData);
+            }
+
+            //sort by dropdown
+            $(document).on('click', '.listing-search-content .search-filter-sort .dropdown-menu a', function (e) {
+                console.log("aaaa")
+                switch ($(this).attr('data-val')) {
+                    case "a_z":
+                        currOnStageMainResultData.sort(function (a, b) {
+                            if (a.title.toLowerCase() < b.title.toLowerCase()) return -1;
+                            if (a.title.toLowerCase() > b.title.toLowerCase()) return 1;
+                            return 0;
+                        });
+                        break;
+                    case "z_a":
+                        currOnStageMainResultData.sort(function (a, b) {
+                            if (a.title.toLowerCase() > b.title.toLowerCase()) return -1;
+                            if (a.title.toLowerCase() < b.title.toLowerCase()) return 1;
+                            return 0;
+                        });
+                        break;
+                    case "latest":
+                        currOnStageMainResultData.sort(function (a, b) {
+                            if (a.created_date > b.created_date) return -1;
+                            if (a.created_date < b.created_date) return 1;
+                            return 0;
+                        });
+                        break;
+                    case "oldest":
+                        currOnStageMainResultData.sort(function (a, b) {
+                            if (a.created_date < b.created_date) return -1;
+                            if (a.created_date > b.created_date) return 1;
+                            return 0;
+                        });
+                        break;
+                }
+                paginationResult(currOnStageMainResultData);
+                //  scrollTop();
+            });
+
+            $(document).on('change', '.listing-search-content .dp-form-mobile select', function (e) {
+                switch ($(this).val()) {
+                    case "a_z":
+                        currOnStageMainResultData.sort(function (a, b) {
+                            if (a.title.toLowerCase() < b.title.toLowerCase()) return -1;
+                            if (a.title.toLowerCase() > b.title.toLowerCase()) return 1;
+                            return 0;
+                        });
+                        break;
+                    case "z_a":
+                        currOnStageMainResultData.sort(function (a, b) {
+                            if (a.title.toLowerCase() > b.title.toLowerCase()) return -1;
+                            if (a.title.toLowerCase() < b.title.toLowerCase()) return 1;
+                            return 0;
+                        });
+                        break;
+                    case "latest":
+                        currOnStageMainResultData.sort(function (a, b) {
+                            if (a.created_date > b.created_date) return -1;
+                            if (a.created_date < b.created_date) return 1;
+                            return 0;
+                        });
+                        break;
+                    case "oldest":
+                        currOnStageMainResultData.sort(function (a, b) {
+                            if (a.created_date < b.created_date) return -1;
+                            if (a.created_date > b.created_date) return 1;
+                            return 0;
+                        });
+                        break;
+                }
+                paginationResult(currOnStageMainResultData);
+                // scrollTop();
+            });
+            //sort by end
+
+
+            function multiFilter(array, filters) {
+                const filterKeys = Object.keys(filters);
+                // filters all elements passing the criteria
+                return array.filter((item) => {
+                    // dynamically validate all filter criteria
+                    return filterKeys.every(function (key) {
+                        if (Array.isArray(item[key]) && item[key].length > 0) {
+                            // if data is tagging array, one matches in the array, return the object true
+                            for (var i = 0; i < item[key].length; i++) {
+                                if (!!~filters[key].indexOf(item[key][i])) {
+                                    return filters[key];
+                                };
+                            }
+                        } else if (filters[key] == "" || filters[key] == "all") {
+                            return true;
+                        } else {
+                            return !!~filters[key].indexOf(item[key]);
+                        }
+                    });
+                });
+            }
+
+            function paginationResult(dataForPagination) {
+                stickySidebar.updateSticky();
+
+                $('#pagination-container').pagination({
+                    dataSource: dataForPagination,
+                    pageSize: 9,
+                    callback: function (data, pagination) {
+                        //results
+                        var productFilterResult = $('#product-listing-result').html();
+                        var TemptProductFilterResult = Handlebars.compile(productFilterResult);
+                        $('.product-listing-result').html(TemptProductFilterResult(data));
+                        checkForShoutout();
+
+                    },
+                    beforePageOnClick: function () {
+                        scrollTop_one();
+                    },
+                    beforeNextOnClick: function () {
+                        scrollTop_one();
+                    },
+                    beforePageOnClick: function () {
+                        scrollTop_one();
+                    }
+                });
+            }
+
+            function checkForShoutout() {
+                if (shoutout == true) {
+                    $('.product-listing-result').prepend("<div class='each m-bottom-xxl p-side-m shoutout-txt'><div  class='bg-light-grey custom-block flex-column justify-center align-stretch'><h6 class='title ht6 uppercase text-center p-s'>SHOUT SHOUT SHOUT</h6></div></div>");
+                }
+            }
+
+            function scrollTop_one(target) {
+                if (target) {
+                    $(target).stop().animate({
+                        scrollTop: 0
+                    }, 500, 'swing');
+                } else {
+                    $("html, body").stop().animate({
+                        scrollTop: 0
+                    }, 500, 'swing');
+                }
+            }
+
+
             ////////FILTER END//////
+
+
 
 
             var dataSearchVal
@@ -1836,7 +2030,6 @@ $(window).on('load', function () {
             // REFINE SEARCH DESKTOP//
             // get value of ul dropdown click function wraps all functions
             $(document).on("click", '.refine-search .refine-list a', function () {
-                console.log(this)
                 stickySidebar.updateSticky();
 
                 $('.checkbox-button-wrapper').show();
@@ -1857,7 +2050,7 @@ $(window).on('load', function () {
                     // update wrapper to currentDATA
                     dataSearchVal = $('.' + dataSearchVal + '-wrapper').data("checkbox-wrapper");
                     //get checkbox name to pass to text
-                    checkboxName = $(this).attr("name");
+                    checkboxName = $(this).attr("data-label");
                     // checkname of the checkbox to pass to button
                     checkname = $(this).data("checkname");
                     //count how many checkbox is checked
@@ -1871,6 +2064,7 @@ $(window).on('load', function () {
             function appendCheckboxToButton() {
                 // pass checked to button
                 if ($('.' + dataSearchVal + '-wrapper  input[data-checkname=' + checkname + ']').is(':checked')) {
+
                     $('[data-checkbutton=' + dataSearchVal + ']').append("<div data-selection=" + checkname + " class='bg-grey m-xs bold btn btn-xs'>" + checkboxName + "<span class='btn-close fs-1 p-left-s'>&times;</span></div>");
                     // remove duplicates
 
@@ -1915,7 +2109,7 @@ $(window).on('load', function () {
                     // update wrapper to currentDATA
                     mdataSearchVal = $('.mobile-' + mdataSearchVal + '-wrapper').data("checkbox-wrapper");
 
-                    checkboxName = $(this).attr("name");
+                    checkboxName = $(this).attr("data-label");
                     // checkname of the checkbox to pass to button
                     checkname = $(this).data("checkname");
                     //count how many checkbox is checked
@@ -2262,28 +2456,13 @@ $(window).on('load', function () {
                 var form = $(currTHIS).closest('form');
                 var selectedFilterData = ($(form).serializeObject());
                 filteredData = multiFilter(galleryData[categoryContent], selectedFilterData);
-                //console.log('filter', selectedFilterData);
-                //console.log('filteredData', filteredData);
+                console.log('filter', selectedFilterData);
+                console.log('filteredData', filteredData);
                 //renderGalleryResultHtml(filteredData);
                 paginationResult(filteredData);
             }
 
-            // serialize form data to object
-            $.fn.serializeObject = function () {
-                var o = {};
-                var a = this.serializeArray();
-                $.each(a, function () {
-                    if (o[this.name] !== undefined) {
-                        if (!o[this.name].push) {
-                            o[this.name] = [o[this.name]];
-                        }
-                        o[this.name].push(this.value || '');
-                    } else {
-                        o[this.name] = this.value || '';
-                    }
-                });
-                return o;
-            };
+
 
             function multiFilter(array, filters) {
                 const filterKeys = Object.keys(filters);
