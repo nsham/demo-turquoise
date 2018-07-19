@@ -99,12 +99,15 @@
     padding-right: 20px;
 }
 
+.order-steps-wrapper table tr {
+    border-bottom: 1px solid #d2d2d2;
+}
+
 .order-steps-wrapper table tr td {
     padding: 20px;
 }
 
 .order-steps-wrapper table tbody tr:nth-child(even) {
-    background-color: #F6F6F6;
 }
 
 .steps-inner-wrapper {
@@ -185,28 +188,80 @@
 }
 
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 769px) {
 
     .steps-header .steps {
+        padding: 10px 0px 9px 35px;
+    }
+
+
+    .steps-header .steps.active {
         padding: 10px 50px 9px 50px;
+    }
+
+    .steps-header .steps .step-no {
+        border: none;
+    }
+
+    .steps-header .steps.active .step-no {
+        border-right: 2px solid;
+    }
+
+    .steps-header .steps > div.step-title {
+        display: none;
+    }
+
+    .steps-header .steps.active > div.step-title {
+        display: inline-block;
     }
 
     .steps-header .steps > div span {
         font-size: 12px;
     }
 
+    .order-steps-wrapper table tr {
+        position: relative;
+    }
+
     .order-steps-wrapper table tr td {
         padding: 10px;
     }
 
+    .step-1-select-wrapper table tbody .sample-img {
+        vertical-align: top;
+        padding-top: 23px;
+    }
+
+    .step-1-select-wrapper table tbody .sample-desc {
+        display: block;
+        width: 178%;
+        padding-bottom: 30px;
+    }
+
     .step-1-select-wrapper table .sample-quantity {
         text-align: center;
+        width: initial;
+    }
+
+    .step-1-select-wrapper table tbody .sample-quantity {
+        display: inline-block;
+        width: 178%;
+        text-align: left;
+        margin-bottom: 30px;
     }
 
     .step-1-select-wrapper table .sample-quantity .quantity-ctrl {
-        display: block;
+        display: inline-block;
         width: 40px;
         margin: auto;
+    }
+
+    .step-1-select-wrapper table tbody .sample-remove {
+        display: inline-block;
+        width: initial;
+        position: absolute;
+        right: 10px;
+        bottom: 0;
     }
 
     .step-1-select-wrapper table .sample-remove a .fa {
@@ -220,6 +275,44 @@
     .step-1-select-wrapper table .sample-remove a:hover .fa {
         color: #009b3a;
         background-color: #fff;
+    }
+
+}
+
+
+@media only screen and (max-width: 576px) {
+
+    .steps-header .steps.active {
+        padding: 10px 0px 9px 35px;
+    }
+
+    .steps-header .steps.active .step-no {
+        border: none;
+    }
+
+    .steps-header .steps.active > div.step-title {
+        display: none;
+    }
+
+    .step-1-select-wrapper table tbody .sample-img img {
+        width: 100%;
+    }
+
+    .step-1-select-wrapper table tbody .sample-desc {
+        width: 218%;
+    }
+
+    .step-1-select-wrapper table tbody .sample-remove {
+        bottom: 23px;
+    }
+
+    .steps-inner-wrapper .step-ctrls {
+        flex-direction: column;
+    }
+
+
+    .step-2-shipping-wrapper form .float-label {
+        margin-bottom: 20px;
     }
 
 }
