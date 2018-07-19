@@ -50,7 +50,6 @@
 							</button>
 							<div class="dropdown-menu dropdown-menu-right" role="menu">
 								<div value="" selected="selected">ALL States</div>
-								<!-- <div class="inputSearch-myLocation"><img class="myLocation-pin" src="/content/dam/USGBoral/Global/Website/Images/component/allsample/blue_pin.png">Use Current location</div> -->
 							</div>
 						</div>
 						<button type="button" class="btn btn-primary btn-search"><span class="glyphicon glyphicon-search icon-size-xs" aria-hidden="true"></span></button>
@@ -69,143 +68,9 @@
 							<span class="fa fa-angle-left icon-size" aria-hidden="true"></span> Back
 						</a>
 						<div class="search-detail-group"></div>
-						<script id="infoTemplate" type="text/x-handlebars-template">
-							{{#each this}}
-							<div class="state-detail p-vertical-l">
-								<div class="row">
-									<div class="col-xs-8">
-										<a href="#" class="cta-location bold color-primary-green uppercase">{{companyName}}</a>
-										{{#if address1}}<p>
-											{{address1}}<br>
-											{{address2}}
-										</p>{{/if}}
-										{{#if phoneNumber}}<p><i class="fa fa-phone icon-color-darker-grey icon-size-xs"></i>&nbsp;&nbsp; <a href="tel:+{{phoneNumber}}">{{phoneNumber}}</a></p>{{/if}}
-										{{#if email}}<p><i class="fa fa-envelope icon-color-darker-grey icon-size-xs"></i>&nbsp; <a href="mailto:+{{email}}">{{email}}</a></p>{{/if}}
-									</div>
-
-									<div class="col-xs-4">
-										{{#if distance}}
-											<p class="distance">{{distance}}KM</p>
-										{{/if}}
-									</div>
-								</div>
-								<span class="float-right"><a href="https://www.google.com/maps?daddr={{latitude}},{{longitude}}" target="_blank"><u>Get Direction</u></a></span>
-								<div class="accordion-wrap clearfix">
-									<div class="btn-accordion">
-										<div class="col-l bold">
-											Product Availability
-										</div>
-										<div class="col-r">
-											<i class="icon-size-xs fa fa-angle-down"></i>
-										</div>
-									</div>
-									<div class="content-accordion">
-										<p>{{product1}}</p>
-										<p>{{product2}}</p>
-										<p>{{product3}}</p>
-										<p>{{product4}}</p>
-										<p>{{product5}}</p>
-									</div>
-								</div>
-							</div>
-							{{/each}}
-						</script>
 					</div>
 
-					<div class="filter-list-item">
-						<div class="row">
-							<div class="col-xs-12 state-detail m-sm-bottom-l">
-								<p class="bold uppercase">Store Type</p>
-								<div class="item-detail">
-									<div>
-										<input id="storetype_distributor" name="storeType" type="checkbox" class="checkbox" value="distributor">
-										<label class="checkbox-lable icon icon-80 icon-homeowner" for="storetype_distributor"></label>
-										<p class="fs-2 p-xxs">Distributor</p>
-									</div>
-									<div>
-										<input id="storetype_trading" name="storeType" type="checkbox" class="checkbox" value="trading">
-										<label class="checkbox-lable icon icon-80 icon-homeowner" for="storetype_trading"></label>
-										<p class="fs-2 p-xxs">Trading</p>
-									</div>
-									<div>
-										<input id="storetype_wholesaler" name="storeType" type="checkbox" class="checkbox" value="wholesaler">
-										<label class="checkbox-lable icon icon-80 icon-homeowner" for="storetype_wholesaler"></label>
-										<p class="fs-2 p-xxs">Wholesaler</p>
-									</div>
-									<div>
-										<input id="storetype_reseller" name="storeType" type="checkbox" class="checkbox" value="reseller">
-										<label class="checkbox-lable icon icon-80 icon-homeowner" for="storetype_reseller"></label>
-										<p class="fs-2 p-xxs">Reseller</p>
-									</div>
-								</div>
-							</div>
-							<div class="col-xs-12 state-detail--distance  m-sm-bottom-l">
-								<p class="bold uppercase">Distance (KM)</p>
-								<div class="item-detail">
-									<div>
-										<input id="distance_all" name="distance" type="radio" class="radio" value="all">
-										<label class="radio-lable icon icon-80 icon-homeowner" for="distance_all"></label>
-										<p class="fs-2 p-xxs">All</p>
-									</div>
-									<div>
-										<input id="distance_15" name="distance" type="radio" class="radio" value="15">
-										<label class="radio-lable icon icon-80 icon-homeowner" for="distance_15"></label>
-										<p class="fs-2 p-xxs">15KM</p>
-									</div>
-									<div>
-										<input id="distance_25" name="distance" type="radio" class="radio" value="25">
-										<label class="radio-lable icon icon-80 icon-homeowner" for="distance_25"></label>
-										<p class="fs-2 p-xxs">25KM</p>
-									</div>
-									<div>
-										<input id="distance_35" name="distance" type="radio" class="radio" value="35">
-										<label class="radio-lable icon icon-80 icon-homeowner" for="distance_35"></label>
-										<p class="fs-2 p-xxs">35KM</p>
-									</div>
-								</div>
-							</div>
-							<div class="col-xs-12 state-detail m-sm-bottom-l">
-								<p class="bold uppercase">Product catergories</p>
-								<div class="item-detail">
-									<div>
-										<input id="productcat_ceilings" name="product" type="checkbox" class="checkbox" value="ceiling">
-										<label class="checkbox-lable icon icon-80 icon-homeowner" for="productcat_ceilings"></label>
-										<p class="fs-2 p-xxs">Ceiling</p>
-									</div>
-									<div>
-										<input id="productcat_interior_linings" name="product" type="checkbox" class="checkbox" value="linings">
-										<label class="checkbox-lable icon icon-80 icon-homeowner" for="productcat_interior_linings"></label>
-										<p class="fs-2 p-xxs">Interior Linings</p>
-									</div>
-									<div>
-										<input id="productcat_finishes" name="product" type="checkbox" class="checkbox" value="finishes">
-										<label class="checkbox-lable icon icon-80 icon-homeowner" for="productcat_finishes"></label>
-										<p class="fs-2 p-xxs">Finishes</p>
-									</div>
-									<div>
-										<input id="productcat_steel_farming" name="product" type="checkbox" class="checkbox" value="steel_farming">
-										<label class="checkbox-lable icon icon-80 icon-homeowner" for="productcat_steel_farming"></label>
-										<p class="fs-2 p-xxs">Steel Framing</p>
-									</div>
-									<div>
-										<input id="productcat_cornice" name="product" type="checkbox" class="checkbox" value="cornice">
-										<label class="checkbox-lable icon icon-80 icon-homeowner" for="productcat_cornice"></label>
-										<p class="fs-2 p-xxs">Cornice</p>
-									</div>
-									<div>
-										<input id="productcat_platering_diy" name="product" type="checkbox" class="checkbox" value="platering_diy">
-										<label class="checkbox-lable icon icon-80 icon-homeowner" for="productcat_platering_diy"></label>
-										<p class="fs-2 p-xxs">Plastering DIY</p>
-									</div>
-									<div>
-										<input id="productcat_insulation" name="product" type="checkbox" class="checkbox" value="insulation">
-										<label class="checkbox-lable icon icon-80 icon-homeowner" for="productcat_insulation"></label>
-										<p class="fs-2 p-xxs">Insulation</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
+					<div class="filter-list-item"></div>
 
 				</div>
 			</form>
@@ -247,6 +112,75 @@
 		</div>  
 	</div>
 </div>
+
+<script id="infoTemplate" type="text/x-handlebars-template">
+	{{#each this}}
+	<div class="state-detail p-vertical-l">
+		<div class="row">
+			<div class="col-xs-8">
+				<a href="#" class="cta-location bold color-primary-green uppercase">{{companyName}}</a>
+				{{#if address1}}<p>
+					{{address1}}<br>
+					{{address2}}
+				</p>{{/if}}
+				{{#if phoneNumber}}<p><i class="fa fa-phone icon-color-darker-grey icon-size-xs"></i>&nbsp;&nbsp; <a href="tel:+{{phoneNumber}}">{{phoneNumber}}</a></p>{{/if}}
+				{{#if email}}<p><i class="fa fa-envelope icon-color-darker-grey icon-size-xs"></i>&nbsp; <a href="mailto:+{{email}}">{{email}}</a></p>{{/if}}
+			</div>
+
+			<div class="col-xs-4">
+				{{#if distance}}
+					<p class="distance">{{distance}}KM</p>
+				{{/if}}
+			</div>
+		</div>
+		<span class="float-right"><a href="https://www.google.com/maps?daddr={{latitude}},{{longitude}}" target="_blank"><u>Get Direction</u></a></span>
+		<div class="accordion-wrap clearfix">
+			<div class="btn-accordion">
+				<div class="col-l bold">
+					Product Availability
+				</div>
+				<div class="col-r">
+					<i class="icon-size-xs fa fa-angle-down"></i>
+				</div>
+			</div>
+			<div class="content-accordion">
+				{{#each product}}
+					<p>{{this}}</p>
+				{{/each}}
+			</div>
+		</div>
+	</div>
+	{{/each}}
+</script>
+
+<script id="templWtbFilter" type="text/x-handlebars-template">
+	{{#each this}}
+	<div class="row">
+		<div class="col-xs-12 state-detail m-sm-bottom-l">
+			<p class="bold uppercase">{{title}}</p>
+			<div class="item-detail">
+				{{#ifEquals key "distance"}}
+					{{#each child}}
+					<div>
+						<input id="{{../key}}_{{key}}" name="{{../key}}" type="radio" class="radio" value="{{value}}">
+						<label class="checkbox-lable icon icon-80 {{icon}}" for="{{../key}}_{{key}}"></label>
+						<p class="fs-2 p-xxs">{{value}}</p>
+					</div>
+					{{/each}}
+				{{else}}
+					{{#each child}}
+					<div>
+						<input id="{{../key}}_{{key}}" name="{{../key}}" type="checkbox" class="checkbox" value="{{value}}">
+						<label class="checkbox-lable icon icon-80 {{icon}}" for="{{../key}}_{{key}}"></label>
+						<p class="fs-2 p-xxs">{{value}}</p>
+					</div>
+					{{/each}}
+				{{/ifEquals}}
+			</div>
+		</div>
+	</div>
+	{{/each}}
+</script>
 
 
 <sly data-sly-use.clientLib="/libs/granite/sightly/templates/clientlib.html" data-sly-call="${clientLib.js @ categories='uiux.alljs'}" data-sly-unwrap/>

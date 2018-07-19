@@ -14,16 +14,18 @@
         var filterData = {};
         var currLocation = null;
         var executedGeo = false;
-        var curLocationMarker;
+        var currLocationMarker;
         var circleOnMap = [];
         var markerCluster;
         var currSenario = "";
         var choosenState = "";
-        var chooseProximity = "";
+        var choosenProximity = "";
+        var searchedText = "";
+        var autocompleteData = {};
 
         var urlString = window.location.href;
         var url = new URL(urlString);
-        var countryCode = window.location.href.indexOf("/usgboral/") > -1? "en_au" : "en_au";
+        var countryCode = window.location.href.indexOf("/usgboral/") > -1? "en_my" : "en_my";
         var locationPath = function() {
             var pathArray = window.location.pathname.split('/').filter(Boolean).slice(0, -1);
             var newPathname = "";
@@ -61,85 +63,9 @@
 
                     AutoComplete({
                         EmptyMessage: "No item found",
-                        QueryArg: "text"
-                        // _RenderResponseItems: function(response) {
-                        //     console.log(response);
-                        // }
+                        QueryArg: "text",
                     }, "#input-search-location");
 
-                    //if($(this).val().length >= num){
-                        // $.ajax({
-                        //     url: "/bin/usg/storeAutoComplete",
-                        //     // data: "text=" + $(this).val() + "&pageurl=" + locationPath,
-                        //     data: "text=" + $(this).val() + "&pageurl=" + "/content/usgboral/en_au/samplepage/",
-                        //     type: "GET",
-                        //     cache: false,
-                        //     success: function (response) {
-                        //         var data = response.Items;
-                        //         var autocompleteData = data;
-                        //         var values = Object.keys(autocompleteData).map(function(e) {
-                        //             return autocompleteData[e].address1 || autocompleteData[e].companyName || autocompleteData[e].city || autocompleteData[e].state || autocompleteData[e].zip || autocompleteData[e].en_locationPage;
-                        //         });
-                        //         //console.log(values);
-                        //         // new autoComplete({
-                        //         //     selector: '#input-search-location',
-                        //         //     minChars: 1,
-                        //         //     source: function(term, suggest){
-                        //         //         term = term.toLowerCase();
-                        //         //         var choices = values;
-                        //         //         var matches = [];
-                        //         //         for (var i=0; i<choices.length; i++){
-                        //         //             if (~choices[i].toLowerCase().indexOf(term)){
-                        //         //                 matches.push(choices[i]);
-                        //         //             } 
-                        //         //         }
-                        //         //         suggest(matches);
-                        //         //     }
-                        //         // });
-                        //     },
-                        //     beforeSend: function () {
-                        //         //$('.loader').fadeIn("fast");
-                        //     },
-                        //     complete: function () {
-                        //         //$('.loader').fadeOut("slow");
-                        //     }
-                        // });
-
-                        // var xhr;
-                        // new autoComplete({
-                        //     selector: '#input-search-location',
-                        //     source: function(term, response){
-                        //         try { xhr.abort(); } catch(e){}
-                        //         xhr = $.getJSON('/bin/usg/storeAutoComplete', {
-                        //             text: term,
-                        //             pageurl: "/content/usgboral/en_au/samplepage/"
-                        //         }, function (data) {
-                        //             var autocompleteData = data.Items;
-                        //             var values = Object.keys(autocompleteData).map(function(e) {
-                        //                 return autocompleteData[e].address1 || autocompleteData[e].companyName || autocompleteData[e].city || autocompleteData[e].state || autocompleteData[e].zip || autocompleteData[e].en_locationPage;
-                        //             });
-                        //             response(values);
-                        //             console.log('data',data);
-                        //             console.log('autocompleteData',autocompleteData);
-                        //             console.log('values',values);
-                        //         });
-                        //     },
-                        //     renderItem: function (item, search){
-                        //         console.log('item', item);
-                        //         search = search.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
-                        //         var re = new RegExp("(" + search.split(' ').join('|') + ")", "gi");
-                        //         return '<div class="autocomplete-suggestion" data-langname="'+item+'" data-val="'+search+'">'+item.replace(re, "<b>$1</b>")+'</div>';
-                        //     },
-                        //     onSelect: function(e, term, item){
-                        //         console.log(e.type);
-                        //         $(target).val(item.getAttribute('data-langname'));
-                        //         //alert('Item "'+item.getAttribute('data-langname')+' ('+item.getAttribute('data-lang')+')" selected by '+(e.type == 'keydown' ? 'pressing enter' : 'mouse click')+'.');
-                        //     }
-                        // });
-
-                         
-                    //}
-                    
                 } else {  
                     $('.wtb-search-bar').removeClass('add-bg').removeClass('open');
                     $('.state-wrap').removeClass('open');
@@ -155,11 +81,11 @@
                 var radius = null;
 
                 //clear circle
-                console.log(circleOnMap);
+                console.log('markersData', markersData);
 
-                filterData = JSON.parse(JSON.stringify($(filterForm).serializeObject()));
+                filterData = $(filterForm).serializeObject();
                 dataFiltered = multiFilter(markersData, filterData);
-                console.log(dataFiltered);
+                console.log('dataFiltered', dataFiltered);
                 displayMarkers(dataFiltered);
                 if(dataFiltered.length > 0){
                     var templateSource = $("#infoTemplate").html();
@@ -197,7 +123,7 @@
                             strokeWeight: 0,
                         });
                         circleOnMap.push(circle);
-                        circle.bindTo('center', curLocationMarker, 'position');
+                        circle.bindTo('center', currLocationMarker, 'position');
                     }
                     
                 }
@@ -233,7 +159,19 @@
             })
         
             $(document).on('click', '#map-search-controller .btn-search', function(e){
-                // jsonDataToCall = JSON.parse(JSON.stringify($(form).serializeObject()));
+                var value = $('#input-search-location').val();
+                console.log(wtbAutocompleteData,value);
+                //wtbAutocompleteData, variable created at the autocomplte.js
+                for(var i=0; i<wtbAutocompleteData.Items.length; i++){
+                    var key = findKey(wtbAutocompleteData.Items[i], value);
+                    if(key !== null && key.indexOf('proximity') >= 0){
+                        currSenario = key;
+                        choosenProximity = value;
+                    } else if(key !== null){
+                        currSenario = key;
+                        searchedText = value;
+                    }
+                }
                 resetFilter();
                 loadStoreListResult();
             });
@@ -320,37 +258,6 @@
                         //$('.loader').fadeOut("slow");
                     }
                 });
-
-                // var xhr;
-                // new autoComplete({
-                //     selector: '#input-search-location',
-                //     source: function(term, response){
-                //         try { xhr.abort(); } catch(e){}
-                //         xhr = $.getJSON('/bin/usg/storeAutoComplete', {
-                //             text: term,
-                //             pageurl: "/content/usgboral/en_au/samplepage/"
-                //         }, function (data) {
-                //             var autocompleteData = data.Items;
-                //             var values = Object.keys(autocompleteData).map(function(e) {
-                //                 return autocompleteData[e].address1 || autocompleteData[e].companyName || autocompleteData[e].city || autocompleteData[e].state || autocompleteData[e].zip || autocompleteData[e].en_locationPage;
-                //             });
-                //             response(values);
-                //             console.log('data',data);
-                //             console.log('autocompleteData',autocompleteData);
-                //             console.log('values',values);
-                //         });
-                //     },
-                //     renderItem: function (item, search){
-                //         search = search.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
-                //         var re = new RegExp("(" + search.split(' ').join('|') + ")", "gi");
-                //         return '<div class="autocomplete-suggestion" data-langname="'+item[0]+'" data-lang="'+item[1]+'" data-val="'+search+'"><img src="img/'+item[1]+'.png"> '+item[0].replace(re, "<b>$1</b>")+'</div>';
-                //     },
-                //     onSelect: function(e, term, item){
-                //         alert('Item "'+item.getAttribute('data-langname')+' ('+item.getAttribute('data-lang')+')" selected by '+(e.type == 'keydown' ? 'pressing enter' : 'mouse click')+'.');
-                //     }
-                // });
-
-              
             }
         });
 
@@ -358,26 +265,33 @@
             $('#filter-list-controller .checkbox, #filter-list-controller .radio').prop('checked', false);
         }
 
-        
-        function multiFilter(arr, filters){
-            const filterKeys = Object.keys(filters);
-            return arr.filter(eachObj => {
-                return filterKeys.every(eachKey => {
-                    if (!filters[eachKey].length) {
-                        return true; // passing an empty filter means that filter is ignored.
-                    } else if(eachKey == "distance"){
-                        if(filters[eachKey] == "all"){
-                            return eachObj;
-                        } else {
-                            return eachObj[eachKey] <= Number(filters[eachKey]);
-                        }
-                        
-                    }
 
-                    return eachObj[eachKey].indexOf(filters[eachKey]) >= 0;
+
+        function multiFilter(array, filters) {
+            const filterKeys = Object.keys(filters);
+            // filters all elements passing the criteria
+            return array.filter((item) => {
+                // dynamically validate all filter criteria
+                return filterKeys.every(function(key){
+                    if( Array.isArray(item[key]) && item[key].length > 0 ) {
+                        // if data is tagging array, one matches in the array, return the object true
+                        for(var i=0; i<item[key].length; i++){
+                            if(!!~filters[key].indexOf(item[key][i])){
+                                return filters[key];
+                            };
+                        }
+                    } else if(key == "distance"){
+                        if(filters[key] == "all" || filters[key] == ""){
+                            return filters[key];
+                        } else {
+                            return item[key] <= Number(filters[key]);
+                        }
+                    }else {
+                        return !!~filters[key].indexOf(item[key]);
+                    }
                 });
             });
-        };
+        }
 
 
         function initialize() {
@@ -437,13 +351,13 @@
             if(markerCluster) markerCluster.clearMarkers();
 
             markerCluster = new MarkerClusterer(map, markers,
-                {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+                {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m', maxZoom: 12});
             
         
             // Finally the bounds variable is used to set the map bounds
             // with fitBounds() function
             map.fitBounds(bounds);
-            map.setZoom(14);
+            map.setZoom(6);
         }
         
         // This function creates each marker and it sets their Info Window content
@@ -457,33 +371,6 @@
             });
 
             markers.push(marker);
-
-           
-
-            // This event expects a click on a marker
-            // When this event is fired the Info Window content is created
-            // and the Info Window is opened.
-
-            // click: function (markers, j) {
-            //     map.removeMarkers();
-            //     populateMarkers();
-            //     for (var j = 0; j < markers.length; j++) {
-            //         console.log(markers[j]);
-            //         markers[j].setIcon('images/marker-active.png');
-            //         //alert(markers[j])
-            //     }
-            //     // setTimeout(() => {
-            //     // 	this.setIcon('marker.png'); 
-            //     // }, 3000);
-
-            //     // marker.setIcon("marker-active.png");   
-            //     // marker.setIcon('https://www.google.com/mapfiles/marker_green.png');
-
-            //     map.setZoom(3);
-            //     map.setCenter(lat, lng);
-            //     populateInfo(key);
-
-            // }
 
             google.maps.event.addListener(marker, 'click', function () {
                 // Creating the content to be inserted in the infowindow
@@ -501,7 +388,12 @@
                 var divHeightOfTheMap = document.getElementById('map-canvas').clientHeight;
                 var offSetFromBottom = 100;
                 map.setCenter(marker.getPosition());
-                map.panBy(-200, -(divHeightOfTheMap / 2 - offSetFromBottom));
+                if (window.matchMedia("(min-width: 768px)").matches) {
+                    map.panBy(-200, -(divHeightOfTheMap / 2 - offSetFromBottom));
+                } else {
+                    map.panBy(0, -(divHeightOfTheMap / 2 - offSetFromBottom));
+                }
+                
 
                 // including content to the Info Window.
                 infoWindow.setContent(iwContent);
@@ -542,30 +434,23 @@
 
         function loadStoreListResult(){
             console.log("jsonDataToCall", jsonDataToCall);
+
             $.ajax({
                 url: "/bin/usg/storeSearch",
                     
-                data:   
-                        // (jsonDataToCall.search_text? "search_text=" + JSON.stringify(jsonDataToCall.search_text) : "")
-                        // + (jsonDataToCall.storetype? "&storetype=" + JSON.stringify(jsonDataToCall.storetype) : "")
-                        // + (jsonDataToCall.distance? "&distance=" + JSON.stringify(jsonDataToCall.distance) : "")
-                        // + (jsonDataToCall.product_cat? "&product_cat=" + JSON.stringify(jsonDataToCall.product_cat) : "")
-                        function(){
-                            switch (currSenario) {
-                                case "userCurrLocation1":
-                                   
-                                    break; 
-                                case "searchProximity":
-                                    return "key=proximity&country=" + countryCode + "&text=" + chooseProximity;
-                                    break;
-                                case "searchState":
-                                    return "key=statename&text=" + choosenState + "&country=" + countryCode;
-                                    break; 
-                                case "searchUserLocation":
-                                    return "country=" + countryCode + "&currentlocation=true";
-                                    break; 
+                data:   function(){
+                            if(currSenario.indexOf('proximity') >= 0){
+                                return "key="+currSenario+"&country=" + countryCode + "&text=" + choosenProximity;
+                            } else if(currSenario == "searchState"){
+                                return "key=statename&text=" + choosenState + "&country=" + countryCode;
+                            } else if(currSenario == "searchUserLocation"){
+                                return "country=" + countryCode + "&currentlocation=true";
+                            } else {
+                                return "key="+currSenario+"&country=" + countryCode + "&text=" + searchedText;
                             }
                         }()
+
+
                         ,
                 type: "GET",
                 cache: false,
@@ -606,8 +491,8 @@
                         // bind external cta event
                         var extLocationCta = $('#filter-list-controller .cta-location');
                         $(extLocationCta).off('click').on( "click", function() {
-                            //console.log($(extLocationCta).index(this));
-                            triggerClick($(extLocationCta).index(this));
+                            var currentMarker = $(extLocationCta).index(this);
+                            triggerClick(currentMarker);
                         });
 
                     } else {
@@ -636,7 +521,7 @@
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(function(position) {
                     var var_pin = '/content/dam/USGBoral/Global/Website/Images/component/allsample/icon_marker_red.png';
-                    curLocationMarker = new google.maps.Marker({
+                    currLocationMarker = new google.maps.Marker({
                         map: map,
                         icon: var_pin
                     });
@@ -652,7 +537,7 @@
                     
                     currLocation = pos;
 
-                    curLocationMarker.setPosition(pos);
+                    currLocationMarker.setPosition(pos);
                     map.setCenter(pos);
 
                     
@@ -660,7 +545,7 @@
                     return callback(pos);
                 }, function() {
                     if(!executedGeo){
-                        handleLocationError(true, infoWindow, map.getCenter());
+                        //handleLocationError(true, infoWindow, map.getCenter());
                         executedGeo = true;
                     }
                     
@@ -668,7 +553,7 @@
             } else {
                 // Browser doesn't support Geolocation
                 if(!executedGeo){
-                    handleLocationError(false, infoWindow, map.getCenter());
+                    //handleLocationError(false, infoWindow, map.getCenter());
                     executedGeo = true;
                 }
             }
@@ -717,6 +602,22 @@
         if (unit=="N") { dist = dist * 0.8684; }
         return dist;
     }
+
+    var findKey = function (obj, value) {
+        var key = null;
+        for (var prop in obj) {
+            if (obj.hasOwnProperty(prop)) {
+                if (obj[prop] === value) {
+                    key = prop;
+                }
+            }
+        }
+        return key;
+    };
+    
+    Handlebars.registerHelper('ifEquals', function(arg1, arg2, options) {
+        return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
+    });
     
 })();
 
