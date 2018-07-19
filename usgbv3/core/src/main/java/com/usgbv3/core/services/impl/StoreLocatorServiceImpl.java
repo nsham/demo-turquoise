@@ -248,12 +248,15 @@ public class StoreLocatorServiceImpl implements StoreLocatorService{
     }
 
     @Override
-    public String getStoreSearch(RequestParameter keyParameter, RequestParameter textParameter, RequestParameter countryParameter, RequestParameter currentLocationParameter, ResourceResolver resourceResolver) {
+    public String getStoreSearch(RequestParameter keyParameter, RequestParameter textParameter
+            , RequestParameter countryParameter, RequestParameter currentLocationParameter
+            , ResourceResolver resourceResolver, String pageURL) {
         String jsonData = "";
         LOG.info("keyParameter:"+keyParameter);
         LOG.info("textParameter:"+textParameter);
         LOG.info("countryParameter:"+countryParameter);
         LOG.info("currentLocationParameter:"+currentLocationParameter);
+        LOG.info("pageURL:"+pageURL);
         Gson gson = new Gson();
         // getting the country path
         String countryParam = countryParameter.getString();
@@ -307,7 +310,7 @@ public class StoreLocatorServiceImpl implements StoreLocatorService{
                     resultJsonObject.add("storeResults", resultJsonArray);
                     if(storeTypeSet != null && productTypeSet != null){
                         JsonArray filterJsonArray = getFilterJsonData(storeTypeSet, productTypeSet
-                                , resourceResolver, countryPath);
+                                , resourceResolver, pageURL);
                         if(filterJsonArray != null){
                             resultJsonObject.add("filterListing", filterJsonArray);
                         }
@@ -338,11 +341,38 @@ public class StoreLocatorServiceImpl implements StoreLocatorService{
                             try {
                                 tempJson = convertResourceToStoreJson(hit.getResource(), gson);
                                 resultJsonArray.add(tempJson);
+
+                                // populating unique storetype and product
+                                if(tempJson.has("storeType")){
+                                    storeTypeSet.add(tempJson.get("storeType").getAsString());
+                                }
+                                if(tempJson.has("product") && tempJson.get("product")!= null){
+                                    productJsonArray = tempJson.get("product").getAsJsonArray();
+                                    if(productJsonArray != null && productJsonArray.size()>0){
+                                        for(JsonElement productJsonElement: productJsonArray){
+                                            if(!"".equals(productJsonElement.getAsString())){
+                                                productTypeSet.add(productJsonElement.getAsString());
+                                            }
+                                        }
+                                    }
+                                }
                             } catch (RepositoryException e) {
                                 LOG.error("Repository Exception:"+e);
                             }
                         }
-                        jsonData = gson.toJson(resultJsonArray);
+                        LOG.info("storeTypeSet:"+storeTypeSet);
+                        LOG.info("productTypeSet:"+productTypeSet);
+                        LOG.info("countryPath:"+countryPath);
+                        resultJsonObject.add("storeResults", resultJsonArray);
+                        if(storeTypeSet != null && productTypeSet != null){
+                            JsonArray filterJsonArray = getFilterJsonData(storeTypeSet, productTypeSet
+                                    , resourceResolver, pageURL);
+                            if(filterJsonArray != null){
+                                resultJsonObject.add("filterListing", filterJsonArray);
+                            }
+                        }
+
+                        jsonData = gson.toJson(resultJsonObject);
                     }
                 }else if(key.startsWith("proximity")){
                     // get all the store in country and search for the proximity string sent
@@ -363,6 +393,21 @@ public class StoreLocatorServiceImpl implements StoreLocatorService{
                         try {
                             tempJson = convertResourceToStoreJson(hit.getResource(), gson);
                             resultJsonArray.add(tempJson);
+
+                            // populating unique storetype and product
+                            if(tempJson.has("storeType")){
+                                storeTypeSet.add(tempJson.get("storeType").getAsString());
+                            }
+                            if(tempJson.has("product") && tempJson.get("product")!= null){
+                                productJsonArray = tempJson.get("product").getAsJsonArray();
+                                if(productJsonArray != null && productJsonArray.size()>0){
+                                    for(JsonElement productJsonElement: productJsonArray){
+                                        if(!"".equals(productJsonElement.getAsString())){
+                                            productTypeSet.add(productJsonElement.getAsString());
+                                        }
+                                    }
+                                }
+                            }
                         } catch (RepositoryException e) {
                             LOG.error("Repository Exception:"+e);
                         }
@@ -382,7 +427,18 @@ public class StoreLocatorServiceImpl implements StoreLocatorService{
                     }
 
                     // filter resutls
-
+                    LOG.info("storeTypeSet:"+storeTypeSet);
+                    LOG.info("productTypeSet:"+productTypeSet);
+                    LOG.info("countryPath:"+countryPath);
+                    if(storeTypeSet != null && productTypeSet != null){
+                        JsonArray filterJsonArray = getFilterJsonData(storeTypeSet, productTypeSet
+                                , resourceResolver, pageURL);
+                        if(filterJsonArray != null){
+                            resultJsonObject.add("filterListing", filterJsonArray);
+                        }
+                    }
+                    // converting to json response
+                    jsonData = gson.toJson(resultJsonObject);
                     jsonData = gson.toJson(resultJsonObject);
 
                 }else{
@@ -404,11 +460,38 @@ public class StoreLocatorServiceImpl implements StoreLocatorService{
                             try {
                                 tempJson = convertResourceToStoreJson(hit.getResource(), gson);
                                 resultJsonArray.add(tempJson);
+
+                                // populating unique storetype and product
+                                if(tempJson.has("storeType")){
+                                    storeTypeSet.add(tempJson.get("storeType").getAsString());
+                                }
+                                if(tempJson.has("product") && tempJson.get("product")!= null){
+                                    productJsonArray = tempJson.get("product").getAsJsonArray();
+                                    if(productJsonArray != null && productJsonArray.size()>0){
+                                        for(JsonElement productJsonElement: productJsonArray){
+                                            if(!"".equals(productJsonElement.getAsString())){
+                                                productTypeSet.add(productJsonElement.getAsString());
+                                            }
+                                        }
+                                    }
+                                }
                             } catch (RepositoryException e) {
                                 LOG.error("Repository Exception:"+e);
                             }
                         }
-                        jsonData = gson.toJson(resultJsonArray);
+                        LOG.info("storeTypeSet:"+storeTypeSet);
+                        LOG.info("productTypeSet:"+productTypeSet);
+                        LOG.info("countryPath:"+countryPath);
+                        resultJsonObject.add("storeResults", resultJsonArray);
+                        if(storeTypeSet != null && productTypeSet != null){
+                            JsonArray filterJsonArray = getFilterJsonData(storeTypeSet, productTypeSet
+                                    , resourceResolver, pageURL);
+                            if(filterJsonArray != null){
+                                resultJsonObject.add("filterListing", filterJsonArray);
+                            }
+                        }
+                        // converting to json response
+                        jsonData = gson.toJson(resultJsonObject);
                     }
                 }
             }
@@ -417,17 +500,16 @@ public class StoreLocatorServiceImpl implements StoreLocatorService{
     }
 
     private JsonArray getFilterJsonData(Set<String> storeTypeSet, Set<String> productTypeSet
-            , ResourceResolver resourceResolver, String countryPath) {
+            , ResourceResolver resourceResolver, String pageURL) {
         JsonArray filterJsonArray = new JsonArray();
         Map<String, Object> storeFilter = null;
         // get country specific data
-        if(countryPath != null){
-            String storeLocatorFilterPagePath = countryPath+"/Configuration/storelocatorfilter";
+        if(pageURL != null){
             Map<String, String> queryMap = new LinkedHashMap<>();
             queryMap.put("type", "nt:unstructured");
-            queryMap.put("path", storeLocatorFilterPagePath);
+            queryMap.put("path", pageURL);
             queryMap.put("property", "sling:resourceType");
-            queryMap.put("property.1_value", "usgbv3/components/content/storelocatorfilter");
+            queryMap.put("property.1_value", "usgbv3/components/content/where-to-buy");
 
             GenericUtils.logQuery(LOG, queryMap);
             Session session = resourceResolver.adaptTo(Session.class);

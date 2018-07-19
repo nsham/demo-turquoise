@@ -11,6 +11,6 @@ public interface StoreLocatorService {
 
     String getAutoSearch(String pageURL, String text, ResourceResolver resourceResolver);
 
-    String getStoreSearch(RequestParameter pageURLParameter, RequestParameter textParameter, RequestParameter countryParameter, RequestParameter currentLocationParameter, ResourceResolver resourceResolver);
+    String getStoreSearch(RequestParameter pageURLParameter, RequestParameter textParameter, RequestParameter countryParameter, RequestParameter currentLocationParameter, ResourceResolver resourceResolver, String pageURL);
     Map<String, Object> getStoreFilter(ValueMap storeLocatorFilterProperties);
 }
