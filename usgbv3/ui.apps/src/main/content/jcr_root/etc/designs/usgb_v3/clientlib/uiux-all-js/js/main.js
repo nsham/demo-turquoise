@@ -1986,7 +1986,7 @@ $(window).on('load', function () {
                     $('.product-listing-result').prepend("<div class='each m-bottom-xxl p-side-m shoutout-txt'><div  class='bg-light-grey custom-block flex-column justify-center align-stretch'><h6 class='title ht6 uppercase text-center p-s'>SHOUT SHOUT SHOUT</h6></div></div>");
                 }
             }
-
+ 
             function scrollTop_one(target) {
                 if (target) {
                     $(target).stop().animate({
