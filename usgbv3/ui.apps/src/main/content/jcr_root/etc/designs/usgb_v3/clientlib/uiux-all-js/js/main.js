@@ -551,10 +551,10 @@ function hookHeadScript(url, async, defer, callback) {
 // ----------------------------------------------------------------------
 // Carousel Feature Card
 // ----------------------------------------------------------------------
-(function(){
+(function () {
     "use strict";
     $(document).ready(function () {
-        if($(".carousel-feature-card").length > 0){
+        if ($(".carousel-feature-card").length > 0) {
             $(".carousel-feature-card").slick();
         }
     });
@@ -1255,7 +1255,7 @@ function hookHeadScript(url, async, defer, callback) {
             // console.log($(this).parent().parent().prev().find($('.dp-text')));
 
         });
-    }); 
+    });
 })();
 
 
@@ -1577,9 +1577,9 @@ $(window).on('load', function () {
     $(document).ready(function () {
         $('[data-img-height="div-height"]').matchHeight();
         $('[data-img-height="img-height"]').matchHeight();
-       //$('.gallery-listing-search-content .box-type-2 ').matchHeight();
+        //$('.gallery-listing-search-content .box-type-2 ').matchHeight();
         $('.listing-search-content .each .custom-block').matchHeight();
-    }); 
+    });
 })();
 
 
@@ -1692,7 +1692,8 @@ $(window).on('load', function () {
             var inputVal
             var numberOfChecked
             // detect change for cardcheckbox
-            $('.listing-search-content .container-checkbox input[type="checkbox"]').change(function () {
+            $(document).on("change", '.listing-search-content .container-checkbox input[type="checkbox"]', function () {
+
 
                 //data-title-value is card wrapper val
                 //data-input-value is checkbox input val
@@ -1734,9 +1735,11 @@ $(window).on('load', function () {
                 $(".popup-content").toggle();
                 $(".compare-popup .btn-compare").toggle();
                 $(".compare-popup .title").toggleClass("selected")
+
                 //check to toggle compare-btn
                 if (numberOfChecked <= 1) {
                     $(".compare-popup .btn-compare").toggle();
+                    $(".instruction-text").toggle();
                 }
             });
 
@@ -1750,19 +1753,22 @@ $(window).on('load', function () {
                 }
                 if (numberOfChecked > 1) {
                     $(".compare-popup .btn-compare").show();
-                    $(".compare-popup .btn-menu-down").show();
                     $(".compare-popup").show();
                     $(".compare-popup .instruction-text").hide();
+
                 } else {
                     $(".compare-popup .instruction-text").show();
                     $(".compare-popup .btn-compare").hide();
-
                 }
-                if (numberOfChecked == 0) {
+
+                if (numberOfChecked > 0) {
+                    $(".compare-popup .btn-menu-down").show();
+                } else {
                     $(".compare-popup").hide();
                     $(".popup-content").hide();
                     $(".compare-popup .btn-menu-down").hide();
                     $(".compare-popup .btn-compare").hide();
+
                 }
 
             }
@@ -1772,6 +1778,232 @@ $(window).on('load', function () {
 
 
             ////// REFINE SEARCH  FEATURE start //////
+
+
+            ////filtering ////
+            var productData
+            var currOnStageMainResultData = [];
+            var currProductData
+            var shoutout
+            productListingResult();
+            //load all from json first
+            function productListingResult() {
+                console.log("ajax load")
+                $.ajax({
+                    //url: "/etc/designs/usgb_v3/clientlib/uiux-all-js/js/json/gallery-filter.json",
+                    url: "/etc/designs/usgb_v3/clientlib/uiux-all-js/js/json/product-listing-filter.json",
+                    type: "GET",
+                    cache: false,
+                    success: function (response) {
+                        // store in global
+                        productData = response
+                        currProductData = productData.product_result
+                        //for sorting
+                        currOnStageMainResultData = productData.product_result
+
+                        //desktop
+                        var productFilterHtml = $('#product-listing-filter').html();
+                        var temptProductFilterHtml = Handlebars.compile(productFilterHtml);
+                        $('.product-listing-filter').html(temptProductFilterHtml(productData.product_listing_filter[0]));
+
+                        //mobile
+                        var MobileProductFilterHtml = $('#m-product-listing-filter').html();
+                        var MobileTemptProductFilterHtml = Handlebars.compile(MobileProductFilterHtml);
+                        $('.m-product-listing-filter').html(MobileTemptProductFilterHtml(productData.product_listing_filter[0]));
+
+                        //results
+                        // var productFilterResult = $('#product-listing-result').html();
+                        // var TemptProductFilterResult = Handlebars.compile(productFilterResult);
+                        // $('.product-listing-result').html(TemptProductFilterResult(productData.product_result));
+
+                        //checkshoutout
+                        shoutout = productData.shoutout;
+                        //console.log(shoutout)
+                        hideAllWrappers();
+                        renderProductListingResult();
+
+                    },
+                    beforeSend: function () {},
+                    complete: function () {}
+                });
+            }
+
+
+            function renderProductListingResult() {
+                console.log(currOnStageMainResultData)
+                paginationResult(currOnStageMainResultData);
+            }
+
+            var btnSubmit
+            //desktop
+            $(document).on('click', '#product-listing-form button[type="submit"]', function (e) {
+                e.preventDefault();
+                btnSubmit = this;
+                submitResults();
+            });
+            //mobile
+            $(document).on('click', '#m-product-listing-form button[type="submit"]', function (e) {
+                e.preventDefault();
+                btnSubmit = this;
+                submitResults();
+            });
+
+            function submitResults() {
+                var form = $(btnSubmit).closest('form');
+                var selectedFilterData = ($(form).serializeObject());
+                var filteredData = multiFilter(productData.product_result, selectedFilterData);
+                console.log('filter', selectedFilterData);
+                console.log('filteredData', filteredData);
+                currOnStageMainResultData = filteredData;
+                console.log(currOnStageMainResultData)
+                paginationResult(currOnStageMainResultData);
+            }
+
+            //sort by dropdown
+            $(document).on('click', '.listing-search-content .search-filter-sort .dropdown-menu a', function (e) {
+                switch ($(this).attr('data-val')) {
+                    case "a_z":
+                        currOnStageMainResultData.sort(function (a, b) {
+                            if (a.title.toLowerCase() < b.title.toLowerCase()) return -1;
+                            if (a.title.toLowerCase() > b.title.toLowerCase()) return 1;
+                            return 0;
+                        });
+                        break;
+                    case "z_a":
+                        currOnStageMainResultData.sort(function (a, b) {
+                            if (a.title.toLowerCase() > b.title.toLowerCase()) return -1;
+                            if (a.title.toLowerCase() < b.title.toLowerCase()) return 1;
+                            return 0;
+                        });
+                        break;
+                    case "latest":
+                        currOnStageMainResultData.sort(function (a, b) {
+                            if (a.created_date > b.created_date) return -1;
+                            if (a.created_date < b.created_date) return 1;
+                            return 0;
+                        });
+                        break;
+                    case "oldest":
+                        currOnStageMainResultData.sort(function (a, b) {
+                            if (a.created_date < b.created_date) return -1;
+                            if (a.created_date > b.created_date) return 1;
+                            return 0;
+                        });
+                        break;
+                }
+                paginationResult(currOnStageMainResultData);
+                //  scrollTop();
+            });
+
+            $(document).on('change', '.listing-search-content .dp-form-mobile select', function (e) {
+                switch ($(this).val()) {
+                    case "a_z":
+                        currOnStageMainResultData.sort(function (a, b) {
+                            if (a.title.toLowerCase() < b.title.toLowerCase()) return -1;
+                            if (a.title.toLowerCase() > b.title.toLowerCase()) return 1;
+                            return 0;
+                        });
+                        break;
+                    case "z_a":
+                        currOnStageMainResultData.sort(function (a, b) {
+                            if (a.title.toLowerCase() > b.title.toLowerCase()) return -1;
+                            if (a.title.toLowerCase() < b.title.toLowerCase()) return 1;
+                            return 0;
+                        });
+                        break;
+                    case "latest":
+                        currOnStageMainResultData.sort(function (a, b) {
+                            if (a.created_date > b.created_date) return -1;
+                            if (a.created_date < b.created_date) return 1;
+                            return 0;
+                        });
+                        break;
+                    case "oldest":
+                        currOnStageMainResultData.sort(function (a, b) {
+                            if (a.created_date < b.created_date) return -1;
+                            if (a.created_date > b.created_date) return 1;
+                            return 0;
+                        });
+                        break;
+                }
+                paginationResult(currOnStageMainResultData);
+                // scrollTop();
+            });
+            //sort by end
+
+
+            function multiFilter(array, filters) {
+                const filterKeys = Object.keys(filters);
+                // filters all elements passing the criteria
+                return array.filter((item) => {
+                    // dynamically validate all filter criteria
+                    return filterKeys.every(function (key) {
+                        if (Array.isArray(item[key]) && item[key].length > 0) {
+                            // if data is tagging array, one matches in the array, return the object true
+                            for (var i = 0; i < item[key].length; i++) {
+                                if (!!~filters[key].indexOf(item[key][i])) {
+                                    return filters[key];
+                                };
+                            }
+                        } else if (filters[key] == "" || filters[key] == "all") {
+                            return true;
+                        } else {
+                            return !!~filters[key].indexOf(item[key]);
+                        }
+                    });
+                });
+            }
+
+            function paginationResult(dataForPagination) {
+                stickySidebar.updateSticky();
+
+                $('#pagination-container').pagination({
+                    dataSource: dataForPagination,
+                    pageSize: 9,
+                    callback: function (data, pagination) {
+                        //results
+                        var productFilterResult = $('#product-listing-result').html();
+                        var TemptProductFilterResult = Handlebars.compile(productFilterResult);
+                        $('.product-listing-result').html(TemptProductFilterResult(data));
+                        checkForShoutout();
+
+                    },
+                    beforePageOnClick: function () {
+                        scrollTop_one();
+                    },
+                    beforeNextOnClick: function () {
+                        scrollTop_one();
+                    },
+                    beforePageOnClick: function () {
+                        scrollTop_one();
+                    }
+                });
+            }
+
+            function checkForShoutout() {
+                if (shoutout == true) {
+                    $('.product-listing-result').prepend("<div class='each m-bottom-xxl p-side-m shoutout-txt'><div  class='bg-light-grey custom-block flex-column justify-center align-stretch'><h6 class='title ht6 uppercase text-center p-s'>SHOUT SHOUT SHOUT</h6></div></div>");
+                }
+            }
+ 
+            function scrollTop_one(target) {
+                if (target) {
+                    $(target).stop().animate({
+                        scrollTop: 0
+                    }, 500, 'swing');
+                } else {
+                    $("html, body").stop().animate({
+                        scrollTop: 0
+                    }, 500, 'swing');
+                }
+            }
+
+
+            ////////FILTER END//////
+
+
+
+
             var dataSearchVal
             var mdataSearchVal
             var checkname
@@ -1781,21 +2013,22 @@ $(window).on('load', function () {
             var countButton
             var MobileCurrentData
             var MobileCountButton
-            // hide html divs desktop and mobile
-            $(".checkbox-wrapper").hide();
-            $('.checkbox-button-wrapper').hide();
-            $('[data-checkbutton]').hide();
-            //mobile
-            $(".m-checkbox-wrapper").hide();
-            $('.mobile-checkbox-button-wrapper').hide();
-            $('[data-m-checkbutton]').hide();
 
+            function hideAllWrappers() {
+                // hide html divs desktop and mobile
+                $(".checkbox-wrapper").hide();
+                $('.checkbox-button-wrapper').hide();
+                $('[data-checkbutton]').hide();
+                //mobile
+                $(".m-checkbox-wrapper").hide();
+                $('.mobile-checkbox-button-wrapper').hide();
+                $('[data-m-checkbutton]').hide();
+            }
 
 
             // REFINE SEARCH DESKTOP//
             // get value of ul dropdown click function wraps all functions
-            $('.refine-search').on("click", '.refine-list a', function () {
-
+            $(document).on("click", '.refine-search .refine-list a', function () {
                 stickySidebar.updateSticky();
 
                 $('.checkbox-button-wrapper').show();
@@ -1816,7 +2049,7 @@ $(window).on('load', function () {
                     // update wrapper to currentDATA
                     dataSearchVal = $('.' + dataSearchVal + '-wrapper').data("checkbox-wrapper");
                     //get checkbox name to pass to text
-                    checkboxName = $(this).attr("name");
+                    checkboxName = $(this).attr("data-label");
                     // checkname of the checkbox to pass to button
                     checkname = $(this).data("checkname");
                     //count how many checkbox is checked
@@ -1830,6 +2063,7 @@ $(window).on('load', function () {
             function appendCheckboxToButton() {
                 // pass checked to button
                 if ($('.' + dataSearchVal + '-wrapper  input[data-checkname=' + checkname + ']').is(':checked')) {
+
                     $('[data-checkbutton=' + dataSearchVal + ']').append("<div data-selection=" + checkname + " class='bg-grey m-xs bold btn btn-xs'>" + checkboxName + "<span class='btn-close fs-1 p-left-s'>&times;</span></div>");
                     // remove duplicates
 
@@ -1854,7 +2088,8 @@ $(window).on('load', function () {
 
 
             //REFINE SEARCH MOBILE//
-            $('#refine-search-mobile').change(function () {
+            $(document).on("change", '#refine-search-mobile', function () {
+                //$(document).change( '#refine-search-mobile',function () {
                 $('.mobile-checkbox-button-wrapper').show();
                 //get mobile option val
                 mdataSearchVal = $(this).val();
@@ -1873,7 +2108,7 @@ $(window).on('load', function () {
                     // update wrapper to currentDATA
                     mdataSearchVal = $('.mobile-' + mdataSearchVal + '-wrapper').data("checkbox-wrapper");
 
-                    checkboxName = $(this).attr("name");
+                    checkboxName = $(this).attr("data-label");
                     // checkname of the checkbox to pass to button
                     checkname = $(this).data("checkname");
                     //count how many checkbox is checked
@@ -1959,8 +2194,6 @@ $(window).on('load', function () {
             // function share between desktop and mobile end//
 
         }
-
-
         if ($('.page-product-listing section').length) productListingFeatures();
 
 
@@ -2021,8 +2254,11 @@ $(window).on('load', function () {
 
         //make text to ellipsis when more than 4 lines
         $('[data-category] .content-box .text-container p').each(function (index, element) {
-            $clamp(element, { clamp: 4, useNativeClamp: false }); 
-        }); 
+            $clamp(element, {
+                clamp: 4,
+                useNativeClamp: false
+            });
+        });
 
 
         var getID = "all";
@@ -2064,14 +2300,17 @@ $(window).on('load', function () {
             $(".fade-bg").fadeIn(500);
             var getDivHeight = $(".content-wrapper").height();
             var newDivHeight = getDivHeight + 380;
-            $('.content-wrapper').css('height', newDivHeight);
+            //$('.content-wrapper').css('height', newDivHeight);
+            $('.content-wrapper').css({
+                'transition': 'height 1.5s',
+                'height': newDivHeight
+            });
             $('[data-category=' + getID + ']').matchHeight();
         }
 
 
         // get data content to filter
         $('.tab-tiles-wrapper ul li').click(function () {
-
             getID = $(this).attr('data-btn-category');
             dataCategory = $('[data-category=' + getID + ']')
             checkFilterData();
@@ -2165,7 +2404,7 @@ $(window).on('load', function () {
 // ----------------------------------------------------------------------
 // Gallery Listing Search  (filter) [ky]
 // ----------------------------------------------------------------------
-(function () { 
+(function () {
     "use strict";
     $(document).ready(function () {
 
@@ -2209,114 +2448,102 @@ $(window).on('load', function () {
                     renderGalleryResultHtml();
                 });
 
-        } // if end 
 
 
-        //when dropdown click render result
-        function renderGalleryResultHtml() {
-            var form = $(currTHIS).closest('form');
-            var selectedFilterData = ($(form).serializeObject());
-            filteredData = multiFilter(galleryData[categoryContent], selectedFilterData);
-            //console.log('filter', selectedFilterData);
-            //console.log('filteredData', filteredData);
-            //renderGalleryResultHtml(filteredData);
-            paginationResult(filteredData); 
-        }
+            //when dropdown click render result
+            function renderGalleryResultHtml() {
+                var form = $(currTHIS).closest('form');
+                var selectedFilterData = ($(form).serializeObject());
+                filteredData = multiFilter(galleryData[categoryContent], selectedFilterData);
+                console.log('filter', selectedFilterData);
+                console.log('filteredData', filteredData);
+                //renderGalleryResultHtml(filteredData);
+                paginationResult(filteredData);
+            }
 
-        // serialize form data to object
-        $.fn.serializeObject = function () {
-            var o = {};
-            var a = this.serializeArray();
-            $.each(a, function () {
-                if (o[this.name] !== undefined) {
-                    if (!o[this.name].push) {
-                        o[this.name] = [o[this.name]];
-                    }
-                    o[this.name].push(this.value || '');
-                } else {
-                    o[this.name] = this.value || '';
-                }
-            });
-            return o;
-        };
 
-        function multiFilter(array, filters) {
-            const filterKeys = Object.keys(filters);
-            // filters all elements passing the criteria
-            return array.filter((item) => {
-                // dynamically validate all filter criteria
-                return filterKeys.every(function (key) {
-                    if (Array.isArray(item[key]) && item[key].length > 0) {
-                        // if data is tagging array, one matches in the array, return the object true
-                        for (var i = 0; i < item[key].length; i++) {
-                            if (!!~filters[key].indexOf(item[key][i])) {
-                                return filters[key];
-                            };
+
+            function multiFilter(array, filters) {
+                const filterKeys = Object.keys(filters);
+                // filters all elements passing the criteria
+                return array.filter((item) => {
+                    // dynamically validate all filter criteria
+                    return filterKeys.every(function (key) {
+                        if (Array.isArray(item[key]) && item[key].length > 0) {
+                            // if data is tagging array, one matches in the array, return the object true
+                            for (var i = 0; i < item[key].length; i++) {
+                                if (!!~filters[key].indexOf(item[key][i])) {
+                                    return filters[key];
+                                };
+                            }
+                        } else if (filters[key] == "" || filters[key] == "all") {
+                            return true;
+                        } else {
+                            return !!~filters[key].indexOf(item[key]);
                         }
-                    } else if (filters[key] == "" || filters[key] == "all") {
-                        return true;
-                    } else {
-                        return !!~filters[key].indexOf(item[key]);
+                    });
+                });
+            }
+
+            //load all from json first
+            function galleryResult() {
+                $.ajax({
+                    //url: "/etc/designs/usgb_v3/clientlib/uiux-all-js/js/json/gallery-filter.json",
+                    url: "/etc/designs/usgb_v3/clientlib/uiux-all-js/js/json/test-gallery.json",
+                    type: "GET",
+                    cache: false,
+                    success: function (response) {
+                        // store in global
+                        galleryData = response
+
+                        var galleryFilterHtml = $('#gallery-filter').html();
+                        var temptGalleryFilterHtml = Handlebars.compile(galleryFilterHtml);
+                        $('.gallery-filter-wrapper').html(temptGalleryFilterHtml(galleryData));
+
+                        renderGalleryResultHtml(galleryData.result);
+                    },
+                    beforeSend: function () {},
+                    complete: function () {}
+                });
+            }
+
+            function paginationResult(dataForPagination) {
+                $('#pagination-container').pagination({
+                    dataSource: dataForPagination,
+                    pageSize: 9,
+                    callback: function (data, pagination) {
+                        var resultFilterHtml = $("#result").html();
+                        var temptResultFilterHtml = Handlebars.compile(resultFilterHtml);
+                        $('.results-gallery').html(temptResultFilterHtml(data));
+                        // console.log('p-', pagination)
+                        //console.log('d-', data)
+                    },
+                    beforePageOnClick: function () {
+                        scrollTop_one();
+                    },
+                    beforeNextOnClick: function () {
+                        scrollTop_one();
+                    },
+                    beforePageOnClick: function () {
+                        scrollTop_one();
                     }
                 });
-            });
-        }
-        
-        //load all from json first
-        function galleryResult() {
-            $.ajax({
-                //url: "/etc/designs/usgb_v3/clientlib/uiux-all-js/js/json/gallery-filter.json",
-                url: "/etc/designs/usgb_v3/clientlib/uiux-all-js/js/json/test-gallery.json",
-                type: "GET",
-                cache: false,
-                success: function (response) {
-                    // store in global
-                    galleryData = response
-
-                    var galleryFilterHtml = $('#gallery-filter').html();
-                    var temptGalleryFilterHtml = Handlebars.compile(galleryFilterHtml);
-                    $('.gallery-filter-wrapper').html(temptGalleryFilterHtml(galleryData));
-
-                    renderGalleryResultHtml(galleryData.result);
-                },
-                beforeSend: function () {},
-                complete: function () {}
-            });
-        }
-
-        function paginationResult(dataForPagination) {
-            $('#pagination-container').pagination({
-                dataSource: dataForPagination,
-                pageSize: 9,
-                callback: function (data, pagination) {
-                    var resultFilterHtml = $("#result").html();
-                    var temptResultFilterHtml = Handlebars.compile(resultFilterHtml);
-                    $('.results-gallery').html(temptResultFilterHtml(data));
-                    // console.log('p-', pagination)
-                    //console.log('d-', data)
-                },
-                beforePageOnClick: function () {
-                    scrollTop_one();
-                },
-                beforeNextOnClick: function () {
-                    scrollTop_one();
-                },
-                beforePageOnClick: function () {
-                    scrollTop_one();
-                }
-            });
-        }
-
-        function scrollTop_one(target) {
-            if (target) {
-                $(target).stop().animate({
-                    scrollTop: 0
-                }, 500, 'swing');
-            } else {
-                $("html, body").stop().animate({
-                    scrollTop: 0
-                }, 500, 'swing');
             }
-        }
+
+            function scrollTop_one(target) {
+                if (target) {
+                    $(target).stop().animate({
+                        scrollTop: 0
+                    }, 500, 'swing');
+                } else {
+                    $("html, body").stop().animate({
+                        scrollTop: 0
+                    }, 500, 'swing');
+                }
+            }
+
+        } // if end
+
+
     });
 })();

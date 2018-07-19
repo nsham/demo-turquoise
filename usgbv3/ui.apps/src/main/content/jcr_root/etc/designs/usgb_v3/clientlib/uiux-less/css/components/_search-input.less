@@ -1,7 +1,6 @@
 // ----------------------------------------------------------------------
 // Component: Search Form
 // ----------------------------------------------------------------------
-
 .search-form {
 	/*target parent
 	* &{
@@ -11,61 +10,51 @@
             width: 250px;
         }
 	}*/
-    /*end target parent*/
-	.form-control{
-		&:focus{
-		}
+	/*end target parent*/
+	.form-control {
+		&:focus {}
 	}
 	.input-group {
 		color: red;
 	}
 	.input-group-btn {
-    	font-size: 100%;
+		font-size: 100%;
 	}
-	input {
-	}
+	input {}
 	[type="submit"] {
-		    font-size: 100%;
-	    	padding: 8px 12px;
-	    	position: relative;
-	    	top: 0px;
+		font-size: 100%;
+		padding: 8px 12px;
+		position: relative;
+		top: 0px;
 	}
 }
 
 // ----------------------------------------------------------------------
 // END Component: Search Form
 // ----------------------------------------------------------------------
-
-
 // ----------------------------------------------------------------------
 // Component: Sub Search Section
 // ----------------------------------------------------------------------
-
 .sub-search-section {
-	li{
+	li {
 		display: inline-block;
 		font-weight: normal;
-
 		font-size: 12px;
 		line-height: 1.2;
-
 		@media only screen and (min-width: 500px) {
 			font-size: 14px;
 			line-height: 1.5;
 		}
-
-		&:first-child{
-			&:before{
-				display:none;
+		&:first-child {
+			&:before {
+				display: none;
 			}
 		}
-		&:before{
-			content: '|';
+		&:before {
+			content: "|";
 			color: #353535;
 			display: inline-block;
 			margin: 0 5px;
-
-
 			@media only screen and (min-width: 500px) {
 				margin: 0 20px;
 			}
@@ -75,22 +64,18 @@
 			a {
 				border-bottom: 2px solid #009b3a;
 				padding-bottom: 5px;
-
 			}
 		}
 	}
-	a{
+	a {
 		color: #353535;
 		transition: none;
 	}
 }
 
-
 // ----------------------------------------------------------------------
 // END Component: Sub Search Section
 // ----------------------------------------------------------------------
-
-
 // ----------------------------------------------------------------------
 // Component: Sort By Dropdown //retired style, migrate to Bootstrap default
 // ----------------------------------------------------------------------
@@ -100,8 +85,6 @@
 //     	display: block;
 //     	clear: both;
 //     }
-
-
 // 	.dropdown{
 // 		width: 100%;
 // 		max-width: 280px;
@@ -117,223 +100,212 @@
 // ----------------------------------------------------------------------
 // END Component: Sort By Dropdown
 // ----------------------------------------------------------------------
-
-
-
 // ----------------------------------------------------------------------
 // Component: Search Main Content
 // ----------------------------------------------------------------------
 .search-main-content {
-
-	&>.inner{
+	&>.inner {
 		display: flex;
-	    flex-wrap:  wrap;
-	    align-items: stretch;
-	    justify-content: stretch;
-	    align-self: center;
+		flex-wrap: wrap;
+		align-items: stretch;
+		justify-content: stretch;
+		align-self: center;
 	}
-
-	.each{
+	.each {
 		flex-grow: 0;
-	    flex-shrink: 0;
-		//flex-basis: 33.33%;
-		flex-basis: 100%;
-	    max-width: 100%;
-	    display: flex;
-		justify-content: center;
-
-		@media (min-width:550px){
-			flex-basis: 50%;
-			max-width: 50%;
-		}
-		@media (min-width:1024px){
-			flex-basis:33.33%;
-			max-width: 33.33%;
-		}
-		.title, p{
-			width: 100%;
-		} 
-	}
-
-	.each-2{ 
+		flex-shrink: 0; //flex-basis: 33.33%;
 		flex-basis: 100%;
 		max-width: 100%;
 		display: flex;
 		justify-content: center;
-		@media (min-width:550px){
+		@media (min-width: 550px) {
+			flex-basis: 50%;
+			max-width: 50%;
+		}
+		@media (min-width: 1024px) {
+			flex-basis: 33.33%;
+			max-width: 33.33%;
+		}
+		.title,
+		p {
+			width: 100%;
+		}
+	}
+	.shoutout-txt {
+		flex-basis: 100%;
+		max-width: 100%;
+		display: flex;
+		justify-content: center;
+		min-height: 250px;
+		@media (min-width: 550px) {
 			flex-basis: 100%;
 			max-width: 100%;
 		}
-		@media (min-width:1024px){
+		@media (min-width:768px) {
+			height: auto;
+		}
+		@media (min-width: 1024px) {
 			flex-basis: 66.66%;
 			max-width: 66.66%;
 		}
+		.center {
+			display: -webkit-box;
+			display: -ms-flexbox;
+			display: flex;
+			-webkit-box-align: center;
+			-ms-flex-align: center;
+			align-items: center;
+			-webkit-box-pack: center;
+			-ms-flex-pack: center;
+			justify-content: center;
+			-webkit-box-orient: vertical;
+			-webkit-box-direction: normal;
+			-ms-flex-direction: column;
+			flex-direction: column;
+		}
+		.thumbs,
+		.radio,
+		.addto {
+			display: none;
+		}
 		
+
 	}
-
-
 	
+
 }
 
 // ----------------------------------------------------------------------
 // END Component: Search Main Content
 // ----------------------------------------------------------------------
-
-
-
 // ----------------------------------------------------------------------
 // Component: Bootstrap default pagination
 // ----------------------------------------------------------------------
-.pagination > li > a,
-.pagination > li > span {
-  border: 0;
-  color:@color-darker-grey;
-  border-bottom: 2px solid transparent;
-  padding: 6px 6px;
-  margin: 0 3px;
-  }
-
-.pagination > li > a:hover,
-.pagination > li > span:hover,
-.pagination > li > a:focus,
-.pagination > li > span:focus {
-    color:@color-darker-grey;
-    background: transparent;
-    font-weight: bold;
-    border-bottom: 2px solid #009b3a;
-    border-radius: 0;
+.pagination>li>a,
+.pagination>li>span {
+	border: 0;
+	color: @color-darker-grey;
+	border-bottom: 2px solid transparent;
+	padding: 6px 6px;
+	margin: 0 3px;
 }
 
-.pagination > li:first-child > a,
-.pagination > li:first-child > span {
-    border-radius: 0;
+.pagination>li>a:hover,
+.pagination>li>span:hover,
+.pagination>li>a:focus,
+.pagination>li>span:focus {
+	color: @color-darker-grey;
+	background: transparent;
+	font-weight: bold;
+	border-bottom: 2px solid #009b3a;
+	border-radius: 0;
 }
 
-.pagination > li:last-child > a,
-.pagination > li:last-child > span {
-    border-radius: 0;
+.pagination>li:first-child>a,
+.pagination>li:first-child>span {
+	border-radius: 0;
 }
 
-.pagination > .active > a,
-.pagination > .active > span, .pagination > .active > a:hover,
-.pagination > .active > span:hover, .pagination > .active > a:focus,
-.pagination > .active > span:focus {
-    background: transparent;
-    color:@color-darker-grey;
-    font-weight: bold;
-    border: 0;
-    border-bottom: 2px solid #009b3a;
+.pagination>li:last-child>a,
+.pagination>li:last-child>span {
+	border-radius: 0;
 }
+
+.pagination>.active>a,
+.pagination>.active>span,
+.pagination>.active>a:hover,
+.pagination>.active>span:hover,
+.pagination>.active>a:focus,
+.pagination>.active>span:focus {
+	background: transparent;
+	color: @color-darker-grey;
+	font-weight: bold;
+	border: 0;
+	border-bottom: 2px solid #009b3a;
+}
+
 // ----------------------------------------------------------------------
 // END Component: Bootstrap default pagination
 // ----------------------------------------------------------------------
-
-
 // ----------------------------------------------------------------------
 // Component: Relevant Content
 // ----------------------------------------------------------------------
-
 .relevant-content {
-
-
-	.each{
-
-		.left{
+	.each {
+		.left {
 			flex-basis: 250px;
 			flex-grow: 0;
 		}
-
 		.right {
-
 			flex-basis: 0;
 			flex-grow: 1;
-
-		    &>a{
-
-				color:@color-darker-grey;
-
-				&:hover{
-					color:@color-primary-green;
+			&>a {
+				color: @color-darker-grey;
+				&:hover {
+					color: @color-primary-green;
 				}
 			}
-
 			.side-functions {
 				/*0 1 auto*/
 				// flex: initial;
-				@media screen and (-ms-high-contrast: active), screen and (-ms-high-contrast: none) { 
-					min-width: 80px; 
+				@media screen and (-ms-high-contrast: active), screen and (-ms-high-contrast: none) {
+					min-width: 80px;
 				}
-
-				@media (min-width:@min-bp-sm){
-					min-width: 270px; 
-				}	
+				@media (min-width: @min-bp-sm) {
+					min-width: 270px;
+				}
 			}
-
 			.side-functions-short {
 				/*0 1 auto*/
 				// flex: initial;
-				@media screen and (-ms-high-contrast: active), screen and (-ms-high-contrast: none) { 
-					min-width: 40px; 
+				@media screen and (-ms-high-contrast: active), screen and (-ms-high-contrast: none) {
+					min-width: 40px;
 				}
-
-				@media (min-width:@min-bp-sm){
-					min-width: 100px; 
-				}	
+				@media (min-width: @min-bp-sm) {
+					min-width: 100px;
+				}
 			}
-
 		}
-
 	}
 	/*end template structure*/
-
 	/*style buttons*/
 	.bookmark,
 	.addto {
-	    // display: inline-block;
-
-	    span {
-		    // display: inline-block;
-		    // font-size: 12px;
+		// display: inline-block;
+		span {
+			// display: inline-block;
+			// font-size: 12px;
 		}
 	}
-
-
 	a {
-	    // color:@color-darker-grey;
-
-	    &:hover{
-	    	h6, p, span{
-	    		// color: @color-primary-green;
-	    	}
-	    }
+		// color:@color-darker-grey;
+		&:hover {
+			h6,
+			p,
+			span {
+				// color: @color-primary-green;
+			}
+		}
 	}
 	/*end style buttons*/
-
 }
 
 // ----------------------------------------------------------------------
 // END Component: Relevant Content
 // ----------------------------------------------------------------------
-
-
 // ----------------------------------------------------------------------
 // Component: Search Filter & related-search
 // ----------------------------------------------------------------------
 .related-search,
-.search-filter{
+.search-filter {
 	border-radius: 4px;
-
 	.radio,
-	.checkbox{
-		margin-top: 10px;	
-		margin-bottom: 0px;	
-
-		
+	.checkbox {
+		margin-top: 10px;
+		margin-bottom: 0px;
 	}
 }
-
 
 // ----------------------------------------------------------------------
 // END Component: Search Filter & related-search
 // ----------------------------------------------------------------------
-

@@ -8,6 +8,7 @@
         var map;
         var infoWindow;
         var markersData = [];
+        var filterListingData = [];
         var markers = [];
         var filterForm = $('#filter-list-controller');
         var jsonDataToCall = {};
@@ -25,7 +26,7 @@
 
         var urlString = window.location.href;
         var url = new URL(urlString);
-        var countryCode = window.location.href.indexOf("/usgboral/") > -1? "en_my" : "en_my";
+        var countryCode = window.location.href.indexOf("/usgboral/") > -1? "en_au" : "en_au";
         var locationPath = function() {
             var pathArray = window.location.pathname.split('/').filter(Boolean).slice(0, -1);
             var newPathname = "";
@@ -84,6 +85,7 @@
                 console.log('markersData', markersData);
 
                 filterData = $(filterForm).serializeObject();
+                console.log('dataSelectedFilter', filterData);
                 dataFiltered = multiFilter(markersData, filterData);
                 console.log('dataFiltered', dataFiltered);
                 displayMarkers(dataFiltered);
@@ -94,9 +96,6 @@
                 } else {
                     $('.search-detail-group').html('<div class="p-3xl"><h5>Sorry</h5><p><i>No result has been found.</i></p></div>');
                 }
-
-
-                console.log($(this).val() == 15);
 
                 switch (Number($(this).val())) {
                     case 15:
@@ -114,7 +113,7 @@
                         circleOnMap = [];
                     }
 
-                    if($(this).val() !== "all"){
+                    if($(this).val().toLowerCase() !== "all"){
                         var circle = new google.maps.Circle({
                             map: map,
                             radius: radius,    // 15km
@@ -281,7 +280,7 @@
                             };
                         }
                     } else if(key == "distance"){
-                        if(filters[key] == "all" || filters[key] == ""){
+                        if(filters[key].toLowerCase() == "all" || filters[key] == ""){
                             return filters[key];
                         } else {
                             return item[key] <= Number(filters[key]);
@@ -328,7 +327,7 @@
         function displayMarkers(data){
             clearOverlays();
             //markerCluster.clearMarkers();
-            console.log(data);
+            console.log('displayMarkers', data);
             // this variable sets the map bounds according to markers position
             var bounds = new google.maps.LatLngBounds();
             
@@ -456,7 +455,8 @@
                 cache: false,
                 success: function (response) {
                     // 1. data come in
-                    markersData = response;
+                    markersData = response.storeResults;
+                    filterListingData = response.filterListing;
 
                     geolocation(function (pos) {
                         if(pos.lat !== null){
@@ -474,6 +474,11 @@
                     markers = [];
 
                     if(markersData.length > 0){
+                        // 1. load filter listing with getted data
+                        var templateFilter = $("#templWtbFilter").html();
+                        var htmlTemplateFilter = Handlebars.compile(templateFilter);
+                        $('.filter-list-item').html(htmlTemplateFilter(response.filterListing));
+
                         // 2. load map with getted data
                         initialize();
                         console.log(markersData);
