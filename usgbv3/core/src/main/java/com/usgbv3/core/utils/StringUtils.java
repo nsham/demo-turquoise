@@ -57,5 +57,12 @@ public class StringUtils {
 
 	}
 
+	public static String replaceSpecialCharacters(String inputString){
+		inputString = inputString.replace(" ", "_");
+		inputString = inputString.replace("(", "_");
+		inputString = inputString.replace(")", "_");
+		return inputString;
+	}
+
  
 }
