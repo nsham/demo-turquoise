@@ -290,11 +290,11 @@ public class StoreLocatorServiceImpl implements StoreLocatorService{
                         resultJsonArray.add(tempJson);
 
                         // populating unique storetype and product
-                        if(tempJson.has("storeType")){
-                            storeTypeSet.add(tempJson.get("storeType").getAsString());
+                        if(tempJson.has("store_type")){
+                            storeTypeSet.add(tempJson.get("store_type").getAsString());
                         }
-                        if(tempJson.has("product") && tempJson.get("product")!= null){
-                            productJsonArray = tempJson.get("product").getAsJsonArray();
+                        if(tempJson.has("product_categories") && tempJson.get("product_categories")!= null){
+                            productJsonArray = tempJson.get("product_categories").getAsJsonArray();
                             if(productJsonArray != null && productJsonArray.size()>0){
                                 for(JsonElement productJsonElement: productJsonArray){
                                     if(!"".equals(productJsonElement.getAsString())){
@@ -343,11 +343,11 @@ public class StoreLocatorServiceImpl implements StoreLocatorService{
                                 resultJsonArray.add(tempJson);
 
                                 // populating unique storetype and product
-                                if(tempJson.has("storeType")){
-                                    storeTypeSet.add(tempJson.get("storeType").getAsString());
+                                if(tempJson.has("store_type")){
+                                    storeTypeSet.add(tempJson.get("store_type").getAsString());
                                 }
-                                if(tempJson.has("product") && tempJson.get("product")!= null){
-                                    productJsonArray = tempJson.get("product").getAsJsonArray();
+                                if(tempJson.has("product_categories") && tempJson.get("product_categories")!= null){
+                                    productJsonArray = tempJson.get("product_categories").getAsJsonArray();
                                     if(productJsonArray != null && productJsonArray.size()>0){
                                         for(JsonElement productJsonElement: productJsonArray){
                                             if(!"".equals(productJsonElement.getAsString())){
@@ -395,11 +395,11 @@ public class StoreLocatorServiceImpl implements StoreLocatorService{
                             resultJsonArray.add(tempJson);
 
                             // populating unique storetype and product
-                            if(tempJson.has("storeType")){
-                                storeTypeSet.add(tempJson.get("storeType").getAsString());
+                            if(tempJson.has("store_type")){
+                                storeTypeSet.add(tempJson.get("store_type").getAsString());
                             }
-                            if(tempJson.has("product") && tempJson.get("product")!= null){
-                                productJsonArray = tempJson.get("product").getAsJsonArray();
+                            if(tempJson.has("product_categories") && tempJson.get("product_categories")!= null){
+                                productJsonArray = tempJson.get("product_categories").getAsJsonArray();
                                 if(productJsonArray != null && productJsonArray.size()>0){
                                     for(JsonElement productJsonElement: productJsonArray){
                                         if(!"".equals(productJsonElement.getAsString())){
@@ -462,11 +462,11 @@ public class StoreLocatorServiceImpl implements StoreLocatorService{
                                 resultJsonArray.add(tempJson);
 
                                 // populating unique storetype and product
-                                if(tempJson.has("storeType")){
-                                    storeTypeSet.add(tempJson.get("storeType").getAsString());
+                                if(tempJson.has("store_type")){
+                                    storeTypeSet.add(tempJson.get("store_type").getAsString());
                                 }
-                                if(tempJson.has("product") && tempJson.get("product")!= null){
-                                    productJsonArray = tempJson.get("product").getAsJsonArray();
+                                if(tempJson.has("product_categories") && tempJson.get("product_categories")!= null){
+                                    productJsonArray = tempJson.get("product_categories").getAsJsonArray();
                                     if(productJsonArray != null && productJsonArray.size()>0){
                                         for(JsonElement productJsonElement: productJsonArray){
                                             if(!"".equals(productJsonElement.getAsString())){
@@ -540,7 +540,7 @@ public class StoreLocatorServiceImpl implements StoreLocatorService{
                 String name= storeFilter.get("distanceCategoryTitle").toString();
                 tempJsonObject.addProperty("title", name);
                 name = name.toLowerCase();
-                tempJsonObject.addProperty("key", StringUtils.replaceSpecialCharacters(name));
+                tempJsonObject.addProperty("key", "distance");
             }
             if(storeFilter.containsKey("distanceCategoryList") && storeFilter.get("distanceCategoryList")!= null){
                 List<DistanceLocatorProductCategory> distanceCategoryList = (List<DistanceLocatorProductCategory>)
@@ -568,7 +568,7 @@ public class StoreLocatorServiceImpl implements StoreLocatorService{
                 String name= storeFilter.get("storeCategoryTitle").toString();
                 tempJsonObject.addProperty("title", name);
                 name = name.toLowerCase();
-                tempJsonObject.addProperty("key", StringUtils.replaceSpecialCharacters(name));
+                tempJsonObject.addProperty("key", "store_type");
             }
             if(storeFilter.containsKey("storeCategoryList") && storeFilter.get("storeCategoryList")!= null){
                 List<StoreLocatorStoreCategory> distanceCategoryList = (List<StoreLocatorStoreCategory>)
@@ -598,7 +598,7 @@ public class StoreLocatorServiceImpl implements StoreLocatorService{
                 String name= storeFilter.get("productCategoryTitle").toString();
                 tempJsonObject.addProperty("title", name);
                 name = name.toLowerCase();
-                tempJsonObject.addProperty("key", StringUtils.replaceSpecialCharacters(name));
+                tempJsonObject.addProperty("key", "product_categories");
             }
             if(storeFilter.containsKey("productCategoryList") && storeFilter.get("productCategoryList")!= null){
                 List<StoreLocatorProductCategory> distanceCategoryList = (List<StoreLocatorProductCategory>)
@@ -636,8 +636,10 @@ public class StoreLocatorServiceImpl implements StoreLocatorService{
                             productList = new ArrayList<>();
                         }
                         productList.add(entry.getValue().toString());
-                        jsonObject.add("product", gson.toJsonTree(productList));
-                    }else{
+                        jsonObject.add("product_categories", gson.toJsonTree(productList));
+                    }else if("storeType".equals(entry.getKey())){
+                        jsonObject.addProperty("store_type", entry.getValue().toString());
+                    }else {
                         jsonObject.addProperty(entry.getKey(), entry.getValue().toString());
                     }
 
