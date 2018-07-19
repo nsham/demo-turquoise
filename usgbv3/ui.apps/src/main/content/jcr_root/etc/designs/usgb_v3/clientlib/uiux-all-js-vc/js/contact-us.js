@@ -232,8 +232,11 @@ function recaptchaCallback() {
                     }).done(function (data) { //fetch server "json" messages when done
                         console.log("successs submit3");
             
-                        $('#contactUsForm1').hide();
-                        $('#contactUsForm2').removeClass('hidden');
+                        $('#thankyou-modal').modal('show');
+                        setTimeout(function(){
+                            location.reload()
+                        }, 8000);
+                        
                     });
                    
                 }// end submit handler
