@@ -1861,7 +1861,6 @@ $(window).on('load', function () {
 
             //sort by dropdown
             $(document).on('click', '.listing-search-content .search-filter-sort .dropdown-menu a', function (e) {
-                console.log("aaaa")
                 switch ($(this).attr('data-val')) {
                     case "a_z":
                         currOnStageMainResultData.sort(function (a, b) {
