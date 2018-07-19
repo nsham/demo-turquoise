@@ -154,33 +154,33 @@
 </script>
 
 <script id="templWtbFilter" type="text/x-handlebars-template">
-	{{#each this}}
-	<div class="row">
-		<div class="col-xs-12 state-detail m-sm-bottom-l">
-			<p class="bold uppercase">{{title}}</p>
-			<div class="item-detail">
-				{{#ifEquals key "distance"}}
-					{{#each child}}
-					<div>
-						<input id="{{../key}}_{{key}}" name="{{../key}}" type="radio" class="radio" value="{{value}}">
-						<label class="checkbox-lable icon icon-80 {{icon}}" for="{{../key}}_{{key}}"></label>
-						<p class="fs-2 p-xxs">{{value}}</p>
-					</div>
-					{{/each}}
-				{{else}}
-					{{#each child}}
-					<div>
-						<input id="{{../key}}_{{key}}" name="{{../key}}" type="checkbox" class="checkbox" value="{{value}}">
-						<label class="checkbox-lable icon icon-80 {{icon}}" for="{{../key}}_{{key}}"></label>
-						<p class="fs-2 p-xxs">{{value}}</p>
-					</div>
-					{{/each}}
-				{{/ifEquals}}
-			</div>
-		</div>
-	</div>
-	{{/each}}
-</script>
+        {{#each this}}
+        <div class="row">
+            <div class="col-xs-12 state-detail {{#ifEquals key "distance"}}state-detail--{{key}}{{else}}m{{/ifEquals}} m-sm-bottom-l">
+                <p class="bold uppercase">{{title}}</p>
+                <div class="item-detail">
+                    {{#ifEquals key "distance"}}
+                        {{#each child}}
+                        <div>
+                            <input id="{{../key}}_{{key}}" name="{{../key}}" type="radio" class="radio" value="{{value}}">
+                            <label class="checkbox-lable icon icon-80 {{icon}}" for="{{../key}}_{{key}}"></label>
+                            <p class="fs-2 p-xxs">{{value}}</p>
+                        </div>
+                        {{/each}}
+                    {{else}}
+                        {{#each child}}
+                        <div>
+                            <input id="{{../key}}_{{key}}" name="{{../key}}" type="checkbox" class="checkbox" value="{{value}}">
+                            <label class="checkbox-lable icon icon-80 {{icon}}" for="{{../key}}_{{key}}"></label>
+                            <p class="fs-2 p-xxs">{{value}}</p>
+                        </div>
+                        {{/each}}
+                    {{/ifEquals}}
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </script>
 
 
 <sly data-sly-use.clientLib="/libs/granite/sightly/templates/clientlib.html" data-sly-call="${clientLib.js @ categories='uiux.alljs'}" data-sly-unwrap/>
