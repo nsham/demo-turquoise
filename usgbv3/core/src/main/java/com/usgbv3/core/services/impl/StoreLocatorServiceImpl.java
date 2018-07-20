@@ -394,6 +394,20 @@ public class StoreLocatorServiceImpl implements StoreLocatorService{
                             tempJson = convertResourceToStoreJson(hit.getResource(), gson);
                             resultJsonArray.add(tempJson);
 
+                        } catch (RepositoryException e) {
+                            LOG.error("Repository Exception:"+e);
+                        }
+                    }
+                    resultJsonObject.add("proximityResult", resultJsonArray);
+
+                    // store results
+                    resultJsonArray = new JsonArray();
+                    Resource storeLocatorResource = resourceResolver.resolve(storeLocationPath);
+                    if(storeLocatorResource != null){
+                        Iterable<Resource> children = storeLocatorResource.getChildren();
+                        for(Resource store : children){
+                            tempJson = convertResourceToStoreJson(store, gson);
+                            resultJsonArray.add(tempJson);
                             // populating unique storetype and product
                             if(tempJson.has("store_type")){
                                 storeTypeSet.add(tempJson.get("store_type").getAsString());
@@ -408,22 +422,8 @@ public class StoreLocatorServiceImpl implements StoreLocatorService{
                                     }
                                 }
                             }
-                        } catch (RepositoryException e) {
-                            LOG.error("Repository Exception:"+e);
                         }
-                    }
-                    resultJsonObject.add("ProximityResult", resultJsonArray);
-
-                    // store results
-                    resultJsonArray = new JsonArray();
-                    Resource storeLocatorResource = resourceResolver.resolve(storeLocationPath);
-                    if(storeLocatorResource != null){
-                        Iterable<Resource> children = storeLocatorResource.getChildren();
-                        for(Resource store : children){
-                            tempJson = convertResourceToStoreJson(store, gson);
-                            resultJsonArray.add(tempJson);
-                        }
-                        resultJsonObject.add("StoreResults", resultJsonArray);
+                        resultJsonObject.add("storeResults", resultJsonArray);
                     }
 
                     // filter resutls
