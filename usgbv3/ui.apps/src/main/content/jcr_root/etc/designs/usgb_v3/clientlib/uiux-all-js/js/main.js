@@ -152,14 +152,14 @@ function hookHeadScript(url, async, defer, callback) {
     $(document).ready(function () {
 
 
-        // var mobileWidth = window.matchMedia("(max-width: 768px)").matches;
-        // var target = $('.hero-banner-wrapper');
-        // for( var i=0, len = target.length; i<len; i++ ){
-        //     var src = $(target[i]).data('img-mobile');
-        //     if( mobileWidth && src.replace(/\s/g,"") != "" ){
-        //         $(target[i]).attr('style', src);
-        //     } 
-        // }
+        var mobileWidth = window.matchMedia("(max-width: 768px)").matches;
+        var target = $('.hero-banner-wrapper');
+        for( var i=0, len = target.length; i<len; i++ ){
+            var src = $(target[i]).data('img-mobile');
+            if( mobileWidth && src.replace(/\s/g,"") != "" ){
+                $(target[i]).attr('style', src);
+            } 
+        }
 
     });
 
@@ -1691,10 +1691,14 @@ $(window).on('load', function () {
             var getCard
             var inputVal
             var numberOfChecked
+            var categoryName = []
+            var getIMG
+            var getTitle
+            var getLink
             // detect change for cardcheckbox
             $(document).on("change", '.listing-search-content .container-checkbox input[type="checkbox"]', function () {
 
-
+                event.preventDefault();
                 //data-title-value is card wrapper val
                 //data-input-value is checkbox input val
                 //data-content-title is popup content title
@@ -1703,16 +1707,19 @@ $(window).on('load', function () {
                 //get html data-text-value from input
                 inputVal = getCard.data("input-value");
                 //console.log("CURRinputVal = " + inputVal)
-                var getIMG = $("[data-title-value=" + inputVal + "]  img").attr("src");
-                var getTitle = $("[data-title-value=" + inputVal + "]  .title").text();
+                getIMG = $("[data-title-value=" + inputVal + "]  img").attr("src");
+                getTitle = $("[data-title-value=" + inputVal + "]  .title").text();
+                getLink = $("[data-title-value="+ inputVal +"] a ").attr("href");
 
                 if ($('.listing-search-content .container-checkbox input[data-input-value=' + inputVal + ']').is(':checked')) {
+
                     //append  to popup
-                    $(".popup-content").append("<div class='each content-wrapper' data-content-title=" + inputVal + "><div class='left img-content'><img src=" + getIMG + "></div><div class='right title-content'data-content-value=" + inputVal + ">" + getTitle + "</div><button class='close-btn-box'><span class='bold'>x</span></button><hr class='col-xs-12 m-no m-top-m'></div>")
+                    $(".popup-content").append("<div class='each content-wrapper' data-content-title=" + inputVal + "><a href="+getLink+"><div class='left img-content'><img src=" + getIMG + "></div><div class='right title-content'data-content-value=" + inputVal + ">" + getTitle + "</div><button class='close-btn-box'><span class='bold'>x</span></button><hr class='col-xs-12 m-no m-top-m'></a></div>")
 
                     if ($(".compare-popup .title").hasClass("selected")) {
                         $(".compare-popup .title").removeClass("selected");
                     }
+
                 } else {
                     //check popup if has the value
                     if ($("[data-content-title=" + inputVal + "]").has("[data-content-value=" + inputVal + "]")) {
@@ -1720,6 +1727,7 @@ $(window).on('load', function () {
                     }
                 }
                 checkNumberOfCheckbox();
+                storeCompareLocalStorage();
             });
 
             // close btn on popup to remove content
@@ -1747,14 +1755,19 @@ $(window).on('load', function () {
                 numberOfChecked = $('.listing-search-content div input:checkbox:checked').length;
                 $(".compare-popup").show();
                 $(".popup-content").show();
-                if (numberOfChecked >= 4) {
-                    $("[data-input-value =" + inputVal + "]").attr('checked', false);
+                if (numberOfChecked >= 3) {
+                    // $("[data-input-value =" + inputVal + "]").attr('checked', false);
+                    $('.listing-search-content .container-checkbox input[type="checkbox"]').prop('disabled', true);
+                    $('.listing-search-content .container-checkbox input:checkbox:checked').prop('disabled', false);
                     $("[data-content-title=" + inputVal + "]").remove();
+                } else {
+                    $('.listing-search-content .container-checkbox input[type="checkbox"]').prop('disabled', false);
                 }
                 if (numberOfChecked > 1) {
                     $(".compare-popup .btn-compare").show();
                     $(".compare-popup").show();
                     $(".compare-popup .instruction-text").hide();
+
 
                 } else {
                     $(".compare-popup .instruction-text").show();
@@ -1763,15 +1776,51 @@ $(window).on('load', function () {
 
                 if (numberOfChecked > 0) {
                     $(".compare-popup .btn-menu-down").show();
+
+
                 } else {
                     $(".compare-popup").hide();
                     $(".popup-content").hide();
                     $(".compare-popup .btn-menu-down").hide();
                     $(".compare-popup .btn-compare").hide();
+                }
+            }
 
+
+
+            function storeCompareLocalStorage() {
+                if ($(getCard).is(':checked')) {
+                    getIMG = $("[data-title-value=" + inputVal + "]  img").attr("src");
+                    getTitle = $("[data-title-value=" + inputVal + "]  .title").text();
+
+                    var groupElem = [getIMG,getTitle,getLink]
+
+                    categoryName.push(groupElem);
+
+                    //categoryName.push(inputVal.getIMG)
+                    //categoryName.push(getIMG)
+                } else {
+                    //remove the elemeent when uncheck
+                    categoryName.splice($.inArray(inputVal, categoryName), 1);
                 }
 
+                console.log("stored", categoryName)
+
+                // if ($(getCard).attr('checked',false)){
+                //     //categoryName.splice(inputVal)
+                // }
+
+                //  localStorage.setItem("ceilings", categoryName);
             }
+
+            retrieveCompare();
+
+            function retrieveCompare() {
+
+                //var test = window.localStorage.getItem(storeData);
+                //console.log("selectedItem", test)
+            }
+
 
             //////COMPARE POPUP END//////
 
@@ -1780,11 +1829,13 @@ $(window).on('load', function () {
             ////// REFINE SEARCH  FEATURE start //////
 
 
-            ////filtering ////
+            ////filtering product listing////
             var productData
             var currOnStageMainResultData = [];
             var currProductData
             var shoutout
+
+
             productListingResult();
             //load all from json first
             function productListingResult() {
@@ -1801,15 +1852,25 @@ $(window).on('load', function () {
                         //for sorting
                         currOnStageMainResultData = productData.product_result
 
-                        //desktop
-                        var productFilterHtml = $('#product-listing-filter').html();
-                        var temptProductFilterHtml = Handlebars.compile(productFilterHtml);
-                        $('.product-listing-filter').html(temptProductFilterHtml(productData.product_listing_filter[0]));
+                        if (response.product_listing_filter.length > 0) {
+                            $("#product-listing-form").removeClass("hidden");
+                            //desktop
+                            var productFilterHtml = $('#product-listing-filter').html();
+                            var temptProductFilterHtml = Handlebars.compile(productFilterHtml);
+                            $('.product-listing-filter').html(temptProductFilterHtml(productData.product_listing_filter[0]));
 
-                        //mobile
-                        var MobileProductFilterHtml = $('#m-product-listing-filter').html();
-                        var MobileTemptProductFilterHtml = Handlebars.compile(MobileProductFilterHtml);
-                        $('.m-product-listing-filter').html(MobileTemptProductFilterHtml(productData.product_listing_filter[0]));
+                            //mobile
+                            $('#filter-icon-btn').addClass();
+                            $('#filter-icon-btn span').removeClass('hidden');
+                            var MobileProductFilterHtml = $('#m-product-listing-filter').html();
+                            var MobileTemptProductFilterHtml = Handlebars.compile(MobileProductFilterHtml);
+                            $('.m-product-listing-filter').html(MobileTemptProductFilterHtml(productData.product_listing_filter[0]));
+
+                        } else {
+                            $('#filter-icon-btn').removeClass();
+                            $('#filter-icon-btn span').addClass('hidden');
+
+                        }
 
                         //results
                         // var productFilterResult = $('#product-listing-result').html();
@@ -1821,7 +1882,6 @@ $(window).on('load', function () {
                         //console.log(shoutout)
                         hideAllWrappers();
                         renderProductListingResult();
-
                     },
                     beforeSend: function () {},
                     complete: function () {}
@@ -1853,10 +1913,12 @@ $(window).on('load', function () {
                 var selectedFilterData = ($(form).serializeObject());
                 var filteredData = multiFilter(productData.product_result, selectedFilterData);
                 console.log('filter', selectedFilterData);
-                console.log('filteredData', filteredData);
+                console.log('filteredDataPL', filteredData);
                 currOnStageMainResultData = filteredData;
                 console.log(currOnStageMainResultData)
+
                 paginationResult(currOnStageMainResultData);
+
             }
 
             //sort by dropdown
@@ -1985,7 +2047,7 @@ $(window).on('load', function () {
                     $('.product-listing-result').prepend("<div class='each m-bottom-xxl p-side-m shoutout-txt'><div  class='bg-light-grey custom-block flex-column justify-center align-stretch'><h6 class='title ht6 uppercase text-center p-s'>SHOUT SHOUT SHOUT</h6></div></div>");
                 }
             }
- 
+
             function scrollTop_one(target) {
                 if (target) {
                     $(target).stop().animate({
