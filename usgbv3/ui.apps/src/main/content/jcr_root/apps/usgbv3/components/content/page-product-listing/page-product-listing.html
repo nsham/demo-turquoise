@@ -187,7 +187,7 @@
 									{{/each}}
 
 								</select>
-							</div>
+							</div>  
 						</div>
 
 						{{#each category_child}}
@@ -205,8 +205,8 @@
 								</div>
 								{{/each}}
 							</div>
-						</div>
-						{{/each}}
+						</div> 
+						{{/each}} 
 						<hr class="m-no" />
 						<div class="each checkbox-button-wrapper">
 							{{#each category_child}}
@@ -220,7 +220,7 @@
 					</script>
 					<!-- handlebar product-listing-filter-wrapper end-->
 
-					<form id="product-listing-form">
+					<form id="product-listing-form" class="hidden">
 						<div class="c-sidebar m-top-m rounded-corners">
 
 							<div class="each product-listing-filter"></div>
@@ -262,7 +262,7 @@
 						</div>
 
 						<div class="addto text-center uppercase">
-							<a href="#">
+							<a href="{{link}}" target="_blank">
 								<span class="fs-2">
 									<strong>View Product</strong>
 								</span>
@@ -317,8 +317,8 @@
 						<!-- END SORT BY -->
 
 						<!-- filter -->
-						<a href="#" class="filter-icon btn visible-xs btn-smd m-left-m">
-							<span class="color-primary-green glyphicon glyphicon-filter"></span>
+						<a href="#"  id="filter-icon-btn" class="filter-icon btn visible-xs btn-smd m-left-m">
+							<span class="color-primary-green glyphicon glyphicon-filter "></span>
 						</a>
 						<!-- end filter -->
 					</div>
@@ -688,7 +688,7 @@
 					</div>
 
 					<div class="search-filter m-bottom-xxl p-side-l">
-						<form id="m-product-listing-form">
+						<form id="m-product-listing-form" >
 							<div class=" m-product-listing-filter"> </div>
 							<div class="m-vertical-xl">
 								<button id="test" type="submit" class=" btn width-full button-green btn-brand-default">apply filter</button>
@@ -697,7 +697,7 @@
 					</div>
 				</div>
 
-			</div>
+			</div> 
 		</div>
 
 	</section>
