@@ -120,16 +120,15 @@
                     </div>
 
                     <div>
-                        <!-- imag popup only mobile -->
+                        <!--popup mobile -->
                         <a data-fancybox="gallery" class="visible-xs" href="/content/dam/USGBoral/Global/Website/Images/component/allsample/bg-banner-tile-2.jpg">
                             <img src="/content/dam/USGBoral/Global/Website/Images/component/allsample/bg-banner-tile-2.jpg" alt="">
                         </a>
-                        <!-- img only desktop -->
+                        <!-- no popup destkop -->
                         <img class="hidden-xs" src="/content/dam/USGBoral/Global/Website/Images/component/allsample/bg-banner-tile-2.jpg" alt="">
+                    </div> 
 
-                    </div>
-
-                    <div>
+                     <div>
                         <a data-fancybox="gallery" class="visible-xs" href="/content/dam/USGBoral/Global/Website/Images/component/allsample/test.png">
                             <img src="/content/dam/USGBoral/Global/Website/Images/component/allsample/test.png" alt="">
                         </a>
@@ -145,52 +144,17 @@
 
                     </div>
 
-
-
                 </div>
 
                 <!-- gallery items thumbnails -->
-                <div class="gallery-slider-nav  mix-media-gallery-item-wrapper m-bottom-m " data-slick='{
-                    "slidesToShow": 4,
-                    "slidesToScroll": 1,
+                <div class="gallery-slider-nav  mix-media-gallery-item-wrapper m-bottom-m " data-slick='{ 
                     "infinite": true,
                     "speed": 300,
                     "arrows": false,
                     "dots":false,
-                    "centerMode":false,
                     "focusOnSelect":true,
-                    "responsive": [
-                        {
-                            "breakpoint": 1024,
-                            "settings": {
-                                "slidesToShow": 2
-                            }
-                        },
-                        {
-                            "breakpoint": 992,
-                            "settings": {
-                                "slidesToShow": 4
-                            }
-                        },
-                        {
-                            "breakpoint": 768,
-                            "settings": {
-                                "slidesToShow": 4
-                            }
-                        },
-                        {
-                            "breakpoint": 500,
-                            "settings": {
-                                "slidesToShow": 3
-                            }
-                        },
-                        {
-                            "breakpoint": 400,
-                            "settings": {
-                                "slidesToShow": 2
-                            }
-                        }
-                    ] 
+                    "centerMode":false,
+                    "variableWidth":true
                 }'>
                     <div class="gallery-item">
                         <div class="thumbnail-border" style="background:transparent url('/content/dam/USGBoral/Global/Website/Images/component/allsample/test.png') center center no-repeat; background-size:cover; ">

@@ -30,7 +30,6 @@
                 <div class="gallery-slider-for  product-gallery-wrapper  bg-dark-grey" data-slick='{
                     "slidesToShow": 1,
                     "slidesToScroll": 1,
-                    "infinite": true,
                     "speed": 300,
                     "arrows": true,
                     "responsive": [
@@ -55,51 +54,6 @@
                     ]
                 }'>
 
-                    <!-- <div class="inline-video" data-video="html5">
-                        <a class="cta-video-inline p-no">
-                            <span class="bg-overlay">
-                                <img src="/content/dam/USGBoral/Global/Website/Images/component/allsample/bg-hover-tile.jpg" alt="">
-                            </span>
-                            <div class="box-size-m-2">
-                                <div class="center va-middle">
-                                    <span class="ico-play-video color-white fa fa-play-circle"></span>
-                                    <div class="m-top-m btn btn-top-border btn-light btn btn-top-border btn-light">MP4 Video
-                                        <span class="glyphicon glyphicon-menu-right"></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-
-                        <div class="video">
-                            <video width="400" controls="" class="modal-video-elem">
-                                <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-                                <source src="https://www.w3schools.com/html/mov_bbb.ogg" type="video/ogg">
-                            </video>
-                        </div>
-
-                    </div> -->
-
-                    <!-- <div class="inline-video" data-video="youtube">
-                        <button class="cta-video-inline p-no" type="button">
-                            <span class="bg-overlay">
-                                <img src="/content/dam/USGBoral/Global/Website/Images/component/allsample/bg-banner-tile.jpg" alt="">
-                            </span>
-                            <div class="box-size-m-2">
-                                <div class="center va-middle">
-                                    <span class="ico-play-video color-white fa fa-play-circle"></span>
-                                    <div class="m-top-m btn btn-top-border btn-light btn btn-top-border btn-light">YT Video
-                                        <span class="glyphicon glyphicon-menu-right"></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </button>
-
-                        <div class="video">
-                            <div id="ranID" class="YouTubeVideoPlayer" data-youtubeid="aqz-KE-bpKQ"></div>
-                        </div>
-
-                    </div> -->
-
                     <div>
                         <a data-fancybox="gallery" data-width="640" data-height="360" href="http://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4">
                             <span class="m-gallery-ico-play ico-play-video color-white fa fa-play-circle"></span>
@@ -112,7 +66,7 @@
                             <img src="http://img.youtube.com/vi/gPuI_pbCYOI/0.jpg" alt="">
                         </a>
                     </div>
-                    <div>
+                    <!-- <div>
                         <a data-fancybox="gallery" href="/content/dam/USGBoral/Global/Website/Images/component/allsample/bg-hover-tile.jpg" target="_blank">
                             <img src="/content/dam/USGBoral/Global/Website/Images/component/allsample/bg-hover-tile.jpg" alt="">
                         </a>
@@ -133,66 +87,23 @@
                         <a data-fancybox="gallery" href="/content/dam/USGBoral/Global/Website/Images/component/allsample/bg-banner-tile-2.jpg" target="_blank">
                             <img src="/content/dam/USGBoral/Global/Website/Images/component/allsample/bg-banner-tile-2.jpg" alt="">
                         </a>
-                    </div>
+                    </div>  -->
                 </div>
 
 
                 <!-- gallery items -->
-                <div class="gallery-slider-nav gallery-item-wrapper m-bottom-m" data-slick='{
-                    "slidesToShow": 4,
-                    "slidesToScroll": 1,
+                <div class="gallery-slider-nav gallery-item-wrapper m-bottom-m" data-slick='{ 
                     "infinite": true,
                     "speed": 300,
                     "arrows": false,
                     "dots":false,
-                    "centerMode":false,
                     "focusOnSelect":true,
-                    "responsive": [
-                        {
-                            "breakpoint": 1024,
-                            "settings": {
-                                "slidesToShow": 3
-                            }
-                        },
-                        {
-                            "breakpoint": 992,
-                            "settings": {
-                                "slidesToShow": 6
-                            }
-                        },
-                        {
-                            "breakpoint": 768,
-                            "settings": {
-                                "slidesToShow": 5
-                            }
-                        },
-                        {
-                            "breakpoint":600,
-                            "settings": {
-                                "slidesToShow": 4
-                            }
-                        },
-                        {
-                            "breakpoint":500,
-                            "settings": {
-                                "slidesToShow": 3
-                            }
-                        },
-                        {
-                            "breakpoint": 400,
-                            "settings": {
-                                "slidesToShow": 2
-                            }
-                        }
-                    ]
+                    "centerMode":false,
+                    "variableWidth":true
                 }'>
-                    <!-- <div class="gallery-item">
-                        <img src="/content/dam/USGBoral/Global/Website/Images/component/allsample/bg-hover-tile.jpg" alt="">
-                    </div>
-                    <div class="gallery-item">
-                        <img src="/content/dam/USGBoral/Global/Website/Images/component/allsample/bg-banner-tile.jpg" alt="">
-                    </div>
-                     -->
+               
+
+               
                     <div class="gallery-item">
                         <div class="thumbnail-border" style=" background:transparent url('https://peach.blender.org/wp-content/uploads/bird1.jpg') center no-repeat; background-size:cover;">
                             <span class="ico-play-video color-white fa fa-play-circle"></span>
@@ -204,12 +115,13 @@
                             <span class="ico-play-video color-white fa fa-play-circle"></span>
                             <img style="opacity:0;" src="http://img.youtube.com/vi/gPuI_pbCYOI/0.jpg">
                         </div>
-                    </div>
-                    <div class="gallery-item">
+                    </div> 
+                     <!-- <div class="gallery-item">
                         <div class="thumbnail-border" style=" background:transparent url('/content/dam/USGBoral/Global/Website/Images/component/allsample/bg-hover-tile.jpg') center no-repeat; background-size:cover;">
                             <img style="opacity:0;" src="/content/dam/USGBoral/Global/Website/Images/component/allsample/bg-hover-tile.jpg">
                         </div>
                     </div>
+                    
                     <div class="gallery-item">
                         <div class="thumbnail-border" style=" background:transparent url('/content/dam/USGBoral/Global/Website/Images/component/allsample/bg-banner-tile-3.jpg') center no-repeat; background-size:cover;">
                             <img style="opacity:0;" src="/content/dam/USGBoral/Global/Website/Images/component/allsample/bg-banner-tile-3.jpg">
@@ -225,7 +137,7 @@
                         <div class="thumbnail-border" style=" background:transparent url('/content/dam/USGBoral/Global/Website/Images/component/allsample/bg-banner-tile-2.jpg') center no-repeat; background-size:cover;">
                             <img style="opacity:0;" src="/content/dam/USGBoral/Global/Website/Images/component/allsample/bg-banner-tile-2.jpg">
                         </div>
-                    </div>
+                    </div> -->
 
 
                 </div>
