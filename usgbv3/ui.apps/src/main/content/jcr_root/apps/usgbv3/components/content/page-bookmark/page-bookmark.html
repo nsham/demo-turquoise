@@ -1,4 +1,6 @@
 <link rel="stylesheet" href="/etc/designs/usgb_v3/clientlib/uiux-less-vc.css" type="text/css"> 
+<link rel="stylesheet" href="/etc/designs/usgb_v3/clientlib/uiux-less-ct.css" type="text/css"> 
+
 
 <!-- BREADCUMB-BOX -->
 <div class="container m-vertical-m ">
@@ -34,8 +36,12 @@
 	<div class="row">
 		<div class="col-xs-12 bookmark-wrap">
 			<!-- SEARCH CONTENT -->
-			<div class="relevant-content">
-				<div class="search-filter-sort justify-end">
+			<div class="no-result p-vertical-l">
+					<h5 class="ht5">No result.</h5>
+					<p>Please bookmark your favourite product.</p>
+			</div>
+			<div class="relevant-content hidden">
+				<div class="search-filter-sort justify-end hidden">
 					<!-- SORT BY -->
 					<div class="dropdown dp-form d-small m-bottom-3xl float-right" style="max-width: 280px;">
 						<button class="btn btn-default color-dark-grey dropdown-toggle text-left dp-clickable" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -48,13 +54,7 @@
 								<a data-val="a_z">A - Z</a>
 							</li>
 							<li>
-								<a data-val="z_a">Z - A</a>
-							</li>
-							<li>
-								<a data-val="latest">Latest to oldest</a>
-							</li>
-							<li>
-								<a data-val="oldest">Oldest to latest</a>
+								<a data-val="categorize">Categorize</a>
 							</li>
 						</ul>
 					</div>
@@ -62,216 +62,121 @@
 					<div class="dropdown dp-form-mobile dropdown-menu-right m-vertical-m d-small">
 						<select class="btn-default">
 							<option value="a_z">A - Z</option>
-							<option value="z_a">Z - A</option>
-							<option value="latest">Latest to oldest</option>
-							<option value="oldest">Oldest to latest</option>
+							<option value="categorize">Categorize</option>
 						</select>
 					</div>
 					<!-- END SORT BY -->
-	
-					<!-- filter -->
-					<a href="#" class="filter-icon btn visible-xs btn-smd m-left-m">
-						<span class="color-primary-green glyphicon glyphicon-filter"></span>
-					</a>
-					<!-- end filter -->
 				</div>
 				<div class="inner">
-					<div class="each">
-						<div class="left">
-							<div class="thumbs">
-								<a href="#">
-									<img src="https://dummyimage.com/250x145/000000/fff">
-								</a>
-							</div>
-						</div>
-						<div class="right">
-							<a href="#">
-								<div class="content p-left-l">
-									<h6 class="headline ht6 uppercase m-bottom-xxs">Sonatex Colour Guide</h6>
-									<p class="description m-no">
-										Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.
-									</p>
-								</div>
-							</a>
-						</div>
-						<div class="p-left-l">
-							<button class="btn btn-brand-default button-green" data-toggle="modal" data-target=".bookmark-delele"> <span class="hidden-xs">REMOVE</span>
-								<i class="icon-size-xs fa fa-trash-o visible-xs"></i>
-							</button>
-						</div>
-					</div>
-					<div class="each">
-						<div class="left">
-							<div class="thumbs">
-								<a href="#">
-									<img src="https://dummyimage.com/250x145/000000/fff">
-								</a>
-							</div>
-						</div>
-						<div class="right">
-							<a href="#">
-								<div class="content p-left-l">
-									<h6 class="headline ht6 uppercase m-bottom-xxs">Sonatex Colour Guide</h6>
-									<p class="description m-no">
-										Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.
-									</p>
-								</div>
-							</a>
-						</div>
-						<div class="p-left-l">
-							<button class="btn btn-brand-default button-green" data-toggle="modal" data-target=".bookmark-delele"> <span class="hidden-xs">REMOVE</span>
-								<i class="icon-size-xs fa fa-trash-o visible-xs"></i>
-							</button>
-						</div>
-					</div>
-					<div class="each">
-						<div class="left">
-							<div class="thumbs">
-								<a href="#">
-									<img src="https://dummyimage.com/250x145/000000/fff">
-								</a>
-							</div>
-						</div>
-						<div class="right">
-							<a href="#">
-								<div class="content p-left-l">
-									<h6 class="headline ht6 uppercase m-bottom-xxs">Sonatex Colour Guide</h6>
-									<p class="description m-no">
-										Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.
-									</p>
-								</div>
-							</a>
-						</div>
-						<div class="p-left-l">
-							<button class="btn btn-brand-default button-green" data-toggle="modal" data-target=".bookmark-delele"> <span class="hidden-xs">REMOVE</span>
-								<i class="icon-size-xs fa fa-trash-o visible-xs"></i>
-							</button>
-						</div>
-					</div>
-					<div class="each">
-						<div class="left">
-							<div class="thumbs">
-								<a href="#">
-									<img src="https://dummyimage.com/250x145/000000/fff">
-								</a>
-							</div>
-						</div>
-						<div class="right">
-							<a href="#">
-								<div class="content p-left-l">
-									<h6 class="headline ht6 uppercase m-bottom-xxs">Sonatex Colour Guide</h6>
-									<p class="description m-no">
-										Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.
-									</p>
-								</div>
-							</a>
-						</div>
-						<div class="p-left-l">
-							<button class="btn btn-brand-default button-green" data-toggle="modal" data-target=".bookmark-delele"> <span class="hidden-xs">REMOVE</span>
-								<i class="icon-size-xs fa fa-trash-o visible-xs"></i>
-							</button>
-						</div>
-					</div>
-					<div class="each">
-						<div class="left">
-							<div class="thumbs">
-								<a href="#">
-									<img src="https://dummyimage.com/250x145/000000/fff">
-								</a>
-							</div>
-						</div>
-						<div class="right">
-							<a href="#">
-								<div class="content p-left-l">
-									<h6 class="headline ht6 uppercase m-bottom-xxs">Sonatex Colour Guide</h6>
-									<p class="description m-no">
-										Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.
-									</p>
-								</div>
-							</a>
-						</div>
-						<div class="p-left-l">
-							<button class="btn btn-brand-default button-green" data-toggle="modal" data-target=".bookmark-delele"> <span class="hidden-xs">REMOVE</span>
-								<i class="icon-size-xs fa fa-trash-o visible-xs"></i>
-							</button>
-						</div>
-					</div>
-					<div class="each">
-						<div class="left">
-							<div class="thumbs">
-								<a href="#">
-									<img src="https://dummyimage.com/250x145/000000/fff">
-								</a>
-							</div>
-						</div>
-						<div class="right">
-							<a href="#">
-								<div class="content p-left-l">
-									<h6 class="headline ht6 uppercase m-bottom-xxs">Sonatex Colour Guide</h6>
-									<p class="description m-no">
-										Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.
-									</p>
-								</div>
-							</a>
-						</div>
-						<div class="p-left-l">
-							<button class="btn btn-brand-default button-green" data-toggle="modal" data-target=".bookmark-delele"> <span class="hidden-xs">REMOVE</span>
-								<i class="icon-size-xs fa fa-trash-o visible-xs"></i>
-							</button>
-						</div>
-					</div>
+					<div class="bookmark-list"></div>
 				</div>
 			</div>
 			<!-- END SEARCH CONTENT -->
 
 			<!-- SEARCH PAGINATION -->
 			<hr />
-			<nav aria-label="Page navigation">
-				<ul class="pagination pull-right m-top-no">
-					<li>
-						<a href="#" aria-label="Previous">
-							<span aria-hidden="true">&lt;</span>
-						</a>
-					</li>
-					<li>
-						<a href="#">1</a>
-					</li>
-					<li>
-						<a href="#">2</a>
-					</li>
-					<li>
-						<a href="#">3</a>
-					</li>
-					<li>
-						<a href="#">4</a>
-					</li>
-					<li>
-						<a href="#">5</a>
-					</li>
-					<li>
-						<a href="#" aria-label="Next">
-							<span aria-hidden="true">&gt;</span>
-						</a>
-					</li>
-				</ul>
-			</nav>
-			<div class="m-vertical-xxs btn-delete" data-toggle="modal" data-target=".bookmark-delele-all">
-				<span class="icon-color-darker-grey icon-size-xs fa fa-trash-o m-right-xxs"></span> Delete all
-			</div>
+			<div id="pagination-container" class="m-bottom-m"></div>
+		
+			<a href="#" class="m-vertical-xxs icon-color-darker-grey hidden" data-toggle="modal" data-target="#bookmark-remove-all-modal">
+					<span class="icon-size-xs fa fa-trash-o m-right-xxs"></span> Delete all
+			</a>
+
+				
 			<!-- END SEARCH PAGINATION -->
 		</div>
 	</div>
-	<div class="row">
+	<div class="social-media-group row hidden">
 		<div class="col-xs-12 text-center m-bottom-4xl">
-			<p>Share on:</p>
-			<div>
-				<a href="#" class="icon-color-darker-grey icon-size fa fa-facebook-square m-right-xxs"></a>
-				<a href="#" class="icon-color-darker-grey icon-size fa fa-twitter-square m-right-xxs"></a>
-				<a href="#" class="icon-color-darker-grey icon-size fa fa-linkedin-square m-right-xxs"></a>
-				<a href="#" class="icon-color-darker-grey icon-size fa fa-envelope-square m-right-xxss"></a>
-			</div>
+			<p class="m-bottom-xxs">Share on:</p>
+			<div class="icon-color-darker-grey share-icons"></div>
 		</div>
 	</div>
 </div>
  
+
+<div id="bookmark-remove-modal" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="myModalLabel">
+	<div class="vertical-alignment-helper">
+			<div class="modal-dialog vertical-align-center" role="document" width="750px">
+					<div class="modal-content">
+							<div class="modal-body m-top-3xl m-bottom-m">
+									<div class="row">
+											<div class="col-md-12" align="center">
+													<div class="form-group">
+															<h4 class="ht4 uppercase color-primary-green header">Remove</h4>
+															<p class="color-dark-grey">Do you sure you want to remove this bookmark?</p>
+															<br>
+															<p style="text-align: center;">
+																	<button class="btn btn-brand-default button-green cta-remove-bookmark">Yes</button>
+																	<button data-dismiss="modal" class="btn btn-brand-default button-green">No</button>
+															</p>
+													</div>
+											</div>
+									</div>
+							</div>
+					</div>
+			</div>
+	</div>
+</div>
+
+<div id="bookmark-remove-all-modal" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="myModalLabel">
+	<div class="vertical-alignment-helper">
+			<div class="modal-dialog vertical-align-center" role="document" width="750px">
+					<div class="modal-content">
+							<div class="modal-body m-top-3xl m-bottom-m">
+									<div class="row">
+											<div class="col-md-12" align="center">
+													<div class="form-group">
+															<h4 class="ht4 uppercase color-primary-green header">Remove All</h4>
+															<p class="color-dark-grey">Do you sure you want to remove all bookmarks?</p>
+															<br>
+															<p style="text-align: center;">
+																	<button class="btn btn-brand-default button-green cta-remove-all-bookmark">Yes</button>
+																	<button data-dismiss="modal" class="btn btn-brand-default button-green">No</button>
+															</p>
+													</div>
+											</div>
+									</div>
+							</div>
+					</div>
+			</div>
+	</div>
+</div>
+
+<script id="bookmark_template" type="text/x-handlebars-template">
+	{{#each this}}
+	<div class="each">
+		<div class="left">
+			<div class="thumbs">
+				<a href="{{pagePropertiesList.0.uri}}.html">
+						<img src="{{pagePropertiesList.0.image616x472}}">
+				</a>
+			</div>
+		</div>
+		<div class="right">
+			<a href="{{pagePropertiesList.0.uri}}.html">
+				<div class="content p-left-l">
+					<h6 class="fs-3 m-bottom-xs">{{pagePropertiesList.0.categoryName}}</h6>
+					<h6 class="headline ht6 uppercase m-bottom-xxs">{{pagePropertiesList.0.pageTitle}}</h6>
+					<p class="description m-no">
+							{{pagePropertiesList.0.pageDescription}}
+					</p>
+				</div>
+			</a>
+		</div>
+		<div class="p-left-l">
+			<button class="btn btn-brand-default button-green cta-trigger-remove"> <span class="hidden-xs">REMOVE</span>
+				<i class="icon-size-xs fa fa-trash-o visible-xs"></i>
+			</button>
+		</div>
+	</div>
+	{{/each}}
+</script>
+
+
 <sly data-sly-use.clientLib="/libs/granite/sightly/templates/clientlib.html" data-sly-call="${clientLib.js @ categories='uiux.alljs'}" data-sly-unwrap/>
+
+<script src='https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials.min.js'></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
+<script src="/etc/designs/usgb_v3/clientlib/uiux-less-ct/js/vendors/pagination.js"></script>
+<script src="/etc/designs/usgb_v3/clientlib/uiux-all-js-vc.js"></script>
