@@ -740,7 +740,7 @@
             <div class="row bg-white m-vertical-l m-sm-vertical-xl" data-scroll="resources">
                 <div class="container">
 
-                    <div class="row m-bottom-4xl">
+                    <div class="row m-md-bottom-4xl">
                         <div class="col-xs-12 m-bottom-s">
                             <h2 class="uppercase color-darker-grey ht5">resources</h2>
                         </div>
@@ -748,29 +748,313 @@
                             <p class="col-xs-12 col-sm-8 p-no"> Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean
                                 massa. </p>
 
-                            <div class="dropdown col-xs-12 col-sm-4 p-no">
-                                <button class="btn btn-default color-dark-grey dropdown-toggle text-left" type="button" id="show-all-series" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                    <span>Show all series</span>
-                                    <span class="color-primary-green glyphicon glyphicon-menu-down fs-1 right"></span>
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="show-all-series">
-                                    <li>
-                                       Series A
-                                    </li>
-                                    <li>
-                                        Series Bt
-                                    </li>
-                                    <li>
-                                        Series C
-                                    </li>
-                                    <li>
-                                      Series D
-                                    </li>
-                                </ul>
+                            <div class="col-xs-12 col-sm-4 p-no">
+                                <div class="filter-content-in-category">
+                                    <div class="dropdown dp-form p-no float-right hidden-xs" style="min-width: 280px; display: inline-block;">
+                                        <button class="btn btn-default color-dark-grey dropdown-toggle text-left dp-clickable" type="button" data-toggle="dropdown"
+                                            aria-haspopup="true" aria-expanded="false">
+                                            <span class="dp-text">All</span>
+                                            <input type="hidden" name="selectenquirytype" value="all">
+                                            <span class="color-primary-green glyphicon glyphicon-menu-down right"></span>
+                                        </button>
+                                        <ul class="dropdown-menu dp-list" aria-labelledby="dropdownMenu1">
+                                            <li>
+                                                <a data-val="all">All</a>
+                                            </li>
+                                            <li>
+                                                <a data-val="technical_data">Technical Data</a>
+                                            </li>
+                                            <li>
+                                                <a data-val="submittal_sheet">Submittal Sheet</a>
+                                            </li>
+                                            <li>
+                                                <a data-val="color_guide">Color Guide</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="dropdown dp-form-mobile dropdown-menu-right m-vertical-m d-small width-full visible-xs">
+                                        <select class="btn-default">
+                                            <option value="all">All</option>
+                                            <option value="technical_data">Technical Data</option>
+                                            <option value="submittal_sheet">Submittal Sheet</option>
+                                            <option value="color_guide">Color Guide</option>
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
+                    </div>
+
+                    <div class="row m-no">
+                        <div class="custom-block col-sm-4 col-xs-12 p-md-m p-xxs" data-filter-content="technical_data-category">
+                            <div class="c-download-add-submittal-list m-bottom-xxs m-sm-bottom-m">
+                                <div class=" each  p-no p-sm-top-s p-sm-bottom-no">
+
+                                    <div class="content-left">
+                                        <img src="/content/dam/USGBoral/Global/Website/Images/component/allsample/pdf-icon.png">
+                                        <div class=" text-content fs-2">
+                                            <span class="bold">Lorem ipsum dolor</span>
+                                            <br>
+                                            <p class="limit"> consectetuer adipiscing </p>
+                                        </div>
+                                    </div>
+
+
+                                    <!-- mobile only -->
+                                    <div class=" two-btn-m visible-xs">
+                                        <a href="#" class="btn button-grey btn-sm">
+                                            <span class="glyphicon glyphicon-arrow-down "></span>
+                                        </a>
+                                        <a href="#" class="btn button-grey btn-sm ">
+                                            <span class="glyphicon glyphicon-plus "></span>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <!-- desktop only -->
+                                <div class="each hidden-xs">
+                                    <div class="two-btn">
+                                        <a href="" class="btn-one">Download</a>
+                                        <a href="" class="btn-two">
+                                            <span class="glyphicon glyphicon-plus"></span>Add to submittal</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="visible-xs">
+                        </div>
+                        <div class="custom-block col-sm-4 col-xs-12 p-md-m p-xxs" data-filter-content="technical_data-category">
+                            <div class="c-download-add-submittal-list m-bottom-xxs m-sm-bottom-m">
+                                <div class=" each  p-no p-sm-top-s p-sm-bottom-no">
+
+                                    <div class="content-left">
+                                        <img src="/content/dam/USGBoral/Global/Website/Images/component/allsample/pdf-icon.png">
+                                        <div class=" text-content fs-2">
+                                            <span class="bold">Lorem ipsum dolor</span>
+                                            <br>
+                                            <p class="limit"> consectetuer adipiscing </p>
+                                        </div>
+                                    </div>
+
+                                    <!-- mobile only -->
+                                    <div class=" two-btn-m visible-xs">
+                                        <a href="#" class="btn button-grey btn-sm">
+                                            <span class="glyphicon glyphicon-arrow-down "></span>
+                                        </a>
+                                        <a href="#" class="btn button-grey btn-sm ">
+                                            <span class="glyphicon glyphicon-plus "></span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <!-- desktop only -->
+                                <div class="each hidden-xs">
+                                    <div class="two-btn">
+                                        <a href="" class="btn-one">Download</a>
+                                        <a href="" class="btn-two">
+                                            <span class="glyphicon glyphicon-plus"></span>Add to submittal</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="visible-xs">
+                        </div>
+                        <div class="custom-block col-sm-4 col-xs-12 p-md-m p-xxs" data-filter-content="technical_data-category">
+                            <div class="c-download-add-submittal-list m-bottom-xxs m-sm-bottom-m">
+                                <div class=" each  p-no p-sm-top-s p-sm-bottom-no">
+
+                                    <div class="content-left">
+                                        <img src="/content/dam/USGBoral/Global/Website/Images/component/allsample/pdf-icon.png">
+                                        <div class=" text-content fs-2">
+                                            <span class="bold">Lorem ipsum dolor</span>
+                                            <br>
+                                            <p class="limit"> consectetuer adipiscing </p>
+                                        </div>
+                                    </div>
+
+                                    <!-- mobile only -->
+                                    <div class=" two-btn-m visible-xs">
+                                        <a href="#" class="btn button-grey btn-sm">
+                                            <span class="glyphicon glyphicon-arrow-down "></span>
+                                        </a>
+                                        <a href="#" class="btn button-grey btn-sm ">
+                                            <span class="glyphicon glyphicon-plus "></span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <!-- desktop only -->
+                                <div class="each hidden-xs">
+                                    <div class="two-btn">
+                                        <a href="" class="btn-one">Download</a>
+                                        <a href="" class="btn-two">
+                                            <span class="glyphicon glyphicon-plus"></span>Add to submittal</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="visible-xs">
+                        </div>
+                        <div class="custom-block col-sm-4 col-xs-12 p-md-m p-xxs" data-filter-content="submittal_sheet-category">
+                            <div class="c-download-add-submittal-list m-bottom-xxs m-sm-bottom-m">
+                                <div class=" each  p-no p-sm-top-s p-sm-bottom-no">
+                                    <div class="content-left">
+                                        <img src="/content/dam/USGBoral/Global/Website/Images/component/allsample/pdf-icon.png">
+                                        <div class=" text-content fs-2">
+                                            <span class="bold">Lorem ipsum dolor</span>
+                                            <br>
+                                            <p class="limit"> consectetuer adipiscing </p>
+                                        </div>
+                                    </div>
+                                    <!-- mobile only -->
+                                    <div class=" two-btn-m visible-xs">
+                                        <a href="#" class="btn button-grey btn-sm">
+                                            <span class="glyphicon glyphicon-arrow-down "></span>
+                                        </a>
+                                        <a href="#" class="btn button-grey btn-sm ">
+                                            <span class="glyphicon glyphicon-plus "></span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <!-- desktop only -->
+                                <div class="each hidden-xs">
+                                    <div class="two-btn">
+                                        <a href="" class="btn-one">Download</a>
+                                        <a href="" class="btn-two">
+                                            <span class="glyphicon glyphicon-plus"></span>Add to submittal</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="visible-xs">
+                        </div>
+                        <div class="custom-block col-sm-4 col-xs-12 p-md-m p-xxs" data-filter-content="submittal_sheet-category">
+                            <div class="c-download-add-submittal-list m-bottom-xxs m-sm-bottom-m">
+                                <div class=" each  p-no p-sm-top-s p-sm-bottom-no">
+                                    <div class="content-left">
+                                        <img src="/content/dam/USGBoral/Global/Website/Images/component/allsample/pdf-icon.png">
+                                        <div class=" text-content fs-2">
+                                            <span class="bold">Lorem ipsum dolor</span>
+                                            <br>
+                                            <p class="limit"> consectetuer adipiscing </p>
+                                        </div>
+                                    </div>
+                                    <!-- mobile only -->
+                                    <div class=" two-btn-m visible-xs">
+                                        <a href="#" class="btn button-grey btn-sm">
+                                            <span class="glyphicon glyphicon-arrow-down "></span>
+                                        </a>
+                                        <a href="#" class="btn button-grey btn-sm ">
+                                            <span class="glyphicon glyphicon-plus "></span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <!-- desktop only -->
+                                <div class="each hidden-xs">
+                                    <div class="two-btn">
+                                        <a href="" class="btn-one">Download</a>
+                                        <a href="" class="btn-two">
+                                            <span class="glyphicon glyphicon-plus"></span>Add to submittal</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="visible-xs">
+                        </div>
+                        <div class="custom-block col-sm-4 col-xs-12 p-md-m p-xxs" data-filter-content="submittal_sheet-category">
+                            <div class="c-download-add-submittal-list m-bottom-xxs m-sm-bottom-m">
+                                <div class=" each  p-no p-sm-top-s p-sm-bottom-no">
+                                    <div class="content-left">
+                                        <img src="/content/dam/USGBoral/Global/Website/Images/component/allsample/pdf-icon.png">
+                                        <div class=" text-content fs-2">
+                                            <span class="bold">Lorem ipsum dolor</span>
+                                            <br>
+                                            <p class="limit"> consectetuer adipiscing </p>
+                                        </div>
+                                    </div>
+                                    <!-- mobile only -->
+                                    <div class=" two-btn-m visible-xs">
+                                        <a href="#" class="btn button-grey btn-sm">
+                                            <span class="glyphicon glyphicon-arrow-down "></span>
+                                        </a>
+                                        <a href="#" class="btn button-grey btn-sm ">
+                                            <span class="glyphicon glyphicon-plus "></span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <!-- desktop only -->
+                                <div class="each hidden-xs">
+                                    <div class="two-btn">
+                                        <a href="" class="btn-one">Download</a>
+                                        <a href="" class="btn-two">
+                                            <span class="glyphicon glyphicon-plus"></span>Add to submittal</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="visible-xs">
+                        </div>
+                        <div class="custom-block col-sm-4 col-xs-12 p-md-m p-xxs" data-filter-content="color_guide-category">
+                            <div class="c-download-add-submittal-list m-bottom-xxs m-sm-bottom-m">
+                                <div class=" each  p-no p-sm-top-s p-sm-bottom-no">
+
+                                    <div class="content-left">
+                                        <img src="/content/dam/USGBoral/Global/Website/Images/component/allsample/pdf-icon.png">
+                                        <div class=" text-content fs-2">
+                                            <span class="bold">Lorem ipsum dolor</span>
+                                            <br>
+                                            <p class="limit"> consectetuer adipiscing </p>
+                                        </div>
+                                    </div>
+
+                                    <!-- mobile only -->
+                                    <div class=" two-btn-m visible-xs">
+                                        <a href="#" class="btn button-grey btn-sm">
+                                            <span class="glyphicon glyphicon-arrow-down "></span>
+                                        </a>
+                                        <a href="#" class="btn button-grey btn-sm ">
+                                            <span class="glyphicon glyphicon-plus "></span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <!-- desktop only -->
+                                <div class="each hidden-xs">
+                                    <div class="two-btn">
+                                        <a href="" class="btn-one">Download</a>
+                                        <a href="" class="btn-two">
+                                            <span class="glyphicon glyphicon-plus"></span>Add to submittal</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="visible-xs">
+                        </div>
+                        <div class="custom-block col-sm-4 col-xs-12 p-md-m p-xxs" data-filter-content="color_guide-category">
+                            <div class="c-download-add-submittal-list m-bottom-xxs m-sm-bottom-m">
+                                <div class=" each  p-no p-sm-top-s p-sm-bottom-no">
+
+                                    <div class="content-left">
+                                        <img src="/content/dam/USGBoral/Global/Website/Images/component/allsample/pdf-icon.png">
+                                        <div class=" text-content fs-2">
+                                            <span class="bold">Lorem ipsum dolor</span>
+                                            <br>
+                                            <p class="limit"> consectetuer adipiscing </p>
+                                        </div>
+                                    </div>
+
+                                    <!-- mobile only -->
+                                    <div class=" two-btn-m visible-xs">
+                                        <a href="#" class="btn button-grey btn-sm">
+                                            <span class="glyphicon glyphicon-arrow-down "></span>
+                                        </a>
+                                        <a href="#" class="btn button-grey btn-sm ">
+                                            <span class="glyphicon glyphicon-plus "></span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <!-- desktop only -->
+                                <div class="each hidden-xs">
+                                    <div class="two-btn">
+                                        <a href="" class="btn-one">Download</a>
+                                        <a href="" class="btn-two">
+                                            <span class="glyphicon glyphicon-plus"></span>Add to submittal</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="visible-xs">
+                        </div>
                     </div>
 
                     <!-- accordion collapse test -->
@@ -778,9 +1062,9 @@
                         <div id="accordion">
 
                             <!-- item one -->
-                            <div class="accordion-item">
+                            <div data-filter-content="technical_data-category" class="accordion-item">
 
-                                <div class="bg-light-grey p-m panel-heading rounded-corners m-bottom-xl" data-toggle="collapse" data-parent="#accordion"
+                                <div class="bg-light-grey p-m panel-heading rounded-corners m-bottom-xl m-md-bottom-m" data-toggle="collapse" data-parent="#accordion"
                                     data-target="#technical-data">
                                     <h2 class="ht6 accordion-toggle bold color-darker-grey">Technical Data</h2>
                                 </div>
@@ -793,8 +1077,7 @@
 
                                                 <!-- 1 -->
                                                 <div class="col-sm-4 col-xs-12 p-md-m p-xxs">
-                                                    <div class="custom-block">
-
+                                                    <div class="custom-block" data-filter-content="technical_data-category">
                                                         <div class="c-download-add-submittal-list m-bottom-xxs m-sm-bottom-m">
                                                             <div class=" each  p-no p-sm-top-s p-sm-bottom-no">
 
@@ -828,17 +1111,14 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-xs-12 p-no visible-xs">
-                                                        <hr>
+                                                        <hr class="visible-xs"/>
                                                     </div>
                                                 </div>
                                                 <!-- 1 end -->
 
                                                 <!-- 2 -->
                                                 <div class="col-sm-4 col-xs-12 p-md-m p-xxs">
-                                                    <div class="custom-block">
-
+                                                    <div class="custom-block" data-filter-content="technical_data-category">
                                                         <div class="c-download-add-submittal-list m-bottom-xxs m-sm-bottom-m">
                                                             <div class=" each  p-no p-sm-top-s p-sm-bottom-no">
 
@@ -870,16 +1150,13 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-xs-12 p-no visible-xs">
-                                                        <hr>
+                                                        <hr class="visible-xs"/>
                                                     </div>
                                                 </div>
                                                 <!-- 2 end -->
                                                 <!-- 3 -->
                                                 <div class="col-sm-4 col-xs-12 p-md-m p-xxs">
-                                                    <div class="custom-block">
-
+                                                    <div class="custom-block" data-filter-content="technical_data-category">
                                                         <div class="c-download-add-submittal-list m-bottom-xxs m-sm-bottom-m">
                                                             <div class=" each  p-no p-sm-top-s p-sm-bottom-no">
 
@@ -911,9 +1188,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-xs-12 p-no visible-xs">
-                                                        <hr>
+                                                        <hr class="visible-xs"/>
                                                     </div>
                                                 </div>
                                                 <!-- 3 end -->
@@ -927,8 +1202,8 @@
                             <!-- item one end -->
 
                             <!-- item two -->
-                            <div class="accordion-item">
-                                <div class="bg-light-grey p-m panel-heading rounded-corners" data-toggle="collapse" data-parent="#accordion" data-target="#submittal-sheet">
+                            <div data-filter-content="submittal_sheet-category" class="accordion-item">
+                                <div class="bg-light-grey p-m panel-heading rounded-corners m-bottom-xl m-md-bottom-m" data-toggle="collapse" data-parent="#accordion" data-target="#submittal-sheet">
                                     <h2 class="ht6 accordion-toggle bold color-darker-grey">Submittal Sheet</h2>
                                 </div>
 
@@ -938,11 +1213,9 @@
                                             <div class="col-xs-12">
                                                 <!-- 1 -->
                                                 <div class="col-sm-4 col-xs-12 p-md-m p-xxs">
-                                                    <div class="custom-block">
-
+                                                    <div class="custom-block" data-filter-content="submittal_sheet-category">
                                                         <div class="c-download-add-submittal-list m-bottom-xxs m-sm-bottom-m">
                                                             <div class=" each  p-no p-sm-top-s p-sm-bottom-no">
-
                                                                 <div class="content-left">
                                                                     <img src="/content/dam/USGBoral/Global/Website/Images/component/allsample/pdf-icon.png">
                                                                     <div class=" text-content fs-2">
@@ -951,8 +1224,6 @@
                                                                         <p class="limit"> consectetuer adipiscing </p>
                                                                     </div>
                                                                 </div>
-
-
                                                                 <!-- mobile only -->
                                                                 <div class=" two-btn-m visible-xs">
                                                                     <a href="#" class="btn button-grey btn-sm">
@@ -963,7 +1234,6 @@
                                                                     </a>
                                                                 </div>
                                                             </div>
-
                                                             <!-- desktop only -->
                                                             <div class="each hidden-xs">
                                                                 <div class="two-btn">
@@ -973,16 +1243,14 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-xs-12 p-no visible-xs">
-                                                        <hr>
+                                                        <hr class="visible-xs"/>
                                                     </div>
                                                 </div>
                                                 <!-- 1 end -->
 
                                                 <!-- 2 -->
                                                 <div class="col-sm-4 col-xs-12 p-md-m p-xxs">
-                                                    <div class="custom-block">
+                                                    <div class="custom-block" data-filter-content="submittal_sheet-category">
 
                                                         <div class="c-download-add-submittal-list m-bottom-xxs m-sm-bottom-m">
                                                             <div class=" each  p-no p-sm-top-s p-sm-bottom-no">
@@ -1015,19 +1283,15 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-xs-12 p-no visible-xs">
-                                                        <hr>
+                                                        <hr class="visible-xs"/>
                                                     </div>
                                                 </div>
                                                 <!-- 2 end -->
                                                 <!-- 3 -->
                                                 <div class="col-sm-4 col-xs-12 p-md-m p-xxs">
-                                                    <div class="custom-block">
-
+                                                    <div class="custom-block" data-filter-content="submittal_sheet-category">
                                                         <div class="c-download-add-submittal-list m-bottom-xxs m-sm-bottom-m">
                                                             <div class=" each  p-no p-sm-top-s p-sm-bottom-no">
-
                                                                 <div class="content-left">
                                                                     <img src="/content/dam/USGBoral/Global/Website/Images/component/allsample/pdf-icon.png">
                                                                     <div class=" text-content fs-2">
@@ -1056,16 +1320,13 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-xs-12 p-no visible-xs">
-                                                        <hr>
+                                                        <hr class="visible-xs"/>
                                                     </div>
                                                 </div>
                                                 <!-- 3 -->
                                                 <!-- 4 -->
                                                 <div class="col-sm-4 col-xs-12 p-md-m p-xxs">
-                                                    <div class="custom-block">
-
+                                                    <div class="custom-block" data-filter-content="submittal_sheet-category">
                                                         <div class="c-download-add-submittal-list m-bottom-xxs m-sm-bottom-m">
                                                             <div class=" each  p-no p-sm-top-s p-sm-bottom-no">
 
@@ -1097,16 +1358,10 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-xs-12 p-no visible-xs">
-                                                        <hr>
+                                                        <hr class="visible-xs"/>
                                                     </div>
                                                 </div>
                                                 <!-- 4 -->
-
-
-
-
                                             </div>
                                         </div>
                                     </div>
@@ -1115,8 +1370,8 @@
                             <!-- item two end -->
 
                             <!-- item 3 -->
-                            <div class="accordion-item">
-                                <div class="bg-light-grey p-m panel-heading rounded-corners" data-toggle="collapse" data-parent="#accordion" data-target="#color-guide">
+                            <div data-filter-content="color_guide-category" class="accordion-item">
+                                <div class="bg-light-grey p-m panel-heading rounded-corners m-bottom-xl m-md-bottom-m" data-toggle="collapse" data-parent="#accordion" data-target="#color-guide">
                                     <h2 class="ht6 accordion-toggle bold color-darker-grey">Color Guide</h2>
                                 </div>
 
@@ -1124,12 +1379,9 @@
                                     <div class=" bg-white">
                                         <div class="row ">
                                             <div class="col-xs-12 ">
-
-
                                                 <!-- 3 -->
                                                 <div class="col-sm-4 col-xs-12 p-md-m p-xxs">
-                                                    <div class="custom-block">
-
+                                                    <div class="custom-block" data-filter-content="color_guide-category">
                                                         <div class="c-download-add-submittal-list m-bottom-xxs m-sm-bottom-m">
                                                             <div class=" each  p-no p-sm-top-s p-sm-bottom-no">
 
@@ -1161,17 +1413,13 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-xs-12 p-no visible-xs">
-                                                        <hr>
+                                                        <hr class="visible-xs"/>
                                                     </div>
                                                 </div>
                                                 <!-- 3 -->
-
                                                 <!-- 3 -->
                                                 <div class="col-sm-4 col-xs-12 p-md-m p-xxs">
-                                                    <div class="custom-block">
-
+                                                    <div class="custom-block" data-filter-content="color_guide-category">
                                                         <div class="c-download-add-submittal-list m-bottom-xxs m-sm-bottom-m">
                                                             <div class=" each  p-no p-sm-top-s p-sm-bottom-no">
 
@@ -1203,9 +1451,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-xs-12 p-no visible-xs">
-                                                        <hr>
+                                                        <hr class="visible-xs"/>
                                                     </div>
                                                 </div>
                                                 <!-- 3 -->
@@ -2138,3 +2384,39 @@
 
 <sly data-sly-use.clientLib="/libs/granite/sightly/templates/clientlib.html" data-sly-call="${clientLib.js @ categories='uiux.alljs'}"
     data-sly-unwrap/>
+
+
+<script>
+(function(){
+    "use strict";
+    // filter content in category
+    $(document).on('click', '.filter-content-in-category .dropdown-menu a', function(e){
+        filterCategories($(this));
+    });
+
+    $(document).on('change', '.filter-content-in-category .dp-form-mobile select', function(e){
+        filterCategories($(this));
+    });
+
+    function filterCategories(target){
+        var value = $(target).attr('data-val') || $(target).val();
+        var parent = $(target).closest('[data-scroll]');
+        if(value == "all"){
+            $(parent).find('.accordion-item, .custom-block').removeClass('hidden');
+            $(parent).find('.panel-collapse').collapse('hide');
+            $(parent).find('.panel-title').attr('data-toggle', 'collapse');
+            setTimeout(function(){
+                $(parent).find('.accordion-item:first-child .panel-collapse').collapse('show');
+            }, 400);
+        } else {
+            $(parent).find('.accordion-item, .custom-block').addClass('hidden');
+            $(parent).find('[data-filter-content="'+ value +'-category"]').removeClass('hidden');
+            $(parent).find('.panel-collapse').collapse('show');
+            $(parent).find('.panel-title').attr('data-toggle', '');
+        }
+    }
+    
+
+    
+})();
+</script>

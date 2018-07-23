@@ -93,21 +93,13 @@ function recaptchaCallback() {
             $("#contactUsForm1").validate({
                 ignore: ".ignore",
                 rules: {
-                    dropdownselect: "required",
-                    countryselect: "required",
-                    locationselect: "required",
-                    departmentselect: "required",
-                    occupationselect: "required",
-                    resume: "required",
+                    enquiry_type : "required",
                     name: "required",
                     chooseFile: "required",
                     email: {
                         required: true,
                     },
-                    contact: {
-                        required: true,
-                        digits: true
-                    },
+                    message: "required",
                     hiddenRecaptcha: {
                         required: function () {
                             if (grecaptcha.getResponse() == '') {
@@ -117,26 +109,15 @@ function recaptchaCallback() {
                             }
                         }
                     },
-                    message: "required",
                     agree: "required",
-                    i_work_with: "required",
-                    i_am_interested: "required"
                 },
                 messages: {
-                    dropdownselect: "Please select one",
-                    countryselect: "Please select your country",
-                    locationselect: "Please select your location",
-                    departmentselect: "Please select your department",
-                    occupationselect: "Please select your occupation",
-                    chooseFile: "Please attach your resume",
+                    enquiry_type: "Please select one",
                     name: "Please enter your name",
                     email: "Please enter a valid email address",
                     message: "Please enter a valid message",
-                    contact: "Please fill in your contact number",
-                    agree: "Please accept our policy",
-                    i_work_with: "Please select one",
-                    i_am_interested: "Please select one",
-                    hiddenRecaptcha: "Please complete the Captcha"
+                    hiddenRecaptcha: "Please complete the Captcha",
+                    agree: "Please accept our policy"
                 },
                 errorElement: "span",
                 errorPlacement: function (error, element) {
@@ -171,7 +152,7 @@ function recaptchaCallback() {
                         processData: false
                     }).done(function (data) { //fetch server "json" messages when done
                         console.log("successs submit3");
-            
+                        $('#id').val('data.id');
                         $('#contactUsForm1').hide();
                         $('#contactUsForm2').removeClass('hidden');
                     });
@@ -184,17 +165,17 @@ function recaptchaCallback() {
             $("#contactUsForm2").validate({
                 ignore: ".ignore",
                 rules: {
-                    occupationselect: "required",
                     contact: {
                         required: true,
                         digits: true
                     },
+                    occupation_select: "required",
                     i_work_with: "required",
                     i_am_interested: "required"
                 },
                 messages: {
-                    occupationselect: "Please select one",
                     contact: "Please fill in your contact number",
+                    occupationselect: "Please select one",
                     i_work_with: "Please select one",
                     i_am_interested: "Please select one"
                 },
@@ -219,12 +200,12 @@ function recaptchaCallback() {
                 },
 
                 submitHandler: function(form) {
-                    console.log("successs submit");
+                    console.log("successs submit", $("form").serializeObject());
             
                     $.ajax({ //ajax form submit
                         url: '/json/formvalidate.json',
                         type: 'POST',
-                        data: $("form").serialize(),
+                        data: JSON.stringify($("form").serializeObject()),
                         dataType: 'json',
                         contentType: false,
                         cache: false,
