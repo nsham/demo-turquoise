@@ -154,11 +154,11 @@ function hookHeadScript(url, async, defer, callback) {
 
         var mobileWidth = window.matchMedia("(max-width: 768px)").matches;
         var target = $('.hero-banner-wrapper');
-        for( var i=0, len = target.length; i<len; i++ ){
+        for (var i = 0, len = target.length; i < len; i++) {
             var src = $(target[i]).data('img-mobile');
-            if( mobileWidth && src.replace(/\s/g,"") != "" ){
+            if (mobileWidth && src.replace(/\s/g, "") != "") {
                 $(target[i]).attr('style', src);
-            } 
+            }
         }
 
     });
@@ -1691,7 +1691,8 @@ $(window).on('load', function () {
             var getCard
             var inputVal
             var numberOfChecked
-            var categoryName = []
+            var categoryName
+            var storeData = []
             var getIMG
             var getTitle
             var getLink
@@ -1709,12 +1710,12 @@ $(window).on('load', function () {
                 //console.log("CURRinputVal = " + inputVal)
                 getIMG = $("[data-title-value=" + inputVal + "]  img").attr("src");
                 getTitle = $("[data-title-value=" + inputVal + "]  .title").text();
-                getLink = $("[data-title-value="+ inputVal +"] a ").attr("href");
+                getLink = $("[data-title-value=" + inputVal + "] a ").attr("href");
 
                 if ($('.listing-search-content .container-checkbox input[data-input-value=' + inputVal + ']').is(':checked')) {
 
                     //append  to popup
-                    $(".popup-content").append("<div class='each content-wrapper' data-content-title=" + inputVal + "><a href="+getLink+"><div class='left img-content'><img src=" + getIMG + "></div><div class='right title-content'data-content-value=" + inputVal + ">" + getTitle + "</div><button class='close-btn-box'><span class='bold'>x</span></button><hr class='col-xs-12 m-no m-top-m'></a></div>")
+                    $(".popup-content").append("<div class='each content-wrapper' data-content-title=" + inputVal + "><a href=" + getLink + " target='_blank'><div class='left img-content'> <img src=" + getIMG + "> </div> <div class='right title-content'data-content-value=" + inputVal + ">" + getTitle + "</div></a><button class='close-btn-box'><span class='bold'>x</span></button><hr class='col-xs-12 m-no m-top-m'></div>")
 
                     if ($(".compare-popup .title").hasClass("selected")) {
                         $(".compare-popup .title").removeClass("selected");
@@ -1756,19 +1757,18 @@ $(window).on('load', function () {
                 $(".compare-popup").show();
                 $(".popup-content").show();
                 if (numberOfChecked >= 3) {
-                    // $("[data-input-value =" + inputVal + "]").attr('checked', false);
+                    //disbled all checks
                     $('.listing-search-content .container-checkbox input[type="checkbox"]').prop('disabled', true);
+                    //enable only checked items to be uncheck
                     $('.listing-search-content .container-checkbox input:checkbox:checked').prop('disabled', false);
-                    $("[data-content-title=" + inputVal + "]").remove();
                 } else {
                     $('.listing-search-content .container-checkbox input[type="checkbox"]').prop('disabled', false);
                 }
+
                 if (numberOfChecked > 1) {
                     $(".compare-popup .btn-compare").show();
                     $(".compare-popup").show();
                     $(".compare-popup .instruction-text").hide();
-
-
                 } else {
                     $(".compare-popup .instruction-text").show();
                     $(".compare-popup .btn-compare").hide();
@@ -1776,8 +1776,6 @@ $(window).on('load', function () {
 
                 if (numberOfChecked > 0) {
                     $(".compare-popup .btn-menu-down").show();
-
-
                 } else {
                     $(".compare-popup").hide();
                     $(".popup-content").hide();
@@ -1790,36 +1788,45 @@ $(window).on('load', function () {
 
             function storeCompareLocalStorage() {
                 if ($(getCard).is(':checked')) {
-                    getIMG = $("[data-title-value=" + inputVal + "]  img").attr("src");
-                    getTitle = $("[data-title-value=" + inputVal + "]  .title").text();
-
-                    var groupElem = [getIMG,getTitle,getLink]
-
-                    categoryName.push(groupElem);
-
-                    //categoryName.push(inputVal.getIMG)
-                    //categoryName.push(getIMG)
+                    var groupElem = [{
+                        "img": getIMG,
+                        "title": getTitle,
+                        "url": getLink
+                    }]
+                    storeData.push(groupElem);
                 } else {
                     //remove the elemeent when uncheck
-                    categoryName.splice($.inArray(inputVal, categoryName), 1);
+                    storeData.splice($.inArray(inputVal, storeData), 1);
                 }
+                console.log("stored", storeData)
+                // Put the object into storage
+                localStorage.setItem(categoryName, JSON.stringify(storeData));
+                //localStorage.setItem(categoryName,storeData);
 
-                console.log("stored", categoryName)
-
-                // if ($(getCard).attr('checked',false)){
-                //     //categoryName.splice(inputVal)
-                // }
-
-                //  localStorage.setItem("ceilings", categoryName);
             }
 
-            retrieveCompare();
 
             function retrieveCompare() {
 
-                //var test = window.localStorage.getItem(storeData);
-                //console.log("selectedItem", test)
+                console.log("reCAT", categoryName)
+                // localStorage.getItem(categoryName);
+
+                // var test2= JSON.parse("ceilings")
+                // console.log("selectedItem", test2.length)
+
+                // Retrieve the object from storage
+               var test = JSON.parse(localStorage.getItem(categoryName))
+               console.log('t-', test[0][0].img)
+
+               var result = test.map(a => a[0]);
+                console.log('rrrr', result[0])
+
+                //$(".compare-popup").show();
+                
+
             }
+
+
 
 
             //////COMPARE POPUP END//////
@@ -1880,6 +1887,12 @@ $(window).on('load', function () {
                         //checkshoutout
                         shoutout = productData.shoutout;
                         //console.log(shoutout)
+
+                        //getCategoryName - to store array
+                        categoryName = productData.category_key;
+                        retrieveCompare();
+
+
                         hideAllWrappers();
                         renderProductListingResult();
                     },
@@ -2608,4 +2621,21 @@ $(window).on('load', function () {
 
 
     });
+})();
+
+
+
+// ----------------------------------------------------------------------
+// Component:  Submittal 
+// ----------------------------------------------------------------------
+(function () {
+    "use strict";
+    $(document).ready(function () {
+
+        $(document).on("change", '#submittal-form [data-check="all"]', function () {
+            $('input:checkbox').not(this).prop('checked', this.checked);
+        });
+
+    });
+
 })();
