@@ -16,6 +16,7 @@
         var currLocation = null;
         var executedGeo = false;
         var currLocationMarker;
+        var proximityLocationMarker;
         var circleOnMap = [];
         var markerCluster;
         var currSenario = "";
@@ -97,7 +98,7 @@
                     $('.search-detail-group').html('<div class="p-3xl"><h5>Sorry</h5><p><i>No result has been found.</i></p></div>');
                 }
 
-                switch (Number($(this).val())) {
+                switch (Number($(this).val().replace('KM', ''))) {
                     case 15:
                         radius = 15000;
                         break; 
@@ -122,7 +123,7 @@
                             strokeWeight: 0,
                         });
                         circleOnMap.push(circle);
-                        circle.bindTo('center', currLocationMarker, 'position');
+                        circle.bindTo('center', proximityLocationMarker, 'position');
                     }
                     
                 }
@@ -283,7 +284,7 @@
                         if(filters[key].toLowerCase() == "all" || filters[key] == ""){
                             return filters[key];
                         } else {
-                            return item[key] <= Number(filters[key]);
+                            return item[key] <= Number(filters[key].replace('KM', ''));
                         }
                     }else {
                         return !!~filters[key].indexOf(item[key]);
@@ -350,13 +351,13 @@
             if(markerCluster) markerCluster.clearMarkers();
 
             markerCluster = new MarkerClusterer(map, markers,
-                {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m', maxZoom: 12});
+                {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
             
         
             // Finally the bounds variable is used to set the map bounds
             // with fitBounds() function
             map.fitBounds(bounds);
-            map.setZoom(6);
+            map.setZoom(5);
         }
         
         // This function creates each marker and it sets their Info Window content
@@ -458,6 +459,10 @@
                     markersData = response.storeResults;
                     filterListingData = response.filterListing;
 
+                    if( currSenario.indexOf('proximity') < 0 || currSenario !== "searchUserLocation" ){
+                        currLocation = null;
+                    }
+
                     geolocation(function (pos) {
                         if(pos.lat !== null){
                             checkDuoLocation();
@@ -468,9 +473,6 @@
                         }
                     });
 
-                    checkDuoLocation();
-                    addDistanceToData();
-
                     markers = [];
 
                     if(markersData.length > 0){
@@ -478,6 +480,17 @@
                         var templateFilter = $("#templWtbFilter").html();
                         var htmlTemplateFilter = Handlebars.compile(templateFilter);
                         $('.filter-list-item').html(htmlTemplateFilter(response.filterListing));
+                        if(response.hasOwnProperty('proximityResult')){
+                            var pos = {
+                                lat: Number(response.proximityResult[0].latitude),
+                                lng: Number(response.proximityResult[0].longitude),
+                            };
+    
+                            currLocation = pos;
+                        }
+
+                        checkDuoLocation();
+                        addDistanceToData();
 
                         // 2. load map with getted data
                         initialize();
@@ -500,11 +513,22 @@
                             triggerClick(currentMarker);
                         });
 
+                        if(response.hasOwnProperty('proximityResult')){
+                            proximityLocationMarker = new google.maps.Marker({
+                                position: currLocation,
+                                icon: '/content/dam/USGBoral/Global/Website/Images/component/allsample/icon_marker_yellow.png',
+                                map: map
+                            });
+                            map.setCenter(pos);
+                            map.setZoom(12);
+                            proximityLocationMarker.setPosition(pos);
+                            proximityLocationMarker.setMap(map);
+                        }
+
                     } else {
                         $('.cta-search-detail-on').removeClass('active');
                         $('.btn-filter').addClass('disabled');
                     }
-                    
                 },
                 beforeSend: function () {
                     $('.loader').fadeIn("fast");
@@ -544,8 +568,6 @@
 
                     currLocationMarker.setPosition(pos);
                     map.setCenter(pos);
-
-                    
 
                     return callback(pos);
                 }, function() {

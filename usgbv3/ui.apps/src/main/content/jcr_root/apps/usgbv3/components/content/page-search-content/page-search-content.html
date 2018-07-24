@@ -231,6 +231,53 @@
     </section>
 </div>
 
+
+<div id="add-submittal-modal" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="addSubmittalModalLabel">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center" role="document" width="750px">
+            <div class="modal-content">
+                <div class="modal-body m-top-3xl m-bottom-m">
+                    <div class="row">
+                        <div class="col-md-12" align="center">
+                            <div class="form-group">
+                                <h4 class="ht4 uppercase color-primary-green m-bottom-l">Successful!</h4>
+                                <p class="color-dark-grey">Added To My Submittal</p>
+                                <br>
+                                <p style="text-align: center;">
+                                    <button data-dismiss="modal" class="btn btn-brand-default button-green">CLOSE</button>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="add-bookmark-modal" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="addBookmarkModalLabel">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center" role="document" width="750px">
+            <div class="modal-content">
+                <div class="modal-body m-top-3xl m-bottom-m">
+                    <div class="row">
+                        <div class="col-md-12" align="center">
+                            <div class="form-group">
+                                <h4 class="ht4 uppercase color-primary-green">Favourites!</h4>
+                                <p class="color-dark-grey">Product already added</p>
+                                <br>
+                                <p style="text-align: center;">
+                                    <button data-dismiss="modal" class="btn btn-brand-default button-green">CLOSE</button>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script id="templSearchFilterMobile" type="text/x-handlebars-template">
     {{#each this}} 
     <div id="{{key}}-group" class="accordionfc">
@@ -320,7 +367,7 @@
         <div class="align-center align-md-bottom flex-row right width-full">
             <a href="{{link}}" class="flex-basis-no flex-IE-grow-auto flex-grow-1 m-right-m">
                 <div class="content p-left-no p-md-left-l">
-                    <p class="sub-headline fs-2">{{category_header}}</p>
+                    <p class="sub-headline fs-2 m-bottom-xs">{{category_header}}</p>
                     <h6 class="headline ht6 uppercase m-bottom-xxs">{{title}}</h6>
                     <p class="description m-no">
                         {{desc}}
@@ -329,7 +376,7 @@
             </a>
             <div class="align-center flex-basis-no flex-IE-grow-auto flex-grow-0 flex-row justify-end side-functions-short">
                 <div class="bookmark uppercase fs-3">
-                    <a href="#">
+                    <a href="#" class="cta-bookmark">
                         <div class="btn button-grey visible-xs">
                             <span class="glyphicon glyphicon-bookmark"></span>
                         </div>
@@ -359,7 +406,7 @@
         <div class="align-center align-md-bottom flex-row right width-full">
             <a href="#" class="flex-basis-no flex-IE-grow-auto flex-grow-1 m-right-m">
                 <div class="content p-left-no p-md-left-l">
-                    <p class="sub-headline fs-2">{{category_header}}</p>
+                    <p class="sub-headline fs-2 m-bottom-xs">{{category_header}}</p>
                     <h6 class="headline ht6 uppercase m-bottom-xxs">{{title}}</h6>
                     <p class="description m-no">
                         {{desc}}
@@ -368,26 +415,30 @@
             </a>
             <div class="align-center flex-basis-no flex-IE-grow-auto flex-grow-0 flex-row justify-end side-functions">
                 <div class="bookmark uppercase fs-3">
-                    <a href="#" class="btn button-grey visible-xs btn-sm">
-                        <span class="glyphicon glyphicon-bookmark"></span>
-                    </a>
-                    <a href="#" class="hidden-xs">
-                        <span class="glyphicon glyphicon-bookmark m-right-xxs"></span>
-                        <span class="">
-                            <strong class="">Bookmark</strong>
-                        </span>
+                    <a href="#" class="cta-bookmark">
+                        <div class="btn button-grey visible-xs">
+                            <span class="glyphicon glyphicon-bookmark"></span>
+                        </div>
+                        <div class="hidden-xs">
+                            <span class="glyphicon glyphicon-bookmark m-right-xxs"></span>
+                            <span>
+                                <strong>Bookmark</strong>
+                            </span>
+                        </div>
                     </a>
                 </div>
                 <span class="hidden-xs m-side-s">|</span>
                 <div class="addto uppercase fs-3 m-left-xxs">
-                    <a href="#" class="btn button-grey visible-xs btn-sm">
-                        <span class="glyphicon glyphicon-plus"></span>
-                    </a>
-                    <a href="#" class="hidden-xs">
-                        <span class="glyphicon glyphicon-plus m-right-xxs"></span>
-                        <span class="">
-                            <strong class="">Add to submittal</strong>
-                        </span>
+                    <a href="#" class="cta-add-submittal" data-toggle="modal" data-target="#add-submittal-modal">
+                        <div class="btn button-grey visible-xs btn-sm">
+                            <span class="glyphicon glyphicon-plus"></span>
+                        </div>
+                        <div class="hidden-xs">
+                            <span class="glyphicon glyphicon-plus m-right-xxs"></span>
+                            <span class="">
+                                <strong class="">Add to submittal</strong>
+                            </span>
+                        </div>
                     </a>
                 </div>
             </div>
@@ -413,7 +464,7 @@
                 <div class="align-center align-md-bottom flex-row right width-full">
                     <a href="#" class="flex-basis-no flex-IE-grow-auto flex-grow-1 m-right-m">
                         <div class="content p-left-no p-md-left-l">
-                            <p class="sub-headline fs-2">{{category_header}}</p>
+                            <p class="sub-headline fs-2 m-bottom-xs">{{category_header}}</p>
                             <h6 class="headline ht6 uppercase m-bottom-xxs">{{title}}</h6>
                             <p class="description m-no">
                                 {{desc}}
@@ -422,26 +473,30 @@
                     </a>
                     <div class="align-center flex-basis-no flex-IE-grow-auto flex-grow-0 flex-row justify-end side-functions">
                         <div class="bookmark uppercase fs-3">
-                            <a href="#" class="btn button-grey visible-xs btn-sm">
-                                <span class="glyphicon glyphicon-bookmark"></span>
-                            </a>
-                            <a href="#" class="hidden-xs">
-                                <span class="glyphicon glyphicon-bookmark m-right-xxs"></span>
-                                <span class="">
-                                    <strong class="">Bookmark</strong>
-                                </span>
+                            <a href="#" class="cta-bookmark">
+                                <div class="btn button-grey visible-xs">
+                                    <span class="glyphicon glyphicon-bookmark"></span>
+                                </div>
+                                <div class="hidden-xs">
+                                    <span class="glyphicon glyphicon-bookmark m-right-xxs"></span>
+                                    <span>
+                                        <strong>Bookmark</strong>
+                                    </span>
+                                </div>
                             </a>
                         </div>
                         <span class="hidden-xs m-side-s">|</span>
                         <div class="addto uppercase fs-3 m-left-xxs">
-                            <a href="#" class="btn button-grey visible-xs btn-sm">
-                                <span class="glyphicon glyphicon-plus"></span>
-                            </a>
-                            <a href="#" class="hidden-xs">
-                                <span class="glyphicon glyphicon-plus m-right-xxs"></span>
-                                <span class="">
-                                    <strong class="">Add to submittal</strong>
-                                </span>
+                            <a href="#" class="cta-add-submittal" data-toggle="modal" data-target="#add-submittal-modal">
+                                <div class="btn button-grey visible-xs btn-sm">
+                                    <span class="glyphicon glyphicon-plus"></span>
+                                </div>
+                                <div class="hidden-xs">
+                                    <span class="glyphicon glyphicon-plus m-right-xxs"></span>
+                                    <span class="">
+                                        <strong class="">Add to submittal</strong>
+                                    </span>
+                                </div>
                             </a>
                         </div>
                     </div>
@@ -482,7 +537,7 @@
                     <div class="align-center align-md-bottom flex-row right width-full">
                         <a href="{{link}}" class="flex-basis-no flex-IE-grow-auto flex-grow-1 m-right-m">
                             <div class="content p-left-no p-md-left-l">
-                                <p class="sub-headline fs-2">{{category_header}}</p>
+                                <p class="sub-headline fs-2 m-bottom-xs">{{category_header}}</p>
                                 <h6 class="headline ht6 uppercase m-bottom-xxs">{{title}}</h6>
                                 <p class="description m-no">
                                     {{desc}}
@@ -491,7 +546,7 @@
                         </a>
                         <div class="align-center flex-basis-no flex-IE-grow-auto flex-grow-0 flex-row justify-end side-functions-short">
                             <div class="bookmark uppercase fs-3">
-                                <a href="#">
+                                <a href="#" class="cta-bookmark">
                                     <div class="btn button-grey visible-xs">
                                         <span class="glyphicon glyphicon-bookmark"></span>
                                     </div>
