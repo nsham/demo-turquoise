@@ -8,9 +8,18 @@
     var resultData = [];
     var currCategory = "content";
     var currOnStageMainResultData = [];
+    var urlParams = new URLSearchParams(window.location.search);
+    var searchedText = "";
 
     $(document).ready(function(){
         if($('.search-form').length > 0){
+            if(urlParams.has('text')){
+                var text = urlParams.get('text');
+                $('#search-form input').val(text);
+                searchedText = text;
+                getResult();
+            }
+
             $(document).on('click', '.sub-search-section a', function(e){
                 e.preventDefault();
                 var val = "";
@@ -26,6 +35,7 @@
                 e.preventDefault();
                 // var val = $(this).closest('form').find('input').val();
                 console.log(currCategory, $('#search-form input').val());
+                searchedText = $('#search-form input').val();
                 getResult();
             });
 
@@ -141,6 +151,62 @@
                 addNewBookmark(url);
             });
 
+            // add submittal
+            $(document).on('click', '.cta-add-submittal', function(e){
+                e.preventDefault();
+                var url = $(this).closest('.each').find('.thumbs a').attr('href');
+                var data = {
+                    document_list: [
+                        {
+                            document_id: "",
+                            document_name: $(this).closest('.each').find('.right .headline').html(),
+                            document_path: $(this).closest('.each').find('.right a').attr('href'),
+                            document_url: window.location.origin + $(this).closest('.each').find('.right a').attr('href')
+                        }
+                    ],
+                    user_info: {
+                        user_id: "cwZ/72WSk6xkm7fFVD4Onw",
+                        display_name: "wqe",
+                        country: "en_au",
+                        first_name: "Chuan Theng",
+                        last_name: "Tan",
+                        email: "tctheng02175@hotmail.com"
+                    }
+                }
+                $.ajax({
+                    url: url + ".json",
+                    type: "GET",
+                    cache: false,
+                    success: function(response) {
+                        console.log(response);
+                        $('#add-submittal-modal').modal('show');
+                        var uuid = response["jcr:uuid"];
+                        data.document_list[0].document_id = uuid;
+                        $.ajax({
+                            url: "/bin/sso/dcAddDoc",
+                            data: JSON.stringify(data),
+                            type: "POST",
+                            cache: false,
+                            success: function(response) {
+
+                            }
+                        });
+                    }
+                });
+            });
+
+            // header search keyword
+            $(document).on('click', '.search-pop-up button[type="submit"]', function(e){
+                e.preventDefault();
+                var text = $(this).closest('.search-pop-up').find('.search-box input').val();
+                window.location.href = "http://usgbuataut.cloudapp.net:4504/content/v3/usgboral/samplepage/search-content.html?text=" + text;
+            });
+
+
+
+
+            
+
         }
     });
 
@@ -209,6 +275,7 @@
         $.ajax({
             // url: "/etc/designs/usgb_v3/clientlib/uiux-less-ct/js/json/search-content-result.json",
             url: "/etc/designs/usgb_v3/clientlib/uiux-less-ct/js/json/search-doc-finder.json",
+            data: "text="+ searchedText + "&category=" + currCategory,
             type: "GET",
             cache: false,
             success: function(response) {

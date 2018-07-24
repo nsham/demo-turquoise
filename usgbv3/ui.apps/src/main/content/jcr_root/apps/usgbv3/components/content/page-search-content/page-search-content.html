@@ -241,18 +241,13 @@
                 <div class="modal-body m-vertical-s">
                     <div class="row">
                         <div class="col-md-12" align="center">
-                            <div class="svg-box">
-                                <svg class="circular yellow-stroke">
+                            <div class="svg-box icon-correct">
+                                <svg class="circular green-stroke">
                                     <circle class="path" cx="75" cy="75" r="50" fill="none" stroke-width="5" stroke-miterlimit="10" />
                                 </svg>
-                                <svg class="alert-sign yellow-stroke">
-                                    <g transform="matrix(1,0,0,1,-615.516,-257.346)">
-                                        <g transform="matrix(0.56541,-0.56541,0.56541,0.56541,93.7153,495.69)">
-                                            <path class="line" d="M634.087,300.805L673.361,261.53" fill="none" />
-                                        </g>
-                                        <g transform="matrix(2.27612,-2.46519e-32,0,2.27612,-792.339,-404.147)">
-                                            <circle class="dot" cx="621.52" cy="316.126" r="1.318" />
-                                        </g>
+                                <svg class="checkmark green-stroke">
+                                    <g transform="matrix(0.79961,8.65821e-32,8.39584e-32,0.79961,-489.57,-205.679)">
+                                        <path class="checkmark__check" fill="none" d="M616.306,283.025L634.087,300.805L673.361,261.53" />
                                     </g>
                                 </svg>
                             </div>
@@ -379,7 +374,7 @@
         <div class="left hidden-xs hidden-sm">
             {{#ifEquals this.type "pages"}}
             <div class="thumbs">
-                <a href="{{link}}">
+                <a href="{{link}}" target="_blank">
                     <img src="{{image}}">
                 </a>
             </div>
@@ -393,7 +388,7 @@
             {{/ifEquals}}
         </div>
         <div class="align-center align-md-bottom flex-row right width-full">
-            <a href="{{link}}" class="flex-basis-no flex-IE-grow-auto flex-grow-1 m-right-m">
+            <a href="{{link}}" target="_blank" class="flex-basis-no flex-IE-grow-auto flex-grow-1 m-right-m">
                 <div class="content p-left-no p-md-left-l">
                     <p class="sub-headline fs-2 m-bottom-xs">{{category_header}}</p>
                     <h6 class="headline ht6 uppercase m-bottom-xxs">{{title}}</h6>
@@ -428,11 +423,11 @@
     <div class="each flex-md-row m-bottom-4xl" data-key="{{key}}">
         <div class="left hidden-xs hidden-sm">
             <div class="thumbs">
-                <a href="#"><img src="https://dummyimage.com/250x145/000000/fff"></a>
+                <a href="{{link}}" target="_blank"><img src="https://dummyimage.com/250x145/000000/fff"></a>
             </div>
         </div>
         <div class="align-center align-md-bottom flex-row right width-full">
-            <a href="#" class="flex-basis-no flex-IE-grow-auto flex-grow-1 m-right-m">
+            <a href="{{link}}" target="_blank" class="flex-basis-no flex-IE-grow-auto flex-grow-1 m-right-m">
                 <div class="content p-left-no p-md-left-l">
                     <p class="sub-headline fs-2 m-bottom-xs">{{category_header}}</p>
                     <h6 class="headline ht6 uppercase m-bottom-xxs">{{title}}</h6>
@@ -457,7 +452,7 @@
                 </div>
                 <span class="hidden-xs m-side-s">|</span>
                 <div class="addto uppercase fs-3 m-left-xxs">
-                    <a href="#" class="cta-add-submittal" data-toggle="modal" data-target="#add-submittal-modal">
+                    <a href="#" class="cta-add-submittal">
                         <div class="btn button-grey visible-xs btn-sm">
                             <span class="glyphicon glyphicon-plus"></span>
                         </div>
@@ -486,11 +481,11 @@
             <div class="each flex-md-row m-bottom-4xl" data-key="{{key}}">
                 <div class="left hidden-xs hidden-sm">
                     <div class="thumbs">
-                        <a href="#"><img src="https://dummyimage.com/250x145/000000/fff"></a>
+                        <a href="{{link}}" target="_blank"><img src="https://dummyimage.com/250x145/000000/fff"></a>
                     </div>
                 </div>
                 <div class="align-center align-md-bottom flex-row right width-full">
-                    <a href="#" class="flex-basis-no flex-IE-grow-auto flex-grow-1 m-right-m">
+                    <a href="{{link}}" target="_blank" class="flex-basis-no flex-IE-grow-auto flex-grow-1 m-right-m">
                         <div class="content p-left-no p-md-left-l">
                             <p class="sub-headline fs-2 m-bottom-xs">{{category_header}}</p>
                             <h6 class="headline ht6 uppercase m-bottom-xxs">{{title}}</h6>
@@ -515,7 +510,7 @@
                         </div>
                         <span class="hidden-xs m-side-s">|</span>
                         <div class="addto uppercase fs-3 m-left-xxs">
-                            <a href="#" class="cta-add-submittal" data-toggle="modal" data-target="#add-submittal-modal">
+                            <a href="#" class="cta-add-submittal">
                                 <div class="btn button-grey visible-xs btn-sm">
                                     <span class="glyphicon glyphicon-plus"></span>
                                 </div>
@@ -549,7 +544,7 @@
                     <div class="left hidden-xs hidden-sm">
                         {{#ifEquals this.type "pages"}}
                         <div class="thumbs">
-                            <a href="{{link}}">
+                            <a href="{{link}}" target="_blank">
                                 <img src="{{image}}">
                             </a>
                         </div>
@@ -563,7 +558,7 @@
                         {{/ifEquals}}
                     </div>
                     <div class="align-center align-md-bottom flex-row right width-full">
-                        <a href="{{link}}" class="flex-basis-no flex-IE-grow-auto flex-grow-1 m-right-m">
+                        <a href="{{link}}" target="_blank" class="flex-basis-no flex-IE-grow-auto flex-grow-1 m-right-m">
                             <div class="content p-left-no p-md-left-l">
                                 <p class="sub-headline fs-2 m-bottom-xs">{{category_header}}</p>
                                 <h6 class="headline ht6 uppercase m-bottom-xxs">{{title}}</h6>
