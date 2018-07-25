@@ -254,6 +254,14 @@ button {
     }
 }
 
+[class^="button-"], [class*=" button-"]{
+    &.disabled{
+        color: #FFF;
+        background-color: #CCC;
+        border-color: #CCC;
+    }
+}
+
 .btn-icon{
     padding: 10px 8px 10px 55px;
     white-space: normal;
