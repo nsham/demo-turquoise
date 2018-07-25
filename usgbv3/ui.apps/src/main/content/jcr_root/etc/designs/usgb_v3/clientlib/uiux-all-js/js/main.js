@@ -1722,7 +1722,6 @@ $(window).on('load', function () {
                     // $(".popup-content").append("<div class='each content-wrapper' data-content-title=" + inputVal + "><a href=" + getLink + " target='_blank'><div class='left img-content'> <img src=" + getIMG + "> </div> <div class='right title-content'data-content-value=" + inputVal + ">" + getTitle + "</div></a><button class='close-btn-box'><span class='bold'>x</span></button><hr class='col-xs-12 m-no m-top-m'></div>")
 
                     storeData.push(groupElem);
-                    
                     storeCompareLocalStorage();
                     //retrieveCompare();
                     if ($(".compare-popup .title").hasClass("selected")) {
@@ -1731,11 +1730,11 @@ $(window).on('load', function () {
 
                 } else {
 
-                     removeCompareLocalStorage();
+                    removeCompareLocalStorage(inputVal);
                     //check popup if has the value
-                    if ($("[data-content-title='" + inputVal + "']").has("[data-content-value='" + inputVal + "']")) {
-                        $("[data-content-title='" + inputVal + "']").remove();
-                    }
+                    // if ($("[data-content-title='" + inputVal + "']").has("[data-content-value='" + inputVal + "']")) {
+                    //     $("[data-content-title='" + inputVal + "']").remove();
+                    // }
                 }
                 checkNumberOfCheckbox();
 
@@ -1793,48 +1792,43 @@ $(window).on('load', function () {
 
             // close btn on popup to remove content
             $("body").on("click", ".close-btn-box", function () {
-
                 event.preventDefault();
                 currInput = $(this).closest('.each').attr("data-content-title");
-
-                //inputVal = currInput
-
-                console.log('currIN', currInput)
                 $("[data-input-value ='" + currInput + "']").attr('checked', false);
-
-                // removeCompareLocalStorage();        
+                removeCompareLocalStorage(currInput);
             });
 
 
 
             function storeCompareLocalStorage() {
+                //console.log("stored", storeData)
                 // Put the object into storage
-               // localStorage.setItem(categoryName, JSON.stringify(storeData));
-                console.log("storeINput", inputVal)
-                console.log("stored", storeData)
-                //  retrieveCompare();
+                localStorage.setItem(categoryName, JSON.stringify(storeData));
+                //console.log("storeINput", inputVal)
+                retrieveCompare();
             }
 
 
-            function removeCompareLocalStorage() {
+            var storePopup
 
-                var index = storeData.indexOf($.inArray(inputVal,storeData)); // 1
-                console.log("in", index)
-               // var test = storeData.splice($.inArray(inputVal, storeData), 1);
-                //console.log("splice", test)
-                //console.log("rrstoreINput", inputVal)
-               // console.log("rremove", storeData)
-                //storeCompareLocalStorage();
-                //console.log("splice", storeData);
+            function removeCompareLocalStorage(data) {
+                //console.log('currIN', data)
+                // var getIndex = storePopup.findIndex(x => x.url == data);
+                //  console.log("in",getIndex)
+                // storePopup.splice(getIndex, 1);
+
+                var getIndex1 = storeData.findIndex(x => x.url == data);
+                //console.log("in1", getIndex1)
+                storeData.splice(getIndex1, 1);
+
+
+                // storePopup = storeData
                 //localStorage.setItem(categoryName, JSON.stringify(storeData));
-
-
-
-                // storeData.splice($.inArray(inputVal, storeData), 1);
-                //storeCompareLocalStorage();
-                //checkNumberOfCheckbox();
-                // retrieveCompare();
-                //$("[data-input-value ='" + currInput + "']").attr('checked', false);
+                //console.log("rremove", storeData)
+                storeCompareLocalStorage();
+               //retrieveCompare();
+                checkNumberOfCheckbox();
+                $("[data-input-value ='" + currInput + "']").attr('checked', false);
             }
 
             function retrieveCompare() {
@@ -1844,23 +1838,24 @@ $(window).on('load', function () {
                 } else {
 
                     // retrieve it (Or create a blank array if there isn't any info saved yet),
-                    //storeData = JSON.parse(localStorage.getItem(categoryName)) || [];
+                    storeData = JSON.parse(localStorage.getItem(categoryName)) || [];
 
 
                     // Retrieve the object from storage
-                    var storePopup = JSON.parse(localStorage.getItem(categoryName))
-                    console.log('getLocal-', storePopup)
+                    // storePopup = JSON.parse(localStorage.getItem(categoryName))
+                    //storeData = JSON.parse(localStorage.getItem(categoryName))
+                    console.log('storePopup-', storeData)
 
                     //load the popup
                     var comparePopupHTML = $('#compare-popup-local').html();
                     var temptcomparePopupHTML = Handlebars.compile(comparePopupHTML);
-                    $('.compare-popup-local').html(temptcomparePopupHTML(storePopup));
+                    $('.compare-popup-local').html(temptcomparePopupHTML(storeData));
 
                     $(".compare-popup").show();
 
 
                     //target checked true and checkback the card
-                    var localNum = storePopup.map(localNum => localNum.url);
+                    var localNum = storeData.map(localNum => localNum.url);
                     //console.log(localNum)
                     $.each(localNum, function (i, val) {
                         var selectedCard = $('[data-input-value="' + val + '"]');
@@ -1938,7 +1933,7 @@ $(window).on('load', function () {
 
                         hideAllWrappers();
                         renderProductListingResult();
-                        //retrieveCompare();
+                        retrieveCompare();
                     },
                     beforeSend: function () {},
                     complete: function () {}
