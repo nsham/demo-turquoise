@@ -13,6 +13,7 @@ public class ProductModel {
 	private String icon;
 	private String linkType;
 	private String link;
+	private Tag tag;
 	private List<Tag> tagList;
 	private String toStringTags;
 	
@@ -62,6 +63,14 @@ public class ProductModel {
 	
 	public void setLink(String link) {
 		this.link = link;
+	}
+
+	public Tag getTag() {
+		return tag;
+	}
+
+	public void setTag(Tag tag) {
+		this.tag = tag;
 	}
 
 	public List<Tag> getTagList() {

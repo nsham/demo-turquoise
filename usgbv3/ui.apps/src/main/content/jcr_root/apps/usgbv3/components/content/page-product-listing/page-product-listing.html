@@ -33,16 +33,33 @@
 	</div>
 	<!-- SECTION 1 END -->
 
-	 
- 
 
-	<!--compare popup -->
+	<!-- comapre popup from  -->
+	<script id="compare-popup-local" type="text/x-handlebars-template">
+
+		{{#each this}}
+		<div class='each content-wrapper' data-content-title="{{num}}"><a href="{{url}}" target='_blank'><div class='left img-content'> <img src="{{img}}"> </div> <div class='right title-content'data-content-value="{{num}}">{{title}}</div></a><button class='close-btn-box'><span class='bold'>x</span></button><hr class='col-xs-12 m-no m-top-m'></div>
+
+		{{/each}}
+
+
+	</script>
+	<!-- compare popup from local -->
+
+
+
+	<!--compare popup --> 
 	<div class="compare-popup">
+
 		<div class="title uppercase ">
 			Compare Product
 			<span class=" btn-menu-down glyphicon glyphicon-menu-down float-right  p-s  text-center"></span>
 		</div>
 		<div class="popup-content c-auto-center-list">
+
+			<div class="compare-popup-local"> </div>
+
+
 			<!-- <div class="each  content-wrapper content1">
 				<div class="left img-content"> </div>
 				<div class="right title-content"> </div>
@@ -146,7 +163,7 @@
 									{{/each}}
 
 								</select>
-							</div>  
+							</div>
 						</div>
 
 						{{#each category_child}}
@@ -164,8 +181,8 @@
 								</div>
 								{{/each}}
 							</div>
-						</div> 
-						{{/each}} 
+						</div>
+						{{/each}}
 						<hr class="m-no" />
 						<div class="each checkbox-button-wrapper">
 							{{#each category_child}}
@@ -213,7 +230,7 @@
 							<div class="radio">
 								<label class="container-checkbox fs-2">
 									Compare Products
-									<input type="checkbox" name="" data-input-value="{{num}}">
+									<input type="checkbox" id="option{{num}}" name="" data-input-value="{{num}}">
 									<span class="checkmark fs-2"></span>
 								</label>
 							</div>
@@ -233,7 +250,7 @@
 			</script>
 			<!-- handlebar product-listing-result-wrapper end-->
 
- 
+
 
 			<div class="col-xs-12 col-sm-9 col-md-9 make-sticky_limit">
 
@@ -275,7 +292,7 @@
 						<!-- END SORT BY -->
 
 						<!-- filter -->
-						<a href="#"  id="filter-icon-btn" class="filter-icon btn visible-xs btn-smd m-left-m">
+						<a href="#" id="filter-icon-btn" class="filter-icon btn visible-xs btn-smd m-left-m">
 							<span class="color-primary-green glyphicon glyphicon-filter "></span>
 						</a>
 						<!-- end filter -->
@@ -351,7 +368,7 @@
 			</div>
 
 
-   
+
 		</div>
 	</div>
 	<!-- section 2 end -->
@@ -406,7 +423,7 @@
 		</div>
 	</div>
 	<!-- SECTION 3 END -->
- 
+
 
 	<!-- SECTION 4-->
 	<div class="container-fluid bg-white">
@@ -531,7 +548,7 @@
 	</div>
 	<!-- SECTION 4 END -->
 
-	 
+
 	<!-- subscribe -->
 	<div class="container-fluid bg-light-grey">
 		<div class="container ">
@@ -626,7 +643,7 @@
 </script>
 <!-- handlebar mobile product-listing-filter-wrapper end-->
 
- 
+
 
 <!-- filter mobile content -->
 <div class="filter-mobile-content hidden">
@@ -640,7 +657,7 @@
 					</div>
 
 					<div class="search-filter m-bottom-xxl p-side-l">
-						<form id="m-product-listing-form" >
+						<form id="m-product-listing-form">
 							<div class=" m-product-listing-filter"> </div>
 							<div class="m-vertical-xl">
 								<button id="test" type="submit" class=" btn width-full button-green btn-brand-default">apply filter</button>
@@ -649,7 +666,7 @@
 					</div>
 				</div>
 
-			</div> 
+			</div>
 		</div>
 
 	</section>
@@ -659,4 +676,4 @@
 
 
 <sly data-sly-use.clientLib="/libs/granite/sightly/templates/clientlib.html" data-sly-call="${clientLib.js @ categories='uiux.alljs'}"
-    data-sly-unwrap/>   
+    data-sly-unwrap/>

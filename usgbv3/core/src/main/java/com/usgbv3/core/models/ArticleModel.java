@@ -13,6 +13,7 @@ public class ArticleModel {
 	private String image;
 	private String link;
 	private Date articleDate;
+	private String imgAlt;
 	
 	public String getTitle() {
 		return title;
@@ -52,6 +53,14 @@ public class ArticleModel {
 
 	public void setArticleDate(Date articleDate) {
 		this.articleDate = articleDate;
+	}
+
+	public String getImgAlt() {
+		return imgAlt;
+	}
+
+	public void setImgAlt(String imgAlt) {
+		this.imgAlt = imgAlt;
 	}
 
 	
