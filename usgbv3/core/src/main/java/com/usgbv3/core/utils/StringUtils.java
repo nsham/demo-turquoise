@@ -1,9 +1,13 @@
 package com.usgbv3.core.utils;
 
+import org.apache.sling.api.SlingHttpServletRequest;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 public class StringUtils {
 
@@ -59,10 +63,112 @@ public class StringUtils {
 
 	public static String replaceSpecialCharacters(String inputString){
 		inputString = inputString.replace(" ", "_");
-		inputString = inputString.replace("(", "_");
-		inputString = inputString.replace(")", "_");
+		//inputString = inputString.replace("(", "_");
+		//inputString = inputString.replace(")", "_");
 		return inputString;
 	}
 
- 
+	/**
+	 * Format string by a specifically ordered parameters
+	 * eg. format "hello %02, %01 good %03"
+	 * parameters firstname, lastname, afternoon
+	 * would result to hello lastname, firstname good afternoon
+	 *
+	 * @param format
+	 * @param parameters
+	 * @return
+	 */
+	public static String formatString(String format, String... parameters){
+
+		String formattedString = new String(format);
+
+		if(parameters != null){
+			for(int i=0; i < parameters.length; i++){
+				String replaceValue = i < 9 ? "%0"+(i+1) : "%"+(i+1);
+				if(formattedString != null){
+					String value = parameters[i] != null ? parameters[i] : "";
+					//value = convertToUTF8(value);
+					formattedString = formattedString.replace(replaceValue, value);
+				}
+			}
+		}
+
+		return formattedString;
+	}
+
+	/**
+	 * Format string by a specifically ordered parameters
+	 * eg. format "hello %02, %01 good %03"
+	 * parameters firstname, lastname, afternoon
+	 * would result to hello lastname, firstname good afternoon
+	 *
+	 * @param format
+	 * @param parameters
+	 * @return
+	 */
+	public static String formatStringUTF8(String format, String... parameters){
+
+		String formattedString = new String(format);
+
+		if(parameters != null){
+			for(int i=0; i < parameters.length; i++){
+				String replaceValue = i < 9 ? "%0"+(i+1) : "%"+(i+1);
+				if(formattedString != null){
+					String value = parameters[i] != null ? parameters[i] : "";
+					value = convertToUTF8(value);
+					formattedString = formattedString.replace(replaceValue, value);
+				}
+			}
+		}
+
+		return formattedString;
+	}
+
+	// convert from internal Java String format -> UTF-8
+	public static String convertToUTF8(String s) {
+		String out = null;
+		try {
+			out = new String(s.getBytes("UTF-8"), "ISO-8859-1");
+		} catch (java.io.UnsupportedEncodingException e) {
+			return null;
+		}
+		return out;
+	}
+
+	/**
+	 * Checks if string is null or empty after trimming start and trailing spaces
+	 * str = null, returns true;
+	 * str = "", returns true;
+	 * str = " ", returns true;
+	 * str = "   ", returns true;
+	 * str = " abc", returns false;
+	 * @param str
+	 * @return
+	 */
+	public static boolean isBlank(String str){
+		return !isNotBlank(str);
+	}
+
+	public static String getRootSitePath(String currentPagePath) {
+		if(currentPagePath != null && currentPagePath.indexOf("/content/usgboral/")!= -1){
+			currentPagePath = currentPagePath.replace("/content/usgboral/", "");
+		}
+		String countryPath = null;
+		if(currentPagePath.indexOf("/")!= -1){
+			String[] pagePathValues = currentPagePath.split("/");
+			if(pagePathValues != null && pagePathValues.length>0){
+				countryPath = "/content/usgboral/"+pagePathValues[0];
+			}
+		}
+		return countryPath;
+	}
+
+	public static String getReferrerURIfromRequest(SlingHttpServletRequest request) throws URISyntaxException {
+		String refererURI = new URI(request.getHeader("referer")).getPath();
+		if(refererURI != null && refererURI.endsWith(".html")){
+			refererURI = refererURI.replace(".html", "");
+		}
+		return refererURI;
+	}
+
 }

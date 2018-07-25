@@ -81,7 +81,7 @@ public class ClearShareDataScheduledTask implements Runnable {
 		Connection connection = null;
 		
 		try{
-			dataSource = (DataSource) source.getDataSource(DATA_SOURCE_NAME_UAT);
+			dataSource = (DataSource) source.getDataSource(DATA_SOURCE_NAME_LOCAL);
 			connection = dataSource.getConnection();
 		} catch (Exception e) {
 			logger.error("getConnection: encountered Exception", e);
@@ -91,7 +91,7 @@ public class ClearShareDataScheduledTask implements Runnable {
 	}
 
 	@Activate
-	protected void activate(final SimpleScheduledTask.Config config) {
+	protected void activate(final ClearShareDataScheduledTask.Config config) {
 
 	}
 }

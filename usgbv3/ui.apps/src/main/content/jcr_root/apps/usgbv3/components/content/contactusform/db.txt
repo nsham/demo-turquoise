@@ -1,0 +1,19 @@
+CREATE TABLE master.dbo.ContactusForm
+(
+    id int IDENTITY,
+    name nvarchar(200),
+    email nvarchar(200),
+    phone nvarchar(255),
+    message nvarchar(255),
+    occupation nvarchar(200),
+    inquiryType nvarchar(200),
+    informNews BIT,
+    productInterest nvarchar(200),
+    workWith nvarchar(200),
+    status BIT,
+    inquiryTime datetime,
+	form1payload nvarchar(max),
+	form2payload nvarchar(max)
+)
+CREATE UNIQUE INDEX ContactusForm_id_uindex ON master.dbo.ContactusForm (id)
+EXEC sp_addextendedproperty 'MS_Description', 'Table to store contact us data', 'SCHEMA', 'dbo', 'TABLE', 'ContactusForm'
