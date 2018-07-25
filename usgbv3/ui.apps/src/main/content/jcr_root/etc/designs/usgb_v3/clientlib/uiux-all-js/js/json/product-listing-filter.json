@@ -59,14 +59,14 @@
             "title": "hard  5mm title title",
             "texture": "hard_texture",
             "thickness": "5mm",
-            "link": "/content/v3/usgboral/samplepage/product-details.html"
+            "link": "/etc/designs/usgb_v3/clientlib/uiux-all-js-vc/js/json/bookmark-1.html"
         }, {
             "num":2,
             "img": "/content/dam/USGBoral/Global/Website/Images/component/allsample/bg-banner-tile.jpg",
             "title": "5 smooth title title",
             "texture": "smooth_texture",
             "lr_rating": "5",
-            "link": "/content/v3/usgboral/samplepage/product-details.html"
+            "link": "/etc/designs/usgb_v3/clientlib/uiux-all-js-vc/js/json/bookmark-2.html"
         },
         {
             "num":3,
@@ -74,7 +74,7 @@
             "title": "5mm 5 title title",
             "thickness": "4mm",
             "lr_rating": "5",
-            "link": "/content/v3/usgboral/samplepage/product-details.html"
+            "link": "/etc/designs/usgb_v3/clientlib/uiux-all-js-vc/js/json/bookmark-3.html"
         }, {
             "num":4,
             "img": "/content/dam/USGBoral/Global/Website/Images/component/allsample/bg-banner-tile.jpg",
