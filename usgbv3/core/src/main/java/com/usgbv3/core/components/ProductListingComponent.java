@@ -20,6 +20,7 @@ import com.day.cq.dam.api.Rendition;
 import com.day.cq.tagging.Tag;
 import com.day.cq.wcm.api.Page;
 import com.google.common.collect.Lists;
+import com.google.gson.Gson;
 import com.usgbv3.core.models.FilterModel;
 import com.usgbv3.core.models.ProductModel;
 
@@ -67,32 +68,42 @@ public class ProductListingComponent extends WCMUsePojo {
 	@Override
 	public void activate() throws Exception {		
 
-		List<Page> siblings =  Lists.newArrayList(getCurrentPage().getParent().listChildren()); 
 		
-		List<Page> childrens =  Lists.newArrayList(getCurrentPage().listChildren()); 
 		parentListingList = new ArrayList<ProductModel>();
 	    productListingList = new ArrayList<ProductModel>();
 	    filterListingList = new ArrayList<FilterModel>();
-	    
 	    List<Tag> tagListingList = new ArrayList<Tag>();
 	    
-	    for(Page sibling : siblings) {
+	    try {
 	    	
-	    	ProductModel siblingProduct = setProductInfo(sibling);
-	    	parentListingList.add(siblingProduct);
+	    	List<Page> siblings =  Lists.newArrayList(getCurrentPage().getParent().listChildren()); 
+			List<Page> childrens =  Lists.newArrayList(getCurrentPage().listChildren()); 
 	    	
-	    }
+			for(Page sibling : siblings) {
+		    	
+		    	ProductModel siblingProduct = setProductInfo(sibling);
+		    	parentListingList.add(siblingProduct);
+		    	
+		    }
 
-	    for(Page child : childrens) {
+		    for(Page child : childrens) {
+		    	
+		    	ProductModel childProduct = setProductInfo(child);
+		    	productListingList.add(childProduct);
+		    	tagListingList.addAll(childProduct.getTagList());
+		    	
+		    }
+		    
+		    //remove filter
+		    filterListingList = groupingFilter(tagListingList);
+		    
+		    //String json = new Gson().toJson(productListingList );
+		    
+		    error = new Gson().toJson(productListingList.get(0) );
 	    	
-	    	ProductModel childProduct = setProductInfo(child);
-	    	productListingList.add(childProduct);
-	    	tagListingList.addAll(childProduct.getTagList());
-	    	
-	    }
-	    
-	    //remove filter
-	    filterListingList = groupingFilter(tagListingList);
+	    }catch (Exception e) {
+			error = error + e.getMessage();
+		}
 	    
 	    
 	}

@@ -32,6 +32,7 @@ public class VideoComponent extends WCMUsePojo {
 	private String videoMP4;
 	private String videoOGG;
 	private String componentId;
+	private String youtubeID;
 	private String error;
 
 	public String getThumbnail() {
@@ -66,6 +67,14 @@ public class VideoComponent extends WCMUsePojo {
 		this.componentId = componentId;
 	}
 
+	public String getYoutubeID() {
+		return youtubeID;
+	}
+
+	public void setYoutubeID(String youtubeID) {
+		this.youtubeID = youtubeID;
+	}
+
 	public String getError() {
 		return error;
 	}
@@ -90,8 +99,8 @@ public class VideoComponent extends WCMUsePojo {
 			if("youtube".equalsIgnoreCase(videoType)) {
 				
 				String youtubeUrl = (String) getProperties().get("youtube");
-				String youtubeId = extractVideoIdFromUrl(youtubeUrl);
-				thumbnail = "http://img.youtube.com/vi/" + youtubeId + "/maxresdefault.jpg";
+				youtubeID = extractVideoIdFromUrl(youtubeUrl);
+				thumbnail = "http://img.youtube.com/vi/" + youtubeID + "/maxresdefault.jpg";
 				
 			}else {
 				try {
