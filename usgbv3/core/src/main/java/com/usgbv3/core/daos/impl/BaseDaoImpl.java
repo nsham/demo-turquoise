@@ -36,7 +36,7 @@ public class BaseDaoImpl implements BaseDao{
 		Connection connection = null;
 		
 		try{
-			dataSource = (DataSource) dataSourcePool.getDataSource(DATA_SOURCE_NAME_LOCAL);
+			dataSource = (DataSource) dataSourcePool.getDataSource(DATA_SOURCE_NAME_UAT);
 			connection = dataSource.getConnection();
 		} catch (Exception e) {
 			log.error("getConnection: encountered Exception", e);
