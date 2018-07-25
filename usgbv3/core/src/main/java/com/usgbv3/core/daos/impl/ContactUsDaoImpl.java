@@ -27,15 +27,15 @@ public class ContactUsDaoImpl implements ContactUsDao {
 	@Reference
 	BaseDao baseDao;
 
-	private final static String INSERT_DATA_STATEMENT = "INSERT INTO ContactusForm (name, email, message , inquiryType " +
+	private final static String INSERT_DATA_STATEMENT = "INSERT INTO ContactUs (name, email, message , inquiryType " +
 			",  informNews,  status ,  inquiryTime, form1payload )" +
 			"VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
-	private final static String UPDATE_SECOND_FORM ="UPDATE ContactusForm SET  phone  = ?,  " +
+	private final static String UPDATE_SECOND_FORM ="UPDATE ContactUs SET  phone  = ?,  " +
 			"occupation  = ?,  productInterest  = ?,  workWith  = ?,  status  = ?, form2payload = ? WHERE  id  = ?";
 
-	private final static String GET_CONTACT_US_FORM1 = "select * from ContactusForm where status=0;";
+	private final static String GET_CONTACT_US_FORM1 = "select * from ContactUs where status=0;";
 
-	private final static String UPDATE_SCHEDULER_STATUS = "UPDATE ContactusForm SET  status  = ? WHERE  id  = ?";
+	private final static String UPDATE_SCHEDULER_STATUS = "UPDATE ContactUs SET  status  = ? WHERE  id  = ?";
 
 	private SimpleDateFormat submitTime=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
