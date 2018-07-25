@@ -1,0 +1,121 @@
+<!-- PAGE CONTENT -->
+<div class="page-content">
+
+    <!-- BREADCUMB-BOX -->
+    <div class="container ">
+        <div class="row m-vertical-m">
+            <div class=" col-xs-12">
+                <div class="breadcrumb-box">
+                    <ol class="breadcrumb m-no p-no bg-white">
+                        <li>USG Boral</li>
+                        <li class="active">
+                            <b>My Submittal</b>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- BREADCUMB-BOX END -->
+
+
+    <div class="container">
+        <div class="row m-top-3xl">
+            <div class="col-xs-12">
+                <h4 class="ht5 color-primary-green uppercase m-bottom-m">My Submittal</h4>
+            </div>
+        </div>
+    </div>
+
+    <!-- ORDER History Wrapper-->
+
+    <div class="container m-sm-top-l">
+        <form id="submittal-form">
+            
+            <div class="bg-primary-green rounded-top p-m p-sm-bottom-4xl p-top-xl p-bottom-6xl m-bottom-m">
+                <div class="col-xs-12 col-sm-6 uppercase color-white text-left p-left-xs p-sm-left-m">
+                    <h6 class="ht6">Document</h6>
+                </div>
+
+                <div class="col-xs-12 col-sm-6 p-no">
+                    <div class="col-xs-8 uppercase color-white text-left  p-left-xs p-sm-left-m">
+                        <h6 class="ht6 m-sm-top-no  m-top-m">Date Added</h6>
+                    </div>
+
+                    <div class="col-xs-4 text-right m-sm-top-no m-top-s p-no">
+                        <div class="checkbox-content">
+                            <label class="container-checkbox fs-2">
+                                <input type="checkbox" name="" data-check="all">
+                                <span class="checkmark inverted fs-2"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="submittal-content">
+
+                <div class="col-xs-12 p-vertical-m bottom-line-grey">
+                    <div class="col-xs-12 col-sm-6  color-grey text-left">
+                        <p>Documen tDocumentDocu mentDocumen tDocument Documen tDocumentD ocumentDocum ent Document Document</p>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 p-no">
+                        <div class=" col-xs-8 color-grey text-left ">
+                            <p>Jul 18, 2018 3:50:40 PM</p>
+                        </div>
+
+                        <div class="col-xs-4 text-right p-no">
+                            <div class="checkbox-content">
+                                <label class="container-checkbox fs-2">
+                                    <input type="checkbox" name="" data-check="1">
+                                    <span class="checkmark fs-2"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-xs-12 p-vertical-m bottom-line-grey">
+                    <div class="col-xs-12 col-sm-6  color-grey text-left">
+                        <p>Documen blabl ablabs lablabal bblab ablblt Document</p>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 p-no">
+                        <div class=" col-xs-8 color-grey text-left ">
+                            <p>Jan 8, 2018 3:50:40 PM</p>
+                        </div>
+
+                        <div class="col-xs-4 text-right p-no">
+                            <div class="checkbox-content">
+                                <label class="container-checkbox fs-2">
+                                    <input type="checkbox" name="" data-check="2">
+                                    <span class="checkmark fs-2"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+
+            <div class="col-xs-12 m-sm-top-5xl m-top-m p-side-xxl">
+                <div class="col-xs-12 col-sm-4 text-sm-right text-center m-top-m">
+                    <a href="#" class="btn btn-brand-default button-outline-green uppercase width-full ">Email to</a>
+                </div>
+                <div class="col-xs-12 col-sm-4 text-sm-center text-center m-top-m">
+                    <a href="#" class="btn btn-brand-default button-outline-green uppercase width-full ">remove selected</a>
+                </div>
+                <div class="col-xs-12 col-sm-4 text-sm-left text-center m-top-m">
+                    <a href="#" class="btn btn-brand-default button-outline-green uppercase width-full ">download selected</a>
+                </div>
+            </div>
+
+        </form> 
+    </div>
+    <!-- /END ORDER History Wrapper-->
+
+</div>
+<!-- END of PAGE CONTENT -->
+
+
+<sly data-sly-use.clientLib="/libs/granite/sightly/templates/clientlib.html" data-sly-call="${clientLib.js @ categories='uiux.alljs'}"
+    data-sly-unwrap/>

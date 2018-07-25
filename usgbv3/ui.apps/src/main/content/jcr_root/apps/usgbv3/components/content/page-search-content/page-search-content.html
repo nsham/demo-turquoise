@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="/etc/designs/usgb_v3/clientlib/uiux-less-ct.css" type="text/css">
+
 <div class="page-content">
         
     <!-- SECTION SEARCH-->     
@@ -231,6 +233,74 @@
     </section>
 </div>
 
+
+<div id="add-submittal-modal" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="addSubmittalModalLabel">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center" role="document" width="750px">
+            <div class="modal-content">
+                <div class="modal-body m-vertical-s">
+                    <div class="row">
+                        <div class="col-md-12" align="center">
+                            <div class="svg-box icon-correct">
+                                <svg class="circular green-stroke">
+                                    <circle class="path" cx="75" cy="75" r="50" fill="none" stroke-width="5" stroke-miterlimit="10" />
+                                </svg>
+                                <svg class="checkmark green-stroke">
+                                    <g transform="matrix(0.79961,8.65821e-32,8.39584e-32,0.79961,-489.57,-205.679)">
+                                        <path class="checkmark__check" fill="none" d="M616.306,283.025L634.087,300.805L673.361,261.53" />
+                                    </g>
+                                </svg>
+                            </div>
+                            <h4 class="ht4 uppercase color-primary-green m-bottom-l">Successful!</h4>
+                            <p class="color-dark-grey">Added To My Submittal</p>
+                            <br>
+                            <p class="text-center m-bottom-l">
+                                <button data-dismiss="modal" class="btn btn-brand-default button-green">CLOSE</button>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="add-bookmark-modal" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="addBookmarkModalLabel">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center" role="document" width="750px">
+            <div class="modal-content">
+                <div class="modal-body m-vertical-s">
+                    <div class="row">
+                        <div class="col-md-12" align="center">
+                            <div class="svg-box">
+                                <svg class="circular yellow-stroke">
+                                    <circle class="path" cx="75" cy="75" r="50" fill="none" stroke-width="5" stroke-miterlimit="10" />
+                                </svg>
+                                <svg class="alert-sign yellow-stroke">
+                                    <g transform="matrix(1,0,0,1,-615.516,-257.346)">
+                                        <g transform="matrix(0.56541,-0.56541,0.56541,0.56541,93.7153,495.69)">
+                                            <path class="line" d="M634.087,300.805L673.361,261.53" fill="none" />
+                                        </g>
+                                        <g transform="matrix(2.27612,-2.46519e-32,0,2.27612,-792.339,-404.147)">
+                                            <circle class="dot" cx="621.52" cy="316.126" r="1.318" />
+                                        </g>
+                                    </g>
+                                </svg>
+                            </div>
+                            <h4 class="ht4 uppercase color-primary-green">Favourites!</h4>
+                            <p class="color-dark-grey">Product already added</p>
+                            <br>
+                            <p class="text-center m-bottom-l">
+                                <button data-dismiss="modal" class="btn btn-brand-default button-green">CLOSE</button>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script id="templSearchFilterMobile" type="text/x-handlebars-template">
     {{#each this}} 
     <div id="{{key}}-group" class="accordionfc">
@@ -304,7 +374,7 @@
         <div class="left hidden-xs hidden-sm">
             {{#ifEquals this.type "pages"}}
             <div class="thumbs">
-                <a href="{{link}}">
+                <a href="{{link}}" target="_blank">
                     <img src="{{image}}">
                 </a>
             </div>
@@ -318,9 +388,9 @@
             {{/ifEquals}}
         </div>
         <div class="align-center align-md-bottom flex-row right width-full">
-            <a href="{{link}}" class="flex-basis-no flex-IE-grow-auto flex-grow-1 m-right-m">
+            <a href="{{link}}" target="_blank" class="flex-basis-no flex-IE-grow-auto flex-grow-1 m-right-m">
                 <div class="content p-left-no p-md-left-l">
-                    <p class="sub-headline fs-2">{{category_header}}</p>
+                    <p class="sub-headline fs-2 m-bottom-xs">{{category_header}}</p>
                     <h6 class="headline ht6 uppercase m-bottom-xxs">{{title}}</h6>
                     <p class="description m-no">
                         {{desc}}
@@ -329,7 +399,7 @@
             </a>
             <div class="align-center flex-basis-no flex-IE-grow-auto flex-grow-0 flex-row justify-end side-functions-short">
                 <div class="bookmark uppercase fs-3">
-                    <a href="#">
+                    <a href="#" class="cta-bookmark">
                         <div class="btn button-grey visible-xs">
                             <span class="glyphicon glyphicon-bookmark"></span>
                         </div>
@@ -353,13 +423,13 @@
     <div class="each flex-md-row m-bottom-4xl" data-key="{{key}}">
         <div class="left hidden-xs hidden-sm">
             <div class="thumbs">
-                <a href="#"><img src="https://dummyimage.com/250x145/000000/fff"></a>
+                <a href="{{link}}" target="_blank"><img src="https://dummyimage.com/250x145/000000/fff"></a>
             </div>
         </div>
         <div class="align-center align-md-bottom flex-row right width-full">
-            <a href="#" class="flex-basis-no flex-IE-grow-auto flex-grow-1 m-right-m">
+            <a href="{{link}}" target="_blank" class="flex-basis-no flex-IE-grow-auto flex-grow-1 m-right-m">
                 <div class="content p-left-no p-md-left-l">
-                    <p class="sub-headline fs-2">{{category_header}}</p>
+                    <p class="sub-headline fs-2 m-bottom-xs">{{category_header}}</p>
                     <h6 class="headline ht6 uppercase m-bottom-xxs">{{title}}</h6>
                     <p class="description m-no">
                         {{desc}}
@@ -368,26 +438,30 @@
             </a>
             <div class="align-center flex-basis-no flex-IE-grow-auto flex-grow-0 flex-row justify-end side-functions">
                 <div class="bookmark uppercase fs-3">
-                    <a href="#" class="btn button-grey visible-xs btn-sm">
-                        <span class="glyphicon glyphicon-bookmark"></span>
-                    </a>
-                    <a href="#" class="hidden-xs">
-                        <span class="glyphicon glyphicon-bookmark m-right-xxs"></span>
-                        <span class="">
-                            <strong class="">Bookmark</strong>
-                        </span>
+                    <a href="#" class="cta-bookmark">
+                        <div class="btn button-grey visible-xs">
+                            <span class="glyphicon glyphicon-bookmark"></span>
+                        </div>
+                        <div class="hidden-xs">
+                            <span class="glyphicon glyphicon-bookmark m-right-xxs"></span>
+                            <span>
+                                <strong>Bookmark</strong>
+                            </span>
+                        </div>
                     </a>
                 </div>
                 <span class="hidden-xs m-side-s">|</span>
                 <div class="addto uppercase fs-3 m-left-xxs">
-                    <a href="#" class="btn button-grey visible-xs btn-sm">
-                        <span class="glyphicon glyphicon-plus"></span>
-                    </a>
-                    <a href="#" class="hidden-xs">
-                        <span class="glyphicon glyphicon-plus m-right-xxs"></span>
-                        <span class="">
-                            <strong class="">Add to submittal</strong>
-                        </span>
+                    <a href="#" class="cta-add-submittal">
+                        <div class="btn button-grey visible-xs btn-sm">
+                            <span class="glyphicon glyphicon-plus"></span>
+                        </div>
+                        <div class="hidden-xs">
+                            <span class="glyphicon glyphicon-plus m-right-xxs"></span>
+                            <span class="">
+                                <strong class="">Add to submittal</strong>
+                            </span>
+                        </div>
                     </a>
                 </div>
             </div>
@@ -407,13 +481,13 @@
             <div class="each flex-md-row m-bottom-4xl" data-key="{{key}}">
                 <div class="left hidden-xs hidden-sm">
                     <div class="thumbs">
-                        <a href="#"><img src="https://dummyimage.com/250x145/000000/fff"></a>
+                        <a href="{{link}}" target="_blank"><img src="https://dummyimage.com/250x145/000000/fff"></a>
                     </div>
                 </div>
                 <div class="align-center align-md-bottom flex-row right width-full">
-                    <a href="#" class="flex-basis-no flex-IE-grow-auto flex-grow-1 m-right-m">
+                    <a href="{{link}}" target="_blank" class="flex-basis-no flex-IE-grow-auto flex-grow-1 m-right-m">
                         <div class="content p-left-no p-md-left-l">
-                            <p class="sub-headline fs-2">{{category_header}}</p>
+                            <p class="sub-headline fs-2 m-bottom-xs">{{category_header}}</p>
                             <h6 class="headline ht6 uppercase m-bottom-xxs">{{title}}</h6>
                             <p class="description m-no">
                                 {{desc}}
@@ -422,26 +496,30 @@
                     </a>
                     <div class="align-center flex-basis-no flex-IE-grow-auto flex-grow-0 flex-row justify-end side-functions">
                         <div class="bookmark uppercase fs-3">
-                            <a href="#" class="btn button-grey visible-xs btn-sm">
-                                <span class="glyphicon glyphicon-bookmark"></span>
-                            </a>
-                            <a href="#" class="hidden-xs">
-                                <span class="glyphicon glyphicon-bookmark m-right-xxs"></span>
-                                <span class="">
-                                    <strong class="">Bookmark</strong>
-                                </span>
+                            <a href="#" class="cta-bookmark">
+                                <div class="btn button-grey visible-xs">
+                                    <span class="glyphicon glyphicon-bookmark"></span>
+                                </div>
+                                <div class="hidden-xs">
+                                    <span class="glyphicon glyphicon-bookmark m-right-xxs"></span>
+                                    <span>
+                                        <strong>Bookmark</strong>
+                                    </span>
+                                </div>
                             </a>
                         </div>
                         <span class="hidden-xs m-side-s">|</span>
                         <div class="addto uppercase fs-3 m-left-xxs">
-                            <a href="#" class="btn button-grey visible-xs btn-sm">
-                                <span class="glyphicon glyphicon-plus"></span>
-                            </a>
-                            <a href="#" class="hidden-xs">
-                                <span class="glyphicon glyphicon-plus m-right-xxs"></span>
-                                <span class="">
-                                    <strong class="">Add to submittal</strong>
-                                </span>
+                            <a href="#" class="cta-add-submittal">
+                                <div class="btn button-grey visible-xs btn-sm">
+                                    <span class="glyphicon glyphicon-plus"></span>
+                                </div>
+                                <div class="hidden-xs">
+                                    <span class="glyphicon glyphicon-plus m-right-xxs"></span>
+                                    <span class="">
+                                        <strong class="">Add to submittal</strong>
+                                    </span>
+                                </div>
                             </a>
                         </div>
                     </div>
@@ -466,7 +544,7 @@
                     <div class="left hidden-xs hidden-sm">
                         {{#ifEquals this.type "pages"}}
                         <div class="thumbs">
-                            <a href="{{link}}">
+                            <a href="{{link}}" target="_blank">
                                 <img src="{{image}}">
                             </a>
                         </div>
@@ -480,9 +558,9 @@
                         {{/ifEquals}}
                     </div>
                     <div class="align-center align-md-bottom flex-row right width-full">
-                        <a href="{{link}}" class="flex-basis-no flex-IE-grow-auto flex-grow-1 m-right-m">
+                        <a href="{{link}}" target="_blank" class="flex-basis-no flex-IE-grow-auto flex-grow-1 m-right-m">
                             <div class="content p-left-no p-md-left-l">
-                                <p class="sub-headline fs-2">{{category_header}}</p>
+                                <p class="sub-headline fs-2 m-bottom-xs">{{category_header}}</p>
                                 <h6 class="headline ht6 uppercase m-bottom-xxs">{{title}}</h6>
                                 <p class="description m-no">
                                     {{desc}}
@@ -491,7 +569,7 @@
                         </a>
                         <div class="align-center flex-basis-no flex-IE-grow-auto flex-grow-0 flex-row justify-end side-functions-short">
                             <div class="bookmark uppercase fs-3">
-                                <a href="#">
+                                <a href="#" class="cta-bookmark">
                                     <div class="btn button-grey visible-xs">
                                         <span class="glyphicon glyphicon-bookmark"></span>
                                     </div>

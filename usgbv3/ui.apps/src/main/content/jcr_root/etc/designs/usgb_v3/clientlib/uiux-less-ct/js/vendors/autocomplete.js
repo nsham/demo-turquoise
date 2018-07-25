@@ -210,11 +210,13 @@ var AutoComplete = /** @class */ (function () {
                     }],
                 Callback: function (event) {
                     if (this.DOMResults.getAttribute("class").indexOf("open") != -1) {
+                        event.preventDefault();
                         var liActive = this.DOMResults.querySelector("li.active");
                         if (liActive !== null) {
-                            event.preventDefault();
                             this._Select(liActive);
                             this.DOMResults.setAttribute("class", "autocomplete");
+                        } else {
+                            $(this.DOMResults.previousSibling.previousSibling.closest('form').getElementsByTagName('button')).click();
                         }
                     }
                 },

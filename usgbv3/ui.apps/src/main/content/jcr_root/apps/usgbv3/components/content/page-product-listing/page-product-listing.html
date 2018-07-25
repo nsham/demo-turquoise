@@ -33,12 +33,14 @@
 	</div>
 	<!-- SECTION 1 END -->
 
+	 
+ 
 
 	<!--compare popup -->
 	<div class="compare-popup">
 		<div class="title uppercase ">
 			Compare Product
-			<span class=" btn-menu-down glyphicon glyphicon-menu-down float-right  p-s "></span>
+			<span class=" btn-menu-down glyphicon glyphicon-menu-down float-right  p-s  text-center"></span>
 		</div>
 		<div class="popup-content c-auto-center-list">
 			<!-- <div class="each  content-wrapper content1">
@@ -73,49 +75,6 @@
 						</li>
 					</ol>
 				</div>
-
-				<!-- dropdown desktop 
-				<div class="col-sm-3 col-xs-12 p-no pull-right">
-					<div class="search-filter-sort">
-						<div class="dropdown dp-form dropdown-menu-right m-bottom-m d-small">
-							<button class="btn btn-default color-dark-grey dropdown-toggle text-left" type="button" id="dropdownMenu1" data-toggle="dropdown"
-							    aria-haspopup="true" aria-expanded="false">
-								<span>Sort By</span>
-								<span class="color-primary-green glyphicon glyphicon-menu-down right"></span>
-							</button>
-							<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-								<li>
-									<a href="#">Alphabet</a>
-								</li>
-								<li>
-									<a href="#">Oldest to Latest</a>
-								</li>
-								<li>
-									<a href="#">Price</a>
-								</li>
-								<li>
-									<a href="#">Date Added</a>
-								</li>
-							</ul>
-						</div>
-
-						<div class="dropdown refine-mobile visible-xs dropdown-menu-right m-vertical-m d-small">
-							<select class="btn-default">
-								<option>Sort By</option>
-								<option value="Oldest to Latest">Oldest to Latest</option>
-								<option value="Price">Price</option>
-								<option value="Date Added">Date Added</option>
-							</select>
-						</div>
-
-						<a href="#" class="filter-icon btn visible-xs btn-smd m-left-m">
-							<span class="color-primary-green glyphicon glyphicon-filter"></span>
-						</a>
-					</div>
-
-					<div class="clearfix"></div>
-				</div>
-				< dropdown desktop -->
 			</div>
 		</div>
 	</div>
@@ -187,7 +146,7 @@
 									{{/each}}
 
 								</select>
-							</div>
+							</div>  
 						</div>
 
 						{{#each category_child}}
@@ -205,8 +164,8 @@
 								</div>
 								{{/each}}
 							</div>
-						</div>
-						{{/each}}
+						</div> 
+						{{/each}} 
 						<hr class="m-no" />
 						<div class="each checkbox-button-wrapper">
 							{{#each category_child}}
@@ -214,13 +173,12 @@
 								<p class=" m-no">{{value}}</p>
 							</div>
 							{{/each}}
-
 						</div>
 
 					</script>
 					<!-- handlebar product-listing-filter-wrapper end-->
 
-					<form id="product-listing-form">
+					<form id="product-listing-form" class="hidden">
 						<div class="c-sidebar m-top-m rounded-corners">
 
 							<div class="each product-listing-filter"></div>
@@ -262,7 +220,7 @@
 						</div>
 
 						<div class="addto text-center uppercase">
-							<a href="#">
+							<a href="{{link}}" target="_blank">
 								<span class="fs-2">
 									<strong>View Product</strong>
 								</span>
@@ -317,8 +275,8 @@
 						<!-- END SORT BY -->
 
 						<!-- filter -->
-						<a href="#" class="filter-icon btn visible-xs btn-smd m-left-m">
-							<span class="color-primary-green glyphicon glyphicon-filter"></span>
+						<a href="#"  id="filter-icon-btn" class="filter-icon btn visible-xs btn-smd m-left-m">
+							<span class="color-primary-green glyphicon glyphicon-filter "></span>
 						</a>
 						<!-- end filter -->
 					</div>
@@ -393,7 +351,7 @@
 			</div>
 
 
-
+   
 		</div>
 	</div>
 	<!-- section 2 end -->
@@ -448,7 +406,7 @@
 		</div>
 	</div>
 	<!-- SECTION 3 END -->
-
+ 
 
 	<!-- SECTION 4-->
 	<div class="container-fluid bg-white">
@@ -573,12 +531,7 @@
 	</div>
 	<!-- SECTION 4 END -->
 
-	<!-- 
-
-
-
-	 -->
-
+	 
 	<!-- subscribe -->
 	<div class="container-fluid bg-light-grey">
 		<div class="container ">
@@ -633,7 +586,6 @@
 			<strong>{{category_title}}</strong>
 		</p>
 	</div>
-
 	<div class="m-top-m mobile-refine-search">
 		<div class="each m-vertical-xl">
 			<div class="search-filter-sort">
@@ -674,7 +626,7 @@
 </script>
 <!-- handlebar mobile product-listing-filter-wrapper end-->
 
-
+ 
 
 <!-- filter mobile content -->
 <div class="filter-mobile-content hidden">
@@ -688,7 +640,7 @@
 					</div>
 
 					<div class="search-filter m-bottom-xxl p-side-l">
-						<form id="m-product-listing-form">
+						<form id="m-product-listing-form" >
 							<div class=" m-product-listing-filter"> </div>
 							<div class="m-vertical-xl">
 								<button id="test" type="submit" class=" btn width-full button-green btn-brand-default">apply filter</button>
@@ -697,7 +649,7 @@
 					</div>
 				</div>
 
-			</div>
+			</div> 
 		</div>
 
 	</section>
@@ -707,4 +659,4 @@
 
 
 <sly data-sly-use.clientLib="/libs/granite/sightly/templates/clientlib.html" data-sly-call="${clientLib.js @ categories='uiux.alljs'}"
-    data-sly-unwrap/>
+    data-sly-unwrap/>   

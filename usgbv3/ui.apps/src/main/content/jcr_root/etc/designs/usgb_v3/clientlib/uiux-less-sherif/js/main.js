@@ -63,10 +63,12 @@
             
             //Hide all steps
             stepWrapper.removeClass("step-active");
+            stepHeaderWrapper.removeClass("current-step");
 
             //Show next step Shipping details
             stepShippingDetailsWrapper.addClass("step-active");
             stepHeaderShippingDetails.addClass("active");
+            stepHeaderShippingDetails.addClass("current-step");
 
         });
 
@@ -92,7 +94,15 @@
         $('#sampleOrderShippingFormSubmit').click(function (e) {
             
             if ($("#sampleOrderShippingForm").valid()) {
-                alert('hello - valid form');
+               
+                //Hide all steps
+                stepWrapper.removeClass("step-active");
+                stepHeaderWrapper.removeClass("current-step");
+
+                //Show next step Shipping details
+                stepOrderSummaryWrapper.addClass("step-active");
+                stepHeaderOrderSummary.addClass("active");
+                stepHeaderOrderSummary.addClass("current-step");
                 
             }
 
