@@ -38,7 +38,7 @@
 	<script id="compare-popup-local" type="text/x-handlebars-template">
 
 		{{#each this}}
-		<div class='each content-wrapper' data-content-title="{{num}}"><a href="{{url}}" target='_blank'><div class='left img-content'> <img src="{{img}}"> </div> <div class='right title-content'data-content-value="{{num}}">{{title}}</div></a><button class='close-btn-box'><span class='bold'>x</span></button><hr class='col-xs-12 m-no m-top-m'></div>
+		<div class='each content-wrapper' data-content-title="{{url}}"><a href="{{url}}" target='_blank'><div class='left img-content'> <img src="{{img}}"> </div> <div class='right title-content'data-content-value="">{{title}}</div></a><button class='close-btn-box'><span class='bold'>x</span></button><hr class='col-xs-12 m-no m-top-m'></div>
 
 		{{/each}}
 
@@ -218,7 +218,7 @@
 			<!-- handlebar product-listing-result-wrapper -->
 			<script id="product-listing-result" type="text/x-handlebars-template">
 				{{#each this}}
-				<div class="each m-bottom-xxl p-side-m" data-title-value="{{num}}" data-category="{{texture}},{{thickness}},{{lr_rating}}">
+				<div class="each m-bottom-xxl p-side-m" data-title-value="" data-category="{{texture}},{{thickness}},{{lr_rating}}">
 					<div class=" bg-light-grey custom-block flex-column justify-space-between align-stretch">
 						<div class="thumbs flex-shrink-0">
 							<img src="{{img}}">
@@ -230,7 +230,7 @@
 							<div class="radio">
 								<label class="container-checkbox fs-2">
 									Compare Products
-									<input type="checkbox" id="option{{num}}" name="" data-input-value="{{num}}">
+									<input type="checkbox" name="" data-input-value="{{link}}">
 									<span class="checkmark fs-2"></span>
 								</label>
 							</div>

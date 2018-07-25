@@ -1690,36 +1690,39 @@ $(window).on('load', function () {
             var getIMG;
             var getTitle;
             var getLink;
-            var groupElem
+            var checkStatus;
+            var groupElem;
+            var currInput;
             // detect change for cardcheckbox
             $(document).on("change", '.listing-search-content .container-checkbox input[type="checkbox"]', function () {
 
                 event.preventDefault();
-                //data-title-value is card wrapper val
-                //data-input-value is checkbox input val
-                //data-content-title is popup content title
-                //data-content-value is content of title 
+
                 getCard = $(this);
                 //get html data-text-value from input
-                inputVal = getCard.data("input-value");
-                //console.log("CURRinputVal = " + inputVal)
-                getIMG = $("[data-title-value=" + inputVal + "]  img").attr("src");
-                getTitle = $("[data-title-value=" + inputVal + "]  .title").text();
-                getLink = $("[data-title-value=" + inputVal + "] a ").attr("href");
+                inputVal = $(this).closest(".each").find("label input").data("input-value");
+
+                getIMG = $(this).closest(".each").find("img").attr("src");
+                getTitle = $(this).closest(".each").find(".title").text();
+                getLink = $(this).closest(".each").find("a").attr("href");
+                checkStatus = $(this).closest(".each").find(".container-checkbox input").prop("checked");
+
 
                 groupElem = {
-                    "num": inputVal,
+                    "url": getLink,
                     "img": getIMG,
                     "title": getTitle,
-                    "url": getLink
+                    "checked": checkStatus
                 }
+                //.listing-search-content .container-checkbox input[data-input-value='+inputVal+']
 
-                if ($('.listing-search-content .container-checkbox input[data-input-value=' + inputVal + ']').is(':checked')) {
+                if ($(this).is(':checked')) {
 
                     //append  to popup
                     // $(".popup-content").append("<div class='each content-wrapper' data-content-title=" + inputVal + "><a href=" + getLink + " target='_blank'><div class='left img-content'> <img src=" + getIMG + "> </div> <div class='right title-content'data-content-value=" + inputVal + ">" + getTitle + "</div></a><button class='close-btn-box'><span class='bold'>x</span></button><hr class='col-xs-12 m-no m-top-m'></div>")
 
                     storeData.push(groupElem);
+                    
                     storeCompareLocalStorage();
                     //retrieveCompare();
                     if ($(".compare-popup .title").hasClass("selected")) {
@@ -1727,45 +1730,16 @@ $(window).on('load', function () {
                     }
 
                 } else {
+
+                     removeCompareLocalStorage();
                     //check popup if has the value
-                    if ($("[data-content-title=" + inputVal + "]").has("[data-content-value=" + inputVal + "]")) {
-                        $("[data-content-title=" + inputVal + "]").remove();
-                        removeCompareLocalStorage()
+                    if ($("[data-content-title='" + inputVal + "']").has("[data-content-value='" + inputVal + "']")) {
+                        $("[data-content-title='" + inputVal + "']").remove();
                     }
                 }
                 checkNumberOfCheckbox();
 
-
-                // $(this).each(function () {
-                //     //checkboxValues[this.value] = this.checked;
-                //     console.log("chki",   checkboxValues[this.id] = this.checked)
-                // });
-                // localStorage.setItem("checkboxValues", JSON.stringify(checkboxValues));
-
-
-
             });
-
-
-
-            // // store checkbox
-            // var checkboxValues = JSON.parse(localStorage.getItem('checkboxValues')) || {},
-            // $checkboxes = $(getCard);
-
-            // // On page load
-            // $.each(checkboxValues, function (key, value) {
-            //     console.log('key',key)
-            //     console.log('val',value)
-            //     //console.log('chboxvals', checkboxValues)
-            //     $("#" + key).prop('checked', value);
-            //    // 
-            // //    var test = '[data-input-value='+key+']'
-            // //    console.log('t',test)
-            // //    $('[data-input-value=1]').prop("checked",true)
-
-            // });
-
-
 
 
 
@@ -1784,7 +1758,6 @@ $(window).on('load', function () {
 
             function checkNumberOfCheckbox() {
                 numberOfChecked = $('.listing-search-content div input:checkbox:checked').length;
-                console.log('checked', numberOfChecked)
 
                 if (numberOfChecked >= 3) {
                     //disbled all checks
@@ -1818,52 +1791,50 @@ $(window).on('load', function () {
             }
 
 
-
             // close btn on popup to remove content
             $("body").on("click", ".close-btn-box", function () {
 
+                event.preventDefault();
+                currInput = $(this).closest('.each').attr("data-content-title");
 
-                var currInput = $(this).closest('.each').attr("data-content-title");
+                //inputVal = currInput
+
                 console.log('currIN', currInput)
-                //  inputVal = $("[data-content-title]").data("content-title");
-                //$("[data-content-title=" + inputVal + "]").remove();
-                $("[data-input-value =" + currInput + "]").attr('checked', false);
+                $("[data-input-value ='" + currInput + "']").attr('checked', false);
 
-                //storeData.splice($.inArray(inputVal, storeData), 1);
-                removeCompareLocalStorage();
-                checkNumberOfCheckbox();
-                //console.log('close', storeData)
+                // removeCompareLocalStorage();        
             });
 
+
+
             function storeCompareLocalStorage() {
-                // console.log("aa")
-                // var groupElem = {
-                //     "num": inputVal,
-                //     "img": getIMG,
-                //     "title": getTitle,
-                //     "url": getLink
-                // }
-                // if ($(getCard).is(':checked')) {
-                //     storeData.push(groupElem);
-                //     // storeToLocal(groupElem);
-                // } else {
-                //     //remove the elemeent when uncheck
-                //     // removeBookmark(groupElem)
-                //     // storeData.splice($.inArray(inputVal, storeData), 1);
-                //     removeCompareLocalStorage()
-                // }
-                console.log("stored", storeData)
                 // Put the object into storage
-                localStorage.setItem(categoryName, JSON.stringify(storeData));
-                retrieveCompare();
+               // localStorage.setItem(categoryName, JSON.stringify(storeData));
+                console.log("storeINput", inputVal)
+                console.log("stored", storeData)
+                //  retrieveCompare();
             }
 
 
             function removeCompareLocalStorage() {
-                storeData.splice($.inArray(inputVal, storeData), 1);
-                //  localStorage.setItem(categoryName, JSON.stringify(storeData));
-                storeCompareLocalStorage()
-                //retrieveCompare();
+
+                var index = storeData.indexOf($.inArray(inputVal,storeData)); // 1
+                console.log("in", index)
+               // var test = storeData.splice($.inArray(inputVal, storeData), 1);
+                //console.log("splice", test)
+                //console.log("rrstoreINput", inputVal)
+               // console.log("rremove", storeData)
+                //storeCompareLocalStorage();
+                //console.log("splice", storeData);
+                //localStorage.setItem(categoryName, JSON.stringify(storeData));
+
+
+
+                // storeData.splice($.inArray(inputVal, storeData), 1);
+                //storeCompareLocalStorage();
+                //checkNumberOfCheckbox();
+                // retrieveCompare();
+                //$("[data-input-value ='" + currInput + "']").attr('checked', false);
             }
 
             function retrieveCompare() {
@@ -1874,72 +1845,30 @@ $(window).on('load', function () {
 
                     // retrieve it (Or create a blank array if there isn't any info saved yet),
                     //storeData = JSON.parse(localStorage.getItem(categoryName)) || [];
-                    //storeData.push(groupElem);
-                    //console.log("stored", storeData)
 
-                    // Put the object into storage
-                    //localStorage.setItem(categoryName, JSON.stringify(storeData));
 
-                    console.log("reCAT", categoryName)
                     // Retrieve the object from storage
                     var storePopup = JSON.parse(localStorage.getItem(categoryName))
-                    //console.log('t-', test[0][0].img)
+                    console.log('getLocal-', storePopup)
 
-                    // var localPopup = storePopup.map(storePopup => storePopup);
-                    // console.log("loadfromLocal", localPopup);
-
-                    // var localInputVal = storePopup.map(storePopup => storePopup[0].num);
-                    // console.log("getDataVal", localInputVal);
-
+                    //load the popup
                     var comparePopupHTML = $('#compare-popup-local').html();
                     var temptcomparePopupHTML = Handlebars.compile(comparePopupHTML);
                     $('.compare-popup-local').html(temptcomparePopupHTML(storePopup));
-                    // //   console.log(temptcomparePopupHTML)
+
                     $(".compare-popup").show();
 
-                    var test = $("[data-content-title").data("content-title")
+
+                    //target checked true and checkback the card
+                    var localNum = storePopup.map(localNum => localNum.url);
+                    //console.log(localNum)
+                    $.each(localNum, function (i, val) {
+                        var selectedCard = $('[data-input-value="' + val + '"]');
+                        $(selectedCard).prop("checked", true);
+                    });
+                    checkNumberOfCheckbox();
                 }
             }
-
-
-            //test
-            // function storeToLocal(data) {
-            //     // retrieve it (Or create a blank array if there isn't any info saved yet),
-            //     var array = [];
-            //     // JSON.parse(localStorage.getItem(categoryName)) || [];
-            //     // add to it,
-            //     array.push(data);
-            //     // then put it back.
-            //     array = uniqueArray(array);
-            //     localStorage.setItem(categoryName, JSON.stringify(array));
-            // }
-
-            // //unique array check no same name
-            // function uniqueArray(arrArg) {
-            //     return arrArg.filter(function (elem, pos, arr) {
-            //       return arr.indexOf(elem) == pos;
-            //     });
-            // };
-
-            // function removeBookmark(data) {
-            //     var store = JSON.parse(localStorage.getItem(categoryName)) || [];
-            //     var numToRemove = data.num;
-            //     for (var i = 0; i < store.length; i++) {
-            //         if (numToRemove in store[i].num) {
-            //             console.log('remove', store[i]);
-            //         }
-            //     }
-            //     data = store;
-            //     localStorage.setItem(categoryName, JSON.stringify(store));
-            // }
-
-            //test end
-
-
-
-
-
-
 
 
             //////COMPARE POPUP END//////
@@ -1962,8 +1891,6 @@ $(window).on('load', function () {
             //load all from json first
             function productListingResult() {
 
-
-                console.log("ajax load")
                 $.ajax({
                     //url: "/etc/designs/usgb_v3/clientlib/uiux-all-js/js/json/gallery-filter.json",
                     url: "/etc/designs/usgb_v3/clientlib/uiux-all-js/js/json/product-listing-filter.json",
@@ -2007,11 +1934,11 @@ $(window).on('load', function () {
 
                         //getCategoryName - to store array
                         categoryName = productData.category_key;
-                        retrieveCompare();
 
 
                         hideAllWrappers();
                         renderProductListingResult();
+                        //retrieveCompare();
                     },
                     beforeSend: function () {},
                     complete: function () {}
@@ -2684,7 +2611,7 @@ $(window).on('load', function () {
                 var pagename = pathname.split(".").reverse()[1];
                 console.log('pagename - ', pagename)
                 var ext = pathname.split(".").pop();
-                console.log("ext-",ext)
+                console.log("ext-", ext)
 
                 $.ajax({
                     //url: "/etc/designs/usgb_v3/clientlib/uiux-all-js/js/json/gallery-filter.json",

@@ -1,3 +1,31 @@
+<!-- For testing purpose only -->
+<script>
+
+//Set a local storage of the products URL requested earlier to be added for sample orders
+////local storage is a string json object
+var sampleOrdersJson = [
+    {
+        productUrl: "http://usgbuataut.cloudapp.net:4504/etc/designs/usgb_v3/clientlib/uiux-less-sherif/js/json/sample-order-product-1.json",
+        quantity: 2
+    },
+    {
+        productUrl: "http://usgbuataut.cloudapp.net:4504/etc/designs/usgb_v3/clientlib/uiux-less-sherif/js/json/sample-order-product-2.json",
+        quantity: 5
+    },
+    {
+        productUrl: "http://usgbuataut.cloudapp.net:4504/etc/designs/usgb_v3/clientlib/uiux-less-sherif/js/json/sample-order-product-3.json",
+        quantity: 1
+    }
+];
+
+localStorage.setItem('sampleOrdersList', JSON.stringify(sampleOrdersJson));
+
+
+
+</script>
+<!-- /END For testing purpose only -->
+
+
 <!-- PAGE CONTENT -->
 <div class="page-content">
     
@@ -81,49 +109,8 @@
                                 <th class="sample-remove"></th>
                             </tr>
                         </thead>
-                       <tbody>
-                            <tr>
-                                <td class="sample-img">
-                                    <img src="http://usgbuataut.cloudapp.net:4504/content/dam/USGBoral/Global/Website/Images/component/allsample/shaft-img.png" alt="">
-                                </td>
-                                <td class="sample-desc">
-                                    <h6 class="title m-s m-left-no">Lorem ipsum dolor sit amet, consectetuer</h6>
-                                    <span>
-                                        Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. 
-                                    </span>
-                                </td>
-                                <td class="sample-quantity">
-                                    <a href="" class="quantity-ctrl dec-quantity"><i class="fa fa-minus" aria-hidden="true"></i>
-                                    </a>
-                                    <input class="quantity-amount"  type="text" min="1" max="100" value="6" readonly="">
-                                    <a href="" class="quantity-ctrl inc-quantity"><i class="fa fa-plus" aria-hidden="true"></i>
-                                    </a>
-                                </td>
-                                <td class="sample-remove">
-                                    <a href="" class="remove-selected-sample"><i class="fa fa-trash" aria-hidden="true"></i> <span class="hidden-xs hidden-sm">REMOVE</span></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                    <td class="sample-img">
-                                        <img src="http://usgbuataut.cloudapp.net:4504/content/dam/USGBoral/Global/Website/Images/component/allsample/shaft-img.png" alt="">
-                                    </td>
-                                    <td class="sample-desc">
-                                        <h6 class="title m-s m-left-no">Lorem ipsum dolor sit amet, consectetuer</h6>
-                                        <span>
-                                            Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. 
-                                        </span>
-                                    </td>
-                                    <td class="sample-quantity">
-                                        <a href="" class="quantity-ctrl dec-quantity"><i class="fa fa-minus" aria-hidden="true"></i>
-                                        </a>
-                                        <input type="text" type="text" min="1" max="100" value="2" readonly="">
-                                        <a href="" class="quantity-ctrl inc-quantity"><i class="fa fa-plus" aria-hidden="true"></i>
-                                        </a>
-                                    </td>
-                                    <td class="sample-remove">
-                                        <a href="" class="remove-selected-sample"><i class="fa fa-trash" aria-hidden="true"></i> <span class="hidden-xs hidden-sm">REMOVE</span></a>
-                                    </td>
-                            </tr>
+                       <tbody class="sample-orders-container">
+                            
                        </tbody>
                     </table>
                     
@@ -355,6 +342,33 @@
 
 </div>
 <!-- END of PAGE CONTENT -->
+
+
+<script id="sampleOrderTemplate" type="text/x-handlebars-template">
+
+    {{#each this}}
+        <tr>
+            <td class="sample-img">
+                <img src="https://dummyimage.com/250x145/000000/fff" alt=""> <!--{{pagePropertiesList.0.image616x472}}-->
+            </td>
+            <td class="sample-desc">
+                <h6 class="title m-s m-left-no">{{pagePropertiesList.0.pageTitle}}</h6>
+                <span>{{pagePropertiesList.0.seoDescription}}</span>
+            </td>
+            <td class="sample-quantity">
+                <a href="" class="quantity-ctrl dec-quantity"><i class="fa fa-minus" aria-hidden="true"></i>
+                </a>
+                <input class="quantity-amount"  type="text" min="1" max="100" value="{{quantity}}" readonly="">
+                <a href="" class="quantity-ctrl inc-quantity"><i class="fa fa-plus" aria-hidden="true"></i>
+                </a>
+            </td>
+            <td class="sample-remove">
+                <a href="" class="remove-selected-sample"><i class="fa fa-trash" aria-hidden="true"></i> <span class="hidden-xs hidden-sm">REMOVE</span></a>
+            </td>
+        </tr>
+    {{/each}}
+
+</script>
 
 
 <script src="/etc/designs/usgb_v3/clientlib/uiux-less-ct/js/vendors/jquery.validate.min.js"></script>

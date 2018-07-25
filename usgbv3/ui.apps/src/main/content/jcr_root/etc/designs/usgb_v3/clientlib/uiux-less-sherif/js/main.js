@@ -3,6 +3,14 @@
 // ----------------------------------------------------------------------
 (function(){
 
+    //Check if the Local storage for Sample Orders list is set
+    var sampleOrderList = {};
+    if(typeof(Storage) !== "undefined") {
+        if (localStorage.sampleOrdersList) {
+            sampleOrderList = JSON.parse(localStorage.getItem('sampleOrdersList'));
+        }
+    }
+
     $(document).ready(function () {
 
         var stepWrapper = $(".order-steps-wrapper .steps-inner-wrapper");
@@ -18,6 +26,17 @@
         var sampleQuantityCtrlSub = $(".sample-quantity .quantity-ctrl.dec-quantity");
         var sampleQuantityCtrlAdd = $(".sample-quantity .quantity-ctrl.inc-quantity");
         var sampleRemoveBtn = $(".sample-remove .remove-selected-sample");
+
+
+        //Get all Sample orders product details and pass to Template
+        getAllSampleOrdersData(sampleOrderList).done(function(results) {
+            console.log(results);
+
+            var html = $('#sampleOrderTemplate').html();
+            var template = Handlebars.compile(html);
+            $('.sample-orders-container').html(template(results));
+
+        });
 
 
         //Add or subtract Sample quantity
@@ -110,5 +129,33 @@
         });
 
     });
+
+
+    //To get all the sample order products list json data.
+    //Function param is the local storage json parsed object
+    function getAllSampleOrdersData(sampleOrdersList) {
+        
+        var sampleProductsDetails = $.Deferred();
+        var tempSampleProductDetails = [];
+        var arrayCount = 0;
+
+        sampleOrderList.forEach(function(sampleProduct, index, array){
+
+            $.get(sampleProduct.productUrl, function(){})
+            .done(function(data){
+                data.quantity = sampleProduct.quantity;
+                tempSampleProductDetails.push(data);
+            }).always(function(){
+                arrayCount++;
+                if(arrayCount === array.length){
+                    sampleProductsDetails.resolve(tempSampleProductDetails);
+                }
+            });
+
+        });
+
+        return sampleProductsDetails.promise();
+        
+    }
 
 })();
