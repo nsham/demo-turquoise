@@ -36,7 +36,7 @@
                 <!-- Steps Header -->
                 <div class="steps-header m-m m-sm-s  m-bottom-4xl m-sm-bottom-4xl">
                     <div class="">
-                        <a href="#" data-step="step-1-select-wrapper" class="step-1-select steps active">
+                        <a href="#" data-step="step-1-select-wrapper" class="step-1-select steps active current-step">
                             <div class="step-no">
                                 <b>1</b>
                             </div>
@@ -77,7 +77,7 @@
                             <tr class="p-s">
                                 <th class="p-s sample-img">ITEMS</th>
                                 <th class="sample-desc"></th>
-                                <th class="p-s sample-quantity">QUANTITY</th>
+                                <th class="p-s sample-quantity"><span>QUANTITY</span></th>
                                 <th class="sample-remove"></th>
                             </tr>
                         </thead>
@@ -141,7 +141,7 @@
                         <div class="col-sm-offset-1 col-xs-offset-0 col-sm-5 col-xs-12">
                             
                             <div class="float-label respond-msg">
-                                <input type="text" class="form-control" name="name" required>
+                                <input type="text" class="form-control" name="name" value="Sherif Testing" required>
                                 <label for="name" class="uppercase ">Recipient Name</label>
                             </div>
 
@@ -150,12 +150,12 @@
                         <div class="col-sm-offset-1 col-xs-offset-0 col-sm-8 col-xs-12">
                             
                             <div class="float-label respond-msg">
-                                <input type="text" class="form-control" name="addressOne" required>
+                                <input type="text" class="form-control" name="addressOne" value="Test Address" required>
                                 <label for="addressOne" class="uppercase ">Address 1</label>
                             </div>
 
                             <div class="float-label respond-msg">
-                                <input type="text" class="form-control" name="addressTwo" required>
+                                <input type="text" class="form-control" name="addressTwo" value="Test address 2" required>
                                 <label for="addressTwo" class="uppercase ">Address 2</label>
                             </div>
 
@@ -164,12 +164,12 @@
                         <div class="col-sm-offset-1 col-xs-offset-0 col-sm-4 col-xs-12">
 
                             <div class="float-label respond-msg">
-                                <input type="text" class="form-control" name="postalCode" digits="true" required>
+                                <input type="text" class="form-control" name="postalCode" value="12345" digits="true" required>
                                 <label for="postalCode" class="uppercase ">Postal Code</label>
                             </div>
 
                             <div class="float-label respond-msg">
-                                <input type="text" class="form-control" name="city" required>
+                                <input type="text" class="form-control" name="city" value="Kuala Lumpur" required>
                                 <label for="city" class="uppercase ">City</label>
                             </div>
 
@@ -178,7 +178,7 @@
                                     <span class="dropdown-arrow color-primary-green glyphicon glyphicon-menu-down fs-1"></span>
                                     <select name="countrySelect" for="countrySelect" class="drop-down-select form-control" type="select" required>
                                         <option></option>
-                                        <option value="1">Malaysia</option>
+                                        <option value="1" selected>Malaysia</option>
                                         <option value="2">Australia</option>
                                         <option value="3">China</option>
                                         <option value="4">Korea</option>
@@ -196,7 +196,7 @@
                                     <span class="dropdown-arrow color-primary-green glyphicon glyphicon-menu-down fs-1"></span>
                                     <select name="stateSelect" for="stateSelect" class="drop-down-select form-control" type="select" required>
                                         <option></option>
-                                        <option value="1">state 1</option>
+                                        <option value="1" selected>state 1</option>
                                         <option value="2">state 2</option>
                                         <option value="3">state 3</option>
                                         <option value="4">state 4</option>
@@ -210,7 +210,9 @@
                         <div class="col-sm-offset-1 col-xs-offset-0 col-sm-8 col-xs-12">
 
                             <div class="float-label respond-msg">
-                                <textarea type="text" name="remarks" class="form-control h150" required></textarea>
+                                <textarea type="text" name="remarks" class="form-control h150" required>
+                                    Test Remark
+                                </textarea>
                                 <label for="remarks" class="uppercase ">Additional Remark</label>
                             </div>
                 
@@ -219,12 +221,12 @@
                         <div class="col-sm-offset-1 col-xs-offset-0 col-sm-4 col-xs-12">
 
                             <div class="float-label respond-msg">
-                                <input type="text" class="form-control" name="contactNo" digits="true" required>
+                                <input type="text" class="form-control" name="contactNo" value="01234567890" digits="true" required>
                                 <label for="contactNo" class="uppercase ">Recipient contact no</label>
                             </div>
 
                             <div class="float-label respond-msg">
-                                <input type="text" class="form-control" name="email" required>
+                                <input type="text" class="form-control" name="email" value="test@apdgroup.com" required>
                                 <label for="email" class="uppercase ">Recipient Email</label>
                             </div>
 
@@ -242,12 +244,21 @@
                 <!-- /END Step 2 Shipping Form -->
 
                 <!-- Step 3 Order Summary -->
-                <div class="step-3-order-summary-wrapper steps-inner-wrapper ms">
+                <div class="step-3-order-summary-wrapper steps-inner-wrapper m-s">
 
                     <div class="ship-to-summary container">
                         
                         <div class="row">
-                            <div class="col-sm-4 col-xs-12">
+                            <div class="col-xs-12 col-sm-4 col-md-push-8 order-date-no">
+                                
+                                <div class="order-details m-top-m m-sm-bottom-4xl">
+                                    <b>DATE:</b> <span class="recipient-order-date-output">23 Feb 2018</span>
+                                    <br>
+                                    <b>ORDER NO:</b> <span class="recipient-order-no-output">USG01234</span>
+                                </div>
+
+                            </div>
+                            <div class="col-xs-12 col-sm-8 col-md-pull-4">
 
                                 <h4 class="ht4 uppercase color-darker-grey">Ship To:</h4>
 
@@ -270,15 +281,6 @@
                                     <br> 
                                     <span class="recipient-email-output">james.loh@sdcontructions.com</span>
                                 </p>
-
-                            </div>
-                            <div class="col-sm-8 col-xs-12 text-right">
-                                
-                                <div class="order-details m-top-m">
-                                    <b>DATE:</b> <span class="recipient-order-date-output">23 Feb 2018</span>
-                                    <br>
-                                    <b>ORDER NO:</b> <span class="recipient-order-no-output">USG01234</span>
-                                </div>
 
                             </div>
                         </div>

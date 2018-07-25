@@ -2217,7 +2217,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-xs-12 m-bottom-xs">
-                        <h2 class="ht6 color-darker-grey ">Your browsing history</h2>
+                        <h2 class="ht6 color-darker-grey ">Your browse history</h2>
                     </div>
                 </div>
 
@@ -2226,7 +2226,7 @@
                     <div>
                         <div class="feature-card-wrapper">
                             <!-- slick div -->
-                            <div class="carousel-feature-card" data-slick='{
+                            <div class="carousel-feature-card browse-history-result" data-slick='{
                                 "dots": false,
                                 "infinite": true,
                                 "speed": 300,
@@ -2256,78 +2256,30 @@
                                     }
                                 ]
                             }'>
-                                <!-- featured items start -->
-                                <!-- 1 -->
-                                <div class="col-sm-2 p-xl p-bottom-no">
-                                    <a href="#" target="_blank">
-                                        <div class="box-size-m box-type-2 bg-white p-md-xs p-xs">
-                                            <div class="center width-full">
-                                                <div class="box-inner-img"></div>
-                                                <h2 class="m-top-m fs-1 color-darker-grey text-center bold">Multistop ™ 3HI - Multi Performance Plasterboard</h2>
-                                            </div>
-                                            <span class="bg-box-hover"> </span>
-                                        </div>
-                                    </a>
-                                </div>
-                                <!-- 1 end -->
-                                <!-- 2 -->
-                                <div class="col-sm-2 p-xl p-bottom-no">
-                                    <a href="#" target="_blank">
-                                        <div class="box-size-m box-type-2 bg-white p-md-xs p-xs">
-                                            <div class="center width-full">
-                                                <div class="box-inner-img"></div>
-                                                <h2 class="m-top-m fs-1 color-darker-grey text-center bold">FIBEROCK® Aqua-Tough™ - MultiPerformance Gypsum Board</h2>
-                                            </div>
-                                            <span class="bg-box-hover"> </span>
-                                        </div>
-                                    </a>
-                                </div>
-                                <!-- 2 end -->
-                                <!-- 3 -->
-                                <div class="col-sm-2 p-xl p-bottom-no">
-                                    <a href="#" target="_blank">
-                                        <div class="box-size-m box-type-2 bg-white p-md-xs p-xs">
-                                            <div class="center width-full">
-                                                <div class="box-inner-img"></div>
-                                                <h2 class="m-top-m fs-1 color-darker-grey text-center bold">Multistop ™ 3HI - Multi Performance Plasterboard</h2>
-                                            </div>
-                                            <span class="bg-box-hover"> </span>
-                                        </div>
-                                    </a>
-                                </div>
-                                <!-- 3 end -->
-                                <!-- 4 -->
-                                <div class="col-sm-2 p-xl p-bottom-no">
-                                    <a href="#" target="_blank">
-                                        <div class="box-size-m box-type-2 bg-white p-md-xs p-xs">
-                                            <div class="center width-full">
-                                                <div class="box-inner-img"></div>
-                                                <h2 class="m-top-m fs-1 color-darker-grey text-center bold">DIY Plasterboard Accessories
-                                                </h2>
-                                            </div>
-                                            <span class="bg-box-hover"> </span>
-                                        </div>
-                                    </a>
-                                </div>
-                                <!-- 4 end -->
-                                <!-- 5-->
-                                <div class="col-sm-2 p-xl p-bottom-no">
-                                    <a href="#" target="_blank">
-                                        <div class="box-size-m box-type-2 bg-white p-md-xs p-xs">
-                                            <div class="center width-full">
-                                                <div class="box-inner-img"></div>
-                                                <h2 class="m-top-m fs-1 color-darker-grey text-center bold">DIY Plasterboard Accessories
-                                                </h2>
-                                            </div>
-                                            <span class="bg-box-hover"> </span>
-                                        </div>
-                                    </a>
-                                </div>
-                                <!-- 5 end -->
-                                <!-- featured items end -->
                             </div>
                             <!-- slick div end -->
-                        </div>
+                        </div>   <!-- end feature-card-wrapper -->
+
+                    
+
+                        <script id="browseHistoryTemplate" type="text/x-handlebars-template">
+                            {{#each this}}
+                            <div class="col-sm-2 p-xl p-bottom-no">
+                                <a href="{{pagePropertiesList.0.uri}}.html" target="_blank">
+                                    <div class="box-size-m box-type-2 bg-white p-md-xs p-xs">
+                                        <div class="center width-full">
+                                            <div class="box-inner-img">
+                                                <img src="{{pagePropertiesList.0.image616x472}}" alt="">
+                                            </div>
+                                            <h2 class="m-top-m fs-1 color-darker-grey text-center bold">{{pagePropertiesList.0.pageTitle}}</h2>
+                                        </div>
+                                        <span class="bg-box-hover"></span>
+                                    </div>
+                                </a>
+                            </div>
+                            {{/each}}
+                        </script>
+
                     </div>
                 </div>
                 <!-- carousel item end -->
@@ -2416,7 +2368,88 @@
         }
     }
     
-
-    
 })();
+
+
+
+(function(){
+    "use strict";
+    $(document).ready(function(){
+        //var url = window.location.href.replace('.html', '.properties.json');
+        var url = "/etc/designs/usgb_v3/clientlib/uiux-all-js-vc/js/json/bookmark-8.html".replace('.html', '.json');
+        var currOnStageMainResultData = [];
+        
+        if($('.page-product-details').length > 0){
+            addNewBrowseHistory(url);
+
+            // get data from localstorage
+            var browseHistoryUrls = JSON.parse(localStorage.getItem('browseHistory'));
+
+            getAll(browseHistoryUrls).done(function(results) {
+                currOnStageMainResultData = results;
+                console.log(currOnStageMainResultData);
+                if(currOnStageMainResultData.length > 0){
+                    var html = $('#browseHistoryTemplate').html();
+                    var template = Handlebars.compile(html);
+                    console.log(template(currOnStageMainResultData));
+                    $('.browse-history-result').append(template(currOnStageMainResultData));
+                }
+            });
+            
+        }
+    });
+
+
+    function addNewBrowseHistory(url) {
+        var urls = JSON.parse(localStorage.getItem('browseHistory')) || [];
+        urls.unshift(url);
+        console.log('urls', urls);
+        urls = uniqueArray(urls);
+        //to remove the laast one, if more than 5 items
+        // if(urls.length > 5){
+        //     urls.pop();
+        // }
+        localStorage.setItem('browseHistory', JSON.stringify(urls));
+    }
+
+    // unique array   check no same name
+    function uniqueArray(arrArg) {
+        return arrArg.filter(function (elem, pos, arr) {
+            return arr.indexOf(elem) == pos;
+        });
+    };
+
+    function getAll(requests) {
+        var count = requests.length;
+        var results = [];
+        var deferreds = [];
+        var all_done = $.Deferred();
+        
+        for(var i=0; i < requests.length; i++) {
+            var deferred = $.ajax({
+                url: requests[i],
+                type: "GET",
+                cache: false,
+            })
+            .done(function(data) {
+                results.push(data);
+            })
+            .error(function() {
+            })
+            .always(function() {
+                count--;
+                
+                if(count === 0) {
+                    all_done.resolve(results);    
+                }
+            });
+            deferreds.push(deferred);
+        } 
+        return all_done.promise();
+    }
+
+})();
+
+
+
 </script>

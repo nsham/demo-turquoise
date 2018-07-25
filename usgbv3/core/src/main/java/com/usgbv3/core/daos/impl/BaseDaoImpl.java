@@ -36,7 +36,7 @@ public class BaseDaoImpl implements BaseDao{
 		Connection connection = null;
 		
 		try{
-			dataSource = (DataSource) dataSourcePool.getDataSource(DATA_SOURCE_NAME_UAT);
+			dataSource = (DataSource) dataSourcePool.getDataSource(DATA_SOURCE_NAME_LOCAL);
 			connection = dataSource.getConnection();
 		} catch (Exception e) {
 			log.error("getConnection: encountered Exception", e);
@@ -72,8 +72,10 @@ public class BaseDaoImpl implements BaseDao{
 		try {
 			if(connection != null){
 				pStatement = connection.prepareStatement(queryString);
-				for(int i=0; i < data.length; i++){
-					pStatement.setObject(i+1, data[i]);
+				if(data != null){
+					for(int i=0; i < data.length; i++){
+						pStatement.setObject(i+1, data[i]);
+					}
 				}
 				resultSet = pStatement.executeQuery();
 				queryDataResult = new QueryDataResult(connection, resultSet, pStatement);

@@ -111,7 +111,7 @@
     "doc_finder": [
         {
             "key": "docFinder_789",
-            "link": "http://usgbuataut.cloudapp.net:4504/content/v3/usgboral/samplepage/product-details.html?wcmmode=disabled",
+            "link": "/content/dam/USGBoral/Global/Website/Images/component/allsample/pdf/plasterboard-catalogue.pdf",
             "image": "https://dummyimage.com/250x145/000000/fff",
             "title": "Sonatex Colour Guide",
             "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonum",
@@ -123,7 +123,7 @@
         },
         {
             "key": "docFinder_456",
-            "link": "http://usgbuataut.cloudapp.net:4504/content/v3/usgboral/samplepage/product-details.html?wcmmode=disabled",
+            "link": "/content/dam/USGBoral/Global/Website/Images/component/allsample/pdf/plasterboard-catalogue.pdf",
             "image": "https://dummyimage.com/250x145/000000/fff",
             "title": "Array Single Sonatex Colour Guide",
             "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonum",
@@ -134,7 +134,7 @@
             "created_date": 2018070723050508
         },{
             "key": "docFinder_789",
-            "link": "http://usgbuataut.cloudapp.net:4504/content/v3/usgboral/samplepage/product-details.html?wcmmode=disabled",
+            "link": "/content/dam/USGBoral/Global/Website/Images/component/allsample/pdf/plasterboard-catalogue.pdf",
             "image": "https://dummyimage.com/250x145/000000/fff",
             "title": "String Sonatex Colour Guide",
             "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonum",
@@ -145,7 +145,7 @@
             "created_date": 2018070723050508
         },{
             "key": "docFinder_123",
-            "link": "http://usgbuataut.cloudapp.net:4504/content/v3/usgboral/samplepage/product-details.html?wcmmode=disabled",
+            "link": "/content/dam/USGBoral/Global/Website/Images/component/allsample/pdf/plasterboard-catalogue.pdf",
             "image": "https://dummyimage.com/250x145/000000/fff",
             "title": "Sonatex Colour Guide",
             "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonum",
@@ -157,7 +157,7 @@
         },
         {
             "key": "docFinder_456",
-            "link": "http://usgbuataut.cloudapp.net:4504/content/v3/usgboral/samplepage/product-details.html?wcmmode=disabled",
+            "link": "/content/dam/USGBoral/Global/Website/Images/component/allsample/pdf/plasterboard-catalogue.pdf",
             "image": "https://dummyimage.com/250x145/000000/fff",
             "title": "Sonatex Colour Guide",
             "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonum",
@@ -168,7 +168,7 @@
             "created_date": 2018070723050508
         },{
             "key": "docFinder_789",
-            "link": "http://usgbuataut.cloudapp.net:4504/content/v3/usgboral/samplepage/product-details.html?wcmmode=disabled",
+            "link": "/content/dam/USGBoral/Global/Website/Images/component/allsample/pdf/plasterboard-catalogue.pdf",
             "image": "https://dummyimage.com/250x145/000000/fff",
             "title": "Sonatex Colour Guide",
             "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonum",
@@ -179,7 +179,7 @@
             "created_date": 2018070723050508
         },{
             "key": "docFinder_123",
-            "link": "http://usgbuataut.cloudapp.net:4504/content/v3/usgboral/samplepage/product-details.html?wcmmode=disabled",
+            "link": "/content/dam/USGBoral/Global/Website/Images/component/allsample/pdf/plasterboard-catalogue.pdf",
             "image": "https://dummyimage.com/250x145/000000/fff",
             "title": "Sonatex Colour Guide",
             "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonum",
@@ -191,7 +191,7 @@
         },
         {
             "key": "docFinder_456",
-            "link": "http://usgbuataut.cloudapp.net:4504/content/v3/usgboral/samplepage/product-details.html?wcmmode=disabled",
+            "link": "/content/dam/USGBoral/Global/Website/Images/component/allsample/pdf/plasterboard-catalogue.pdf",
             "image": "https://dummyimage.com/250x145/000000/fff",
             "title": "Sonatex Colour Guide",
             "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonum",
@@ -202,7 +202,7 @@
             "created_date": 2018070723050508
         },{
             "key": "docFinder_789",
-            "link": "http://usgbuataut.cloudapp.net:4504/content/v3/usgboral/samplepage/product-details.html?wcmmode=disabled",
+            "link": "/content/dam/USGBoral/Global/Website/Images/component/allsample/pdf/plasterboard-catalogue.pdf",
             "image": "https://dummyimage.com/250x145/000000/fff",
             "title": "Sonatex Colour Guide",
             "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonum",

@@ -1,0 +1,170 @@
+.floating-type-form {
+  .form-control {
+    background: transparent;
+    padding: 0;
+  }
+  .float-label {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    margin-bottom: 20px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    position: relative;
+    .dropdown-arrow {
+      position: absolute;
+      top: 15px;
+      right: 10px;
+    }
+    .h150 {
+      height: 150px;
+    }
+    input[type=file] {
+      z-index: 100;
+      cursor: pointer;
+      position: absolute;
+      height: 3.1em;
+      width: 100%;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      filter: alpha(opacity=0);
+    }
+  }
+  .float-label label {
+    z-index: 0;
+    width: auto;
+    height: 0;
+    left: 0px;
+    top: 0px;
+    position: absolute;
+    top: 15px;
+    left: 8px;
+    font-weight: bold;
+    color: #5f575c;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    -webkit-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+  }
+  .float-label input,
+  .float-label textarea,
+  .float-label select {
+    z-index: 1;
+    height: 3.5em;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  .float-label input:valid,
+  .float-label input:focus {
+    padding: 20px 8px 5px 8px;
+    width: 100%;
+  }
+  .float-label textarea:valid,
+  .float-label textarea:focus {
+    padding: 20px 8px 5px 8px;
+  }
+  .float-label input:focus,
+  .float-label textarea:focus {
+    background: transparent;
+  }
+  .float-label input:valid+label,
+  .float-label input:focus+label {
+    color: #01963a;
+    font-size: 12px;
+    -webkit-transform: translate3d(0, -10px, 0);
+    transform: translate3d(0, -10px, 0);
+  }
+  .float-label textarea:valid+label,
+  .float-label textarea:focus+label {
+    color: #01963a;
+    font-size: 12px;
+    -webkit-transform: translate3d(0, -10px, 0);
+    transform: translate3d(0, -10px, 0);
+  }
+  .float-label {
+    .drop-down-select {
+      padding: 18px 8px 0;
+    }
+    .open {
+      color: #01963a;
+      font-size: 12px;
+      -webkit-transform: translate3d(0, -10px, 0);
+      transform: translate3d(0, -10px, 0);
+    }
+  }
+  .radio label,
+  .checkbox label {
+    margin-bottom: 5px;
+  }
+  select {
+    /* for Firefox */
+    -moz-appearance: none;
+    /* for Chrome */
+    -webkit-appearance: none;
+  }
+  /* For IE10 */
+  select::-ms-expand {
+    display: none;
+  }
+  .error {
+    color: #a94442;
+    font-size: 13px;
+  }
+  .has-success .help-block,
+  .has-success .control-label,
+  .has-success .radio,
+  .has-success .checkbox,
+  .has-success .radio-inline,
+  .has-success .checkbox-inline,
+  .has-success.radio label,
+  .has-success.checkbox label,
+  .has-success.radio-inline label,
+  .has-success.checkbox-inline label {
+    color: #333;
+  }
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    -webkit-animation: autofill 0s forwards;
+    animation: autofill 0s forwards;
+  }
+  @keyframes autofill {
+    100% {
+      background: transparent;
+      color: inherit;
+    }
+  }
+  @-webkit-keyframes autofill {
+    100% {
+      background: transparent;
+      color: inherit;
+    }
+  }
+}
+
+#hiddenRecaptcha-error {
+  margin-top: -13px;
+}
+
+.file-upload {
+  font-size: 14px;
+  border: 1px solid #ccc;
+  height: 3.5em;
+  .file-select {
+    display: block;
+    color: #34495e;
+    cursor: pointer;
+    text-align: left;
+    overflow: hidden;
+    position: relative;
+    .file-select-name {
+      display: inline-block;
+      padding: 20px 8px 5px 8px;
+    }
+  }
+}
