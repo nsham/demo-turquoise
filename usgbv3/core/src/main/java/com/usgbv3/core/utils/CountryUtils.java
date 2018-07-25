@@ -13,10 +13,18 @@ import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.jcr.Node;
+import javax.jcr.Property;
+import javax.jcr.PropertyIterator;
 
 public class CountryUtils {
     private static final Logger LOG = LoggerFactory.getLogger(CountryUtils.class);
+    
+    private static String countryListPath = "/etc/usgbCountryList";
 
     public static List<CountryModel> getCountryModelList(ResourceResolver resourceResolver){
         List<CountryModel> countryModelList = new ArrayList<>();
@@ -64,5 +72,60 @@ public class CountryUtils {
 
         }
         return null;
+    }
+    
+    public static List<Map<String, String>> retrieveUsgbCountry(ResourceResolver resourceResolver){
+		Resource countryListResource = null;
+		
+		
+		List<Map<String, String>> usgbCountry = new ArrayList<Map<String,String>>();
+		Map<String, String> country = null;
+		
+		try{
+			
+			countryListResource = resourceResolver.getResource(countryListPath);
+			
+			if(countryListResource.hasChildren()){
+				for(Resource countryResource : countryListResource.getChildren()){
+					country = new HashMap<String, String>();
+					Node countryNode = countryResource.adaptTo(Node.class);
+					
+					PropertyIterator properties = countryNode.getProperties();
+					
+					while (properties.hasNext()) {
+						Property property = properties.nextProperty();
+						if(!property.isMultiple()){
+							country.put(property.getName(), property.getValue().getString());
+						}
+					}
+					usgbCountry.add(country);
+				}
+			}
+			
+		}catch(Exception ex){
+			LOG.error("retrieveUsgbCountry : " + ex.getMessage());
+		}
+		
+		return usgbCountry;
+		
+	}
+    
+    public static Map<String, String> retrieveUsgbCountrybyPath(ResourceResolver resourceResolver, String pagePath){
+    	
+    	Map<String, String> countryInfo = null;
+    	
+    	List<Map<String, String>> countryList = retrieveUsgbCountry(resourceResolver);
+    	
+    	for(Map<String, String> country : countryList) {
+			
+			if(pagePath.contains(country.get("pathCode").toString())) {
+				countryInfo = country;
+				break;
+			}
+			
+		}
+    	
+    	return countryInfo;
+    	
     }
 }

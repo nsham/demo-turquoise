@@ -1616,28 +1616,22 @@ $(window).on('load', function () {
 
         ///  MIX MEDIA  GALLERY/// 
         if ($(".mix-media-gallery-wrapper").length) {
-            console.log("test")
             // videoType();
-
 
             $(".mix-media-gallery-wrapper .slick-arrow").click(function () {
                 //   videoType();
                 console.log("test1")
                 $(".modal-video-elem").get(0).pause();
                 if ($(".mix-media-gallery-wrapper .slick-slide .video #ranID").hasClass('YouTubeVideoPlayer')) {
-                    console.log("bb")
                     $('.YouTubeVideoPlayer')[0].contentWindow.postMessage('{"event":"command","func":"' + 'stopVideo' + '","args":""}', '*');
                 }
             });
 
             function videoType() {
-
                 if ($(".mix-media-gallery-wrapper .slick-current .video").prev().hasClass('modal-video-elem')) {
-                    console.log("aaa")
                     $(".modal-video-elem").get(0).pause();
                 }
                 if ($(".mix-media-gallery-wrapper .slick-current .video").prev().hasClass('YouTubeVideoPlayer')) {
-                    console.log("bb")
                     $('.YouTubeVideoPlayer')[0].contentWindow.postMessage('{"event":"command","func":"' + 'stopVideo' + '","args":""}', '*');
                 }
             }
@@ -1688,14 +1682,15 @@ $(window).on('load', function () {
             $(".compare-popup .instruction-text").hide();
             $(".compare-popup .btn-menu-down").hide();
 
-            var getCard
-            var inputVal
-            var numberOfChecked
-            var categoryName
-            var storeData = []
-            var getIMG
-            var getTitle
-            var getLink
+            var getCard;
+            var inputVal;
+            var numberOfChecked;
+            var categoryName;
+            var storeData = [];
+            var getIMG;
+            var getTitle;
+            var getLink;
+            var groupElem
             // detect change for cardcheckbox
             $(document).on("change", '.listing-search-content .container-checkbox input[type="checkbox"]', function () {
 
@@ -1712,11 +1707,21 @@ $(window).on('load', function () {
                 getTitle = $("[data-title-value=" + inputVal + "]  .title").text();
                 getLink = $("[data-title-value=" + inputVal + "] a ").attr("href");
 
+                groupElem = {
+                    "num": inputVal,
+                    "img": getIMG,
+                    "title": getTitle,
+                    "url": getLink
+                }
+
                 if ($('.listing-search-content .container-checkbox input[data-input-value=' + inputVal + ']').is(':checked')) {
 
                     //append  to popup
-                    $(".popup-content").append("<div class='each content-wrapper' data-content-title=" + inputVal + "><a href=" + getLink + " target='_blank'><div class='left img-content'> <img src=" + getIMG + "> </div> <div class='right title-content'data-content-value=" + inputVal + ">" + getTitle + "</div></a><button class='close-btn-box'><span class='bold'>x</span></button><hr class='col-xs-12 m-no m-top-m'></div>")
+                    // $(".popup-content").append("<div class='each content-wrapper' data-content-title=" + inputVal + "><a href=" + getLink + " target='_blank'><div class='left img-content'> <img src=" + getIMG + "> </div> <div class='right title-content'data-content-value=" + inputVal + ">" + getTitle + "</div></a><button class='close-btn-box'><span class='bold'>x</span></button><hr class='col-xs-12 m-no m-top-m'></div>")
 
+                    storeData.push(groupElem);
+                    storeCompareLocalStorage();
+                    //retrieveCompare();
                     if ($(".compare-popup .title").hasClass("selected")) {
                         $(".compare-popup .title").removeClass("selected");
                     }
@@ -1725,19 +1730,44 @@ $(window).on('load', function () {
                     //check popup if has the value
                     if ($("[data-content-title=" + inputVal + "]").has("[data-content-value=" + inputVal + "]")) {
                         $("[data-content-title=" + inputVal + "]").remove();
+                        removeCompareLocalStorage()
                     }
                 }
                 checkNumberOfCheckbox();
-                storeCompareLocalStorage();
+
+
+                // $(this).each(function () {
+                //     //checkboxValues[this.value] = this.checked;
+                //     console.log("chki",   checkboxValues[this.id] = this.checked)
+                // });
+                // localStorage.setItem("checkboxValues", JSON.stringify(checkboxValues));
+
+
+
             });
 
-            // close btn on popup to remove content
-            $('body').on("click", ".close-btn-box", function () {
-                inputVal = $("[data-content-title]").data("content-title");
-                $("[data-content-title=" + inputVal + "]").remove();
-                $("[data-input-value =" + inputVal + "]").attr('checked', false);
-                checkNumberOfCheckbox()
-            });
+
+
+            // // store checkbox
+            // var checkboxValues = JSON.parse(localStorage.getItem('checkboxValues')) || {},
+            // $checkboxes = $(getCard);
+
+            // // On page load
+            // $.each(checkboxValues, function (key, value) {
+            //     console.log('key',key)
+            //     console.log('val',value)
+            //     //console.log('chboxvals', checkboxValues)
+            //     $("#" + key).prop('checked', value);
+            //    // 
+            // //    var test = '[data-input-value='+key+']'
+            // //    console.log('t',test)
+            // //    $('[data-input-value=1]').prop("checked",true)
+
+            // });
+
+
+
+
 
             //hide show popup
             $(".compare-popup .btn-menu-down").click(function () {
@@ -1754,8 +1784,8 @@ $(window).on('load', function () {
 
             function checkNumberOfCheckbox() {
                 numberOfChecked = $('.listing-search-content div input:checkbox:checked').length;
-                $(".compare-popup").show();
-                $(".popup-content").show();
+                console.log('checked', numberOfChecked)
+
                 if (numberOfChecked >= 3) {
                     //disbled all checks
                     $('.listing-search-content .container-checkbox input[type="checkbox"]').prop('disabled', true);
@@ -1769,15 +1799,18 @@ $(window).on('load', function () {
                     $(".compare-popup .btn-compare").show();
                     $(".compare-popup").show();
                     $(".compare-popup .instruction-text").hide();
+
                 } else {
-                    $(".compare-popup .instruction-text").show();
                     $(".compare-popup .btn-compare").hide();
+                    $(".compare-popup .instruction-text").show();
                 }
 
                 if (numberOfChecked > 0) {
                     $(".compare-popup .btn-menu-down").show();
+                    $(".popup-content").show();
                 } else {
-                    $(".compare-popup").hide();
+                    $(".compare-popup .instruction-text").hide();
+                    $(".compare-popup").show();
                     $(".popup-content").hide();
                     $(".compare-popup .btn-menu-down").hide();
                     $(".compare-popup .btn-compare").hide();
@@ -1786,45 +1819,125 @@ $(window).on('load', function () {
 
 
 
+            // close btn on popup to remove content
+            $("body").on("click", ".close-btn-box", function () {
+
+
+                var currInput = $(this).closest('.each').attr("data-content-title");
+                console.log('currIN', currInput)
+                //  inputVal = $("[data-content-title]").data("content-title");
+                //$("[data-content-title=" + inputVal + "]").remove();
+                $("[data-input-value =" + currInput + "]").attr('checked', false);
+
+                //storeData.splice($.inArray(inputVal, storeData), 1);
+                removeCompareLocalStorage();
+                checkNumberOfCheckbox();
+                //console.log('close', storeData)
+            });
+
             function storeCompareLocalStorage() {
-                if ($(getCard).is(':checked')) {
-                    var groupElem = [{
-                        "img": getIMG,
-                        "title": getTitle,
-                        "url": getLink
-                    }]
-                    storeData.push(groupElem);
-                } else {
-                    //remove the elemeent when uncheck
-                    storeData.splice($.inArray(inputVal, storeData), 1);
-                }
+                // console.log("aa")
+                // var groupElem = {
+                //     "num": inputVal,
+                //     "img": getIMG,
+                //     "title": getTitle,
+                //     "url": getLink
+                // }
+                // if ($(getCard).is(':checked')) {
+                //     storeData.push(groupElem);
+                //     // storeToLocal(groupElem);
+                // } else {
+                //     //remove the elemeent when uncheck
+                //     // removeBookmark(groupElem)
+                //     // storeData.splice($.inArray(inputVal, storeData), 1);
+                //     removeCompareLocalStorage()
+                // }
                 console.log("stored", storeData)
                 // Put the object into storage
                 localStorage.setItem(categoryName, JSON.stringify(storeData));
-                //localStorage.setItem(categoryName,storeData);
-
+                retrieveCompare();
             }
 
+
+            function removeCompareLocalStorage() {
+                storeData.splice($.inArray(inputVal, storeData), 1);
+                //  localStorage.setItem(categoryName, JSON.stringify(storeData));
+                storeCompareLocalStorage()
+                //retrieveCompare();
+            }
 
             function retrieveCompare() {
 
-                console.log("reCAT", categoryName)
-                // localStorage.getItem(categoryName);
+                if (localStorage.getItem(categoryName) === null) {
+                    console.log("localempty")
+                } else {
 
-                // var test2= JSON.parse("ceilings")
-                // console.log("selectedItem", test2.length)
+                    // retrieve it (Or create a blank array if there isn't any info saved yet),
+                    //storeData = JSON.parse(localStorage.getItem(categoryName)) || [];
+                    //storeData.push(groupElem);
+                    //console.log("stored", storeData)
 
-                // Retrieve the object from storage
-               var test = JSON.parse(localStorage.getItem(categoryName))
-               console.log('t-', test[0][0].img)
+                    // Put the object into storage
+                    //localStorage.setItem(categoryName, JSON.stringify(storeData));
 
-               var result = test.map(a => a[0]);
-                console.log('rrrr', result[0])
+                    console.log("reCAT", categoryName)
+                    // Retrieve the object from storage
+                    var storePopup = JSON.parse(localStorage.getItem(categoryName))
+                    //console.log('t-', test[0][0].img)
 
-                //$(".compare-popup").show();
-                
+                    // var localPopup = storePopup.map(storePopup => storePopup);
+                    // console.log("loadfromLocal", localPopup);
 
+                    // var localInputVal = storePopup.map(storePopup => storePopup[0].num);
+                    // console.log("getDataVal", localInputVal);
+
+                    var comparePopupHTML = $('#compare-popup-local').html();
+                    var temptcomparePopupHTML = Handlebars.compile(comparePopupHTML);
+                    $('.compare-popup-local').html(temptcomparePopupHTML(storePopup));
+                    // //   console.log(temptcomparePopupHTML)
+                    $(".compare-popup").show();
+
+                    var test = $("[data-content-title").data("content-title")
+                }
             }
+
+
+            //test
+            // function storeToLocal(data) {
+            //     // retrieve it (Or create a blank array if there isn't any info saved yet),
+            //     var array = [];
+            //     // JSON.parse(localStorage.getItem(categoryName)) || [];
+            //     // add to it,
+            //     array.push(data);
+            //     // then put it back.
+            //     array = uniqueArray(array);
+            //     localStorage.setItem(categoryName, JSON.stringify(array));
+            // }
+
+            // //unique array check no same name
+            // function uniqueArray(arrArg) {
+            //     return arrArg.filter(function (elem, pos, arr) {
+            //       return arr.indexOf(elem) == pos;
+            //     });
+            // };
+
+            // function removeBookmark(data) {
+            //     var store = JSON.parse(localStorage.getItem(categoryName)) || [];
+            //     var numToRemove = data.num;
+            //     for (var i = 0; i < store.length; i++) {
+            //         if (numToRemove in store[i].num) {
+            //             console.log('remove', store[i]);
+            //         }
+            //     }
+            //     data = store;
+            //     localStorage.setItem(categoryName, JSON.stringify(store));
+            // }
+
+            //test end
+
+
+
+
 
 
 
@@ -1833,8 +1946,9 @@ $(window).on('load', function () {
 
 
 
-            ////// REFINE SEARCH  FEATURE start //////
 
+
+            ////// REFINE SEARCH  FEATURE start //////
 
             ////filtering product listing////
             var productData
@@ -1843,9 +1957,12 @@ $(window).on('load', function () {
             var shoutout
 
 
+
             productListingResult();
             //load all from json first
             function productListingResult() {
+
+
                 console.log("ajax load")
                 $.ajax({
                     //url: "/etc/designs/usgb_v3/clientlib/uiux-all-js/js/json/gallery-filter.json",
@@ -1903,7 +2020,7 @@ $(window).on('load', function () {
 
 
             function renderProductListingResult() {
-                console.log(currOnStageMainResultData)
+                // console.log(currOnStageMainResultData)
                 paginationResult(currOnStageMainResultData);
             }
 
@@ -1925,10 +2042,10 @@ $(window).on('load', function () {
                 var form = $(btnSubmit).closest('form');
                 var selectedFilterData = ($(form).serializeObject());
                 var filteredData = multiFilter(productData.product_result, selectedFilterData);
-                console.log('filter', selectedFilterData);
-                console.log('filteredDataPL', filteredData);
+                //console.log('filter', selectedFilterData);
+                // console.log('filteredDataPL', filteredData);
                 currOnStageMainResultData = filteredData;
-                console.log(currOnStageMainResultData)
+                // console.log(currOnStageMainResultData)
 
                 paginationResult(currOnStageMainResultData);
 
@@ -2057,7 +2174,7 @@ $(window).on('load', function () {
 
             function checkForShoutout() {
                 if (shoutout == true) {
-                    $('.product-listing-result').prepend("<div class='each m-bottom-xxl p-side-m shoutout-txt'><div  class='bg-light-grey custom-block flex-column justify-center align-stretch'><h6 class='title ht6 uppercase text-center p-s'>SHOUT SHOUT SHOUT</h6></div></div>");
+                    $('.product-listing-result').prepend("<div class='each m-bottom-xxl p-side-m shoutout-txt'><div  class='bg-light-grey width-full custom-block flex-column justify-center align-stretch'><h6 class='title ht6 uppercase text-center p-s'>SHOUT SHOUT SHOUT</h6></div></div>");
                 }
             }
 
@@ -2562,6 +2679,13 @@ $(window).on('load', function () {
 
             //load all from json first
             function galleryResult() {
+
+                var pathname = window.location.pathname;
+                var pagename = pathname.split(".").reverse()[1];
+                console.log('pagename - ', pagename)
+                var ext = pathname.split(".").pop();
+                console.log("ext-",ext)
+
                 $.ajax({
                     //url: "/etc/designs/usgb_v3/clientlib/uiux-all-js/js/json/gallery-filter.json",
                     url: "/etc/designs/usgb_v3/clientlib/uiux-all-js/js/json/test-gallery.json",

@@ -12,20 +12,20 @@ import com.adobe.cq.sightly.WCMUsePojo;
 import com.day.cq.wcm.api.Page;
 import com.google.common.collect.Lists;
 import com.usgbv3.core.models.ProductModel;
-import com.usgbv3.core.models.TabTilesModel;
+import com.usgbv3.core.models.AssetsPagesCategoryModel;
 
 
 public class TabTilesComponent extends WCMUsePojo {
 	private static final Logger LOG = LoggerFactory.getLogger(TabTilesComponent.class);
 	
-	private List<TabTilesModel> productList;
+	private List<AssetsPagesCategoryModel> productList;
 	private String error;
 
-	public List<TabTilesModel> getProductList() {
+	public List<AssetsPagesCategoryModel> getProductList() {
 		return productList;
 	}
 
-	public void setProductList(List<TabTilesModel> productList) {
+	public void setProductList(List<AssetsPagesCategoryModel> productList) {
 		this.productList = productList;
 	}
 
@@ -40,7 +40,7 @@ public class TabTilesComponent extends WCMUsePojo {
 	@Override
 	public void activate() throws Exception {		
 
-		productList = new ArrayList<TabTilesModel>();
+		productList = new ArrayList<AssetsPagesCategoryModel>();
 		
 		String parentPath = (String) getProperties().get("parentPath");
 		Page parentPage = getPageManager().getPage(parentPath);
@@ -48,7 +48,7 @@ public class TabTilesComponent extends WCMUsePojo {
 		
 		for(Page category : categoryPages) {
 			
-			TabTilesModel tabTiles = new TabTilesModel();
+			AssetsPagesCategoryModel tabTiles = new AssetsPagesCategoryModel();
 			List<ProductModel> products = setProduct(category);
 			tabTiles.setCategory(category);
 			tabTiles.setPages(products);

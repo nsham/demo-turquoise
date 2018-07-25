@@ -2,3 +2,4 @@
 where-to-buy.js
 global-landing.js
 search.js
+submittal.js
