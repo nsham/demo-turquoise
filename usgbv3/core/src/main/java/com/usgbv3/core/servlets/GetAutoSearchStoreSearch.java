@@ -2,6 +2,7 @@ package com.usgbv3.core.servlets;
 
 import com.usgbv3.core.constants.ApplicationConstants;
 import com.usgbv3.core.services.StoreLocatorService;
+import com.usgbv3.core.utils.StringUtils;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.SlingHttpServletResponse;
 import org.apache.sling.api.request.RequestParameter;
@@ -44,10 +45,7 @@ public class GetAutoSearchStoreSearch extends SlingSafeMethodsServlet {
         String jsonResponse = "";
         if(textParameter != null && request.getHeader("referer") != null){
             try {
-                String refererURI = new URI(request.getHeader("referer")).getPath();
-                if(refererURI != null && refererURI.endsWith(".html")){
-                    refererURI = refererURI.replace(".html", "");
-                }
+                String refererURI = StringUtils.getReferrerURIfromRequest(request);
                 jsonResponse = storeLocatorService.getAutoSearch(refererURI
                         , textParameter.getString(), request.getResourceResolver());
             } catch (URISyntaxException e) {
@@ -63,4 +61,6 @@ public class GetAutoSearchStoreSearch extends SlingSafeMethodsServlet {
         out.print(jsonResponse);
         out.flush();
     }
+
+
 }

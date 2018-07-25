@@ -26,9 +26,6 @@ public class ShareDataDaoImpl implements ShareDataDao {
 	protected final Logger log = LoggerFactory.getLogger(this.getClass());
 
 	@Reference
-	DataSourcePool dataSourcePool;
-
-	@Reference
 	BaseDao baseDao;
 
 	@Override
