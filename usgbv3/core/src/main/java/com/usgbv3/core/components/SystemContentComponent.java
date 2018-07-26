@@ -72,28 +72,31 @@ public class SystemContentComponent extends WCMUsePojo {
 			SearchResult hotspotList = getSystemPages(parentPath);
 			error = error + " hotspotList : " + hotspotList.getTotalMatches() + "<br/>";
 			int hitNo = 0;
-			for (Hit hit : hotspotList.getHits()) {
-				
-				Node hitNode = hit.getNode();
-				SystemPageCategoryModel systemPageModel = new SystemPageCategoryModel();
-				
-				if(hitNode.hasProperty("category")) {
-					error = error + " category ade : " + hitNode.getProperty("category").getValue().getString() + "<br/>";
-					systemPageModel.setCategory(hitNode.getProperty("category").getValue().getString());
-					systemPageModel.setPageNo(hitNo);
-					rawCategoryList.add(hitNode.getProperty("category").getValue().getString());
+			
+			if(hotspotList != null && hotspotList.getTotalMatches() > 0) {
+				for (Hit hit : hotspotList.getHits()) {
+					
+					Node hitNode = hit.getNode();
+					SystemPageCategoryModel systemPageModel = new SystemPageCategoryModel();
+					
+					if(hitNode.hasProperty("category")) {
+						error = error + " category ade : " + hitNode.getProperty("category").getValue().getString() + "<br/>";
+						systemPageModel.setCategory(hitNode.getProperty("category").getValue().getString());
+						systemPageModel.setPageNo(hitNo);
+						rawCategoryList.add(hitNode.getProperty("category").getValue().getString());
+					}
+					
+					Node pageNode = getPagebyNode(hitNode);
+					Page systemPage = getPageManager().getPage(pageNode.getPath());
+					systemPageModel.setPage(systemPage);
+					productList.add(systemPageModel);
+//					Page parentPage = getPageManager().getPage(path);
+					hitNo++;
+					
 				}
-				
-				Node pageNode = getPagebyNode(hitNode);
-				Page systemPage = getPageManager().getPage(pageNode.getPath());
-				systemPageModel.setPage(systemPage);
-				productList.add(systemPageModel);
-//				Page parentPage = getPageManager().getPage(path);
-				hitNo++;
-				
+				filterList = new ArrayList<String>(new HashSet<String>(rawCategoryList));
 			}
 			
-			filterList = new ArrayList<String>(new HashSet<String>(rawCategoryList));
 			
 		}catch(Exception ex) {
 			error = error + "Exception activate : " + ex.getMessage();
