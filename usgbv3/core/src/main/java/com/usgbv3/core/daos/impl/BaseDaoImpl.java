@@ -268,4 +268,14 @@ public class BaseDaoImpl implements BaseDao{
 		
 		return success; 
 	}
+	
+	protected void closeResultSet(ResultSet resultSet){
+		try{
+			if(resultSet != null){
+				resultSet.close();
+			}
+		}catch(SQLException e){
+			log.error("closeResultSet: encountered SQLException while closing ResultSet", e);
+		}
+	}
 }
