@@ -5,7 +5,7 @@
 <div class="container p-no">
     <div class="row m-no m-top-3xl m-bottom-m">
         <div class="col-xs-12 p-sm-left-no">
-            <h2 class="ht4 uppercase text-left color-darker-grey">Gallery</h2>
+            <h2 class="ht4 uppercase text-left color-darker-grey">${properties.title @ context='unsafe'}</h2>
         </div>
     </div>
 </div>
@@ -23,7 +23,7 @@
                 <form id="gallery-filter-form">
                     <div class="c-sidebar rounded-corners">
                         <div class="p-xl p-bottom-no">
-                            <h5 class=" text-left color-dark-grey bold ht6 uppercase">Refine your search</h5>
+                            <h5 class=" text-left color-dark-grey bold ht6 uppercase">${properties.refineSearch @ context='unsafe'}</h5>
                         </div>
                         <div class=" gallery-filter-wrapper">
                         </div>

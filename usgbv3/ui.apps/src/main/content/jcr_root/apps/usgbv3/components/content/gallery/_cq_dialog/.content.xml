@@ -23,12 +23,21 @@
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="granite/ui/components/foundation/container">
                         <items jcr:primaryType="nt:unstructured">
+                            <title
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/foundation/form/textfield"
+                                fieldLabel="Title"
+                                name="./title"/>
+                            <refineyoursearch
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/foundation/form/textfield"
+                                fieldLabel="Refine your Search"
+                                name="./refineSearch"/>
                             <gallerypath
                                 jcr:primaryType="nt:unstructured"
                                 sling:resourceType="granite/ui/components/foundation/form/pathbrowser"
                                 fieldLabel="Gallery Path"
                                 name="./galleryPath"/>
-
                         </items>
                     </column>
                 </items>
