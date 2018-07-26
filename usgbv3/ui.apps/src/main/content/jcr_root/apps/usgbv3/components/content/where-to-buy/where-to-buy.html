@@ -1,33 +1,12 @@
 <sly data-sly-test="${wcmmode.edit}">
     Edit here for where to buy component
 </sly>
-
-
-
-<!-- BREADCUMB-BOX -->
-<div class="container m-vertical-m ">
-    <div class="row">
-        <div class="col-xs-12">
-            <div class="breadcrumb-box">
-                <ol class="breadcrumb m-no p-no bg-white">
-                    <li>USG BORAL</li>
-                    <li class="active">
-                        <b>Where to buy</b>
-                    </li>
-                </ol>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- BREADCUMB-BOX END -->
-
-
 <!-- TITLE -->
 <div class="container m-vertical-m">
     <div class="row">
         <div class="col-xs-12">
-            <h4 class="ht4 uppercase color-darker-grey">WHERE TO BUY</h4>
-            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.</p>
+            <h4 class="ht4 uppercase color-darker-grey">${properties.title @ context='unsafe'}</h4>
+            <p>${properties.description @ context ='unsafe'}</p>
         </div>
     </div>
 </div>
@@ -86,38 +65,7 @@
 </div>
 
 
-<div class="container-fluid bg-light-grey p-vertical-l m-vertical-m">
-    <div class="container m-vertical-m ">
-        <div class="row row-eq-height">
-            <div class="col-sm-6 col-xs-12 p-sm-4xl p-l bg-white m-bottom-xl m-sm-no">
-                <div class="row">
-                    <div class="col-sm-3 col-xs-4">
-                        <div class="thumbs">
-                            <img src="https://dummyimage.com/108x130/000000/fff">
-                        </div>
 
-                    </div>
-                    <div class="col-sm-9 col-xs-8">
-                        <h4 class="ht4 uppercase color-darker-grey">USG Boral malaysia</h4>
-                        <p>Suite 17-03, Level 17, The Pinnacle, <br>
-                            Persiaran Lagoon, Bandar Sunway, <br>
-                            46150 Petaling Jaya,<br>
-                            Selangor Darul Ehsan - MALAYSIA
-                        </p>
-                        <p><i class="fa fa-phone icon-color-darker-grey icon-size-xs"></i>&nbsp;&nbsp; + 60 3 5624 3600 </p>
-                        <p><i class="fa fa-fax icon-color-darker-grey icon-size-xs"></i>&nbsp; + 60 3 5624 3601</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-sm-6 col-xs-12 p-sm-4xl p-l bg-white left-line-light-grey">
-                <h4 class="ht4 uppercase color-darker-grey">usg boral global</h4>
-                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. </p>
-                <p><a href="#" class="btn btn-brand-default button-green">FIND OUT MORE</a></p>
-            </div>
-        </div>
-    </div>
-</div>
 
 <script id="infoTemplate" type="text/x-handlebars-template">
     {{#each this}}
@@ -191,7 +139,7 @@
 
 
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDylpywGh8XxHMztw-kBRtXCnqyAHZqPwQ"></script>
-<sly data-sly-use.clientLib="/libs/granite/sightly/templates/clientlib.html" data-sly-call="${clientLib.js @ categories='uiux.wheretobuy'}" data-sly-unwrap/>
+<sly data-sly-use.clientLib="/libs/granite/sightly/templates/clientlib.html" data-sly-call="${clientLib.all @ categories='uiux.wheretobuy'}" data-sly-unwrap/>
 <!--<script src="/etc/designs/usgb_v3/clientlib/uiux-less-ct/js/vendors/autocomplete.js"></script>
 <script src="/etc/designs/usgb_v3/clientlib/uiux-less-ct/js/vendors/markerclusterer.js"></script>
 <script src="/etc/designs/usgb_v3/clientlib/uiux-less-ct.js"></script>-->

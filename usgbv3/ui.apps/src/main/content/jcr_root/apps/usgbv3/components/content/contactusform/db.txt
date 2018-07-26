@@ -1,4 +1,4 @@
-CREATE TABLE master.dbo.ContactusForm
+CREATE TABLE master.dbo.ContactUs
 (
     id int IDENTITY,
     name nvarchar(200),
@@ -15,5 +15,5 @@ CREATE TABLE master.dbo.ContactusForm
 	form1payload nvarchar(max),
 	form2payload nvarchar(max)
 )
-CREATE UNIQUE INDEX ContactusForm_id_uindex ON master.dbo.ContactusForm (id)
-EXEC sp_addextendedproperty 'MS_Description', 'Table to store contact us data', 'SCHEMA', 'dbo', 'TABLE', 'ContactusForm'
+CREATE UNIQUE INDEX ContactUs_id_uindex ON master.dbo.ContactUs (id)
+EXEC sp_addextendedproperty 'MS_Description', 'Table to store contact us data', 'SCHEMA', 'dbo', 'TABLE', 'ContactUs'
