@@ -51,7 +51,7 @@ public class SSOConfigurationServiceImpl implements SSOConfigurationService{
 	@Reference(cardinality = ReferenceCardinality.MANDATORY, policy = ReferencePolicy.STATIC)
 	private ConfigurationAdmin configAdmin;
 	
-	@ObjectClassDefinition(name = "USGB SSO Configuration")
+	@ObjectClassDefinition(name = "USGBv3 SSO Configuration")
     public @interface ConfigurationDetails {
 		
 		 @AttributeDefinition(name = "Client ID", defaultValue = "clientId")
