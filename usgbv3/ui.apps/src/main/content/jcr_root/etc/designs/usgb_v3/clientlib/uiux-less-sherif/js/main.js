@@ -23,11 +23,6 @@
         var stepHeaderShippingDetails = $(".steps-header .step-2-select");
         var stepHeaderOrderSummary = $(".steps-header .step-3-select");
 
-        var sampleQuantityCtrlSub = $(".sample-quantity .quantity-ctrl.dec-quantity");
-        var sampleQuantityCtrlAdd = $(".sample-quantity .quantity-ctrl.inc-quantity");
-        var sampleRemoveBtn = $(".sample-remove .remove-selected-sample");
-
-
         //Get all Sample orders product details and pass to Template
         getAllSampleOrdersData(sampleOrderList).done(function(results) {
             console.log(results);
@@ -36,43 +31,49 @@
             var template = Handlebars.compile(html);
             $('.sample-orders-container').html(template(results));
 
-        });
+            var sampleQuantityCtrlSub = $(".sample-quantity .quantity-ctrl.dec-quantity");
+            var sampleQuantityCtrlAdd = $(".sample-quantity .quantity-ctrl.inc-quantity");
+            var sampleRemoveBtn = $(".sample-remove .remove-selected-sample");
 
+            //Add or subtract Sample quantity
+            sampleQuantityCtrlSub.on("click", function(event){
 
-        //Add or subtract Sample quantity
-        sampleQuantityCtrlSub.on("click", function(event){
+                event.preventDefault();
+                var quantityObject = $(this).next();
+                var quantityObjectValue = parseInt(quantityObject.val());
 
-            event.preventDefault();
-            var quantityObject = $(this).next();
-            var quantityObjectValue = parseInt(quantityObject.val());
+                if(quantityObjectValue > 1){
+                    quantityObjectValue = quantityObjectValue-1;
+                    quantityObject.val(quantityObjectValue);
+                }
 
-            if(quantityObjectValue > 1){
-                quantityObjectValue = quantityObjectValue-1;
+            });
+
+            //Add or subtract Sample quantity
+            sampleQuantityCtrlAdd.on("click", function(event){
+
+                event.preventDefault();
+                var quantityObject = $(this).prev();
+                var quantityObjectValue = parseInt(quantityObject.val());
+                quantityObjectValue = quantityObjectValue+1;
                 quantityObject.val(quantityObjectValue);
-            }
+
+            });
+
+            //Remove Order sample
+            sampleRemoveBtn.on("click", function(event){
+                
+                event.preventDefault();
+
+                var itemRowObject = ($(this).parent()).parent();
+                itemRowObject.remove();
+
+            });
 
         });
 
-        //Add or subtract Sample quantity
-        sampleQuantityCtrlAdd.on("click", function(event){
 
-            event.preventDefault();
-            var quantityObject = $(this).prev();
-            var quantityObjectValue = parseInt(quantityObject.val());
-            quantityObjectValue = quantityObjectValue+1;
-            quantityObject.val(quantityObjectValue);
-
-        });
-
-        //Remove Order sample
-        sampleRemoveBtn.on("click", function(event){
-            
-            event.preventDefault();
-
-            var itemRowObject = ($(this).parent()).parent();
-            itemRowObject.remove();
-
-        });
+       
 
         //Order select step button
         var orderSelectBtn = $(".order-steps-wrapper .order-sample-btn");
@@ -144,6 +145,7 @@
             $.get(sampleProduct.productUrl, function(){})
             .done(function(data){
                 data.quantity = sampleProduct.quantity;
+                data.productUrl = sampleProduct.productUrl;
                 tempSampleProductDetails.push(data);
             }).always(function(){
                 arrayCount++;
