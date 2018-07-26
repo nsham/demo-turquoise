@@ -1641,9 +1641,98 @@ $(window).on('load', function () {
     });
 })();
 
+// ----------------------------------------------------------------------
+// Compare Product Page 
+// ----------------------------------------------------------------------
+// ----------------------------------------------------------------------
+(function () {
+    "use strict";
+    $(document).ready(function () {
+
+        function productCompare() {
+
+            //get from local storage
+            var data = JSON.parse(localStorage.getItem('ceiling'));
+            //var getJSONarr = data.map(getJSONarr => getJSONarr.url.split(".").reverse()[1] + ".json");
+            var getJSONarr = data.map(function (getJSONarr) {
+                return getJSONarr.url.split(".").reverse()[1] + ".json";
+            });
+            var currOnStageMainResultData = [];
+
+            //after ajax get all data in array, run pagination
+            getAll(getJSONarr).done(function (results) {
+                currOnStageMainResultData = results;
+                if (currOnStageMainResultData.length > 0) {
+                    //load the compare
+                    var compareContent = $('#compare-product-col').html();
+                    var temptcompareContent = Handlebars.compile(compareContent);
+                    $('.compare-product-col').html(temptcompareContent(results));
+                    console.log(results)
+                }
+
+                if (currOnStageMainResultData.length < 10) {
+                    $('#pagination-container').addClass('hidden');
+                }
+
+            });
+
+
+
+
+
+
+
+
+
+
+
+
+            function getAll(requests) {
+                var count = requests.length;
+                var results = [];
+                var deferreds = [];
+                var all_done = $.Deferred();
+
+                for (var i = 0; i < requests.length; i++) {
+                    var deferred = $.ajax({
+                            url: requests[i],
+                            type: "GET",
+                            cache: false,
+                        })
+                        .done(function (data) {
+                            results.push(data);
+                        })
+                        .error(function () {})
+                        .always(function () {
+                            count--;
+
+                            if (count === 0) {
+                                all_done.resolve(results);
+                            }
+                        });
+                    deferreds.push(deferred);
+                }
+                return all_done.promise();
+            }
+
+
+
+
+
+
+
+
+        }
+        if ($('.product-compare-content').length) productCompare();
+
+
+    });
+})();
+
+
 
 // ----------------------------------------------------------------------
-// Checkbox Count (product listing)
+// Checkbox Count /filtering (product listing)
 // ----------------------------------------------------------------------
 (function () {
     "use strict";
@@ -1693,6 +1782,7 @@ $(window).on('load', function () {
             var checkStatus;
             var groupElem;
             var currInput;
+            var storePopup; //localstorage arr
             // detect change for cardcheckbox
             $(document).on("change", '.listing-search-content .container-checkbox input[type="checkbox"]', function () {
 
@@ -1809,7 +1899,7 @@ $(window).on('load', function () {
             }
 
 
-            var storePopup
+
 
             function removeCompareLocalStorage(data) {
                 //console.log('currIN', data)
@@ -1826,7 +1916,7 @@ $(window).on('load', function () {
                 //localStorage.setItem(categoryName, JSON.stringify(storeData));
                 //console.log("rremove", storeData)
                 storeCompareLocalStorage();
-               //retrieveCompare();
+                //retrieveCompare();
                 checkNumberOfCheckbox();
                 $("[data-input-value ='" + currInput + "']").attr('checked', false);
             }
@@ -2114,9 +2204,6 @@ $(window).on('load', function () {
 
 
             ////////FILTER END//////
-
-
-
 
             var dataSearchVal
             var mdataSearchVal
