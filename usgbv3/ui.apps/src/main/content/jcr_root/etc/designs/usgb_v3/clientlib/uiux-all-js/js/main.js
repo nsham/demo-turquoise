@@ -1639,7 +1639,7 @@ $(window).on('load', function () {
         ///  MIX MEDIA  GALLERY///
 
     });
-})();
+})(); 
 
 // ----------------------------------------------------------------------
 // Compare Product Page 
@@ -1667,7 +1667,7 @@ $(window).on('load', function () {
                     var compareContent = $('#compare-product-col').html();
                     var temptcompareContent = Handlebars.compile(compareContent);
                     $('.compare-product-col').html(temptcompareContent(results));
-                    console.log(results)
+                   // console.log(results)
                 }
 
                 if (currOnStageMainResultData.length < 10) {
@@ -1676,17 +1676,27 @@ $(window).on('load', function () {
 
             });
 
+                 // close btn on popup to remove content
+            $("body").on("click", ".close-btn-box", function () {
+                event.preventDefault();
+                
+
+               var getIndex1 = data.findIndex(x => x.url == "/etc/designs/usgb_v3/clientlib/uiux-all-js-vc/js/json/bookmark-2.html");
+                //storeData.splice(getIndex1, 1);
+                console.log("cc",getIndex1);
+                //console.log('tt',getIndex1)
+
+                // currInput = $(this).closest('.each').attr("data-content-title");
+                // $("[data-input-value ='" + currInput + "']").attr('checked', false);
+                // removeCompareLocalStorage(currInput);
+            });
 
 
 
 
 
 
-
-
-
-
-
+            // iterate thru all  json list
             function getAll(requests) {
                 var count = requests.length;
                 var results = [];
@@ -1714,9 +1724,6 @@ $(window).on('load', function () {
                 }
                 return all_done.promise();
             }
-
-
-
 
 
 
