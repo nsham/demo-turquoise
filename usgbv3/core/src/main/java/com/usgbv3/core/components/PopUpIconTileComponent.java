@@ -69,7 +69,7 @@ public class PopUpIconTileComponent extends WCMUsePojo {
 		if(currentNode.hasProperty("bgcolor")) {
 			
 			String bgcolor = currentNode.getProperty("bgcolor").getString();
-			popupIcon.setTitle(bgcolor);
+			popupIcon.setBgcolor(bgcolor);
 			
 		}
 		if(currentNode.hasProperty("image")) {

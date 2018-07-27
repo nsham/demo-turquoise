@@ -80,7 +80,7 @@ public class ProductCharacteristicComponent extends WCMUsePojo {
 				product.setIcon(rawNode.getProperty("icon").getString());
 			}
 			
-			if(rawNode.getProperty("linkType") != null) {
+			if(rawNode.hasProperty("linkType")) {
 				
 				String linkType = rawNode.getProperty("linkType").toString();
 				product.setLinkType(linkType);

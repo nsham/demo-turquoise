@@ -72,7 +72,7 @@ public class ContactUSMailScheduler implements Runnable {
 			LOG.info("contactUsFormList:"+contactUsFormList);
 			Boolean emailStatus = false, dbUpdateStatus= false;
 			if(contactUsFormList != null && contactUsFormList.size()>0){
-				emailStatus = contactUSFormService.sendContactUSBatchEmail("/content/usgboral/Configuration"
+				emailStatus = contactUSFormService.sendContactUSBatchEmail("/content/usgboral/global"
                         ,contactUsFormList, adminResourceResolver);
 				LOG.info("emailStatus:"+emailStatus);
 			}
