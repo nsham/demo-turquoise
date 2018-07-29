@@ -10,7 +10,6 @@ import com.day.cq.wcm.api.Page;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.usgbv3.core.services.MixedMediaService;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.SlingHttpServletResponse;
 import org.apache.sling.api.request.RequestParameter;
@@ -45,9 +44,6 @@ public class GetGalleryDetails  extends SlingSafeMethodsServlet {
     @Reference
     QueryBuilder queryBuilder;
 
-    @Reference
-    MixedMediaService mixedMediaService;
-
     @Override
     protected void doGet(SlingHttpServletRequest request, SlingHttpServletResponse response)
             throws IOException {
@@ -55,12 +51,18 @@ public class GetGalleryDetails  extends SlingSafeMethodsServlet {
         RequestParameter pageURLParameter = request.getRequestParameter("pageurl");
         String jsonData = "";
         if(pageURLParameter != null && queryBuilder != null){
-            String galleryParenthPath = getGalleryParentPathFromPage(pageURLParameter, request.getResourceResolver());
-            LOG.info("galleryParenthPath:"+galleryParenthPath);
-            if(galleryParenthPath != null){
-                jsonData = getJsonDataOfGallery(galleryParenthPath, request.getResourceResolver());
-            }
+            Resource galleryResource = getGalleryResourceFromPage(pageURLParameter, request.getResourceResolver());
+            if(galleryResource != null){
+                ValueMap galleryResourceValueMap = galleryResource.getValueMap();
+                if(galleryResourceValueMap.containsKey("galleryPath")){
+                    String galleryParenthPath = galleryResource.getValueMap().get("galleryPath", String.class);
+                    LOG.info("galleryParenthPath:"+galleryParenthPath);
+                    if(galleryParenthPath != null){
+                        jsonData = getJsonDataOfGallery(galleryParenthPath, request.getResourceResolver(), galleryResourceValueMap);
+                    }
+                }
 
+            }
         }
         response.setContentType("application/json");
         PrintWriter out = response.getWriter();
@@ -68,7 +70,47 @@ public class GetGalleryDetails  extends SlingSafeMethodsServlet {
         out.flush();
     }
 
-    private String getJsonDataOfGallery(String galleryParenthPath, ResourceResolver resourceResolver) {
+
+    /**
+     * function to get gallery resource
+     * @param pageURLParameter
+     * @param resourceResolver
+     * @return
+     */
+    private Resource getGalleryResourceFromPage(RequestParameter pageURLParameter, ResourceResolver resourceResolver) {
+        Resource galleryResource = null;
+        String pageURL  = pageURLParameter.getString();
+        Map<String, String> queryMap = new LinkedHashMap<>();
+        queryMap.put("type", "nt:unstructured");
+        queryMap.put("path", pageURL);
+        queryMap.put("property", "sling:resourceType");
+        queryMap.put("property.1_value", "usgbv3/components/content/gallery");
+
+        Session session = resourceResolver.adaptTo(Session.class);
+        Query query = queryBuilder.createQuery(PredicateGroup.create(queryMap), session);
+        SearchResult result = query.getResult();
+        List<Hit> hitsList = result.getHits();
+        if(hitsList != null && hitsList.size()>0){
+            Hit hit = hitsList.get(0);
+            String galleryPath = null;
+            try {
+                galleryResource = hit.getResource();
+            } catch (RepositoryException e) {
+                LOG.error("RepositoryException in getGalleryParetPathFromPage:"+e);
+            }
+
+        }
+        return  galleryResource;
+    }
+
+    /**
+     * function to get json data from one parent galley path
+     * @param galleryParenthPath
+     * @param resourceResolver
+     * @param galleryResourceValueMap
+     * @return
+     */
+    private String getJsonDataOfGallery(String galleryParenthPath, ResourceResolver resourceResolver, ValueMap galleryResourceValueMap) {
         JsonObject finalJsonData= new JsonObject();
         JsonArray categoryDropdownJsonArray = new JsonArray();
         Map<String, JsonObject> specificsMap = new HashMap<>();
@@ -125,13 +167,21 @@ public class GetGalleryDetails  extends SlingSafeMethodsServlet {
         if(specificsMap.size()>0){
             JsonObject specificsJson = new JsonObject();
             specificsJson.addProperty("category_key", "view");
-            specificsJson.addProperty("category_title", "View By");
-
+            if(galleryResourceValueMap.containsKey("ddlabel1")){
+                specificsJson.addProperty("category_title", galleryResourceValueMap.get("ddlabel1", String.class));
+            }else{
+                specificsJson.addProperty("category_title", "View By");
+            }
             JsonArray optionValue = new JsonArray();
             // adding the all field
             JsonObject allJsonObject = new JsonObject();
             allJsonObject.addProperty("key", "all");
-            allJsonObject.addProperty("value", "All");
+            if(galleryResourceValueMap.containsKey("ddtitle1")){
+                allJsonObject.addProperty("value", galleryResourceValueMap.get("ddtitle1", String.class));
+            }else{
+                allJsonObject.addProperty("value", "All");
+            }
+
             optionValue.add(allJsonObject);
             // adding the specifics populated from pages
             SortedSet<String> keys = new TreeSet<>(specificsMap.keySet());
@@ -145,13 +195,22 @@ public class GetGalleryDetails  extends SlingSafeMethodsServlet {
         if(styleMap.size()>0){
             JsonObject styleJson = new JsonObject();
             styleJson.addProperty("category_key", "type");
-            styleJson.addProperty("category_title", "Type");
+            if(galleryResourceValueMap.containsKey("ddlabel2")){
+                styleJson.addProperty("category_title", galleryResourceValueMap.get("ddlabel2", String.class));
+            }else {
+                styleJson.addProperty("category_title", "Type");
+            }
 
             JsonArray optionValue = new JsonArray();
             // adding the all field
             JsonObject allJsonObject = new JsonObject();
             allJsonObject.addProperty("key", "all");
-            allJsonObject.addProperty("value", "All");
+            if(galleryResourceValueMap.containsKey("ddtitle2")){
+                allJsonObject.addProperty("value", galleryResourceValueMap.get("ddtitle2", String.class));
+            }else{
+                allJsonObject.addProperty("value", "All");
+            }
+
             optionValue.add(allJsonObject);
             // adding the style populated from pages
             SortedSet<String> keys = new TreeSet<>(styleMap.keySet());
@@ -173,17 +232,22 @@ public class GetGalleryDetails  extends SlingSafeMethodsServlet {
         return gson.toJson(finalJsonData);
     }
 
+    /**
+     * get page properties from gallery
+     * @param childPage
+     * @param tagName
+     * @param resourceResolver
+     * @return
+     */
     private JsonObject getPageProperiesForGallery(Page childPage, String tagName, ResourceResolver resourceResolver) {
         ValueMap pageProperties = childPage.getContentResource().getValueMap();
         JsonObject tempJsonObject = new JsonObject();
 
-        if(mixedMediaService != null){
-            int mixedMediaCountInPage = mixedMediaService.getMixedMediaCountInPage(childPage.getPath(), resourceResolver);
-            if(mixedMediaCountInPage>-1){
-                tempJsonObject.addProperty("num", mixedMediaCountInPage);
-            }
-        }
 
+        int mixedMediaCountInPage = getMixedMediaCountInPage(childPage.getPath(), resourceResolver);
+        if(mixedMediaCountInPage>-1){
+            tempJsonObject.addProperty("num", mixedMediaCountInPage);
+        }
 
         if(pageProperties.containsKey("socialImage")){
             tempJsonObject.addProperty("img", pageProperties.get("socialImage").toString());
@@ -215,13 +279,19 @@ public class GetGalleryDetails  extends SlingSafeMethodsServlet {
         return tempJsonObject;
     }
 
-    private String getGalleryParentPathFromPage(RequestParameter pageURLParameter, ResourceResolver resourceResolver) {
-        String pageURL  = pageURLParameter.getString();
+    /**
+     * this method would be used to get the count of images in mixed media component
+     * @param path
+     * @param resourceResolver
+     * @return
+     */
+    private int getMixedMediaCountInPage(String path, ResourceResolver resourceResolver) {
+
         Map<String, String> queryMap = new LinkedHashMap<>();
         queryMap.put("type", "nt:unstructured");
-        queryMap.put("path", pageURL);
+        queryMap.put("path", path);
         queryMap.put("property", "sling:resourceType");
-        queryMap.put("property.1_value", "usgbv3/components/content/gallery");
+        queryMap.put("property.1_value", "usgbv3/components/content/mix-media-player-component");
 
         Session session = resourceResolver.adaptTo(Session.class);
         Query query = queryBuilder.createQuery(PredicateGroup.create(queryMap), session);
@@ -231,12 +301,26 @@ public class GetGalleryDetails  extends SlingSafeMethodsServlet {
             Hit hit = hitsList.get(0);
             String galleryPath = null;
             try {
-                galleryPath = hit.getResource().getValueMap().get("galleryPath", String.class);
+                Resource mixMediaResource = hit.getResource();
+                if(mixMediaResource != null){
+                    ValueMap mixMediaValueMap = mixMediaResource.getValueMap();
+                    String[] mediaStringArray= null;
+                    if(mixMediaValueMap.containsKey("imgPath")){
+                        mediaStringArray = mixMediaValueMap.get("imgPath", String[].class);
+                    }else if(mixMediaValueMap.containsKey("videoDam")){
+                        mediaStringArray = mixMediaValueMap.get("videoDam", String[].class);
+                    }else if(mixMediaValueMap.containsKey("thumbnail")){
+                        mediaStringArray = mixMediaValueMap.get("thumbnail", String[].class);
+                    }
+                    if(mediaStringArray != null){
+                        return mediaStringArray.length;
+                    }
+                }
             } catch (RepositoryException e) {
                 LOG.error("RepositoryException in getGalleryParetPathFromPage:"+e);
             }
-            return galleryPath;
         }
-        return  null;
+        return -1;
     }
+
 }
