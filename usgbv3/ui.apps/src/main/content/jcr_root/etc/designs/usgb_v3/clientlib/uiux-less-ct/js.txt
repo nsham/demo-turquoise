@@ -2,7 +2,6 @@
 vendors/jszip.js
 vendors/FileSaver.js
 where-to-buy.js
-global-landing.js
 search.js
 submittal.js
 
