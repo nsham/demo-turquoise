@@ -1128,7 +1128,7 @@ function hookHeadScript(url, async, defer, callback) {
 (function () {
     "use strict";
     $(document).ready(function () {
-        $('body').on("click", '[data-search-pop-up]', function () {
+        $('body').on("click", '[data-search-pop-up]', function () { 
 
             var $searchPopUp = $('.search-pop-up');
 
@@ -1136,7 +1136,11 @@ function hookHeadScript(url, async, defer, callback) {
 
                 $searchPopUp.removeClass('hidden');
                 setTimeout(function () {
-                    $searchPopUp.addClass('active')
+                    $searchPopUp.addClass('active');
+                    AutoComplete({
+                        EmptyMessage: "No item found",
+                        QueryArg: "text",
+                    }, "#header-search-input");
                 }, 50);
 
                 defaultScrollUpdate(".search-pop-up");
