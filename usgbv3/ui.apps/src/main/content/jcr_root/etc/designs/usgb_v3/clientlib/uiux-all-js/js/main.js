@@ -2851,8 +2851,27 @@ $(window).on('load', function () {
                     .then(
                         function success(response) {
                             //console.log('User\'s Location Data is ', response);
-                            console.log('User\'s Country', response.country);
-                            getCountry();
+                            //console.log('User\'s Country', response.country.code);
+                            var countryCode = response.country.code;
+                            var countryName = response.country.name;
+                            //console.log("cc", countryCode, "cn", countryName);
+
+                            $.ajax({
+                                url: "/etc/designs/usgb_v3/clientlib/uiux-all-js/js/json/global-landing-my.json",
+                                data: "countrycode="+countryCode+"&country="+countryName+"",
+                                type: "GET",
+                                cache: false,
+                                success: function (response) {
+
+                                    var globalLanding = $('#global-landing').html();
+                                    var TemptglobalLanding = Handlebars.compile(globalLanding);
+                                    $('.global-landing').html(TemptglobalLanding(response));
+
+                                },
+                                beforeSend: function () {},
+                                complete: function () {}
+                            });
+
                         },
 
                         function fail(data, status) {
@@ -2862,23 +2881,6 @@ $(window).on('load', function () {
             }
             ipLookUp();
 
-
-            function getCountry(response) {
-                $.ajax({
-                    url: "/etc/designs/usgb_v3/clientlib/uiux-all-js/js/json/global-landing-my.json",
-                    type: "GET",
-                    cache: false,
-                    success: function (response) {
-
-                        var globalLanding = $('#global-landing').html();
-                        var TemptglobalLanding = Handlebars.compile(globalLanding);
-                        $('.global-landing').html(TemptglobalLanding(response));
-
-                    },
-                    beforeSend: function () {},
-                    complete: function () {}
-                });
-            }
 
         }
 
