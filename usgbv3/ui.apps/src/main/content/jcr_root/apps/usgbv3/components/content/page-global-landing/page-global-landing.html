@@ -29,14 +29,16 @@
                                 </div>
                             </li>
                             <li>
-                                <img src="/content/dam/USGBoral/Global/Website/Images/component/allsample/global-landing/middle-east.png" alt="Middle East" class="m-right-m">
+                                <img src="/content/dam/USGBoral/Global/Website/Images/component/allsample/global-landing/middle-east.png" alt="Middle East"
+                                    class="m-right-m">
                                 <div>
                                     <h6 class="ht6 uppercase">Middle east</h6>
                                     <a href="#" target="_blank" class="fs-2 color-darker-grey">English</a>
                                 </div>
                             </li>
                             <li>
-                                <img src="/content/dam/USGBoral/Global/Website/Images/component/allsample/global-landing/new-zealand.png" alt="New Zealand" class="m-right-m">
+                                <img src="/content/dam/USGBoral/Global/Website/Images/component/allsample/global-landing/new-zealand.png" alt="New Zealand"
+                                    class="m-right-m">
                                 <div>
                                     <h6 class="ht6 uppercase">New Zealand</h6>
                                     <a href="#" target="_blank" class="fs-2 color-darker-grey">English</a>
@@ -64,7 +66,8 @@
                                 </div>
                             </li>
                             <li>
-                                <img src="/content/dam/USGBoral/Global/Website/Images/component/allsample/global-landing/philippines.png" alt="Philippines" class="m-right-m">
+                                <img src="/content/dam/USGBoral/Global/Website/Images/component/allsample/global-landing/philippines.png" alt="Philippines"
+                                    class="m-right-m">
                                 <div>
                                     <h6 class="ht6 uppercase">Philippines</h6>
                                     <a href="#" target="_blank" class="fs-2 color-darker-grey">English</a>
@@ -178,7 +181,7 @@
         <div class="col-xs-12 col-md-3">
             <!-- slick div -->
             <div class="feature-card-wrapper variation-1 m-bottom-s">
-                <div class="carousel-feature-card" data-slick='{
+                <div class="carousel-feature-card global-feature-card" data-slick='{
                             "dots": true,
                             "infinite": false,
                             "speed": 300,
@@ -192,9 +195,9 @@
                     <div class="col-xs-12 p-no m-no">
                         <a href="#" target="_blank">
                             <div class="box-inner-img" style="background: url(/content/dam/USGBoral/Global/Website/Images/component/allsample/global-landing/usgboral-location.jpg) right center / cover no-repeat transparent;">
-                                <div class="content uppercase">New product launches / corporate promotional / campaign event / news highlights New product launches
-                                    / corporate promotional / campaign event / news highlights New product launches / corporate promotional
-                                    / campaign event / news highlights</div>
+                                <div class="content uppercase">New product launches / corporate promotional / campaign event / news highlights New product
+                                    launches / corporate promotional / campaign event / news highlights New product launches
+                                    / corporate promotional / campaign event / news highlights</div>
                             </div>
                         </a>
                     </div>
@@ -203,9 +206,9 @@
                     <div class="col-xs-12 p-no m-no">
                         <a href="#" target="_blank">
                             <div class="box-inner-img" style="background: url(/content/dam/USGBoral/Global/Website/Images/component/allsample/global-landing/usgboral-location.jpg)  right center / cover no-repeat transparent;">
-                                <div class="content uppercase">New product launches / corporate promotional / campaign event / news highlights New product launches
-                                    / corporate promotional / campaign event / news highlights New product launches / corporate promotional
-                                    / campaign event / news highlights</div>
+                                <div class="content uppercase">New product launches / corporate promotional / campaign event / news highlights New product
+                                    launches / corporate promotional / campaign event / news highlights New product launches
+                                    / corporate promotional / campaign event / news highlights</div>
                             </div>
                             <span class="bg-overlay" style="position:absolute"></span>
                         </a>
@@ -215,9 +218,9 @@
                     <div class="col-xs-12 p-no m-no">
                         <a href="#" target="_blank">
                             <div class="box-inner-img" style="background: url(/content/dam/USGBoral/Global/Website/Images/component/allsample/global-landing/usgboral-location.jpg)  right center / cover no-repeat transparent;">
-                                <div class="content uppercase">New product launches / corporate promotional / campaign event / news highlights New product launches
-                                    / corporate promotional / campaign event / news highlights New product launches / corporate promotional
-                                    / campaign event / news highlights</div>
+                                <div class="content uppercase">New product launches / corporate promotional / campaign event / news highlights New product
+                                    launches / corporate promotional / campaign event / news highlights New product launches
+                                    / corporate promotional / campaign event / news highlights</div>
                             </div>
                             <span class="bg-overlay bg-overlay-gradient-x" style="position:absolute"></span>
                         </a>
@@ -228,19 +231,29 @@
 
             </div>
             <!-- slick div end -->
+            <script id="global-landing" type="text/x-handlebars-template">
 
-            <div class="location">
-                <div class="overlay">
-                    <p class="sub-heading uppercase">USG BORAL MALAYSIA</p>
-                    <p>Suite 17-03, Level 17, The Pinnacle, Persiaran Lagoon, Bandar Sunway, 46150 Petaling Jaya, Selangor Darul
-                        Ehsan - MALAYSIA</p>
-                    <p>Tel: +60 3 5624 3600
-                        <br> Fax: +60 3 5634 3601</p>
+
+                <div class="location">
+
+                    <div class="overlay">
+                        <p class="sub-heading uppercase">{{title}}</p>
+                        <p>{{address}}</p>
+                        <p>Tel: {{tel}}
+                            <br> Fax: {{fax}}</p>
+                    </div>
+
                 </div>
 
+            </script>
+
+            <div class="global-location-card">
+                <div class="global-landing"></div>
             </div>
+           
             <div class="m-vertical-m">
-                <a href="#" class="uppercase color-darker-grey fs-2"><span class="fa fa-globe"></span> Global Contact Information
+                <a href="#" class="uppercase color-darker-grey fs-2">
+                    <span class="fa fa-globe"></span> Global Contact Information
                     <span class="glyphicon glyphicon-menu-right color-primary-green"></span>
                 </a>
             </div>
@@ -250,3 +263,4 @@
 
 <script type="text/javascript" src="/etc/designs/usgb_v3/clientlib/uiux-all-js.js"></script>
 <script src="/etc/designs/usgb_v3/clientlib/uiux-less-ct.js"></script>
+
