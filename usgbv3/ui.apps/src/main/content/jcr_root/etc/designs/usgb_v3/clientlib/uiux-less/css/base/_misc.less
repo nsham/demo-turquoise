@@ -1102,6 +1102,12 @@ svg {
 
     &.border{
       border: 6px solid @color-primary-green;
+        transition: all 0.4s;
+        -moz-transition: all 0.4s;
+        -webkit-transition: all 0.4s;
+      &:hover{
+        border: 6px solid @color-primary-yellow;
+      }
     }
 
     //default size
