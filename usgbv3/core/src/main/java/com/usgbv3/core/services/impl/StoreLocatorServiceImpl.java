@@ -201,7 +201,8 @@ public class StoreLocatorServiceImpl implements StoreLocatorService{
             List<Hit> hitsList = null;
             resultJsonArray = new JsonArray();
             JsonObject tempJsonObject = new JsonObject();
-            Map<String, String> dataMap = new LinkedHashMap<>();
+            Map<String, String> dataMapNoFlagShip = new LinkedHashMap<>();
+            Map<String, String> dataMapYesFlagShip = new LinkedHashMap<>();
             for(String matchField : matchFieldsArray){
                 if(StringUtils.isNotBlank(matchField)){
                     queryMap = new LinkedHashMap<>();
@@ -221,8 +222,15 @@ public class StoreLocatorServiceImpl implements StoreLocatorService{
                             resultResource = hit.getResource();
                             LOG.info("for match field :"+matchField+"resultResource:"+resultResource.getPath());
                             ValueMap valueMap = resultResource.getValueMap();
+                            // to order data as per flagship
                             if(valueMap.containsKey(matchField)){
-                                dataMap.put(valueMap.get(matchField).toString(), prefix+matchField);
+                                if(valueMap.containsKey("flagship") && valueMap.get("flagship") != null
+                                        && "yes".equalsIgnoreCase((String)valueMap.get("flagship"))){
+                                    dataMapYesFlagShip.put(valueMap.get(matchField).toString(), prefix+matchField);
+                                }else{
+                                    dataMapNoFlagShip.put(valueMap.get(matchField).toString(), prefix+matchField);
+                                }
+
                             }
 
                         } catch (RepositoryException e) {
@@ -233,15 +241,23 @@ public class StoreLocatorServiceImpl implements StoreLocatorService{
                 }
 
             }
-            if(dataMap.size()>0){
-                Iterator it = dataMap.entrySet().iterator();
+            if(dataMapYesFlagShip.size()>0){
+                Iterator it = dataMapYesFlagShip.entrySet().iterator();
                 while (it.hasNext()) {
                     Map.Entry pair = (Map.Entry)it.next();
                     tempJsonObject = new JsonObject();
                     tempJsonObject.addProperty(pair.getValue().toString(), pair.getKey().toString());
                     resultJsonArray.add(tempJsonObject);
                 }
-
+            }
+            if(dataMapNoFlagShip.size()>0){
+                Iterator it = dataMapNoFlagShip.entrySet().iterator();
+                while (it.hasNext()) {
+                    Map.Entry pair = (Map.Entry)it.next();
+                    tempJsonObject = new JsonObject();
+                    tempJsonObject.addProperty(pair.getValue().toString(), pair.getKey().toString());
+                    resultJsonArray.add(tempJsonObject);
+                }
             }
         }
         return resultJsonArray;
@@ -274,6 +290,8 @@ public class StoreLocatorServiceImpl implements StoreLocatorService{
         String proximityLocationPath = countryPath+"/proximitylocations";
         JsonObject tempJson=null;
         JsonArray resultJsonArray = new JsonArray();
+        JsonArray resultYesFlagshipJsonArray = new JsonArray();
+        JsonArray resultNoFlagshipJsonArray = new JsonArray();
         JsonObject resultJsonObject = new JsonObject();
         Set<String> storeTypeSet = new HashSet<>();
         Set<String> productTypeSet = new HashSet<>();
@@ -287,7 +305,14 @@ public class StoreLocatorServiceImpl implements StoreLocatorService{
                     Iterable<Resource> children = storeLocatorResource.getChildren();
                     for(Resource store : children){
                         tempJson = convertResourceToStoreJson(store, gson);
-                        resultJsonArray.add(tempJson);
+                        if(tempJson != null && tempJson.has("flagship")
+                                && tempJson.get("flagship") != null
+                                && "yes".equalsIgnoreCase(tempJson
+                                .getAsJsonPrimitive("flagship").getAsString())){
+                            resultYesFlagshipJsonArray.add(tempJson);
+                        }else{
+                            resultNoFlagshipJsonArray.add(tempJson);
+                        }
 
                         // populating unique storetype and product
                         if(tempJson.has("store_type")){
@@ -307,6 +332,12 @@ public class StoreLocatorServiceImpl implements StoreLocatorService{
                     LOG.info("storeTypeSet:"+storeTypeSet);
                     LOG.info("productTypeSet:"+productTypeSet);
                     LOG.info("countryPath:"+countryPath);
+                    if(resultYesFlagshipJsonArray.size()>0){
+                        resultJsonArray.addAll(resultYesFlagshipJsonArray);
+                    }
+                    if(resultNoFlagshipJsonArray.size()>0){
+                        resultJsonArray.addAll(resultNoFlagshipJsonArray);
+                    }
                     resultJsonObject.add("storeResults", resultJsonArray);
                     if(storeTypeSet != null && productTypeSet != null){
                         JsonArray filterJsonArray = getFilterJsonData(storeTypeSet, productTypeSet
@@ -340,7 +371,14 @@ public class StoreLocatorServiceImpl implements StoreLocatorService{
                         for(Hit hit:hitsList){
                             try {
                                 tempJson = convertResourceToStoreJson(hit.getResource(), gson);
-                                resultJsonArray.add(tempJson);
+                                if(tempJson != null && tempJson.has("flagship")
+                                        && tempJson.get("flagship") != null
+                                        && "yes".equalsIgnoreCase(tempJson
+                                        .getAsJsonPrimitive("flagship").getAsString())){
+                                    resultYesFlagshipJsonArray.add(tempJson);
+                                }else{
+                                    resultNoFlagshipJsonArray.add(tempJson);
+                                }
 
                                 // populating unique storetype and product
                                 if(tempJson.has("store_type")){
@@ -363,6 +401,12 @@ public class StoreLocatorServiceImpl implements StoreLocatorService{
                         LOG.info("storeTypeSet:"+storeTypeSet);
                         LOG.info("productTypeSet:"+productTypeSet);
                         LOG.info("countryPath:"+countryPath);
+                        if(resultYesFlagshipJsonArray.size()>0){
+                            resultJsonArray.addAll(resultYesFlagshipJsonArray);
+                        }
+                        if(resultNoFlagshipJsonArray.size()>0){
+                            resultJsonArray.addAll(resultNoFlagshipJsonArray);
+                        }
                         resultJsonObject.add("storeResults", resultJsonArray);
                         if(storeTypeSet != null && productTypeSet != null){
                             JsonArray filterJsonArray = getFilterJsonData(storeTypeSet, productTypeSet
@@ -407,7 +451,14 @@ public class StoreLocatorServiceImpl implements StoreLocatorService{
                         Iterable<Resource> children = storeLocatorResource.getChildren();
                         for(Resource store : children){
                             tempJson = convertResourceToStoreJson(store, gson);
-                            resultJsonArray.add(tempJson);
+                            if(tempJson != null && tempJson.has("flagship")
+                                    && tempJson.get("flagship") != null
+                                    && "yes".equalsIgnoreCase(tempJson
+                                    .getAsJsonPrimitive("flagship").getAsString())){
+                                resultYesFlagshipJsonArray.add(tempJson);
+                            }else{
+                                resultNoFlagshipJsonArray.add(tempJson);
+                            }
                             // populating unique storetype and product
                             if(tempJson.has("store_type")){
                                 storeTypeSet.add(tempJson.get("store_type").getAsString());
@@ -422,6 +473,12 @@ public class StoreLocatorServiceImpl implements StoreLocatorService{
                                     }
                                 }
                             }
+                        }
+                        if(resultYesFlagshipJsonArray.size()>0){
+                            resultJsonArray.addAll(resultYesFlagshipJsonArray);
+                        }
+                        if(resultNoFlagshipJsonArray.size()>0){
+                            resultJsonArray.addAll(resultNoFlagshipJsonArray);
                         }
                         resultJsonObject.add("storeResults", resultJsonArray);
                     }
@@ -445,7 +502,7 @@ public class StoreLocatorServiceImpl implements StoreLocatorService{
                     // search in country for the key to have the value
                     if(textParameter != null) {
                         String text = textParameter.getString();
-
+                        text = text.replace("-", "");
                         Map<String, String> queryMap = new LinkedHashMap<>();
                         queryMap.put("path", storeLocationPath);
                         queryMap.put("type", "nt:unstructured");
@@ -459,7 +516,14 @@ public class StoreLocatorServiceImpl implements StoreLocatorService{
                         for(Hit hit:hitsList){
                             try {
                                 tempJson = convertResourceToStoreJson(hit.getResource(), gson);
-                                resultJsonArray.add(tempJson);
+                                if(tempJson != null && tempJson.has("flagship")
+                                        && tempJson.get("flagship") != null
+                                        && "yes".equalsIgnoreCase(tempJson
+                                        .getAsJsonPrimitive("flagship").getAsString())){
+                                    resultYesFlagshipJsonArray.add(tempJson);
+                                }else{
+                                    resultNoFlagshipJsonArray.add(tempJson);
+                                }
 
                                 // populating unique storetype and product
                                 if(tempJson.has("store_type")){
@@ -482,6 +546,12 @@ public class StoreLocatorServiceImpl implements StoreLocatorService{
                         LOG.info("storeTypeSet:"+storeTypeSet);
                         LOG.info("productTypeSet:"+productTypeSet);
                         LOG.info("countryPath:"+countryPath);
+                        if(resultYesFlagshipJsonArray.size()>0){
+                            resultJsonArray.addAll(resultYesFlagshipJsonArray);
+                        }
+                        if(resultNoFlagshipJsonArray.size()>0){
+                            resultJsonArray.addAll(resultNoFlagshipJsonArray);
+                        }
                         resultJsonObject.add("storeResults", resultJsonArray);
                         if(storeTypeSet != null && productTypeSet != null){
                             JsonArray filterJsonArray = getFilterJsonData(storeTypeSet, productTypeSet
