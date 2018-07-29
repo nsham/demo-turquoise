@@ -1639,7 +1639,7 @@ $(window).on('load', function () {
         ///  MIX MEDIA  GALLERY///
 
     });
-})(); 
+})();
 
 // ----------------------------------------------------------------------
 // Compare Product Page 
@@ -1651,62 +1651,54 @@ $(window).on('load', function () {
 
         function productCompare() {
 
-
-                
-
-            var data 
+            var data;
             var getJSONarr = [];
             var currOnStageMainResultData = [];
+            var currCategoryKey = "finishes";
+
             $(".default-col").hide();
 
-           getLocalCompare();
-            function getLocalCompare(){
-                  if (localStorage.getItem("ceiling") === null) {
-                    console.log("localempty")
-                   $(".default-col").show();
+            getLocalCompare();
+
+            function getLocalCompare() {
+                if (localStorage.getItem(currCategoryKey) === null) {
+                    //console.log("localempty")
+                    $(".default-col").show();
                 } else {
                     $(".default-col").hide();
 
-                         //get from local storage
-                        //var
-                        data = JSON.parse(localStorage.getItem('ceiling')); 
-                        console.log("data1-",data);
-                        
-                        //var getJSONarr = data.map(getJSONarr => getJSONarr.url.split(".").reverse()[1] + ".json");
-                        //var 
-                        getJSONarr = data.map(function (getJSONarr) {
-                           return getJSONarr.url.split(".").reverse()[1] + ".json";
-                        });
 
-                        
-                        //get url  html
-                        //  var getHTML = data.map(function (getHTML) {
-                        // return getHTML.url
-                        //  });
-                       
-                        if(data.length <1){
-                            console.log("nomore");
-                            localStorage.removeItem("ceiling");
-                            $(".compare-product-col").remove();
-                            $(".default-col").show();
-                           
-                        }
-                        loadLocalCompare();
+                    //get from local storage
+                    data = JSON.parse(localStorage.getItem(currCategoryKey));
+                    //console.log("data1-", data);
+
+                    getJSONarr = data.map(function (getJSONarr) {
+                        return getJSONarr.url.split(".").reverse()[1] + ".json";
+                    });
+
+
+                    if (data.length < 1) {
+                        //console.log("nomore");
+                        localStorage.removeItem(currCategoryKey);
+                        $(".compare-product-col").remove();
+                        $(".default-col").show();
+
+                    }
+                    loadLocalCompare();
                 }
             }
-           
-            
-            function  loadLocalCompare(){
+
+
+            function loadLocalCompare() {
                 //data = JSON.parse(localStorage.getItem('ceiling')) || [];
                 // getJSONarr = data.map(function (getJSONarr) {
                 // return getJSONarr.url.split(".").reverse()[1] + ".json";
                 //  });
 
-                 //after ajax get all data in array, run pagination
+                //after ajax get all data in array, run pagination
                 getAll(getJSONarr).done(function (results) {
 
                     currOnStageMainResultData = results;
-                    console.log(currOnStageMainResultData.length )
 
                     if (currOnStageMainResultData.length > 0) {
                         //load the compare
@@ -1714,93 +1706,80 @@ $(window).on('load', function () {
                         var temptcompareContent = Handlebars.compile(compareContent);
                         $('.compare-product-col').html(temptcompareContent(results));
 
-
-
                     }
 
-                    switch(currOnStageMainResultData.length) {
+                    switch (currOnStageMainResultData.length) {
                         case 1:
-                             $(".compare-one").hide();
-                        break;
+                            $(".compare-one").hide();
+                            break;
                         case 2:
-                             $(".compare-one , .compare-two").hide();
-                        break;
+                            $(".compare-one , .compare-two").hide();
+                            break;
                         case 3:
-                             $(".compare-one , .compare-two, .compare-three").hide();
-                        break;
-                   }
-
-
-            
-                    if (currOnStageMainResultData.length <0) {
-                       console.log("empty");
+                            $(".compare-one , .compare-two, .compare-three").hide();
+                            break;
                     }
 
-                        $('[data-div-height="physicalProperties"]').matchHeight();
-                        $('[data-div-height="applications"]').matchHeight();
-                        $('[data-div-height="sustainability"]').matchHeight();
-                        $('[data-div-height="resourceList"]').matchHeight();
-                        $('[data-div-height="wrapper"]').matchHeight();
 
-                }); 
+                    $('[data-div-height="physicalProperties"]').matchHeight();
+                    $('[data-div-height="applications"]').matchHeight();
+                    $('[data-div-height="sustainability"]').matchHeight();
+                    $('[data-div-height="resourceList"]').matchHeight();
+                    $('[data-div-height="wrapper"]').matchHeight();
+
+                });
 
 
-                   // iterate thru all  json list
-            function getAll(requests) {
-                var count = requests.length;
-                var results = [];
-                var deferreds = [];
-                var all_done = $.Deferred();
+                // iterate thru all  json list
+                function getAll(requests) {
+                    var count = requests.length;
+                    var results = [];
+                    var deferreds = [];
+                    var all_done = $.Deferred();
 
-                for (var i = 0; i < requests.length; i++) {
-                    var deferred = $.ajax({
-                            url: requests[i],
-                            type: "GET",
-                            cache: false,
-                        })
-                        .done(function (data) {
-                            results.push(data);
-                        })
-                        .error(function () {})
-                        .always(function () {
-                            count--;
+                    for (var i = 0; i < requests.length; i++) {
+                        var deferred = $.ajax({
+                                url: requests[i],
+                                type: "GET",
+                                cache: false,
+                            })
+                            .done(function (data) {
+                                results.push(data);
 
-                            if (count === 0) {
-                                all_done.resolve(results);
-                            }
-                        });
-                    deferreds.push(deferred);
+                            })
+                            .error(function () {})
+                            .always(function () {
+                                count--;
+
+                                if (count === 0) {
+                                    all_done.resolve(results);
+                                }
+                            });
+                        deferreds.push(deferred);
+                    }
+                    return all_done.promise();
                 }
-                return all_done.promise();
-            }
 
             }
 
-           
-             // close btn on popup to remove content
+
+            // close btn on popup to remove content
             $("body").on("click", ".close-btn-box", function () {
                 event.preventDefault();
-                
 
                 var btnURL = $(this).closest("button").attr("href");
 
-
-                var getIndex1 = data.findIndex(x => x.url == btnURL);
+                // var getIndex1 = data.findIndex(x => x.url == btnURL);
+                var getIndex1 = data.findIndex(function (x) {
+                    return x.url == btnURL;
+                });
                 data.splice(getIndex1, 1);
-                console.log("data-",data);
+                //console.log("data-", data);
 
-                localStorage.setItem("ceiling", JSON.stringify(data));
-                 getLocalCompare();
+                localStorage.setItem(currCategoryKey, JSON.stringify(data));
+                getLocalCompare();
 
             });
-
-
-
-
-
-
-         
-
 
 
 
@@ -1984,21 +1963,18 @@ $(window).on('load', function () {
 
 
             function removeCompareLocalStorage(data) {
-                //console.log('currIN', data)
-                // var getIndex = storePopup.findIndex(x => x.url == data);
-                //  console.log("in",getIndex)
-                // storePopup.splice(getIndex, 1);
 
-                var getIndex1 = storeData.findIndex(x => x.url == data);
+                // var getIndex1 = storeData.findIndex(x => x.url == data);
+                var getIndex1 = storeData.findIndex(function (x) {
+                    return x.url == data;
+                });
                 //console.log("in1", getIndex1)
                 storeData.splice(getIndex1, 1);
 
-
-                // storePopup = storeData
+                // storePopup = storeData;
                 //localStorage.setItem(categoryName, JSON.stringify(storeData));
                 //console.log("rremove", storeData)
                 storeCompareLocalStorage();
-                //retrieveCompare();
                 checkNumberOfCheckbox();
                 $("[data-input-value ='" + currInput + "']").attr('checked', false);
             }
@@ -2011,7 +1987,6 @@ $(window).on('load', function () {
 
                     // retrieve it (Or create a blank array if there isn't any info saved yet),
                     storeData = JSON.parse(localStorage.getItem(categoryName)) || [];
-
 
                     // Retrieve the object from storage
                     // storePopup = JSON.parse(localStorage.getItem(categoryName))
@@ -2027,7 +2002,10 @@ $(window).on('load', function () {
 
 
                     //target checked true and checkback the card
-                    var localNum = storeData.map(localNum => localNum.url);
+                    // var localNum = storeData.map(localNum => localNum.url);
+                    var localNum = storeData.map(function (localNum) {
+                        return localNum.url;
+                    });
                     //console.log(localNum)
                     $.each(localNum, function (i, val) {
                         var selectedCard = $('[data-input-value="' + val + '"]');
@@ -2053,14 +2031,13 @@ $(window).on('load', function () {
             var shoutout
 
 
-
             productListingResult();
             //load all from json first
             function productListingResult() {
 
                 $.ajax({
                     //url: "/etc/designs/usgb_v3/clientlib/uiux-all-js/js/json/gallery-filter.json",
-                    url: "/etc/designs/usgb_v3/clientlib/uiux-all-js/js/json/product-listing-filter.json",
+                    url: "/etc/designs/usgb_v3/clientlib/uiux-all-js/js/json/product-listing-filter-one.json",
                     type: "GET",
                     cache: false,
                     success: function (response) {
