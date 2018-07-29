@@ -1639,7 +1639,7 @@ $(window).on('load', function () {
         ///  MIX MEDIA  GALLERY///
 
     });
-})();
+})(); 
 
 // ----------------------------------------------------------------------
 // Compare Product Page 
@@ -1651,42 +1651,101 @@ $(window).on('load', function () {
 
         function productCompare() {
 
-            //get from local storage
-            var data = JSON.parse(localStorage.getItem('ceiling'));
-            //var getJSONarr = data.map(getJSONarr => getJSONarr.url.split(".").reverse()[1] + ".json");
-            var getJSONarr = data.map(function (getJSONarr) {
-                return getJSONarr.url.split(".").reverse()[1] + ".json";
-            });
+
+                
+
+            var data 
+            var getJSONarr = [];
             var currOnStageMainResultData = [];
+            $(".default-col").hide();
 
-            //after ajax get all data in array, run pagination
-            getAll(getJSONarr).done(function (results) {
-                currOnStageMainResultData = results;
-                if (currOnStageMainResultData.length > 0) {
-                    //load the compare
-                    var compareContent = $('#compare-product-col').html();
-                    var temptcompareContent = Handlebars.compile(compareContent);
-                    $('.compare-product-col').html(temptcompareContent(results));
-                    console.log(results)
+           getLocalCompare();
+            function getLocalCompare(){
+                  if (localStorage.getItem("ceiling") === null) {
+                    console.log("localempty")
+                   $(".default-col").show();
+                } else {
+                    $(".default-col").hide();
+
+                         //get from local storage
+                        //var
+                        data = JSON.parse(localStorage.getItem('ceiling')); 
+                        console.log("data1-",data);
+                        
+                        //var getJSONarr = data.map(getJSONarr => getJSONarr.url.split(".").reverse()[1] + ".json");
+                        //var 
+                        getJSONarr = data.map(function (getJSONarr) {
+                           return getJSONarr.url.split(".").reverse()[1] + ".json";
+                        });
+
+                        
+                        //get url  html
+                        //  var getHTML = data.map(function (getHTML) {
+                        // return getHTML.url
+                        //  });
+                       
+                        if(data.length <1){
+                            console.log("nomore");
+                            localStorage.removeItem("ceiling");
+                            $(".compare-product-col").remove();
+                            $(".default-col").show();
+                           
+                        }
+                        loadLocalCompare();
                 }
+            }
+           
+            
+            function  loadLocalCompare(){
+                //data = JSON.parse(localStorage.getItem('ceiling')) || [];
+                // getJSONarr = data.map(function (getJSONarr) {
+                // return getJSONarr.url.split(".").reverse()[1] + ".json";
+                //  });
 
-                if (currOnStageMainResultData.length < 10) {
-                    $('#pagination-container').addClass('hidden');
-                }
+                 //after ajax get all data in array, run pagination
+                getAll(getJSONarr).done(function (results) {
 
-            });
+                    currOnStageMainResultData = results;
+                    console.log(currOnStageMainResultData.length )
 
-
-
-
-
-
-
-
+                    if (currOnStageMainResultData.length > 0) {
+                        //load the compare
+                        var compareContent = $('#compare-product-col').html();
+                        var temptcompareContent = Handlebars.compile(compareContent);
+                        $('.compare-product-col').html(temptcompareContent(results));
 
 
 
+                    }
 
+                    switch(currOnStageMainResultData.length) {
+                        case 1:
+                             $(".compare-one").hide();
+                        break;
+                        case 2:
+                             $(".compare-one , .compare-two").hide();
+                        break;
+                        case 3:
+                             $(".compare-one , .compare-two, .compare-three").hide();
+                        break;
+                   }
+
+
+            
+                    if (currOnStageMainResultData.length <0) {
+                       console.log("empty");
+                    }
+
+                        $('[data-div-height="physicalProperties"]').matchHeight();
+                        $('[data-div-height="applications"]').matchHeight();
+                        $('[data-div-height="sustainability"]').matchHeight();
+                        $('[data-div-height="resourceList"]').matchHeight();
+                        $('[data-div-height="wrapper"]').matchHeight();
+
+                }); 
+
+
+                   // iterate thru all  json list
             function getAll(requests) {
                 var count = requests.length;
                 var results = [];
@@ -1715,9 +1774,32 @@ $(window).on('load', function () {
                 return all_done.promise();
             }
 
+            }
+
+           
+             // close btn on popup to remove content
+            $("body").on("click", ".close-btn-box", function () {
+                event.preventDefault();
+                
+
+                var btnURL = $(this).closest("button").attr("href");
+
+
+                var getIndex1 = data.findIndex(x => x.url == btnURL);
+                data.splice(getIndex1, 1);
+                console.log("data-",data);
+
+                localStorage.setItem("ceiling", JSON.stringify(data));
+                 getLocalCompare();
+
+            });
 
 
 
+
+
+
+         
 
 
 

@@ -61,49 +61,52 @@
 			{{#each this}}
 			<div class=" col-xs-4  p-no">
 				<div class="p-side-xl">
-					<div data-img-height="div-height" class="box-type-3 bg-light-grey ">
+					<div data-div-height="wrapper" class="box-type-3 bg-light-grey ">
 						<div class="center width-full">
 							<div class="box-inner-img">
 								<img src="{{pagePropertiesList.0.image335x275}}">
 							</div>
 							<h2 class="p-vertical-l color-darker-grey ht6 text-center uppercase">{{pagePropertiesList.0.pageTitle}}
-								<button type="button" class="close-btn-box bg-light-grey" aria-label="Close">
+								<button href="{{pagePropertiesList.0.url}}" type="button" class="close-btn-box bg-light-grey" aria-label="Close">
 									<span class="bold" aria-hidden="true">&times;</span>
 								</button>
 						</div>
 					</div>
-				</div>
+				</div>  
 
 				{{#each pagePropertiesList}}
 
 				<div class="p-xl m-top-l">
-					<h2 class="ht5 uppercase color-darker-grey">{{comparablePropList.0.propertyLabel}}</h2>
+					<h2 class=" title ht6 uppercase color-darker-grey">{{comparablePropList.0.propertyLabel}}</h2>
 				</div>
 
 				<hr class="m-no">
-				<div class="p-side-xl p-m ">
-					{{{applications}}}
+				<div data-div-height="physicalProperties" class="physical p-side-xl p-m ">
+					{{{physicalProperties}}}
 				</div>
+
 				<div class="p-xl m-top-l">
-					<h2 class="ht5 uppercase color-darker-grey">{{comparablePropList.1.propertyLabel}}</h2>
+					<h2 class="ht6 title uppercase color-darker-grey">{{comparablePropList.1.propertyLabel}}</h2>
 				</div>
 				<hr class="m-no">
-				<div class="p-side-xl p-m ">
-					<!-- {{{applications}}} -->
+				<div  data-div-height="applications" class=" applicationsp-side-xl p-m ">
+					 {{applications}}
 				</div>
 				<div class="p-xl m-top-l">
-					<h2 class="ht5 uppercase color-darker-grey">{{comparablePropList.2.propertyLabel}}</h2>
+					<h2 class="ht6 title uppercase color-darker-grey">{{comparablePropList.2.propertyLabel}}</h2>
 				</div>
 				<hr class="m-no">
-				<div class="p-side-xl p-m ">
-					<!-- {{{applications}}} -->
+				<div data-div-height="sustainability" class="p-side-xl p-m ">
+					 {{sustainability}} 
 				</div>
 				<div class="p-xl m-top-l">
-					<h2 class="ht5 uppercase color-darker-grey">{{comparablePropList.3.propertyLabel}}</h2>
+					<h2 class="ht6 title uppercase color-darker-grey">{{comparablePropList.3.propertyLabel}}</h2>
 				</div>
 				<hr class="m-no">
-				<div class="p-side-xl p-m ">
-					<!-- {{{applications}}} -->
+				<div data-div-height="resourceList" class="p-side-xl p-m ">
+					 {{#each resourceList}}
+					 <div><a href="{{docSrc}}">{{title}}</a></div>
+					 {{/each}}
 				</div>
 
 				{{/each}}
@@ -115,26 +118,78 @@
 			{{/each}}
 
 
-			<!-- <div class="col-xs-4 col-cell p-no">
-					<div class="p-side-xl">
-						<a>
-							<div data-img-height="div-height" class="box-type-3 bg-light-grey ">
-								<div class="center width-full">
-									<div class="box-inner-img">
-										<div class="bg-add-img p-s">
-											<a href="#">
-												<div class="add-img-box">
-													<span class="btn-plus">+</span>
+				<div data-div-height="wrapper" class="compare-one col-xs-4 col-cell p-no">
+						
+						<a href="/content/v3/usgboral/samplepage/product-listing.html">	<div class="p-side-xl">
+								
+									<div class="box-type-3 bg-light-grey ">
+										
+										<div class="center width-full">
+											<div class="box-inner-img">
+												<div class="bg-add-img p-s">
+													
+														<div class="add-img-box">
+															<span class="btn-plus">+</span>
+														</div>
 												</div>
-											</a>
+											</div>
+											<h2 class="p-vertical-l color-darker-grey ht6 text-center uppercase">Add to compare </h2>
+										</div>
+						
+									</div>
+							</div>
+
+						</a>
+						</div>
+
+
+
+						<div  data-div-height="wrapper" class="compare-two col-xs-4 col-cell p-no">
+							
+							<a href="/content/v3/usgboral/samplepage/product-listing.html"><div class="p-side-xl">
+								
+									<div  class="box-type-3 bg-light-grey ">
+										<div class="center width-full">
+											<div class="box-inner-img">
+												<div class="bg-add-img p-s">
+													<a href="#">
+														<div class="add-img-box">
+															<span class="btn-plus">+</span>
+														</div>
+													</a>
+												</div>
+											</div>
+											<h2 class="p-vertical-l color-darker-grey ht6 text-center uppercase">Add to compare </h2>
 										</div>
 									</div>
-									<h2 class="p-vertical-l color-darker-grey ht6 text-center uppercase">Add to compare </h2>
-								</div>
+								
 							</div>
-						</a>
-					</div>
-				</div> -->
+							</a>
+						</div>
+
+						<div data-div-height="wrapper" class="compare-three col-xs-4 col-cell p-no">
+							<a href="/content/v3/usgboral/samplepage/product-listing.html">
+							<div class="p-side-xl">
+								
+									<div class="box-type-3 bg-light-grey ">
+										<div class="center width-full">
+											<div class="box-inner-img">
+												<div class="bg-add-img p-s">
+													<a href="#">
+														<div class="add-img-box">
+															<span class="btn-plus">+</span>
+														</div>
+													</a>
+												</div>
+											</div>
+											<h2 class="p-vertical-l color-darker-grey ht6 text-center uppercase">Add to compare </h2>
+										</div>
+									</div>
+								
+							</div>
+							</a>
+						</div>
+
 
 		</script>
 
@@ -146,67 +201,76 @@
 
 				<div class="table-responsive m-vertical-xl product-compare-content ">
 
-					<div class="compare-product-col"> </div>
+					<div class="compare-product-col"> 
+					</div>
 
 
-					<!-- <div class="compare-one col-xs-4 col-cell p-no">
-						<div class="p-side-xl">
-							 <a>
-								<div data-img-height="div-height" class="box-type-3 bg-light-grey ">
-									<div class="center width-full">
-										<div class="box-inner-img">
-											<div class="bg-add-img p-s">
-												<a href="#">
-													<div class="add-img-box">
-														<span class="btn-plus">+</span>
-													</div>
-												</a>
+					<div class="default-col">
+						<div data-div-height="wrapper" class=" col-xs-4 col-cell p-no">
+							<div class="p-side-xl">
+								
+									<div  class="box-type-3 bg-light-grey ">
+										<a href="/content/v3/usgboral/samplepage/product-listing.html">
+										<div class="center width-full">
+											<div class="box-inner-img">
+												<div class="bg-add-img p-s">
+													<a href="#">
+														<div class="add-img-box">
+															<span class="btn-plus">+</span>
+														</div>
+													</a>
+												</div>
 											</div>
+											<h2 class="p-vertical-l color-darker-grey ht6 text-center uppercase">Add to compare </h2>
 										</div>
-										<h2 class="p-vertical-l color-darker-grey ht6 text-center uppercase">Add to compare </h2>
+									</a>
 									</div>
-								</div>
-							</a> 
-							<div data-img-height="div-height" class="box-type-3 bg-light-grey ">
-								<div class="center width-full">
-									<div class="box-inner-img">
-										<img src="https://dummyimage.com/425x150/000000/fff">
-									</div>
-									<h2 class="p-vertical-l color-darker-grey ht6 text-center uppercase">ACOUSTIC PANELS &amp;
-										<br>1CEILING TILES</h2>
-									<button type="button" class="close-btn-box bg-light-grey" aria-label="Close">
-										<span class="bold" aria-hidden="true">&times;</span>
-									</button>
-								</div>
+								
 							</div>
 						</div>
 
-						<div class="p-xl m-top-l">
-							<h2 class="ht5 uppercase color-darker-grey">Physical Application</h2>
-						</div>
-						<hr class="m-no">
-						<div class="p-side-xl p-m ">
-							<p> col1Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum
-								sociis natoque penatibus et magnis </p>
-							<p> dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.
-								Nulla consequat massa quis enim. </p>
-						</div>
-
-
-						<div class="p-xl m-top-l">
-							<h2 class="ht5 uppercase color-darker-grey"> Application</h2>
-						</div>
-						<hr class="m-no">
-						<div class="p-side-xl p-m ">
-							<p> col1Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum
-								sociis natoque penatibus et magnis </p>
-							<p> dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.
-								Nulla consequat massa quis enim. </p>
+						<div  data-div-height="wrapper" class="col-xs-4 col-cell p-no">
+							<div class="p-side-xl">
+								<a href="/content/v3/usgboral/samplepage/product-listing.html">
+									<div  class="box-type-3 bg-light-grey ">
+										<div class="center width-full">
+											<div class="box-inner-img">
+												<div class="bg-add-img p-s">
+													<a href="#">
+														<div class="add-img-box">
+															<span class="btn-plus">+</span>
+														</div>
+													</a>
+												</div>
+											</div>
+											<h2 class="p-vertical-l color-darker-grey ht6 text-center uppercase">Add to compare </h2>
+										</div>
+									</div>
+								</a>
+							</div>
 						</div>
 
-					</div> -->
-
-
+						<div data-div-height="wrapper" class=" col-xs-4 col-cell p-no">
+							<div class="p-side-xl">
+								<a href="/content/v3/usgboral/samplepage/product-listing.html">
+									<div  class="box-type-3 bg-light-grey ">
+										<div class="center width-full">
+											<div class="box-inner-img">
+												<div class="bg-add-img p-s">
+													<a href="#">
+														<div class="add-img-box">
+															<span class="btn-plus">+</span>
+														</div>
+													</a>
+												</div>
+											</div>
+											<h2 class="p-vertical-l color-darker-grey ht6 text-center uppercase">Add to compare </h2>
+										</div>
+									</div>
+								</a>
+							</div>
+						</div>
+					</div>
 
 				</div>
 
