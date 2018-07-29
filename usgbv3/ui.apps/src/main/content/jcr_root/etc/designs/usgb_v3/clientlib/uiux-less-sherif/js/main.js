@@ -13,6 +13,16 @@
 
     $(document).ready(function () {
 
+        //Check user SSO Login
+        if(!$.ssoManager.isLogin){
+            
+            $('.pre-login-nav a').click();
+
+        } else {
+
+        }
+
+
         var stepWrapper = $(".order-steps-wrapper .steps-inner-wrapper");
         var stepOrderSelectWrapper = $(".order-steps-wrapper .step-1-select-wrapper");
         var stepShippingDetailsWrapper = $(".order-steps-wrapper .step-2-shipping-wrapper");
@@ -27,9 +37,7 @@
         getAllSampleOrdersData(sampleOrderList).done(function(results) {
             console.log(results);
 
-            var html = $('#sampleOrderTemplate').html();
-            var template = Handlebars.compile(html);
-            $('.sample-orders-container').html(template(results));
+            updateViewTemplate($('#sampleOrderTemplate').html(), results, $('.sample-orders-container') );
 
             var sampleQuantityCtrlSub = $(".sample-quantity .quantity-ctrl.dec-quantity");
             var sampleQuantityCtrlAdd = $(".sample-quantity .quantity-ctrl.inc-quantity");
@@ -43,6 +51,9 @@
                 var quantityObjectValue = parseInt(quantityObject.val());
 
                 if(quantityObjectValue > 1){
+
+                    addSubtractSampleOrder(-1, $(this).parent().parent().data("producturl"), "sampleOrdersList");
+
                     quantityObjectValue = quantityObjectValue-1;
                     quantityObject.val(quantityObjectValue);
                 }
@@ -55,6 +66,9 @@
                 event.preventDefault();
                 var quantityObject = $(this).prev();
                 var quantityObjectValue = parseInt(quantityObject.val());
+
+                addSubtractSampleOrder(1, $(this).parent().parent().data("producturl"), "sampleOrdersList");
+
                 quantityObjectValue = quantityObjectValue+1;
                 quantityObject.val(quantityObjectValue);
 
@@ -65,8 +79,25 @@
                 
                 event.preventDefault();
 
+                var productUrlRemove = $(this).parent().parent().data("producturl");
                 var itemRowObject = ($(this).parent()).parent();
-                itemRowObject.remove();
+
+                removeSampleOrder(productUrlRemove, "sampleOrdersList", function(){
+                    
+                    /*
+                    var sampleOrderIndexRemove = results.findIndex(i => i.productUrl == productUrlRemove );
+
+                    if(sampleOrderIndexRemove > -1){
+
+                        results.splice(sampleOrderIndexRemove, 1);
+                        updateViewTemplate($('#sampleOrderTemplate').html(), results, $('.sample-orders-container') );
+
+                    }
+                    */
+
+                    itemRowObject.remove();
+
+                });
 
             });
 
@@ -158,6 +189,62 @@
 
         return sampleProductsDetails.promise();
         
+    }
+
+
+    //Function to Add/subtract quantity from Sample order
+    function addSubtractSampleOrder(operation, productUrl, sampleOrderLocalStorageName){
+
+        var sampleOrderLocalStorage = localStorage.getItem(sampleOrderLocalStorageName) 
+        var sampleOrderLocalStorageJson = JSON.parse(sampleOrderLocalStorage) || [];
+
+        var sampleOrderIndex = sampleOrderLocalStorageJson.findIndex(i => i.productUrl == productUrl);
+
+        if(sampleOrderIndex > -1){
+
+            var sampleOrderCurrentQuantity = parseInt(sampleOrderLocalStorageJson[sampleOrderIndex].quantity);
+            
+            if(operation === -1){
+                sampleOrderLocalStorageJson[sampleOrderIndex].quantity = sampleOrderCurrentQuantity-1;
+            }
+
+            if(operation === 1){
+                sampleOrderLocalStorageJson[sampleOrderIndex].quantity = sampleOrderCurrentQuantity+1;
+            }
+
+            localStorage.setItem(sampleOrderLocalStorageName, JSON.stringify(sampleOrderLocalStorageJson));
+
+        }
+
+    }
+
+
+    //Function to remove sample order from list
+    function removeSampleOrder(productUrl, sampleOrderLocalStorageName, callback){
+
+        var sampleOrderLocalStorage = localStorage.getItem(sampleOrderLocalStorageName) 
+        var sampleOrderLocalStorageJson = JSON.parse(sampleOrderLocalStorage) || [];
+
+        var sampleOrderIndex = sampleOrderLocalStorageJson.findIndex(i => i.productUrl == productUrl);
+
+        if(sampleOrderIndex > -1){
+
+            sampleOrderLocalStorageJson.splice(sampleOrderIndex, 1);
+
+        }
+
+        localStorage.setItem(sampleOrderLocalStorageName, JSON.stringify(sampleOrderLocalStorageJson));
+
+        callback();
+
+    }
+
+    //Function for Handlebar template update on changes
+    function updateViewTemplate(html, data, container){
+
+        var template = Handlebars.compile(html);
+        container.html(template(data));
+
     }
 
 })();
