@@ -17,6 +17,7 @@ jquery.waypoints.js
 pagination.js
 handlebars.js
 clamp.js
+autocomplete.js
 main.js
  
   

@@ -50,11 +50,9 @@
                                 name="./wordLength"/>
                             <isglobal
                                 jcr:primaryType="nt:unstructured"
-                                sling:resourceType="granite/ui/components/coral/foundation/form/checkbox"
-                                name="./isGlobal"
-                                text="Is Global"
-                                uncheckedValue="false"
-                                value="true"/>
+                                sling:resourceType="granite/ui/components/foundation/form/textfield"
+                                name="./allstates"
+                                fieldLabel="All States"/>
                         </items>
                     </column>
                 </items>

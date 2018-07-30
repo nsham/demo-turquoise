@@ -39,6 +39,10 @@ function recaptchaCallback() {
                 }
             });
 
+            $(document).on('click', '.btn-no-thanks', function(){
+                location.reload();
+            });
+
             // $(document).on('click', '.login-yes', function (e) {
             //     e.preventDefault();
             //     windowOpenPage();

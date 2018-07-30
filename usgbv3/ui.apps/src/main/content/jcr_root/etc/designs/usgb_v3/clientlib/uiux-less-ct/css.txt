@@ -1,5 +1,3 @@
 #base=css
 
-vendors/pagination.css
-vendors/autocomplete.css
 main.less

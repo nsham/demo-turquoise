@@ -357,7 +357,7 @@
             // Finally the bounds variable is used to set the map bounds
             // with fitBounds() function
             map.fitBounds(bounds);
-            map.setZoom(5);
+            map.setZoom(8);
         }
         
         // This function creates each marker and it sets their Info Window content
@@ -520,7 +520,7 @@
                                 map: map
                             });
                             map.setCenter(pos);
-                            map.setZoom(12);
+                            map.setZoom(8);
                             proximityLocationMarker.setPosition(pos);
                             proximityLocationMarker.setMap(map);
                         }
