@@ -19,15 +19,18 @@
 
     <div class="container m-vertical-m">
         <div class="row">
-            <form id="contactUsForm1" class="floating-type-form form-validate" method="post" name="htmlform" action="/bin/usg/contactusbasic">
+            <form id="contactUsForm1" class="floating-type-form form-validate" method="post" name="htmlform"
+                  action="/bin/usg/contactusbasic">
                 <div class="col-sm-offset-1 col-xs-offset-0 col-sm-5 col-xs-12">
-                    <div class="float-label respond-msg" >
+                    <div class="float-label respond-msg">
                         <label class="uppercase ">Enquiry Type </label>
                         <span class="dropdown-arrow color-primary-green glyphicon glyphicon-menu-down fs-1"></span>
                         <select name="dropdownselect" for="dropdownselect" class="drop-down-select form-control"
-                                type="select" >
+                                type="select">
                             <option></option>
-                            <option data-sly-repeat.key="${contactus.enquiryType}" value="${key}">${contactus.enquiryType[key]}</option>
+                            <option data-sly-repeat.key="${contactus.enquiryType}" value="${key}">
+                                ${contactus.enquiryType[key]}
+                            </option>
                         </select>
                     </div>
                     <div class="float-label respond-msg">
@@ -46,7 +49,7 @@
                     </div>
                     <br>
                     <p>Kindly tick the checkbox below before submiting this form</p>
-                    <div class="m-bottom-xl respond-msg" >
+                    <div class="m-bottom-xl respond-msg">
 
                         <div data-sly-resource="${ 'captcha' @ resourceType='/apps/usgbv3/components/content/captcha'}">
 
@@ -76,7 +79,7 @@
             <form id="contactUsForm2" class="floating-type-form form-validate hidden" method="post" name="htmlform"
                   action="">
                 <div class="col-sm-offset-1 col-xs-offset-0 col-sm-5 col-xs-12">
-                    <input type="hidden" id="dbid"  name="dbid" value=""/>
+                    <input type="hidden" id="dbid" name="dbid" value=""/>
                     <div class="float-label respond-msg">
                         <input type="text" class="form-control" name="contact" required>
                         <label for="contact" class="uppercase ">contact no</label>
@@ -87,12 +90,14 @@
                         <select name="occupation" for="dropdownselect" class="drop-down-select form-control"
                                 type="select">
                             <option></option>
-                            <option data-sly-repeat.key="${contactus.occupation}" value="${key}">${contactus.occupation[key]}</option>
+                            <option data-sly-repeat.key="${contactus.occupation}" value="${key}">
+                                ${contactus.occupation[key]}
+                            </option>
                         </select>
                     </div>
                     <h6 class="ht6 uppercase color-darker-grey m-top-xl">I work with</h6>
                     <div class="checkbox respond-msg" data-sly-list.key="${contactus.workingWith}">
-                        <label class="container-checkbox" >
+                        <label class="container-checkbox">
                             ${contactus.workingWith[key]}
                             <input type="checkbox" name="i_work_with" value="${key}">
                             <span class="checkmark"></span>
@@ -110,17 +115,17 @@
                                 <div class="row">
                                     <div class="col-xs-12 col-sm-6" data-sly-list.key="${contactus.productInterest}">
                                         <sly data-sly-test="${keyList.odd}">
-                                        <label class="container-checkbox" >
-                                            ${contactus.productInterest[key]}
-                                            <input type="checkbox" name="i_am_interested" value="${key}">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                        <br>
+                                            <label class="container-checkbox">
+                                                ${contactus.productInterest[key]}
+                                                <input type="checkbox" name="i_am_interested" value="${key}">
+                                                <span class="checkmark"></span>
+                                            </label>
+                                            <br>
                                         </sly>
                                     </div>
                                     <div class="col-xs-12 col-sm-6" data-sly-list.key="${contactus.productInterest}">
                                         <sly data-sly-test="${keyList.even}">
-                                            <label class="container-checkbox" >
+                                            <label class="container-checkbox">
                                                 ${contactus.productInterest[key]}
                                                 <input type="checkbox" name="i_am_interested" value="${key}">
                                                 <span class="checkmark"></span>
@@ -138,6 +143,9 @@
 
                 <div class="col-xs-12 text-center  m-bottom-4xl">
                     <div class="form-group">
+                        <button type="noThanks" class="btn btn-brand-default btn-no-thanks button-grey m-right-l"
+                                value="noThanks">NO THANKS
+                        </button>
                         <button type="submit" id="myform" class="btn btn-brand-default button-green" value="Submit">
                             SEND
                         </button>
@@ -148,5 +156,6 @@
     </div>
 </sly>
 
-<sly data-sly-use.clientLib="/libs/granite/sightly/templates/clientlib.html" data-sly-call="${clientLib.all @ categories='uiux.contactus'}" data-sly-unwrap/>
+<sly data-sly-use.clientLib="/libs/granite/sightly/templates/clientlib.html"
+     data-sly-call="${clientLib.all @ categories='uiux.contactus'}" data-sly-unwrap/>
 <script src='https://www.google.com/recaptcha/api.js'></script>

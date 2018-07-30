@@ -186,6 +186,7 @@ function hookHeadScript(url, async, defer, callback) {
     "use strict";
     $(document).ready(function () {
         if ($('.cta-video-popup').length > 0) {
+
             $('.cta-video-popup').on('click', function () {
                 switch ($(this).data('video-type')) {
                     case "youtube":
@@ -216,6 +217,7 @@ function hookHeadScript(url, async, defer, callback) {
     });
 
     function togglePopupVideo(state) {
+
         // if state == 'hide', hide. Else: show video
         if (state == "hide") {
             $('video.modal-video-elem')[0].pause();
@@ -226,6 +228,7 @@ function hookHeadScript(url, async, defer, callback) {
 
     function togglePopupYoutubeVideo(state, element) {
 
+        console.log("testvideo")
         //autoplay video not supported unless set to mute by default
         //if state == 'hide', hide. Else: show video
 
@@ -264,6 +267,7 @@ function hookHeadScript(url, async, defer, callback) {
         // function playVideoPlayer(){
 
         $('.inline-video').on("click", function () {
+
 
             var $this = $(this);
             var thumbs = $this.children('.cta-video-inline');
@@ -1124,7 +1128,7 @@ function hookHeadScript(url, async, defer, callback) {
 (function () {
     "use strict";
     $(document).ready(function () {
-        $('body').on("click", '[data-search-pop-up]', function () {
+        $('body').on("click", '[data-search-pop-up]', function () { 
 
             var $searchPopUp = $('.search-pop-up');
 
@@ -1132,7 +1136,11 @@ function hookHeadScript(url, async, defer, callback) {
 
                 $searchPopUp.removeClass('hidden');
                 setTimeout(function () {
-                    $searchPopUp.addClass('active')
+                    $searchPopUp.addClass('active');
+                    AutoComplete({
+                        EmptyMessage: "No item found",
+                        QueryArg: "text",
+                    }, "#header-search-input");
                 }, 50);
 
                 defaultScrollUpdate(".search-pop-up");
@@ -2830,4 +2838,58 @@ $(window).on('load', function () {
 
     });
 
+})();
+  
+
+// ----------------------------------------------------------------------
+// Component:  Global Landing 
+// ----------------------------------------------------------------------
+
+(function () {
+    "use strict";
+    $(document).ready(function () {
+
+        function globalLandingCard() {
+            function ipLookUp() {
+                $.ajax('https://geoip.nekudo.com/api')
+                    .then(
+                        function success(response) {
+                            //console.log('User\'s Location Data is ', response);
+                            //console.log('User\'s Country', response.country.code);
+                            var countryCode = response.country.code;
+                            var countryName = response.country.name;
+                            //console.log("cc", countryCode, "cn", countryName);
+
+                            $.ajax({
+                                url: "/etc/designs/usgb_v3/clientlib/uiux-all-js/js/json/global-landing-my.json",
+                                data: "countrycode="+countryCode+"&country="+countryName+"",
+                                type: "GET",
+                                cache: false,
+                                success: function (response) {
+
+                                    var globalLanding = $('#global-landing').html();
+                                    var TemptglobalLanding = Handlebars.compile(globalLanding);
+                                    $('.global-landing').html(TemptglobalLanding(response));
+
+                                },
+                                beforeSend: function () {},
+                                complete: function () {}
+                            });
+
+                        },
+
+                        function fail(data, status) {
+                            console.log('Request failed.  Returned status of', status);
+                        }
+                    );
+            }
+            ipLookUp();
+
+
+        }
+
+
+        if ($('.global-location-card').length) globalLandingCard();
+
+    });
 })();
