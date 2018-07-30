@@ -12,6 +12,13 @@
     var searchedText = "";
 
     $(document).ready(function(){
+
+        AutoComplete({
+            EmptyMessage: "No item found",
+            QueryArg: "text",
+        }, "#search-form input");
+
+
         if($('.search-form').length > 0){
             if(urlParams.has('text')){
                 var text = urlParams.get('text');

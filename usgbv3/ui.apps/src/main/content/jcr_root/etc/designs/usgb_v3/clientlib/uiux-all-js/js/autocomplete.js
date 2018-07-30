@@ -488,20 +488,22 @@ var AutoComplete = /** @class */ (function () {
                 var returnResponse = [];
                 //JSON return
                 var json = JSON.parse(response);
-                // fix for where to buy component
-                wtbAutocompleteData = json;
-                var responseHotFix = json;
-                var data = responseHotFix.Items;
-                var autocompleteData = data;
-                
-                json = Object.keys(autocompleteData).map(function(e) {
-                    for (var key in autocompleteData[e]){
-                        if(autocompleteData[e].hasOwnProperty(key)) {
-                            return autocompleteData[e][key];
+                if(response.indexOf("Items") >= 0){
+                    // fix for where to buy component
+                    wtbAutocompleteData = json;
+                    var responseHotFix = json;
+                    var data = responseHotFix.Items;
+                    var autocompleteData = data;
+                    
+                    json = Object.keys(autocompleteData).map(function(e) {
+                        for (var key in autocompleteData[e]){
+                            if(autocompleteData[e].hasOwnProperty(key)) {
+                                return autocompleteData[e][key];
+                            }
                         }
-                    }
-                });
-
+                    });
+                }
+                
                 if (Object.keys(json).length === 0) {
                     return "";
                 }

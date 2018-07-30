@@ -1,7 +1,6 @@
 #base=js
 vendors/jszip.js
 vendors/FileSaver.js
-where-to-buy.js
 search.js
 submittal.js
 
