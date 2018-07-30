@@ -2425,40 +2425,17 @@
 <script>
 (function(){
     "use strict";
-
-    // add bookmark
-    $(document).on('click', '.cta-bookmark', function(e){
-        e.preventDefault();
-        $('#add-bookmark-modal').modal('show');
-        var url = $(this).attr('href').replace(".html", ".properties.json");
-        addNewBookmark(url);
-    });
-
-    //add bookmark
-    function addNewBookmark(url) {
-        // retrieve it (Or create a blank array if there isn't any info saved yet),
-        var urls = JSON.parse(localStorage.getItem('bookmarkStore')) || [];
-        // add to it,
-        urls.push(url);
-        // then put it back.
-        urls = uniqueArray(urls);
-        localStorage.setItem('bookmarkStore', JSON.stringify(urls));
-    }
-
-    // unique array   check no same name
-    function uniqueArray(arrArg) {
-        return arrArg.filter(function (elem, pos, arr) {
-            return arr.indexOf(elem) == pos;
+    //===========================
+    // resources filter
+    //===========================
+    $(document).ready(function(){
+        $(document).on('click', '.filter-content-in-category .dropdown-menu a', function(e){
+            filterCategories($(this));
         });
-    };
 
-    // filter content in category
-    $(document).on('click', '.filter-content-in-category .dropdown-menu a', function(e){
-        filterCategories($(this));
-    });
-
-    $(document).on('change', '.filter-content-in-category .dp-form-mobile select', function(e){
-        filterCategories($(this));
+        $(document).on('change', '.filter-content-in-category .dp-form-mobile select', function(e){
+            filterCategories($(this));
+        });
     });
 
     function filterCategories(target){
@@ -2478,22 +2455,50 @@
             $(parent).find('.panel-title').attr('data-toggle', '');
         }
     }
-    
 })();
-
 
 
 (function(){
     "use strict";
+    //===========================
+    // add bookmark
+    //===========================
     $(document).ready(function(){
-        //var url = window.location.href.replace('.html', '.properties.json');
-        var url = "/etc/designs/usgb_v3/clientlib/uiux-all-js-vc/js/json/bookmark-8.html".replace('.html', '.json');
+        $(document).on('click', '.cta-bookmark', function(e){
+            e.preventDefault();
+            $('#add-bookmark-modal').modal('show');
+            var url = $(this).attr('href').replace(".html", ".properties.json");
+            addNewBookmark(url);
+        });
+    });
+
+    function addNewBookmark(url) {
+        var urls = JSON.parse(localStorage.getItem('bookmarkStore')) || [];
+        urls.push(url);
+        urls = uniqueArray(urls);
+        localStorage.setItem('bookmarkStore', JSON.stringify(urls));
+    }
+
+    function uniqueArray(arrArg) {
+        return arrArg.filter(function (elem, pos, arr) {
+            return arr.indexOf(elem) == pos;
+        });
+    };
+})();
+
+
+(function(){
+    "use strict";
+    //===========================
+    // browser history
+    //===========================
+    $(document).ready(function(){
+        var url = $('.cta-bookmark').attr('href').replace('.html', '.properties.json');
         var currOnStageMainResultData = [];
         
         if($('.page-product-details').length > 0){
             addNewBrowseHistory(url);
 
-            // get data from localstorage
             var browseHistoryUrls = JSON.parse(localStorage.getItem('browseHistory'));
 
             getAll(browseHistoryUrls).done(function(results) {
@@ -2523,7 +2528,6 @@
         localStorage.setItem('browseHistory', JSON.stringify(urls));
     }
 
-    // unique array   check no same name
     function uniqueArray(arrArg) {
         return arrArg.filter(function (elem, pos, arr) {
             return arr.indexOf(elem) == pos;
