@@ -156,12 +156,13 @@
                     penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque
                     eu, pretium quis, sem. Nulla consequat massa quis enim.
                 </p>
-
-                <a href="#" class="col-xs-4 color-darker-grey fs-3 p-no m-bottom-m hidden-xs">
+               
+                <a href="${currentPage.path}.html" class="col-xs-4 color-darker-grey fs-3 p-no m-bottom-m hidden-xs cta-bookmark">
                     <span class="glyphicon glyphicon-heart p-right-s"></span>Add to my bookmark</a>
                 <a href="mailto:?Subject=5 Top Nasi Lemak Stalls In KL&amp;body=https://www.expatriatelifestyle.com/food-and-
-                buttons" class="col-xs-6 color-darker-grey fs-3 p-no m-bottom-m hidden-xs">
+                                            buttons" class="col-xs-6 color-darker-grey fs-3 p-no m-bottom-m hidden-xs">
                     <span class="glyphicon glyphicon-print p-right-s"></span>Print</a>
+                
 
                 <div class="row">
                     <div class="col-xs-12">
@@ -2374,16 +2375,44 @@
     </div>
     <!-- SECTION 14 END -->
 
-
-
-
-
-
-
-
 </div>
 <!-- END of PAGE CONTENT -->
 
+<div id="add-bookmark-modal" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="addBookmarkModalLabel">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center" role="document" width="750px">
+            <div class="modal-content">
+                <div class="modal-body m-vertical-s">
+                    <div class="row">
+                        <div class="col-md-12" align="center">
+                            <div class="svg-box">
+                                <svg class="circular yellow-stroke">
+                                    <circle class="path" cx="75" cy="75" r="50" fill="none" stroke-width="5" stroke-miterlimit="10" />
+                                </svg>
+                                <svg class="alert-sign yellow-stroke">
+                                    <g transform="matrix(1,0,0,1,-615.516,-257.346)">
+                                        <g transform="matrix(0.56541,-0.56541,0.56541,0.56541,93.7153,495.69)">
+                                            <path class="line" d="M634.087,300.805L673.361,261.53" fill="none" />
+                                        </g>
+                                        <g transform="matrix(2.27612,-2.46519e-32,0,2.27612,-792.339,-404.147)">
+                                            <circle class="dot" cx="621.52" cy="316.126" r="1.318" />
+                                        </g>
+                                    </g>
+                                </svg>
+                            </div>
+                            <h4 class="ht4 uppercase color-primary-green">Favourites!</h4>
+                            <p class="color-dark-grey">Product already added</p>
+                            <br>
+                            <p class="text-center m-bottom-l">
+                                <button data-dismiss="modal" class="btn btn-brand-default button-green">CLOSE</button>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 
@@ -2396,13 +2425,17 @@
 <script>
 (function(){
     "use strict";
-    // filter content in category
-    $(document).on('click', '.filter-content-in-category .dropdown-menu a', function(e){
-        filterCategories($(this));
-    });
+    //===========================
+    // resources filter
+    //===========================
+    $(document).ready(function(){
+        $(document).on('click', '.filter-content-in-category .dropdown-menu a', function(e){
+            filterCategories($(this));
+        });
 
-    $(document).on('change', '.filter-content-in-category .dp-form-mobile select', function(e){
-        filterCategories($(this));
+        $(document).on('change', '.filter-content-in-category .dp-form-mobile select', function(e){
+            filterCategories($(this));
+        });
     });
 
     function filterCategories(target){
@@ -2422,22 +2455,50 @@
             $(parent).find('.panel-title').attr('data-toggle', '');
         }
     }
-    
 })();
-
 
 
 (function(){
     "use strict";
+    //===========================
+    // add bookmark
+    //===========================
     $(document).ready(function(){
-        //var url = window.location.href.replace('.html', '.properties.json');
-        var url = "/etc/designs/usgb_v3/clientlib/uiux-all-js-vc/js/json/bookmark-8.html".replace('.html', '.json');
+        $(document).on('click', '.cta-bookmark', function(e){
+            e.preventDefault();
+            $('#add-bookmark-modal').modal('show');
+            var url = $(this).attr('href').replace(".html", ".properties.json");
+            addNewBookmark(url);
+        });
+    });
+
+    function addNewBookmark(url) {
+        var urls = JSON.parse(localStorage.getItem('bookmarkStore')) || [];
+        urls.push(url);
+        urls = uniqueArray(urls);
+        localStorage.setItem('bookmarkStore', JSON.stringify(urls));
+    }
+
+    function uniqueArray(arrArg) {
+        return arrArg.filter(function (elem, pos, arr) {
+            return arr.indexOf(elem) == pos;
+        });
+    };
+})();
+
+
+(function(){
+    "use strict";
+    //===========================
+    // browser history
+    //===========================
+    $(document).ready(function(){
+        var url = $('.cta-bookmark').attr('href').replace('.html', '.properties.json');
         var currOnStageMainResultData = [];
         
         if($('.page-product-details').length > 0){
             addNewBrowseHistory(url);
 
-            // get data from localstorage
             var browseHistoryUrls = JSON.parse(localStorage.getItem('browseHistory'));
 
             getAll(browseHistoryUrls).done(function(results) {
@@ -2467,7 +2528,6 @@
         localStorage.setItem('browseHistory', JSON.stringify(urls));
     }
 
-    // unique array   check no same name
     function uniqueArray(arrArg) {
         return arrArg.filter(function (elem, pos, arr) {
             return arr.indexOf(elem) == pos;

@@ -13,10 +13,9 @@
       background: #565656;
       .content{
         padding:15px 10px 40px;
-        z-index: 2;
+        z-index: 1;
         top: 0;
         color:#ffffff;
-        position: relative;
         @media(min-width:@min-bp-sm){
           padding:25px 20px 40px;
         }
@@ -33,33 +32,23 @@
         background-color: #ffffff;
       }
     }
-  } 
+  }
   .location{
-    //background: url('/content/dam/USGBoral/Global/Website/Images/component/allsample/global-landing/usgboral-location.jpg')no-repeat left center;
-    //background-size: cover; 
+    background: url('/images/usgboral-location.jpg')no-repeat left center;
+    background-size: cover;
     color:#ffffff;
-   
     .overlay{
       background-color: rgba(0, 0, 0, 0.7);
       padding:15px 10px;
       @media(min-width:@min-bp-sm){
         padding:25px 20px;
       }
-        p{
-          &:first-child{
-            font-size:18px;
-            text-transform:uppercase;
-          }
-          &:nth-of-type(3){
-            margin-bottom:0px;
-          }
-        }
     }
   }
 }
 
 .region-landing--country-list{
-  overflow: auto; 
+  overflow: auto;
   padding-bottom: 30px;
   float: none;
   height: 100%;
@@ -99,7 +88,7 @@
             padding-right:0;
           }
         }
-      } 
+      }
     }
   }
   a{

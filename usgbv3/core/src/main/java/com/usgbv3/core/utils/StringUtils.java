@@ -164,11 +164,14 @@ public class StringUtils {
 	}
 
 	public static String getReferrerURIfromRequest(SlingHttpServletRequest request) throws URISyntaxException {
-		String refererURI = new URI(request.getHeader("referer")).getPath();
-		if(refererURI != null && refererURI.endsWith(".html")){
-			refererURI = refererURI.replace(".html", "");
+		if(request.getHeader("referer") != null){
+			String refererURI = new URI(request.getHeader("referer")).getPath();
+			if(refererURI != null && refererURI.endsWith(".html")){
+				refererURI = refererURI.replace(".html", "");
+			}
+			return refererURI;
 		}
-		return refererURI;
+		return null;
 	}
 
 }
