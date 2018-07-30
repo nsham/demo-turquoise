@@ -87,7 +87,7 @@ public class VideoComponent extends WCMUsePojo {
 	public void activate() throws Exception {		
 		
 		//LOG.info("defaultInherit:");
-		String videoType = (String) getProperties().get("videoType");
+		String videoType = (String) getProperties().get("assetType");
 		String damThumb = (String) getProperties().get("thumbnail");
 		componentId = "vid_" + String.valueOf(getProperties().hashCode());
 		
