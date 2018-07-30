@@ -233,14 +233,14 @@
             <!-- slick div end -->
             <script id="global-landing" type="text/x-handlebars-template">
 
-
-                <div class="location">
-
+ 
+                <div class="location" style=" background: url('{{background_img}}') no-repeat left center; background-size:cover;
+                ">
+ 
                     <div class="overlay">
-                        <p class="sub-heading uppercase">{{title}}</p>
-                        <p>{{address}}</p>
-                        <p>Tel: {{tel}}
-                            <br> Fax: {{fax}}</p>
+                        <!--   class="sub-heading uppercase" -->
+                        <p class="sub-heading uppercase">{{title}}</p>                        
+                        {{{address}}}
                     </div>
 
                 </div>
