@@ -159,6 +159,7 @@ function recaptchaCallback() {
                         $('#id').val('data.id');
                         $('#contactUsForm1').hide();
                         $('#contactUsForm2').removeClass('hidden');
+                        $('.thank-you-contacting-msg').removeClass('hidden');
                     });
                    
                 }// end submit handler
