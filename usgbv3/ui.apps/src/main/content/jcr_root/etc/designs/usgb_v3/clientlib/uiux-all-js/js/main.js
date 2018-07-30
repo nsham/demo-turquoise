@@ -2893,3 +2893,30 @@ $(window).on('load', function () {
 
     });
 })();
+
+
+
+// ----------------------------------------------------------------------
+// Component:  Global Landing 
+// ----------------------------------------------------------------------
+
+(function () {
+    "use strict";
+    $(document).ready(function () {
+
+        function caseStudiesPlaceholder() {
+        
+            var desktopPlaceholder = $(".desktop-sidebar-placeholder").html();
+            
+            console.log(desktopPlaceholder)
+            $(".mobile-sidebar-placeholder").append(desktopPlaceholder);
+
+            //desktopPlaceholder = mobilePlaceholder;
+
+        }
+
+
+        if ($('.desktop-sidebar-placeholder').length) caseStudiesPlaceholder();
+
+    });
+})();
