@@ -15,5 +15,5 @@ public interface BaseDao {
     int insertDataReturnId(String statement, Object... data);
     List<Map<String, Object>> resultSetToList(ResultSet rs) throws SQLException;
     boolean removeUpdateData(String statement, Object... data);
-
+    void closeResultSet(ResultSet resultSet);
 }

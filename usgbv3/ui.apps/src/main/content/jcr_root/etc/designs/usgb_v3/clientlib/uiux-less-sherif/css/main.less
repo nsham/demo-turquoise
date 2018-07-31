@@ -166,6 +166,10 @@
     font-weight: bold;
 }
 
+.step-1-select-wrapper .cart-empty {
+    display: none;
+}
+
 .steps-inner-wrapper .step-ctrls {
     display: flex;
     flex-direction: row;
@@ -187,6 +191,19 @@
 .step-3-order-summary-wrapper  table .sample-quantity {
     width: 20%;
     text-align: center;
+}
+
+
+.sample-orders-modal {
+
+    .modal-dialog {
+        margin: 10% auto;
+
+        .cta-confirm-remove-order {
+            color: #fff;
+        }
+    }
+
 }
 
 
@@ -394,6 +411,24 @@
             text-align: center;
         }
 
+    }
+
+}
+
+.sample-orders-cart-sort {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-content: end;
+    height: 100%;
+
+    &>div {
+        text-align: right;
+    }
+
+    .dropdown {
+        width: 200px;
+        margin-left: 10px;
     }
 
 }

@@ -32,6 +32,15 @@
 
                     });
 
+
+                    var dropdownSortOrdersOptions = $(".sample-orders-cart-sort .dropdown-menu a");
+
+                    dropdownSortOrdersOptions.on("click", function(event){
+
+                        console.log($(this).data("sortby"));
+
+                    });
+
                  }
 
         }
@@ -45,21 +54,12 @@
         var tempProductsDetails = [];
         var arrayCount = 0;
 
-        console.log(userInfoJson);
-
-        /* 
-        $.get("/bin/sso/osRetrieveHistory", userInfoJson, function(data){})
-        .done(function(data){
-
-        });
-        */
-
         $.ajax({
             url: "/bin/sso/osRetrieveHistory",
             data: JSON.stringify(userInfoJson),
             dataType: 'json',
             contentType: "application/json",
-            type: "GET",
+            type: "POST",
             cache: false,
             success: function (response) {
                 console.log(response);
