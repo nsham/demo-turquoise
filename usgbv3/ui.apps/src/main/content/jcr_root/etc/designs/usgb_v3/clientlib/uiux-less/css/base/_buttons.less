@@ -1,5 +1,7 @@
 a {
     text-decoration: none;
+    -webkit-transition: all ease 200ms;
+    -o-transition: all ease 200ms;
     transition: all ease 200ms;
     border: 0;
     color: @color-primary-green;
@@ -9,12 +11,13 @@ a {
         text-decoration: none;
         outline: none;
         color: @color-primary-green;
-        //text-decoration: underline;
     }
 }
 
 button {
     text-decoration: none;
+    -webkit-transition: all ease 200ms;
+    -o-transition: all ease 200ms;
     transition: all ease 200ms;
     border: 0;
     &:hover,
@@ -286,7 +289,11 @@ button {
         position: absolute;
         right: 0;
         top: 50%;
-        transform: translateY(-50%);
+        -webkit-transform: translateY(-50%);
+            -ms-transform: translateY(-50%);
+                transform: translateY(-50%);
+        -webkit-transition: all ease 200ms;
+        -o-transition: all ease 200ms;
         transition: all ease 200ms;
     }
 
@@ -322,8 +329,12 @@ button {
         position: absolute;
         left: 0;
         top: 50%;
-        transform: translateY(-50%);
+        -webkit-transform: translateY(-50%);
+            -ms-transform: translateY(-50%);
+                transform: translateY(-50%);
         font-size: 21px;
+        -webkit-transition: all ease 200ms;
+        -o-transition: all ease 200ms;
         transition: all ease 200ms;
     }
 

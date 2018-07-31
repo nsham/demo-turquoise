@@ -136,7 +136,9 @@ svg {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
 }
 
 .relative {
@@ -382,8 +384,9 @@ svg {
   -ms-flex-align: center;
   align-items: center;
   -ms-flex-direction: row;
-  flex-direction: row;
-
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+          flex-direction: row;
 }
 
 .flex-inlin-row {
@@ -395,7 +398,9 @@ svg {
   -ms-flex-align: center;
   align-items: center;
   -ms-flex-direction: row;
-  flex-direction: row;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+          flex-direction: row;
 }
 
 

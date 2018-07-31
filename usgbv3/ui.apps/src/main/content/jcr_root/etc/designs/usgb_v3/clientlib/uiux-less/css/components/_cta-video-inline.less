@@ -13,6 +13,8 @@
     left: 0;
     width: 100%;
     height: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     background: black;
 
@@ -72,6 +74,8 @@
         left: 0;
         right: 0;
         z-index: 5;
+        -webkit-transition: all ease 300ms;
+        -o-transition: all ease 300ms;
         transition: all ease 300ms;
         margin: -15px;
         padding: 15px;
@@ -86,7 +90,9 @@
     .va-middle{
         position: absolute;
         top: 50%;
-        transform: translateY(-50%);
+        -webkit-transform: translateY(-50%);
+            -ms-transform: translateY(-50%);
+                transform: translateY(-50%);
     }
 
     .va-bottom{
@@ -104,7 +110,9 @@
     .ha-center{
         position: absolute;
         left: 50%;
-        transform: translateX(-50%);
+        -webkit-transform: translateX(-50%);
+            -ms-transform: translateX(-50%);
+                transform: translateX(-50%);
     }
 
     .ha-right{
@@ -118,7 +126,9 @@
         position: absolute;
         top: 50%;
         left: 50%;
-        transform: translate(-50%, -50%);
+        -webkit-transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+                transform: translate(-50%, -50%);
         text-align: center;
     }
     /* END of Centerise Content*/
@@ -169,6 +179,8 @@
         left: 0;
         right: 0;
         z-index: 5;
+        -webkit-transition: all ease 300ms;
+        -o-transition: all ease 300ms;
         transition: all ease 300ms;
         margin: -15px;
         padding: 15px;
@@ -183,7 +195,9 @@
     .va-middle{
         position: absolute;
         top: 50%;
-        transform: translateY(-50%);
+        -webkit-transform: translateY(-50%);
+            -ms-transform: translateY(-50%);
+                transform: translateY(-50%);
     }
 
     .va-bottom{
@@ -201,7 +215,9 @@
     .ha-center{
         position: absolute;
         left: 50%;
-        transform: translateX(-50%);
+        -webkit-transform: translateX(-50%);
+            -ms-transform: translateX(-50%);
+                transform: translateX(-50%);
     }
 
     .ha-right{
@@ -215,7 +231,9 @@
         position: absolute;
         top: 50%;
         left: 50%;
-        transform: translate(-50%, -50%);
+        -webkit-transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+                transform: translate(-50%, -50%);
         text-align: center;
     }
     /* END of Centerise Content*/
@@ -266,7 +284,4 @@
         width: 100%;
         float: left;
     }
-
-
-
 }

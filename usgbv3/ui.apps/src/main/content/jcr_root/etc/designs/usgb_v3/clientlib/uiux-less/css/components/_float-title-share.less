@@ -1,18 +1,13 @@
 .float-title-share {
 	position: relative;
 	overflow: hidden;
-
 	-webkit-transition: all .3s;
+	-o-transition: all .3s;
 	transition: all .3s;
-
 	z-index: -1;
-
-	// default
 	margin-top: -70px;
 
 	.inner {
-	  // padding-left: 15px;
-	  // padding-right: 15px;
 	  margin-right: auto;
 	  margin-left: auto;
 
@@ -36,7 +31,6 @@
 	      width: 1240px;
 
 	  }
-
 	}
 
 
@@ -45,25 +39,22 @@
 	}
 
 	.slide-content{
-
 		-webkit-transition: all .3s;
+		-o-transition: all .3s;
 		transition: all .3s;
-
 	    position: absolute;
 	    width: 100%;
 	    background: white;
 	    left: 0;
-
-	    top: -100%;//default
+	    top: -100%;
 
 	    &.active{
-	    	top: 0;//active
+	    	top: 0;
 	    }
 
 		.fa-instagram.fa-stack-1x {
 		    font-size: 20px;
 		}
-
 	}
 
 	.close-share{

@@ -19,22 +19,25 @@
 
     .radio-split-two{
         padding-top: 15px;
-
         display: -webkit-box;
-        display: -moz-box;
         display: -ms-flexbox;
-        display: -webkit-flex;
         display: flex;
-
-        flex-wrap:wrap;
-        flex-direction:row;
-        justify-content:flex-start;
-        align-items:stretch;
+        -ms-flex-wrap:wrap;
+            flex-wrap:wrap;
+        -webkit-box-orient:horizontal;
+        -webkit-box-direction:normal;
+            -ms-flex-direction:row;
+                flex-direction:row;
+        -webkit-box-pack:start;
+            -ms-flex-pack:start;
+                justify-content:flex-start;
+        -webkit-box-align:stretch;
+            -ms-flex-align:stretch;
+                align-items:stretch;
         word-wrap: break-word;
 
         .radio-item{
            width:50%;
-           //order:1;
             .item-inner{
                 position: relative;
                 label {
@@ -45,16 +48,11 @@
                         left:0;
                     }
                 }
-
             }
         }
         .radio-item:nth-child(1n){
             clear: both; 
             margin-bottom:10px;
-           // background:red;
         }
-      
     }
-
-    
 }

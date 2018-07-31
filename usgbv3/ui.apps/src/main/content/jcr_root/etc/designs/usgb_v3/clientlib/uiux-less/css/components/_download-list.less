@@ -2,15 +2,27 @@
 
   .each {
       margin: 0;
+      display: -webkit-box;
+      display: -ms-flexbox;
       display: flex;
-      flex-direction: row;
-      justify-content: flex-start;
-      align-items: center;
-      flex-wrap: nowrap;
+      -webkit-box-orient: horizontal;
+      -webkit-box-direction: normal;
+          -ms-flex-direction: row;
+              flex-direction: row;
+      -webkit-box-pack: start;
+          -ms-flex-pack: start;
+              justify-content: flex-start;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
+      -ms-flex-wrap: nowrap;
+          flex-wrap: nowrap;
   }
 
   &.inline-list{
     >.each {
+      display: -webkit-inline-box;
+      display: -ms-inline-flexbox;
       display: inline-flex;
     }
   }
@@ -32,5 +44,4 @@
       text-decoration:underline;
     }
   }
-
 }

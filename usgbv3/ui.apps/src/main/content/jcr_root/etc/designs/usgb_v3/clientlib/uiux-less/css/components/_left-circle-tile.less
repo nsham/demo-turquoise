@@ -5,11 +5,9 @@
 		visibility: visible;
 	}
 	.round-image {
-		//flex-basis: 150px;  poor IE dun understand this 
 		width: 150px;
 		height: 150px;
 	}
-
 
 	&.slick-dotted.slick-slider {
 	  margin-bottom: 50px;
@@ -24,7 +22,6 @@
 	  li{
 	  	width: auto;
 	  	height: auto;
-
 	  }
 
 	  button {
@@ -44,15 +41,17 @@
 	  .slick-active button {
 	    background-color: #5f575c;
 	  }
-
 	}
-
 	
 	.slick-arrow {
 	  bottom: -48px;
 	  top: auto;
-	  transform: none;
-	  transform: all ease 300ms;
+	  -webkit-transform: none;
+	      -ms-transform: none;
+	          transform: none;
+	  -webkit-transform: all ease 300ms;
+	      -ms-transform: all ease 300ms;
+	          transform: all ease 300ms;
 	  height: auto;
 	  z-index: 100;
 
@@ -62,29 +61,24 @@
 	    font-size: 40px;
 	  }
 	  &:hover {
-	    /* background-color: darken(@color-primary-green, 10%);*/
+	
 	  }
 	  &:hover:before {
 	    opacity: 1;
 	  }
-
 	}
 	
 	.slick-prev {
 	  left: 15%;
 	  width: auto;
 
-
 	  &:before {
-	  /*content: "\2039";*/
 	  content: " ";
 	  background: url(../images/arrow-grey-btn.png) no-repeat transparent;
 	  width: 9px;
 	  float: left;
 	  height: 15px;
-
 	 }
-
 	}
 
 	@media (min-width: 768px) {
@@ -98,17 +92,15 @@
 	  width: auto;
 
 	  &:before {
-		  /*content: "\f105";*/
 		  content: " ";
 		  background: url(../images/arrow-grey-btn.png) no-repeat transparent;
 		  width: 9px;
 		  float: left;
 		  height: 15px;
-
 		  -webkit-transform: rotate(180deg);
-		  transform: rotate(180deg);
+		  -ms-transform: rotate(180deg);
+		      transform: rotate(180deg);
 	 }
-
 	}
 
 	@media (min-width: 768px) {
@@ -116,7 +108,5 @@
 	    right: 33%;
 	  }
 	}
-
-
 
 }
