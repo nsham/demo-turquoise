@@ -6,14 +6,17 @@
 
 var sampleOrdersJson = [
     {
+        productName: "Product 1",
         productUrl: "http://usgbuataut.cloudapp.net:4504/etc/designs/usgb_v3/clientlib/uiux-less-sherif/js/json/sample-order-product-1.json",
         quantity: 2
     },
     {
+        productName: "Product 2",
         productUrl: "http://usgbuataut.cloudapp.net:4504/etc/designs/usgb_v3/clientlib/uiux-less-sherif/js/json/sample-order-product-2.json",
         quantity: 5
     },
     {
+        productName: "Product 3",
         productUrl: "http://usgbuataut.cloudapp.net:4504/etc/designs/usgb_v3/clientlib/uiux-less-sherif/js/json/sample-order-product-3.json",
         quantity: 1
     }
@@ -129,7 +132,7 @@ localStorage.setItem('sampleOrdersList', JSON.stringify(sampleOrdersJson));
                         <div class="col-sm-offset-1 col-xs-offset-0 col-sm-5 col-xs-12">
                             
                             <div class="float-label respond-msg">
-                                <input type="text" class="form-control" name="name" value="Sherif Testing" required>
+                                <input type="text" class="form-control name" name="name" value="" required>
                                 <label for="name" class="uppercase ">Recipient Name</label>
                             </div>
 
@@ -138,12 +141,12 @@ localStorage.setItem('sampleOrdersList', JSON.stringify(sampleOrdersJson));
                         <div class="col-sm-offset-1 col-xs-offset-0 col-sm-8 col-xs-12">
                             
                             <div class="float-label respond-msg">
-                                <input type="text" class="form-control" name="addressOne" value="Test Address" required>
+                                <input type="text" class="form-control address-1" name="addressOne" value="" required>
                                 <label for="addressOne" class="uppercase ">Address 1</label>
                             </div>
 
                             <div class="float-label respond-msg">
-                                <input type="text" class="form-control" name="addressTwo" value="Test address 2" required>
+                                <input type="text" class="form-control address-2" name="addressTwo" value="" required>
                                 <label for="addressTwo" class="uppercase ">Address 2</label>
                             </div>
 
@@ -152,19 +155,25 @@ localStorage.setItem('sampleOrdersList', JSON.stringify(sampleOrdersJson));
                         <div class="col-sm-offset-1 col-xs-offset-0 col-sm-4 col-xs-12">
 
                             <div class="float-label respond-msg">
-                                <input type="text" class="form-control" name="postalCode" value="12345" digits="true" required>
+                                <input type="text" class="form-control postal-code" name="postalCode" value="" digits="true" required>
                                 <label for="postalCode" class="uppercase ">Postal Code</label>
                             </div>
 
                             <div class="float-label respond-msg">
-                                <input type="text" class="form-control" name="city" value="Kuala Lumpur" required>
+                                <input type="text" class="form-control city" name="city" value="" required>
                                 <label for="city" class="uppercase ">City</label>
                             </div>
 
                             <div class="float-label respond-msg">
-                                <label class="uppercase ">Country</label>
+                                <label class="uppercase ">State/Province/Region</label>
+                                <input type="text" class="form-control state" name="stateSelect" value="" required>
+                            </div>
+
+
+                            <div class="float-label respond-msg">
+                                <label class="uppercase">Country</label>
                                     <span class="dropdown-arrow color-primary-green glyphicon glyphicon-menu-down fs-1"></span>
-                                    <select name="countrySelect" for="countrySelect" class="drop-down-select form-control" type="select" required>
+                                    <select name="countrySelect" for="countrySelect" class="drop-down-select form-control country" type="select" required>
                                         <option></option>
                                         <option value="1" selected>Malaysia</option>
                                         <option value="2">Australia</option>
@@ -179,27 +188,12 @@ localStorage.setItem('sampleOrdersList', JSON.stringify(sampleOrdersJson));
                                     </select>
                             </div>
 
-                            <div class="float-label respond-msg">
-                                <label class="uppercase ">State/Province/Region</label>
-                                    <span class="dropdown-arrow color-primary-green glyphicon glyphicon-menu-down fs-1"></span>
-                                    <select name="stateSelect" for="stateSelect" class="drop-down-select form-control" type="select" required>
-                                        <option></option>
-                                        <option value="1" selected>state 1</option>
-                                        <option value="2">state 2</option>
-                                        <option value="3">state 3</option>
-                                        <option value="4">state 4</option>
-                                        <option value="5">state 5</option>
-                                        <option value="6">state 6</option>
-                                    </select>
-                            </div>
-
                         </div>
 
                         <div class="col-sm-offset-1 col-xs-offset-0 col-sm-8 col-xs-12">
 
                             <div class="float-label respond-msg">
-                                <textarea type="text" name="remarks" class="form-control h150" required>
-                                    Test Remark
+                                <textarea type="text" name="remarks" class="form-control h150 remark">
                                 </textarea>
                                 <label for="remarks" class="uppercase ">Additional Remark</label>
                             </div>
@@ -209,12 +203,12 @@ localStorage.setItem('sampleOrdersList', JSON.stringify(sampleOrdersJson));
                         <div class="col-sm-offset-1 col-xs-offset-0 col-sm-4 col-xs-12">
 
                             <div class="float-label respond-msg">
-                                <input type="text" class="form-control" name="contactNo" value="01234567890" digits="true" required>
+                                <input type="text" class="form-control contact-no" name="contactNo" value="01234567890" digits="true" required>
                                 <label for="contactNo" class="uppercase ">Recipient contact no</label>
                             </div>
 
                             <div class="float-label respond-msg">
-                                <input type="text" class="form-control" name="email" value="test@apdgroup.com" required>
+                                <input type="text" class="form-control email" name="email" value="test@apdgroup.com" required>
                                 <label for="email" class="uppercase ">Recipient Email</label>
                             </div>
 
