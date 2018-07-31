@@ -117,6 +117,14 @@ localStorage.setItem('sampleOrdersList', JSON.stringify(sampleOrdersJson));
                             
                        </tbody>
                     </table>
+
+                    <div class="row">
+                        <div class="col">
+                            <div class="cart-empty text-center m-top-l">
+                                <h4 class="color-grey">No product added.</h4>
+                            </div>
+                        </div>
+                    </div>
                     
                     <div class="step-ctrls m-l">
                         <a href="#" class="btn btn-brand-default button-grey m-s">View my order history</a>
@@ -364,6 +372,46 @@ localStorage.setItem('sampleOrdersList', JSON.stringify(sampleOrdersJson));
     {{/each}}
 
 </script>
+
+
+<!-- Remove Sample product Modal -->
+<div id="removeSampleOrderModal" class="modal fade sample-orders-modal" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="removeSampleOrderModalLabel">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center" role="document" width="750px">
+            <div class="modal-content">
+                <div class="modal-body m-vertical-s">
+                    <div class="row">
+                        <div class="col-md-12" align="center">
+                            <div class="svg-box">
+                                <svg class="circular yellow-stroke">
+                                    <circle class="path" cx="75" cy="75" r="50" fill="none" stroke-width="5" stroke-miterlimit="10" />
+                                </svg>
+                                <svg class="alert-sign yellow-stroke">
+                                    <g transform="matrix(1,0,0,1,-615.516,-257.346)">
+                                        <g transform="matrix(0.56541,-0.56541,0.56541,0.56541,93.7153,495.69)">
+                                            <path class="line" d="M634.087,300.805L673.361,261.53" fill="none" />
+                                        </g>
+                                        <g transform="matrix(2.27612,-2.46519e-32,0,2.27612,-792.339,-404.147)">
+                                            <circle class="dot" cx="621.52" cy="316.126" r="1.318" />
+                                        </g>
+                                    </g>
+                                </svg>
+                            </div>
+                            <h4 class="ht4 uppercase color-primary-green">Are you sure?</h4>
+                            <p class="color-dark-grey">You will not be able to recover this product</p>
+                            <br>
+                            <p class="text-center m-bottom-l">
+                                <button data-dismiss="modal" class="btn btn-brand-default m-right-l">Cancel</button>
+                                <button class="btn btn-brand-default button-red cta-confirm-remove-order">Yes, Delete it!</button>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /END Remove Sample product Modal -->
 
 
 <script src="/etc/designs/usgb_v3/clientlib/uiux-less-ct/js/vendors/jquery.validate.min.js"></script>

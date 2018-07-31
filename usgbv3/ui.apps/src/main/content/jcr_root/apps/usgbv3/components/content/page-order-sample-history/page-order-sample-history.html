@@ -20,10 +20,34 @@
 
 
     <div class="container ">
-        <div class="row">
-            <div class="col-xs-12">
+        <div class="row row-eq-height">
+            <div class="col-xs-12 col-sm-8 col-md-8">
                 <h4 class="ht4 color-darker-grey uppercase m-bottom-m">My order sample cart History</h4>
                 <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.</p>
+            </div>
+            <div class="col-xs-12 col-sm-4 col-md-4">
+                
+                <div class="sample-orders-cart-sort">
+                    <div>
+                        <span>view by </span>
+                        <div class="dropdown dp-form d-small">
+                            <button class="btn btn-default color-dark-grey dropdown-toggle text-left dp-clickable" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="dp-text">Latest to oldest</span>
+                                <input type="hidden" name="selectSortType" value="latest">
+                                <span class="color-primary-green glyphicon glyphicon-menu-down right"></span>
+                            </button>
+                            <ul class="dropdown-menu dp-list" aria-labelledby="dropdownMenu1">
+                                <li>
+                                    <a data-sortby="latest">Latest to oldest</a>
+                                </li>
+                                <li>
+                                    <a data-sortby="oldest">Oldest to latest</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
