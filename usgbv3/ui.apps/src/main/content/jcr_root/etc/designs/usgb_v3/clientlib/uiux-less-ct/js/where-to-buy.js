@@ -27,7 +27,7 @@
 
         var urlString = window.location.href;
         var url = new URL(urlString);
-        var countryCode = window.location.href.indexOf("/usgboral/") > -1? "en_au" : "en_au";
+        var countryCode = window.location.href.indexOf("/usgboral/") > -1? "en_my" : "en_my";
         var locationPath = function() {
             var pathArray = window.location.pathname.split('/').filter(Boolean).slice(0, -1);
             var newPathname = "";

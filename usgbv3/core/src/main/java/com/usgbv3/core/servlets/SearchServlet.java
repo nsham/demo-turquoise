@@ -1,0 +1,878 @@
+package com.usgbv3.core.servlets;
+
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.rmi.ServerException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import javax.jcr.Node;
+import javax.jcr.NodeIterator;
+import javax.jcr.Session;
+import javax.servlet.Servlet;
+
+import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
+import org.apache.sling.api.SlingHttpServletRequest;
+import org.apache.sling.api.SlingHttpServletResponse;
+import org.apache.sling.api.request.RequestParameter;
+import org.apache.sling.api.resource.Resource;
+import org.apache.sling.api.resource.ResourceResolver;
+import org.apache.sling.api.resource.ValueMap;
+import org.apache.sling.api.servlets.HttpConstants;
+import org.apache.sling.commons.json.JSONArray;
+import org.apache.sling.commons.json.JSONException;
+import org.apache.sling.commons.json.JSONObject;
+import org.osgi.framework.Constants;
+import org.osgi.service.component.annotations.Component;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.day.cq.commons.jcr.JcrConstants;
+import com.day.cq.dam.api.Asset;
+import com.day.cq.search.PredicateGroup;
+import com.day.cq.search.Query;
+import com.day.cq.search.QueryBuilder;
+import com.day.cq.search.result.Hit;
+import com.day.cq.search.result.SearchResult;
+import com.day.cq.tagging.Tag;
+import com.day.cq.tagging.TagManager;
+import com.day.cq.wcm.api.Page;
+import com.day.cq.wcm.api.PageManager;
+import com.google.gson.Gson;
+import com.usgbv3.core.constants.ApplicationConstants;
+import com.usgbv3.core.daos.UserInfoDao;
+import com.usgbv3.core.models.SearchContentModel;
+import com.usgbv3.core.services.RestletService;
+import com.usgbv3.core.services.SSOConfigurationService;
+import com.usgbv3.core.utils.CountryUtils;
+
+
+//localhost:4502/bin/usgb/v3/search
+/*
+ * This servlet is called from /etc/designs/usgb/clientlib-site/js/sso.app.js 
+ * We would be getting the access_token and domain from the request params which would be used for operation here
+ * This class would get the user info.
+ */
+@Component(service=Servlet.class,
+property={
+        Constants.SERVICE_DESCRIPTION + "=Search Servlet",
+        "sling.servlet.methods=" + HttpConstants.METHOD_GET,
+        "sling.servlet.paths="+ "/bin/usgb/v3/search"
+})
+public class SearchServlet extends BaseAllMethodsServlet {
+	private static final long serialVersionUID = 1452364151988577055L; 
+	protected final Logger LOG = LoggerFactory.getLogger(this.getClass());
+	
+	private static SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
+	
+	@Reference
+    private QueryBuilder builder;
+	
+	@Override
+	protected void doGet(SlingHttpServletRequest request,
+			SlingHttpServletResponse response) throws ServerException,
+			IOException {
+				LOG.info("SearchServlet Start");
+			try {
+				response.setCharacterEncoding("utf-8");
+				
+//				String pageURL = null;
+//		        if(request.getHeader("referer") != null){
+//		            try {
+//		                String refererURI = new URI(request.getHeader("referer")).getPath();
+//		                if(refererURI != null && refererURI.endsWith(".html")){
+//		                    pageURL = refererURI.replace(".html", "");
+//		                }
+//		            } catch (URISyntaxException e) {
+//		                LOG.error("URI SyntaxExvception is :"+e);
+//		            }
+//		        }else{
+//		            RequestParameter pageURLParameter = request.getRequestParameter(ApplicationConstants.PAGE_URL);
+//		            if(pageURLParameter != null){
+//		                pageURL = pageURLParameter.getString();
+//		            }
+//		        }
+//		        
+//		        Map<String, String> countryInfo = CountryUtils.retrieveUsgbCountrybyPath(request.getResourceResolver(), pageURL);
+//		        String countryHomePagePath = countryInfo.get("homepageUrl").toString();
+		        
+		        String countryHomePagePath = "/content/usgboral/en_au/search";
+		        Map<String, String> countryInfo = CountryUtils.retrieveUsgbCountrybyPath(request.getResourceResolver(), countryHomePagePath);
+		        
+				String keyword = request.getRequestParameter("text").toString();
+				String category = request.getRequestParameter("category").toString();
+				JSONObject jsonObj = new JSONObject();
+
+				jsonObj.put("path", countryHomePagePath);
+				jsonObj.put("searched_text", keyword);
+				
+				if("content".equalsIgnoreCase(category)) {
+					String path = countryInfo.get("sitePath").toString();
+					jsonObj = generateContentListbyKeyword(request.getResourceResolver(), path, keyword);
+					
+				}else if("doc_finder".equalsIgnoreCase(category)) {
+					LOG.info("In doc_finder");
+					String path = countryInfo.get("sitePath").toString();
+					LOG.info("doc_finder = " + path);
+					jsonObj = generateDocFinderListbyKeyword(request.getResourceResolver(), path, keyword);
+					
+				}else {
+					this.setJsonResponse(response, "{\"ERROR\": Unknown Category\"}", 500);
+				}
+				
+				
+				this.setJsonResponseOk(response,jsonObj.toString());
+				
+			}catch(Exception e){
+				this.setJsonResponse(response, "{\"ERROR\":\"exception"+ e.getMessage() + "\"}", 500);
+			}
+		
+	}
+	
+	private JSONObject generateContentListbyKeyword(ResourceResolver resourceResolver, String path, String keyword) throws JSONException{
+		
+		JSONObject apiResponse = new JSONObject();
+		Gson gson = new Gson();
+		try {
+
+
+			int totalMatchforContent = 0;
+			
+			SearchResult resultPages = queryContent(resourceResolver, path, keyword, "-1");
+
+			LOG.info("result = " + resultPages);
+			
+			int totalMatchforPage = (int) resultPages.getTotalMatches();
+
+
+			JSONArray jsonArrayProduct = new JSONArray();
+			JSONArray jsonArrayFilter = new JSONArray();
+			
+			if(totalMatchforPage > 0){
+				
+				
+				JSONObject jsonFilterType = new JSONObject();
+				jsonFilterType.put("key", "type");
+				jsonFilterType.put("title", "Type");
+				
+				JSONArray typeChild = new JSONArray();
+				JSONObject pageType = new JSONObject();
+				pageType.put("key", "page");
+				pageType.put("name", "Page");
+				typeChild.put(pageType);
+				jsonFilterType.put("child", typeChild);
+				
+				jsonArrayFilter.put(jsonFilterType);
+				
+				int hitNo = 0;
+				for(Hit hit : resultPages.getHits()){
+					totalMatchforContent++;
+					ValueMap hitProperties = hit.getProperties();
+					JSONObject searchContentJson = new JSONObject();
+//					SearchContentModel searchContent = new SearchContentModel();
+					
+					searchContentJson.put("key", "content_" + hitNo);
+					searchContentJson.put("title", hitProperties.get("jcr:title", String.class));
+					searchContentJson.put("description", hitProperties.get("pageDescription", String.class));
+					searchContentJson.put("image", hitProperties.get("pageImage", String.class));
+					searchContentJson.put("link", hit.getPath());
+					searchContentJson.put("type", "page");
+					if(hitProperties.containsKey("jcr:score")) {
+						searchContentJson.put("score", hitProperties.get("jcr:score", String.class));
+					}
+					
+					Calendar calendar = hitProperties.get("jcr:created", Calendar.class);
+					Date date = (Date) calendar.getTime();
+//					searchContent.setCreated_date(formatter.format(date));
+					searchContentJson.put("created_date", formatter.format(date));
+					
+					
+						
+					JSONObject pageCategory = getPageCategory(resourceResolver, path, hit.getPath());
+					LOG.info("pageCategory = " + pageCategory);
+					
+					searchContentJson.put("category_header", pageCategory.get("name").toString());
+					searchContentJson.put("category", pageCategory.get("key").toString());
+					
+					boolean addCategory = false;
+					
+					for (int i = 0 ; i < jsonArrayFilter.length(); i++) {
+						
+						if("category".equalsIgnoreCase(jsonArrayFilter.getJSONObject(i).get("key").toString())) {
+							
+							if(jsonArrayFilter.getJSONObject(i).has("child")){
+								
+								JSONArray categoryList = (JSONArray) jsonArrayFilter.getJSONObject(i).get("child");
+								categoryList.put(pageCategory);
+								
+								jsonArrayFilter.getJSONObject(i).remove("child");
+								jsonArrayFilter.getJSONObject(i).put("child", categoryList);
+								addCategory = true;
+								break;
+							}else {
+								
+								JSONArray categoryList = new JSONArray();
+								categoryList.put(pageCategory);
+								jsonArrayFilter.getJSONObject(i).put("child", categoryList);
+								addCategory = true;
+								break;
+							}
+							
+						}
+						
+					}
+					
+					if(!addCategory) {
+						
+						JSONObject jsonFilterCategory = new JSONObject();
+						jsonFilterCategory.put("key", "category");
+						jsonFilterCategory.put("title", "Category");
+						
+						JSONArray categoryList = new JSONArray();
+						categoryList.put(pageCategory);
+						jsonFilterCategory.put("child", categoryList);
+						jsonArrayFilter.put(jsonFilterCategory);
+						
+					}
+						
+					
+//					if(hitProperties.containsKey("cq:tags")) {
+//						List<String> tags = Arrays.asList(hitProperties.get("cq:tags", String[].class));
+//						searchContent.setTags(tags);
+//						
+//						List<String> tagsValue = new ArrayList<String>();
+//						
+//						for(String tag : tags) {
+//							
+//							TagManager tagManager = resourceResolver.adaptTo(TagManager.class);
+//							Tag pageTag = tagManager.resolve(tag);
+//							tagsValue.add(pageTag.getName());
+//							
+//							Tag parenttag = pageTag.getParent();
+//							if(jsonArrayFilter.length() > 0 ) {
+//								
+//							}else {
+//								
+//							}
+//						}
+//						
+//						
+//					}
+					
+					
+					
+//					jsonArrayProduct.put(new JSONObject(gson.toJson(searchContent)));
+					jsonArrayProduct.put(searchContentJson);
+					hitNo++;
+				}
+				
+				
+				
+				
+				
+			}
+			
+			// get data from hero-banner-component and video-component
+			SearchResult resultVideo = queryVideo(resourceResolver, path, keyword);
+			
+			LOG.info("videooo = " + resultVideo);
+			
+			int totalMatchforVideo = (int) resultVideo.getTotalMatches();
+
+
+			LOG.info("videooo count = " + totalMatchforVideo);
+			if(totalMatchforVideo > 0){
+				
+				boolean addVideo = false;
+				for (int i = 0 ; i < jsonArrayFilter.length(); i++) {
+					
+					
+					if("type".equalsIgnoreCase(jsonArrayFilter.getJSONObject(i).get("key").toString())) {
+						
+						
+						JSONArray videoList = (JSONArray) jsonArrayFilter.getJSONObject(i).get("child");
+						
+						JSONObject videoFilter = new JSONObject();
+						videoFilter.put("key", "video");
+						videoFilter.put("name", "Video");
+						videoList.put(videoFilter);
+						
+						jsonArrayFilter.getJSONObject(i).remove("child");
+						jsonArrayFilter.getJSONObject(i).put("child", videoList);
+						addVideo = true;
+						break;
+						
+					}
+				}
+				
+				if(!addVideo) {
+					
+					JSONObject jsonFilterType = new JSONObject();
+					jsonFilterType.put("key", "type");
+					jsonFilterType.put("title", "Type");
+					
+					JSONArray typeChild = new JSONArray();
+					JSONObject pageType = new JSONObject();
+					pageType.put("key", "video");
+					pageType.put("name", "Video");
+					typeChild.put(pageType);
+					jsonFilterType.put("child", typeChild);
+				}
+				
+				int hitVideoNo = 0;
+				for(Hit hit : resultVideo.getHits()){
+					
+					ValueMap hitProperties = hit.getProperties();
+					JSONObject searchContentJson = new JSONObject();
+//					SearchContentModel searchContent = new SearchContentModel();
+					
+					if(hitProperties.containsKey("videoDam")) {
+						
+						totalMatchforContent++;
+						
+						Resource res = resourceResolver.getResource(hitProperties.get("videoDam", String.class));
+						Asset asset = res.adaptTo(Asset.class);
+						
+						searchContentJson.put("key", "video_" + hitVideoNo);
+						
+						if(hitProperties.containsKey("title")) {
+							searchContentJson.put("title", hitProperties.get("title", String.class));
+							
+						}else {
+							searchContentJson.put("title", asset.getMetadataValue("dc:title"));
+						}
+						
+						if(hitProperties.containsKey("pageDescription")) {
+							searchContentJson.put("description", hitProperties.get("pageDescription", String.class));
+						}
+						
+						if(hitProperties.containsKey("pageImage")) {
+							searchContentJson.put("image", hitProperties.get("pageImage", String.class));
+						}
+						
+						if(hitProperties.containsKey("videoDam")) {
+							searchContentJson.put("link", hitProperties.get("videoDam", String.class));
+						}
+						
+						searchContentJson.put("type", "video");
+						
+						if(hitProperties.containsKey("jcr:score")) {
+							searchContentJson.put("score", hitProperties.get("jcr:score", String.class));
+						}
+						
+						jsonArrayProduct.put(searchContentJson);
+					}
+					
+					
+				}
+			}
+			
+
+			
+			//remove duplicate Json
+			for (int i = 0 ; i < jsonArrayFilter.length(); i++) {
+				
+				if(jsonArrayFilter.getJSONObject(i).has("child")){
+					
+					JSONArray categoryList = (JSONArray) jsonArrayFilter.getJSONObject(i).get("child");
+					categoryList = removeDuplicateFilter(categoryList);
+					
+					jsonArrayFilter.getJSONObject(i).remove("child");
+					jsonArrayFilter.getJSONObject(i).put("child", categoryList);
+				}
+			}
+			
+			
+
+			if(totalMatchforContent > 0) {
+				apiResponse.put("result", "true");
+			}else {
+				apiResponse.put("result", "false");
+			}
+
+			apiResponse.put("path", path);
+			apiResponse.put("num_result", totalMatchforContent);
+			apiResponse.put("filter_listing", jsonArrayFilter);
+			apiResponse.put("content", jsonArrayProduct);
+			
+		} catch (Exception e) {
+			LOG.info("result = " + e.getMessage());
+			e.printStackTrace();
+		}
+		
+		
+		
+		
+		return apiResponse;
+	}
+	
+	public SearchResult queryContent(ResourceResolver resourceResolver, String path, String keyword, String limit) {
+
+		Session session = resourceResolver.adaptTo(Session.class);
+		Map<String, String> queryMap = new HashMap<String, String>();
+		String keywordWildCard = "*" + keyword + "*";
+
+		queryMap.put("path", path);
+		queryMap.put("type", "cq:Page");
+		queryMap.put("fulltext", keywordWildCard);
+		queryMap.put("p.limit", limit);
+		queryMap.put("p.offset", "0");
+		queryMap.put("orderby", "@jcr:score");
+		queryMap.put("orderby.sort", "desc");
+
+		LOG.info("builder = " + builder);
+		
+		Query query = builder.createQuery(PredicateGroup.create(queryMap), session);
+		SearchResult result = query.getResult();
+		
+		return result;
+	}
+	
+	public SearchResult queryVideo(ResourceResolver resourceResolver, String path, String keyword) {
+
+		Session session = resourceResolver.adaptTo(Session.class);
+		Map<String, String> queryMap = new HashMap<String, String>();
+		String keywordWildCard = "*" + keyword + "*";
+
+		queryMap.put("path", path);
+		queryMap.put("1_property", "sling:resourceType");
+		queryMap.put("1_property.value", "usgbv3/components/content/hero-banner-component");
+		queryMap.put("1_property.value", "usgbv3/components/content/video-component");
+		queryMap.put("2_property", "assetType");
+		queryMap.put("2_property.value", "assetVideo");
+		queryMap.put("fulltext", keywordWildCard);
+		queryMap.put("orderby", "@jcr:score");
+		queryMap.put("orderby.sort", "desc");
+		queryMap.put("p.limit", "-1");
+
+		LOG.info("builder = " + builder);
+		
+		Query query = builder.createQuery(PredicateGroup.create(queryMap), session);
+		SearchResult result = query.getResult();
+		
+		return result;
+	}
+	
+	public JSONObject getPageCategory(ResourceResolver resourceResolver, String homePage, String pagePath) {
+		JSONObject category = new JSONObject();
+
+		LOG.info("getPageCategory Start = " + homePage + "  |  " + pagePath);
+		
+		if(pagePath.contains("jcr:content")) {
+			pagePath = pagePath.substring(0,pagePath.indexOf("jcr:content"));
+		}
+		Page contentPage = resourceResolver.resolve(pagePath).adaptTo(Page.class); 
+		
+		
+		try {
+			
+			
+			LOG.info("getPageCategory pagePath = " + pagePath);
+			
+			if(pagePath.indexOf(homePage) > -1) {
+//				LOG.info("getPageCategory indexOf > -1 = " + pagePath);
+				
+				if(homePage.equals(pagePath)) {
+
+//					LOG.info("getPageCategory equals = " + pagePath);
+					Page parentPage = contentPage.getParent(); 
+					
+					category.put("key", "homepage");
+					category.put("name", "Home Page");
+					
+				}else {
+					
+					if(!(homePage.equals(contentPage.getParent().getPath()))) {
+
+//						LOG.info("getPageCategory if = " + pagePath);
+						category = getPageCategory(resourceResolver, homePage, contentPage.getParent().getPath());
+						
+					}else {
+
+//						LOG.info("getPageCategory else = " + pagePath);
+						
+						category.put("key", contentPage.getName());
+						category.put("name", contentPage.getTitle());
+					}
+				}
+				
+			}else {
+
+				LOG.info("getPageCategory indexOf not = " + pagePath);
+				category.put("key", "others");
+				category.put("name", "Others");
+			}
+			
+				
+			
+			
+		}catch (Exception e) {
+			LOG.info("getPageCategory ERROR = " + e.getMessage());
+		}
+		
+		
+		
+		
+		return category;
+	}
+	
+	private JSONObject generateDocFinderListbyKeyword(ResourceResolver resourceResolver, String path, String keyword) throws JSONException{
+		
+		JSONObject apiResponse = new JSONObject();
+		int totalMatchforContent = 0;
+		try {
+			
+			SearchResult resultPages = queryDocFinder(resourceResolver, path, keyword, "-1");
+			int totalMatchforPage = (int) resultPages.getTotalMatches();
+			LOG.info("totalMatchforPage : " + totalMatchforPage);
+			
+			JSONArray jsonArrayProduct = new JSONArray();
+			JSONArray jsonArrayFilter = new JSONArray();
+			
+			if(totalMatchforPage > 0){
+			
+				int hitNo = 0;
+				for(Hit hit : resultPages.getHits()){
+					
+			
+					LOG.info("DOC Path ( " + hitNo + " ) : " + hit.getPath());
+	//				jsonArrayFilter.put(hit.getPath());
+					 Node hitNode =  hit.getNode();
+					 NodeIterator ni =  hitNode.getNodes(); 
+				 
+					 while (ni.hasNext()) {
+				        Node child = (Node)ni.nextNode(); 
+				         
+				        
+				        NodeIterator ni2 =  child.getNodes() ; 
+				        while (ni2.hasNext()) {
+					        Node child2 = (Node)ni2.nextNode(); 
+					        
+					        if(child2.hasProperty("docPath")) {
+					        	
+					        	JSONObject searchContentJson = new JSONObject();
+					        	
+	//				        	jsonArrayFilter.put("getPath  = " + child2.getPath());
+	//				        	jsonArrayFilter.put("docPath  = " + child2.getProperty("docPath").getString());
+	
+					        	String docPath = child2.getProperty("docPath").getString();
+					        	
+					        	Resource res = resourceResolver.getResource(docPath);
+								Asset asset = res.adaptTo(Asset.class);
+								Node assetNode = resourceResolver.getResource(docPath).adaptTo(Node.class);
+								
+								searchContentJson.put("key", "docFinder_" + hitNo);
+								searchContentJson.put("link", docPath);
+	
+								if(child2.hasProperty("thumbnail")) {
+									searchContentJson.put("image", child2.getProperty("thumbnail").getString());
+								}else {
+									searchContentJson.put("image", "/content/dam/USGBoral/global/website/image/logo/pdf-icon.png");
+								}
+								
+								if(!(asset.getMetadataValue("dc:title").isEmpty())) {
+									searchContentJson.put("title", asset.getMetadataValue("dc:title"));
+									
+								}else {
+									searchContentJson.put("title", asset.getName());
+								}
+						        
+								searchContentJson.put("description", asset.getMetadataValue("dc:description"));
+								
+														
+								JSONObject pageCategory = getPageCategory(resourceResolver, path, hit.getPath());
+								LOG.info("type" + pageCategory);
+								searchContentJson.put("type", pageCategory.get("key").toString());
+								
+								boolean addType = false;
+								
+								for (int i = 0 ; i < jsonArrayFilter.length(); i++) {
+									
+									if("type".equalsIgnoreCase(jsonArrayFilter.getJSONObject(i).get("key").toString())) {
+										
+										if(jsonArrayFilter.getJSONObject(i).has("child")){
+											
+											JSONArray categoryList = (JSONArray) jsonArrayFilter.getJSONObject(i).get("child");
+											categoryList.put(pageCategory);
+											
+											jsonArrayFilter.getJSONObject(i).remove("child");
+											jsonArrayFilter.getJSONObject(i).put("child", categoryList);
+											addType = true;
+											break;
+										}else {
+											
+											JSONArray categoryList = new JSONArray();
+											categoryList.put(pageCategory);
+											jsonArrayFilter.getJSONObject(i).put("child", categoryList);
+											addType = true;
+											break;
+										}
+										
+									}
+									
+								}
+								
+								if(!addType) {
+									
+									JSONObject jsonFilterCategory = new JSONObject();
+									jsonFilterCategory.put("key", "type");
+									jsonFilterCategory.put("title", "Type");
+									
+									JSONArray categoryList = new JSONArray();
+									categoryList.put(pageCategory);
+									jsonFilterCategory.put("child", categoryList);
+									jsonArrayFilter.put(jsonFilterCategory);
+									
+								}
+								
+								
+								
+								
+								
+								
+								JSONObject pageSubCategory = getPageCategory(resourceResolver, path + "/" + pageCategory.get("key").toString(), hit.getPath());
+								//searchContentJson.put("type", pageCategory.get("key").toString());
+								String pageCategoryFilterKey = pageCategory.get("key").toString() + "_category";
+								String pageCategoryFilterTitle = pageCategory.get("name").toString() + " Category";
+
+								searchContentJson.put("category_header", pageSubCategory.get("name").toString());
+								searchContentJson.put(pageCategoryFilterKey, pageSubCategory.get("key").toString());
+								
+								boolean addCategory = false;
+								
+								for (int i = 0 ; i < jsonArrayFilter.length(); i++) {
+									
+									if(pageCategoryFilterKey.equalsIgnoreCase(jsonArrayFilter.getJSONObject(i).get("key").toString())) {
+										
+										if(jsonArrayFilter.getJSONObject(i).has("child")){
+											
+											JSONArray categoryList = (JSONArray) jsonArrayFilter.getJSONObject(i).get("child");
+											categoryList.put(pageSubCategory);
+											
+											jsonArrayFilter.getJSONObject(i).remove("child");
+											jsonArrayFilter.getJSONObject(i).put("child", categoryList);
+											addCategory = true;
+											break;
+										}else {
+											
+											JSONArray categoryList = new JSONArray();
+											categoryList.put(pageSubCategory);
+											jsonArrayFilter.getJSONObject(i).put("child", categoryList);
+											addCategory = true;
+											break;
+										}
+										
+									}
+									
+								}
+								
+								if(!addCategory) {
+									
+									JSONObject jsonFilterCategory = new JSONObject();
+									jsonFilterCategory.put("key", pageCategoryFilterKey);
+									jsonFilterCategory.put("title", pageCategoryFilterTitle);
+									
+									JSONArray categoryList = new JSONArray();
+									categoryList.put(pageSubCategory);
+									jsonFilterCategory.put("child", categoryList);
+									jsonArrayFilter.put(jsonFilterCategory);
+									
+								}
+								
+								
+								TagManager tagManager = resourceResolver.adaptTo(TagManager.class);
+								List<String> tagValues = new ArrayList<String>();
+								
+								if(!(asset.getMetadataValue("cq:tags").isEmpty())) {
+									
+									Object[] tags = (Object[]) asset.getMetadata("cq:tags");
+									
+									for (Object obj : tags) {
+									     Tag tag = tagManager.resolve(obj.toString());
+									     
+									     //check if tags is under asset category or not
+									     if("category".equals(tag.getParent().getName())) {
+									    	 tagValues.add(tag.getName());
+									    	 
+									    	 JSONObject jsonTag = new JSONObject();
+									    	 jsonTag.put("key", tag.getName());
+									    	 jsonTag.put("name", tag.getTitle());
+									    	 
+									    	 boolean addTag = false;
+												
+												for (int i = 0 ; i < jsonArrayFilter.length(); i++) {
+													
+													if("document_type".equalsIgnoreCase(jsonArrayFilter.getJSONObject(i).get("key").toString())) {
+														
+														if(jsonArrayFilter.getJSONObject(i).has("child")){
+															
+															JSONArray categoryList = (JSONArray) jsonArrayFilter.getJSONObject(i).get("child");
+															categoryList.put(jsonTag);
+															
+															jsonArrayFilter.getJSONObject(i).remove("child");
+															jsonArrayFilter.getJSONObject(i).put("child", categoryList);
+															addTag = true;
+															break;
+														}else {
+															
+															JSONArray categoryList = new JSONArray();
+															categoryList.put(jsonTag);
+															jsonArrayFilter.getJSONObject(i).put("child", categoryList);
+															addTag = true;
+															break;
+														}
+														
+													}
+													
+												}
+												
+												if(!addTag) {
+													
+													JSONObject jsonFilterCategory = new JSONObject();
+													jsonFilterCategory.put("key", "document_type");
+													jsonFilterCategory.put("title", "Document Type");
+													
+													JSONArray categoryList = new JSONArray();
+													categoryList.put(jsonTag);
+													jsonFilterCategory.put("child", categoryList);
+													jsonArrayFilter.put(jsonFilterCategory);
+													
+												}
+												
+									     }   
+									}
+									
+									searchContentJson.put("document_type", tagValues.toString());
+								}
+								
+								
+								
+								
+								Calendar calendar = assetNode.getProperty("jcr:created").getDate();
+								Date date = (Date) calendar.getTime();
+	//							searchContent.setCreated_date(formatter.format(date));
+								searchContentJson.put("created_date", formatter.format(date));
+														
+														
+															
+								
+								
+								
+								
+						        totalMatchforContent++;
+						        jsonArrayProduct.put(searchContentJson);
+								hitNo++;
+					        }
+					        
+				        }
+				    }
+					
+					hitNo++;
+				}
+			}
+			
+			//remove duplicate Json
+			for (int i = 0 ; i < jsonArrayFilter.length(); i++) {
+				
+				if(jsonArrayFilter.getJSONObject(i).has("child")){
+					
+					JSONArray categoryList = (JSONArray) jsonArrayFilter.getJSONObject(i).get("child");
+					categoryList = removeDuplicateFilter(categoryList);
+					
+					jsonArrayFilter.getJSONObject(i).remove("child");
+					jsonArrayFilter.getJSONObject(i).put("child", categoryList);
+				}
+			}
+			
+			apiResponse.put("path", path);
+			apiResponse.put("num_result", totalMatchforContent);
+			apiResponse.put("filter_listing", jsonArrayFilter);
+			apiResponse.put("doc_finder", jsonArrayProduct);
+			
+		}catch (Exception e) {
+//			LOG.info("result = " + e.getMessage());
+			e.getStackTrace();
+		}
+		
+		
+		
+		
+		return apiResponse;
+	}
+	
+	public SearchResult queryDocFinder(ResourceResolver resourceResolver, String path, String keyword, String limit) {
+
+		LOG.info("IN queryDocFinder");
+		SearchResult result = null;
+		
+		try {
+			
+			Session session = resourceResolver.adaptTo(Session.class);
+			Map<String, String> queryMap = new HashMap<String, String>();
+			String keywordWildCard = "*" + keyword + "*";
+
+			
+			LOG.info("session = " + session + "keywordWildCard = " + keywordWildCard);
+			
+			
+			queryMap.put("path", path);
+			queryMap.put("1_property", "sling:resourceType");
+			queryMap.put("1_property.1_value", "usgbv3/components/content/resources-component");
+			queryMap.put("1_property.2_value", "usgbv3/components/content/resources-component");
+//			queryMap.put("fulltext", keywordWildCard);
+			queryMap.put("orderby", "@jcr:score");
+			queryMap.put("orderby.sort", "desc");
+			queryMap.put("p.limit", "-1");
+
+			
+			Query query = builder.createQuery(PredicateGroup.create(queryMap), session);
+			result = query.getResult();
+			
+		}catch(Exception ex) {
+			LOG.info("Exception queryDocFinder = " + ex.getMessage());
+		}
+		
+		
+		return result;
+	}
+	
+	public JSONArray removeDuplicateFilter(JSONArray rawJsonArray) {
+		
+		Set<String> keyCodes=new HashSet<String>();
+		JSONArray tempArray=new JSONArray();
+		
+		try {
+			
+			for(int i = 0; i < rawJsonArray.length(); i++){
+				   String  keyCode=rawJsonArray.getJSONObject(i).getString("key");
+				   if(keyCodes.contains(keyCode)){
+				     continue;
+				   }
+				   else{
+					   keyCodes.add(keyCode);
+					   tempArray.put(rawJsonArray.getJSONObject(i));
+				   }
+
+				}
+			
+		}catch (Exception e) {
+			LOG.info("removeDuplicateFilter Exception " + e.getMessage());
+		}
+		
+
+
+		return tempArray;
+	}
+	
+	
+}
