@@ -113,6 +113,7 @@ function recaptchaCallback() {
                         $('#dbid').val(data.id);
                         $('#contactUsForm1').hide();
                         $('#contactUsForm2').removeClass('hidden');
+                        $('.thank-you-contacting-msg').removeClass('hidden');
                     });
 
                 }// end submit handler
