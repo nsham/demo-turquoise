@@ -41,6 +41,8 @@ public class ShippingDetail {
 	@Column(name="created_date")
 	private Date created_date;
 
+	@Column(name="remark")
+	private String remark;
 
 	public String getShip_id() {
 		return ship_id;
@@ -130,6 +132,14 @@ public class ShippingDetail {
 		this.created_date = created_date;
 	}
 
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+
 	@Override
 	public String toString() {
 		return "ShipingDetail [ship_id=" + ship_id 
@@ -142,6 +152,7 @@ public class ShippingDetail {
 				+ ", ship_postcode=" + ship_postcode
 				+ ", ship_city=" + ship_city 
 				+ ", ship_country=" + ship_country
+				+ ", remark=" + remark
 				+ ", created_date=" + created_date + "]";
 	}
 

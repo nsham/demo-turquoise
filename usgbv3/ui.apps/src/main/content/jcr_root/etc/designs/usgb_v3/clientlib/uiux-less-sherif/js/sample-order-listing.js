@@ -26,6 +26,8 @@
 
         var shippingDetailsForm = $("#sampleOrderShippingForm");
 
+        var cartEmptyNotificationWrapper = $(".step-1-select-wrapper .cart-empty");
+
 
         //Check user SSO Login
         if(!$.ssoManager.isLogin){
@@ -39,6 +41,15 @@
                  ($.ssoManager.sso.userInfo().responseJSON).hasOwnProperty('id')) {
 
                     var userInfo = $.ssoManager.sso.userInfo().responseJSON;
+
+                    //Order select step button
+                    var orderSelectBtn = $(".order-steps-wrapper .order-sample-btn");
+
+                    //Check local storage Object if empty
+                    if(sampleOrderList.length <= 0){
+                        cartEmptyNotificationWrapper.show();
+                        orderSelectBtn.hide();
+                    }
 
                     //Shipping Form Fields
                     var formName = shippingDetailsForm.find(".name");
@@ -61,10 +72,7 @@
                     formState.val(userInfo.profile.state);
                     formContactNo.val(userInfo.profile.phone);
                     formEmail.val(userInfo.email.address);
-
-
-                    //Order select step button
-                    var orderSelectBtn = $(".order-steps-wrapper .order-sample-btn");
+                    
 
                     //Go to step 2 Shipping details Form
                     orderSelectBtn.on("click", function(event){
@@ -209,31 +217,45 @@
             });
 
             //Remove Order sample
+            var orderToRemoveObject = {};
+            var confirmRemoveOrderModal = $('#removeSampleOrderModal');
+            var confirmRemoveOrderCta = confirmRemoveOrderModal.find(".cta-confirm-remove-order");
+            
             sampleRemoveBtn.on("click", function(event){
                 
                 event.preventDefault();
 
-                var productUrlRemove = $(this).parent().parent().data("producturl");
-                var itemRowObject = ($(this).parent()).parent();
+                confirmRemoveOrderModal.modal('show');
 
-                removeSampleOrder(productUrlRemove, "sampleOrdersList", function(){
+                orderToRemoveObject.productUrlRemove = $(this).parent().parent().data("producturl");
+                orderToRemoveObject.itemRowObject = $($(this).parent()).parent();
+
+            });
+
+            confirmRemoveOrderCta.on("click", function(event){
+
+                removeSampleOrder(orderToRemoveObject.productUrlRemove, "sampleOrdersList", function(sampleOrderArrayLength){
                     
-                    /*
-                    var sampleOrderIndexRemove = results.findIndex(i => i.productUrl == productUrlRemove );
+                    orderToRemoveObject.itemRowObject.remove();
+                    orderToRemoveObject = {};
 
-                    if(sampleOrderIndexRemove > -1){
-
-                        results.splice(sampleOrderIndexRemove, 1);
-                        updateViewTemplate($('#sampleOrderTemplate').html(), results, $('.sample-orders-container') );
-
+                    confirmRemoveOrderModal.modal('hide');
+                    
+                    //Check local storage Object if empty
+                    if(sampleOrderArrayLength <= 0){
+                        cartEmptyNotificationWrapper.show();
+                        orderSelectBtn.hide();
                     }
-                    */
 
-                    itemRowObject.remove();
 
                 });
 
             });
+
+            confirmRemoveOrderModal.on('hidden.bs.modal', function (e) {
+                orderToRemoveObject = {};
+            })
+            
 
         });
         
@@ -313,7 +335,7 @@
 
         localStorage.setItem(sampleOrderLocalStorageName, JSON.stringify(sampleOrderLocalStorageJson));
 
-        callback();
+        callback(sampleOrderLocalStorageJson.length);
 
     }
 

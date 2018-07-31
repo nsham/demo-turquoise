@@ -1,0 +1,87 @@
+@media print {
+    html,
+    body {
+        padding: 0;
+        margin: 0 0 -5px 0;
+        a[href]:after {
+            content: none !important;
+        }
+    }
+    .page-break {
+        page-break-before: always;
+    }
+    .avoid-break {
+        page-break-inside: avoid;
+    }
+    .header>.wrapper {
+        position: absolute;
+        top: 0px !important;
+    }
+    .gallery-item-wrapper,
+    .stacked-default,
+    .slick-next,
+    .slick-prev,
+    .slick-dots,
+    .ico-play-video,
+    .product-menu-sticky,
+    .fa {
+        display: none !important;
+    }
+    .col-xs-12 {
+        page-break-inside: avoid;
+    }
+    [data-img-height="div-height"] {
+        border: 1px solid @color-dark-grey;
+    }
+    .page-product-details {
+        .pn-ProductNav {
+            overflow: visible;
+        }
+        .product-gallery-wrapper {
+            // Show Only Active Slide
+            .slick-slide {
+                display: none !important;
+                &.slick-active {
+                    display: block !important;
+                }
+            } // Reset adaptiveHeight
+            .slick-list {
+                height: auto !important;
+            } // Remove Scrollbars
+            .slick-track {
+                width: auto !important;
+                height: auto !important;
+                transform: none !important;
+                .slick-slide {
+                    width: auto !important;
+                }
+            }
+        }
+        .bg-overlay {
+            border: 1px solid  @color-dark-grey;
+        }
+        [data-scroll="cad"] {
+            .custom-block {
+                border: 1px solid  @color-dark-grey;
+            }
+            .col-xs-12 {
+                width: 33%;
+            }
+        }
+    }
+    .page-product-compare {
+        [data-div-height="resourceList"]>a {
+            display: none !important;
+        }
+        .box-type-3 {
+            border: 1px solid  @color-dark-grey;
+        }
+        [data-div-height="applications"] {
+            page-break-after: always;
+        }
+        .table-responsive {
+            height: auto;
+            overflow: hidden;
+        }
+    }
+}

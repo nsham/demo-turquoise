@@ -9,17 +9,22 @@ import java.util.List;
 import java.util.Map;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.usgbv3.core.daos.DocumentCollatorDao;
 import com.usgbv3.core.entity.DocumentCollator;
 import com.usgbv3.core.models.QueryDataResult;
+import com.usgbv3.core.daos.BaseDao;
 import com.usgbv3.core.daos.ContactUsDao;
 
 @Component(immediate = true, service = DocumentCollatorDao.class
 , configurationPid = "com.usgbv3.core.daos.impl.DocumentCollatorDaoImpl")
-public class DocumentCollatorDaoImpl extends BaseDaoImpl implements DocumentCollatorDao {
+public class DocumentCollatorDaoImpl implements DocumentCollatorDao {
+	
+	@Reference
+	BaseDao baseDao;
 	
 	protected final Logger log = LoggerFactory.getLogger(this.getClass());
 	private SimpleDateFormat submitTime=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -29,7 +34,7 @@ public class DocumentCollatorDaoImpl extends BaseDaoImpl implements DocumentColl
 
 		log.info("data : " + data.toString());
 		String query = "INSERT INTO DC_Document (doc_aem_id,doc_name,doc_path,doc_url,created_date,user_id) VALUES (?,?,?,?,?,?);";
-		int insertedId = insertDataReturnId(query,
+		int insertedId = baseDao.insertDataReturnId(query,
 				data.getDoc_aem_id(),
 				data.getDoc_name(),
 				data.getDoc_path(),
@@ -48,7 +53,7 @@ public class DocumentCollatorDaoImpl extends BaseDaoImpl implements DocumentColl
 		boolean success = false;
 		for(String removeId : removeList){
 			
-			success = removeUpdateData(query,
+			success = baseDao.removeUpdateData(query,
 					userId,
 					removeId);
 			
@@ -74,7 +79,7 @@ public class DocumentCollatorDaoImpl extends BaseDaoImpl implements DocumentColl
 //		QueryDataResult queryDataResult = null;
 		
 		try{
-			List<Map<String, Object>> newQuery = retrieveData(query, sso_id);
+			List<Map<String, Object>> newQuery = baseDao.retrieveData(query, sso_id);
 			
 			for(Map<String, Object> queryMap : newQuery){
 
