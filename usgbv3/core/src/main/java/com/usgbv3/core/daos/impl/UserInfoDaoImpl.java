@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,11 +18,15 @@ import com.usgbv3.core.entity.UserInfo;
 import com.usgbv3.core.models.QueryDataResult;
 import com.usgbv3.core.models.UrlRedirection;
 import com.usgbv3.core.utils.StringUtils;
+import com.usgbv3.core.daos.BaseDao;
 import com.usgbv3.core.daos.OrderSampleDao;
 
 @Component(immediate = true, service = UserInfoDao.class
 , configurationPid = "com.usgbv3.core.daos.impl.UserInfoDaoImpl")
-public class UserInfoDaoImpl extends BaseDaoImpl implements UserInfoDao {
+public class UserInfoDaoImpl implements UserInfoDao {
+	
+	@Reference
+	BaseDao baseDao;
 	
 	protected final Logger log = LoggerFactory.getLogger(this.getClass());
 	private SimpleDateFormat submitTime=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -30,7 +35,7 @@ public class UserInfoDaoImpl extends BaseDaoImpl implements UserInfoDao {
 	@Override
 	public boolean insertData(UserInfo data) {
 		
-		boolean success = insertData(INSERT_DATA_STATEMENT,
+		boolean success = baseDao.insertData(INSERT_DATA_STATEMENT,
 //				data.getName(),
 //				data.getEmail(),
 //				data.getAddress(),
@@ -58,7 +63,7 @@ public class UserInfoDaoImpl extends BaseDaoImpl implements UserInfoDao {
 		QueryDataResult queryDataResult = null;
 		
 		try{
-			queryDataResult = queryData(query, sso_id);
+			queryDataResult = baseDao.queryData(query, sso_id);
 			resultSet = queryDataResult != null ? queryDataResult.getResultSet() : null;
 //			log.info("UserInfo resultthen Set 1 : " + resultSet.getString("user_id"));
 			if (resultSet != null && resultSet.next()){
@@ -76,8 +81,8 @@ public class UserInfoDaoImpl extends BaseDaoImpl implements UserInfoDao {
 			log.info("UserInfoDao : " + ex.getMessage());
 			log.error("UserInfoDao : " + ex.getMessage());
 		}finally {
-			closeResultSet(resultSet);
-			closeQueryDataResult(queryDataResult);
+			baseDao.closeResultSet(resultSet);
+			baseDao.closeQueryDataResult(queryDataResult);
 		}
 		
 		
@@ -95,7 +100,7 @@ public class UserInfoDaoImpl extends BaseDaoImpl implements UserInfoDao {
 		List<Map<String, Object>> retrieveUser = new ArrayList<Map<String,Object>>();
 		
 		try{
-			retrieveUser = retrieveData(selectQuery, userInfo.getUser_sso_id());
+			retrieveUser = baseDao.retrieveData(selectQuery, userInfo.getUser_sso_id());
 			
 			if(retrieveUser.size() > 0){
 				for(Map<String, Object> queryMap : retrieveUser){
@@ -110,7 +115,7 @@ public class UserInfoDaoImpl extends BaseDaoImpl implements UserInfoDao {
 				
 				if(userInfo != null && StringUtils.isNotBlank(userInfo.getUser_sso_id()) ){
 					
-					insertId = insertDataReturnId("INSERT INTO SSO_User (user_sso_id, display_name, user_first_name, user_last_name, email, created_date, last_login_date) VALUES (?,?,?,?,?,?,?)",
+					insertId = baseDao.insertDataReturnId("INSERT INTO SSO_User (user_sso_id, display_name, user_first_name, user_last_name, email, created_date, last_login_date) VALUES (?,?,?,?,?,?,?)",
 							userInfo.getUser_sso_id(),
 							userInfo.getDisplay_name(),
 							userInfo.getUser_first_name(),

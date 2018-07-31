@@ -269,7 +269,7 @@ public class BaseDaoImpl implements BaseDao{
 		return success; 
 	}
 	
-	protected void closeResultSet(ResultSet resultSet){
+	public void closeResultSet(ResultSet resultSet){
 		try{
 			if(resultSet != null){
 				resultSet.close();
