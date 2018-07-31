@@ -1128,7 +1128,7 @@ function hookHeadScript(url, async, defer, callback) {
 (function () {
     "use strict";
     $(document).ready(function () {
-        $('body').on("click", '[data-search-pop-up]', function () { 
+        $('body').on("click", '[data-search-pop-up]', function () {
 
             var $searchPopUp = $('.search-pop-up');
 
@@ -1776,17 +1776,20 @@ $(window).on('load', function () {
                 event.preventDefault();
 
                 var btnURL = $(this).closest("button").attr("href");
+                //console.log("data-", btnURL);
 
-                // var getIndex1 = data.findIndex(x => x.url == btnURL);
-                var getIndex1 = data.findIndex(function (x) {
-                    return x.url == btnURL;
+
+                var getIndex1
+                data.some(function (x, i) {
+                    if (x.url == btnURL) {
+                        getIndex1 = i;
+                        return true;
+                    }
                 });
                 data.splice(getIndex1, 1);
-                //console.log("data-", data);
 
                 localStorage.setItem(currCategoryKey, JSON.stringify(data));
                 getLocalCompare();
-
             });
 
 
@@ -1972,10 +1975,15 @@ $(window).on('load', function () {
 
             function removeCompareLocalStorage(data) {
 
-                // var getIndex1 = storeData.findIndex(x => x.url == data);
-                var getIndex1 = storeData.findIndex(function (x) {
-                    return x.url == data;
+                // var getIndex1 = storeData.findIndex(x => x.url == data);     
+                var getIndex1
+                storeData.some(function (x, i) {
+                    if (x.url == data) {
+                        getIndex1 = i;
+                        return true;
+                    }
                 });
+                
                 //console.log("in1", getIndex1)
                 storeData.splice(getIndex1, 1);
 
@@ -2202,11 +2210,10 @@ $(window).on('load', function () {
             });
             //sort by end
 
-
             function multiFilter(array, filters) {
-                const filterKeys = Object.keys(filters);
+                var filterKeys = Object.keys(filters);
                 // filters all elements passing the criteria
-                return array.filter((item) => {
+                return array.filter(function (item) {
                     // dynamically validate all filter criteria
                     return filterKeys.every(function (key) {
                         if (Array.isArray(item[key]) && item[key].length > 0) {
@@ -2225,31 +2232,46 @@ $(window).on('load', function () {
                 });
             }
 
+
+
+            function _defineProperty(obj, key, value) {
+                if (key in obj) {
+                    Object.defineProperty(obj, key, {
+                        value: value,
+                        enumerable: true,
+                        configurable: true,
+                        writable: true
+                    });
+                } else {
+                    obj[key] = value;
+                }
+                return obj;
+            }
+
             function paginationResult(dataForPagination) {
                 stickySidebar.updateSticky();
 
-                $('#pagination-container').pagination({
+                $('#pagination-container').pagination(_defineProperty({
                     dataSource: dataForPagination,
                     pageSize: 9,
-                    callback: function (data, pagination) {
+                    callback: function callback(data, pagination) {
                         //results
                         var productFilterResult = $('#product-listing-result').html();
                         var TemptProductFilterResult = Handlebars.compile(productFilterResult);
                         $('.product-listing-result').html(TemptProductFilterResult(data));
                         checkForShoutout();
-
                     },
-                    beforePageOnClick: function () {
+                    beforePageOnClick: function beforePageOnClick() {
                         scrollTop_one();
                     },
-                    beforeNextOnClick: function () {
-                        scrollTop_one();
-                    },
-                    beforePageOnClick: function () {
+                    beforeNextOnClick: function beforeNextOnClick() {
                         scrollTop_one();
                     }
-                });
+                }, 'beforePageOnClick', function beforePageOnClick() {
+                    scrollTop_one();
+                }));
             }
+
 
             function checkForShoutout() {
                 if (shoutout == true) {
@@ -2732,9 +2754,9 @@ $(window).on('load', function () {
 
 
             function multiFilter(array, filters) {
-                const filterKeys = Object.keys(filters);
+                var filterKeys = Object.keys(filters);
                 // filters all elements passing the criteria
-                return array.filter((item) => {
+                return array.filter(function (item) {
                     // dynamically validate all filter criteria
                     return filterKeys.every(function (key) {
                         if (Array.isArray(item[key]) && item[key].length > 0) {
@@ -2782,27 +2804,40 @@ $(window).on('load', function () {
                 });
             }
 
+            function _defineProperty(obj, key, value) {
+                if (key in obj) {
+                    Object.defineProperty(obj, key, {
+                        value: value,
+                        enumerable: true,
+                        configurable: true,
+                        writable: true
+                    });
+                } else {
+                    obj[key] = value;
+                }
+                return obj;
+            }
+
             function paginationResult(dataForPagination) {
-                $('#pagination-container').pagination({
+                $('#pagination-container').pagination(_defineProperty({
                     dataSource: dataForPagination,
                     pageSize: 9,
-                    callback: function (data, pagination) {
+                    callback: function callback(data, pagination) {
                         var resultFilterHtml = $("#result").html();
                         var temptResultFilterHtml = Handlebars.compile(resultFilterHtml);
                         $('.results-gallery').html(temptResultFilterHtml(data));
                         // console.log('p-', pagination)
                         //console.log('d-', data)
                     },
-                    beforePageOnClick: function () {
+                    beforePageOnClick: function beforePageOnClick() {
                         scrollTop_one();
                     },
-                    beforeNextOnClick: function () {
-                        scrollTop_one();
-                    },
-                    beforePageOnClick: function () {
+                    beforeNextOnClick: function beforeNextOnClick() {
                         scrollTop_one();
                     }
-                });
+                }, 'beforePageOnClick', function beforePageOnClick() {
+                    scrollTop_one();
+                }));
             }
 
             function scrollTop_one(target) {
@@ -2839,7 +2874,7 @@ $(window).on('load', function () {
     });
 
 })();
-  
+
 
 // ----------------------------------------------------------------------
 // Component:  Global Landing 
@@ -2862,7 +2897,7 @@ $(window).on('load', function () {
 
                             $.ajax({
                                 url: "/etc/designs/usgb_v3/clientlib/uiux-all-js/js/json/global-landing-my.json",
-                                data: "countrycode="+countryCode+"&country="+countryName+"",
+                                data: "countrycode=" + countryCode + "&country=" + countryName + "",
                                 type: "GET",
                                 cache: false,
                                 success: function (response) {
@@ -2905,9 +2940,9 @@ $(window).on('load', function () {
     $(document).ready(function () {
 
         function caseStudiesPlaceholder() {
-        
+
             var desktopPlaceholder = $(".desktop-sidebar-placeholder").html();
-            
+
             console.log(desktopPlaceholder)
             $(".mobile-sidebar-placeholder").append(desktopPlaceholder);
 
