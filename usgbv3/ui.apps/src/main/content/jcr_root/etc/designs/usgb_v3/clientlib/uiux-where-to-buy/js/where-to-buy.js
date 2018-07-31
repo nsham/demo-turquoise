@@ -149,6 +149,12 @@
                 }
             });
 
+            $('#input-search-location').on('keyup', function (e) {
+                if (e.which == 13) {
+                    $('#map-search-controller .btn-search').click();
+                }
+            });
+
             $(document).on('change keyup','#filter-list-controller .checkbox, #filter-list-controller .radio', function(e){
                 e.preventDefault();
                 var dataFiltered = [];
@@ -180,6 +186,9 @@
                     case 35:
                         radius = 35000;
                 }
+
+                map.setZoom(5);
+
                 if($(this).attr('name') == "distance"){
                     if(circleOnMap.length>0){
                         circleOnMap[0].setMap(null);
@@ -203,9 +212,6 @@
                     }
                     map.setZoom(10);
                 }
-                
-                map.setZoom(5);
-                
             });
         
             $(document).on('click','.search-bar-toggle-button', function(e){
