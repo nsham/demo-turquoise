@@ -211,6 +211,7 @@ public class SSOOSSubmitOrderServlet
 //    		SENT EMAIL NOTIFICATION END
     		apiResponse.put("sendEmailStatus", emailSuccess);
         	apiResponse.put("order_id", orderinfoSuccess.getOrder_id());
+        	apiResponse.put("order_date", orderinfoSuccess.getCreated_date());
         	apiResponse.put("status", "success");
         	
     	}else{
