@@ -28,6 +28,10 @@
 
         var cartEmptyNotificationWrapper = $(".step-1-select-wrapper .cart-empty");
 
+        var orderSubmitFailModal = $("#orderSubmitFailModal");
+
+        var afterSubmitOrderSummaryData = {};
+
 
         //Check user SSO Login
         if(!$.ssoManager.isLogin){
@@ -147,7 +151,50 @@
                                 type: "POST",
                                 cache: false,
                                 success: function (response) {
+
                                     console.log(response);
+
+                                    if(response.status === "success"){
+                                        
+                                        //Hide all steps
+                                        stepWrapper.removeClass("step-active");
+                                        stepHeaderWrapper.removeClass("current-step");
+
+                                        //Show next step Shipping details
+                                        stepOrderSummaryWrapper.addClass("step-active");
+                                        stepHeaderOrderSummary.addClass("active");
+                                        stepHeaderOrderSummary.addClass("current-step");
+
+                                        //convert date string to long date
+                                        afterSubmitOrderSummaryData.orderDate = convertDateLong(response.order_date);
+
+                                        afterSubmitOrderSummaryData.orderId = response.order_id;
+                                        
+
+                                        afterSubmitOrderSummaryData.shipToInfo = {
+                                            "name": formData.shipping_detail.name,
+                                            "email": formData.shipping_detail.email,
+                                            "contactno": formData.shipping_detail.phone_no,
+                                            "address1": formData.shipping_detail.address1,
+                                            "address2": formData.shipping_detail.address2,
+                                            "postcode": formData.shipping_detail.postcode,
+                                            "city": formData.shipping_detail.city,
+                                            "state": formData.shipping_detail.state,
+                                            "country": formData.shipping_detail.country,
+                                            "remark": formData.shipping_detail.remark
+                                        };
+
+                                        console.log(afterSubmitOrderSummaryData);
+
+                                        updateViewTemplate($('#submitOrderSummaryTemplate').html(), afterSubmitOrderSummaryData, $('.ship-to-summary') );
+
+                                    } else {
+
+                                        //Sample order Form Submission failed
+                                        orderSubmitFailModal.modal('show');
+
+                                    }
+                                    
                                 },
                                 beforeSend: function () {
                                     //$('.loader').fadeIn("fast");
@@ -155,16 +202,12 @@
                                 complete: function () {
                                     //$('.loader').fadeOut("slow");
                                 }
+                            }).fail(function() {
+
+                                //Sample order Form Submission failed
+                                orderSubmitFailModal.modal('show');
+
                             });
-
-                            //Hide all steps
-                            stepWrapper.removeClass("step-active");
-                            stepHeaderWrapper.removeClass("current-step");
-
-                            //Show next step Shipping details
-                             stepOrderSummaryWrapper.addClass("step-active");
-                            stepHeaderOrderSummary.addClass("active");
-                            stepHeaderOrderSummary.addClass("current-step");
                             
                         }
 
@@ -179,22 +222,29 @@
         getAllSampleOrdersData(sampleOrderList).done(function(results) {
             console.log(results);
 
+            afterSubmitOrderSummaryData.ordersList = results;
             updateViewTemplate($('#sampleOrderTemplate').html(), results, $('.sample-orders-container') );
 
             var sampleQuantityCtrlSub = $(".sample-quantity .quantity-ctrl.dec-quantity");
             var sampleQuantityCtrlAdd = $(".sample-quantity .quantity-ctrl.inc-quantity");
             var sampleRemoveBtn = $(".sample-remove .remove-selected-sample");
 
-            //Add or subtract Sample quantity
+            //Subtract Sample quantity
             sampleQuantityCtrlSub.on("click", function(event){
 
                 event.preventDefault();
                 var quantityObject = $(this).next();
                 var quantityObjectValue = parseInt(quantityObject.val());
+                var productUrl = $(this).parent().parent().data("producturl");
 
                 if(quantityObjectValue > 1){
 
-                    addSubtractSampleOrder(-1, $(this).parent().parent().data("producturl"), "sampleOrdersList");
+                    if(addSubtractSampleOrder(-1, productUrl, "sampleOrdersList")){
+                        var orderIndex = afterSubmitOrderSummaryData.ordersList.findIndex(i => i.productUrl == productUrl);
+                        if( orderIndex > -1){
+                            afterSubmitOrderSummaryData.ordersList[orderIndex].quantity = parseInt(afterSubmitOrderSummaryData.ordersList[orderIndex].quantity) - 1;
+                        }
+                    }
 
                     quantityObjectValue = quantityObjectValue-1;
                     quantityObject.val(quantityObjectValue);
@@ -202,14 +252,23 @@
 
             });
 
-            //Add or subtract Sample quantity
+            //Add Sample quantity
             sampleQuantityCtrlAdd.on("click", function(event){
 
                 event.preventDefault();
                 var quantityObject = $(this).prev();
                 var quantityObjectValue = parseInt(quantityObject.val());
+                var productUrl = $(this).parent().parent().data("producturl");
 
-                addSubtractSampleOrder(1, $(this).parent().parent().data("producturl"), "sampleOrdersList");
+                if(addSubtractSampleOrder(1, productUrl, "sampleOrdersList")){
+
+                    var orderIndex = afterSubmitOrderSummaryData.ordersList.findIndex(i => i.productUrl == productUrl);
+                    if( orderIndex > -1){
+                        afterSubmitOrderSummaryData.ordersList[orderIndex].quantity = parseInt(afterSubmitOrderSummaryData.ordersList[orderIndex].quantity) + 1;
+                    }
+
+                }
+                
 
                 quantityObjectValue = quantityObjectValue+1;
                 quantityObject.val(quantityObjectValue);
@@ -236,6 +295,11 @@
 
                 removeSampleOrder(orderToRemoveObject.productUrlRemove, "sampleOrdersList", function(sampleOrderArrayLength){
                     
+                    var orderIndex = afterSubmitOrderSummaryData.ordersList.findIndex(i => i.productUrl == orderToRemoveObject.productUrlRemove);
+                    if( orderIndex > -1){
+                        afterSubmitOrderSummaryData.ordersList.splice(orderIndex, 1);
+                    }
+
                     orderToRemoveObject.itemRowObject.remove();
                     orderToRemoveObject = {};
 
@@ -314,6 +378,10 @@
 
             localStorage.setItem(sampleOrderLocalStorageName, JSON.stringify(sampleOrderLocalStorageJson));
 
+            return true;
+
+        } else {
+            return false;
         }
 
     }
@@ -352,7 +420,7 @@
     //Function to setup the sample ordes form array objects
     function setFormDataOrderObject(sampleOrderLocalStorageName){
 
-        var sampleOrderLocalStorage = localStorage.getItem(sampleOrderLocalStorageName) 
+        var sampleOrderLocalStorage = localStorage.getItem(sampleOrderLocalStorageName);
         var sampleOrderLocalStorageJson = JSON.parse(sampleOrderLocalStorage) || [];
 
         var formDataOrderArrayObject = [];
@@ -372,6 +440,17 @@
 
 
         return formDataOrderArrayObject;
+
+    }
+
+
+    //Function to convert to Long date format
+    function convertDateLong(dateString){
+
+        var orderDate = new Date(dateString);
+        var options = { year: 'numeric', month: 'short', day: 'numeric' };
+
+        return orderDate.toLocaleDateString("en-GB", options);
 
     }
 
