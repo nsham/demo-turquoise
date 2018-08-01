@@ -13,7 +13,6 @@ public class SSOComponent extends WCMUsePojo {
 
     private static final Logger LOG = LoggerFactory.getLogger(SSOComponent.class);
     
-    @Reference
 	private SSOConfigurationService ssoConfig;
     
     private String clientId;
@@ -37,8 +36,12 @@ public class SSOComponent extends WCMUsePojo {
 
 	@Override
     public void activate() throws Exception {
-    	Map<String, String> config = ssoConfig.getConfig(getRequest().getServerName());
-    	LOG.debug("SSOComponent :: get sso configuration");
+		
+		ssoConfig = ((SSOConfigurationService) getSlingScriptHelper().getService(SSOConfigurationService.class));
+		Map<String, String> config = ssoConfig.getConfig(getRequest().getServerName());
+    	
+		LOG.info("SSOComponent :: get sso configuration");
+		
 		clientId = ""; clientDomain = "";
     	if(config != null) {
     		clientId = config.get("clientId");
