@@ -1659,10 +1659,23 @@ $(window).on('load', function () {
 
         function productCompare() {
 
+            //test insert param
+            var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?category=finishes&countrycode=en_au';
+            window.history.pushState({
+                path: newurl
+            }, '', newurl);
+
+
+            var url_string = window.location.href;
+            var url = new URL(url_string);
+            var c = url.searchParams.get("category");
+            var cc = url.searchParams.get("countrycode");
+            
             var data;
             var getJSONarr = [];
             var currOnStageMainResultData = [];
-            var currCategoryKey = "finishes";
+            var currCategoryKey = c+"_"+cc ;
+           
 
             $(".default-col").hide();
 
@@ -1846,7 +1859,8 @@ $(window).on('load', function () {
             var getCard;
             var inputVal;
             var numberOfChecked;
-            var categoryName;
+            var categoryName; //key name in localStorage
+            var countryCode;
             var storeData = [];
             var getIMG;
             var getTitle;
@@ -1874,7 +1888,8 @@ $(window).on('load', function () {
                     "url": getLink,
                     "img": getIMG,
                     "title": getTitle,
-                    "checked": checkStatus
+                    "checked": checkStatus,
+                    "countryCode": countryCode
                 }
                 //.listing-search-content .container-checkbox input[data-input-value='+inputVal+']
 
@@ -1948,6 +1963,7 @@ $(window).on('load', function () {
                     $(".popup-content").hide();
                     $(".compare-popup .btn-menu-down").hide();
                     $(".compare-popup .btn-compare").hide();
+                    localStorage.removeItem(categoryName);
                 }
             }
 
@@ -1983,7 +1999,7 @@ $(window).on('load', function () {
                         return true;
                     }
                 });
-                
+
                 //console.log("in1", getIndex1)
                 storeData.splice(getIndex1, 1);
 
@@ -2052,7 +2068,7 @@ $(window).on('load', function () {
             function productListingResult() {
 
                 $.ajax({
-                    //url: "/etc/designs/usgb_v3/clientlib/uiux-all-js/js/json/gallery-filter.json",
+                    //url: "/etc/designs/usgb_v3/clientlib/uiux-all-js/js/json/gallery-filter-one.json",
                     url: "/etc/designs/usgb_v3/clientlib/uiux-all-js/js/json/product-listing-filter-one.json",
                     type: "GET",
                     cache: false,
@@ -2093,7 +2109,8 @@ $(window).on('load', function () {
                         //console.log(shoutout)
 
                         //getCategoryName - to store array
-                        categoryName = productData.category_key;
+                        categoryName = productData.category_key +"_"+productData.country_key;
+                        countryCode = productData.country_key;
 
 
                         hideAllWrappers();
