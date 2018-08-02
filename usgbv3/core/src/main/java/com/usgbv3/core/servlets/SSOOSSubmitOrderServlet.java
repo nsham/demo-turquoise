@@ -36,7 +36,7 @@ import com.usgbv3.core.services.EmailService;
 property={
         Constants.SERVICE_DESCRIPTION + "=SSO Order Sample - Submit Order" ,
         "sling.servlet.methods=" + HttpConstants.METHOD_POST,
-        "sling.servlet.paths="+ "/bin/sso/osSubmitOrder"
+        "sling.servlet.paths="+ "/bin/sso/orderSample/submit"
 })
 public class SSOOSSubmitOrderServlet
   extends BaseAllMethodsServlet

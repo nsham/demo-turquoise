@@ -34,7 +34,7 @@ import com.usgbv3.core.services.SSOConfigurationService;
 property={
         Constants.SERVICE_DESCRIPTION + "=SSO User Info",
         "sling.servlet.methods=" + HttpConstants.METHOD_POST,
-        "sling.servlet.paths="+ "/bin/sso/userInfo"
+        "sling.servlet.paths="+ "/bin/sso/info/user"
 })
 public class SSOUserInfoServlet extends BaseAllMethodsServlet {
 	private static final long serialVersionUID = 1452364151988577055L; 

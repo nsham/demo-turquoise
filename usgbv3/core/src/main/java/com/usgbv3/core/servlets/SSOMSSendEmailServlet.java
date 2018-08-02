@@ -31,7 +31,7 @@ import com.usgbv3.core.services.EmailService;
 property={
         Constants.SERVICE_DESCRIPTION + "=SSO My Submittal - Send Email" ,
         "sling.servlet.methods=" + HttpConstants.METHOD_POST,
-        "sling.servlet.paths="+ "/bin/sso/msSendEmail"
+        "sling.servlet.paths="+ "/bin/sso/mySubmittal/email"
 })
 public class SSOMSSendEmailServlet extends BaseAllMethodsServlet {
 	private static final long serialVersionUID = 1452364151988577055L;
