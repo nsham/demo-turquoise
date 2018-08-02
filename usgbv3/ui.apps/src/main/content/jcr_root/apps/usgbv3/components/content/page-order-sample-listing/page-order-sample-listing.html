@@ -117,6 +117,14 @@ localStorage.setItem('sampleOrdersList', JSON.stringify(sampleOrdersJson));
                             
                        </tbody>
                     </table>
+
+                    <div class="row">
+                        <div class="col">
+                            <div class="cart-empty text-center m-top-l">
+                                <h4 class="color-grey">No product added.</h4>
+                            </div>
+                        </div>
+                    </div>
                     
                     <div class="step-ctrls m-l">
                         <a href="#" class="btn btn-brand-default button-grey m-s">View my order history</a>
@@ -175,16 +183,16 @@ localStorage.setItem('sampleOrdersList', JSON.stringify(sampleOrdersJson));
                                     <span class="dropdown-arrow color-primary-green glyphicon glyphicon-menu-down fs-1"></span>
                                     <select name="countrySelect" for="countrySelect" class="drop-down-select form-control country" type="select" required>
                                         <option></option>
-                                        <option value="1" selected>Malaysia</option>
-                                        <option value="2">Australia</option>
-                                        <option value="3">China</option>
-                                        <option value="4">Korea</option>
-                                        <option value="5">Vietnam</option>
-                                        <option value="6">Philippines</option>
-                                        <option value="7">Indonesia</option>
-                                        <option value="8">Thailand</option>
-                                        <option value="9">Singapore</option>
-                                        <option value="10">New Zealand</option>
+                                        <option value="Malaysia" selected>Malaysia</option>
+                                        <option value="Australia">Australia</option>
+                                        <option value="China">China</option>
+                                        <option value="Korea">Korea</option>
+                                        <option value="Vietnam">Vietnam</option>
+                                        <option value="Philippines">Philippines</option>
+                                        <option value="Indonesia">Indonesia</option>
+                                        <option value="Thailand">Thailand</option>
+                                        <option value="Singapore">Singapore</option>
+                                        <option value="New Zealand">New Zealand</option>
                                     </select>
                             </div>
 
@@ -193,8 +201,7 @@ localStorage.setItem('sampleOrdersList', JSON.stringify(sampleOrdersJson));
                         <div class="col-sm-offset-1 col-xs-offset-0 col-sm-8 col-xs-12">
 
                             <div class="float-label respond-msg">
-                                <textarea type="text" name="remarks" class="form-control h150 remark">
-                                </textarea>
+                                <textarea type="text" name="remarks" class="form-control h150 remark"></textarea>
                                 <label for="remarks" class="uppercase ">Additional Remark</label>
                             </div>
                 
@@ -229,101 +236,6 @@ localStorage.setItem('sampleOrdersList', JSON.stringify(sampleOrdersJson));
                 <div class="step-3-order-summary-wrapper steps-inner-wrapper m-s">
 
                     <div class="ship-to-summary container">
-                        
-                        <div class="row">
-                            <div class="col-xs-12 col-sm-4 col-md-push-8 order-date-no">
-                                
-                                <div class="order-details m-top-m m-sm-bottom-4xl">
-                                    <b>DATE:</b> <span class="recipient-order-date-output">23 Feb 2018</span>
-                                    <br>
-                                    <b>ORDER NO:</b> <span class="recipient-order-no-output">USG01234</span>
-                                </div>
-
-                            </div>
-                            <div class="col-xs-12 col-sm-8 col-md-pull-4">
-
-                                <h4 class="ht4 uppercase color-darker-grey">Ship To:</h4>
-
-                                <p class="m-top-s">
-                                    <span class="recipient-name-output">James Loh</span>
-                                </p>
-
-                                <p class="m-top-s">
-                                    <span class="recipient-address-one-output">SD Construction & Engineering Sdn Bhd 10</span>,
-                                    <br>
-                                    <span class="recipient-address-two-output">Jalan USJ 1/10, Taipan UEP</span>.
-                                    <br>
-                                    <span class="recipient-postal-code-output">533000</span> <span class="recipient-city-output">Subang</span>,
-                                    <br>
-                                    <span class="recipient-state-output">Selangor</span>, <span class="recipient-country-output">Malaysia</span>
-                                </p>
-
-                                <p class="m-top-m">
-                                    <span class="recipient-contact-no-output">+606 345 7821</span>
-                                    <br> 
-                                    <span class="recipient-email-output">james.loh@sdcontructions.com</span>
-                                </p>
-
-                            </div>
-                        </div>
-
-                        <div class="row">
-
-                            <div class="col">
-
-                                    <table class="m-top-m">
-                                            <thead>
-                                                <tr class="p-s">
-                                                    <th class="p-s">ITEMS</th>
-                                                    <th></th>
-                                                    <th class="p-s text-center">QUANTITY</th>
-                                                </tr>
-                                            </thead>
-                                           <tbody>
-                                                <tr>
-                                                    <td class="sample-img">
-                                                        <img src="http://usgbuataut.cloudapp.net:4504/content/dam/USGBoral/Global/Website/Images/component/allsample/shaft-img.png" alt="">
-                                                    </td>
-                                                    <td class="sample-desc">
-                                                        <h6 class="title m-s m-left-no">Lorem ipsum dolor sit amet, consectetuer</h6>
-                                                        <span>
-                                                            Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. 
-                                                        </span>
-                                                    </td>
-                                                    <td class="sample-quantity">
-                                                        4
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                        <td class="sample-img">
-                                                            <img src="http://usgbuataut.cloudapp.net:4504/content/dam/USGBoral/Global/Website/Images/component/allsample/shaft-img.png" alt="">
-                                                        </td>
-                                                        <td class="sample-desc">
-                                                            <h6 class="title m-s m-left-no">Lorem ipsum dolor sit amet, consectetuer</h6>
-                                                            <span>
-                                                                Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. 
-                                                            </span>
-                                                        </td>
-                                                        <td class="sample-quantity">
-                                                            2
-                                                        </td>
-                                                </tr>
-                                           </tbody>
-                                        </table>
-
-                            </div>
-
-                        </div>
-
-                        <div class="row">
-                            <div class="col">
-                                <p class="m-top-m">
-                                    <b>REMARKS</b> 
-                                    <br>
-                                    <span class="recipient-remarks-output">N/A</span> 
-                                </p>
-                            </div>
-                        </div>
 
                     </div>
 
@@ -339,6 +251,7 @@ localStorage.setItem('sampleOrdersList', JSON.stringify(sampleOrdersJson));
 <!-- END of PAGE CONTENT -->
 
 
+<!-- Sample orders listing Template -->
 <script id="sampleOrderTemplate" type="text/x-handlebars-template">
 
     {{#each this}}
@@ -364,6 +277,174 @@ localStorage.setItem('sampleOrdersList', JSON.stringify(sampleOrdersJson));
     {{/each}}
 
 </script>
+<!-- /End Sample orders listing Template -->
+
+
+<!-- After Submit orders summary Listing Template -->
+<script id="submitOrderSummaryTemplate" type="text/x-handlebars-template">
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-4 col-md-push-8 order-date-no">
+            
+            <div class="order-details m-top-m m-sm-bottom-4xl">
+                <b>DATE:</b> <span class="recipient-order-date-output">{{orderDate}}</span>
+                <br>
+                <b>ORDER NO:</b> <span class="recipient-order-no-output">{{orderId}}</span>
+            </div>
+
+        </div>
+        <div class="col-xs-12 col-sm-8 col-md-pull-4">
+
+            <h4 class="ht4 uppercase color-darker-grey">Ship To:</h4>
+
+            <p class="m-top-s">
+                <span class="recipient-name-output">{{shipToInfo.name}}</span>
+            </p>
+
+            <p class="m-top-s">
+                <span class="recipient-address-one-output">{{shipToInfo.address1}}</span>,
+                <br>
+                <span class="recipient-address-two-output">{{shipToInfo.address2}}</span>.
+                <br>
+                <span class="recipient-postal-code-output">{{shipToInfo.postcode}}</span> <span class="recipient-city-output">{{shipToInfo.city}}</span>,
+                <br>
+                <span class="recipient-state-output">{{shipToInfo.state}}</span>, <span class="recipient-country-output">{{shipToInfo.country}}</span>
+            </p>
+
+            <p class="m-top-m">
+                <span class="recipient-contact-no-output">{{shipToInfo.contactno}}</span>
+                <br> 
+                <span class="recipient-email-output">{{shipToInfo.email}}</span>
+            </p>
+
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col">
+
+                <table class="m-top-m">
+                        <thead>
+                            <tr class="p-s">
+                                <th class="p-s">ITEMS</th>
+                                <th></th>
+                                <th class="p-s text-center">QUANTITY</th>
+                            </tr>
+                        </thead>
+                       <tbody>
+                           {{#each ordersList}}
+                            <tr>
+                                    <td class="sample-img">
+                                        <img src="http://usgbuataut.cloudapp.net:4504/content/dam/USGBoral/Global/Website/Images/component/allsample/shaft-img.png" alt="">
+                                    </td>
+                                    <td class="sample-desc">
+                                        <h6 class="title m-s m-left-no">{{pagePropertiesList.0.pageTitle}}</h6>
+                                        <span>{{pagePropertiesList.0.seoDescription}}</span>
+                                    </td>
+                                    <td class="sample-quantity">
+                                        {{quantity}}
+                                    </td>
+                                </tr>
+                           {{/each}}
+                       </tbody>
+                    </table>
+
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <p class="m-top-m">
+                <b>REMARKS</b> 
+                <br>
+                <span class="recipient-remarks-output">{{shipToInfo.remark}}</span> 
+            </p>
+        </div>
+    </div>
+
+</script>
+<!-- /End After Submit order summary Template -->
+
+
+<!-- Remove Sample product Modal -->
+<div id="removeSampleOrderModal" class="modal fade sample-orders-modal" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="removeSampleOrderModalLabel">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center" role="document" width="750px">
+            <div class="modal-content">
+                <div class="modal-body m-vertical-s">
+                    <div class="row">
+                        <div class="col-md-12" align="center">
+                            <div class="svg-box">
+                                <svg class="circular yellow-stroke">
+                                    <circle class="path" cx="75" cy="75" r="50" fill="none" stroke-width="5" stroke-miterlimit="10" />
+                                </svg>
+                                <svg class="alert-sign yellow-stroke">
+                                    <g transform="matrix(1,0,0,1,-615.516,-257.346)">
+                                        <g transform="matrix(0.56541,-0.56541,0.56541,0.56541,93.7153,495.69)">
+                                            <path class="line" d="M634.087,300.805L673.361,261.53" fill="none" />
+                                        </g>
+                                        <g transform="matrix(2.27612,-2.46519e-32,0,2.27612,-792.339,-404.147)">
+                                            <circle class="dot" cx="621.52" cy="316.126" r="1.318" />
+                                        </g>
+                                    </g>
+                                </svg>
+                            </div>
+                            <h4 class="ht4 uppercase color-primary-green">Are you sure?</h4>
+                            <p class="color-dark-grey">You will not be able to recover this product</p>
+                            <br>
+                            <p class="text-center m-bottom-l">
+                                <button data-dismiss="modal" class="btn btn-brand-default m-right-l">Cancel</button>
+                                <button class="btn btn-brand-default button-red cta-confirm-remove-order">Yes, Delete it!</button>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /END Remove Sample product Modal -->
+
+
+<!-- Order Submit Fail Modal -->
+<div id="orderSubmitFailModal" class="modal fade sample-orders-modal" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="orderSubmitFailModalLabel">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center" role="document" width="750px">
+            <div class="modal-content">
+                <div class="modal-body m-vertical-s">
+                    <div class="row">
+                        <div class="col-md-12" align="center">
+                            <div class="svg-box">
+                                <svg class="circular yellow-stroke">
+                                    <circle class="path" cx="75" cy="75" r="50" fill="none" stroke-width="5" stroke-miterlimit="10" />
+                                </svg>
+                                <svg class="alert-sign yellow-stroke">
+                                    <g transform="matrix(1,0,0,1,-615.516,-257.346)">
+                                        <g transform="matrix(0.56541,-0.56541,0.56541,0.56541,93.7153,495.69)">
+                                            <path class="line" d="M634.087,300.805L673.361,261.53" fill="none" />
+                                        </g>
+                                        <g transform="matrix(2.27612,-2.46519e-32,0,2.27612,-792.339,-404.147)">
+                                            <circle class="dot" cx="621.52" cy="316.126" r="1.318" />
+                                        </g>
+                                    </g>
+                                </svg>
+                            </div>
+                            <h4 class="ht4 uppercase color-primary-red">order failed!</h4>
+                            <p class="color-dark-grey">Something went wrong with your sample order submission.</p>
+                            <br>
+                            <p class="text-center m-bottom-l">
+                                <button data-dismiss="modal" class="btn btn-brand-default m-right-l">ok</button>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /END  Order Submit Fail Modal -->
 
 
 <script src="/etc/designs/usgb_v3/clientlib/uiux-less-ct/js/vendors/jquery.validate.min.js"></script>

@@ -5,10 +5,17 @@
         background:@color-light-grey;
       }
     >.each {
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
-        flex-wrap: nowrap;
-        justify-content: space-between;
-        align-items: center;
+        -ms-flex-wrap: nowrap;
+            flex-wrap: nowrap;
+        -webkit-box-pack: justify;
+            -ms-flex-pack: justify;
+                justify-content: space-between;
+        -webkit-box-align: center;
+            -ms-flex-align: center;
+                align-items: center;
         margin: 0;
         width: 100%;
         img {
@@ -42,17 +49,7 @@
                 @media only screen and (min-width:370px) {
                      width: auto;
                 }
-                // @media only screen and (min-width:480px) {
-                //     width: 65%;
-                // }
-                // @media only screen and (min-width:768px) {
-                //     display: inline-block;
-                //     margin-top: 5px;
-                //     margin-left: 5px;
-                //     margin-bottom: 5px;
-                //     text-align: left;
-                //     width: 71%;
-                // }
+
                 p{
                     margin:0;
                 }
@@ -66,7 +63,8 @@
             cursor: pointer;
             @media only screen and (min-width:768px) {
                 display: -moz-inline-flex;
-                display: -webkit-inline-flex;
+                display: -webkit-inline-box;
+                display: -ms-inline-flexbox;
                 display: inline-flex;
                 width: 100%;
             }
@@ -83,31 +81,27 @@
                 }
             }
             .btn-one{
-                flex-basis: 40%;
+                -ms-flex-preferred-size: 40%;
+                    flex-basis: 40%;
                 -webkit-flex-basis: 40%; 
                 border-radius: 0 0 0px 10px;
                 border-right:1px solid @color-white; 
-
-
             }
             .btn-two{
-                flex-basis:60%;
+                -ms-flex-preferred-size:60%;
+                    flex-basis:60%;
                 -webkit-flex-basis: 60%;
                 border-radius: 0 0 10px 0px; 
                 .glyphicon{
                     left:-6px;
                 }
             }
-            
         }
         .two-btn-m{              
             display: inline-block;
             position: relative;
             float: right;
             margin-top: -6px;
-        }  
-
-
-        
+        }   
     }
 }

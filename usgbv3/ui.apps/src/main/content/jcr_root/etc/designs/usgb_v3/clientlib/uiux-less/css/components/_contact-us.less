@@ -59,10 +59,21 @@
         margin-bottom: 10px;
     }
     .float-label input:valid,
+    .float-label input:-moz-read-only,
+    .float-label input:focus {
+        padding: 20px 8px 5px 8px;
+        width: 100%;
+    }
+    .float-label input:valid,
     .float-label input:read-only,
     .float-label input:focus {
         padding: 20px 8px 5px 8px;
         width: 100%;
+    }
+    .float-label textarea:valid,
+    .float-label textarea:-moz-read-only,
+    .float-label textarea:focus {
+        padding: 20px 8px 5px 8px;
     }
     .float-label textarea:valid,
     .float-label textarea:read-only,
@@ -74,8 +85,24 @@
         background: transparent;
     }
     .float-label input:valid+label,
+    .float-label input:-moz-read-only+label,
+    .float-label input:focus+label {
+        color: #01963a;
+        font-size: 12px;
+        -webkit-transform: translate3d(0, -10px, 0);
+        transform: translate3d(0, -10px, 0);
+    }
+    .float-label input:valid+label,
     .float-label input:read-only+label,
     .float-label input:focus+label {
+        color: #01963a;
+        font-size: 12px;
+        -webkit-transform: translate3d(0, -10px, 0);
+        transform: translate3d(0, -10px, 0);
+    }
+    .float-label textarea:valid+label,
+    .float-label textarea:-moz-read-only+label,
+    .float-label textarea:focus+label {
         color: #01963a;
         font-size: 12px;
         -webkit-transform: translate3d(0, -10px, 0);

@@ -3,8 +3,10 @@
 }
 
 .make-sticky_inner{
-    transform: translate(0, 0);
-    transform: translate3d(0, 0, 0);
+    -webkit-transform: translate(0, 0);
+        -ms-transform: translate(0, 0);
+            transform: translate(0, 0);
+    -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
     will-change: position, transform;
 }
-

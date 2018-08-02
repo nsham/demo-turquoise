@@ -10,6 +10,7 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,11 +21,15 @@ import com.usgbv3.core.entity.ProductInfo;
 import com.usgbv3.core.entity.ShippingDetail;
 import com.usgbv3.core.entity.UserInfo;
 import com.usgbv3.core.models.OrderSampleForm;
+import com.usgbv3.core.daos.BaseDao;
 import com.usgbv3.core.daos.DocumentCollatorDao;
 
 @Component(immediate = true, service = OrderSampleDao.class
 , configurationPid = "com.usgbv3.core.daos.impl.OrderSampleDaoImpl")
-public class OrderSampleDaoImpl extends BaseDaoImpl implements OrderSampleDao {
+public class OrderSampleDaoImpl implements OrderSampleDao {
+	
+	@Reference
+	BaseDao baseDao;
 	
 	protected final Logger log = LoggerFactory.getLogger(this.getClass());
 	private SimpleDateFormat submitTime=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -53,14 +58,15 @@ public class OrderSampleDaoImpl extends BaseDaoImpl implements OrderSampleDao {
 			"sd.ship_postcode AS 'sd.ship_postcode', " +
 			"sd.ship_city AS 'sd.ship_city', " +
 			"sd.ship_country AS 'sd.ship_country', " +
-			"sd.created_date AS 'sd.created_date' " +
+			"sd.created_date AS 'sd.created_date', " +
+			"sd.remark AS 'sd.remark' " +
 		"FROM os_orderinfo oi, SSO_User sso, OS_ShippingDetail sd " +
 		"WHERE oi.user_id = sso.user_id " +
 		"AND oi.ship_id = sd.ship_id ";
 	@Override
 	public boolean insertData(OrderSampleForm data) {
 		String query = "INSERT INTO OrderSamplesForm (name,email,address,suburb,state,postcode,phone,segment,product,comments,informNews,timeAdded) VALUES (?,?,?,?,?,?,?,?,?,?,?,?);";
-		boolean success = insertData(query,
+		boolean success = baseDao.insertData(query,
 				data.getName(),
 				data.getEmail(),
 				data.getAddress(),
@@ -80,9 +86,9 @@ public class OrderSampleDaoImpl extends BaseDaoImpl implements OrderSampleDao {
 	@Override
 	public String insertDataSD(ShippingDetail data) {
 		String shippingId = "";
-		String query = "INSERT INTO OS_ShippingDetail (ship_name, ship_phone_no, ship_email, ship_address1, ship_address2, ship_address3, ship_postcode, ship_city, ship_country, created_date) "
-				+ "VALUES (?,?,?,?,?,?,?,?,?,?)";
-		int insertId = insertDataReturnId(query,
+		String query = "INSERT INTO OS_ShippingDetail (ship_name, ship_phone_no, ship_email, ship_address1, ship_address2, ship_address3, ship_postcode, ship_city, ship_country, created_date, remark) "
+				+ "VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+		int insertId = baseDao.insertDataReturnId(query,
 				data.getShip_name(),
 				data.getShip_phone_no(),
 				data.getShip_email(),
@@ -92,7 +98,8 @@ public class OrderSampleDaoImpl extends BaseDaoImpl implements OrderSampleDao {
 				data.getShip_postcode(),
 				data.getShip_city(),
 				data.getShip_country(),
-				submitTime.format(new Date()));
+				submitTime.format(new Date()),
+				data.getRemark());
 		
 		shippingId = "OSSD" + String.format("%08d", insertId);
 		
@@ -108,7 +115,7 @@ public class OrderSampleDaoImpl extends BaseDaoImpl implements OrderSampleDao {
 		
 		for(ProductInfo product : data){
 			
-			int insertId = insertDataReturnId(query,
+			int insertId = baseDao.insertDataReturnId(query,
 					product.getProduct_name(),
 					product.getProduct_path(),
 					product.getProduct_url(),
@@ -140,7 +147,7 @@ public class OrderSampleDaoImpl extends BaseDaoImpl implements OrderSampleDao {
 		String orderRelationQuery = "INSERT INTO OS_OrderProductMapping (order_id, product_id) VALUES (?,?) ";
 		
 		log.info("START insertDataOrder ");
-		int insertId = insertDataReturnId(orderQuery,
+		int insertId = baseDao.insertDataReturnId(orderQuery,
 				orderInfo.getUser_id(),
 				orderInfo.getOrder_country(),
 				orderInfo.getStatus(),
@@ -152,7 +159,7 @@ public class OrderSampleDaoImpl extends BaseDaoImpl implements OrderSampleDao {
 
 		log.info("insertDataOrder insertId : " + insertId);
 		if(insertId > 0){
-			List<Map<String, Object>> retrieveOrder = retrieveData(orderRetrieveQuery, insertId);
+			List<Map<String, Object>> retrieveOrder = baseDao.retrieveData(orderRetrieveQuery, insertId);
 			
 			for(Map<String, Object> queryMap : retrieveOrder){
 				submittedOrder.setOrder_id((String) queryMap.get("order_id"));
@@ -166,7 +173,7 @@ public class OrderSampleDaoImpl extends BaseDaoImpl implements OrderSampleDao {
 			}
 			
 			for(String product : productIdList){
-				insertData(orderRelationQuery, 
+				baseDao.insertData(orderRelationQuery, 
 						submittedOrder.getOrder_id(),
 						product);
 			}
@@ -191,7 +198,7 @@ public class OrderSampleDaoImpl extends BaseDaoImpl implements OrderSampleDao {
 //		QueryDataResult queryDataResult = null;
 		
 		try{
-			List<Map<String, Object>> newQuery = retrieveData(query, sso_id);
+			List<Map<String, Object>> newQuery = baseDao.retrieveData(query, sso_id);
 			
 			for(Map<String, Object> queryMap : newQuery){
 
@@ -218,7 +225,7 @@ public class OrderSampleDaoImpl extends BaseDaoImpl implements OrderSampleDao {
 		String query = "UPDATE OS_OrderInfo SET order_status = ?, modified_date = ?, modified_by = ? WHERE order_id = ?";
 		boolean success = false;
 			
-		success = removeUpdateData(query, 
+		success = baseDao.removeUpdateData(query, 
 				status,
 				submitTime.format(new Date()),
 				userId,
@@ -239,7 +246,7 @@ public class OrderSampleDaoImpl extends BaseDaoImpl implements OrderSampleDao {
 			
 			Date startDate = (Date) inputMap.get("startDate");
 			Date endDate = (Date) inputMap.get("endDate");
-			List<Map<String, Object>> newQuery = retrieveData(query, submitTime.format(startDate), submitTime.format(endDate));
+			List<Map<String, Object>> newQuery = baseDao.retrieveData(query, submitTime.format(startDate), submitTime.format(endDate));
 			
 			for(Map<String, Object> queryMap : newQuery){
 
@@ -276,35 +283,35 @@ public class OrderSampleDaoImpl extends BaseDaoImpl implements OrderSampleDao {
 						"AND oi.order_country IN (?) " +
 						"AND (oi.created_date >= ? AND oi.created_date <= ? ) " +
 						"order by oi.created_date desc";
-				newQuery = retrieveData(query, countryList.get(0), submitTime.format(startDate), submitTime.format(endDate));
+				newQuery = baseDao.retrieveData(query, countryList.get(0), submitTime.format(startDate), submitTime.format(endDate));
 				
 			}else if(countryList.size() == 2){
 				query = baseQuery +
 						"AND oi.order_country IN (?,?) " +
 						"AND (oi.created_date >= ? AND oi.created_date <= ? ) " +
 						"order by oi.created_date desc";
-				newQuery = retrieveData(query, countryList.get(0), countryList.get(1), submitTime.format(startDate), submitTime.format(endDate));
+				newQuery = baseDao.retrieveData(query, countryList.get(0), countryList.get(1), submitTime.format(startDate), submitTime.format(endDate));
 				
 			}else if(countryList.size() == 3){
 				query = baseQuery +
 						"AND oi.order_country IN (?,?,?) " +
 						"AND (oi.created_date >= ? AND oi.created_date <= ? ) " +
 						"order by oi.created_date desc";
-				newQuery = retrieveData(query, countryList.get(0), countryList.get(1), countryList.get(2), submitTime.format(startDate), submitTime.format(endDate));
+				newQuery = baseDao.retrieveData(query, countryList.get(0), countryList.get(1), countryList.get(2), submitTime.format(startDate), submitTime.format(endDate));
 				
 			}else if(countryList.size() == 4){
 				query = baseQuery +
 						"AND oi.order_country IN (?,?,?,?) " +
 						"AND (oi.created_date >= ? AND oi.created_date <= ? ) " +
 						"order by oi.created_date desc";
-				newQuery = retrieveData(query, countryList.get(0), countryList.get(1), countryList.get(2), countryList.get(3), submitTime.format(startDate), submitTime.format(endDate));
+				newQuery = baseDao.retrieveData(query, countryList.get(0), countryList.get(1), countryList.get(2), countryList.get(3), submitTime.format(startDate), submitTime.format(endDate));
 				
 			}else if(countryList.size() == 5){
 				query = baseQuery +
 						"AND oi.order_country IN (?,?,?,?,?) " +
 						"AND (oi.created_date >= ? AND oi.created_date <= ? ) " +
 						"order by oi.created_date desc";
-				newQuery = retrieveData(query, countryList.get(0), countryList.get(1), countryList.get(2), countryList.get(3), countryList.get(4), submitTime.format(startDate), submitTime.format(endDate));
+				newQuery = baseDao.retrieveData(query, countryList.get(0), countryList.get(1), countryList.get(2), countryList.get(3), countryList.get(4), submitTime.format(startDate), submitTime.format(endDate));
 			}
 
 			log.info("baseQuery : " + baseQuery);
@@ -369,6 +376,7 @@ public class OrderSampleDaoImpl extends BaseDaoImpl implements OrderSampleDao {
 		shippingDetail.setShip_city((String) queryMap.get("sd.ship_city"));
 		shippingDetail.setShip_country((String) queryMap.get("sd.ship_country"));
 		shippingDetail.setCreated_date((Date) queryMap.get("sd.modified_date"));
+		shippingDetail.setRemark((String) queryMap.get("sd.remark"));
 		orderInfo.setShippingDetail(shippingDetail);
 		
 		UserInfo userinfo = new UserInfo();
@@ -395,7 +403,7 @@ public class OrderSampleDaoImpl extends BaseDaoImpl implements OrderSampleDao {
 				"ORDER BY pi.product_id asc";
 		
 		try{
-			List<Map<String, Object>> newQuery = retrieveData(query, orderId);
+			List<Map<String, Object>> newQuery = baseDao.retrieveData(query, orderId);
 			
 			for(Map<String, Object> queryMap : newQuery){
 

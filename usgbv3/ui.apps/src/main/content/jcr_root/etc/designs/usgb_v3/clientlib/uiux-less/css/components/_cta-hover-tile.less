@@ -69,6 +69,8 @@
         right: 0;
         z-index: 5;
         opacity: .3;
+        -webkit-transition: all ease 300ms;
+        -o-transition: all ease 300ms;
         transition: all ease 300ms;
         margin: -15px;
     }
@@ -92,7 +94,9 @@
         @media(min-width: 768px){
             position: absolute;
             top: 50%;
-            transform: translateY(-50%);
+            -webkit-transform: translateY(-50%);
+                -ms-transform: translateY(-50%);
+                    transform: translateY(-50%);
         }
     }
     .va-bottom{
@@ -117,7 +121,9 @@
     .ha-center{
         position: absolute;
         left: 50%;
-        transform: translateX(-50%);
+        -webkit-transform: translateX(-50%);
+            -ms-transform: translateX(-50%);
+                transform: translateX(-50%);
     }
 
     .ha-right{
@@ -131,7 +137,9 @@
         position: absolute;
         top: 50%;
         left: 50%;
-        transform: translate(-50%, -50%);
+        -webkit-transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+                transform: translate(-50%, -50%);
         text-align: center;
     }
     /* END of Centerise Content*/

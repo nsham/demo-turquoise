@@ -57,7 +57,7 @@
     } else if(dt.indexOf('en_ip') > 1 || dt.indexOf('en_ip.html') > 1) {
 		return 'IP';
     } else {
-        return undefined;
+        return 'AU';
     }
   }
 // get the locale code or country code from the url
@@ -139,9 +139,10 @@
     var myclientd = $('#myclientd').html();
 	var currentDomain =window.location.hostname;
 
-    var ssoDomain = "https://myaccount.usgboral.com";
+    var ssoDomain = "http://myaccount-stg.usgboral.com";
 
       if(myclientd){
+
 		ssoDomain = myclientd;
       }
 
@@ -152,7 +153,7 @@
     var logoutURL = ssoDomain +"/Logout.aspx";
     var sessionURL = ssoDomain +"/GetSessionToken.aspx";
     var manageProfileURL = ssoDomain +"/MyAccount.aspx";
-    var client_id = "Fs6tAUFc2Waj7FeO7fyrFQ";
+    var client_id = "wMFTKQEamclwZUsW8zZ2/g";
     var userSession = {};
     var userInfo = {};
     var countryCode = getCountryCode();
@@ -187,7 +188,7 @@
         Cookies.set(USGB_AT, getQueryParam().access_token, {path: '/'});
         Cookies.set(USGB_ST, getQueryParam().session_token, {path: '/'});
         Cookies.set(USGB_SA, getQueryParam().state, {path: '/'});
-        window.close();
+        //window.close();
       } else if (getQueryParam().session_token && getQueryParam().state && !getQueryParam().access_token) {
           if(getQueryParam().error &&  getQueryParam().error == 'not_logged_in') {
 			location.href=getReturnURI();
@@ -225,8 +226,8 @@ console.log(goto);
     };
 
     var sessionRedirect = function() {
-      var goto = sessionURL;
-      goto += '?' + "client_id=" + client_id;
+      var goto = sessionURL + '?';
+      goto += "client_id=" + client_id;
       goto += '&state='+getState();
       goto += '&redirect_uri=' + getReturnURI();
         console.log(goto);
@@ -317,7 +318,7 @@ console.log(goto);
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
         async: false
-      }).success().responseJSON;
+      }).done().responseJSON;
     };
 
   var manageProfile = function() {

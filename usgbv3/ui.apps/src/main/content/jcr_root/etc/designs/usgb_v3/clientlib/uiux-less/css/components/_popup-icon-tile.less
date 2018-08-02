@@ -4,7 +4,7 @@
 		width: 200px;
 		height: 200px;
 		margin: 0 auto;
-
+		-o-transition: all 0.4s;
 		transition: all 0.4s;
 		-moz-transition: all 0.4s;
 		-webkit-transition: all 0.4s;
@@ -33,6 +33,7 @@
 			}
 			.fa-arrow-right{
 				color:#009b3a;
+				-o-transition: all 0.4s;
 				transition: all 0.4s;
 				-moz-transition: all 0.4s;
 				-webkit-transition: all 0.4s;
@@ -67,9 +68,11 @@
 
 		max-width: 300px;
 		margin: 0 auto;
-		justify-content: flex-start;
-
-		box-sizing: content-box;
+		-webkit-box-pack: start;
+		    -ms-flex-pack: start;
+		        justify-content: flex-start;
+		-webkit-box-sizing: content-box;
+		        box-sizing: content-box;
 
 		padding: 15px;
 		margin-bottom: 25px;
@@ -80,8 +83,11 @@
 
 			max-width: none;
 			margin: 0 auto;
-			justify-content: center;
-			box-sizing: content-box;
+			-webkit-box-pack: center;
+			    -ms-flex-pack: center;
+			        justify-content: center;
+			-webkit-box-sizing: content-box;
+			        box-sizing: content-box;
 			padding: 0; 
 
 		}

@@ -145,6 +145,7 @@ public class SSOOSSubmitOrderServlet
 		sd.setShip_postcode((String) shippingDetail.get("postcode"));
 		sd.setShip_city((String) shippingDetail.get("city"));
 		sd.setShip_country((String) shippingDetail.get("country"));
+		sd.setRemark((String) shippingDetail.get("remark"));
 		
 		String shippingId = orderSampleDao.insertDataSD(sd);
 		log.info("shippingId : " + shippingId);
@@ -210,6 +211,7 @@ public class SSOOSSubmitOrderServlet
 //    		SENT EMAIL NOTIFICATION END
     		apiResponse.put("sendEmailStatus", emailSuccess);
         	apiResponse.put("order_id", orderinfoSuccess.getOrder_id());
+        	apiResponse.put("order_date", orderinfoSuccess.getCreated_date());
         	apiResponse.put("status", "success");
         	
     	}else{

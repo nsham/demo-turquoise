@@ -2,22 +2,24 @@
 //Icon group wrapper
 // ----------------------------------------------------------------------
 .icon-group-wrapper {
-  align-items: stretch;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
   /* Default */
-  justify-content: space-evenly;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
   text-align: center;
   padding: 0;
   margin: 0;
   list-style: none;
   -ms-box-orient: horizontal;
   display: -webkit-box;
-  display: -moz-box;
   display: -ms-flexbox;
   display: -moz-flex;
-  display: -webkit-flex;
   display: flex;
-  -webkit-flex-wrap: wrap;
-  flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
   li {
     display: inline-block;
     padding: 0px 5px; //  flex: 0 1 auto; /* Default */

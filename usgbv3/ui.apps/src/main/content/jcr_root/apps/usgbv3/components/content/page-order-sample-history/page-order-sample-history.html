@@ -20,10 +20,34 @@
 
 
     <div class="container ">
-        <div class="row">
-            <div class="col-xs-12">
+        <div class="row row-eq-height">
+            <div class="col-xs-12 col-sm-8 col-md-8">
                 <h4 class="ht4 color-darker-grey uppercase m-bottom-m">My order sample cart History</h4>
                 <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.</p>
+            </div>
+            <div class="col-xs-12 col-sm-4 col-md-4">
+                
+                <div class="sample-orders-cart-sort">
+                    <div>
+                        <span>view by </span>
+                        <div class="dropdown dp-form d-small">
+                            <button class="btn btn-default color-dark-grey dropdown-toggle text-left dp-clickable" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="dp-text">Latest to oldest</span>
+                                <input type="hidden" name="selectSortType" value="latest">
+                                <span class="color-primary-green glyphicon glyphicon-menu-down right"></span>
+                            </button>
+                            <ul class="dropdown-menu dp-list" aria-labelledby="dropdownMenu1">
+                                <li>
+                                    <a data-sortby="latest">Latest to oldest</a>
+                                </li>
+                                <li>
+                                    <a data-sortby="oldest">Oldest to latest</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
@@ -44,55 +68,10 @@
                 <h6 class="ht6">Order Status</h6>
             </div>
         </div>
-        <div class="row order-item accordionfc">
-            <div class="col-xs-12 col-sm-12">
+        <div class="row">
+            <div class="col">
+                <div class="orders-history-wrapper">
 
-                <div class="row order-item-info">
-                        <div class="col-xs-12 col-sm-3">
-                                <div class="order-no">
-                                    <span>USGB01234</span>
-                                </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-3">
-                            <div class="order-date">
-                                <span>11/03/2018</span>
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-3"></div>
-                        <div class="col-xs-12 col-sm-3">
-                            <div class="order-status heading fs-2 collapsed" data-target="#order-no-12345" data-toggle="collapse" aria-expanded="false">
-                                <span>Pending Delivery</span>
-                                <span class="glyphicon glyphicon-minus"></span>
-                                <span class="glyphicon glyphicon-plus"></span>
-                            </div>
-                        </div>
-                </div>
-                <div class="row order-item-desc p-sm-top-l">
-                    <div class="col-xs-12">
-                        <div id="order-no-12345" class="row collapse p-sm-xl bg-lighter-grey order-item-desc-info">
-                            <div class="col-xs-12 col-sm-1"></div>
-                            <div class="col-xs-8 col-sm-8">
-                                <b>Item:</b>
-                                <div class="item-name">
-                                    <span>Product name #1</span>
-                                </div>
-                                <div class="item-name">
-                                    <span>Product name #2</span>
-                                </div>
-                                <br>
-                                <b>Ship to:</b>
-                                <div class="item-ship-to-address">
-                                    <span>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis</span>
-                                </div>
-                            </div>
-                            <div class="col-xs-2 col-sm-2 text-center">
-                                <b>Quantity</b>
-                                <div class="item-quantity"><span>1</span></div>
-                                <div class="item-quantity"><span>3</span></div>
-                            </div>
-                            <div class="col-xs-12 col-sm-1"></div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -102,6 +81,74 @@
 </div>
 <!-- END of PAGE CONTENT -->
 
+
+<!-- Sample Order History Template -->
+<script id="orderHistoryTemplate" type="text/x-handlebars-template">
+
+    {{#each this}}
+        <div class="row order-item accordionfc">
+            <div class="col-xs-12 col-sm-12">
+
+                <div class="row order-item-info">
+                    <div class="col-xs-12 col-sm-3">
+                        <div class="order-no">
+                            <span>{{order_id}}</span>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-3">
+                        <div class="order-date">
+                            <span>{{created_date}}</span>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-3"></div>
+                    <div class="col-xs-12 col-sm-3">
+                        <div class="order-status heading fs-2 collapsed" data-target="#{{order_id}}" data-toggle="collapse" aria-expanded="false">
+                            <span>{{status}}</span>
+                            <span class="glyphicon glyphicon-minus"></span>
+                            <span class="glyphicon glyphicon-plus"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row order-item-desc p-sm-top-l">
+                    <div class="col-xs-12">
+                        <div id="{{order_id}}" class="row collapse p-sm-xl bg-lighter-grey order-item-desc-info">
+                            <div class="col-xs-12 col-sm-1"></div>
+                            <div class="col-xs-8 col-sm-8">
+                                <b>Item:</b>
+                                {{#each productList}}
+                                    <div class="item-name">
+                                        <span>{{product_name}}</span>
+                                    </div>
+                                {{/each}}
+                                <br>
+                                <b>Ship to:</b>
+                                <div class="item-ship-to-address">
+                                    <span>{{shippingDetail.ship_address1}},</span>
+                                    </br>
+                                    <span>{{shippingDetail.ship_address2}},</span>
+                                    </br>
+                                    <span>{{shippingDetail.ship_postcode}} {{shippingDetail.ship_city}}, {{shippingDetail.ship_country}} </span>
+                                </div>
+                            </div>
+                            <div class="col-xs-2 col-sm-2 text-center">
+                                <b>Quantity</b>
+                                {{#each productList}}
+                                    <div class="item-quantity"><span>{{product_quantity}}</span></div>
+                                {{/each}}
+
+                            </div>
+                            <div class="col-xs-12 col-sm-1"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    {{/each}}
+
+</script>
+<!-- /END Sample Order History Template -->
 
 <script src="/etc/designs/usgb_v3/clientlib/uiux-less-ct/js/vendors/jquery.validate.min.js"></script>
 <sly data-sly-use.clientLib="/libs/granite/sightly/templates/clientlib.html" data-sly-call="${clientLib.js @ categories='uiux.alljs'}" data-sly-unwrap/>
