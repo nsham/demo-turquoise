@@ -1649,6 +1649,8 @@ $(window).on('load', function () {
     });
 })();
 
+
+
 // ----------------------------------------------------------------------
 // Compare Product Page 
 // ----------------------------------------------------------------------
@@ -1660,7 +1662,7 @@ $(window).on('load', function () {
         function productCompare() {
 
             //test insert param
-            var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?category=finishes&countrycode=en_au';
+            var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?category=ceiling&countrycode=malaysia';
             window.history.pushState({
                 path: newurl
             }, '', newurl);
@@ -1670,12 +1672,12 @@ $(window).on('load', function () {
             var url = new URL(url_string);
             var c = url.searchParams.get("category");
             var cc = url.searchParams.get("countrycode");
-            
+
             var data;
             var getJSONarr = [];
             var currOnStageMainResultData = [];
-            var currCategoryKey = c+"_"+cc ;
-           
+            var currCategoryKey = c + "_" + cc;
+
 
             $(".default-col").hide();
 
@@ -1815,6 +1817,174 @@ $(window).on('load', function () {
 })();
 
 
+// ----------------------------------------------------------------------
+// Checkbox  (product details)
+// ----------------------------------------------------------------------
+(function () {
+    "use strict";
+    $(document).ready(function () {
+
+        var currCategoryKey;
+        var countryCode;
+        var getLink;
+        var checkStatus;
+        var storeData = [];
+        var detailsData;
+
+        var tempURL = "/etc/designs/usgb_v3/clientlib/uiux-all-js/js/json/product-compare-one.html";
+
+        //get browser url
+        var pathname = window.location.pathname;
+        var pagename = pathname.split(".").reverse()[1] + ".json";
+        console.log('pagename - ', pagename)
+        //pass url to load json
+        var detailsJSON
+
+        function productCompareDetailPage() {
+
+            detailsJSON = tempURL.split(".").reverse()[1] + ".json";
+            getJSONDetails();
+
+            $(document).on("change", '[data-input-value]', function () {
+
+                event.preventDefault();
+                getLink = $(this).data("input-value");
+
+                if ($(this).is(':checked')) {
+                    console.log("check")
+                    checkStatus = $(this).prop("checked");
+                    var groupElem = {
+                        "url": detailsData.pagePropertiesList[0].url,
+                        "img": detailsData.pagePropertiesList[0].image68x56,
+                        "title": detailsData.pagePropertiesList[0].pageTitle,
+                        "checked": checkStatus,
+                        "countryCode": countryCode
+                    }
+                    storeData.push(groupElem);
+                    addToDetailsToLocal();
+
+                } else {
+                    console.log("uncheck")
+                    removeCompareDetails();
+                }
+            });
+
+              // close btn on popup to remove content
+              $("body").on("click", ".close-btn-box", function () {
+                event.preventDefault();
+                var currInput = $(this).closest('.each').attr("data-content-title");
+                $("[data-input-value ='" + currInput + "']").attr('checked', false);
+                removeCompareDetails(currInput);
+            });
+
+
+
+        }
+        if ($('#compare-pop-detail-page').length) productCompareDetailPage();
+
+        function addToDetailsToLocal() {
+            localStorage.setItem(currCategoryKey, JSON.stringify(storeData));
+            getDetailsLocalCompare();
+        }
+
+        function removeCompareDetails(data) {
+            // var getIndex1 = storeData.findIndex(x => x.url == data);     
+            var getIndex1
+            storeData.some(function (x, i) {
+                if (x.url == getLink) {
+                    getIndex1 = i;
+                    return true;
+                }
+            });
+
+            //console.log("in1", getIndex1)
+            storeData.splice(getIndex1, 1);
+            addToDetailsToLocal();
+            getDetailsLocalCompare();
+
+        }
+
+
+        function getDetailsLocalCompare() {
+
+            if (localStorage.getItem(currCategoryKey) === null) {
+                console.log("detailLocalempty")
+            } else {
+                //get from local storage
+                storeData = JSON.parse(localStorage.getItem(currCategoryKey));
+                console.log("currinLocal-", storeData);
+                loadCompare();
+
+                if (storeData.length < 1) {
+                    //console.log("nomore");
+                    localStorage.removeItem(currCategoryKey);
+                }
+            }
+        }
+
+        function countPopContent(){
+            var popContent = $("[data-content-title]").length;
+            console.log(popContent)
+           // var currInput1 = $(this).closest('.each').attr("data-content-title");
+            if(detailsData.pagePropertiesList[0].url = $("[data-input-value]").data('input-value')){
+             //   $("[data-input-value]").prop('checked',true);
+            }else{
+            //    $("[data-input-value]").prop('checked',false);
+            }
+        }
+
+        function loadCompare() {
+            //load the popup
+            var comparePopupHTML = $('#compare-popup-local').html();
+            var temptcomparePopupHTML = Handlebars.compile(comparePopupHTML);
+            $('.compare-popup-local').html(temptcomparePopupHTML(storeData));
+            $(".compare-popup").show();
+        
+            countPopContent();
+        }
+
+
+
+        function getJSONDetails() {
+            console.log('de', detailsJSON)
+            $.ajax({
+                url: detailsJSON,
+                type: "GET",
+                cache: false,
+                success: function (response) {
+                    detailsData = response;
+                    // console.log(detailsData)
+                    countryCode = detailsData.country_key;
+                    currCategoryKey = detailsData.category_key + "_" + countryCode;
+                    console.log(currCategoryKey);
+
+                    // var groupElem = {
+                    //     "url": detailsData.pagePropertiesList[0].url,
+                    //     "img": detailsData.pagePropertiesList[0].image68x56,
+                    //     "title": detailsData.pagePropertiesList[0].pageTitle,
+                    //     "checked": checkStatus,
+                    //     "countryCode": countryCode
+                    // }
+                    // storeData.push(groupElem);
+                    // console.log("dStore", storeData)
+                    //localStorage.setItem(currCategoryKey, JSON.stringify(storeData));
+                    getDetailsLocalCompare();
+
+                },
+                beforeSend: function () {},
+                complete: function () {}
+            });
+
+        }
+
+
+
+
+
+
+
+    });
+})();
 
 // ----------------------------------------------------------------------
 // Checkbox Count /filtering (product listing)
@@ -1822,6 +1992,7 @@ $(window).on('load', function () {
 (function () {
     "use strict";
     $(document).ready(function () {
+
 
         function productListingFeatures() {
 
@@ -1867,36 +2038,51 @@ $(window).on('load', function () {
             var getLink;
             var checkStatus;
             var groupElem;
+            var findElem;
             var currInput;
             var storePopup; //localstorage arr
+
+
+            //populate comparePopup
+            function getElement() {
+
+                //match getLink from checkbox to find array info
+                var findElem = findElement(currProductData, "link", getLink);
+
+                function findElement(currProductData, propName, propValue) {
+
+                    for (var i = 0; i < currProductData.length; i++)
+                        if (currProductData[i][propName] == propValue)
+                            return currProductData[i];
+                }
+                //pass json details
+                inputVal = findElem.link;
+                getIMG = findElem.img;
+                getTitle = findElem.title;
+            }
+
+
             // detect change for cardcheckbox
             $(document).on("change", '.listing-search-content .container-checkbox input[type="checkbox"]', function () {
 
                 event.preventDefault();
 
                 getCard = $(this);
-                //get html data-text-value from input
-                inputVal = $(this).closest(".each").find("label input").data("input-value");
-
-                getIMG = $(this).closest(".each").find("img").attr("src");
-                getTitle = $(this).closest(".each").find(".title").text();
                 getLink = $(this).closest(".each").find("a").attr("href");
+                getElement();
                 checkStatus = $(this).closest(".each").find(".container-checkbox input").prop("checked");
 
-
+                //pass to  arr to compare popup to append
                 groupElem = {
-                    "url": getLink,
+                    "url": inputVal,
                     "img": getIMG,
                     "title": getTitle,
                     "checked": checkStatus,
                     "countryCode": countryCode
                 }
-                //.listing-search-content .container-checkbox input[data-input-value='+inputVal+']
 
                 if ($(this).is(':checked')) {
 
-                    //append  to popup
-                    // $(".popup-content").append("<div class='each content-wrapper' data-content-title=" + inputVal + "><a href=" + getLink + " target='_blank'><div class='left img-content'> <img src=" + getIMG + "> </div> <div class='right title-content'data-content-value=" + inputVal + ">" + getTitle + "</div></a><button class='close-btn-box'><span class='bold'>x</span></button><hr class='col-xs-12 m-no m-top-m'></div>")
 
                     storeData.push(groupElem);
                     storeCompareLocalStorage();
@@ -1916,7 +2102,6 @@ $(window).on('load', function () {
                 checkNumberOfCheckbox();
 
             });
-
 
 
             //hide show popup
@@ -1987,10 +2172,7 @@ $(window).on('load', function () {
             }
 
 
-
-
             function removeCompareLocalStorage(data) {
-
                 // var getIndex1 = storeData.findIndex(x => x.url == data);     
                 var getIndex1
                 storeData.some(function (x, i) {
@@ -2010,6 +2192,8 @@ $(window).on('load', function () {
                 checkNumberOfCheckbox();
                 $("[data-input-value ='" + currInput + "']").attr('checked', false);
             }
+
+
 
             function retrieveCompare() {
 
@@ -2059,8 +2243,9 @@ $(window).on('load', function () {
             ////filtering product listing////
             var productData
             var currOnStageMainResultData = [];
-            var currProductData
+            var currProductData //target the results
             var shoutout
+
 
 
             productListingResult();
@@ -2069,13 +2254,14 @@ $(window).on('load', function () {
 
                 $.ajax({
                     //url: "/etc/designs/usgb_v3/clientlib/uiux-all-js/js/json/gallery-filter-one.json",
-                    url: "/etc/designs/usgb_v3/clientlib/uiux-all-js/js/json/product-listing-filter-one.json",
+                    url: "/etc/designs/usgb_v3/clientlib/uiux-all-js/js/json/product-listing-filter.json",
                     type: "GET",
                     cache: false,
                     success: function (response) {
                         // store in global
                         productData = response
                         currProductData = productData.product_result
+
                         //for sorting
                         currOnStageMainResultData = productData.product_result
 
@@ -2109,18 +2295,23 @@ $(window).on('load', function () {
                         //console.log(shoutout)
 
                         //getCategoryName - to store array
-                        categoryName = productData.category_key +"_"+productData.country_key;
+                        categoryName = productData.category_key + "_" + productData.country_key;
                         countryCode = productData.country_key;
 
 
                         hideAllWrappers();
                         renderProductListingResult();
                         retrieveCompare();
+
                     },
                     beforeSend: function () {},
                     complete: function () {}
                 });
             }
+
+
+
+
 
 
             function renderProductListingResult() {
