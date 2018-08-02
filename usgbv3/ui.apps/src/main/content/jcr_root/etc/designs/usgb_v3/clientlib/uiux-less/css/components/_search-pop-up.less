@@ -13,7 +13,10 @@
      transition: opacity 0.5s;
 
     .input-same-line {
-		max-width: 650px;
+        max-width: 650px;
+        .search-box{
+            height: 42px;
+        }
 	}
 
     &.active{
@@ -26,6 +29,21 @@
         right: 0;
         z-index: 100;
     }
+
+    #header-search-input{
+        padding: 0;
+    }
+
+    .autocomplete{
+        width: 100% !important;
+        margin: 0 -15px;
+        transform: translateY(11px);
+
+        & > ul > li{
+			padding: 10px 15px;
+        }
+    }
+
 }
 
 

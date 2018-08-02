@@ -1140,6 +1140,25 @@ function hookHeadScript(url, async, defer, callback) {
                     AutoComplete({
                         EmptyMessage: "No item found",
                         QueryArg: "text",
+                        _Render: function(response) {
+                            var ul;
+                            if (typeof response == "string") {
+                                ul = this._RenderRaw(response);
+                            } else {
+                                ul = this._RenderResponseItems(response);
+                            }
+                            if (this.DOMResults.hasChildNodes()) {
+                                this.DOMResults.removeChild(this.DOMResults.childNodes[0]);
+                            }
+                            
+                            this.DOMResults.appendChild(ul);
+            
+                            for(var i=0; i<$('[data-autocomplete-value]').length; i++){
+                                if( $($('[data-autocomplete-value]')[i]).find('strong').length == 0){
+                                    $($('[data-autocomplete-value]')[i]).hide();
+                                }
+                            }
+                        }
                     }, "#header-search-input");
                 }, 50);
 
