@@ -26,6 +26,7 @@
         var choosenProximity = "";
         var searchedText = "";
         var autocompleteData = {};
+        var selectionFlag = true;
 
         var urlString = window.location.href;
         var url = new URL(urlString);
@@ -138,6 +139,15 @@
                     AutoComplete({
                         EmptyMessage: "No item found",
                         QueryArg: "text",
+                        _Select: function(item) {
+                            if (item.hasAttribute("data-autocomplete-value")) {
+                                this.Input.value = item.getAttribute("data-autocomplete-value");
+                            } else {
+                                this.Input.value = item.innerHTML;
+                            }
+                            this.Input.setAttribute("data-autocomplete-old-value", this.Input.value);
+                            selectionFlag = true;
+                        }
                     }, "#input-search-location");
 
                 } else {  
@@ -176,6 +186,13 @@
                     $('.search-detail-group').html('<div class="p-3xl"><h5>Sorry</h5><p><i>No result has been found.</i></p></div>');
                 }
 
+                // filtered item click event
+                var extLocationCta = $('#filter-list-controller .cta-location');
+                $(extLocationCta).off('click').on( "click", function() {
+                    var currentMarker = $(extLocationCta).index(this);
+                    triggerClick(currentMarker);
+                });
+
                 switch (Number($(this).val().replace('KM', ''))) {
                     case 15:
                         radius = 15000;
@@ -186,8 +203,6 @@
                     case 35:
                         radius = 35000;
                 }
-
-                map.setZoom(5);
 
                 if($(this).attr('name') == "distance"){
                     if(circleOnMap.length>0){
@@ -209,9 +224,21 @@
                         } else {
                             circle.bindTo('center', currUserLocationMarker, 'position');
                         }
+                        map.setZoom(10);
+                    } else {
+                        if(currSenario.indexOf('proximity') >= 0){
+                            map.setCenter(proximityLocationMarker.position);
+                        } else {
+                            map.setCenter(currUserLocationMarker.position);
+                        }
+                        
+                        map.setZoom(5);
                     }
-                    map.setZoom(10);
+                } else {
+                    map.setZoom(5);
                 }
+
+                filterListScrollbarReset();
             });
         
             $(document).on('click','.search-bar-toggle-button', function(e){
@@ -239,24 +266,33 @@
                 e.preventDefault();
                 $('.filter-back-btn').removeClass('open');
                 $('.filter-list-item').removeClass('open');
-            })
+            });
         
             $(document).on('click', '#map-search-controller .btn-search', function(e){
-                var value = $('#input-search-location').val();
-                console.log(wtbAutocompleteData,value);
-                //wtbAutocompleteData, variable created at the autocomplte.js
-                for(var i=0; i<wtbAutocompleteData.Items.length; i++){
-                    var key = findKey(wtbAutocompleteData.Items[i], value);
-                    if(key !== null && key.indexOf('proximity') >= 0){
-                        currSenario = key;
-                        choosenProximity = value;
-                    } else if(key !== null){
-                        currSenario = key;
+                if($('#input-search-location').val() !== ""){
+                    var value = $('#input-search-location').val();
+                    currSenario = "";
+                    console.log(wtbAutocompleteData,value);
+                    //wtbAutocompleteData, variable created at the autocomplte.js
+                    if(selectionFlag == true){
+                        for(var i=0; i<wtbAutocompleteData.Items.length; i++){
+                            var key = findKey(wtbAutocompleteData.Items[i], value);
+                            if(key !== null && key.indexOf('proximity') >= 0){
+                                currSenario = key;
+                                choosenProximity = value;
+                            } else if(key !== null){
+                                currSenario = key;
+                                searchedText = value;
+                            }
+                        }
+                        selectionFlag = false;
+                    } else {
                         searchedText = value;
                     }
+                    resetFilter();
+                    loadStoreListResult();
+                    
                 }
-                resetFilter();
-                loadStoreListResult();
             });
             
             $(document).on('click', '.accordion-wrap .btn-accordion', function(e){
@@ -321,6 +357,7 @@
                 event.preventDefault();
                 $('.state-wrap').addClass('open');
             });
+            
 
             if($("#input-search-location").length){
                 $.ajax({
@@ -439,8 +476,11 @@
 
             if(markerCluster) markerCluster.clearMarkers();
 
-            markerCluster = new MarkerClusterer(map, markers,
-                {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+            markerCluster = new MarkerClusterer(map, markers, {
+                    imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m',
+                    maxZoom: 14
+                }
+            );
             
         
             // Finally the bounds variable is used to set the map bounds
@@ -470,7 +510,7 @@
                     address1 + '<br />' +
                     address2 + '<br /><br />' +
                     '<div class="fa fa-phone icon-size-xs p-right-m"></div>' + phoneNumber + '<br /><br />' +
-                    '<div class="fa fa-envelope icon-size-xs p-right-m"></div>' + email + '<br /><br />' +
+                    (email!==undefined? ('<div class="fa fa-envelope icon-size-xs p-right-m"></div>' + email + '<br /><br />') : "") +
                     '<a href="' + directionUrl + '" target="_blank"> <div class="rounded-corners bg-primary-green p-s text-center color-white bold"> Get Direction </div></a>' + '</div></div>';
 
                 // pan to clicked marker
@@ -595,10 +635,12 @@
                         $('.cta-search-detail-on').addClass('active');
                         $('.btn-filter').removeClass('disabled');
 
+                        filterListScrollbarReset();
+
                         if (window.matchMedia("(min-width: 768px)").matches) {
                             $('.state-wrap').addClass('open');
                         }
-
+                        
                         // bind external cta event
                         var extLocationCta = $('#filter-list-controller .cta-location');
                         $(extLocationCta).off('click').on( "click", function() {
@@ -613,7 +655,7 @@
                                 map: map
                             });
                             map.setCenter(pos);
-                            map.setZoom(12);
+                            map.setZoom(14);
                             proximityLocationMarker.setPosition(pos);
                             proximityLocationMarker.setMap(map);
                         }
@@ -632,10 +674,15 @@
             });
         }
 
+        function filterListScrollbarReset(){
+            $('.search-detail-wrap .state-wrap .search-detail-group').animate({scrollTop: 0});
+        }
         
 
         function triggerClick(index) {
-            console.log(markers[index]);
+            console.log(markers[index].position);
+            map.setZoom(17);
+            map.setCenter(markers[index].position);
             google.maps.event.trigger(markers[index], 'click');
         }
 

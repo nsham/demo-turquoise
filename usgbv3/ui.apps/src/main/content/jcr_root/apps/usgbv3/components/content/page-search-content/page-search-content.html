@@ -47,7 +47,7 @@
             </div>
             <div class="row">
                 <div class="col-xs-12">
-                    <p class="result-caption m-top-xs m-left-xxs m-no fs-3 hidden"><strong><span class="num">0</span> search results found for : <span class="keyword"></span></strong></p>
+                    <p class="result-caption m-top-xs m-left-xxs m-no fs-3 hidden"><strong><span class="num">0</span> search results found from <i class="current-category"></i></strong></p>
                 </div>
             </div>
         </div>
@@ -55,13 +55,13 @@
     <!-- SEARCH FORM END -->
 
     <!-- SUB-SEARCH-SECTION -->
-    <div class="container search-category-controller-container hidden">
+    <div class="container search-category-controller-container">
         <div class="row m-vertical-xl">
             <div class="col-xs-12 text-center text-sm-left">
                 <ul class="sub-search-section">
                     <li class="active"><a href="#" data-category="content">Content</a></li>
                     <li><a href="#" data-category="doc_finder">Document Finder</a></li>
-                    <li><a href="#" data-category="cad">CAD Drawing</a></li>
+                    <!-- <li><a href="#" data-category="cad">CAD Drawing</a></li> -->
                 </ul>
             </div>
         </div>
@@ -175,7 +175,7 @@
     </div>
     <!-- SEARCH INPUT (GROUP) END-->
 
-    <div class="no-search-result-container container hidden">
+    <div class="no-search-result-container container">
         <div class="row">
             <div class="col-xs-12">
                 <h5 class="ht5 color-primary-green m-vertical-l m-bottom-s">Currently no result has been found.</h5>
@@ -301,6 +301,43 @@
     </div>
 </div>
 
+<div id="signin-modal" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="signinModalLabel">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center" role="document" width="750px">
+            <div class="modal-content">
+                <div class="modal-body m-vertical-s">
+                    <div class="row">
+                        <div class="col-md-12" align="center">
+                            <div class="svg-box">
+                                <svg class="circular yellow-stroke">
+                                    <circle class="path" cx="75" cy="75" r="50" fill="none" stroke-width="5" stroke-miterlimit="10" />
+                                </svg>
+                                <svg class="alert-sign yellow-stroke">
+                                    <g transform="matrix(1,0,0,1,-615.516,-257.346)">
+                                        <g transform="matrix(0.56541,-0.56541,0.56541,0.56541,93.7153,495.69)">
+                                            <path class="line" d="M634.087,300.805L673.361,261.53" fill="none" />
+                                        </g>
+                                        <g transform="matrix(2.27612,-2.46519e-32,0,2.27612,-792.339,-404.147)">
+                                            <circle class="dot" cx="621.52" cy="316.126" r="1.318" />
+                                        </g>
+                                    </g>
+                                </svg>
+                            </div>
+                            <h4 class="ht4 uppercase color-primary-green">Sign in?</h4>
+                            <p class="color-dark-grey">Please login to enable this feature.</p>
+                            <br>
+                            <p class="text-center m-bottom-l">
+                                <button class="btn btn-brand-default button-green cta-login">Login Now</button>
+                                <button data-dismiss="modal" class="btn btn-brand-default button-green">CLOSE</button>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script id="templSearchFilterMobile" type="text/x-handlebars-template">
     {{#each this}} 
     <div id="{{key}}-group" class="accordionfc">
@@ -359,7 +396,7 @@
 
 <script id="templSearchRelated" type="text/x-handlebars-template">
     <div class="wrapper p-l">
-        <p class="fs-2"><strong>Searches related to "{{searched_text}}"</strong></p>
+        <p class="fs-2"><strong>Searches related to "{{keyword}}"</strong></p>
         {{#each searches_related}}
         <p class="fs-2">
             <a href="#">{{this}}</a> 
@@ -393,13 +430,13 @@
                     <p class="sub-headline fs-2 m-bottom-xs">{{category_header}}</p>
                     <h6 class="headline ht6 uppercase m-bottom-xxs">{{title}}</h6>
                     <p class="description m-no">
-                        {{desc}}
+                        {{description}}
                     </p>
                 </div>
             </a>
             <div class="align-center flex-basis-no flex-IE-grow-auto flex-grow-0 flex-row justify-end side-functions-short">
                 <div class="bookmark uppercase fs-3">
-                    <a href="#" class="cta-bookmark">
+                    <a href="{{link}}" class="cta-bookmark disabled">
                         <div class="btn button-grey visible-xs">
                             <span class="glyphicon glyphicon-bookmark"></span>
                         </div>
@@ -413,7 +450,7 @@
                 </div>
             </div>
         </div>
-        <span>{{created_date}}</span>
+        <!-- <span>{{created_date}}</span> -->
     </div>
     {{/each}}
 </script>
@@ -432,13 +469,13 @@
                     <p class="sub-headline fs-2 m-bottom-xs">{{category_header}}</p>
                     <h6 class="headline ht6 uppercase m-bottom-xxs">{{title}}</h6>
                     <p class="description m-no">
-                        {{desc}}
+                        {{description}}
                     </p>
                 </div>
             </a>
             <div class="align-center flex-basis-no flex-IE-grow-auto flex-grow-0 flex-row justify-end side-functions">
                 <div class="bookmark uppercase fs-3">
-                    <a href="#" class="cta-bookmark">
+                    <a href="#" class="cta-bookmark disabled">
                         <div class="btn button-grey visible-xs">
                             <span class="glyphicon glyphicon-bookmark"></span>
                         </div>
@@ -452,7 +489,7 @@
                 </div>
                 <span class="hidden-xs m-side-s">|</span>
                 <div class="addto uppercase fs-3 m-left-xxs">
-                    <a href="#" class="cta-add-submittal">
+                    <a href="#" class="cta-add-submittal disabled">
                         <div class="btn button-grey visible-xs btn-sm">
                             <span class="glyphicon glyphicon-plus"></span>
                         </div>
@@ -473,7 +510,7 @@
 
 <script id="templSubSearchResult_docFinder" type="text/x-handlebars-template">
     <hr />
-    <h5 class="ht5 uppercase m-bottom-xl">We also found relevant "<span>{{searched_text}}</span>" in Document Finder</h5>
+    <h5 class="ht5 uppercase m-bottom-xl">We also found relevant "<span>{{keyword}}</span>" in Document Finder</h5>
     <!-- RELEVANT SEARCH CONTENT -->
     <div class="relevant-content">
         <div class="inner">
@@ -490,13 +527,13 @@
                             <p class="sub-headline fs-2 m-bottom-xs">{{category_header}}</p>
                             <h6 class="headline ht6 uppercase m-bottom-xxs">{{title}}</h6>
                             <p class="description m-no">
-                                {{desc}}
+                                {{description}}
                             </p>
                         </div>
                     </a>
                     <div class="align-center flex-basis-no flex-IE-grow-auto flex-grow-0 flex-row justify-end side-functions">
                         <div class="bookmark uppercase fs-3">
-                            <a href="#" class="cta-bookmark">
+                            <a href="#" class="cta-bookmark disabled">
                                 <div class="btn button-grey visible-xs">
                                     <span class="glyphicon glyphicon-bookmark"></span>
                                 </div>
@@ -510,7 +547,7 @@
                         </div>
                         <span class="hidden-xs m-side-s">|</span>
                         <div class="addto uppercase fs-3 m-left-xxs">
-                            <a href="#" class="cta-add-submittal">
+                            <a href="#" class="cta-add-submittal disabled">
                                 <div class="btn button-grey visible-xs btn-sm">
                                     <span class="glyphicon glyphicon-plus"></span>
                                 </div>
@@ -529,13 +566,13 @@
         </div>
     </div>
     <!-- END RELEVANT SEARCH CONTENT -->
-    <a href="#" class="btn btn-top-border btn-dark float-right">Read More <span class="glyphicon glyphicon-menu-right"></span></a>
+    <a href="#" class="btn btn-top-border btn-dark float-right sub-search-result-link" data-category="doc_finder">Read More <span class="glyphicon glyphicon-menu-right"></span></a>
     <div class="clearfix"></div>
 </script>
 
 <script id="templSubSearchResult_content" type="text/x-handlebars-template">
     <hr />
-    <h5 class="ht5 uppercase m-bottom-xl">We also found relevant "<span>{{searched_text}}</span>" in Content</h5>
+    <h5 class="ht5 uppercase m-bottom-xl">We also found relevant "<span>{{keyword}}</span>" in Content</h5>
     <!-- RELEVANT SEARCH CONTENT -->
     <div class="relevant-content">
         <div class="inner">
@@ -563,13 +600,13 @@
                                 <p class="sub-headline fs-2 m-bottom-xs">{{category_header}}</p>
                                 <h6 class="headline ht6 uppercase m-bottom-xxs">{{title}}</h6>
                                 <p class="description m-no">
-                                    {{desc}}
+                                    {{description}}
                                 </p>
                             </div>
                         </a>
                         <div class="align-center flex-basis-no flex-IE-grow-auto flex-grow-0 flex-row justify-end side-functions-short">
                             <div class="bookmark uppercase fs-3">
-                                <a href="#" class="cta-bookmark">
+                                <a href="#" class="cta-bookmark disabled">
                                     <div class="btn button-grey visible-xs">
                                         <span class="glyphicon glyphicon-bookmark"></span>
                                     </div>
@@ -588,7 +625,7 @@
         </div>
     </div>
     <!-- END RELEVANT SEARCH CONTENT -->
-    <a href="#" class="btn btn-top-border btn-dark float-right">Read More <span class="glyphicon glyphicon-menu-right"></span></a>
+    <a href="#" class="btn btn-top-border btn-dark float-right sub-search-result-link" data-category="content">Read More <span class="glyphicon glyphicon-menu-right"></span></a>
     <div class="clearfix"></div>
 </script>
 
