@@ -144,7 +144,7 @@
                             formData.order_sample = setFormDataOrderObject("sampleOrdersList");
 
                             $.ajax({
-                                url: "/bin/sso/osSubmitOrder",
+                                url: "/bin/sso/orderSample/submit",
                                 data: JSON.stringify(formData),
                                 dataType: 'json',
                                 contentType: "application/json",

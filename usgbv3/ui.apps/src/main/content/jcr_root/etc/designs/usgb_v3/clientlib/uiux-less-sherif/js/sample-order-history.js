@@ -29,11 +29,14 @@
                     }
 
                     var orderHistoryItemTemplate = $("#orderHistoryTemplate");
-                    var orderHistoryItemTemplateContainer = $(".orders-history-wrapper")
+                    var orderHistoryItemTemplateContainer = $(".orders-history-wrapper");
+
+                    var ordersHistoryResultArray = {};
 
                     getSampleOrdersHistory(userInfoCustom).done(function(result){
 
                         console.log(result);
+                        ordersHistoryResultArray = result.orderSamplesList;
                         var template = Handlebars.compile(orderHistoryItemTemplate.html());
                         orderHistoryItemTemplateContainer.html(template(result.orderSamplesList));
 
@@ -44,7 +47,40 @@
 
                     dropdownSortOrdersOptions.on("click", function(event){
 
-                        console.log($(this).data("sortby"));
+                        switch($(this).data("sortby")){
+
+                            case "latest": 
+                                ordersHistoryResultArray.sort(function(a,b){
+                                    return b.sort_date - a.sort_date;
+                                });
+                                break;
+                            
+                            case "oldest":
+                                ordersHistoryResultArray.sort(function(a,b){
+                                    return a.sort_date - b.sort_date;
+                                });
+                                break;
+
+                        }
+
+                        var template = Handlebars.compile(orderHistoryItemTemplate.html());
+                        orderHistoryItemTemplateContainer.html(template(ordersHistoryResultArray));
+
+                    });
+
+
+                    $(document).on("click", ".cancel-order-cta", function(event){
+                        
+                        var cancelOrderData = {};
+                        cancelOrderData.user_info = userInfoCustom.user_info;
+                        cancelOrderData.order_info = {
+                            "order_id": $(this).data("orderid"),
+                            "status": "Cancelled"
+                        }
+
+                        cancelActiveSampleOrder(cancelOrderData, function(data){
+                            console.log(data);
+                        });
 
                     });
 
@@ -62,13 +98,32 @@
         var arrayCount = 0;
 
         $.ajax({
-            url: "/bin/sso/osRetrieveHistory",
+            url: "/bin/sso/orderSample/retrieve",
             data: JSON.stringify(userInfoJson),
             dataType: 'json',
             contentType: "application/json",
             type: "POST",
             cache: false,
             success: function (response) {
+
+                response.orderSamplesList.forEach(function(orderItem, index, array){
+
+                    var orderDate = orderItem.created_date.replace(" ","T");
+                    var display_date = new Date(orderDate);
+                    var display_date_String = display_date.getDate()+"/"+(display_date.getMonth()+1)+"/"+display_date.getFullYear();
+                    
+                    orderItem.sort_date = display_date;
+                    orderItem.display_date = display_date_String;
+
+                    //Check order status if active to allow order cancel
+                    if(orderItem.status == "Active"){
+                        orderItem.orderStatusActive = true;
+                    } else {
+                        orderItem.orderStatusActive = false;
+                    }
+
+                });
+
                 productsDetails.resolve(response);
             },
             beforeSend: function () {
@@ -80,6 +135,29 @@
         });
 
         return productsDetails.promise();
+    }
+
+    //Function to cancel the Active sample order request
+    function cancelActiveSampleOrder(cancelRequestJson, callback){
+
+        $.ajax({
+            url: "/bin/sso/orderSample/cancel",
+            data: JSON.stringify(cancelRequestJson),
+            dataType: 'json',
+            contentType: "application/json",
+            type: "POST",
+            cache: false,
+            success: function (response) {
+                callback(response)
+            },
+            beforeSend: function () {
+                //$('.loader').fadeIn("fast");
+            },
+            complete: function () {
+                //$('.loader').fadeOut("slow");
+            }
+        });
+
     }
      
 })();

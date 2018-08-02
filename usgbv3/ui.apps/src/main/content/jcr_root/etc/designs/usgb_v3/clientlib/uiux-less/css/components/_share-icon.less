@@ -181,3 +181,157 @@
     .jssocials-share-count-box .jssocials-share-count {
       line-height: 2.5em;
       color: #444; }
+
+
+
+
+      
+// ----------------------------------------------------------------------
+//sharethis.css
+// ----------------------------------------------------------------------
+
+
+.share-group {
+  // display: inline-block;
+  
+  > .sharethis-inline-share-buttons{
+    text-align: unset!important;
+    > .st-btn{
+      display: none!important;
+      width: 33px!important;
+      height: 33px!important;
+      line-height: 33px!important;
+      text-align: center!important;
+      vertical-align: middle!important;
+      padding:0px!important;
+      > svg {
+        height: 20px!important;
+        width: 20px!important;
+        top:6px!important;
+      }
+      &:hover{
+        top:0!important;
+      }
+      &:last-child{
+        display:inline-block!important;
+      }
+      &[data-network='sharethis'] {
+        background-color: #353535!important;
+        &:hover{
+          background-color: #95D03A!important;
+        }
+      }
+      &[data-network='facebook'] {
+          background-color: #353535!important;
+          &:hover{
+            background-color: #3B5998!important;
+          }
+        }
+        &[data-network='twitter'] {
+          background-color: #353535!important;
+          &:hover{
+            background-color: #55acee!important;
+          }
+        }
+        &[data-network='email'] {
+          background-color: #353535!important;
+          &:hover{
+            background-color: #7d7d7d!important;
+          }
+        }
+        &[data-network='linkedin'] {
+          background-color: #353535!important;
+          &:hover{
+            background-color: #0077b5!important;
+          }
+        }
+        &[data-network='sharethis'] {
+          background-color: #353535!important;
+          &:hover{
+            background-color: #009b3a!important;
+          }
+        }
+    }
+  }
+
+  @media(min-width:768px){
+    // display: block;
+    > .sharethis-inline-share-buttons{
+      > .st-btn{
+          display: inline-block!important;
+        &:last-child{
+          display:none!important;
+        }
+        &:hover{
+          opacity: 1!important;
+        }
+        
+      }
+    }
+  }
+}
+
+.st-btns{
+  .st-btn{
+    &[data-network='pinterest'] {
+      display: none!important;
+    }
+    &[data-network='messenger'] {
+      display: none!important;
+    }
+    &[data-network='reddit'] {
+      display: none!important;
+    }
+    &[data-network='tumblr'] {
+      display: none!important;
+    }
+    &[data-network='digg'] {
+      display: none!important;
+    }
+    &[data-network='googleplus'] {
+      display: none!important;
+    }
+    &[data-network='stumbleupon'] {
+      display: none!important;
+    }
+    &[data-network='whatsapp'] {
+      display: none!important;
+    }
+    &[data-network='vk'] {
+      display: none!important;
+    }
+    &[data-network='weibo'] {
+      display: none!important;
+    }
+    &[data-network='odnoklassniki'] {
+      display: none!important;
+    }
+    &[data-network='xing'] {
+      display: none!important;
+    }
+    &[data-network='print'] {
+      display: none!important;
+    }
+    &[data-network='blogger'] {
+      display: none!important;
+    }
+    &[data-network='flipboard'] {
+      display: none!important;
+    }
+    &[data-network='meneame'] {
+      display: none!important;
+    }
+    &[data-network='mailru'] {
+      display: none!important;
+    }
+    &[data-network='delicious'] {
+      display: none!important;
+    }
+    &[data-network='livejournal'] {
+      display: none!important;
+    }
+    &[data-network='wechat'] {
+      display: none!important;
+    }
+  }
+}
