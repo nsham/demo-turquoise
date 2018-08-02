@@ -892,4 +892,10 @@
 </div>
 <!-- end search pop up -->
 
+<sly data-sly-use.ssoComponent="com.usgbv3.core.components.SSOComponent">
+	<div id="myclient" style="display:none">${ssoComponent.clientId}</div>
+    <div id="myclientd" style="display:none">${ssoComponent.clientDomain}</div>
+</sly>
+
 <sly data-sly-use.clientLib="/libs/granite/sightly/templates/clientlib.html" data-sly-call="${clientLib.all @ categories='uiux.header'}" data-sly-unwrap/>
+<sly data-sly-use.clientLib="/libs/granite/sightly/templates/clientlib.html" data-sly-call="${clientLib.all @ categories='uiux.sso'}" data-sly-unwrap/>

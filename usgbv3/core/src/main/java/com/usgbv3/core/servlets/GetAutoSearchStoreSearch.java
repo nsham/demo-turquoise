@@ -47,7 +47,7 @@ public class GetAutoSearchStoreSearch extends SlingSafeMethodsServlet {
             try {
                 String refererURI = StringUtils.getReferrerURIfromRequest(request);
                 jsonResponse = storeLocatorService.getAutoSearch(refererURI
-                        , textParameter.getString(), request.getResourceResolver());
+                        , textParameter.getString(), request.getResourceResolver(),false);
             } catch (URISyntaxException e) {
                 LOG.error("URI SyntaxExvception is :"+e);
             }
