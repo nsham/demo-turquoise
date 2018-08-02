@@ -31,7 +31,7 @@ import com.usgbv3.core.services.EmailService;
 property={
         Constants.SERVICE_DESCRIPTION + "=SSO Order Sample - Cancel Order" ,
         "sling.servlet.methods=" + HttpConstants.METHOD_POST,
-        "sling.servlet.paths="+ "/bin/sso/osCancelledOrder"
+        "sling.servlet.paths="+ "/bin/sso/orderSample/cancel"
 })
 public class SSOOSDeleteStatusServlet
   extends BaseAllMethodsServlet

@@ -32,7 +32,7 @@ import com.usgbv3.core.services.SSOConfigurationService;
 property={
         Constants.SERVICE_DESCRIPTION + "=SSO Session Info",
         "sling.servlet.methods=" + HttpConstants.METHOD_POST,
-        "sling.servlet.paths="+ "/bin/sso/sessionInfo"
+        "sling.servlet.paths="+ "/bin/sso/info/session"
 })
 public class SSOSessionInfoServlet extends BaseAllMethodsServlet {
 	private static final long serialVersionUID = 1452364151988577055L;

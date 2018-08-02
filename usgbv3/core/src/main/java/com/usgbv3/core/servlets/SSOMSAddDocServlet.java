@@ -27,7 +27,7 @@ import com.usgbv3.core.entity.UserInfo;
 property={
         Constants.SERVICE_DESCRIPTION + "=SSO My Submittal - Add Doc" ,
         "sling.servlet.methods=" + HttpConstants.METHOD_POST,
-        "sling.servlet.paths="+ "/bin/sso/msAddDoc"
+        "sling.servlet.paths="+ "/bin/sso/mySubmittal/add"
 })
 public class SSOMSAddDocServlet
   extends BaseAllMethodsServlet

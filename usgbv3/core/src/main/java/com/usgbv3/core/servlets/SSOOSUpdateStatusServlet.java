@@ -24,7 +24,7 @@ import com.usgbv3.core.daos.OrderSampleDao;
 property={
         Constants.SERVICE_DESCRIPTION + "=SSO Order Sample - Update Status" ,
         "sling.servlet.methods=" + HttpConstants.METHOD_POST,
-        "sling.servlet.paths="+ "/bin/sso/osUpdateStatus"
+        "sling.servlet.paths="+ "/bin/sso/orderSample/update"
 })
 public class SSOOSUpdateStatusServlet
   extends BaseAllMethodsServlet
