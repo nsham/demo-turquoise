@@ -185,6 +185,7 @@
                                 <i class="fa fa-print fa-stack-1x fa-inverse"></i>
                             </span>
                         </a>
+                        
                         <div class="share-group text-left">
                             <div class="sharethis-inline-share-buttons"></div>
                         </div>
@@ -2323,7 +2324,7 @@
 
                         <script id="browseHistoryTemplate" type="text/x-handlebars-template">
                             {{#each this}}
-                            <div class="col-sm-2 p-xl p-bottom-no">
+                            <div class="browse-history-thumb p-xl p-bottom-no">
                                 <a href="{{pagePropertiesList.0.uri}}.html" target="_blank">
                                     <div class="box-size-m box-type-2 bg-white p-md-xs p-xs">
                                         <div class="center width-full">
@@ -2528,6 +2529,7 @@
             // if(urls.length > 5){
             //     urls.pop();
             // }
+
             localStorage.setItem('browseHistory', JSON.stringify(urls));
         }
 
