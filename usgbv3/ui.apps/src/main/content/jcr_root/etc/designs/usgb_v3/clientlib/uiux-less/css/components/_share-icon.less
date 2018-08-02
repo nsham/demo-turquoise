@@ -181,3 +181,28 @@
     .jssocials-share-count-box .jssocials-share-count {
       line-height: 2.5em;
       color: #444; }
+
+
+
+
+.share-group {
+  display: inline-block;
+  > .sharethis-inline-share-buttons{
+    text-align: unset!important;
+  }
+  .st-btn[data-network='facebook'] {
+    display: none;
+  }
+  .st-btn[data-network='twitter'] {
+    display: none;
+  }
+  .st-btn[data-network='email'] {
+    display: none;
+  }
+  .st-btn[data-network='linkedin'] {
+    display: none;
+  }
+  @media(min-width:767px){
+    display: block;
+  }
+}
