@@ -1,68 +1,6 @@
 <!-- PAGE CONTENT -->
 <div class="page-content ">
 
-
-
-    <!-- comapre popup from  -->
-    <script id="compare-popup-local" type="text/x-handlebars-template">
-
-        {{#each this}}
-        <div class='each content-wrapper' data-content-title="{{url}}">
-            <a href="{{url}}" target='_blank'>
-                <div class='left img-content'>
-                    <img src="{{img}}"> </div>
-                <div class='right title-content' data-content-value="">{{title}}</div>
-            </a>
-            <button class='close-btn-box'>
-                <span class='bold'>x</span>
-            </button>
-            <hr class='col-xs-12 m-no m-top-m'>
-        </div>
-
-        {{/each}}
-
-
-    </script>
-    <!-- compare popup from local -->
-
-
-
-    <!--compare popup -->
-    <div id="compare-pop-detail-page" class="compare-popup">
-
-        <div class="title uppercase ">
-            Compare Product
-            <span class=" btn-menu-down glyphicon glyphicon-menu-down float-right  p-s  text-center"></span>
-        </div>
-        <div class="popup-content c-auto-center-list">
-
-            <div class="compare-popup-local"> </div>
-
-
-            <!-- <div class="each  content-wrapper content1">
-				<div class="left img-content"> </div>
-				<div class="right title-content"> </div>
-				<button type="button" class="close-btn-box" aria-label="Close">
-					<span class="bold" aria-hidden="true">×</span>
-				</button>
-			</div>
-			<hr> -->
-        </div>
-        <div class="each instruction-text ">
-            <p class="m-bottom-xl color-grey text-center ">Select another product to compare</p>
-        </div>
-        <div class="each btn-compare m-m">
-            <a href="/content/v3/usgboral/samplepage/product-compare.html">
-                <button class="btn width-full button-green btn-brand-default">compare selected</button>
-            </a>
-        </div>
-    </div>
-    <!-- compare popup end -->
-
-
-
-
-
     <!--breadcrumb box -->
     <div class="container">
         <div class="row m-vertical-m ">
@@ -273,7 +211,7 @@
                     <div class="col-sm-8 col-xs-12">
                         <div class="radio">
                             <label class="fs-3 color-grey container-checkbox">Compare this product
-                                <input type="checkbox" data-input-value="/etc/designs/usgb_v3/clientlib/uiux-all-js/js/json/product-compare-one.html">
+                                <input type="checkbox">
                                 <span class="checkmark"></span>
                             </label>
                         </div>
@@ -2347,7 +2285,7 @@
                     <div>
                         <div class="feature-card-wrapper">
                             <!-- slick div -->
-                            <div class="carousel-feature-card browse-history-result" data-slick='{
+                            <div class="browse-history-result" data-slick='{
                                 "dots": false,
                                 "infinite": true,
                                 "speed": 300,
@@ -2487,7 +2425,7 @@
 <sly data-sly-use.clientLib="/libs/granite/sightly/templates/clientlib.html" data-sly-call="${clientLib.js @ categories='uiux.alljs'}"
     data-sly-unwrap/>
 
-
+   
 <script>
     (function () {
         "use strict";
@@ -2569,23 +2507,26 @@
 
                 getAll(browseHistoryUrls).done(function (results) {
                     currOnStageMainResultData = results;
-                   // console.log(currOnStageMainResultData);
+                    console.log(currOnStageMainResultData);
                     if (currOnStageMainResultData.length > 0) {
                         var html = $('#browseHistoryTemplate').html();
                         var template = Handlebars.compile(html);
-                        //console.log(template(currOnStageMainResultData));
+                        console.log(template(currOnStageMainResultData));
                         $('.browse-history-result').append(template(currOnStageMainResultData));
+                        $('.browse-history-result').slick();
+                       
                     }
                 });
 
             }
+
         });
 
 
         function addNewBrowseHistory(url) {
             var urls = JSON.parse(localStorage.getItem('browseHistory')) || [];
             urls.unshift(url);
-           // console.log('urls', urls);
+            //console.log('urls', urls);
             urls = uniqueArray(urls);
             //to remove the laast one, if more than 5 items
             // if(urls.length > 5){
@@ -2630,4 +2571,7 @@
         }
 
     })();
+
+
+
 </script>
