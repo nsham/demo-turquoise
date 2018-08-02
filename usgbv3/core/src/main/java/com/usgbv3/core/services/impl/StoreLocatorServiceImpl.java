@@ -85,7 +85,7 @@ public class StoreLocatorServiceImpl implements StoreLocatorService{
     }
 
     @Override
-    public String getAutoSearch(String pageURL, String text, ResourceResolver resourceResolver) {
+    public String getAutoSearch(String pageURL, String text, ResourceResolver resourceResolver, boolean getResource) {
         LOG.info("pageURL:"+pageURL);
         JsonArray resultJsonArray = null;
         Gson gson = new Gson();
@@ -169,7 +169,7 @@ public class StoreLocatorServiceImpl implements StoreLocatorService{
                 if(autoSearchConfiguration.containsKey("matchField")){
                     String matchFieldCSV = autoSearchConfiguration.get("matchField");
                     resultJsonArray = getAutoSearchJsonElements(text, resourceResolver, resultJsonArray
-                            , storeLocationPath, matchFieldCSV, "");
+                            , storeLocationPath, matchFieldCSV, "", getResource);
                 }
             }
 
@@ -178,7 +178,7 @@ public class StoreLocatorServiceImpl implements StoreLocatorService{
                 LOG.info("resultJsonArray is null so searching in  proximity data");
                 String proximityMatchFieldCSV = autoSearchConfiguration.get("proximityMatchField");
                 resultJsonArray = getAutoSearchJsonElements(text, resourceResolver, resultJsonArray
-                        , proximityLocationPath, proximityMatchFieldCSV, "proximity_");
+                        , proximityLocationPath, proximityMatchFieldCSV, "proximity_", getResource);
             }
 
         }
@@ -191,7 +191,7 @@ public class StoreLocatorServiceImpl implements StoreLocatorService{
     }
 
     private JsonArray getAutoSearchJsonElements(String searchText, ResourceResolver resourceResolver
-            , JsonArray resultJsonArray, String path, String matchFieldCSV, String prefix) {
+            , JsonArray resultJsonArray, String path, String matchFieldCSV, String prefix, Boolean getResource) {
         String[] matchFieldsArray;
         Map<String, String> queryMap;
         matchFieldsArray = matchFieldCSV.split(",");
@@ -203,6 +203,9 @@ public class StoreLocatorServiceImpl implements StoreLocatorService{
             JsonObject tempJsonObject = new JsonObject();
             Map<String, String> dataMapNoFlagShip = new LinkedHashMap<>();
             Map<String, String> dataMapYesFlagShip = new LinkedHashMap<>();
+            List<JsonObject> flagShipYESStoreJsonObjectList = new ArrayList<>();
+            List<JsonObject> flagShipNOStoreJsonObjectList = new ArrayList<>();
+            Gson gson = new Gson();
             for(String matchField : matchFieldsArray){
                 if(StringUtils.isNotBlank(matchField)){
                     queryMap = new LinkedHashMap<>();
@@ -220,45 +223,66 @@ public class StoreLocatorServiceImpl implements StoreLocatorService{
                     for(Hit hit: hitsList){
                         try {
                             resultResource = hit.getResource();
-                            LOG.info("for match field :"+matchField+"resultResource:"+resultResource.getPath());
                             ValueMap valueMap = resultResource.getValueMap();
-                            // to order data as per flagship
-                            if(valueMap.containsKey(matchField)){
-                                if(valueMap.containsKey("flagship") && valueMap.get("flagship") != null
-                                        && "yes".equalsIgnoreCase((String)valueMap.get("flagship"))){
-                                    dataMapYesFlagShip.put(valueMap.get(matchField).toString(), prefix+matchField);
-                                }else{
-                                    dataMapNoFlagShip.put(valueMap.get(matchField).toString(), prefix+matchField);
+                            LOG.info("for match field :"+matchField+"resultResource:"+resultResource.getPath());
+                            if(getResource){
+                                if(valueMap.containsKey(matchField)){
+                                    if(valueMap.containsKey("flagship") && valueMap.get("flagship") != null
+                                            && "yes".equalsIgnoreCase((String)valueMap.get("flagship"))){
+                                        flagShipYESStoreJsonObjectList.add(convertResourceToStoreJson(resultResource, gson));
+                                    }else{
+                                        flagShipNOStoreJsonObjectList.add(convertResourceToStoreJson(resultResource, gson));
+                                    }
                                 }
-
+                            }else{
+                                // to order data as per flagship
+                                if(valueMap.containsKey(matchField)){
+                                    if(valueMap.containsKey("flagship") && valueMap.get("flagship") != null
+                                            && "yes".equalsIgnoreCase((String)valueMap.get("flagship"))){
+                                        dataMapYesFlagShip.put(valueMap.get(matchField).toString(), prefix+matchField);
+                                    }else{
+                                        dataMapNoFlagShip.put(valueMap.get(matchField).toString(), prefix+matchField);
+                                    }
+                                }
                             }
-
                         } catch (RepositoryException e) {
                             LOG.error("RepositoryException :"+e);
                         }
-
                     }
                 }
+            }
+            if(getResource){
+                if(flagShipYESStoreJsonObjectList.size()>0){
+                    for(JsonObject storeObject : flagShipYESStoreJsonObjectList){
+                        resultJsonArray.add(storeObject);
+                    }
+                }
+                if(flagShipNOStoreJsonObjectList.size()>0){
+                    for(JsonObject storeObject : flagShipNOStoreJsonObjectList){
+                        resultJsonArray.add(storeObject);
+                    }
+                }
+            }else{
+                if(dataMapYesFlagShip.size()>0){
+                    Iterator it = dataMapYesFlagShip.entrySet().iterator();
+                    while (it.hasNext()) {
+                        Map.Entry pair = (Map.Entry)it.next();
+                        tempJsonObject = new JsonObject();
+                        tempJsonObject.addProperty(pair.getValue().toString(), pair.getKey().toString());
+                        resultJsonArray.add(tempJsonObject);
+                    }
+                }
+                if(dataMapNoFlagShip.size()>0){
+                    Iterator it = dataMapNoFlagShip.entrySet().iterator();
+                    while (it.hasNext()) {
+                        Map.Entry pair = (Map.Entry)it.next();
+                        tempJsonObject = new JsonObject();
+                        tempJsonObject.addProperty(pair.getValue().toString(), pair.getKey().toString());
+                        resultJsonArray.add(tempJsonObject);
+                    }
+                }
+            }
 
-            }
-            if(dataMapYesFlagShip.size()>0){
-                Iterator it = dataMapYesFlagShip.entrySet().iterator();
-                while (it.hasNext()) {
-                    Map.Entry pair = (Map.Entry)it.next();
-                    tempJsonObject = new JsonObject();
-                    tempJsonObject.addProperty(pair.getValue().toString(), pair.getKey().toString());
-                    resultJsonArray.add(tempJsonObject);
-                }
-            }
-            if(dataMapNoFlagShip.size()>0){
-                Iterator it = dataMapNoFlagShip.entrySet().iterator();
-                while (it.hasNext()) {
-                    Map.Entry pair = (Map.Entry)it.next();
-                    tempJsonObject = new JsonObject();
-                    tempJsonObject.addProperty(pair.getValue().toString(), pair.getKey().toString());
-                    resultJsonArray.add(tempJsonObject);
-                }
-            }
         }
         return resultJsonArray;
     }
@@ -349,7 +373,13 @@ public class StoreLocatorServiceImpl implements StoreLocatorService{
                     // converting to json response
                     jsonData = gson.toJson(resultJsonObject);
                 }
-            }else if(keyParameter != null){
+            }else if(keyParameter != null && "".equals(keyParameter.getString())){
+                LOG.info("hey key parameter is empty means we need to search in all fields");
+                String text = textParameter.getString();
+                if(text != null ){
+                    jsonData = getAutoSearch(pageURL, text, resourceResolver, true);
+                }
+            }else if(keyParameter != null && !"".equals(keyParameter.getString())){
                 String key = keyParameter.getString();
                 Session session = resourceResolver.adaptTo(Session.class);
                 SearchResult result = null;
@@ -495,12 +525,12 @@ public class StoreLocatorServiceImpl implements StoreLocatorService{
                         }
                     }
                     // converting to json response
-                    jsonData = gson.toJson(resultJsonObject);
+                    //jsonData = gson.toJson(resultJsonObject);
                     jsonData = gson.toJson(resultJsonObject);
 
                 }else{
                     // search in country for the key to have the value
-                    if(textParameter != null) {
+                    if(textParameter != null && !"".equals(textParameter.getString())) {
                         String text = textParameter.getString();
                         text = text.replace("-", "");
                         Map<String, String> queryMap = new LinkedHashMap<>();

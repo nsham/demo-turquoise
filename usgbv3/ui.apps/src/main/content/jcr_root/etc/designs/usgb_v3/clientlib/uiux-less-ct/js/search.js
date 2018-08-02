@@ -10,16 +10,56 @@
     var currOnStageMainResultData = [];
     var urlParams = new URLSearchParams(window.location.search);
     var searchedText = "";
+    var sort = "a_z";
+    var dt = {};
 
     $(document).ready(function(){
 
         AutoComplete({
             EmptyMessage: "No item found",
             QueryArg: "text",
+            _Render: function(response) {
+                var ul;
+                if (typeof response == "string") {
+                    ul = this._RenderRaw(response);
+                } else {
+                    ul = this._RenderResponseItems(response);
+                }
+                if (this.DOMResults.hasChildNodes()) {
+                    this.DOMResults.removeChild(this.DOMResults.childNodes[0]);
+                }
+                
+                this.DOMResults.appendChild(ul);
+
+                for(var i=0; i<$('[data-autocomplete-value]').length; i++){
+                    if( $($('[data-autocomplete-value]')[i]).find('strong').length == 0){
+                        $($('[data-autocomplete-value]')[i]).hide();
+                    }
+                }
+            }
         }, "#search-form input");
 
-
         if($('.search-form').length > 0){
+            if($.ssoManager.isLogin){
+                if (typeof $.ssoManager.sso.userInfo() !== 'undefined' &&
+                    typeof $.ssoManager.sso.userInfo().responseJSON !== 'undefined' &&
+                    ($.ssoManager.sso.userInfo().responseJSON).hasOwnProperty('id')) {
+                    var userInfo = $.ssoManager.sso.userInfo().responseJSON;
+
+                    //var dt = { user_info: {user_id: userInfo.id} };
+                    dt = {
+                        user_info: {
+                            user_id: userInfo.id,
+                            display_name: userInfo.profile.display_name,
+                            country: $.ssoManager.countryCode,
+                            first_name: userInfo.profile.first_name,
+                            last_name: userInfo.profile.last_name,
+                            email: userInfo.email.address
+                        }
+                    };
+                }
+            }
+
             if(urlParams.has('text')){
                 var text = urlParams.get('text');
                 $('#search-form input').val(text);
@@ -27,7 +67,7 @@
                 getResult();
             }
 
-            $(document).on('click', '.sub-search-section a', function(e){
+            $(document).on('click', '.sub-search-section a, .sub-search-result-link', function(e){
                 e.preventDefault();
                 var val = "";
                 var parent = $(this).closest('.sub-search-section');
@@ -36,14 +76,16 @@
                 val = $(this).attr('data-category');
                 currCategory = val;
                 getResult();
+                scrollToTarget('.search-category-controller-container');
             });
 
             $(document).on('click', '#search-form button[type="submit"]', function(e){
                 e.preventDefault();
-                // var val = $(this).closest('form').find('input').val();
                 console.log(currCategory, $('#search-form input').val());
                 searchedText = $('#search-form input').val();
-                getResult();
+                if(searchedText !== ""){
+                    getResult();
+                }
             });
 
             $(document).on('click', '#search-filter-mobile-form button[type="submit"], #search-filter-desktop-form button[type="submit"]', function(e){
@@ -55,44 +97,18 @@
                 console.log('filteredData', filteredData);
                 currOnStageMainResultData = filteredData;
                 //console.log(currOnStageMainResultData);
-                paginationResult (currOnStageMainResultData);
-                
-                scrollTop();
+                if(filteredData.length > 0){
+                    paginationResult (currOnStageMainResultData);
+                }
+                scrollToTarget('.search-category-controller-container');
+                if($('.filter-icon').is('visible')){
+                    $('.close-filter-mobile-content').click();
+                }
             });
 
             $(document).on('click', '.search-result-container .search-filter-sort .dropdown-menu a', function(e){
-                switch ($(this).attr('data-val')) {
-                    case "a_z":
-                        currOnStageMainResultData.sort(function(a, b){
-                            if(a.title.toLowerCase() < b.title.toLowerCase()) return -1;
-                            if(a.title.toLowerCase() > b.title.toLowerCase()) return 1;
-                            return 0;
-                        });
-                        break; 
-                    case "z_a":
-                        currOnStageMainResultData.sort(function(a, b){
-                            if(a.title.toLowerCase() > b.title.toLowerCase()) return -1;
-                            if(a.title.toLowerCase() < b.title.toLowerCase()) return 1;
-                            return 0;
-                        });
-                        break;
-                    case "latest":
-                        currOnStageMainResultData.sort(function(a, b){
-                            if(a.created_date > b.created_date) return -1;
-                            if(a.created_date < b.created_date) return 1;
-                            return 0;
-                        });
-                        break; 
-                    case "oldest":
-                        currOnStageMainResultData.sort(function(a, b){
-                            if(a.created_date < b.created_date) return -1;
-                            if(a.created_date > b.created_date) return 1;
-                            return 0;
-                        });
-                        break; 
-                }
+                sort = $(this).attr('data-val');
                 paginationResult (currOnStageMainResultData);
-                scrollTop();
             });
 
             $(document).on('change', '.search-result-container .dp-form-mobile select', function(e){
@@ -127,7 +143,7 @@
                         break; 
                 }
                 paginationResult (currOnStageMainResultData);
-                scrollTop();
+                scrollToTarget('.search-category-controller-container');
             });
 
             $(document).on('change', '#type-group input[type="checkbox"]', function(e){
@@ -153,53 +169,55 @@
             // add bookmark
             $(document).on('click', '.cta-bookmark', function(e){
                 e.preventDefault();
-                $('#add-bookmark-modal').modal('show');
-                var url = $(this).closest('.bookmark').find('a').attr('href').replace(".html", ".properties.json");
-                addNewBookmark(url);
+                if(!$(this).hasClass('disabled')){
+                    $('#add-bookmark-modal').modal('show');
+                    var url = $(this).attr('href').replace(".html", ".properties.json");
+                    addNewBookmark(url);
+                } else {
+                    $('#signin-modal').modal('show');
+                }
             });
 
             // add submittal
             $(document).on('click', '.cta-add-submittal', function(e){
                 e.preventDefault();
-                var url = $(this).closest('.each').find('.thumbs a').attr('href');
-                var data = {
-                    document_list: [
-                        {
-                            document_id: "",
-                            document_name: $(this).closest('.each').find('.right .headline').html(),
-                            document_path: $(this).closest('.each').find('.right a').attr('href'),
-                            document_url: window.location.origin + $(this).closest('.each').find('.right a').attr('href')
-                        }
-                    ],
-                    user_info: {
-                        user_id: "cwZ/72WSk6xkm7fFVD4Onw",
-                        display_name: "wqe",
-                        country: "en_au",
-                        first_name: "Chuan Theng",
-                        last_name: "Tan",
-                        email: "tctheng02175@hotmail.com"
-                    }
-                }
-                $.ajax({
-                    url: url + ".json",
-                    type: "GET",
-                    cache: false,
-                    success: function(response) {
-                        console.log(response);
-                        $('#add-submittal-modal').modal('show');
-                        var uuid = response["jcr:uuid"];
-                        data.document_list[0].document_id = uuid;
-                        $.ajax({
-                            url: "/bin/sso/dcAddDoc",
-                            data: JSON.stringify(data),
-                            type: "POST",
-                            cache: false,
-                            success: function(response) {
-
+                if(!$(this).hasClass('disabled')){
+                    var url = $(this).closest('.each').find('.thumbs a').attr('href');
+                    var data = {
+                        document_list: [
+                            {
+                                document_id: "",
+                                document_name: $(this).closest('.each').find('.right .headline').html(),
+                                document_path: $(this).closest('.each').find('.right a').attr('href'),
+                                document_url: window.location.origin + $(this).closest('.each').find('.right a').attr('href')
                             }
-                        });
+                        ],
+                        user_info: dt.user_info
                     }
-                });
+                    $.ajax({
+                        url: url + ".json",
+                        type: "GET",
+                        cache: false,
+                        success: function(response) {
+                            $('#add-submittal-modal').modal('show');
+                            var uuid = response["jcr:uuid"];
+                            data.document_list[0].document_id = uuid;
+                            $.ajax({
+                                url: "/bin/sso/msAddDoc",
+                                data: JSON.stringify(data),
+                                type: "POST",
+                                dataType: 'json',
+                                contentType: "application/json",
+                                cache: false,
+                                success: function(response) {
+                                    console.log('add submittal status', response);
+                                }
+                            });
+                        }
+                    });
+                } else {
+                    $('#signin-modal').modal('show');
+                }
             });
 
             // header search keyword
@@ -209,17 +227,18 @@
                 window.location.href = "http://usgbuataut.cloudapp.net:4504/content/v3/usgboral/samplepage/search-content.html?text=" + text;
             });
 
-
-
-
-            
-
+            // login
+            $(document).on('click', '.cta-login', function(e){
+                e.preventDefault();
+                $('.pre-login-nav a').click();
+            });
         }
     });
 
     
 
     function paginationResult(dataForPagination) {
+        sorting();
         $('#pagination-container').pagination({
             dataSource: dataForPagination,
             callback: function(data, pagination) {
@@ -238,13 +257,13 @@
                 $('#data-container').html(temptMainResulthtml(data));
             },
             beforePageOnClick: function(){
-                scrollTop();
+                scrollToTarget('.search-category-controller-container');
             },
             beforeNextOnClick: function(){
-                scrollTop();
+                scrollToTarget('.search-category-controller-container');
             },
             beforePageOnClick: function(){
-                scrollTop();
+                scrollToTarget('.search-category-controller-container');
             }
         });
     }
@@ -278,10 +297,17 @@
         }
     }
 
+    function scrollToTarget(target){
+        $('html, body').animate({
+            scrollTop: $(target).offset().top - 50
+        }, 500);
+    }
+
     function getResult(){
         $.ajax({
-            // url: "/etc/designs/usgb_v3/clientlib/uiux-less-ct/js/json/search-content-result.json",
-            url: "/etc/designs/usgb_v3/clientlib/uiux-less-ct/js/json/search-doc-finder.json",
+            //url: "/etc/designs/usgb_v3/clientlib/uiux-less-ct/js/json/search-content-result.json",
+            //url: "/etc/designs/usgb_v3/clientlib/uiux-less-ct/js/json/search-doc-finder.json",
+            url: "/bin/usgb/v3/search",
             data: "text="+ searchedText + "&category=" + currCategory,
             type: "GET",
             cache: false,
@@ -291,10 +317,9 @@
 
                 $('.result-caption').removeClass('hidden');
                 $('.result-caption .num').html(resultData.num_result);
-                $('.result-caption .keyword').html(resultData.searched_text);
+                $('.result-caption .current-category').html($('[data-category="'+currCategory+'"]').html());
 
                 if(response.result){
-                    $('.search-category-controller-container').removeClass('hidden');
                     $('.no-search-result-container').addClass('hidden');
                     $('.search-result-container').removeClass('hidden');
 
@@ -316,31 +341,40 @@
                     }
 
                     //populate search related listing
-                    var relatedHtml = $('#templSearchRelated').html();
-                    var temptRelatedHtml = Handlebars.compile(relatedHtml);
-                    $('.related-search').html(temptRelatedHtml(resultData));
-
+                    //if(resultData.searches_related.length > 0){
+                        var relatedHtml = $('#templSearchRelated').html();
+                        var temptRelatedHtml = Handlebars.compile(relatedHtml);
+                        $('.related-search').html(temptRelatedHtml(resultData));
+                    //}
 
                     switch (currCategory) {
                         case "content":
                             // if search in content, doc finder is the sub search result
-                            var subResultDocFinderHtml = $('#templSubSearchResult_docFinder').html();
-                            var temptSubResultDocFinderHtml = Handlebars.compile(subResultDocFinderHtml);
-                            $($('.sub-search-result-wrapper')[0]).html(temptSubResultDocFinderHtml(resultData));
+                            if(response.doc_finder.length > 0){
+                                var subResultDocFinderHtml = $('#templSubSearchResult_docFinder').html();
+                                var temptSubResultDocFinderHtml = Handlebars.compile(subResultDocFinderHtml);
+                                $($('.sub-search-result-wrapper')[0]).html(temptSubResultDocFinderHtml(resultData));
+                            }
                             break; 
                         case "doc_finder":
                             // if search in doc finder, content is the sub search result
-                            var subResultContentHtml = $('#templSubSearchResult_content').html();
-                            var temptSubResultContentHtml = Handlebars.compile(subResultContentHtml);
-                            $($('.sub-search-result-wrapper')[0]).html(temptSubResultContentHtml(resultData));
+                            if(response.content.length > 0){
+                                var subResultContentHtml = $('#templSubSearchResult_content').html();
+                                var temptSubResultContentHtml = Handlebars.compile(subResultContentHtml);
+                                $($('.sub-search-result-wrapper')[0]).html(temptSubResultContentHtml(resultData));
+                            }
                             break;
                         case "cad":
                             text = "No required yet!";
                             break; 
                     }
 
+                    // check login
+                    if($.ssoManager.isLogin){
+                        $('.cta-bookmark, .cta-add-submittal').removeClass('disabled');
+                    }
+
                 }else{
-                    $('.search-category-controller-container').addClass('hidden');
                     $('.search-result-container').addClass('hidden');
                     $('.no-search-result-container').removeClass('hidden');
                 }
@@ -374,6 +408,39 @@
             return arr.indexOf(elem) == pos;
         });
     };
+
+    function sorting(){
+        switch (sort) {
+            case "a_z":
+                currOnStageMainResultData.sort(function(a, b){
+                    if(a.title.toLowerCase() < b.title.toLowerCase()) return -1;
+                    if(a.title.toLowerCase() > b.title.toLowerCase()) return 1;
+                    return 0;
+                });
+                break; 
+            case "z_a":
+                currOnStageMainResultData.sort(function(a, b){
+                    if(a.title.toLowerCase() > b.title.toLowerCase()) return -1;
+                    if(a.title.toLowerCase() < b.title.toLowerCase()) return 1;
+                    return 0;
+                });
+                break;
+            case "latest":
+                currOnStageMainResultData.sort(function(a, b){
+                    if(a.created_date > b.created_date) return -1;
+                    if(a.created_date < b.created_date) return 1;
+                    return 0;
+                });
+                break; 
+            case "oldest":
+                currOnStageMainResultData.sort(function(a, b){
+                    if(a.created_date < b.created_date) return -1;
+                    if(a.created_date > b.created_date) return 1;
+                    return 0;
+                });
+                break; 
+        }
+    }
 
     
 })();

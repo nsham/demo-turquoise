@@ -28,7 +28,14 @@
                         }
                     }
 
+                    var orderHistoryItemTemplate = $("#orderHistoryTemplate");
+                    var orderHistoryItemTemplateContainer = $(".orders-history-wrapper")
+
                     getSampleOrdersHistory(userInfoCustom).done(function(result){
+
+                        console.log(result);
+                        var template = Handlebars.compile(orderHistoryItemTemplate.html());
+                        orderHistoryItemTemplateContainer.html(template(result.orderSamplesList));
 
                     });
 
@@ -62,7 +69,7 @@
             type: "POST",
             cache: false,
             success: function (response) {
-                console.log(response);
+                productsDetails.resolve(response);
             },
             beforeSend: function () {
                 //$('.loader').fadeIn("fast");
