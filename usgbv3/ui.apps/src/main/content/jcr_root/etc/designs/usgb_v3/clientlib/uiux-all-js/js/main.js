@@ -2148,27 +2148,7 @@ $(window).on('load', function () {
                     $('.listing-search-content .container-checkbox input[type="checkbox"]').prop('disabled', false);
                 }
 
-                if (numberOfChecked > 1) {
-                    $(".compare-popup .btn-compare").show();
-                    $(".compare-popup").show();
-                    $(".compare-popup .instruction-text").hide();
-
-                } else {
-                    $(".compare-popup .btn-compare").hide();
-                    $(".compare-popup .instruction-text").show();
-                }
-
-                if (numberOfChecked > 0) {
-                    $(".compare-popup .btn-menu-down").show();
-                    $(".popup-content").show();
-                } else {
-                    $(".compare-popup .instruction-text").hide();
-                    $(".compare-popup").show();
-                    $(".popup-content").hide();
-                    $(".compare-popup .btn-menu-down").hide();
-                    $(".compare-popup .btn-compare").hide();
-                    localStorage.removeItem(categoryName);
-                }
+                                   
             }
 
 
