@@ -6,10 +6,7 @@ import com.day.cq.search.QueryBuilder;
 import com.day.cq.search.result.Hit;
 import com.day.cq.search.result.SearchResult;
 import com.google.common.reflect.TypeToken;
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
+import com.google.gson.*;
 import com.usgbv3.core.models.DistanceLocatorProductCategory;
 import com.usgbv3.core.models.StoreLocatorProductCategory;
 import com.usgbv3.core.models.StoreLocatorStoreCategory;
@@ -319,7 +316,6 @@ public class StoreLocatorServiceImpl implements StoreLocatorService{
         JsonObject resultJsonObject = new JsonObject();
         Set<String> storeTypeSet = new HashSet<>();
         Set<String> productTypeSet = new HashSet<>();
-        Set<String> tempSet = null;
         JsonArray productJsonArray = null;
         if(countryPath != null){
             if(currentLocationParameter != null){
@@ -378,6 +374,9 @@ public class StoreLocatorServiceImpl implements StoreLocatorService{
                 String text = textParameter.getString();
                 if(text != null ){
                     jsonData = getAutoSearch(pageURL, text, resourceResolver, true);
+                    if(jsonData != null){
+                        jsonData =  populateStoreResultFormat(jsonData, gson, resourceResolver, pageURL);
+                    }
                 }
             }else if(keyParameter != null && !"".equals(keyParameter.getString())){
                 String key = keyParameter.getString();
@@ -597,6 +596,49 @@ public class StoreLocatorServiceImpl implements StoreLocatorService{
             }
         }
         return jsonData;
+    }
+
+    private String populateStoreResultFormat(String jsonData, Gson gson, ResourceResolver resourceResolver, String pageURL) {
+        JsonParser parser = new JsonParser();
+        JsonElement tradeElement = parser.parse(jsonData);
+        JsonObject autosearchResultJsonObject = tradeElement.getAsJsonObject();
+        JsonArray storeJsonObjects= null;
+        JsonObject tempJson, resultJsonObject = new JsonObject();
+        if(autosearchResultJsonObject.has("Items")){
+            storeJsonObjects = autosearchResultJsonObject.getAsJsonArray("Items");
+        }
+        if(storeJsonObjects != null){
+
+            Set<String> storeTypeSet = new HashSet<>();
+            Set<String> productTypeSet = new HashSet<>();
+            JsonArray productJsonArray = null;
+            for(JsonElement storeElement : storeJsonObjects){
+                tempJson = storeElement.getAsJsonObject();
+                if(tempJson.has("store_type")){
+                    storeTypeSet.add(tempJson.get("store_type").getAsString());
+                }
+                if(tempJson.has("product_categories") && tempJson.get("product_categories")!= null){
+                    productJsonArray = tempJson.get("product_categories").getAsJsonArray();
+                    if(productJsonArray != null && productJsonArray.size()>0){
+                        for(JsonElement productJsonElement: productJsonArray){
+                            if(!"".equals(productJsonElement.getAsString())){
+                                productTypeSet.add(productJsonElement.getAsString());
+                            }
+                        }
+                    }
+                }
+            }
+            resultJsonObject.add("storeResults", storeJsonObjects);
+            if(storeTypeSet != null && productTypeSet != null){
+                JsonArray filterJsonArray = getFilterJsonData(storeTypeSet, productTypeSet
+                        , resourceResolver, pageURL);
+                if(filterJsonArray != null){
+                    resultJsonObject.add("filterListing", filterJsonArray);
+                }
+            }
+        }
+
+        return gson.toJson(resultJsonObject);
     }
 
     private JsonArray getFilterJsonData(Set<String> storeTypeSet, Set<String> productTypeSet
