@@ -3,7 +3,6 @@
 // Responsive Fonts
 // Header Text Font Size
 // ----------------------------------------------------------------------
-
 h1,
 h2,
 h3,
@@ -24,30 +23,31 @@ h6,
     line-height: 1.2;
 }
 
-.noto-regular{
+.noto-regular {
     font-family: @noto;
     font-weight: 400;
 }
 
-.noto-bold{
+.noto-bold {
     font-family: @noto;
     font-weight: 700;
 }
 
-.font-awesome{
+.font-awesome {
     font-family: @font-awesome;
 }
 
 /* font awesome icons default */
-.stacked-default{
+
+.stacked-default {
     vertical-align: bottom;
     display: inline-block;
     margin: -2px;
 }
+
 .stacked-default>* {
     font-size: 11px;
 }
-
 
 .stacked-default .fa-2x {
     font-size: 13px;
@@ -66,69 +66,59 @@ h6,
     position: relative;
     top: -1px;
 }
+
 /* end font awesome icons default */
 
-
 /*icon colors & sizes*/
-.icon-color-white{
+
+.icon-color-white {
     color: @color-white;
     &:hover,
     &:focus,
-    &:active{
+    &:active {
         color: @color-primary-yellow;
     }
 }
 
-
-.icon-color-green{
+.icon-color-green {
     color: @color-primary-green;
     &:hover,
     &:focus,
-    &:active{
+    &:active {
         color: @color-primary-yellow;
     }
 }
 
-.icon-color-darker-grey{
+.icon-color-darker-grey {
     color: @color-darker-grey;
     &:hover,
     &:focus,
-    &:active{
+    &:active {
         color: @color-primary-green;
     }
 }
 
-.icon-size{  
+.icon-size {
     font-size: 30px;
-    
-    
 }
 
-.icon-size-lg{
+.icon-size-lg {
     font-size: 40px;
-    
-    
 }
 
-.icon-size-md{
+.icon-size-md {
     font-size: 35px;
-    
-    
 }
 
-.icon-size-sm{
+.icon-size-sm {
     font-size: 25px;
-    
-    
 }
 
-.icon-size-xs{
+.icon-size-xs {
     font-size: 20px;
-    
-    
 }
-/*end icon colors & sizes*/
 
+/*end icon colors & sizes*/
 
 h1,
 .ht1 {
@@ -141,7 +131,7 @@ h2,
 }
 
 h3,
-.ht3{
+.ht3 {
     font-size: 40px;
 }
 
@@ -151,7 +141,7 @@ h4,
 }
 
 h5,
-.ht5{
+.ht5 {
     font-size: 24px;
 }
 
@@ -185,8 +175,6 @@ h6,
     .ht6 {
         font-size: 16px;
     }
-
-
 }
 
 // ----------------------------------------------------------------------
@@ -194,10 +182,7 @@ h6,
 // output: fs-{font-sizes}
 // Body Text Font Size
 // ----------------------------------------------------------------------
-
 // @font-sizes: (20, 14, 12, 10); reference only
-
-
 //.loop-font(@bp: null) {
 //    @each @size in @font-sizes {
 //      .fs-@{size} {
@@ -205,24 +190,41 @@ h6,
 //      }
 //    }
 //}
-
-.fs-1 { font-size: 16px; line-height:1.5; }
-.fs-2 { font-size: 14px; line-height:1.5; }
-.fs-3 { font-size: 12px; line-height:1.2; }
-
-@media (min-width: 768px) {
-    .fs-1 { font-size: 16px; line-height:1.5; }
-    .fs-2 { font-size: 14px; line-height:1.5; }
-    .fs-3 { font-size: 12px; line-height:1.2; }
+.fs-1 {
+    font-size: 16px;
+    line-height: 1.5;
 }
 
+.fs-2 {
+    font-size: 14px;
+    line-height: 1.5;
+}
 
+.fs-3 {
+    font-size: 12px;
+    line-height: 1.2;
+}
+
+@media (min-width: 768px) {
+    .fs-1 {
+        font-size: 16px;
+        line-height: 1.5;
+    }
+    .fs-2 {
+        font-size: 14px;
+        line-height: 1.5;
+    }
+    .fs-3 {
+        font-size: 12px;
+        line-height: 1.2;
+    }
+}
 
 // ----------------------------------------------------------------------
 // Headline Sub-Text
 // ----------------------------------------------------------------------
 .sub-heading {
-    font-size: 19px; 
+    font-size: 19px;
     line-height: 1.5;
     font-weight: 700;
     @media (min-width: 768px) {
@@ -230,52 +232,48 @@ h6,
     }
 }
 
-
 // ----------------------------------------------------------------------
 // Header Title Yellow Icon
 // ----------------------------------------------------------------------
-.yellow-label{
-    &:before{
-            content: " ";
-            position: absolute;
-            background: url(../images/yellow-header-icon-l.png) no-repeat transparent;
-            background-size: 100%;
-            width: 56px;
-            height: 90px;
-            // left:0;
-            margin-top:0px;
-            margin-top: -12px;
-            margin-left: -59px;
-
+.yellow-label {
+    &:before {
+        content: " ";
+        position: absolute;
+        background: url(../images/yellow-header-icon-l.png) no-repeat transparent;
+        background-size: 100%;
+        width: 56px;
+        height: 90px; // left:0;
+        margin-top: 0px;
+        margin-top: -12px;
+        margin-left: -59px;
     }
 }
 
-
-.ht1{
-    .yellow-label{
-        &:before{ 
+.ht1 {
+    .yellow-label {
+        &:before {
             width: 28px;
             height: 53px;
             margin-left: -55px;
             margin-top: -6px;
-            @media only screen and (min-width: @min-bp-sm){
+            @media only screen and (min-width: @min-bp-sm) {
                 width: 43px;
                 height: 79px;
                 margin-left: -65px;
-                margin-top: -6px;                
+                margin-top: -6px;
             }
         }
     }
 }
 
-.ht4{
-    .yellow-label{
-        &:before{ 
+.ht4 {
+    .yellow-label {
+        &:before {
             width: 18px;
             height: 37px;
             margin-left: -30px;
             margin-top: -3px;
-            @media only screen and (min-width: @min-bp-sm){
+            @media only screen and (min-width: @min-bp-sm) {
                 width: 23px;
                 margin-left: -40px;
             }
@@ -283,27 +281,36 @@ h6,
     }
 }
 
-.ht5{
-    .yellow-label{
-        &:before{ 
+.ht5 {
+    .yellow-label {
+        &:before {
             width: 15px;
             height: 37px;
             margin-left: -20px;
             margin-top: -3px;
-            @media only screen and (min-width: @min-bp-sm){
+            @media only screen and (min-width: @min-bp-sm) {
                 width: 16px;
                 margin-left: -26px;
-                margin-top: -4px;            
+                margin-top: -4px;
             }
         }
     }
 }
 
-.footer-title{
-    .yellow-label{
-        &:before{ 
+.footer {
+    li a {
+        color: @color-white;
+        &:hover {
+            color: @color-primary-yellow;
+        }
+    }
+}
+
+.footer-title {
+    .yellow-label {
+        &:before {
             width: 11px;
-           margin-left: -18px;
+            margin-left: -18px;
             margin-top: 0px;
         }
     }
