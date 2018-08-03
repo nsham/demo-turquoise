@@ -38,8 +38,7 @@ function recaptchaCallback() {
                     $(labelChooseFile).addClass('open');
                 }
             });
-
-            $(document).on('click', '.btn-no-thanks', function(){
+             $(document).on('click', '.btn-no-thanks', function(){
                 location.reload();
             });
 
@@ -113,7 +112,7 @@ function recaptchaCallback() {
                         $('#dbid').val(data.id);
                         $('#contactUsForm1').hide();
                         $('#contactUsForm2').removeClass('hidden');
-                        $('.thank-you-contacting-msg').removeClass('hidden');
+                         $('.thank-you-contacting-msg').removeClass('hidden');
                     });
 
                 }// end submit handler

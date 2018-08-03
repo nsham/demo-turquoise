@@ -33,7 +33,7 @@
     <properties>
     
         <aem.host.local>localhost</aem.host.local>
-        <aem.port.local>4504</aem.port.local>
+        <aem.port.local>4502</aem.port.local>
         <aem.slng.user.local>admin</aem.slng.user.local>
         <aem.slng.password.local>admin</aem.slng.password.local>
         <aem.vlt.user.local>admin</aem.vlt.user.local>
@@ -44,11 +44,11 @@
 
         <!--     DEV -->
         <aem.host.dev>usgbdevaut.cloudapp.net</aem.host.dev>
-        <aem.port.dev>4502</aem.port.dev>
-        <aem.slng.user.dev>APD_admin</aem.slng.user.dev>
-        <aem.slng.password.dev>Usg_boral@Apd16</aem.slng.password.dev>
+        <aem.port.dev>4504</aem.port.dev>
+        <aem.slng.user.dev>admin</aem.slng.user.dev>
+        <aem.slng.password.dev>admin</aem.slng.password.dev>
         <aem.vlt.user.dev>admin</aem.vlt.user.dev>
-        <aem.vlt.password.dev>usgBApd@i23</aem.vlt.password.dev>
+        <aem.vlt.password.dev>admin</aem.vlt.password.dev>
 
         <!--     UAT -->
         <aem.host.uat>usgbuataut.cloudapp.net</aem.host.uat>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dam="http://www.day.com/dam/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:mix="http://www.jcp.org/jcr/mix/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:mixinTypes="[mix:referenceable]"
+    jcr:primaryType="dam:Asset"
+    jcr:uuid="0174206e-e91b-4725-9f5e-2f78d3ba0be9">
+    <jcr:content
+        dam:assetState="processed"
+        dam:relativePath="USGBoral/Global/Website/Images/component/carousel-home-banner/usgbicon.woff"
+        jcr:lastModified="{Date}2018-06-05T00:50:16.756+08:00"
+        jcr:lastModifiedBy="admin"
+        jcr:primaryType="dam:AssetContent">
+        <metadata
+            dam:extracted="{Date}2018-06-05T00:50:16.694+08:00"
+            dam:sha1="f71f805f8d64f5ef9751d26636dbd00452678973"
+            dam:size="{Long}10604"
+            dc:format="application/x-font-woff"
+            jcr:mixinTypes="[cq:Taggable]"
+            jcr:primaryType="nt:unstructured"/>
+        <related jcr:primaryType="nt:unstructured"/>
+    </jcr:content>
+</jcr:root>

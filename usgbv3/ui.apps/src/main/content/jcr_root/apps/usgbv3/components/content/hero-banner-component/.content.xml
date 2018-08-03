@@ -3,5 +3,5 @@
     jcr:description="Hero Banner Component"
     jcr:primaryType="cq:Component"
     jcr:title="Hero Banner Component"
-    sling:resourceSuperType="usgbv3/components/content/basic-cssOverwrite"
+    sling:resourceSuperType="usgbv3/components/content/basic-advance"
     componentGroup="UIUXComponents"/>

@@ -33,7 +33,7 @@ import com.usgbv3.core.entity.UserInfo;
 property={
         Constants.SERVICE_DESCRIPTION + "=SSO My Submittal - Retrieve History" ,
         "sling.servlet.methods=" + HttpConstants.METHOD_POST,
-        "sling.servlet.paths="+ "/bin/sso/msRetrieveHistory"
+        "sling.servlet.paths="+ "/bin/sso/mySubmittal/retrieve"
 })
 public class SSOMSRetrieveServlet extends BaseAllMethodsServlet {
 	private static final long serialVersionUID = 1452364151988577055L;

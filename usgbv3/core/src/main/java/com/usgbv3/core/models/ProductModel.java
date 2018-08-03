@@ -13,6 +13,7 @@ public class ProductModel {
 	private String icon;
 	private String linkType;
 	private String link;
+	private String createdDate;
 	private Tag tag;
 	private List<Tag> tagList;
 	private String toStringTags;
@@ -102,6 +103,14 @@ public class ProductModel {
 			result = result + "data-"+ tag.getParent().getName() + "='" + tag.getName() + "' ";
 		}
 		return result;
+	}
+
+	public String getCreatedDate() {
+		return createdDate;
+	}
+
+	public void setCreatedDate(String createdDate) {
+		this.createdDate = createdDate;
 	}
 	
 	

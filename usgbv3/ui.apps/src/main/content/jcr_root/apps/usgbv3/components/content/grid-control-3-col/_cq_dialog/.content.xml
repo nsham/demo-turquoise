@@ -303,6 +303,9 @@
                 jcr:primaryType="nt:unstructured"
                 jcr:title="Styling"
                 sling:resourceType="granite/ui/components/foundation/section">
+                <layout
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="granite/ui/components/foundation/layouts/fixedcolumns"/>
                 <items jcr:primaryType="nt:unstructured">
                     <column
                         jcr:primaryType="nt:unstructured"
@@ -313,21 +316,18 @@
                                 jcr:title="Advanced Styling"
                                 sling:resourceType="granite/ui/components/foundation/form/fieldset">
                                 <items jcr:primaryType="nt:unstructured">
-                                    <id/>
                                     <cssClass
                                         jcr:primaryType="nt:unstructured"
                                         sling:resourceType="granite/ui/components/foundation/form/textfield"
                                         fieldLabel="CSS Class"
                                         name="./cssClass"/>
                                     <disclaimer/>
+                                    <id/>
                                 </items>
                             </css>
                         </items>
                     </column>
                 </items>
-                <layout
-                    jcr:primaryType="nt:unstructured"
-                    sling:resourceType="granite/ui/components/foundation/layouts/fixedcolumns"/>
             </styling>
         </items>
     </content>

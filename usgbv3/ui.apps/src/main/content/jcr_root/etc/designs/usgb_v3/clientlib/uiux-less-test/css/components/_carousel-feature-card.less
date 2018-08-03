@@ -1,0 +1,147 @@
+// ----------------------------------------------------------------------
+// Component: Feature Card Wrapper
+// ----------------------------------------------------------------------
+.feature-card-wrapper{
+        padding: 0;
+
+        &.variation-1 {
+            img{
+                position: relative;
+                top: 0;
+                left: 0;
+                transform: none;
+                width: 100%;
+                max-width: 100%;
+            }
+        }
+        &.variation-2 {
+            img{
+                width: 100%;
+                max-width: 100%;
+            }
+            .each-box{
+                @media only screen and (min-width:768px) {
+                    width: 50%;
+                    float: left;
+                    padding: 7px;
+                }
+            }
+        }
+        
+       .slick-dots {
+        position: static; 
+        padding-bottom: 10px;
+        margin-top: 1%;
+        @media (max-width: 768px) {
+            margin-top: 5px;   
+        }
+        button{
+            background-color: transparent;
+            border: 2px solid #5f575c;
+            border-radius: 60%;
+            height: 11px;
+            width: 11px;
+            padding: 3px;
+            &:hover{
+                background-color: #5f575c;
+            }
+            &:before{
+                content: none;
+            }
+        }
+        .slick-active{
+            button{
+                background-color: #5f575c;
+            }
+        }
+    }
+    .slick-arrow {
+        bottom: 0;
+        top: auto;
+        transform: none;
+        // background-color: @color-primary-green;
+        transform: all ease 300ms;
+        height: auto;
+        z-index: 90;
+
+        &:before{
+            font-family: @font-awesome;
+            opacity: .7;
+            font-size: 40px;
+        }
+        &:hover{
+           /* background-color: darken(@color-primary-green, 10%);*/
+            &:before{
+                opacity: 1;
+            }
+        }
+    }
+    .slick-prev {
+        left: 33%;
+        @media (max-width: 992px) {
+            left: 23%;
+        }
+        @media (max-width: 768px) {
+            left: 15%;
+        }
+        @media (max-width: 480px) {
+            left: 6%;
+        }
+        @media (max-width: 400px) {
+            left: 3%;
+        }
+        &:before{
+            /*content: "\2039";*/
+            content: " ";
+            background: url(../images/arrow-grey-btn.png) no-repeat transparent;
+            width: 9px; 
+            float: left;
+            height: 15px;
+            margin-bottom: 15px;
+        }
+    }
+    .slick-next {
+        right: 33%;
+        @media (max-width: 992px) {
+            right: 23%;
+        }
+        @media (max-width: 768px) {
+            right: 15%;
+        }
+        @media (max-width: 480px) {
+            right: 6%;
+        }
+        @media (max-width: 400px) {
+            right: 0%;
+        }
+        &:before{
+            /*content: "\f105";*/
+            content: " ";
+            background: url(../images/arrow-grey-btn.png) no-repeat transparent;
+            width: 9px;
+            float: left;
+            height: 15px;
+            margin-bottom: 15px;
+            -webkit-transform: rotate(180deg);
+            transform: rotate(180deg);
+        }
+    }
+
+   
+
+    .slick-dotted.slick-slider {
+        margin-bottom: 0px;
+    }
+
+    .cta-video-popup .ico-play-video {
+        z-index: 10;
+        //max-width: 165px;
+       // width: auto;
+        margin: auto;
+        padding: 1%;
+        font-size:80px;
+
+    }
+}
+
+

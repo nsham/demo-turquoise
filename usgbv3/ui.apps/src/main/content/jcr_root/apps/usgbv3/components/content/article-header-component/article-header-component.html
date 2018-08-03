@@ -1,0 +1,53 @@
+<sly data-sly-test="${wcmmode.edit || wcmmode.design}">
+	Edit here for Article Header Component
+</sly>
+
+<style>
+	${properties.cssoverwrite @ context='unsafe'}
+</style>
+
+<div class="c-article-bar with-contact ${properties.classid @ context='unsafe'}">
+	<div class="inner">
+		<h1 class="ht4 text-center text-sm-left uppercase"><strong>${currentPage.title }</strong></h1>
+		<!-- desktop only -->
+        <sly data-sly-test="${properties.buttonText}">
+            <div class="dbtn-group hidden-xs ">
+            	<sly data-sly-test.isLink="${properties.link}">
+					<a href='${properties.link}' target="${properties.targettype == properties.hiddentarget ? properties.targetName : properties.targettype}" 
+                		class="btn btn-brand-default ${properties.buttonStyle }">${properties.buttonText}</a>
+                </sly>
+				<sly data-sly-test="${!isLink}">
+					<a class="btn btn-brand-default ${properties.buttonStyle }">${properties.buttonText}</a>
+                </sly>
+
+            </div>
+        </sly>
+		<!-- end desktop only -->
+		<hr class="m-vertical-m dark-2-grey" />
+	</div>
+</div>
+
+<div class="row row-vertical-center p-no m-bottom-m">
+	<div class="col-xs-6 col-sm-6 ">
+
+    	<sly data-sly-test.pagedate="${currentPage.properties.pagedate }">
+			<p class="color-grey m-no"><i>${ 'dd MMM yyyy' @ format=currentPage.properties.pagedate}</i></p> 
+        </sly>
+
+    	<sly data-sly-test="${!pagedate }">
+			<p class="color-grey m-no"><i>${ 'dd MMM yyyy' @ format=currentPage.lastModified}</i></p> 
+        </sly>
+
+	</div>
+	<div class="col-xs-6 col-sm-6 ">
+		<!-- desktop only -->
+		<!-- c-socialmedia-row -->
+		<div class="c-socialmedia-row text-center text-sm-right">
+			<span class="color-dark-grey fs-2 hidden-xs">Share us on:</span>
+        	<span class="color-dark-grey fs-2 visible-xs">Share</span>
+			<div class="sharethis-inline-share-buttons"></div>
+		</div>
+		<!-- end c-socialmedia-row -->
+		<!-- end desktop only -->
+	</div>
+</div>

@@ -2,36 +2,44 @@
 	Edit here for Image Hotspot
 </sly>
 
-<div class="hotspot-container">
+<style type="text/css">
+    #img-hotspot.s7interactiveimage{
+        max-width:630px;
+        width:100%; 
+        height:auto;
+        margin:20px auto;
+    }
 
-    <style type="text/css">
+    @media(min-width:767px){
+
         #img-hotspot.s7interactiveimage{
-            width:100%; 
-            height:auto;
-            margin:auto;
+            margin:40px auto;
         }
+    }
 
-        /*
-        @media(min-width:767px){
-  		#img-hotspot.s7interactiveimage{
-            width:100vh;
-		}
-        }
-        */
-    </style>
+
+	${properties.cssoverwrite @ context='unsafe'}
+
+</style>
+
+<div class="hotspot-container ${properties.classid }">
+
+
 
     <script type="text/javascript" src="/etc/dam/viewers/s7viewers/html5/js/InteractiveImage.js"></script>
     
     <div id="img-hotspot"></div>
     
     <script type="text/javascript">
+        var full = location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: '');
+
         var imgViewer = new s7viewers.InteractiveImage({
             "containerId" : "img-hotspot",
             "params" : { 
-                "serverurl" : "http://usgbdevaut.cloudapp.net:4504/is/image/",
-                "contenturl" : "http://usgbdevaut.cloudapp.net:4504", 
+                "serverurl" : "/is/image/",
+                "contenturl" : full, 
                 "config" : "/etc/dam/presets/viewer/Product_Viewer",
-                "asset" : '${properties.MainImgPath @ context="scriptString"}' 
+                "asset" : '${properties.mainImgPath @ context="scriptString"}' 
             }
         })
 
@@ -63,26 +71,29 @@
                     </div>
                     <!-- end modal header -->
                     <!-- modal content -->
-                    <div class="modal-content">
-                        <!-- modal body -->
-                        <div class="modal-body">
-                            <div class="flex-row justify-end row-wrap">
-                                <div class="col-xs-12 col-sm-8 p-bottom-m p-top-m order-2 order-sm-2">
-                                    <h2 class="ht4 m-bottom-m m-top-m m-sm-top-no hs-title">${item.properties.title}</h2>
-                                    <p class="color-darker-grey fs-2 hs-desc">${item.properties.description @ context='html'}</p>
-                                </div>
-                                <div class="col-xs-12 col-sm-4 order-1 order-sm-2 p-bottom-m p-top-m">
-                                    <img class="img-responsive hs-img" src="${item.properties.imgPath}"/>
-                                </div>
-                            </div>
-                            <div class="flex-row justify-end row-wrap">
-                            	<div class="col-xs-12 col-sm-8 p-bottom-m p-top-m">
-                                	<a href="${item.properties.productLink}.html" class="btn btn-brand-default button-green">Find out more</a>
-                                </div>
-                            </div>
+
+        			<div class="modal-content p-vertical-l">
+                      <!-- modal body -->
+                      <div class="modal-body">
+                        <div class="">
+                          <div class="col-xs-12 col-sm-6 order-1 order-sm-2 p-top-no p-sm-top-xs p-bottom-m p-sm-bottom-no">
+                            <img class="img-responsive hs-img" src="${item.properties.imgPath @ context='unsafe'}">
+                          </div>
+                          <div class="col-xs-12 col-sm-6 order-2 order-sm-2">
+                            <h2 class="ht4 m-sm-bottom-m m-bottom-s top-no hs-title">${item.properties.title}</h2>
+                    
+        					${item.properties.description @ context='html'}
+                    
+                    
+                            <p class="text-left ">
+                              <a href="${item.properties.productLink @ context='unsafe'}.html" target="${properties.targettype == properties.hiddentarget ? properties.targetName : properties.targettype}" class="btn btn-brand-default button-green">Find out more</a>
+                            </p>
+                          </div>
                         </div>
-                        <!-- end modal body -->
+                      </div>
+                      <!-- end modal body -->
                     </div>
+
                     <!-- end modal content -->
                 </div>
             </div>

@@ -2,9 +2,16 @@
 	Edit here for Newsletter Component
 </sly>
 
-<div class="container-fluid bg-white p-no " style="background:transparent url('/content/dam/USGBoral/Global/Website/Images/component/allsample/bg-carousel-banner.jpg') center right no-repeat; background-size:cover;">
-	<div class="bg-overlay">
-        <div class="container subscribe-newsletter p-no">
+
+<sly data-sly-test.assetExist="${properties.imgPath }">
+	<div class="container-fluid bg-white p-no " style="background:transparent url(${properties.imgPath @ context='unsafe'}) center right no-repeat; background-size:cover;">
+</sly>
+<sly data-sly-test.assetExist="${!assetExist }">
+	<div class="container-fluid bg-white p-no " style="background-color: ${properties.bgColor @ context='unsafe'};">
+</sly>
+
+	<div class="${properties.opacity}">
+        <div class="container subscribe-newsletter">
             <div class="row m-no m-bottom-xxl m-top-xxl">
                 <div class="col-xs-12 p-no">
                     <div class="col-xs-12 col-md-6">

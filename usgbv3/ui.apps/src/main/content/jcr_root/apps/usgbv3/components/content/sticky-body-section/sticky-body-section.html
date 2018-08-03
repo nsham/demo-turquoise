@@ -1,0 +1,25 @@
+<div class="container">
+	<div class="row m-bottom-xxl">
+		<div class="col-xs-12 col-sm-9 col-md-9 make-sticky_limit">
+
+			<sly data-sly-resource="${'left-par' @ resourceType='foundation/components/parsys'}"/>
+
+		</div>
+		<!-- set p-left-no, avoid sticy width's glitch -->
+		<div class="col-xs-12 col-sm-3 col-md-3 hidden-xs p-left-no make-sticky">
+
+			<div class="make-sticky_inner" style="position: relative;">
+            	<div class="c-sidebar">
+                	<div class="each" >
+				
+						<sly data-sly-resource="${'right-par' @ resourceType='foundation/components/parsys'}"/>
+
+					</div>
+                </div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<sly data-sly-use.clientLib="/libs/granite/sightly/templates/clientlib.html" data-sly-call="${clientLib.js @ categories='uiux.stickysidebar'}" data-sly-unwrap/>

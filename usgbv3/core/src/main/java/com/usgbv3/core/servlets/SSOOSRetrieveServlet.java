@@ -5,6 +5,7 @@ import java.net.URI;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.rmi.ServerException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -69,12 +70,12 @@ import com.usgbv3.core.utils.StringUtils;
 property={
         Constants.SERVICE_DESCRIPTION + "=SSO Order Sample - Retrieve History" ,
         "sling.servlet.methods=" + HttpConstants.METHOD_POST,
-        "sling.servlet.paths="+ "/bin/sso/osRetrieveHistory"
+        "sling.servlet.paths="+ "/bin/sso/orderSample/retrieve"
 })
 public class SSOOSRetrieveServlet extends BaseAllMethodsServlet {
 	private static final long serialVersionUID = 1452364151988577055L;
 	protected final Logger log = LoggerFactory.getLogger(this.getClass());
-
+	private SimpleDateFormat formatT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	
 	@Reference
 	private OrderSampleDao orderSampleDao;
@@ -260,6 +261,8 @@ public class SSOOSRetrieveServlet extends BaseAllMethodsServlet {
 			for(OrderInfo oi : oiList){
 				
 				JSONObject oiJson = new JSONObject(gson.toJson(oi));
+				oiJson.put("created_date", formatT.format(oi.getCreated_date()));
+				oiJson.put("modified_date", formatT.format(oi.getModified_date()));
 				jsonArray.put(oiJson);
 			}
 			

@@ -1,16 +1,24 @@
 package com.usgbv3.core.components;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
 
 import org.apache.sling.api.resource.Resource;
+import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.api.resource.ValueMap;
+import org.apache.sling.commons.json.JSONArray;
+import org.apache.sling.commons.json.JSONException;
+import org.apache.sling.commons.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,6 +31,7 @@ import com.google.common.collect.Lists;
 import com.google.gson.Gson;
 import com.usgbv3.core.models.FilterModel;
 import com.usgbv3.core.models.ProductModel;
+import com.usgbv3.core.utils.CountryUtils;
 
 
 public class ProductListingComponent extends WCMUsePojo {
@@ -31,8 +40,12 @@ public class ProductListingComponent extends WCMUsePojo {
 	private List<ProductModel> parentListingList;
 	private List<ProductModel> productListingList;
 	private List<FilterModel> filterListingList;
+	private String productListingJson;
 	private String error;
 
+	private static SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
+
+	
 	public List<ProductModel> getParentListingList() {
 		return parentListingList;
 	}
@@ -55,6 +68,14 @@ public class ProductListingComponent extends WCMUsePojo {
 
 	public void setFilterListingList(List<FilterModel> filterListingList) {
 		this.filterListingList = filterListingList;
+	}
+
+	public String getProductListingJson() {
+		return productListingJson;
+	}
+
+	public void setProductListingJson(String productListingJson) {
+		this.productListingJson = productListingJson;
 	}
 
 	public String getError() {
@@ -97,9 +118,11 @@ public class ProductListingComponent extends WCMUsePojo {
 		    //remove filter
 		    filterListingList = groupingFilter(tagListingList);
 		    
+		    productListingJson = convertToJsonString();
+		    
 		    //String json = new Gson().toJson(productListingList );
 		    
-		    error = new Gson().toJson(productListingList.get(0) );
+//		    error = new Gson().toJson(productListingList.get(0) );
 	    	
 	    }catch (Exception e) {
 			error = error + e.getMessage();
@@ -126,6 +149,11 @@ public class ProductListingComponent extends WCMUsePojo {
 				
 				product.setImage(pageProperties.get("pageImage").toString());
 			}			
+			
+
+			Calendar calendar = pageProperties.get("jcr:created", Calendar.class);
+			Date date = (Date) calendar.getTime();
+			product.setCreatedDate(formatter.format(date));
 			
 		}catch (Exception e) {
 			error = e.getMessage();
@@ -177,6 +205,191 @@ public class ProductListingComponent extends WCMUsePojo {
 		
 		
 		return filterGroups;
+	}
+	
+	public String convertToJsonString() {
+		
+		String productListing = "";
+		JSONObject basicInfoObject = new JSONObject();
+		
+		try {
+
+			Map<String, String> countryInfo = CountryUtils.retrieveUsgbCountrybyPath(getResourceResolver(), getCurrentPage().getPath());
+			
+			JSONObject categoryJson = getPageCategory(getResourceResolver(), countryInfo.get("sitePath")+"/products", getCurrentPage().getPath());
+			basicInfoObject.put("category_key", categoryJson.get("key"));
+			
+			basicInfoObject.put("country_key", countryInfo.get("countryCode"));
+			
+			basicInfoObject.put("product_listing_filter", convertFilterToJson());
+			
+			if(getProperties().containsKey("enableShoutout") && "true".equalsIgnoreCase((String) getProperties().get("enableShoutout"))) {
+				basicInfoObject.put("shoutout", true);
+			}else {
+				basicInfoObject.put("shoutout", false);
+			}
+			
+			
+			basicInfoObject.put("product_result", convertProductListingListToJson());
+			productListing = basicInfoObject.toString();
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return productListing;
+	}
+	
+	public JSONArray convertFilterToJson() {
+		
+		JSONArray filterJson = new JSONArray();
+		JSONObject filterInfoJson = new JSONObject();
+		
+		try {
+			filterInfoJson.put("catergory_key", "refine_search");
+			filterInfoJson.put("category_title", "Refine Your Search");
+			
+			if(filterListingList != null) {
+
+				JSONArray filterListingListJson = new JSONArray();
+				for(FilterModel filterListing : filterListingList) {
+
+					JSONObject filterListingJson = new JSONObject();
+					filterListingJson.put("key", filterListing.getTagCategory().getName());
+					filterListingJson.put("value", filterListing.getTagCategory().getTitle());
+					
+					
+					if(filterListing.getTagValues() != null) {
+						JSONArray secondFilterListingListJson = new JSONArray();
+						for(Tag filterListingTag : filterListing.getTagValues()) {
+							
+							JSONObject secondFilterListingJson = new JSONObject();
+							secondFilterListingJson.put("key", filterListingTag.getName());
+							secondFilterListingJson.put("value", filterListingTag.getTitle());
+							secondFilterListingListJson.put(secondFilterListingJson);
+						}
+
+						filterListingJson.put("child", secondFilterListingListJson);
+						
+					}
+					
+					filterListingListJson.put(filterListingJson);
+				}
+			
+				filterInfoJson.put("category_child", filterListingListJson);
+			}
+			filterJson.put(filterInfoJson);
+			
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return filterJson;
+		
+	}
+	
+	public JSONArray convertProductListingListToJson() {
+		
+		JSONArray productJson = new JSONArray();
+		
+		try {
+			
+			if(productListingList != null) {
+				int count = 1;
+				for(ProductModel product : productListingList) {
+
+					JSONObject productInfoJson = new JSONObject();
+					productInfoJson.put("num", count);
+					productInfoJson.put("img", product.getImage());
+					productInfoJson.put("title", product.getTitle());
+					
+					for(Tag tag : product.getTagList()) {
+						
+						productInfoJson.put(tag.getParent().getName(), tag.getName());
+					}
+					
+					productInfoJson.put("link", product.getLink() + ".html");
+					productInfoJson.put("created_date", product.getCreatedDate());
+					
+					productJson.put(productInfoJson);
+					count++;
+				}
+				
+			}
+			
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		
+		
+		return productJson;
+	}
+	
+	public JSONObject getPageCategory(ResourceResolver resourceResolver, String homePage, String pagePath) {
+		JSONObject category = new JSONObject();
+
+		LOG.info("getPageCategory Start = " + homePage + "  |  " + pagePath);
+		
+		if(pagePath.contains("jcr:content")) {
+			pagePath = pagePath.substring(0,pagePath.indexOf("jcr:content"));
+		}
+		Page contentPage = resourceResolver.resolve(pagePath).adaptTo(Page.class); 
+		
+		
+		try {
+			
+			
+			LOG.info("getPageCategory pagePath = " + pagePath);
+			
+			if(pagePath.indexOf(homePage) > -1) {
+//				LOG.info("getPageCategory indexOf > -1 = " + pagePath);
+				
+				if(homePage.equals(pagePath)) {
+
+//					LOG.info("getPageCategory equals = " + pagePath);
+					Page parentPage = contentPage.getParent(); 
+					
+					category.put("key", "homepage");
+					category.put("name", "Home Page");
+					
+				}else {
+					
+					if(!(homePage.equals(contentPage.getParent().getPath()))) {
+
+//						LOG.info("getPageCategory if = " + pagePath);
+						category = getPageCategory(resourceResolver, homePage, contentPage.getParent().getPath());
+						
+					}else {
+
+//						LOG.info("getPageCategory else = " + pagePath);
+						
+						category.put("key", contentPage.getName());
+						category.put("name", contentPage.getTitle());
+					}
+				}
+				
+			}else {
+
+				LOG.info("getPageCategory indexOf not = " + pagePath);
+				category.put("key", "others");
+				category.put("name", "Others");
+			}
+			
+				
+			
+			
+		}catch (Exception e) {
+			LOG.info("getPageCategory ERROR = " + e.getMessage());
+		}
+		
+		
+		
+		
+		return category;
 	}
     
 

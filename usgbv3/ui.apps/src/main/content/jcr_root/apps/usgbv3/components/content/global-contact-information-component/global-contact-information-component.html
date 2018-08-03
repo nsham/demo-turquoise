@@ -1,0 +1,47 @@
+<sly data-sly-test="${wcmmode.edit || wcmmode.design}">
+	Edit here for Global Contact Information 
+</sly>
+
+<sly data-sly-use.listUse="${'logic_multifield.js' @ multifieldName='contactinfo'}">
+	  <div class="row m-md-top-xl">
+			 <div>
+				    <div class="col col-md-12 col-sm-12 col-xs-12 md-${properties['aligndesktop'] || 'text-center'} sm-${properties['aligntablet'] || 'text-center'} xs-${properties['alignmobile'] || 'text-center'} filterDetail">
+						<strong class="titleDropdown">FILTER BY COUNTRY&nbsp;&nbsp;&nbsp;</strong>
+        				<select class="countryDropdown">
+                            <!--option value="" disabled selected>PLEASE SELECT A COUNTRY</option-->
+                            <option value="All">ALL</option>
+                        </select>
+                    </div>
+          </div>
+
+      </div>
+      <div class="row m-md-top-xl">
+    	  <sly data-sly-list="${listUse}">
+        	<sly data-sly-call="${contactinfo @ ci=item}"/>
+	      </sly>
+      </div>
+</sly>
+
+ <template data-sly-template.contactinfo="${ @ ci}">
+     <sly data-sly-use.contact ="${'logic.js'}">
+   		 <div class="col col-md-${contact.columndesktop} col-sm-${contact.columntablet} col-xs-${contact.columnmobile} contactDetail" data-country="${ci.properties.country}">
+             <div class="media media-tertiary">
+    				<div class="media-left">
+        				<a href="${ci.properties.pagepath}.html">
+							<img class="media-object" src="${ci.properties.image }" alt="...">
+        				</a>
+                    </div>
+					<div class="media-body rtf">
+						<a href="${ci.properties.contactPagePath}.html">
+                            <h5 class="media-heading">${ci.properties.title}</h5>
+                        </a>
+                        <p>
+                        	${ci.properties.contentRichText @ context='html'}
+                        </p>
+                    </div>
+             </div>
+         </div>
+    </sly>
+</template> 
+
+<sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html" data-sly-call="${clientlib.all @ categories='uiux.globalcontact'}"/>

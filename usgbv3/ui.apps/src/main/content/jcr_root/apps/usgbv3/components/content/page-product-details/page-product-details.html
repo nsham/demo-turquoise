@@ -185,12 +185,10 @@
                                 <i class="fa fa-print fa-stack-1x fa-inverse"></i>
                             </span>
                         </a>
-                        <a href="" class="float-left stacked-default icon-color-darker-grey">
-                            <span class="fa-stack fa-5x">
-                                <i class="fa fa-square fa-stack-2x"></i>
-                                <i class="fa fa-share-alt fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </a>
+                        
+                        <div class="share-group text-left">
+                            <div class="sharethis-inline-share-buttons"></div>
+                        </div>
 
                         <a href="" class="float-right stacked-default icon-color-darker-grey ">
                             <span class="fa-stack fa-5x">
@@ -237,7 +235,10 @@
                                         <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
                                     </span>
                                 </a> -->
-                                <div class="sharethis-inline-share-buttons"></div>
+                                <div class="share-group text-left">
+                                    <div class="sharethis-inline-share-buttons"></div>
+                                </div>
+                                
                             </p>
                         </div>
                     </div>
@@ -2284,7 +2285,7 @@
                     <div>
                         <div class="feature-card-wrapper">
                             <!-- slick div -->
-                            <div class="carousel-feature-card browse-history-result" data-slick='{
+                            <div class="browse-history-result" data-slick='{
                                 "dots": false,
                                 "infinite": true,
                                 "speed": 300,
@@ -2323,7 +2324,7 @@
 
                         <script id="browseHistoryTemplate" type="text/x-handlebars-template">
                             {{#each this}}
-                            <div class="col-sm-2 p-xl p-bottom-no">
+                            <div class="browse-history-thumb p-xl p-bottom-no">
                                 <a href="{{pagePropertiesList.0.uri}}.html" target="_blank">
                                     <div class="box-size-m box-type-2 bg-white p-md-xs p-xs">
                                         <div class="center width-full">
@@ -2512,22 +2513,26 @@
                         var template = Handlebars.compile(html);
                         console.log(template(currOnStageMainResultData));
                         $('.browse-history-result').append(template(currOnStageMainResultData));
+                        $('.browse-history-result').slick();
+                       
                     }
                 });
 
             }
+
         });
 
 
         function addNewBrowseHistory(url) {
             var urls = JSON.parse(localStorage.getItem('browseHistory')) || [];
             urls.unshift(url);
-            console.log('urls', urls);
+            //console.log('urls', urls);
             urls = uniqueArray(urls);
             //to remove the laast one, if more than 5 items
             // if(urls.length > 5){
             //     urls.pop();
             // }
+
             localStorage.setItem('browseHistory', JSON.stringify(urls));
         }
 
@@ -2566,4 +2571,7 @@
         }
 
     })();
+
+
+
 </script>

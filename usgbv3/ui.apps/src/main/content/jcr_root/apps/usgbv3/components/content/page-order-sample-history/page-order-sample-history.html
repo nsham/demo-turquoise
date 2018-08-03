@@ -97,7 +97,7 @@
                     </div>
                     <div class="col-xs-12 col-sm-3">
                         <div class="order-date">
-                            <span>{{created_date}}</span>
+                            <span>{{display_date}}</span>
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-3"></div>
@@ -113,32 +113,48 @@
                 <div class="row order-item-desc p-sm-top-l">
                     <div class="col-xs-12">
                         <div id="{{order_id}}" class="row collapse p-sm-xl bg-lighter-grey order-item-desc-info">
-                            <div class="col-xs-12 col-sm-1"></div>
-                            <div class="col-xs-8 col-sm-8">
-                                <b>Item:</b>
-                                {{#each productList}}
-                                    <div class="item-name">
-                                        <span>{{product_name}}</span>
-                                    </div>
-                                {{/each}}
-                                <br>
-                                <b>Ship to:</b>
-                                <div class="item-ship-to-address">
-                                    <span>{{shippingDetail.ship_address1}},</span>
-                                    </br>
-                                    <span>{{shippingDetail.ship_address2}},</span>
-                                    </br>
-                                    <span>{{shippingDetail.ship_postcode}} {{shippingDetail.ship_city}}, {{shippingDetail.ship_country}} </span>
+                            
+                            <div class="col">
+                                
+                                <div class="row">
+                                        <div class="col-xs-12 col-sm-1"></div>
+                                        <div class="col-xs-8 col-sm-8">
+                                            <b>Item:</b>
+                                            {{#each productList}}
+                                                <div class="item-name">
+                                                    <span>{{product_name}}</span>
+                                                </div>
+                                            {{/each}}
+                                            <br>
+                                            <b>Ship to:</b>
+                                            <div class="item-ship-to-address">
+                                                <span>{{shippingDetail.ship_address1}},</span>
+                                                </br>
+                                                <span>{{shippingDetail.ship_address2}},</span>
+                                                </br>
+                                                <span>{{shippingDetail.ship_postcode}} {{shippingDetail.ship_city}}, {{shippingDetail.ship_country}} </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-2 col-sm-2 text-center">
+                                            <b>Quantity</b>
+                                            {{#each productList}}
+                                                <div class="item-quantity"><span>{{product_quantity}}</span></div>
+                                            {{/each}}
+                                        </div>
+                                        <div class="col-xs-12 col-sm-1"></div>
                                 </div>
-                            </div>
-                            <div class="col-xs-2 col-sm-2 text-center">
-                                <b>Quantity</b>
-                                {{#each productList}}
-                                    <div class="item-quantity"><span>{{product_quantity}}</span></div>
-                                {{/each}}
+
+                                {{#if orderStatusActive}}
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-9"></div>
+                                        <div class="col-xs-12 col-sm-3">
+                                            <a href="#" data-orderid="{{order_id}}" class="cancel-order-cta btn btn-brand-default button-green m-s">Cancel Order</a>
+                                        </div>
+                                    </div>
+                                {{/if}}
 
                             </div>
-                            <div class="col-xs-12 col-sm-1"></div>
+
                         </div>
                     </div>
                 </div>

@@ -1,3 +1,4 @@
 #base=js
 
 slick.js
+slick-lightbox.js
