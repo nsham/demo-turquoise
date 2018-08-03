@@ -1,0 +1,37 @@
+// ----------------------------------------------------------------------
+
+  // Accordion List collapse expand (ky)
+
+// ----------------------------------------------------------------------
+ 
+.accordion-item  {
+    margin-bottom: 20px;
+   // background-color: #fff;
+    border: 0px solid transparent;
+    border-radius: 0px;
+    -webkit-box-shadow: none;
+    box-shadow:none;
+ }
+
+
+
+ .panel-heading {
+    cursor: pointer;
+}
+
+/* CSS Method for adding Font Awesome Chevron Icons */
+ .accordion-toggle:after {
+    font-weight: bold;
+    color:@color-primary-green;
+    font-size: 22px;
+    content:"\2013";
+    float: right;
+    margin-top:-4px;
+}
+.panel-heading.collapsed .accordion-toggle:after {
+    /* symbol for "collapsed" panels */
+   // font-size:16px;
+    content:"\002b";
+}
+
+

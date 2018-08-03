@@ -5,6 +5,6 @@
     cq:lastReplicationAction="Activate"
     jcr:mixinTypes="[cq:ReplicationStatus]"
     jcr:primaryType="cq:Component"
-    jcr:title="UIUX Master Template "
+    jcr:title="UIUX - FreeForm Template "
     sling:resourceSuperType="wcm/foundation/components/page"
     componentGroup=".hidden"/>

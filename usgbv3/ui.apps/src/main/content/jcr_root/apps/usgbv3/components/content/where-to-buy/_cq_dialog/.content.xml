@@ -51,8 +51,8 @@
                             <isglobal
                                 jcr:primaryType="nt:unstructured"
                                 sling:resourceType="granite/ui/components/foundation/form/textfield"
-                                name="./allstates"
-                                fieldLabel="All States"/>
+                                fieldLabel="All States"
+                                name="./allstates"/>
                         </items>
                     </column>
                 </items>

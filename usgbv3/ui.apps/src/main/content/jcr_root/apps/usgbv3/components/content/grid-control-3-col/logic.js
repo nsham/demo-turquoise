@@ -3,7 +3,7 @@
 /**
  * 
  */
-use(["../../structure/common/datasources/margin/MarginUtils.js",'/apps/usgbv3/widgets/utils/utils.js'], function (MarginUtils, utils) {
+use(["/apps/usgbv3/widgets/utils/MarginUtils.js",'/apps/usgbv3/widgets/utils/utils.js'], function (MarginUtils, utils) {
 
     var c1padding = utils.getPaddingClasses(
         granite.resource.properties['dc1hidepadding'],
