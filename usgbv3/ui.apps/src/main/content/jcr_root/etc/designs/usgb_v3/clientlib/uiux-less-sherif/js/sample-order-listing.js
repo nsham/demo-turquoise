@@ -108,7 +108,28 @@
 
 
                     //Step 2 Shipping Details Form
-                    shippingDetailsForm.validate();
+                    shippingDetailsForm.validate({
+                        ignore: ".ignore",
+                        errorElement: "span",
+                        errorPlacement: function (error, element) {
+                            // Add the `help-block` class to the error element
+                            error.addClass("help-block");
+        
+                            if (element.prop("type") === "checkbox") {
+                                error.insertAfter(element.closest('.checkbox'));
+                            } else if (element.prop("tagName").toLowerCase() === "select") {
+                                error.insertAfter(element);
+                            } else {
+                                error.insertAfter(element.parent().find('label'));
+                            }
+                        },
+                        highlight: function (element, errorClass, validClass) {
+                            $(element).parents(".respond-msg").addClass("has-error").removeClass("has-success");
+                        },
+                        unhighlight: function (element, errorClass, validClass) {
+                            $(element).parents(".respond-msg").addClass("has-success").removeClass("has-error");
+                        }
+                    });
 
                     $('#sampleOrderShippingFormSubmit').click(function (e) {
                         
