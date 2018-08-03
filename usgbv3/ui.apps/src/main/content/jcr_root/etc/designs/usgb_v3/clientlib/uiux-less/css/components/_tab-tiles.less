@@ -1,0 +1,124 @@
+// ----------------------------------------------------------------------
+// Component: Tab Tiles Filter
+// ----------------------------------------------------------------------
+
+.tab-tiles-wrapper {
+  .btn-scroll-top {
+    cursor: pointer;
+    position: absolute;
+    bottom: 57px;
+    right: 0px;
+    z-index: 4;
+    @media (min-width: 768px) {
+      bottom: 50px;
+      right: 11px;
+    }
+  }
+  ul {
+    font-size: 14px;
+    @media (min-width: 400px) {
+      font-size: 16px;
+    }
+  }
+  ul > li {
+    cursor: pointer;
+    padding: 0 5px;
+    border-right: 1px solid @color-grey;
+    position: relative;
+    display: inline-block;
+    width: auto;
+
+    @media (min-width: 400px) {
+      padding: 0 15px;
+    }
+    a {
+      color: @color-darker-grey;
+    }
+
+    &:last-child {
+      border-right: none;
+    }
+    &.active {
+      a {
+        padding-top: 8px;
+        border-bottom: 2px solid @color-primary-green;
+        font-weight: bold;
+      }
+    }
+  }
+
+  .no-crop {
+    height: 100%;
+    overflow: auto;
+  }
+  .crop-height {
+    height: 780px;
+    overflow: hidden;
+  }
+  .content-wrapper {
+    .content-box { 
+      display: -webkit-box; 
+      display: -ms-flexbox; 
+      display: flex;
+      -webkit-box-orient: horizontal;
+      -webkit-box-direction: normal;
+          -ms-flex-direction: row;
+              flex-direction: row;
+      -ms-flex-wrap: nowrap;
+          flex-wrap: nowrap;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
+      text-align: left;
+      @media (min-width: 768px) {
+        -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+        text-align: center;
+      }
+
+      .box-img {
+        margin: none;
+        @media (min-width: 768px) {
+          margin: auto;
+        }
+        img {
+          width: 70px;
+
+          @media (min-width: 768px) {
+            width: 100%;
+          }
+        }
+      }
+      .text-container {
+        margin-left: 10px;
+        @media (min-width: 768px) {
+          width: 100%;
+        }
+        p {
+         text-align:left;
+          @media (min-width: 768px) {
+            text-align: center;
+          }
+        }
+      }
+    }
+    .bg-box-hover:hover {
+      border: 2px solid @color-primary-green;
+    }
+
+    .fade-bg {
+      width: 100%;
+      height: 100px;
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      z-index: 2;
+      background: url("/content/dam/USGBoral/Global/Website/Images/component/allsample/fade-bottom.png");
+      background-repeat: repeat-x;
+    }
+  }
+  #loadMore {
+    z-index: 3;
+    position: relative;
+  }
+}

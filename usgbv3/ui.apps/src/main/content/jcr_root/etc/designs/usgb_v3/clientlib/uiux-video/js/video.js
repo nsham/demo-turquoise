@@ -147,7 +147,7 @@ function hookHeadScript(url, async, defer, callback) {
       $(document).on('click','.youtube-inline-video',function(e){
         $(this).hide();
         $(this).closest('.inline-video').find('.video').html('<iframe width="560" height="316" id="ytvideo" title="YouTube video player" class="video" frameborder="0" allowfullscreen src="http://www.youtube.com/embed/'+$(this).attr("data-youtubeid")+'?autoplay=1"></iframe>').show();
-          console.log('play');
+          //console.log('play');
     });
   });
 })();
