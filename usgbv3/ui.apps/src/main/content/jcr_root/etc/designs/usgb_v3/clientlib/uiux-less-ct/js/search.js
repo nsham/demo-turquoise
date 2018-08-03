@@ -203,7 +203,7 @@
                             var uuid = response["jcr:uuid"];
                             data.document_list[0].document_id = uuid;
                             $.ajax({
-                                url: "/bin/sso/msAddDoc",
+                                url: "/bin/sso/mySubmittal/add",
                                 data: JSON.stringify(data),
                                 type: "POST",
                                 dataType: 'json',

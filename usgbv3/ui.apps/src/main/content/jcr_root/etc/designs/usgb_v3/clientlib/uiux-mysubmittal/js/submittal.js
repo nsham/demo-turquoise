@@ -33,7 +33,7 @@
                     /***START AJAX CALL TO /bin/sso*****/ ///
 
                     $.ajax({
-                        url: "/bin/sso/msRetrieveHistory",
+                        url: "/bin/sso/mySubmittal/retrieve",
                         data: JSON.stringify(dt), 
                         type: "POST",
                         dataType: 'json',
@@ -106,7 +106,7 @@
                                 user_info: dt.user_info
                             }
                             $.ajax({
-                                url: "/bin/sso/msSendEmail",
+                                url: "/bin/sso/mySubmittal/email",
                                 data: JSON.stringify(data),
                                 dataType: 'json',
                                 contentType: "application/json",
@@ -139,7 +139,7 @@
                             user_info: dt.user_info
                         }
                         $.ajax({
-                            url: "/bin/sso/msRemoveDoc",
+                            url: "/bin/sso/mySubmittal/remove",
                             data: JSON.stringify(data),
                             dataType: 'json',
                             contentType: "application/json",
