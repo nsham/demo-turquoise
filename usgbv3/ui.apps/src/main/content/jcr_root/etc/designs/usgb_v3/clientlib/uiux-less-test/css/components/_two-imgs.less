@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .c-two-imgs {
 
 	&:after{
@@ -27,4 +28,35 @@
 	    }
 
 	}
+=======
+.c-two-imgs {
+
+	&:after{
+		content:'';
+		display: block;
+		clear: both;
+	}
+
+	img {
+	    max-width: 100%;
+	    width: 100%;
+	    margin-bottom: 15px;
+
+	    @media only screen and (min-width:550px) {
+	    	width: 50%;
+	    	float: left;
+	    	box-sizing: border-box;
+	    	padding-right: 7px;
+	    }
+
+	    &+img{
+	    	@media only screen and (min-width:550px) {
+
+	    		padding-right: 0;
+	    		padding-left: 7px;
+	    	}
+	    }
+
+	}
+>>>>>>> 7c6b295501581433d4cd01e3a475439ca3b9cf67
 }

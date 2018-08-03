@@ -1,4 +1,0 @@
-#base=js
-
-contact-us.js
-bookmark.js

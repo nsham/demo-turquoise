@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // ----------------------------------------------------------------------
 
   //Product Page Gallery Media
@@ -145,4 +146,153 @@
 .slick-lightbox-slick-iframe{
     width: 90vw;
     height: 60vh;
+=======
+// ----------------------------------------------------------------------
+
+  //Product Page Gallery Media
+// ----------------------------------------------------------------------
+
+.product-gallery-wrapper{
+    height: 390px;
+    width: 100%;
+    .gallery-item{
+        height: 291px;
+        width: 100%;
+        overflow: hidden;
+        img{
+            //max-width:100%;
+        }
+    }
+    .slider {
+    width: auto;
+    margin: 30px 50px 50px;
+    }
+
+    .slick-slide {
+    padding: 0px 0;
+    text-align: center;
+    z-index: 100;
+
+        img { 
+            display: inline-block; 
+            width: 100%;
+        }
+    }
+
+
+     
+    .slick-prev{
+        top:70%;
+        left: 43%;
+        z-index: 999;
+    }
+    
+    .slick-next {
+        top:70%;
+        right: 43%;
+        z-index: 999;
+    }    
+    .slick-prev:before, 
+    .slick-next:before {
+        z-index: 9999;
+        color:white;    
+    }
+
+  
+    .slick-dots {
+        bottom: 30px;    
+        display: -webkit-box;
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-flex-flow: row wrap;
+        justify-content: space-between;
+        @media (min-width:500px){
+            bottom: 0px;    
+        }
+        @media (min-width:768px){
+            bottom: -10px;    
+        }
+        @media (min-width:1024px){
+            bottom: 15px;    
+        }
+        li{
+            margin: 0;
+            height: auto;
+            text-align: center;
+            overflow: hidden;
+            height: 63px;
+            width: 24%;
+            @media (min-width:500px){
+                height: 90px;
+            }
+            @media (min-width:768px){
+                height: 100px;
+            }
+            
+            @media (min-width:1024px){
+                height: 80px;
+                width:24%;
+            }
+            
+            img{
+                width: 100%;
+                height: 100%;
+                margin: 0.2%;
+                background: blue;
+            }
+        }
+    }
+
+
+    // .slick-dots li {
+    //     display: none
+    // }
+    
+    
+    // .slick-dots li:nth-last-child(1),
+    // .slick-dots li:nth-last-child(2),
+    // .slick-dots li:nth-last-child(3) {
+    //     display: block;
+    // }
+    
+    // .slick-dots li.slick-active ~ li:nth-last-child(1),
+    // .slick-dots li.slick-active ~ li:nth-last-child(2),
+    // .slick-dots li.slick-active ~ li:nth-last-child(3) {
+    //     display: none;
+    // }
+    // .slick-dots li.slick-active + li + li:nth-last-child(3),
+    // .slick-dots li.slick-active + li + li:nth-last-child(2),
+    // .slick-dots li.slick-active + li + li:nth-last-child(1),
+    // .slick-dots li.slick-active + li:nth-last-child(3),
+    // .slick-dots li.slick-active + li:nth-last-child(2),
+    // .slick-dots li.slick-active + li:nth-last-child(1){
+    //     display: block;
+    // }
+
+
+    ////
+
+
+ 
+}
+
+
+.slick-dotted.slick-slider {
+    margin-bottom: 10px;
+}
+
+.slick-initialized .slick-slide {
+    display: block;
+    z-index: 100;
+}
+
+.slick-lightbox .slick-prev {
+    z-index: 999;
+}
+.slick-lightbox-slick-iframe{
+    width: 90vw;
+    height: 60vh;
+>>>>>>> 7c6b295501581433d4cd01e3a475439ca3b9cf67
 }

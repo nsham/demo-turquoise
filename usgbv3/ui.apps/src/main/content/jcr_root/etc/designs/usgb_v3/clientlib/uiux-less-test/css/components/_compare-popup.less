@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .compare-popup{
     position: fixed;
     right: 5%;
@@ -62,3 +63,69 @@
     height: auto;
 }
 
+=======
+.compare-popup{
+    position: fixed;
+    right: 5%;
+    bottom:0;
+    width: 90%;
+    background:@color-light-grey;
+    z-index: 999;
+    font-size:14px;
+    height: auto;
+    // -webkit-transition: height 1s linear; /* For Safari 3.1 to 6.0 */
+    // transition: height 1s linear;
+
+   
+    @media (min-width:768px){
+        width:400px;
+        right: 0;
+    }
+   
+    .title{
+        cursor: pointer;
+        color:@color-white;
+        background:@color-darker-grey;
+        padding:10px 10px;
+        &:hover{
+            .glyphicon-menu-down{
+            color:@color-primary-green;
+            -ms-transform: rotate(180deg); /* IE 9 */
+            -webkit-transform: rotate(180deg); /* Safari 3-8 */
+            transform: rotate(180deg);
+            }
+        }
+    }
+    .popup-content{
+        padding: 10px;
+
+        .each{
+            position: relative;
+            .close-btn-box{
+                color:@color-darker-grey;
+                background:transparent;
+                font-size: 20px;
+                padding: 0 8px;
+                position: absolute;
+                top: 0px;
+                right: 0px;
+    
+            }
+            p{
+                padding:0 10px;
+            }
+            .left{
+                flex-basis:40%;
+            }
+            .right{
+                flex-basis:60%;
+            }
+        }
+    }
+}
+
+.popupSlide{
+    height: auto;
+}
+
+>>>>>>> 7c6b295501581433d4cd01e3a475439ca3b9cf67

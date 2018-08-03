@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // ----------------------------------------------------------------------
 // Component: Search Form
 // ----------------------------------------------------------------------
@@ -319,3 +320,326 @@
 // END Component: Search Filter & related-search
 // ----------------------------------------------------------------------
 
+=======
+// ----------------------------------------------------------------------
+// Component: Search Form
+// ----------------------------------------------------------------------
+
+.search-form {
+	/*target parent
+	* &{
+		min-width: 500px;
+		@media (max-width: 600px) {
+            min-width: auto;
+            width: 250px;
+        }
+	}*/
+    /*end target parent*/
+	.form-control{
+		&:focus{
+		}
+	}
+	.input-group {
+		color: red;
+	}
+	.input-group-btn {
+    	font-size: 100%;
+	}
+	input {
+	}
+	[type="submit"] {
+		    font-size: 100%;
+	    	padding: 8px 12px;
+	    	position: relative;
+	    	top: 0px;
+	}
+}
+
+// ----------------------------------------------------------------------
+// END Component: Search Form
+// ----------------------------------------------------------------------
+
+
+// ----------------------------------------------------------------------
+// Component: Sub Search Section
+// ----------------------------------------------------------------------
+
+.sub-search-section {
+	li{
+		display: inline-block;
+		font-weight: normal;
+
+		font-size: 12px;
+		line-height: 1.2;
+
+		@media only screen and (min-width: 500px) {
+			font-size: 14px;
+			line-height: 1.5;
+		}
+
+		&:first-child{
+			&:before{
+				display:none;
+			}
+		}
+		&:before{
+			content: '|';
+			color: #353535;
+			display: inline-block;
+			margin: 0 5px;
+
+
+			@media only screen and (min-width: 500px) {
+				margin: 0 20px;
+			}
+		}
+		&.active {
+			font-weight: bold;
+			a {
+				border-bottom: 2px solid #009b3a;
+				padding-bottom: 5px;
+
+			}
+		}
+	}
+	a{
+		color: #353535;
+		&:hover{
+			
+		}
+	}
+}
+
+
+// ----------------------------------------------------------------------
+// END Component: Sub Search Section
+// ----------------------------------------------------------------------
+
+
+// ----------------------------------------------------------------------
+// Component: Sort By Dropdown //retired style, migrate to Bootstrap default
+// ----------------------------------------------------------------------
+// .sort-by-dropdown{
+// 	&:after{
+// 		content: '';
+//     	display: block;
+//     	clear: both;
+//     }
+
+
+// 	.dropdown{
+// 		width: 100%;
+// 		max-width: 280px;
+// 		float: right;
+// 		.dropdown-toggle{
+// 	    	width: 100%;
+// 	    	display: flex;
+// 		    justify-content: space-between;
+// 		    align-items: center;
+// 		}
+// 	}
+// }
+// ----------------------------------------------------------------------
+// END Component: Sort By Dropdown
+// ----------------------------------------------------------------------
+
+
+
+// ----------------------------------------------------------------------
+// Component: Search Main Content
+// ----------------------------------------------------------------------
+.search-main-content {
+
+	&>.inner{
+		display: flex;
+	    flex-wrap:  wrap;
+	    align-items: stretch;
+	    justify-content: stretch;
+	    align-self: center;
+	}
+
+	.each{
+		flex-grow: 0;
+	    flex-shrink: 0;
+		//flex-basis: 33.33%;
+		flex-basis: 100%;
+	    max-width: 100%;
+	    display: flex;
+		justify-content: center;
+
+		@media (min-width:550px){
+			flex-basis: 50%;
+			max-width: 50%;
+		}
+		@media (min-width:1024px){
+			flex-basis:33.33%;
+			max-width: 33.33%;
+		}
+		
+	}
+	
+}
+
+// ----------------------------------------------------------------------
+// END Component: Search Main Content
+// ----------------------------------------------------------------------
+
+
+
+// ----------------------------------------------------------------------
+// Component: Bootstrap default pagination
+// ----------------------------------------------------------------------
+.pagination > li > a,
+.pagination > li > span {
+  border: 0;
+  color:@color-darker-grey;
+  border-bottom: 2px solid transparent;
+  padding: 6px 6px;
+  margin: 0 3px;
+  }
+
+.pagination > li > a:hover,
+.pagination > li > span:hover,
+.pagination > li > a:focus,
+.pagination > li > span:focus {
+    color:@color-darker-grey;
+    background: transparent;
+    font-weight: bold;
+    border-bottom: 2px solid #009b3a;
+    border-radius: 0;
+}
+
+.pagination > li:first-child > a,
+.pagination > li:first-child > span {
+    border-radius: 0;
+}
+
+.pagination > li:last-child > a,
+.pagination > li:last-child > span {
+    border-radius: 0;
+}
+
+.pagination > .active > a,
+.pagination > .active > span, .pagination > .active > a:hover,
+.pagination > .active > span:hover, .pagination > .active > a:focus,
+.pagination > .active > span:focus {
+    background: transparent;
+    color:@color-darker-grey;
+    font-weight: bold;
+    border: 0;
+    border-bottom: 2px solid #009b3a;
+}
+// ----------------------------------------------------------------------
+// END Component: Bootstrap default pagination
+// ----------------------------------------------------------------------
+
+
+// ----------------------------------------------------------------------
+// Component: Relevant Content
+// ----------------------------------------------------------------------
+
+.relevant-content {
+
+
+	.each{
+
+		.left{
+			flex-basis: 250px;
+			flex-grow: 0;
+		}
+
+		.right {
+
+			flex-basis: 0;
+			flex-grow: 1;
+
+		    &>a{
+
+				color:@color-darker-grey;
+
+				&:hover{
+					color:@color-primary-green;
+				}
+			}
+
+			.side-functions {
+				/*0 1 auto*/
+				// flex: initial;
+				@media screen and (-ms-high-contrast: active), screen and (-ms-high-contrast: none) { 
+					min-width: 80px; 
+				}
+
+				@media (min-width:@min-bp-sm){
+					min-width: 270px; 
+				}	
+			}
+
+			.side-functions-short {
+				/*0 1 auto*/
+				// flex: initial;
+				@media screen and (-ms-high-contrast: active), screen and (-ms-high-contrast: none) { 
+					min-width: 40px; 
+				}
+
+				@media (min-width:@min-bp-sm){
+					min-width: 100px; 
+				}	
+			}
+
+		}
+
+	}
+	/*end template structure*/
+
+	/*style buttons*/
+	.bookmark,
+	.addto {
+	    // display: inline-block;
+
+	    span {
+		    // display: inline-block;
+		    // font-size: 12px;
+		}
+	}
+
+
+	a {
+	    // color:@color-darker-grey;
+
+	    &:hover{
+	    	h6, p, span{
+	    		// color: @color-primary-green;
+	    	}
+	    }
+	}
+	/*end style buttons*/
+
+}
+
+// ----------------------------------------------------------------------
+// END Component: Relevant Content
+// ----------------------------------------------------------------------
+
+
+// ----------------------------------------------------------------------
+// Component: Search Filter & related-search
+// ----------------------------------------------------------------------
+.related-search,
+.search-filter{
+	border-radius: 4px;
+
+	.radio,
+	.checkbox{
+		margin-top: 10px;	
+		margin-bottom: 0px;	
+
+		
+	}
+}
+
+
+// ----------------------------------------------------------------------
+// END Component: Search Filter & related-search
+// ----------------------------------------------------------------------
+
+>>>>>>> 7c6b295501581433d4cd01e3a475439ca3b9cf67

@@ -31,7 +31,11 @@
     
 <!--     <filter root="/apps/usgbv3/components/content/header" /> -->
 <!--     <filter root="/apps/usgbv3/components/content/header-country-popup-component" /> -->
+<<<<<<< HEAD
 <!--     <filter root="/apps/usgbv3/components/content/header-megamenu" /> -->
+=======
+    <filter root="/apps/usgbv3/components/content/header-megamenu" />
+>>>>>>> 7c6b295501581433d4cd01e3a475439ca3b9cf67
 <!--     <filter root="/apps/usgbv3/components/content/header-mobile-view-component" /> -->
 <!--     <filter root="/apps/usgbv3/components/content/header-search-popup-component" /> -->
 <!--     <filter root="/apps/usgbv3/components/content/hero-banner-component" /> -->

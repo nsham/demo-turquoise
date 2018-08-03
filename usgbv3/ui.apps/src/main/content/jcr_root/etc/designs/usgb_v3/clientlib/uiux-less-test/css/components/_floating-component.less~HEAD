@@ -1,0 +1,48 @@
+// ----------------------------------------------------------------------
+// Component: Floating Component
+// ----------------------------------------------------------------------
+
+.floating-component-group{
+    z-index: 50;
+    top: 60px;
+    bottom: auto;
+    left: auto;
+    right: 5px;
+    width: 95%;
+    max-width: 300px;
+    background-color: #f3f3f3;
+    border: 5px solid #FFF;
+    box-shadow: 1px 1px 5px #999;
+    @media(min-width:768px){
+        top: auto;
+        left: auto;
+        right: 20px;
+        bottom: 100px;
+        width: 300px;
+    }
+
+    &.fixed-it{
+        position: fixed;
+    }
+
+    .close{
+        position: absolute;
+        right: 5px;
+        top: 2px;
+        opacity: .9;
+        &:hover{
+            opacity: 1;
+        }
+        &.fill-black{
+            fill: #000;
+        }
+        &.fill-white{
+            fill: #FFF;
+        }
+    }
+
+    .floating-compoenent-inner{
+        float: left;
+        width: 100%;
+    }
+}

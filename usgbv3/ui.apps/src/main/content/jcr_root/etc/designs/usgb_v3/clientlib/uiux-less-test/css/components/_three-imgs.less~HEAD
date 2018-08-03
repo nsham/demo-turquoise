@@ -1,0 +1,35 @@
+.c-three-imgs{
+  &:after {
+    content: '';
+    display: block;
+    clear: both; 
+  }
+  img {
+    max-width: 100%;
+    width: 100%;
+    margin-bottom: 15px; 
+    @media only screen and (min-width: 550px) {
+      width: 32.25%;
+      float: left;
+      box-sizing: content-box;
+      padding-right: 1.6%;
+    }
+    &:first-child{
+    }
+    &:last-child{
+      padding-right: 0;
+      float: right;
+    }
+  }
+}
+// .c-three-imgs:after {
+// content: '';
+// display: block;
+// clear: both; }
+// .c-three-imgs img {
+// max-width: 100%;
+// width: 50%;
+// float: left;
+// margin-bottom: 15px;
+// padding-right: 7px;
+// }
