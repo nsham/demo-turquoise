@@ -6,11 +6,25 @@
 	${properties.cssoverwrite @ context='unsafe'}
 </style>
 
-<div class="${properties.classid }" >
-    <a href="${properties.pageUrl}.html" target="${properties.targettype == properties.hiddentarget ? properties.targetName : properties.targettype}" class="cta-hover-tile">
+<div class="${properties.classid } ${properties.hideDestop ? 'hidden-lg hidden-md' : '' } ${properties.hideMobile ? 'hidden-sm hidden-xs' : '' }" >
+	<sly data-sly-test.urlExist="${properties.link}">
+		<a href="${properties.link}.html" target="${properties.targettype == properties.hiddentarget ? properties.targetName : properties.targettype}" class="cta-hover-tile">
+    </sly>
+	<sly data-sly-test="${!urlExist}">
+		<a class="cta-hover-tile">
+    </sly>
+
         <div class="${properties.buttonText ? 'big-size' : ''}">
             <div class="text-center">
-                <div class="m-top-m m-bottom-l icon icon-150 ${properties.icon}"></div>   
+            	<sly data-sly-test.isImage="${properties.hiddenImage == properties.imageType}">
+					<div class="m-top-m border flex-grow-0 flex-shrink-0 m-bottom-l ${properties.imageStyle @ context='unsafe'} ">
+                    	<img src="${properties.imgPath @ context='unsafe'}" alt="">
+                    </div>
+                </sly>
+                <sly data-sly-test="${!isImage}">
+					<div class="m-top-m m-bottom-l icon icon-150 ${properties.icon} "></div>   
+                </sly>
+
                 <p class="${properties.buttonText ? 'm-bottom-m ht5 color-darker-grey uppercase' : 'm-top-l bold color-darker-grey'}">${properties.title @ context='html'}</p>  
                 <div class="color-darker-grey">${properties.description @ context='html'}</div>
 				<sly data-sly-test="${properties.buttonText}">
@@ -20,3 +34,27 @@
         </div>
     </a>
 </div>
+
+<style>
+
+    
+    .cta-hover-tile:hover .round-image{
+    	border:6px solid #fed100;
+    }
+
+    .cta-hover-tile:hover .icon{
+    	color:#fed100;
+    }
+
+    .round-image{
+        transition: all 0.4s;
+        -moz-transition: all 0.4s;
+        -webkit-transition: all 0.4s;
+    }
+
+    .icon{
+        transition: all 0.4s;
+        -moz-transition: all 0.4s;
+        -webkit-transition: all 0.4s;
+    }
+</style>

@@ -16,6 +16,7 @@
     
     Map<String, String> kv = new LinkedHashMap<String, String>();
 
+    kv.put("None", "");
     kv.put("Statistic", "icon-stc");
     kv.put("Home Owner", "icon-homeowner");
     kv.put("Installation Guide", "icon-installation-guide");

@@ -1,4 +1,94 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <workspaceFilter version="1.0">
-    <filter root="/apps/usgbv3/components/content/hotspots-component" />
+
+<!-- 	COMPONENTS -->
+<!--     <filter root="/apps/usgbv3/components/content/about-usg-component" /> -->
+<!--     <filter root="/apps/usgbv3/components/content/article-header-component" /> -->
+<!--     <filter root="/apps/usgbv3/components/content/basic-advance" /> -->
+<!--     <filter root="/apps/usgbv3/components/content/basic-cssOverwrite" /> -->
+<!--     <filter root="/apps/usgbv3/components/content/bookmark" /> -->
+<!--     <filter root="/apps/usgbv3/components/content/breadcrumb" /> -->
+<!--     <filter root="/apps/usgbv3/components/content/browsing-history-component" /> -->
+<!--     <filter root="/apps/usgbv3/components/content/bu-location-component" /> -->
+<!--     <filter root="/apps/usgbv3/components/content/captcha" /> -->
+<!--     <filter root="/apps/usgbv3/components/content/compare-component" /> -->
+<!--     <filter root="/apps/usgbv3/components/content/contact-us-component" /> -->
+    
+<!--     <filter root="/apps/usgbv3/components/content/country" /> -->
+<!--     <filter root="/apps/usgbv3/components/content/countrylist" /> -->
+<!--     <filter root="/apps/usgbv3/components/content/document-finder-tile-component" /> -->
+<!--     <filter root="/apps/usgbv3/components/content/empty-component" /> -->
+<!--     <filter root="/apps/usgbv3/components/content/feature-cards-carousel-component" /> -->
+<!--     <filter root="/apps/usgbv3/components/content/footer" /> -->
+<!--     <filter root="/apps/usgbv3/components/content/freeform-image-component" /> -->
+<!--     <filter root="/apps/usgbv3/components/content/freeform-text-component" /> -->
+<!--     <filter root="/apps/usgbv3/components/content/gallery" /> -->
+<!--     <filter root="/apps/usgbv3/components/content/geolocationsection" /> -->
+<!--     <filter root="/apps/usgbv3/components/content/global-contact-information-component" /> -->
+<!--     <filter root="/apps/usgbv3/components/content/grid-control-1-col" /> -->
+<!--     <filter root="/apps/usgbv3/components/content/grid-control-2-col" /> -->
+<!--     <filter root="/apps/usgbv3/components/content/grid-control-3-col" /> -->
+    
+<!--     <filter root="/apps/usgbv3/components/content/header" /> -->
+<!--     <filter root="/apps/usgbv3/components/content/header-country-popup-component" /> -->
+    <filter root="/apps/usgbv3/components/content/header-megamenu" />
+<!--     <filter root="/apps/usgbv3/components/content/header-mobile-view-component" /> -->
+<!--     <filter root="/apps/usgbv3/components/content/header-search-popup-component" /> -->
+<!--     <filter root="/apps/usgbv3/components/content/hero-banner-component" /> -->
+    
+<!--     	NOT ABLE TO IMPORT -->
+<!--     <filter root="/apps/usgbv3/components/content/hotspots-component" /> -->
+    
+    
+<!--     <filter root="/apps/usgbv3/components/content/hover-icon-tile-component" /> -->
+<!--     <filter root="/apps/usgbv3/components/content/html" /> -->
+<!--     <filter root="/apps/usgbv3/components/content/Icon-button-tile-component" /> -->
+<!--     <filter root="/apps/usgbv3/components/content/image-slider-component" /> -->
+<!--     <filter root="/apps/usgbv3/components/content/image-tile-component" /> -->
+<!--     <filter root="/apps/usgbv3/components/content/inspiration-widget" /> -->
+<!--     <filter root="/apps/usgbv3/components/content/left-circle-tile-component" /> -->
+<!--     <filter root="/apps/usgbv3/components/content/main-banner-component" /> -->
+<!--     <filter root="/apps/usgbv3/components/content/mix-media-player-component" /> -->
+<!--     <filter root="/apps/usgbv3/components/content/my-submittal-component" /> -->
+<!--     <filter root="/apps/usgbv3/components/content/newsletter-component" /> -->
+<!--     <filter root="/apps/usgbv3/components/content/othersite" /> -->
+    
+<!--     <filter root="/apps/usgbv3/components/content/page-guide" /> -->
+<!--     <filter root="/apps/usgbv3/components/content/pagination-scroller-component" /> -->
+<!--     <filter root="/apps/usgbv3/components/content/pd-description-component" /> -->
+<!--     <filter root="/apps/usgbv3/components/content/pd-top-section" /> -->
+<!--     <filter root="/apps/usgbv3/components/content/pop-up-icon-tile-component" /> -->
+<!--     <filter root="/apps/usgbv3/components/content/product-characteristics-component" /> -->
+<!--     <filter root="/apps/usgbv3/components/content/product-listing-component" /> -->
+<!--     <filter root="/apps/usgbv3/components/content/resources-component" /> -->
+<!--     <filter root="/apps/usgbv3/components/content/search-component" /> -->
+<!--     <filter root="/apps/usgbv3/components/content/share-component" /> -->
+<!--     <filter root="/apps/usgbv3/components/content/sp-product-pages-component" /> -->
+<!--     <filter root="/apps/usgbv3/components/content/sp-product-resources-component" /> -->
+    
+<!--     <filter root="/apps/usgbv3/components/content/sticky-body-section" /> -->
+<!--     <filter root="/apps/usgbv3/components/content/sticky-icon-component" /> -->
+<!--     <filter root="/apps/usgbv3/components/content/sticky-menu-component" /> -->
+<!--     <filter root="/apps/usgbv3/components/content/system-content-component" /> -->
+<!--     <filter root="/apps/usgbv3/components/content/tab-tiles-component" /> -->
+<!--     <filter root="/apps/usgbv3/components/content/text-button-component" /> -->
+<!--     <filter root="/apps/usgbv3/components/content/video-component" /> -->
+<!--     <filter root="/apps/usgbv3/components/content/where-to-buy" /> -->
+<!--     <filter root="/apps/usgbv3/components/content/where-to-buy-component" /> -->
+    
+    
+<!--     TEMPLATE & LOV & UTIL-->
+<!--     <filter root="/apps/usgbv3/components/structure" /> -->
+<!--     <filter root="/apps/usgbv3/templates" /> -->
+<!--     <filter root="/apps/usgbv3/widgets" /> -->
+    
+<!--     JS & CSS -->
+    <filter root="/etc/designs/usgb_v3" />
+    
+    
+<!--     COUNTRY CONFIG & TAGS-->
+    <filter root="/etc/tags/usgbv3" />
+    <filter root="/etc/usgbCountryList" />
+    
+    
 </workspaceFilter>

@@ -39,11 +39,11 @@
                                         fieldLabel="SEO Keywords"
                                         name="./seoKeywords"/>
                                     <logopath
-                                            jcr:primaryType="nt:unstructured"
-                                            sling:resourceType="granite/ui/components/foundation/form/pathbrowser"
-                                            fieldDescription="Logo path"
-                                            fieldLabel="Logo Path"
-                                            name="./logopath"/>
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/form/pathbrowser"
+                                        fieldDescription="Logo path"
+                                        fieldLabel="Logo Path"
+                                        name="./logopath"/>
                                 </items>
                             </columns>
                         </items>

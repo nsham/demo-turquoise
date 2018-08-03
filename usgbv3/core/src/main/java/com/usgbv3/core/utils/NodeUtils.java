@@ -3,19 +3,25 @@ package com.usgbv3.core.utils;
 import com.usgbv3.core.services.ExcelFileService;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceResolver;
+import org.apache.sling.commons.json.jcr.JsonJcrNode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.jcr.*;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 public class NodeUtils {
 	
 	protected static final Logger log = LoggerFactory.getLogger(NodeUtils.class);
 	
 	private static final String PROPERTY_NAME_DELIMETER = "\\."; //need to escape the dot(.)
-
+	public static final String JCR_PROPERTY_PREFIX = "jcr:";
+	public static final String CQ_PROPERTY_PREFIX = "cq:";
+	public static final String SLING_PROPERTY_PREFIX = "sling:";
 
 	
 	/**
@@ -98,6 +104,36 @@ public class NodeUtils {
 						
 					}
 				}
+			}
+		}
+	}
+	
+	/**
+	 * Removes all jcr, cq, and sling properties in a JsonJcrNode.
+	 * If a property key starts with "jcr:" then it is considered JCR property.
+	 * If a property key starts with "cq:" then it is considered CQ property.
+	 * If a property key starts with "sling:" then it is considered Sling property.
+	 * Useful when you don't want to expose application generated properties in your JSON
+	 * 
+	 * @param jsonJcrNode
+	 */
+	public static void removeAppGeneratedPropertiesFromJsonJcrNode(JsonJcrNode jsonJcrNode){
+		if(jsonJcrNode != null){
+			List<String> keyList = new ArrayList<String>();
+			
+			Iterator<String> keyIterator = jsonJcrNode.keys();
+			while(keyIterator.hasNext()){
+				String key = keyIterator.next();
+				if(key != null &&
+						(key.startsWith(JCR_PROPERTY_PREFIX) ||
+								key.startsWith(CQ_PROPERTY_PREFIX) ||
+								key.startsWith(SLING_PROPERTY_PREFIX))){
+					keyList.add(key);
+				}
+			}
+			
+			for(String key : keyList){
+				jsonJcrNode.remove(key);
 			}
 		}
 	}

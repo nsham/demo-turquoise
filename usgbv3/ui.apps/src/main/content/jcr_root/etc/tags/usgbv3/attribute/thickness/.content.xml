@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"
+    jcr:description=""
+    jcr:primaryType="cq:Tag"
+    jcr:title="Thickness"
+    sling:resourceType="cq/tagging/components/tag">
+    <_x0035_mm/>
+    <_x0034_mm/>
+    <_x0033_mm/>
+    <_x0032_mm/>
+    <_x0031_mm/>
+</jcr:root>

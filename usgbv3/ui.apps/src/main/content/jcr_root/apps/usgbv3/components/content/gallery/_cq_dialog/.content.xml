@@ -34,7 +34,6 @@
                                 fieldLabel="Tile Description"
                                 name="./refineSearch"
                                 useFixedInlineToolbar="{Boolean}true">
-                                <buttonText/>
                                 <rtePlugins jcr:primaryType="nt:unstructured">
                                     <format
                                         jcr:primaryType="nt:unstructured"
@@ -189,6 +188,7 @@
                                         </inline>
                                     </cui>
                                 </uiSettings>
+                                <buttonText/>
                             </description>
                             <gallerypath
                                 jcr:primaryType="nt:unstructured"

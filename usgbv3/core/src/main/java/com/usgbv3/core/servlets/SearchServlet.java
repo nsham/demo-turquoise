@@ -78,6 +78,9 @@ public class SearchServlet extends BaseAllMethodsServlet {
 	@Reference
     private QueryBuilder builder;
 	
+	private static String defaultSearchImage = "/content/dam/USGBoral/global/website/image/logo/default_search.jpg";
+	private static String defaultPdfIcon = "/content/dam/USGBoral/global/website/image/logo/pdf-icon.png";
+	
 	@Override
 	protected void doGet(SlingHttpServletRequest request,
 			SlingHttpServletResponse response) throws ServerException,
@@ -86,27 +89,28 @@ public class SearchServlet extends BaseAllMethodsServlet {
 			try {
 				response.setCharacterEncoding("utf-8");
 				
-//				String pageURL = null;
-//		        if(request.getHeader("referer") != null){
-//		            try {
-//		                String refererURI = new URI(request.getHeader("referer")).getPath();
-//		                if(refererURI != null && refererURI.endsWith(".html")){
-//		                    pageURL = refererURI.replace(".html", "");
-//		                }
-//		            } catch (URISyntaxException e) {
-//		                LOG.error("URI SyntaxExvception is :"+e);
-//		            }
-//		        }else{
-//		            RequestParameter pageURLParameter = request.getRequestParameter(ApplicationConstants.PAGE_URL);
-//		            if(pageURLParameter != null){
-//		                pageURL = pageURLParameter.getString();
-//		            }
-//		        }
+				String pageURL = null;
+		        if(request.getHeader("referer") != null){
+		            try {
+		                String refererURI = new URI(request.getHeader("referer")).getPath();
+		                if(refererURI != null && refererURI.endsWith(".html")){
+		                    pageURL = refererURI.replace(".html", "");
+		                }
+		            } catch (URISyntaxException e) {
+		                LOG.error("URI SyntaxExvception is :"+e);
+		            }
+		        }else{
+		            RequestParameter pageURLParameter = request.getRequestParameter(ApplicationConstants.PAGE_URL);
+		            if(pageURLParameter != null){
+		                pageURL = pageURLParameter.getString();
+		            }
+		        }
 //		        
 //		        Map<String, String> countryInfo = CountryUtils.retrieveUsgbCountrybyPath(request.getResourceResolver(), pageURL);
 //		        String countryHomePagePath = countryInfo.get("homepageUrl").toString();
 		        
-		        String countryHomePagePath = "/content/usgboral/en_au/search";
+//		        String countryHomePagePath = "/content/usgboral/en_au/search";
+		        String countryHomePagePath = pageURL;
 		        Map<String, String> countryInfo = CountryUtils.retrieveUsgbCountrybyPath(request.getResourceResolver(), countryHomePagePath);
 		        
 				String keyword = request.getRequestParameter("text").toString();
@@ -183,13 +187,21 @@ public class SearchServlet extends BaseAllMethodsServlet {
 					
 					searchContentJson.put("key", "content_" + hitNo);
 					searchContentJson.put("title", hitProperties.get("jcr:title", String.class));
-					searchContentJson.put("description", hitProperties.get("pageDescription", String.class));
-					searchContentJson.put("image", hitProperties.get("pageImage", String.class));
-					searchContentJson.put("link", hit.getPath());
-					searchContentJson.put("type", "page");
-					if(hitProperties.containsKey("jcr:score")) {
-						searchContentJson.put("score", hitProperties.get("jcr:score", String.class));
+					
+					if(hitProperties.containsKey("pageDescription")) {
+						searchContentJson.put("description", hitProperties.get("pageDescription", String.class));
+					}else {
+						searchContentJson.put("description", hitProperties.get("jcr:description", String.class));
 					}
+					
+					if(hitProperties.containsKey("pageImage")) {
+						searchContentJson.put("image", hitProperties.get("pageImage", String.class));
+					}else {
+						searchContentJson.put("image", defaultSearchImage);
+					}
+					
+					searchContentJson.put("link", hit.getPath() + ".html");
+					searchContentJson.put("type", "page");
 					
 					Calendar calendar = hitProperties.get("jcr:created", Calendar.class);
 					Date date = (Date) calendar.getTime();
@@ -246,32 +258,6 @@ public class SearchServlet extends BaseAllMethodsServlet {
 					}
 						
 					
-//					if(hitProperties.containsKey("cq:tags")) {
-//						List<String> tags = Arrays.asList(hitProperties.get("cq:tags", String[].class));
-//						searchContent.setTags(tags);
-//						
-//						List<String> tagsValue = new ArrayList<String>();
-//						
-//						for(String tag : tags) {
-//							
-//							TagManager tagManager = resourceResolver.adaptTo(TagManager.class);
-//							Tag pageTag = tagManager.resolve(tag);
-//							tagsValue.add(pageTag.getName());
-//							
-//							Tag parenttag = pageTag.getParent();
-//							if(jsonArrayFilter.length() > 0 ) {
-//								
-//							}else {
-//								
-//							}
-//						}
-//						
-//						
-//					}
-					
-					
-					
-//					jsonArrayProduct.put(new JSONObject(gson.toJson(searchContent)));
 					jsonArrayProduct.put(searchContentJson);
 					hitNo++;
 				}
@@ -354,10 +340,20 @@ public class SearchServlet extends BaseAllMethodsServlet {
 						
 						if(hitProperties.containsKey("pageDescription")) {
 							searchContentJson.put("description", hitProperties.get("pageDescription", String.class));
+						}else {
+							searchContentJson.put("description", hitProperties.get("jcr:description", String.class));
 						}
 						
 						if(hitProperties.containsKey("pageImage")) {
 							searchContentJson.put("image", hitProperties.get("pageImage", String.class));
+						}else {
+							if(asset.getRendition("cq5dam.thumbnail.319.319.png") != null) {
+								
+								searchContentJson.put("image", asset.getRendition("cq5dam.thumbnail.319.319.png").getPath());
+							}else {
+								searchContentJson.put("image", defaultSearchImage);
+							}
+							
 						}
 						
 						if(hitProperties.containsKey("videoDam")) {
@@ -366,9 +362,7 @@ public class SearchServlet extends BaseAllMethodsServlet {
 						
 						searchContentJson.put("type", "video");
 						
-						if(hitProperties.containsKey("jcr:score")) {
-							searchContentJson.put("score", hitProperties.get("jcr:score", String.class));
-						}
+						
 						
 						jsonArrayProduct.put(searchContentJson);
 					}
@@ -377,8 +371,86 @@ public class SearchServlet extends BaseAllMethodsServlet {
 				}
 			}
 			
-
 			
+			//get relevent in Doc Finder
+			
+			JSONArray jsonArrayReleventDF = new JSONArray();
+			SearchResult resultDocFinder = queryDocFinder(resourceResolver, path, keyword, "-1");
+			
+			int totalMatchforDocFinder = (int) resultDocFinder.getTotalMatches();
+			if(totalMatchforDocFinder > 0){
+				
+				int hitNo = 0;
+				for(Hit hit : resultDocFinder.getHits()){
+					
+					 Node hitNode =  hit.getNode();
+					 NodeIterator ni =  hitNode.getNodes(); 
+				 
+					 while (ni.hasNext()) {
+				        Node child = (Node)ni.nextNode(); 
+				         
+				        NodeIterator ni2 =  child.getNodes() ; 
+				        while (ni2.hasNext()) {
+					        Node child2 = (Node)ni2.nextNode(); 
+					        
+					        if(child2.hasProperty("docPath") && hitNo <= 2) {
+					        	
+					        	JSONObject searchContentJson = new JSONObject();
+					        	
+	//				        	jsonArrayFilter.put("getPath  = " + child2.getPath());
+	//				        	jsonArrayFilter.put("docPath  = " + child2.getProperty("docPath").getString());
+	
+					        	String docPath = child2.getProperty("docPath").getString();
+					        	
+					        	Resource res = resourceResolver.getResource(docPath);
+								Asset asset = res.adaptTo(Asset.class);
+								Node assetNode = resourceResolver.getResource(docPath).adaptTo(Node.class);
+								
+								searchContentJson.put("key", "docFinder_" + hitNo);
+								searchContentJson.put("link", docPath);
+	
+								if(child2.hasProperty("thumbnail")) {
+									searchContentJson.put("image", child2.getProperty("thumbnail").getString());
+								}else {
+									searchContentJson.put("image", defaultPdfIcon);
+								}
+								
+								if(!(asset.getMetadataValue("dc:title").isEmpty())) {
+									searchContentJson.put("title", asset.getMetadataValue("dc:title"));
+									
+								}else {
+									searchContentJson.put("title", asset.getName());
+								}
+						        
+								if(!(searchContentJson.get("title").toString().toLowerCase()).contains(keyword.toLowerCase())){
+					        		continue;
+					        	}
+								
+								searchContentJson.put("description", asset.getMetadataValue("dc:description"));
+								
+														
+								JSONObject pageCategory = getPageCategory(resourceResolver, path, hit.getPath());
+								LOG.info("type" + pageCategory);
+								searchContentJson.put("type", pageCategory.get("key").toString());
+								
+								
+								
+								Calendar calendar = assetNode.getProperty("jcr:created").getDate();
+								Date date = (Date) calendar.getTime();
+	//							searchContent.setCreated_date(formatter.format(date));
+								searchContentJson.put("created_date", formatter.format(date));
+														
+									
+								
+								jsonArrayReleventDF.put(searchContentJson);
+								hitNo++;
+								
+					        }
+					        
+				        }
+				    }
+				}
+			}
 			//remove duplicate Json
 			for (int i = 0 ; i < jsonArrayFilter.length(); i++) {
 				
@@ -395,15 +467,17 @@ public class SearchServlet extends BaseAllMethodsServlet {
 			
 
 			if(totalMatchforContent > 0) {
-				apiResponse.put("result", "true");
+				apiResponse.put("result", true);
 			}else {
-				apiResponse.put("result", "false");
+				apiResponse.put("result", false);
 			}
 
 			apiResponse.put("path", path);
+			apiResponse.put("keyword", keyword);
 			apiResponse.put("num_result", totalMatchforContent);
 			apiResponse.put("filter_listing", jsonArrayFilter);
 			apiResponse.put("content", jsonArrayProduct);
+			apiResponse.put("doc_finder", jsonArrayReleventDF);
 			
 		} catch (Exception e) {
 			LOG.info("result = " + e.getMessage());
@@ -424,12 +498,15 @@ public class SearchServlet extends BaseAllMethodsServlet {
 
 		queryMap.put("path", path);
 		queryMap.put("type", "cq:Page");
+//		queryMap.put("property", "jcr:content/@excludeSearch");
+//		queryMap.put("property.operation", "unequals");
+//		queryMap.put("property.value", "true");
 		queryMap.put("fulltext", keywordWildCard);
 		queryMap.put("p.limit", limit);
 		queryMap.put("p.offset", "0");
 		queryMap.put("orderby", "@jcr:score");
 		queryMap.put("orderby.sort", "desc");
-
+//		excludeSearch
 		LOG.info("builder = " + builder);
 		
 		Query query = builder.createQuery(PredicateGroup.create(queryMap), session);
@@ -461,69 +538,6 @@ public class SearchServlet extends BaseAllMethodsServlet {
 		SearchResult result = query.getResult();
 		
 		return result;
-	}
-	
-	public JSONObject getPageCategory(ResourceResolver resourceResolver, String homePage, String pagePath) {
-		JSONObject category = new JSONObject();
-
-		LOG.info("getPageCategory Start = " + homePage + "  |  " + pagePath);
-		
-		if(pagePath.contains("jcr:content")) {
-			pagePath = pagePath.substring(0,pagePath.indexOf("jcr:content"));
-		}
-		Page contentPage = resourceResolver.resolve(pagePath).adaptTo(Page.class); 
-		
-		
-		try {
-			
-			
-			LOG.info("getPageCategory pagePath = " + pagePath);
-			
-			if(pagePath.indexOf(homePage) > -1) {
-//				LOG.info("getPageCategory indexOf > -1 = " + pagePath);
-				
-				if(homePage.equals(pagePath)) {
-
-//					LOG.info("getPageCategory equals = " + pagePath);
-					Page parentPage = contentPage.getParent(); 
-					
-					category.put("key", "homepage");
-					category.put("name", "Home Page");
-					
-				}else {
-					
-					if(!(homePage.equals(contentPage.getParent().getPath()))) {
-
-//						LOG.info("getPageCategory if = " + pagePath);
-						category = getPageCategory(resourceResolver, homePage, contentPage.getParent().getPath());
-						
-					}else {
-
-//						LOG.info("getPageCategory else = " + pagePath);
-						
-						category.put("key", contentPage.getName());
-						category.put("name", contentPage.getTitle());
-					}
-				}
-				
-			}else {
-
-				LOG.info("getPageCategory indexOf not = " + pagePath);
-				category.put("key", "others");
-				category.put("name", "Others");
-			}
-			
-				
-			
-			
-		}catch (Exception e) {
-			LOG.info("getPageCategory ERROR = " + e.getMessage());
-		}
-		
-		
-		
-		
-		return category;
 	}
 	
 	private JSONObject generateDocFinderListbyKeyword(ResourceResolver resourceResolver, String path, String keyword) throws JSONException{
@@ -561,14 +575,26 @@ public class SearchServlet extends BaseAllMethodsServlet {
 					        if(child2.hasProperty("docPath")) {
 					        	
 					        	JSONObject searchContentJson = new JSONObject();
-					        	
-	//				        	jsonArrayFilter.put("getPath  = " + child2.getPath());
-	//				        	jsonArrayFilter.put("docPath  = " + child2.getProperty("docPath").getString());
-	
 					        	String docPath = child2.getProperty("docPath").getString();
 					        	
 					        	Resource res = resourceResolver.getResource(docPath);
 								Asset asset = res.adaptTo(Asset.class);
+								
+					        	if(!(asset.getMetadataValue("dc:title").isEmpty())) {
+									searchContentJson.put("title", asset.getMetadataValue("dc:title"));
+									
+								}else {
+									searchContentJson.put("title", asset.getName());
+								}
+					        	
+					        	if(!(searchContentJson.get("title").toString().toLowerCase()).contains(keyword.toLowerCase())){
+					        		continue;
+					        	}
+					        	
+	//				        	jsonArrayFilter.put("getPath  = " + child2.getPath());
+	//				        	jsonArrayFilter.put("docPath  = " + child2.getProperty("docPath").getString());
+	
+					        	
 								Node assetNode = resourceResolver.getResource(docPath).adaptTo(Node.class);
 								
 								searchContentJson.put("key", "docFinder_" + hitNo);
@@ -577,7 +603,7 @@ public class SearchServlet extends BaseAllMethodsServlet {
 								if(child2.hasProperty("thumbnail")) {
 									searchContentJson.put("image", child2.getProperty("thumbnail").getString());
 								}else {
-									searchContentJson.put("image", "/content/dam/USGBoral/global/website/image/logo/pdf-icon.png");
+									searchContentJson.put("image", defaultPdfIcon);
 								}
 								
 								if(!(asset.getMetadataValue("dc:title").isEmpty())) {
@@ -691,7 +717,7 @@ public class SearchServlet extends BaseAllMethodsServlet {
 								
 								
 								TagManager tagManager = resourceResolver.adaptTo(TagManager.class);
-								List<String> tagValues = new ArrayList<String>();
+								JSONArray tagValues = new JSONArray();
 								
 								if(!(asset.getMetadataValue("cq:tags").isEmpty())) {
 									
@@ -702,7 +728,7 @@ public class SearchServlet extends BaseAllMethodsServlet {
 									     
 									     //check if tags is under asset category or not
 									     if("category".equals(tag.getParent().getName())) {
-									    	 tagValues.add(tag.getName());
+									    	 tagValues.put(tag.getName());
 									    	 
 									    	 JSONObject jsonTag = new JSONObject();
 									    	 jsonTag.put("key", tag.getName());
@@ -752,7 +778,7 @@ public class SearchServlet extends BaseAllMethodsServlet {
 									     }   
 									}
 									
-									searchContentJson.put("document_type", tagValues.toString());
+									searchContentJson.put("document_type", tagValues);
 								}
 								
 								
@@ -780,6 +806,9 @@ public class SearchServlet extends BaseAllMethodsServlet {
 					hitNo++;
 				}
 			}
+			JSONArray releventContent = new JSONArray();
+			releventContent = getRelaventContent(resourceResolver, path, keyword);
+			
 			
 			//remove duplicate Json
 			for (int i = 0 ; i < jsonArrayFilter.length(); i++) {
@@ -794,10 +823,18 @@ public class SearchServlet extends BaseAllMethodsServlet {
 				}
 			}
 			
+			if(totalMatchforContent > 0) {
+				apiResponse.put("result", true);
+			}else {
+				apiResponse.put("result", false);
+			}
+			
 			apiResponse.put("path", path);
+			apiResponse.put("keyword", keyword);
 			apiResponse.put("num_result", totalMatchforContent);
 			apiResponse.put("filter_listing", jsonArrayFilter);
 			apiResponse.put("doc_finder", jsonArrayProduct);
+			apiResponse.put("content", releventContent);
 			
 		}catch (Exception e) {
 //			LOG.info("result = " + e.getMessage());
@@ -872,6 +909,134 @@ public class SearchServlet extends BaseAllMethodsServlet {
 
 
 		return tempArray;
+	}
+	
+	public JSONObject getPageCategory(ResourceResolver resourceResolver, String homePage, String pagePath) {
+		JSONObject category = new JSONObject();
+
+		LOG.info("getPageCategory Start = " + homePage + "  |  " + pagePath);
+		
+		if(pagePath.contains("jcr:content")) {
+			pagePath = pagePath.substring(0,pagePath.indexOf("jcr:content"));
+		}
+		Page contentPage = resourceResolver.resolve(pagePath).adaptTo(Page.class); 
+		
+		
+		try {
+			
+			
+			LOG.info("getPageCategory pagePath = " + pagePath);
+			
+			if(pagePath.indexOf(homePage) > -1) {
+//				LOG.info("getPageCategory indexOf > -1 = " + pagePath);
+				
+				if(homePage.equals(pagePath)) {
+
+//					LOG.info("getPageCategory equals = " + pagePath);
+					Page parentPage = contentPage.getParent(); 
+					
+					category.put("key", "homepage");
+					category.put("name", "Home Page");
+					
+				}else {
+					
+					if(!(homePage.equals(contentPage.getParent().getPath()))) {
+
+//						LOG.info("getPageCategory if = " + pagePath);
+						category = getPageCategory(resourceResolver, homePage, contentPage.getParent().getPath());
+						
+					}else {
+
+//						LOG.info("getPageCategory else = " + pagePath);
+						
+						category.put("key", contentPage.getName());
+						category.put("name", contentPage.getTitle());
+					}
+				}
+				
+			}else {
+
+				LOG.info("getPageCategory indexOf not = " + pagePath);
+				category.put("key", "others");
+				category.put("name", "Others");
+			}
+			
+				
+			
+			
+		}catch (Exception e) {
+			LOG.info("getPageCategory ERROR = " + e.getMessage());
+		}
+		
+		
+		
+		
+		return category;
+	}
+	
+	public JSONArray getRelaventContent(ResourceResolver resourceResolver, String path, String keyword) {
+
+		JSONArray jsonArrayProduct = new JSONArray();
+		
+		try {
+			
+			SearchResult resultPages = queryContent(resourceResolver, path, keyword, "3");
+
+			LOG.info("result = " + resultPages);
+			
+			int totalMatchforPage = (int) resultPages.getTotalMatches();
+
+
+			
+			if(totalMatchforPage > 0){
+				
+				
+				int hitNo = 0;
+				for(Hit hit : resultPages.getHits()){
+					ValueMap hitProperties = hit.getProperties();
+					JSONObject searchContentJson = new JSONObject();
+//					SearchContentModel searchContent = new SearchContentModel();
+					
+					searchContentJson.put("key", "content_" + hitNo);
+					searchContentJson.put("title", hitProperties.get("jcr:title", String.class));
+					
+					if(hitProperties.containsKey("pageDescription")) {
+						searchContentJson.put("description", hitProperties.get("pageDescription", String.class));
+					}else {
+						searchContentJson.put("description", hitProperties.get("jcr:description", String.class));
+					}
+					
+					if(hitProperties.containsKey("pageImage")) {
+						searchContentJson.put("image", hitProperties.get("pageImage", String.class));
+					}else {
+						searchContentJson.put("image", defaultSearchImage);
+					}
+					
+					searchContentJson.put("link", hit.getPath() + ".html");
+					searchContentJson.put("type", "page");
+					
+					Calendar calendar = hitProperties.get("jcr:created", Calendar.class);
+					Date date = (Date) calendar.getTime();
+//					searchContent.setCreated_date(formatter.format(date));
+					searchContentJson.put("created_date", formatter.format(date));
+					
+					
+						
+					JSONObject pageCategory = getPageCategory(resourceResolver, path, hit.getPath());
+					LOG.info("pageCategory = " + pageCategory);
+					
+					searchContentJson.put("category_header", pageCategory.get("name").toString());
+					searchContentJson.put("category", pageCategory.get("key").toString());
+					
+					jsonArrayProduct.put(searchContentJson);
+				}
+			}
+			
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+			return jsonArrayProduct;
 	}
 	
 	

@@ -71,7 +71,7 @@ public class ContactUsTileComponent extends WCMUsePojo {
 			countryInfo = CountryUtils.retrieveUsgbCountrybyPath(getResourceResolver(), getCurrentPage().getPath());
 			String sitePath = countryInfo.get("sitePath").toString();
 			
-			String  contactsNodePath = sitePath+"contacts";
+			String  contactsNodePath = sitePath+"/contacts";
 			
 			
 			Resource contactNodeResource = getResourceResolver().resolve(contactsNodePath);

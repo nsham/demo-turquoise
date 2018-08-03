@@ -33,11 +33,9 @@
                     /***START AJAX CALL TO /bin/sso*****/ ///
 
                     $.ajax({
-                        url: "/bin/sso/msRetrieveHistory",
-                        data: JSON.stringify(dt), 
-                        type: "POST",
-                        dataType: 'json',
-                        contentType: "application/json",
+                        url: "/etc/designs/usgb_v3/clientlib/uiux-less-ct/js/json/submittal-listing.json",
+                        data: "",
+                        type: "GET",
                         cache: false,
                         success: function (response) {
                             dataOnStage = response.documentCollatorList;
