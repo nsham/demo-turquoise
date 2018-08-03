@@ -13,7 +13,7 @@
 <!-- TITLE END -->
 
 
-<div class="container-fluid ">
+<div class="container-fluid">
     <div class="row">
         <div class="col-xs-12 p-no">
             <form id="map-search-controller" onkeypress="return event.keyCode != 13;">
@@ -22,10 +22,12 @@
                         Back
                     </div>
                     <div class="input-group search-group">
-                        <input type="text" id="input-search-location" name="search_text" data-autocomplete="/bin/usg/storeAutoComplete" data-autocomplete-minchars="3" class="form-control placeholder" placeholder="City, postcode, Store name or address">
+                        <div class="relative width-full">
+                            <input type="text" id="input-search-location" name="search_text" data-autocomplete="/bin/usg/storeAutoComplete" data-autocomplete-minchars="3" class="form-control placeholder" placeholder="City, postcode, Store name or address">
+                        </div>
 
 
-                        <div class="inputSearch-myLocation hidden"><img class="myLocation-pin" src="/content/dam/USGBoral/Global/Website/Images/component/allsample/blue_pin.png">Use Current location</div>
+                        <div class="inputSearch-myLocation hidden"><img class="myLocation-pin" src="/content/dam/USGBoral/Global/Website/Images/component/allsample/icon_marker_red.png">Use Current location</div>
                         <div class="dropdown dropdown-lg">
                             <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                                 <span class="sr-only">Toggle navigation</span>
@@ -37,10 +39,10 @@
                                 <div value="" selected="selected">${properties.allstates}</div>
                             </div>
                         </div>
-                        <button type="button" class="btn btn-primary btn-search"><span class="glyphicon glyphicon-search icon-size-xs" aria-hidden="true"></span></button>
-                        <button type="button" class="btn btn-primary btn-filter m-left-s disabled"><span class="fa fa-filter icon-size-xs" aria-hidden="true"></span></button>
+                        <button type="submit" class="btn btn-primary btn-search"><span class="glyphicon glyphicon-search icon-size-xs" aria-hidden="true"></span></button>
+                        <a class="btn btn-primary btn-filter m-left-s disabled"><span class="fa fa-filter icon-size-xs" aria-hidden="true"></span></a>
                     </div>
-                    <button type="button" class="btn btn-primary search-bar-toggle-button hidden-xs" ><span class="fa fa-angle-left icon-size" aria-hidden="true"></span></button>
+                    <a href="#" class="btn btn-primary search-bar-toggle-button hidden-xs" ><span class="fa fa-angle-left icon-size" aria-hidden="true"></span></a>
                 </div>
             </form>
             <form id="filter-list-controller" onkeypress="return event.keyCode != 13;">
@@ -69,7 +71,7 @@
 
 <script id="infoTemplate" type="text/x-handlebars-template">
     {{#each this}}
-    <div class="state-detail p-vertical-l">
+    <div class="state-detail p-vertical-l clearfix">
         <div class="row">
             <div class="col-xs-8">
                 <a href="#" class="cta-location bold color-primary-green uppercase">{{companyName}}</a>
@@ -87,7 +89,7 @@
                 {{/if}}
             </div>
         </div>
-        <span class="float-right"><a href="https://www.google.com/maps?daddr={{latitude}},{{longitude}}" target="_blank"><u>Get Direction</u></a></span>
+        <span class="float-right m-bottom-l"><a href="https://www.google.com/maps?daddr={{latitude}},{{longitude}}" target="_blank"><u>Get Direction</u></a></span>
         {{#if product_categories}}
         <div class="accordion-wrap clearfix">
             <div class="btn-accordion">
