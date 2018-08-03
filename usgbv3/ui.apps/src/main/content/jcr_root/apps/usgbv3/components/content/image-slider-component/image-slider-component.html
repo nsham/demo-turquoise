@@ -1,0 +1,63 @@
+<sly data-sly-test="${wcmmode.edit || wcmmode.design}">
+	Edit here for Image Slider Component
+</sly>
+
+<style>
+	${properties.cssoverwrite @ context='unsafe'}
+</style>
+
+
+<!-- slick div -->
+<div class="feature-card-wrapper variation-1 m-bottom-s ${properties.classid }" >  
+	<div class="carousel-image-slider"  >
+		<sly data-sly-use.listUse="${'logic.js' @ multifieldName='ftp'}">  
+			<sly data-sly-list="${listUse}"> 
+			
+				<!-- featured items start -->
+				<!-- 1 -->
+				<div class="col-xs-12 p-no m-no">
+					<div class="  bg-white">
+							<div>
+								<div class="box-inner-img" style=" max-height: 700px; overflow: hidden;">
+
+                                	<sly data-sly-test.assetExist="${item.properties.imgPath }">
+                                        <img src="${item.properties.imgPath @ context='unsafe'}" style=" width: 100%; height: auto;" alt="${properties.alt @ context='unsafe'}" />
+                                    </sly>
+
+								</div>                                   
+							</div>
+					</div>
+				</div>
+				<!-- 1 end -->
+				
+				<!-- featured items end -->
+			</sly>
+		</sly>
+	</div>
+</div> 
+<!-- slick div end -->
+
+
+<sly data-sly-use.clientLib="/libs/granite/sightly/templates/clientlib.html" data-sly-call="${clientLib.js @ categories='uiux.slick'}" data-sly-unwrap/>
+
+<script>
+
+(function () {
+    "use strict";
+    $(document).ready(function () {
+        $(".carousel-image-slider").slick({
+                            "dots": true,
+                            "infinite": false,
+                            "speed": 300,
+                            "slidesToShow": 1,
+                            "slidesToScroll": 1
+                            });
+
+    });
+})();
+
+</script>
+
+
+
+

@@ -6,17 +6,96 @@
     <content
         jcr:primaryType="nt:unstructured"
         sling:resourceType="granite/ui/components/foundation/container">
+        <layout
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="granite/ui/components/foundation/layouts/tabs"
+            type="nav"/>
         <items jcr:primaryType="nt:unstructured">
             <basic
                 jcr:primaryType="nt:unstructured"
                 jcr:title="Basic"
                 sling:resourceType="granite/ui/components/foundation/section">
+                <layout
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="granite/ui/components/foundation/layouts/fixedcolumns"/>
                 <items jcr:primaryType="nt:unstructured">
                     <column
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="granite/ui/components/foundation/container">
                         <items jcr:primaryType="nt:unstructured">
-                            <buttonText/>
+                            <imageType
+                                granite:class="cq-dialog-dropdown-showhide"
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/coral/foundation/form/select"
+                                fieldLabel="Image Type"
+                                name="./imageType">
+                                <granite:data
+                                    jcr:primaryType="nt:unstructured"
+                                    cq-dialog-dropdown-showhide-target=".image-showhide-target"/>
+                                <items jcr:primaryType="nt:unstructured">
+                                    <_x0031_
+                                        jcr:primaryType="nt:unstructured"
+                                        text="Icon"
+                                        value="icon"/>
+                                    <_x0032_
+                                        jcr:primaryType="nt:unstructured"
+                                        text="Image"
+                                        value="image"/>
+                                </items>
+                            </imageType>
+                            <iconField
+                                granite:class="icon image-showhide-target"
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/coral/foundation/container">
+                                <granite:data
+                                    jcr:primaryType="nt:unstructured"
+                                    showhidetargetvalue="icon"/>
+                                <items jcr:primaryType="nt:unstructured">
+                                    <icon
+                                        granite:class="cq-dialog-dropdown-showhide"
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/coral/foundation/form/select"
+                                        fieldLabel="Icon"
+                                        name="./icon">
+                                        <datasource
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="usgbv3/components/structure/common/datasources/iconcode"/>
+                                    </icon>
+                                </items>
+                            </iconField>
+                            <imageField
+                                granite:class="image image-showhide-target"
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/coral/foundation/container">
+                                <granite:data
+                                    jcr:primaryType="nt:unstructured"
+                                    showhidetargetvalue="image"/>
+                                <items jcr:primaryType="nt:unstructured">
+                                    <imgPath/>
+                                    <imageStyle
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/coral/foundation/form/select"
+                                        fieldLabel="Image Style"
+                                        name="./imageStyle">
+                                        <items jcr:primaryType="nt:unstructured">
+                                            <_x0031_
+                                                jcr:primaryType="nt:unstructured"
+                                                text="Circle"
+                                                value="round-image"/>
+                                            <_x0032_
+                                                jcr:primaryType="nt:unstructured"
+                                                text="Full Image"
+                                                value="box-inner-img"/>
+                                        </items>
+                                    </imageStyle>
+                                </items>
+                            </imageField>
+                            <title
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                fieldLabel="Title"
+                                name="./title"
+                                useFixedInlineToolbar="{Boolean}true"/>
                             <description
                                 jcr:primaryType="nt:unstructured"
                                 sling:resourceType="cq/gui/components/authoring/dialog/richtext"
@@ -179,12 +258,7 @@
                                     </cui>
                                 </uiSettings>
                             </description>
-                            <link
-                                jcr:primaryType="nt:unstructured"
-                                sling:resourceType="granite/ui/components/foundation/form/pathbrowser"
-                                fieldLabel="Link Path"
-                                name="./link"
-                                rootPath="/content/usgboral"/>
+                            <buttonText/>
                             <buttonStyle
                                 jcr:primaryType="nt:unstructured"
                                 sling:resourceType="granite/ui/components/foundation/form/select"
@@ -194,34 +268,31 @@
                                     jcr:primaryType="nt:unstructured"
                                     sling:resourceType="usgbv3/components/structure/common/datasources/buttonstyle"/>
                             </buttonStyle>
-                            <title
+                            <link
                                 jcr:primaryType="nt:unstructured"
-                                sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
-                                fieldLabel="Title"
-                                name="./title"
-                                useFixedInlineToolbar="{Boolean}true"/>
-                            <icon
-                                granite:class="cq-dialog-dropdown-showhide"
+                                sling:resourceType="granite/ui/components/foundation/form/pathbrowser"
+                                fieldLabel="Link Path"
+                                name="./link"
+                                rootPath="/content/usgboral"/>
+                            <hiddenImage/>
+                            <hideDestop
                                 jcr:primaryType="nt:unstructured"
-                                sling:resourceType="granite/ui/components/coral/foundation/form/select"
-                                fieldLabel="Icon"
-                                name="./icon">
-                                <datasource
-                                    jcr:primaryType="nt:unstructured"
-                                    sling:resourceType="usgbv3/components/structure/common/datasources/iconcode"/>
-                            </icon>
-                            <imgPath/>
+                                sling:resourceType="granite/ui/components/foundation/form/checkbox"
+                                allowBulkEdit="{Boolean}true"
+                                name="./hideDestop"
+                                text="Hide From Destop"
+                                value="true"/>
+                            <hideMobile
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/foundation/form/checkbox"
+                                allowBulkEdit="{Boolean}true"
+                                name="./hideMobile"
+                                text="Hide From Mobile"
+                                value="true"/>
                         </items>
                     </column>
                 </items>
-                <layout
-                    jcr:primaryType="nt:unstructured"
-                    sling:resourceType="granite/ui/components/foundation/layouts/fixedcolumns"/>
             </basic>
         </items>
-        <layout
-            jcr:primaryType="nt:unstructured"
-            sling:resourceType="granite/ui/components/foundation/layouts/tabs"
-            type="nav"/>
     </content>
 </jcr:root>

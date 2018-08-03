@@ -1,0 +1,71 @@
+// ----------------------------------------------------------------------
+// Component: accordionfc
+// ----------------------------------------------------------------------
+.accordionfc{
+
+	.heading {
+		cursor:pointer;
+		position: relative;
+
+		.glyphicon-minus{
+			display: block;
+		}
+
+		.glyphicon-plus{
+			display: none;
+		}
+
+		&.collapsed{
+			.glyphicon-minus{
+				display: none;
+			}
+
+			.glyphicon-plus{
+				display: block;
+			}
+
+		}
+
+		span{
+		    &:first-child {
+			    padding-right: 18px;
+			    display: block;
+			}
+
+			&.glyphicon {
+			    position: absolute;
+			    top: 4px;
+			    right: 0;
+			}
+
+		}
+
+	}
+
+	.content{
+		
+		margin: 0;
+
+	}
+
+	&:before{
+		// content: '';
+	 //    display: block;
+	 //    margin-top: 15px;
+	 //    margin-bottom: 15px;
+	 //    border: 0;
+	 //    border-top: 1px solid #eee;
+		display: none;
+	}
+
+	&:after{
+		content: '';
+	    display: block;
+	    margin-top: 15px;
+	    margin-bottom: 15px;
+	    border: 0;
+	    border-top: 1px solid #eee;
+	}
+
+
+}

@@ -1,0 +1,36 @@
+// ----------------------------------------------------------------------
+// Component: Breadcrumb Box
+// ----------------------------------------------------------------------
+
+.breadcrumb-box{
+	/*overwrite bootstrap 3*/
+	.breadcrumb{
+		font-size: 12px;
+		li{
+			&.active{
+				color: @color-darker-grey;
+			}
+		}
+	}
+	/*end overwrite bootstrap 3*/
+	li{
+		color: @color-darker-grey;
+		&+li{
+			&:before{
+				color: @color-darker-grey;
+				content: ">";
+				padding: 0 6px 0 1px;
+			}
+		}
+	}
+	a{
+		color: @color-darker-grey;
+		&:hover{
+			color: @color-darker-grey;
+		}
+	}
+}
+
+// ----------------------------------------------------------------------
+// END Component: Breadcrumb Box
+// ----------------------------------------------------------------------

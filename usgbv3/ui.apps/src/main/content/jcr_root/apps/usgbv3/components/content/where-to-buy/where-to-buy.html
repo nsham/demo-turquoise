@@ -88,7 +88,6 @@
             </div>
         </div>
         <span class="float-right"><a href="https://www.google.com/maps?daddr={{latitude}},{{longitude}}" target="_blank"><u>Get Direction</u></a></span>
-        {{#if product_categories}}
         <div class="accordion-wrap clearfix">
             <div class="btn-accordion">
                 <div class="col-l bold">
@@ -99,12 +98,11 @@
                 </div>
             </div>
             <div class="content-accordion">
-                {{#each product_categories}}
+                {{#each product}}
                 <p>{{this}}</p>
                 {{/each}}
             </div>
         </div>
-        {{/if}}
     </div>
     {{/each}}
 </script>
@@ -139,8 +137,7 @@
 </script>
 
 
-<sly data-sly-use.clientLib="/libs/granite/sightly/templates/clientlib.html" data-sly-call="${clientLib.js @ categories='uiux.alljs'}"
-    data-sly-unwrap/>
+
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDylpywGh8XxHMztw-kBRtXCnqyAHZqPwQ"></script>
 <sly data-sly-use.clientLib="/libs/granite/sightly/templates/clientlib.html" data-sly-call="${clientLib.all @ categories='uiux.wheretobuy'}" data-sly-unwrap/>
 <!--<script src="/etc/designs/usgb_v3/clientlib/uiux-less-ct/js/vendors/autocomplete.js"></script>

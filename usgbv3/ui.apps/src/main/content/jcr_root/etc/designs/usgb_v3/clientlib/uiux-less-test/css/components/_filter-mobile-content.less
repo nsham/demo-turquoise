@@ -1,0 +1,110 @@
+.filter-mobile-content{
+
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 90;
+	background-color: rgba(53, 53, 53, 0.95);
+	width: 100%;
+	height: 100%;
+	
+
+	/* padding-top: 72px; */
+	z-index: 120;
+
+	//1
+	&.animateIn{
+		opacity: 0;
+		webkit-animation-fill-mode: forwards;
+		              animation-fill-mode: forwards;
+
+		-webkit-animation-name: fadeIn; 
+		    -webkit-animation-duration: 0.4s;
+		    animation-name: fadeIn;
+		    animation-duration: 0.4s;
+
+	}
+
+	//3
+	&.animateOut{
+		opacity: 1;
+		webkit-animation-fill-mode: forwards;
+		              animation-fill-mode: forwards;
+
+
+
+		-webkit-animation-name: fadeOut; 
+		    -webkit-animation-duration: 0.4s;
+		    animation-name: fadeOut;
+		    animation-duration: 0.4s;
+
+	}
+
+
+	@keyframes fadeIn {
+	    from {opacity: 0;}
+	    to {opacity: 1;}
+	}
+
+
+	@keyframes fadeOut {
+	    from {opacity: 1;}
+	    to {opacity: 0;}
+	}
+
+	> * {
+		overflow: auto;
+		width: 100%;
+		height: 100%;
+		background: white;
+		position: absolute;
+		top: 0;
+		
+
+		//2
+		&.animateIn{
+			right: -100%;
+			webkit-animation-fill-mode: forwards;
+					              animation-fill-mode: forwards;
+
+				      -webkit-animation-delay: 0.4s;
+				                    animation-delay: 0.4s;
+
+					-webkit-animation-name: slideIn; 
+					    -webkit-animation-duration: 0.4s;
+					    animation-name: slideIn;
+					    animation-duration: 0.4s;
+
+		}
+		
+		//4
+		&.animateOut{
+			right: -15px;
+			webkit-animation-fill-mode: forwards;
+					              animation-fill-mode: forwards;
+
+
+
+					-webkit-animation-name: slideOut; 
+					    -webkit-animation-duration: 0.4s;
+					    animation-name: slideOut;
+					    animation-duration: 0.4s;
+
+		}
+
+		@keyframes slideIn {
+		    from {right: -100%;}
+		    to {right: -15px;}
+		}
+
+
+		@keyframes slideOut {
+		    from {right: -15px;}
+		    to {right: -100%;}
+		}
+	}
+
+	.close-filter-mobile-content{
+		display: inline-block;
+	}
+}

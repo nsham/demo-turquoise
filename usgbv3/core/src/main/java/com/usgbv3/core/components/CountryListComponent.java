@@ -12,11 +12,12 @@ import java.util.List;
 public class CountryListComponent extends WCMUsePojo {
     private static final Logger LOG = LoggerFactory.getLogger(CountryListComponent.class);
 
+    private List<CountryModel> countryModelList;
+    
     public List<CountryModel> getCountryModelList() {
         return countryModelList;
     }
 
-    private List<CountryModel> countryModelList;
 
     @Override
     public void activate() throws Exception {
