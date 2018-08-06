@@ -236,6 +236,7 @@
         sorting();
         $('#pagination-container').pagination({
             dataSource: dataForPagination,
+            pageSize: Number($('[data-category="'+ currCategory +'"]').attr('data-result-amount')),
             callback: function(data, pagination) {
                 switch (currCategory) {
                     case "content":
