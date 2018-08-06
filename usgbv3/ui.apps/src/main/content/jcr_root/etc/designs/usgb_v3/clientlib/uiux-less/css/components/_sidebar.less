@@ -1,0 +1,58 @@
+.c-sidebar {
+    background: #f6f6f6;
+    margin-bottom: 15px;
+    >.each {
+        padding: 20px;
+        .each-child{
+            padding:20px;
+        }
+    }
+    .bg-green-btn{
+        cursor: pointer;
+        &:hover{
+            background-color:@color-primary-green;
+            a{
+                color:@color-white; 
+            }
+        }
+    }
+
+    .radio-split-two{
+        padding-top: 15px;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-wrap:wrap;
+            flex-wrap:wrap;
+        -webkit-box-orient:horizontal;
+        -webkit-box-direction:normal;
+            -ms-flex-direction:row;
+                flex-direction:row;
+        -webkit-box-pack:start;
+            -ms-flex-pack:start;
+                justify-content:flex-start;
+        -webkit-box-align:stretch;
+            -ms-flex-align:stretch;
+                align-items:stretch;
+        word-wrap: break-word;
+
+        .radio-item{
+           width:50%;
+            .item-inner{
+                position: relative;
+                label {
+                    padding: 0 0 0 19px;
+                    .checkmark{
+                        position: absolute;
+                        top:0;
+                        left:0;
+                    }
+                }
+            }
+        }
+        .radio-item:nth-child(1n){
+            clear: both; 
+            margin-bottom:10px;
+        }
+    }
+}

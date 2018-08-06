@@ -291,7 +291,6 @@
                                                                     </inline>
                                                                 </cui>
                                                             </uiSettings>
-                                                            <buttonText/>
                                                         </bottomDescription1>
                                                         <bottomLink1
                                                             jcr:primaryType="nt:unstructured"
@@ -597,7 +596,6 @@
                                                                     </inline>
                                                                 </cui>
                                                             </uiSettings>
-                                                            <buttonText/>
                                                         </bottomDescription2>
                                                         <bottomLink2
                                                             jcr:primaryType="nt:unstructured"
@@ -903,7 +901,6 @@
                                                                     </inline>
                                                                 </cui>
                                                             </uiSettings>
-                                                            <buttonText/>
                                                         </bottomDescription3>
                                                         <bottomLink3
                                                             jcr:primaryType="nt:unstructured"
@@ -1209,7 +1206,6 @@
                                                                     </inline>
                                                                 </cui>
                                                             </uiSettings>
-                                                            <buttonText/>
                                                         </bottomDescription4>
                                                         <bottomLink4
                                                             jcr:primaryType="nt:unstructured"
@@ -1515,7 +1511,6 @@
                                                                     </inline>
                                                                 </cui>
                                                             </uiSettings>
-                                                            <buttonText/>
                                                         </bottomDescription5>
                                                         <bottomLink5
                                                             jcr:primaryType="nt:unstructured"
@@ -1821,7 +1816,6 @@
                                                                     </inline>
                                                                 </cui>
                                                             </uiSettings>
-                                                            <buttonText/>
                                                         </bottomDescription6>
                                                         <bottomLink6
                                                             jcr:primaryType="nt:unstructured"
@@ -2127,7 +2121,6 @@
                                                                     </inline>
                                                                 </cui>
                                                             </uiSettings>
-                                                            <buttonText/>
                                                         </bottomDescription7>
                                                         <bottomLink7
                                                             jcr:primaryType="nt:unstructured"
@@ -2433,7 +2426,6 @@
                                                                     </inline>
                                                                 </cui>
                                                             </uiSettings>
-                                                            <buttonText/>
                                                         </bottomDescription8>
                                                         <bottomLink8
                                                             jcr:primaryType="nt:unstructured"

@@ -167,6 +167,7 @@
                 <div class="row">
                     <div class="col-xs-12">
                         <a href="#" class="col-xs-12 col-sm-5 btn btn-lg btn-brand-default button-green">Request Sample</a>
+                        <a href="#" class="add-to-cart"></a>
                     </div>
                 </div>
 
@@ -2572,6 +2573,358 @@
         }
 
     })();
+
+
+
+
+// ----------------------------------------------------------------------
+// Checkbox  (product details)
+// ----------------------------------------------------------------------
+(function () {
+    "use strict";
+    $(document).ready(function () {
+		$(".compare-popup").hide();
+        $(".compare-popup .btn-compare").hide();
+        $(".compare-popup .instruction-text").hide();
+
+        var currCategoryKey;
+        var countryCode;
+        var getLink;
+        var checkStatus;
+        var storeData = [];
+        var currStoreData = [];
+        var detailsData;
+        var currInput;
+        var getIndex1;
+
+        var orderData=[];
+
+       //var tempURL = "/etc/designs/usgb_v3/clientlib/uiux-all-js/js/json/product-compare-one.html";
+
+        //get browser url
+        var pathname = window.location.pathname;
+        var pagename = pathname.split(".").reverse()[1] + ".properties.json";
+        //pass url to load json
+        var detailsJSON
+
+        function productCompareDetailPage() {
+
+            detailsJSON = pagename;
+            getJSONDetails();
+
+            $(document).on("change", '[data-input-value]', function () {
+
+                event.preventDefault();
+                getLink = $(this).data("input-value");
+
+                if ($(this).is(':checked')) {
+                    console.log("check")
+                    checkStatus = $(this).prop("checked");
+                    $(this).prop('disabled',false);
+
+                    var groupElem = {
+                        "url": detailsData.uri+".html",
+                       "img": detailsData.pageImage,
+                        "title": detailsData.pageTitle,
+                        "checked": checkStatus,
+                        "countryCode": countryCode
+                    }
+
+                   	storeData.push(groupElem);
+                    //console.log("whencheck",groupElem);
+                    addToDetailsToLocal();
+
+                } else {
+                    console.log("uncheck")
+                     getIndex1
+                     storeData.some(function (x, i) {
+                        if (x.url == getLink) {
+                            getIndex1 = i;
+                            return true;
+                         }
+            		});
+
+            		console.log("in1", getIndex1)
+                    removeCompareDetails();
+                }
+            });
+
+             //hide show popup
+            $(".compare-popup .btn-menu-down").click(function () {
+                $(".popup-content").toggle();
+                $(".compare-popup .btn-compare").toggle();
+                $(".compare-popup .title").toggleClass("selected")
+
+                //check to toggle compare-btn
+                //if (numberOfChecked <= 1) {
+                 //   $(".compare-popup .btn-compare").toggle();
+                 //   $(".instruction-text").toggle();
+                //}
+            });
+
+             // close btn on popup to remove content
+            $("body").on("click", ".close-btn-box", function () {
+                event.preventDefault();
+                currInput = $(this).closest('.each').attr("data-content-title");
+                $("[data-input-value ='" + currInput + "']").attr('checked', false);
+
+				getIndex1
+                storeData.some(function (x, i) {
+                    if (x.url == currInput) {
+                        getIndex1 = i;
+                        return true;
+                    }
+                });
+
+            	console.log("in2", getIndex1)
+                removeCompareDetails();
+            });
+
+
+
+             // request btn
+            $("body").on("click", ".request-btn", function () {
+                console.log("req btn");
+                var url = detailsData.uri + ".html";
+                var array = JSON.parse(localStorage.getItem('sampleOrdersJson')) || [];
+                //console.log('current page product', detailsData);
+                var orderElem = {
+                    productName: detailsData.pageTitle,
+                    productUrl: detailsData.uri + ".html",
+                    quantity: 1
+                }
+                if(array.length == 0){
+                    array.push(orderElem);
+                } else {
+                            array.push(orderElem);
+                            console.log("aarr1", array);
+                        
+
+                            var output = [];
+                            
+                            array.forEach(function (value) {
+                                var existing = output.filter(function (v, i) {
+                                    return v.productUrl == value.productUrl;
+                                });
+                                if (existing.length) {
+                                    var existingIndex = output.indexOf(existing[0]);
+                                    output[existingIndex].quantity = output[existingIndex].quantity + value.quantity;
+                                } else {
+                                    value.quantity = value.quantity;
+                                    output.push(value);
+                                }
+                            });
+
+                            
+                            console.log('output', output);
+                            array = output;
+                            console.log("aarr2", array);
+                        }
+                localStorage.setItem("sampleOrdersJson", JSON.stringify(array));
+                console.log('final', array);
+
+                
+
+            });
+
+
+
+        }
+        if ($('#compare-pop-detail-page').length) productCompareDetailPage();
+
+        function addNewSample(obj) {
+            var array = JSON.parse(localStorage.getItem('sampleOrdersJson')) || [];
+            array.push(obj);
+            array = uniqueArray(urls);
+            localStorage.setItem('browseHistory', JSON.stringify(urls));
+        }
+
+        function addToDetailsToLocal() {
+            localStorage.setItem(currCategoryKey, JSON.stringify(storeData));
+            getDetailsLocalCompare();
+        }
+
+
+        function removeCompareDetails() {
+           //console.log("currGetLink",getLink);
+            // var getIndex1 = storeData.findIndex(x => x.url == data); 
+
+
+            storeData.splice(getIndex1, 1);
+           	addToDetailsToLocal();
+           	getDetailsLocalCompare();
+           	$("[data-input-value ='" + currInput + "']").prop('checked', false);
+
+        }
+
+
+        function getDetailsLocalCompare() {
+
+            if (localStorage.getItem(currCategoryKey) === null) {
+                console.log("detailLocalempty")
+            } else {
+                //get from local storage
+                storeData = JSON.parse(localStorage.getItem(currCategoryKey));
+                currStoreData = storeData;
+                console.log("currinLocal-", storeData);
+                loadCompare();
+
+				if (storeData.length >= 3) {
+                    //disbled all checks
+                    $('input[type="checkbox"]').prop('disabled', true);
+                    //enable only checked items to be uncheck
+
+                }
+                else {
+                	$('input[type="checkbox"]').prop('disabled', false);
+               }
+
+
+                var localNum = storeData.map(function (localNum) {
+                	return localNum.url;
+                });
+               	console.log(localNum)
+
+                $.each(localNum, function (i, val) {
+                	var selectedCard = $('[data-input-value="' + val + '"]');
+                    console.log(selectedCard);
+                	$(selectedCard).prop("checked", true);
+                    $(selectedCard).prop('disabled', false);
+                });
+
+
+                if (storeData.length < 1) {
+                    //console.log("nomore");
+                    localStorage.removeItem(currCategoryKey);
+                }
+            }
+        }
+
+        function countPopContent(){
+            var popContent = $("[data-content-title]").length;
+
+            	if (popContent > 1) {
+                    $(".compare-popup .btn-compare").show();
+                    $(".compare-popup").show();
+                    $(".compare-popup .instruction-text").hide();
+
+                } else {
+                    $(".compare-popup .btn-compare").hide();
+                    $(".compare-popup .instruction-text").show();
+                }
+
+                if (popContent > 0) {
+                    $(".compare-popup .btn-menu-down").show();
+                    $(".popup-content").show();
+                } else {
+                    $(".compare-popup .instruction-text").hide();
+                    $(".compare-popup").show();
+                    $(".popup-content").hide();
+                    $(".compare-popup .btn-menu-down").hide();
+                    $(".compare-popup .btn-compare").hide();
+                    //localStorage.removeItem(categoryName);
+                }
+
+            //console.log(popContent)
+        }
+
+
+
+
+        function loadCompare() {
+        	console.log("currStoreData-", currStoreData);
+            //load the popup
+            var comparePopupHTML = $('#compare-popup-local').html();
+            var temptcomparePopupHTML = Handlebars.compile(comparePopupHTML);
+            $('.compare-popup-local').html(temptcomparePopupHTML(storeData));
+            $(".compare-popup").show();
+        
+            countPopContent();
+        }
+
+
+
+        function getJSONDetails() {
+            console.log('urlJSON', detailsJSON)
+            $.ajax({
+                url: detailsJSON,
+                type: "GET",
+                cache: false,
+                success: function (response) {
+
+                    detailsData = response.pagePropertiesList[0];
+                    console.log("res", detailsData);
+                    countryCode = detailsData.countryCode;
+                    currCategoryKey = detailsData.categoryKey + "_" + countryCode;
+                    console.log("CK",currCategoryKey);
+
+                    // var groupElem = {
+                    //     "url": detailsData.pagePropertiesList[0].url,
+                    //     "img": detailsData.pagePropertiesList[0].image68x56,
+                    //     "title": detailsData.pagePropertiesList[0].pageTitle,
+                    //     "checked": checkStatus,
+                    //     "countryCode": countryCode
+                    // }
+                    // storeData.push(groupElem);
+                    // console.log("dStore", storeData)
+                    //localStorage.setItem(currCategoryKey, JSON.stringify(storeData));
+
+
+                    getDetailsLocalCompare();
+
+                },
+                beforeSend: function () {},
+                complete: function () {}
+            });
+
+        }
+
+
+
+    });
+})();
+
+
+
+
+(function(){
+    "use strict";
+    //===========================
+    // transtion Request
+    //===========================
+    $(document).ready(function(){
+
+        var count = 0;
+         $("body").on("click", ".request-btn", function (event) {
+
+            count++;
+            $("a.add-to-cart").addClass("size");
+            setTimeout(function() {
+                $("a.add-to-cart").addClass("hover");
+            }, 200);
+
+            setTimeout(function() {
+               $("a.cart > span").addClass("counter");
+                $("a.cart > span.counter").text(count);
+            }, 400);
+
+            setTimeout(function() {
+				$("a.add-to-cart").hide();
+                $("a.add-to-cart").removeClass("hover");
+                $("a.add-to-cart").removeClass("size");
+            }, 1100);
+            setTimeout(function() {
+            	$("a.add-to-cart").show();
+            },1500);
+            event.preventDefault();
+        });
+
+    });
+
+})();
+
+
+
 
 
 

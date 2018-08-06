@@ -189,7 +189,6 @@
                                         </inline>
                                     </cui>
                                 </uiSettings>
-                                <buttonText/>
                             </description>
                             <link
                                 jcr:primaryType="nt:unstructured"

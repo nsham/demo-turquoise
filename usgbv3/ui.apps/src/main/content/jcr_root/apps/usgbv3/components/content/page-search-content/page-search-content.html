@@ -37,7 +37,7 @@
                 <div class="col-xs-12 col-sm-5">
                     <form id="search-form" class="search-form">
                         <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Ceiling" autocomplete="off" data-autocomplete="/etc/designs/usgb_v3/clientlib/uiux-less-ct/js/json/search-autocomplete.json">
+                            <input type="text" class="form-control" placeholder="Ceiling" autocomplete="off" data-autocomplete="/bin/usgb/v3/searchAutoComplete">
                             <span class="input-group-btn">
                                 <button type="submit" class="btn btn-default glyphicon glyphicon-search color-primary-green"></button>
                             </span>
@@ -175,7 +175,7 @@
     </div>
     <!-- SEARCH INPUT (GROUP) END-->
 
-    <div class="no-search-result-container container">
+    <div class="no-search-result-container container m-bottom-5xl">
         <div class="row">
             <div class="col-xs-12">
                 <h5 class="ht5 color-primary-green m-vertical-l m-bottom-s">Currently no result has been found.</h5>
@@ -407,19 +407,19 @@
 
 <script id="templSearchResult_content" type="text/x-handlebars-template">
     {{#each this}} 
-    <div class="each width-full flex-md-row m-bottom-4xl" data-key="{{key}}">
+    <div class="each width-full flex-md-row m-bottom-4xl search-result-thumbnail" data-key="{{key}}">
         <div class="left hidden-xs hidden-sm">
-            {{#ifEquals this.type "pages"}}
+            {{#ifEquals this.type "page"}}
             <div class="thumbs">
-                <a href="{{link}}" target="_blank">
-                    <img src="{{image}}">
+                <a href="{{link}}" target="_blank" class="width-full">
+                    <img src="{{image}}" class="width-full" alt="{{title}}">
                 </a>
             </div>
             {{else}}
             <div class="c-video-popup">
                 <a data-fancybox="" href="{{link}}">
                     <span class="ico-play-video color-white fa fa-play-circle"></span>
-                    <img src="{{image}}" alt="">
+                    <img src="{{image}}" class="width-full" alt="{{title}}">
                 </a>
             </div>
             {{/ifEquals}}
@@ -460,7 +460,7 @@
     <div class="each flex-md-row m-bottom-4xl" data-key="{{key}}">
         <div class="left hidden-xs hidden-sm">
             <div class="thumbs">
-                <a href="{{link}}" target="_blank"><img src="https://dummyimage.com/250x145/000000/fff"></a>
+                <a href="{{link}}" target="_blank"><img src="{{image}}" class="width-full" alt="{{title}}"></a>
             </div>
         </div>
         <div class="align-center align-md-bottom flex-row right width-full">
@@ -518,7 +518,7 @@
             <div class="each flex-md-row m-bottom-4xl" data-key="{{key}}">
                 <div class="left hidden-xs hidden-sm">
                     <div class="thumbs">
-                        <a href="{{link}}" target="_blank"><img src="https://dummyimage.com/250x145/000000/fff"></a>
+                        <a href="{{link}}" target="_blank"><img src="{{image}}" class="width-full" alt="{{title}}"></a>
                     </div>
                 </div>
                 <div class="align-center align-md-bottom flex-row right width-full">
@@ -577,19 +577,19 @@
     <div class="relevant-content">
         <div class="inner">
             {{#each content}}
-                <div class="each width-full flex-md-row m-bottom-4xl" data-key="{{key}}">
+                <div class="each width-full flex-md-row m-bottom-4xl search-result-thumbnail" data-key="{{key}}">
                     <div class="left hidden-xs hidden-sm">
-                        {{#ifEquals this.type "pages"}}
+                        {{#ifEquals this.type "page"}}
                         <div class="thumbs">
                             <a href="{{link}}" target="_blank">
-                                <img src="{{image}}">
+                                <img src="{{image}}" class="width-full" alt="{{title}}">
                             </a>
                         </div>
                         {{else}}
                         <div class="c-video-popup">
                             <a data-fancybox="" href="{{link}}">
                                 <span class="ico-play-video color-white fa fa-play-circle"></span>
-                                <img src="{{image}}" alt="">
+                                <img src="{{image}}" class="width-full" alt="{{title}}">
                             </a>
                         </div>
                         {{/ifEquals}}

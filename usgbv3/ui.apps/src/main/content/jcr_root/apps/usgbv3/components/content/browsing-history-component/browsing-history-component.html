@@ -14,7 +14,7 @@
 			<div class="col-xs-12">
 				<div class="feature-card-wrapper">
 					<!-- slick div -->
-					<div class="carousel-feature-card browse-history-result">
+					<div class="browse-history-result">
 					</div>
 					<!-- slick div end -->
 				</div>   <!-- end feature-card-wrapper -->
@@ -23,7 +23,7 @@
 
 				<script id="browseHistoryTemplate" type="text/x-handlebars-template">
 					{{#each this}}
-					<div class="col-sm-2 p-xl p-bottom-no">
+					<div class="browse-history-thumb p-xl p-bottom-no">
 						<a href="{{pagePropertiesList.0.uri}}.html" target="_blank">
 							<div class="box-size-m box-type-2 bg-white p-md-xs p-xs">
 								<div class="center width-full">
@@ -69,6 +69,7 @@
                     var template = Handlebars.compile(html);
                     console.log(template(currOnStageMainResultData));
                     $('.browse-history-result').append(template(currOnStageMainResultData));
+                    $('.browse-history-result').slick();
                 }
             });
 

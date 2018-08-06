@@ -31,7 +31,7 @@
     
 <!--     <filter root="/apps/usgbv3/components/content/header" /> -->
 <!--     <filter root="/apps/usgbv3/components/content/header-country-popup-component" /> -->
-<!--     <filter root="/apps/usgbv3/components/content/header-megamenu" /> -->
+    <filter root="/apps/usgbv3/components/content/header-megamenu" />
 <!--     <filter root="/apps/usgbv3/components/content/header-mobile-view-component" /> -->
 <!--     <filter root="/apps/usgbv3/components/content/header-search-popup-component" /> -->
 <!--     <filter root="/apps/usgbv3/components/content/hero-banner-component" /> -->
@@ -83,15 +83,8 @@
 <!--     <filter root="/apps/usgbv3/widgets" /> -->
     
 <!--     JS & CSS -->
-<!--     <filter root="/etc/designs/usgb_v3" > -->
-<!--     	<exclude pattern="/etc/designs/usgb_v3/clientlib/uiux-all-js" /> -->
-<!--     	<exclude pattern="/etc/designs/usgb_v3/clientlib/uiux-all-js-vc" /> -->
-<!--     	<exclude pattern="/etc/designs/usgb_v3/clientlib/uiux-less" /> -->
-<!--     	<exclude pattern="/etc/designs/usgb_v3/clientlib/uiux-less-ct" /> -->
-<!--     	<exclude pattern="/etc/designs/usgb_v3/clientlib/uiux-less-sherif" /> -->
-<!--     	<exclude pattern="/etc/designs/usgb_v3/clientlib/uiux-less-vc" /> -->
+    <filter root="/etc/designs/usgb_v3" />
     
-<!--     </filter> -->
     
 <!--     COUNTRY CONFIG & TAGS-->
     <filter root="/etc/tags/usgbv3" />

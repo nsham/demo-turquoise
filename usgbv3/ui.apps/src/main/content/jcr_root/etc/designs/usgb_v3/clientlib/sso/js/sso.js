@@ -137,7 +137,7 @@
 
     var myclient = $('#myclient').html();
     var myclientd = $('#myclientd').html();
-	var currentDomain =window.location.hostname;
+	  var currentDomain =window.location.hostname;
 
     var ssoDomain = "http://myaccount-stg.usgboral.com";
 
@@ -147,8 +147,8 @@
       }
 
     // var stAPI = "http://localhost:9003/sso/sessionInfo";
-    var stAPI = "/bin/sso/sessionInfo";
-    var uiAPI = "/bin/sso/userInfo";
+    var stAPI = "/bin/sso/info/session";
+    var uiAPI = "/bin/sso/info/user";
     var loginURL = ssoDomain +"/Login.aspx";
     var logoutURL = ssoDomain +"/Logout.aspx";
     var sessionURL = ssoDomain +"/GetSessionToken.aspx";

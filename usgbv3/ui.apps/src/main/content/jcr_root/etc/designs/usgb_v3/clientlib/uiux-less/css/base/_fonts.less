@@ -1,0 +1,317 @@
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans:400,700');
+// ----------------------------------------------------------------------
+// Responsive Fonts
+// Header Text Font Size
+// ----------------------------------------------------------------------
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.ht1,
+.ht2,
+.ht3,
+.ht4,
+.ht5,
+.ht6,
+.footer-title {
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-family: 'Noto Sans', sans-serif;
+    line-height: 1.2;
+}
+
+.noto-regular {
+    font-family: @noto;
+    font-weight: 400;
+}
+
+.noto-bold {
+    font-family: @noto;
+    font-weight: 700;
+}
+
+.font-awesome {
+    font-family: @font-awesome;
+}
+
+/* font awesome icons default */
+
+.stacked-default {
+    vertical-align: bottom;
+    display: inline-block;
+    margin: -2px;
+}
+
+.stacked-default>* {
+    font-size: 11px;
+}
+
+.stacked-default .fa-2x {
+    font-size: 13px;
+}
+
+.stacked-default .fa-3x {
+    font-size: 15px;
+}
+
+.stacked-default .fa-4x {
+    font-size: 17px;
+}
+
+.stacked-default .fa-5x {
+    font-size: 19px;
+    position: relative;
+    top: -1px;
+}
+
+/* end font awesome icons default */
+
+/*icon colors & sizes*/
+
+.icon-color-white {
+    color: @color-white;
+    &:hover,
+    &:focus,
+    &:active {
+        color: @color-primary-yellow;
+    }
+}
+
+.icon-color-green {
+    color: @color-primary-green;
+    &:hover,
+    &:focus,
+    &:active {
+        color: @color-primary-yellow;
+    }
+}
+
+.icon-color-darker-grey {
+    color: @color-darker-grey;
+    &:hover,
+    &:focus,
+    &:active {
+        color: @color-primary-green;
+    }
+}
+
+.icon-size {
+    font-size: 30px;
+}
+
+.icon-size-lg {
+    font-size: 40px;
+}
+
+.icon-size-md {
+    font-size: 35px;
+}
+
+.icon-size-sm {
+    font-size: 25px;
+}
+
+.icon-size-xs {
+    font-size: 20px;
+}
+
+/*end icon colors & sizes*/
+
+h1,
+.ht1 {
+    font-size: 56px;
+}
+
+h2,
+.ht2 {
+    font-size: 48px;
+}
+
+h3,
+.ht3 {
+    font-size: 40px;
+}
+
+h4,
+.ht4 {
+    font-size: 32px;
+}
+
+h5,
+.ht5 {
+    font-size: 24px;
+}
+
+h6,
+.ht6 {
+    font-size: 16px;
+}
+
+@media(max-width:768px) {
+    h1,
+    .ht1 {
+        font-size: 36px;
+    }
+    h2,
+    .ht2 {
+        font-size: 32px;
+    }
+    h3,
+    .ht3 {
+        font-size: 28px;
+    }
+    h4,
+    .ht4 {
+        font-size: 24px;
+    }
+    h5,
+    .ht5 {
+        font-size: 20px;
+    }
+    h6,
+    .ht6 {
+        font-size: 16px;
+    }
+}
+
+// ----------------------------------------------------------------------
+// Responsive Fonts
+// output: fs-{font-sizes}
+// Body Text Font Size
+// ----------------------------------------------------------------------
+// @font-sizes: (20, 14, 12, 10); reference only
+//.loop-font(@bp: null) {
+//    @each @size in @font-sizes {
+//      .fs-@{size} {
+//        font-size: @size+ px;
+//      }
+//    }
+//}
+.fs-1 {
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.fs-2 {
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.fs-3 {
+    font-size: 12px;
+    line-height: 1.2;
+}
+
+@media (min-width: 768px) {
+    .fs-1 {
+        font-size: 16px;
+        line-height: 1.5;
+    }
+    .fs-2 {
+        font-size: 14px;
+        line-height: 1.5;
+    }
+    .fs-3 {
+        font-size: 12px;
+        line-height: 1.2;
+    }
+}
+
+// ----------------------------------------------------------------------
+// Headline Sub-Text
+// ----------------------------------------------------------------------
+.sub-heading {
+    font-size: 19px;
+    line-height: 1.5;
+    font-weight: 700;
+    @media (min-width: 768px) {
+        font-size: 18px;
+    }
+}
+
+// ----------------------------------------------------------------------
+// Header Title Yellow Icon
+// ----------------------------------------------------------------------
+.yellow-label {
+    &:before {
+        content: " ";
+        position: absolute;
+        background: url(../images/yellow-header-icon-l.png) no-repeat transparent;
+        background-size: 100%;
+        width: 56px;
+        height: 90px; // left:0;
+        margin-top: 0px;
+        margin-top: -12px;
+        margin-left: -59px;
+    }
+}
+
+.ht1 {
+    .yellow-label {
+        &:before {
+            width: 28px;
+            height: 53px;
+            margin-left: -55px;
+            margin-top: -6px;
+            @media only screen and (min-width: @min-bp-sm) {
+                width: 43px;
+                height: 79px;
+                margin-left: -65px;
+                margin-top: -6px;
+            }
+        }
+    }
+}
+
+.ht4 {
+    .yellow-label {
+        &:before {
+            width: 18px;
+            height: 37px;
+            margin-left: -30px;
+            margin-top: -3px;
+            @media only screen and (min-width: @min-bp-sm) {
+                width: 23px;
+                margin-left: -40px;
+            }
+        }
+    }
+}
+
+.ht5 {
+    .yellow-label {
+        &:before {
+            width: 15px;
+            height: 37px;
+            margin-left: -20px;
+            margin-top: -3px;
+            @media only screen and (min-width: @min-bp-sm) {
+                width: 16px;
+                margin-left: -26px;
+                margin-top: -4px;
+            }
+        }
+    }
+}
+
+.footer {
+    li a {
+        color: @color-white;
+        &:hover {
+            color: @color-primary-yellow;
+        }
+    }
+}
+
+.footer-title {
+    .yellow-label {
+        &:before {
+            width: 11px;
+            margin-left: -18px;
+            margin-top: 0px;
+        }
+    }
+}
