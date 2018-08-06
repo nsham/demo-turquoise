@@ -59,9 +59,9 @@
         <div class="row m-vertical-xl">
             <div class="col-xs-12 text-center text-sm-left">
                 <ul class="sub-search-section">
-                    <li class="active"><a href="#" data-category="content">Content</a></li>
-                    <li><a href="#" data-category="doc_finder">Document Finder</a></li>
-                    <!-- <li><a href="#" data-category="cad">CAD Drawing</a></li> -->
+                    <li class="active"><a href="#" data-category="content" data-result-amount="6">Content</a></li>
+                    <li><a href="#" data-category="doc_finder" data-result-amount="10">Document Finder</a></li>
+                    <!-- <li><a href="#" data-category="cad" data-result-amount="9">CAD Drawing</a></li> -->
                 </ul>
             </div>
         </div>
@@ -435,6 +435,7 @@
                 </div>
             </a>
             <div class="align-center flex-basis-no flex-IE-grow-auto flex-grow-0 flex-row justify-end side-functions-short">
+                {{#ifEquals this.type "page"}}
                 <div class="bookmark uppercase fs-3">
                     <a href="{{link}}" class="cta-bookmark disabled">
                         <div class="btn button-grey visible-xs">
@@ -448,6 +449,7 @@
                         </div>
                     </a>
                 </div>
+                {{/ifEquals}}
             </div>
         </div>
         <!-- <span>{{created_date}}</span> -->
@@ -475,14 +477,14 @@
             </a>
             <div class="align-center flex-basis-no flex-IE-grow-auto flex-grow-0 flex-row justify-end side-functions">
                 <div class="bookmark uppercase fs-3">
-                    <a href="#" class="cta-bookmark disabled">
+                    <a href="{{link}}" target="_blank">
                         <div class="btn button-grey visible-xs">
-                            <span class="glyphicon glyphicon-bookmark"></span>
+                            <span class="glyphicon glyphicon-eye-open"></span>
                         </div>
                         <div class="hidden-xs">
-                            <span class="glyphicon glyphicon-bookmark m-right-xxs"></span>
+                            <span class="glyphicon glyphicon-eye-open m-right-xxs"></span>
                             <span>
-                                <strong>Bookmark</strong>
+                                <strong>View</strong>
                             </span>
                         </div>
                     </a>
@@ -533,14 +535,14 @@
                     </a>
                     <div class="align-center flex-basis-no flex-IE-grow-auto flex-grow-0 flex-row justify-end side-functions">
                         <div class="bookmark uppercase fs-3">
-                            <a href="#" class="cta-bookmark disabled">
+                            <a href="{{link}}" target="_blank">
                                 <div class="btn button-grey visible-xs">
-                                    <span class="glyphicon glyphicon-bookmark"></span>
+                                    <span class="glyphicon glyphicon-eye-open"></span>
                                 </div>
                                 <div class="hidden-xs">
-                                    <span class="glyphicon glyphicon-bookmark m-right-xxs"></span>
+                                    <span class="glyphicon glyphicon-eye-open m-right-xxs"></span>
                                     <span>
-                                        <strong>Bookmark</strong>
+                                        <strong>View</strong>
                                     </span>
                                 </div>
                             </a>
@@ -605,6 +607,7 @@
                             </div>
                         </a>
                         <div class="align-center flex-basis-no flex-IE-grow-auto flex-grow-0 flex-row justify-end side-functions-short">
+                            {{#ifEquals this.type "page"}}
                             <div class="bookmark uppercase fs-3">
                                 <a href="#" class="cta-bookmark disabled">
                                     <div class="btn button-grey visible-xs">
@@ -618,6 +621,7 @@
                                     </div>
                                 </a>
                             </div>
+                            {{/ifEquals}}
                         </div>
                     </div>
                 </div>
