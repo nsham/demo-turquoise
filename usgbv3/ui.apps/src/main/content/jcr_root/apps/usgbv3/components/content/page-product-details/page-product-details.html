@@ -2581,6 +2581,8 @@
 (function () {
     "use strict";
     $(document).ready(function () {
+
+
 		$(".compare-popup").hide();
         $(".compare-popup .btn-compare").hide();
         $(".compare-popup .instruction-text").hide();
@@ -2594,6 +2596,7 @@
         var detailsData;
         var currInput;
         var getIndex1;
+        var popContent;
 
         var orderData=[];
 
@@ -2649,15 +2652,17 @@
 
              //hide show popup
             $(".compare-popup .btn-menu-down").click(function () {
-                $(".popup-content").toggle();
-                $(".compare-popup .btn-compare").toggle();
-                $(".compare-popup .title").toggleClass("selected")
+
+				$(".compare-popup .btn-compare").toggle();
+                $(".compare-popup .title").toggleClass("selected");
 
                 //check to toggle compare-btn
-                //if (numberOfChecked <= 1) {
-                 //   $(".compare-popup .btn-compare").toggle();
-                 //   $(".instruction-text").toggle();
-                //}
+                console.log("pop",popContent);
+                if (popContent <= 1) {
+                  $(".compare-popup .btn-compare").hide();
+                 $(".instruction-text").fadeToggle(500);
+                }
+                $(".popup-content").fadeToggle(600);
             });
 
              // close btn on popup to remove content
@@ -2665,6 +2670,12 @@
                 event.preventDefault();
                 currInput = $(this).closest('.each').attr("data-content-title");
                 $("[data-input-value ='" + currInput + "']").attr('checked', false);
+
+                $(this).closest(".each").animate({
+                    left: "200px",
+                    opacity:0.2
+
+              	}, 500 );
 
 				getIndex1
                 storeData.some(function (x, i) {
@@ -2695,9 +2706,6 @@
                     array.push(orderElem);
                 } else {
                             array.push(orderElem);
-                            console.log("aarr1", array);
-                        
-
                             var output = [];
                             
                             array.forEach(function (value) {
@@ -2713,15 +2721,12 @@
                                 }
                             });
 
-                            
-                            console.log('output', output);
                             array = output;
-                            console.log("aarr2", array);
                         }
                 localStorage.setItem("sampleOrdersJson", JSON.stringify(array));
                 console.log('final', array);
 
-                
+
 
             });
 
@@ -2747,11 +2752,15 @@
            //console.log("currGetLink",getLink);
             // var getIndex1 = storeData.findIndex(x => x.url == data); 
 
+			//$(".compare-popup .each").fadeOut(500);
+			setTimeout(function () {
+                storeData.splice(getIndex1, 1);
+                addToDetailsToLocal();
+                getDetailsLocalCompare();
+                $("[data-input-value ='" + currInput + "']").prop('checked', false);
+            }, 500);
 
-            storeData.splice(getIndex1, 1);
-           	addToDetailsToLocal();
-           	getDetailsLocalCompare();
-           	$("[data-input-value ='" + currInput + "']").prop('checked', false);
+
 
         }
 
@@ -2799,29 +2808,27 @@
         }
 
         function countPopContent(){
-            var popContent = $("[data-content-title]").length;
+            popContent = $("[data-content-title]").length;
+
+                 if (popContent > 0) {
+                    $(".compare-popup").fadeIn(500);
+                    $(".popup-content").fadeIn(500);
+                    $(".compare-popup .btn-menu-down").fadeIn(500);
+                } else {
+                    $(".compare-popup").fadeOut(700);
+                }
 
             	if (popContent > 1) {
-                    $(".compare-popup .btn-compare").show();
-                    $(".compare-popup").show();
-                    $(".compare-popup .instruction-text").hide();
+					$(".compare-popup").fadeIn(800);
+                    $(".compare-popup .popup-content .each").fadeIn(800);
+                    $(".compare-popup .btn-compare").fadeIn(500);
+                    $(".compare-popup .instruction-text").fadeOut(500);
 
                 } else {
-                    $(".compare-popup .btn-compare").hide();
-                    $(".compare-popup .instruction-text").show();
+                	$(".compare-popup .btn-compare").fadeOut(500);
+					$(".compare-popup .instruction-text").fadeIn(500);
                 }
 
-                if (popContent > 0) {
-                    $(".compare-popup .btn-menu-down").show();
-                    $(".popup-content").show();
-                } else {
-                    $(".compare-popup .instruction-text").hide();
-                    $(".compare-popup").show();
-                    $(".popup-content").hide();
-                    $(".compare-popup .btn-menu-down").hide();
-                    $(".compare-popup .btn-compare").hide();
-                    //localStorage.removeItem(categoryName);
-                }
 
             //console.log(popContent)
         }
@@ -2835,8 +2842,8 @@
             var comparePopupHTML = $('#compare-popup-local').html();
             var temptcomparePopupHTML = Handlebars.compile(comparePopupHTML);
             $('.compare-popup-local').html(temptcomparePopupHTML(storeData));
-            $(".compare-popup").show();
-        
+           // $(".compare-popup").fadeIn(500);
+
             countPopContent();
         }
 
@@ -2881,7 +2888,6 @@
 
     });
 })();
-
 
 
 
