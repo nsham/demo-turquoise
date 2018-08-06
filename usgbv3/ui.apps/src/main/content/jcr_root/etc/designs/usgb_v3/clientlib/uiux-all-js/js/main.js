@@ -1112,7 +1112,7 @@ function hookHeadScript(url, async, defer, callback) {
     "use strict";
     $(document).ready(function () {
         //  This data attribute will do the magic, data-scroll-reveal="wait 0.2s, then enter over 500ms after 0.3s"
-        if (!(/msie [6|7|8|9]/i.test(navigator.userAgent))) {
+        if (!(/msie [6|7|8|9]/i.test(navigator.userAgent)) && $('[data-scroll-reveal]').length > 0) {
             (function () {
                 window.scrollReveal = new scrollReveal({
                     reset: false
