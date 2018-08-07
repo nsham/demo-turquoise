@@ -33,10 +33,11 @@
         .glyphicon-menu-down {
             text-align: right;
             -ms-transform: rotate(180deg);
-            /* IE 9 */
             -webkit-transform: rotate(180deg);
-            /* Safari 3-8 */
             transform: rotate(180deg);
+            -ms-transform-origin:60% 50%; 
+            -webkit-transform-origin:60% 50%; 
+            transform-origin:60% 50%;
             padding-top: 20px;
         }
     }
@@ -44,6 +45,9 @@
         padding: 10px;
         .each {
             position: relative;
+            &:last-child{
+                margin-bottom:-10px;
+            }
             .close-btn-box {
                 color: @color-darker-grey;
                 background: transparent;
