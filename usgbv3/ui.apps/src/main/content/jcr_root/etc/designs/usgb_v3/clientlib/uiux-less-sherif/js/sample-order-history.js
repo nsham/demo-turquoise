@@ -32,6 +32,7 @@
                     var orderHistoryItemTemplateContainer = $(".orders-history-wrapper");
 
                     var ordersHistoryResultArray = {};
+                    var cancelOrderData = {};
 
                     getSampleOrdersHistory(userInfoCustom).done(function(result){
 
@@ -69,17 +70,29 @@
                     });
 
 
+                    var confirmCancelOrderModal = $("#cancelSampleOrderModal");
+                    var confirmCancelOrderCta = $(".cta-confirm-cancel-order");
+                    
                     $(document).on("click", ".cancel-order-cta", function(event){
                         
-                        var cancelOrderData = {};
+                        var orderid =  $(this).data("orderid") + "";
                         cancelOrderData.user_info = userInfoCustom.user_info;
                         cancelOrderData.order_info = {
-                            "order_id": $(this).data("orderid"),
+                            "order_id": orderid,
                             "status": "Cancelled"
                         }
 
+                        confirmCancelOrderModal.modal('show');
+
+                    });
+
+                    confirmCancelOrderCta.on("click", function(event){
+
                         cancelActiveSampleOrder(cancelOrderData, function(data){
-                            console.log(data);
+                            if(data.status == "success"){
+                                confirmCancelOrderModal.modal('hide');
+                                location.reload();
+                            }
                         });
 
                     });

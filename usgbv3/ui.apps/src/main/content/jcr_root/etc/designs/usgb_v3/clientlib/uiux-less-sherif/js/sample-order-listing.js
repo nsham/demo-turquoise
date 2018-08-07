@@ -3,6 +3,10 @@
 // ----------------------------------------------------------------------
 (function(){
 
+
+    //Check if Element exist on DOM
+    if($(".order-steps-wrapper").length>0){
+
     //Check if the Local storage for Sample Orders list is set
     var sampleOrderList = {};
     if(typeof(Storage) !== "undefined") {
@@ -33,6 +37,7 @@
         var afterSubmitOrderSummaryData = {};
 
 
+    
         //Check user SSO Login
         if(!$.ssoManager.isLogin){
             
@@ -451,6 +456,9 @@
         var options = { year: 'numeric', month: 'short', day: 'numeric' };
 
         return orderDate.toLocaleDateString("en-GB", options);
+
+    }
+
 
     }
 
