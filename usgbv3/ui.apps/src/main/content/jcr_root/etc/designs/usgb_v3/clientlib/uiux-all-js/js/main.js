@@ -1112,7 +1112,7 @@ function hookHeadScript(url, async, defer, callback) {
     "use strict";
     $(document).ready(function () {
         //  This data attribute will do the magic, data-scroll-reveal="wait 0.2s, then enter over 500ms after 0.3s"
-        if (!(/msie [6|7|8|9]/i.test(navigator.userAgent))) {
+        if (!(/msie [6|7|8|9]/i.test(navigator.userAgent)) && $('[data-scroll-reveal]').length > 0) {
             (function () {
                 window.scrollReveal = new scrollReveal({
                     reset: false
@@ -1140,7 +1140,7 @@ function hookHeadScript(url, async, defer, callback) {
                     AutoComplete({
                         EmptyMessage: "No item found",
                         QueryArg: "text",
-                        _Render: function(response) {
+                        _Render: function (response) {
                             var ul;
                             if (typeof response == "string") {
                                 ul = this._RenderRaw(response);
@@ -1150,11 +1150,11 @@ function hookHeadScript(url, async, defer, callback) {
                             if (this.DOMResults.hasChildNodes()) {
                                 this.DOMResults.removeChild(this.DOMResults.childNodes[0]);
                             }
-                            
+
                             this.DOMResults.appendChild(ul);
-            
-                            for(var i=0; i<$('[data-autocomplete-value]').length; i++){
-                                if( $($('[data-autocomplete-value]')[i]).find('strong').length == 0){
+
+                            for (var i = 0; i < $('[data-autocomplete-value]').length; i++) {
+                                if ($($('[data-autocomplete-value]')[i]).find('strong').length == 0) {
                                     $($('[data-autocomplete-value]')[i]).hide();
                                 }
                             }
@@ -1669,7 +1669,6 @@ $(window).on('load', function () {
 })();
 
 
-
 // ----------------------------------------------------------------------
 // Compare Product Page 
 // ----------------------------------------------------------------------
@@ -1677,15 +1676,7 @@ $(window).on('load', function () {
 (function () {
     "use strict";
     $(document).ready(function () {
-
         function productCompare() {
-
-            //test insert param
-            var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?category=ceiling&countrycode=malaysia';
-            window.history.pushState({
-                path: newurl
-            }, '', newurl);
-
 
             var url_string = window.location.href;
             var url = new URL(url_string);
@@ -1715,7 +1706,7 @@ $(window).on('load', function () {
                     //console.log("data1-", data);
 
                     getJSONarr = data.map(function (getJSONarr) {
-                        return getJSONarr.url.split(".").reverse()[1] + ".json";
+                        return getJSONarr.url.split(".").reverse()[1] + ".properties.json";
                     });
 
 
@@ -1789,7 +1780,6 @@ $(window).on('load', function () {
                                 results.push(data);
 
                             })
-                            .error(function () {})
                             .always(function () {
                                 count--;
 
@@ -1810,23 +1800,18 @@ $(window).on('load', function () {
                 event.preventDefault();
 
                 var btnURL = $(this).closest("button").attr("href");
-                //console.log("data-", btnURL);
 
-
-                var getIndex1
-                data.some(function (x, i) {
-                    if (x.url == btnURL) {
-                        getIndex1 = i;
-                        return true;
-                    }
+                // var getIndex1 = data.findIndex(x => x.url == btnURL);
+                var getIndex1 = data.findIndex(function (x) {
+                    return x.url == btnURL;
                 });
                 data.splice(getIndex1, 1);
+                //console.log("btn-", btnURL);
 
                 localStorage.setItem(currCategoryKey, JSON.stringify(data));
                 getLocalCompare();
+
             });
-
-
 
         }
         if ($('.product-compare-content').length) productCompare();
@@ -1839,171 +1824,165 @@ $(window).on('load', function () {
 // ----------------------------------------------------------------------
 // Checkbox  (product details)
 // ----------------------------------------------------------------------
-(function () {
-    "use strict";
-    $(document).ready(function () {
+// (function () {
+//     "use strict";
+//     $(document).ready(function () {
 
-        var currCategoryKey;
-        var countryCode;
-        var getLink;
-        var checkStatus;
-        var storeData = [];
-        var detailsData;
+//         var currCategoryKey;
+//         var countryCode;
+//         var getLink;
+//         var checkStatus;
+//         var storeData = [];
+//         var detailsData;
 
-        var tempURL = "/etc/designs/usgb_v3/clientlib/uiux-all-js/js/json/product-compare-one.html";
+//         var tempURL = "/etc/designs/usgb_v3/clientlib/uiux-all-js/js/json/product-compare-one.html";
 
-        //get browser url
-        var pathname = window.location.pathname;
-        var pagename = pathname.split(".").reverse()[1] + ".json";
-        console.log('pagename - ', pagename)
-        //pass url to load json
-        var detailsJSON
+//         //get browser url
+//         var pathname = window.location.pathname;
+//         var pagename = pathname.split(".").reverse()[1] + ".json";
+//         console.log('pagename - ', pagename)
+//         //pass url to load json
+//         var detailsJSON
 
-        function productCompareDetailPage() {
+//         function productCompareDetailPage() {
 
-            detailsJSON = tempURL.split(".").reverse()[1] + ".json";
-            getJSONDetails();
+//             detailsJSON = tempURL.split(".").reverse()[1] + ".json";
+//             getJSONDetails();
 
-            $(document).on("change", '[data-input-value]', function () {
+//             $(document).on("change", '[data-input-value]', function () {
 
-                event.preventDefault();
-                getLink = $(this).data("input-value");
+//                 event.preventDefault();
+//                 getLink = $(this).data("input-value");
 
-                if ($(this).is(':checked')) {
-                    console.log("check")
-                    checkStatus = $(this).prop("checked");
-                    var groupElem = {
-                        "url": detailsData.pagePropertiesList[0].url,
-                        "img": detailsData.pagePropertiesList[0].image68x56,
-                        "title": detailsData.pagePropertiesList[0].pageTitle,
-                        "checked": checkStatus,
-                        "countryCode": countryCode
-                    }
-                    storeData.push(groupElem);
-                    addToDetailsToLocal();
+//                 if ($(this).is(':checked')) {
+//                     console.log("check")
+//                     checkStatus = $(this).prop("checked");
+//                     var groupElem = {
+//                         "url": detailsData.pagePropertiesList[0].url,
+//                         "img": detailsData.pagePropertiesList[0].image68x56,
+//                         "title": detailsData.pagePropertiesList[0].pageTitle,
+//                         "checked": checkStatus,
+//                         "countryCode": countryCode
+//                     }
+//                     storeData.push(groupElem);
+//                     addToDetailsToLocal();
 
-                } else {
-                    console.log("uncheck")
-                    removeCompareDetails();
-                }
-            });
+//                 } else {
+//                     console.log("uncheck")
+//                     removeCompareDetails();
+//                 }
+//             });
 
-              // close btn on popup to remove content
-              $("body").on("click", ".close-btn-box", function () {
-                event.preventDefault();
-                var currInput = $(this).closest('.each').attr("data-content-title");
-                $("[data-input-value ='" + currInput + "']").attr('checked', false);
-                removeCompareDetails(currInput);
-            });
-
-
-
-        }
-        if ($('#compare-pop-detail-page').length) productCompareDetailPage();
-
-        function addToDetailsToLocal() {
-            localStorage.setItem(currCategoryKey, JSON.stringify(storeData));
-            getDetailsLocalCompare();
-        }
-
-        function removeCompareDetails(data) {
-            // var getIndex1 = storeData.findIndex(x => x.url == data);     
-            var getIndex1
-            storeData.some(function (x, i) {
-                if (x.url == getLink) {
-                    getIndex1 = i;
-                    return true;
-                }
-            });
-
-            //console.log("in1", getIndex1)
-            storeData.splice(getIndex1, 1);
-            addToDetailsToLocal();
-            getDetailsLocalCompare();
-
-        }
-
-
-        function getDetailsLocalCompare() {
-
-            if (localStorage.getItem(currCategoryKey) === null) {
-                console.log("detailLocalempty")
-            } else {
-                //get from local storage
-                storeData = JSON.parse(localStorage.getItem(currCategoryKey));
-                console.log("currinLocal-", storeData);
-                loadCompare();
-
-                if (storeData.length < 1) {
-                    //console.log("nomore");
-                    localStorage.removeItem(currCategoryKey);
-                }
-            }
-        }
-
-        function countPopContent(){
-            var popContent = $("[data-content-title]").length;
-            console.log(popContent)
-           // var currInput1 = $(this).closest('.each').attr("data-content-title");
-            if(detailsData.pagePropertiesList[0].url = $("[data-input-value]").data('input-value')){
-             //   $("[data-input-value]").prop('checked',true);
-            }else{
-            //    $("[data-input-value]").prop('checked',false);
-            }
-        }
-
-        function loadCompare() {
-            //load the popup
-            var comparePopupHTML = $('#compare-popup-local').html();
-            var temptcomparePopupHTML = Handlebars.compile(comparePopupHTML);
-            $('.compare-popup-local').html(temptcomparePopupHTML(storeData));
-            $(".compare-popup").show();
-        
-            countPopContent();
-        }
+//               // close btn on popup to remove content
+//               $("body").on("click", ".close-btn-box", function () {
+//                 event.preventDefault();
+//                 var currInput = $(this).closest('.each').attr("data-content-title");
+//                 $("[data-input-value ='" + currInput + "']").attr('checked', false);
+//                 removeCompareDetails(currInput);
+//             });
 
 
 
-        function getJSONDetails() {
-            console.log('de', detailsJSON)
-            $.ajax({
-                url: detailsJSON,
-                type: "GET",
-                cache: false,
-                success: function (response) {
-                    detailsData = response;
-                    // console.log(detailsData)
-                    countryCode = detailsData.country_key;
-                    currCategoryKey = detailsData.category_key + "_" + countryCode;
-                    console.log(currCategoryKey);
+//         }
+//         if ($('#compare-pop-detail-page').length) productCompareDetailPage();
 
-                    // var groupElem = {
-                    //     "url": detailsData.pagePropertiesList[0].url,
-                    //     "img": detailsData.pagePropertiesList[0].image68x56,
-                    //     "title": detailsData.pagePropertiesList[0].pageTitle,
-                    //     "checked": checkStatus,
-                    //     "countryCode": countryCode
-                    // }
-                    // storeData.push(groupElem);
-                    // console.log("dStore", storeData)
-                    //localStorage.setItem(currCategoryKey, JSON.stringify(storeData));
-                    getDetailsLocalCompare();
+//         function addToDetailsToLocal() {
+//             localStorage.setItem(currCategoryKey, JSON.stringify(storeData));
+//             getDetailsLocalCompare();
+//         }
 
-                },
-                beforeSend: function () {},
-                complete: function () {}
-            });
+//         function removeCompareDetails(data) {
+//             // var getIndex1 = storeData.findIndex(x => x.url == data);     
+//             var getIndex1
+//             storeData.some(function (x, i) {
+//                 if (x.url == getLink) {
+//                     getIndex1 = i;
+//                     return true;
+//                 }
+//             });
 
-        }
+//             //console.log("in1", getIndex1)
+//             storeData.splice(getIndex1, 1);
+//             addToDetailsToLocal();
+//             getDetailsLocalCompare();
+
+//         }
 
 
+//         function getDetailsLocalCompare() {
+
+//             if (localStorage.getItem(currCategoryKey) === null) {
+//                 console.log("detailLocalempty")
+//             } else {
+//                 //get from local storage
+//                 storeData = JSON.parse(localStorage.getItem(currCategoryKey));
+//                 console.log("currinLocal-", storeData);
+//                 loadCompare();
+
+//                 if (storeData.length < 1) {
+//                     //console.log("nomore");
+//                     localStorage.removeItem(currCategoryKey);
+//                 }
+//             }
+//         }
+
+//         function countPopContent(){
+//             var popContent = $("[data-content-title]").length;
+//             console.log(popContent)
+//            // var currInput1 = $(this).closest('.each').attr("data-content-title");
+//             if(detailsData.pagePropertiesList[0].url = $("[data-input-value]").data('input-value')){
+//              //   $("[data-input-value]").prop('checked',true);
+//             }else{
+//             //    $("[data-input-value]").prop('checked',false);
+//             }
+//         }
+
+//         function loadCompare() {
+//             //load the popup
+//             var comparePopupHTML = $('#compare-popup-local').html();
+//             var temptcomparePopupHTML = Handlebars.compile(comparePopupHTML);
+//             $('.compare-popup-local').html(temptcomparePopupHTML(storeData));
+//             $(".compare-popup").show();
+
+//             countPopContent();
+//         }
 
 
 
+//         function getJSONDetails() {
+//             console.log('de', detailsJSON)
+//             $.ajax({
+//                 url: detailsJSON,
+//                 type: "GET",
+//                 cache: false,
+//                 success: function (response) {
+//                     detailsData = response;
+//                     // console.log(detailsData)
+//                     countryCode = detailsData.country_key;
+//                     currCategoryKey = detailsData.category_key + "_" + countryCode;
+//                     console.log(currCategoryKey);
 
+//                     // var groupElem = {
+//                     //     "url": detailsData.pagePropertiesList[0].url,
+//                     //     "img": detailsData.pagePropertiesList[0].image68x56,
+//                     //     "title": detailsData.pagePropertiesList[0].pageTitle,
+//                     //     "checked": checkStatus,
+//                     //     "countryCode": countryCode
+//                     // }
+//                     // storeData.push(groupElem);
+//                     // console.log("dStore", storeData)
+//                     //localStorage.setItem(currCategoryKey, JSON.stringify(storeData));
+//                     getDetailsLocalCompare();
 
-    });
-})();
+//                 },
+//                 beforeSend: function () {},
+//                 complete: function () {}
+//             });
+
+//         }
+
+//     });
+// })();
 
 // ----------------------------------------------------------------------
 // Checkbox Count /filtering (product listing)
@@ -2014,6 +1993,7 @@ $(window).on('load', function () {
 
 
         function productListingFeatures() {
+
 
             // readjust sticky side bar
             var stickySidebar = new StickySidebar('.make-sticky', {
@@ -2137,7 +2117,8 @@ $(window).on('load', function () {
             });
 
             function checkNumberOfCheckbox() {
-                numberOfChecked = $('.listing-search-content div input:checkbox:checked').length;
+                //numberOfChecked = $('.listing-search-content div input:checkbox:checked').length;
+                numberOfChecked = storeData.length;
 
                 if (numberOfChecked >= 3) {
                     //disbled all checks
@@ -2148,7 +2129,32 @@ $(window).on('load', function () {
                     $('.listing-search-content .container-checkbox input[type="checkbox"]').prop('disabled', false);
                 }
 
-                                   
+                if (numberOfChecked < 1) {
+                    localStorage.removeItem(categoryName);
+                }
+
+
+                if (numberOfChecked > 1) {
+                    $(".compare-popup .btn-compare").show();
+                    $(".compare-popup").show();
+                    $(".compare-popup .instruction-text").hide();
+
+                } else {
+                    $(".compare-popup .btn-compare").hide();
+                    $(".compare-popup .instruction-text").show();
+                }
+
+                if (numberOfChecked > 0) {
+                    $(".compare-popup .btn-menu-down").show();
+                    $(".popup-content").show();
+                } else {
+                    $(".compare-popup .instruction-text").hide();
+                    $(".compare-popup").show();
+                    $(".popup-content").hide();
+                    $(".compare-popup .btn-menu-down").hide();
+                    $(".compare-popup .btn-compare").hide();
+
+                }
             }
 
 
@@ -2156,7 +2162,7 @@ $(window).on('load', function () {
             $("body").on("click", ".close-btn-box", function () {
                 event.preventDefault();
                 currInput = $(this).closest('.each').attr("data-content-title");
-                $("[data-input-value ='" + currInput + "']").attr('checked', false);
+                $("[data-input-value ='" + currInput + "']").prop('checked', false);
                 removeCompareLocalStorage(currInput);
             });
 
@@ -2206,7 +2212,11 @@ $(window).on('load', function () {
                     // Retrieve the object from storage
                     // storePopup = JSON.parse(localStorage.getItem(categoryName))
                     //storeData = JSON.parse(localStorage.getItem(categoryName))
-                    console.log('storePopup-', storeData)
+                    console.log('storePopupAA-', storeData.length)
+
+
+
+
 
                     //load the popup
                     var comparePopupHTML = $('#compare-popup-local').html();
@@ -2225,6 +2235,7 @@ $(window).on('load', function () {
                     $.each(localNum, function (i, val) {
                         var selectedCard = $('[data-input-value="' + val + '"]');
                         $(selectedCard).prop("checked", true);
+                        $('.listing-search-content .container-checkbox input:checkbox:checked').prop('disabled', false);
                     });
                     checkNumberOfCheckbox();
                 }
@@ -2247,7 +2258,7 @@ $(window).on('load', function () {
 
 
 
-            productListingResult();
+            //productListingResult();
             //load all from json first
             function productListingResult() {
 
@@ -2308,7 +2319,53 @@ $(window).on('load', function () {
                 });
             }
 
+            function productListingResultString(data) {
+                console.log("productListingResultString in");
+                productData = data
+                currProductData = productData.product_result
 
+                //for sorting
+                currOnStageMainResultData = productData.product_result
+
+                if (productData.product_listing_filter.length > 0) {
+                    $("#product-listing-form").removeClass("hidden");
+                    //desktop
+                    var productFilterHtml = $('#product-listing-filter').html();
+                    var temptProductFilterHtml = Handlebars.compile(productFilterHtml);
+                    $('.product-listing-filter').html(temptProductFilterHtml(productData.product_listing_filter[0]));
+
+                    //mobile
+                    $('#filter-icon-btn').addClass();
+                    $('#filter-icon-btn span').removeClass('hidden');
+                    var MobileProductFilterHtml = $('#m-product-listing-filter').html();
+                    var MobileTemptProductFilterHtml = Handlebars.compile(MobileProductFilterHtml);
+                    $('.m-product-listing-filter').html(MobileTemptProductFilterHtml(productData.product_listing_filter[0]));
+
+                } else {
+                    $('#filter-icon-btn').removeClass();
+                    $('#filter-icon-btn span').addClass('hidden');
+
+                }
+
+                //results
+                // var productFilterResult = $('#product-listing-result').html();
+                // var TemptProductFilterResult = Handlebars.compile(productFilterResult);
+                // $('.product-listing-result').html(TemptProductFilterResult(productData.product_result));
+
+                //checkshoutout
+                shoutout = productData.shoutout;
+                //console.log(shoutout)
+
+                //getCategoryName - to store array
+                categoryName = productData.category_key + "_" + productData.country_key;
+                countryCode = productData.country_key;
+
+
+                hideAllWrappers();
+                renderProductListingResult();
+                retrieveCompare();
+
+            }
 
 
 
@@ -2689,6 +2746,9 @@ $(window).on('load', function () {
                 }
             }
             // function share between desktop and mobile end//
+
+
+
 
         }
         if ($('.page-product-listing section').length) productListingFeatures();

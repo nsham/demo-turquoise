@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="cq:Widget"
+    sling:resourceType="cq/gui/components/authoring/dialog/richtext"
+    fieldLabel="&#x9;&#xa;Content Rich Text"
+    hideLabel="{Boolean}false"
+    name="./contentRichText"
+    title="Rich Text"
+    useFixedInlineToolbar="{Boolean}true"
+    xtype="richtext">
+    <rtePlugins jcr:primaryType="nt:unstructured">
+        <format
+            jcr:primaryType="nt:unstructured"
+            features="*"/>
+        <justify
+            jcr:primaryType="nt:unstructured"
+            features="*"/>
+        <lists
+            jcr:primaryType="nt:unstructured"
+            features="*"/>
+        <paraformat
+            jcr:primaryType="nt:unstructured"
+            features="*"/>
+        <links
+            jcr:primaryType="nt:unstructured"
+            features="*"/>
+        <touchuitooltip
+            jcr:primaryType="nt:unstructured"
+            features="*"/>
+        <image
+            jcr:primaryType="nt:unstructured"
+            jcr:title="Pick an Image"
+            sling:resourceType="cq/gui/components/authoring/dialog"
+            features="image"/>
+        <misctools
+            jcr:primaryType="nt:unstructured"
+            features="*"/>
+        <styles
+            jcr:primaryType="nt:unstructured"
+            features="*">
+            <styles jcr:primaryType="cq:WidgetCollection">
+                <textprimary
+                    jcr:primaryType="nt:unstructured"
+                    cssName="text-primary"
+                    text="text-primary"/>
+                <pagetitle
+                    jcr:primaryType="nt:unstructured"
+                    cssName="page-title mt-30-sm"
+                    text="page-title"/>
+                <textbigprimary
+                    jcr:primaryType="nt:unstructured"
+                    cssName="text-big-primary mb-50-bg"
+                    text="text-big-primary"/>
+            </styles>
+        </styles>
+        <edit
+            jcr:primaryType="nt:unstructured"
+            features="*"
+            findreplace="*"
+            format="*"
+            redo="*"
+            spellcheck="*"
+            undo="*"/>
+    </rtePlugins>
+</jcr:root>

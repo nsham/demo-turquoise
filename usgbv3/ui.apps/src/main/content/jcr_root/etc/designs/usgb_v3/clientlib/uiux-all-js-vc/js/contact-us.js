@@ -57,7 +57,13 @@ function recaptchaCallback() {
     "use strict";
 
     $(document).ready(function () {
-        if($('.floating-type-form').length > 0){ 
+        if($('.floating-type-form').length > 0){
+            for(var i=0; i<$('.drop-down-select').length; i++){
+                if($($('.drop-down-select')[i]).val() !== ""){
+                    $($('.drop-down-select')[i]).closest('.float-label').find('label').addClass('open');
+                }
+            }
+
             $(document).on('change', '.floating-type-form .drop-down-select', function (e) {
                 var labelDropDown = $(this).closest('.float-label').find('label');
                 if ($(this).val() == "") {
@@ -93,229 +99,142 @@ function recaptchaCallback() {
             //     e.preventDefault();
             //     windowOpenPage();
             // });
-
-            $("#contactUsForm1").validate({
-                ignore: ".ignore",
-                rules: {
-                    enquiry_type : "required",
-                    name: "required",
-                    chooseFile: "required",
-                    email: {
-                        required: true,
-                    },
-                    message: "required",
-                    hiddenRecaptcha: {
-                        required: function () {
-                            if (grecaptcha.getResponse() == '') {
-                                return true;
-                            } else {
-                                return false;
+            if($("#contactUsForm1").length > 0){
+                $("#contactUsForm1").validate({
+                    ignore: ".ignore",
+                    rules: {
+                        enquiry_type : "required",
+                        name: "required",
+                        chooseFile: "required",
+                        email: {
+                            required: true,
+                        },
+                        message: "required",
+                        hiddenRecaptcha: {
+                            required: function () {
+                                if (grecaptcha.getResponse() == '') {
+                                    return true;
+                                } else {
+                                    return false;
+                                }
                             }
+                        },
+                        agree: "required",
+                    },
+                    messages: {
+                        enquiry_type: "Please select one",
+                        name: "Please enter your name",
+                        email: "Please enter a valid email address",
+                        message: "Please enter a valid message",
+                        hiddenRecaptcha: "Please complete the Captcha",
+                        agree: "Please accept our policy"
+                    },
+                    errorElement: "span",
+                    errorPlacement: function (error, element) {
+                        // Add the `help-block` class to the error element
+                        error.addClass("help-block");
+    
+                        if (element.prop("type") === "checkbox") {
+                            error.insertAfter(element.closest('.checkbox'));
+                        } else if (element.prop("tagName").toLowerCase() === "select") {
+                            error.insertAfter(element);
+                        } else {
+                            error.insertAfter(element.parent().find('label'));
                         }
                     },
-                    agree: "required",
-                },
-                messages: {
-                    enquiry_type: "Please select one",
-                    name: "Please enter your name",
-                    email: "Please enter a valid email address",
-                    message: "Please enter a valid message",
-                    hiddenRecaptcha: "Please complete the Captcha",
-                    agree: "Please accept our policy"
-                },
-                errorElement: "span",
-                errorPlacement: function (error, element) {
-                    // Add the `help-block` class to the error element
-                    error.addClass("help-block");
-
-                    if (element.prop("type") === "checkbox") {
-                        error.insertAfter(element.closest('.checkbox'));
-                    } else if (element.prop("tagName").toLowerCase() === "select") {
-                        error.insertAfter(element);
-                    } else {
-                        error.insertAfter(element.parent().find('label'));
-                    }
-                },
-                highlight: function (element, errorClass, validClass) {
-                    $(element).parents(".respond-msg").addClass("has-error").removeClass("has-success");
-                },
-                unhighlight: function (element, errorClass, validClass) {
-                    $(element).parents(".respond-msg").addClass("has-success").removeClass("has-error");
-                },
-
-                submitHandler: function(form) {
-                    console.log("successs submit");
-            
-                    $.ajax({ //ajax form submit
-                        url: '/json/formvalidate.json',
-                        type: 'POST',
-                        data: $("form").serialize(),
-                        dataType: 'json',
-                        contentType: false,
-                        cache: false,
-                        processData: false
-                    }).done(function (data) { //fetch server "json" messages when done
-                        console.log("successs submit3");
-                        $('#id').val('data.id');
-                        $('#contactUsForm1').hide();
-                        $('#contactUsForm2').removeClass('hidden');
-                        $('.thank-you-contacting-msg').removeClass('hidden');
-                    });
-                   
-                }// end submit handler
-            }); //contactUsForm1
-
-
-
-            $("#contactUsForm2").validate({
-                ignore: ".ignore",
-                rules: {
-                    contact: {
-                        required: true,
-                        digits: true
+                    highlight: function (element, errorClass, validClass) {
+                        $(element).parents(".respond-msg").addClass("has-error").removeClass("has-success");
                     },
-                    occupation_select: "required",
-                    i_work_with: "required",
-                    i_am_interested: "required"
-                },
-                messages: {
-                    contact: "Please fill in your contact number",
-                    occupationselect: "Please select one",
-                    i_work_with: "Please select one",
-                    i_am_interested: "Please select one"
-                },
-                errorElement: "span",
-                errorPlacement: function (error, element) {
-                    // Add the `help-block` class to the error element
-                    error.addClass("help-block");
-
-                    if (element.prop("type") === "checkbox") {
-                        error.insertAfter(element.closest('.checkbox'));
-                    } else if (element.prop("tagName").toLowerCase() === "select") {
-                        error.insertAfter(element);
-                    } else {
-                        error.insertAfter(element.parent().find('label'));
-                    }
-                },
-                highlight: function (element, errorClass, validClass) {
-                    $(element).parents(".respond-msg").addClass("has-error").removeClass("has-success");
-                },
-                unhighlight: function (element, errorClass, validClass) {
-                    $(element).parents(".respond-msg").addClass("has-success").removeClass("has-error");
-                },
-
-                submitHandler: function(form) {
-                    console.log("successs submit", $("form").serializeObject());
+                    unhighlight: function (element, errorClass, validClass) {
+                        $(element).parents(".respond-msg").addClass("has-success").removeClass("has-error");
+                    },
+    
+                    submitHandler: function(form) {
+                        console.log("successs submit");
+                
+                        $.ajax({ //ajax form submit
+                            url: '/json/formvalidate.json',
+                            type: 'POST',
+                            data: $("form").serialize(),
+                            dataType: 'json',
+                            contentType: false,
+                            cache: false,
+                            processData: false
+                        }).done(function (data) { //fetch server "json" messages when done
+                            console.log("successs submit3");
+                            $('#id').val('data.id');
+                            $('#contactUsForm1').hide();
+                            $('#contactUsForm2').removeClass('hidden');
+                            $('.thank-you-contacting-msg').removeClass('hidden');
+                        });
+                       
+                    }// end submit handler
+                }); //contactUsForm1
+            }
             
-                    $.ajax({ //ajax form submit
-                        url: '/json/formvalidate.json',
-                        type: 'POST',
-                        data: JSON.stringify($("form").serializeObject()),
-                        dataType: 'json',
-                        contentType: false,
-                        cache: false,
-                        processData: false
-                    }).done(function (data) { //fetch server "json" messages when done
-                        console.log("successs submit3");
-            
-                        $('#thankyou-modal').modal('show');
-                        setTimeout(function(){
-                            location.reload()
-                        }, 8000);
-                        
-                    });
-                   
-                }// end submit handler
-            }); //contactUsForm2
+            if($("#contactUsForm2").length > 0){
+                $("#contactUsForm2").validate({
+                    ignore: ".ignore",
+                    rules: {
+                        contact: {
+                            required: true,
+                            digits: true
+                        },
+                        occupation_select: "required",
+                        i_work_with: "required",
+                        i_am_interested: "required"
+                    },
+                    messages: {
+                        contact: "Please fill in your contact number",
+                        occupationselect: "Please select one",
+                        i_work_with: "Please select one",
+                        i_am_interested: "Please select one"
+                    },
+                    errorElement: "span",
+                    errorPlacement: function (error, element) {
+                        // Add the `help-block` class to the error element
+                        error.addClass("help-block");
 
-            // $("#contactUsForm3").validate({
-            //     ignore: ".ignore",
-            //     rules: {
-            //         dropdownselect: "required",
-            //         countryselect: "required",
-            //         locationselect: "required",
-            //         departmentselect: "required",
-            //         occupationselect: "required",
-            //         resume: "required",
-            //         name: "required",
-            //         chooseFile: "required",
-            //         email: {
-            //             required: true,
-            //         },
-            //         contact: {
-            //             required: true,
-            //             digits: true
-            //         },
-            //         hiddenRecaptcha: {
-            //             required: function () {
-            //                 if (grecaptcha.getResponse() == '') {
-            //                     return true;
-            //                 } else {
-            //                     return false;
-            //                 }
-            //             }
-            //         },
-            //         message: "required",
-            //         agree: "required",
-            //         i_work_with: "required",
-            //         i_am_interested: "required"
-            //     },
-            //     messages: {
-            //         dropdownselect: "Please select one",
-            //         countryselect: "Please select your country",
-            //         locationselect: "Please select your location",
-            //         departmentselect: "Please select your department",
-            //         occupationselect: "Please select your occupation",
-            //         chooseFile: "Please attach your resume",
-            //         name: "Please enter your name",
-            //         email: "Please enter a valid email address",
-            //         message: "Please enter a valid message",
-            //         contact: "Please fill in your contact number",
-            //         agree: "Please accept our policy",
-            //         i_work_with: "Please select one",
-            //         i_am_interested: "Please select one",
-            //         hiddenRecaptcha: "Please complete the Captcha"
-            //     },
-            //     errorElement: "span",
-            //     errorPlacement: function (error, element) {
-            //         // Add the `help-block` class to the error element
-            //         error.addClass("help-block");
+                        if (element.prop("type") === "checkbox") {
+                            error.insertAfter(element.closest('.checkbox'));
+                        } else if (element.prop("tagName").toLowerCase() === "select") {
+                            error.insertAfter(element);
+                        } else {
+                            error.insertAfter(element.parent().find('label'));
+                        }
+                    },
+                    highlight: function (element, errorClass, validClass) {
+                        $(element).parents(".respond-msg").addClass("has-error").removeClass("has-success");
+                    },
+                    unhighlight: function (element, errorClass, validClass) {
+                        $(element).parents(".respond-msg").addClass("has-success").removeClass("has-error");
+                    },
 
-            //         if (element.prop("type") === "checkbox") {
-            //             error.insertAfter(element.closest('.checkbox'));
-            //         } else if (element.prop("tagName").toLowerCase() === "select") {
-            //             error.insertAfter(element);
-            //         } else {
-            //             error.insertAfter(element.parent().find('label'));
-            //         }
-            //     },
-            //     highlight: function (element, errorClass, validClass) {
-            //         $(element).parents(".respond-msg").addClass("has-error").removeClass("has-success");
-            //     },
-            //     unhighlight: function (element, errorClass, validClass) {
-            //         $(element).parents(".respond-msg").addClass("has-success").removeClass("has-error");
-            //     },
-
-            //     submitHandler: function(form) {
-            //         console.log("successs submit");
+                    submitHandler: function(form) {
+                        console.log("successs submit", $("form").serializeObject());
+                
+                        $.ajax({ //ajax form submit
+                            url: '/json/formvalidate.json',
+                            type: 'POST',
+                            data: JSON.stringify($("form").serializeObject()),
+                            dataType: 'json',
+                            contentType: false,
+                            cache: false,
+                            processData: false
+                        }).done(function (data) { //fetch server "json" messages when done
+                            console.log("successs submit3");
+                
+                            $('#thankyou-modal').modal('show');
+                            setTimeout(function(){
+                                location.reload()
+                            }, 8000);
+                            
+                        });
+                    
+                    }// end submit handler
+                }); 
+            }
             
-            //         $.ajax({ //ajax form submit
-            //             url: '/json/formvalidate.json',
-            //             type: 'POST',
-            //             data: $("form").serialize(),
-            //             dataType: 'json',
-            //             contentType: false,
-            //             cache: false,
-            //             processData: false
-            //         }).done(function (data) { //fetch server "json" messages when done
-            //             console.log("successs submit3");
-            
-            //             $('#contactUsForm1').hide();
-            //             $('#contactUsForm2').removeClass('hidden');
-            //         });
-                   
-            //     }// end submit handler
-            // }); //contactUsForm3
 
         }
     });

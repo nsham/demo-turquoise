@@ -13,35 +13,51 @@
             <div class="carousel-home-banner" >
 
 				<sly data-sly-use.listUse="${'logic.js' @ multifieldName='banners'}">  
-  					<sly data-sly-list="${listUse}">  
+  					<sly data-sly-list="${listUse}">
 
-						<!-- Component: Hero Banner -->
+						<!-- Component: Main Banner -->
 
         					  <sly data-sly-test.assetExist="${item.properties.imgPath || item.properties.mblImgPath || item.properties.videoDam}">
-        						<a href="${item.properties.link}.html" target="${properties.targettype == properties.hiddentarget ? properties.targetName : properties.targettype}" class="hero-banner-wrapper" style="background:transparent url(${item.properties.imgPath @ context='unsafe'}) center right no-repeat; background-size:cover;"
-        							data-img-mobile="background:transparent url(${item.properties.mblImgPath ? item.properties.mblImgPath : item.properties.imgPath @ context='unsafe'}) bottom right no-repeat; background-size:cover;" >
+                              	<sly data-sly-test.enablevideo="${item.properties.enableVideo}">
+                                    <a href="${item.properties.link}.html" target="${properties.targettype == properties.hiddentarget ? properties.targetName : properties.targettype}" class="hero-banner-wrapper" style="background: rgb(0, 0, 0); width: 1349px;"
+                                        data-img-mobile="background:#000" >
+
+                                        <video width="90%" heigth:="100%" autoplay="" nocontrols="" video="" loop="" id="theVideo" muted onloadedmetadata="this.muted=true">
+                                            <source src="${item.properties.videoDam}" type="video/mp4">
+                                        </video>
+
+                                </sly>
+                                <sly data-sly-test="${!enablevideo}">
+									<a href="${item.properties.link}.html" target="${properties.targettype == properties.hiddentarget ? properties.targetName : properties.targettype}" class="hero-banner-wrapper mobile-image-enabled" style="background:transparent url(${item.properties.imgPath @ context='unsafe'}) center right no-repeat; background-size:cover;"
+                                        data-img-mobile="background:transparent url(${item.properties.mblImgPath ? item.properties.mblImgPath : item.properties.imgPath @ context='unsafe'}) bottom right no-repeat; background-size:cover;" >
+                                </sly>
         					  </sly>
         					  <sly data-sly-test="${!assetExist}">
-        						<a href="${item.properties.link}.html" target="${properties.targettype == properties.hiddentarget ? properties.targetName : properties.targettype}" class="hero-banner-wrapper" style="background-color: ${item.properties.bgColor @ context='unsafe'};" >
+        						<a href="${item.properties.link}.html" target="${properties.targettype == properties.hiddentarget ? properties.targetName : properties.targettype}" class="hero-banner-wrapper" style="background-color: ${item.properties.bgColor @ context='unsafe'}" >
         					  </sly>
-                              <div class="container">
-                                 <div class="row">
-                                    <div class="col-xs-12">
-                                       <div class="banner-big">
-                                          <div class="content-area m-left-3xl text-left va-middle va-sm-middle va-top">
-                                             <h2 class="ht1 uppercase color-white ">
-                                                <span class="yellow-label"></span>
-                                                ${item.properties.title @ context='html'}
-                                             </h2>
-                                             <div class="width-half color-white">${item.properties.description @ context='html'}</div>
-                                             <sly data-sly-test="${item.properties.buttonText}">
-                                                 <div class="btn btn-brand-default ${item.properties.buttonStyle }">${item.properties.buttonText}</div>
-                                             </sly>
-                                          </div>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </div>
+                              <div class="${item.properties.opacity}">
+                                  <div class="container">
+                                     <div class="row">
+                                        <div class="col-xs-12">
+                                           <div class="banner-big">
+                                              <div class="content-area m-side-3xl ${item.properties.contentAlignment} va-middle va-sm-middle va-top">
+                                                 <h2 class="ht1 uppercase color-white ">
+                                                 	<sly data-sly-test="${!item.properties.hideYellowIcon}">
+														<span class="yellow-label"></span>
+                                                    </sly>
+
+                                                    ${item.properties.title @ context='html'}
+                                                 </h2>
+                                                 <div class="color-white ${item.properties.contentAlignment == item.properties.hiddenCenter ? '' : 'width-half'} ">${item.properties.description @ context='html'}</div>
+                                                 <sly data-sly-test="${item.properties.buttonText}">
+                                                     <div class="btn btn-brand-default ${item.properties.buttonStyle }">${item.properties.buttonText}</div>
+                                                 </sly>
+                                              </div>
+                                           </div>
+                                        </div>
+                                     </div>
+                                  </div>
+                               </div>
                            </a>
                            <!-- component end -->
                     </sly> 
@@ -55,30 +71,4 @@
 
 
 <sly data-sly-use.clientLib="/libs/granite/sightly/templates/clientlib.html" data-sly-call="${clientLib.js @ categories='uiux.slick'}" data-sly-unwrap/>
-<script>
-
-// ----------------------------------------------------------------------
-// Carousel Home Banner
-// ----------------------------------------------------------------------
-(function(){
-    "use strict";
-    $(document).ready(function(){
-       $(".carousel-home-banner").slick({
-                                            "dots": true,
-                                            "infinite": true,
-                                            "speed": 300,
-                                            "slidesToShow": 1,
-                                            "slidesToScroll": 1,
-                                            "responsive": [
-                                                {
-                                                    "breakpoint": 992,
-                                                    "settings": {
-                                                        "slidesToShow": 1
-                                                    }
-                                                }
-                                            ]
-                                        });
-    });
-})();
-
-</script>
+<sly data-sly-use.clientLib="/libs/granite/sightly/templates/clientlib.html" data-sly-call="${clientLib.js @ categories='uiux.mainbanner'}" data-sly-unwrap/>

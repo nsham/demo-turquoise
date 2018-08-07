@@ -86,7 +86,11 @@
 
                     });
 
+<<<<<<< HEAD
                     confirmCancelOrderCta.on("click", function(event){
+=======
+                    confirmRemoveOrderCta.on("click", function(event){
+>>>>>>> 102aa36cac987cc12a165af89ec26d127b7f004c
 
                         cancelActiveSampleOrder(cancelOrderData, function(data){
                             if(data.status == "success"){

@@ -3,4 +3,4 @@
     jcr:primaryType="cq:Widget"
     sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
     fieldLabel="ID"
-    name="./gc1bookmark"/>
+    name="./gc2bookmark"/>

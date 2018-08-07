@@ -31,6 +31,7 @@ public class VideoComponent extends WCMUsePojo {
 	private String thumbnail;
 	private String videoMP4;
 	private String videoOGG;
+	private String videoOri;
 	private String componentId;
 	private String youtubeID;
 	private String error;
@@ -122,10 +123,13 @@ public class VideoComponent extends WCMUsePojo {
 						Rendition renditionOGG = asset.getRendition("cq5dam.video.firefoxhq.ogg");
 						videoOGG = renditionOGG.getPath();
 						
+						videoOri = videoDam;
+						
 					}else {
 						thumbnail = "";
 						videoMP4 = "";
 						videoOGG = "";
+						videoOri = "";
 					}
 					
 				}catch (Exception e) {
@@ -167,6 +171,15 @@ public class VideoComponent extends WCMUsePojo {
         }
         return url;
     }
+
+	public String getVideoOri() {
+		return videoOri;
+	}
+
+	public void setVideoOri(String videoOri) {
+		this.videoOri = videoOri;
+	}
+
     
 
 }

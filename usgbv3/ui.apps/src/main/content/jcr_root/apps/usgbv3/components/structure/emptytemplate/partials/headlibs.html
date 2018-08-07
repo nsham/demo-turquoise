@@ -1,7 +1,4 @@
 
-
-
-
 <!--/* Include Adobe Dynamic Tag Management libraries for the header */-->
 <sly data-sly-include="/libs/cq/cloudserviceconfigs/components/servicelibs/servicelibs.jsp" data-sly-unwrap/>
 
@@ -15,12 +12,6 @@
 
 
 <sly data-sly-use.clientLib="/libs/granite/sightly/templates/clientlib.html" data-sly-call="${clientLib.css @ categories='uiux.less'}" data-sly-unwrap/>
-<sly data-sly-use.clientLib="/libs/granite/sightly/templates/clientlib.html" data-sly-call="${clientLib.css @ categories='uiux.lessvc'}" data-sly-unwrap/>
-<sly data-sly-use.clientLib="/libs/granite/sightly/templates/clientlib.html" data-sly-call="${clientLib.all @ categories='jquery'}" data-sly-unwrap/>
-
-
-
-<!--/* 
-<link rel="stylesheet" type="text/css" href="/etc/designs/usgb/clientlib-site/css/uiuxsprint1.css">
-<sly data-sly-use.clientLib="/libs/granite/sightly/templates/clientlib.html" data-sly-call="${clientLib.css @ categories='bootstrap3, bootstrap3-theme'}" data-sly-unwrap/>
- */-->
+<sly data-sly-use.clientLib="/libs/granite/sightly/templates/clientlib.html" data-sly-call="${clientLib.all @ categories='uiux.jquery'}" data-sly-unwrap/>
+<sly data-sly-use.clientLib="/libs/granite/sightly/templates/clientlib.html" data-sly-call="${clientLib.all @ categories='uiux.main'}" data-sly-unwrap/>
+<sly data-sly-use.clientLib="/libs/granite/sightly/templates/clientlib.html" data-sly-call="${clientLib.js @ categories='uiux.bootstrap'}" data-sly-unwrap/>

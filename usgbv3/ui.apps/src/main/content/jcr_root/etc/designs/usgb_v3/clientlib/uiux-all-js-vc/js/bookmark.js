@@ -167,8 +167,6 @@
             .done(function(data) {
                 results.push(data);
             })
-            .error(function() {
-            })
             .always(function() {
                 count--;
                 

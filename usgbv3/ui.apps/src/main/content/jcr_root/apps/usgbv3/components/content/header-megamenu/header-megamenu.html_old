@@ -1,0 +1,481 @@
+<sly data-sly-use.component="com.usgbv3.core.components.MegamenuComponent">
+
+    <!-- error = ${component.error} -->
+    <sly data-sly-list.megamenu="${component.megamenuList}">
+		${megamenu.title} | ${megamenu.styleType} | 
+
+        (
+        <sly data-sly-list.megamenuchild="${megamenu.child}">
+			${megamenuchild.title}) 
+			[
+            <sly data-sly-list.megamenugrandchild="${megamenuchild.child}">
+				${megamenugrandchild.title}) | 
+            </sly>
+			]
+        </sly>
+        )
+        <br/>
+    </sly>
+</sly>
+
+
+<!-- second nav -->
+	<div class=" navbar-collapse mega-menu-wrapper text-right">
+		<ul class="nav navbar-nav fs-nav-2 v-line-2 ">
+			<li class="nav-dropdown-wrapper mega-dropdown">
+				<a href="#">PRODUCTS</a>
+
+				<!-- mega dropdown menu -->
+				<div class="mega-dropdown-menu dropdown-show">
+					<div class="row row-eq-height row-wrap m-no p-vertical-5xl p-side-6xl">
+						<!-- column 1 -->
+						<div class="col-xs-4 col-sm-4 col-md-3 p-side-m m-bottom-xl mega-dropdown-separator">
+							<!-- nested row & column -->
+							<div class="row m-no">
+								<div class="col-xs-12 p-no">
+									<!-- content -->
+									<h5 class="mega-dropdown-menu-head flex-row ht6 bold color-primary-yellow uppercase">
+										<a href="#" class="flex-row flex-grow-1">
+											<span>CEILING</span>
+											<span class="align-self-right glyphicon glyphicon-menu-right"></span>
+										</a>
+									</h5>
+									<ul class="mega-dropdown-menu-list m-top-m m-bottom-xl p-right-l">
+										<li><a href="#">Acoustic Panels &amp; Ceiling Tiles</a></li>
+										<li><a href="#">Acoustic Suspension Systems</a></li>
+										<li><a href="#">Drywall Suspension Systems</a></li>
+										<li><a href="#">Integrated Systems</a></li>
+										<li><a href="#">Speciality Cellings</a></li>
+										<li><a href="#">Metal Ceilings</a></li>
+										<li><a href="#">Asona Acoustic Range</a></li>
+									</ul>
+									<!-- end content -->
+								</div>
+							</div>
+							<!-- end nested row & column -->
+						</div>
+						<!-- end column 1 -->
+						<!-- column 2 -->
+						<div class="col-xs-4 col-sm-4 col-md-3 p-side-m m-bottom-xl mega-dropdown-separator">
+							<!-- nested row & column -->
+							<div class="row m-no">
+								<div class="col-xs-12 p-no">
+									<!-- content -->
+									<h5 class="mega-dropdown-menu-head flex-row ht6 bold color-primary-yellow uppercase">
+										<a href="#" class="flex-row flex-grow-1">
+											<span>FINISHES</span>
+											<span class="align-self-right glyphicon glyphicon-menu-right"></span>
+										</a>
+									</h5>
+									<ul class="mega-dropdown-menu-list m-top-m m-bottom-xl p-right-l">
+										<li><a href="#">Jointing Compounds</a></li>
+										<li><a href="#">Speciality Plasters </a></li>
+										<li><a href="#">Adhesives</a></li>
+										<li><a href="#">Primers</a></li>
+										<li><a href="#">Sealants</a></li>
+										<li><a href="#">Joint Tapes</a></li>
+									</ul>
+									<!-- end content -->
+								</div>
+							</div>
+							<!-- end nested row & column -->
+						</div>
+						<!-- end column 2 -->
+						<!-- column 3 -->
+						<div class="col-xs-4 col-sm-4 col-md-3 p-side-m m-bottom-xl mega-dropdown-separator">
+							<!-- nested row & column -->
+							<div class="row m-no">
+								<div class="col-xs-12 p-no">
+									<!-- content -->
+									<h5 class="mega-dropdown-menu-head flex-row ht6 bold color-primary-yellow uppercase">
+										<a href="#" class="flex-row flex-grow-1">
+											<span>PLASTERING DIY</span>
+											<span class="align-self-right glyphicon glyphicon-menu-right"></span>
+										</a>
+									</h5>
+									<ul class="mega-dropdown-menu-list m-top-m m-bottom-xl p-right-l">
+										<li><a href="#">DIY Cornice Adhesive</a></li>
+										<li><a href="#">DIY Patching Plaster</a></li>
+										<li><a href="#">Total Joint Finish </a></li>
+										<li><a href="#">Stud Adhesive</a></li>
+										<li><a href="#">Tools & Accessories</a></li>
+									</ul>
+									<!-- end content -->
+								</div>
+							</div>
+							<!-- end nested row & column -->
+						</div>
+						<!-- end column 3 -->
+						<!-- column 4 -->
+						<div class="col-xs-4 col-sm-4 col-md-3 p-side-m m-bottom-xl">
+							<!-- nested row & column -->
+							<div class="row m-no">
+								<div class="col-xs-12 p-no">
+									<!-- content -->
+									<h5 class="mega-dropdown-menu-head flex-row ht6 bold color-primary-yellow uppercase">
+										<a href="#" class="flex-row flex-grow-1">
+											<span>INTERIOR LININGS</span>
+											<span class="align-self-right glyphicon glyphicon-menu-right"></span>
+										</a>
+									</h5>
+									<ul class="mega-dropdown-menu-list m-top-m m-bottom-xl p-right-l">
+										<li><a href="#">SHEETROCK Plasterboard</a></li>
+										<li><a href="#">Technical Boards</a></li>
+									</ul>
+									<!-- end content -->
+								</div>
+							</div>
+							<!-- end nested row & column -->
+						</div>
+						<!-- end column 4 -->
+						<!-- column 5 -->
+						<div class="col-xs-4 col-sm-4 col-md-3 p-side-m m-bottom-xl">
+							<!-- nested row & column -->
+							<div class="row m-no">
+								<div class="col-xs-12 p-no">
+									<!-- content -->
+									<h5 class="mega-dropdown-menu-head flex-row ht6 bold color-primary-yellow uppercase">
+										<a href="#" class="flex-row flex-grow-1">
+											<span>CORNICE</span>
+											<span class="align-self-right glyphicon glyphicon-menu-right"></span>
+										</a>
+									</h5>
+									<ul class="mega-dropdown-menu-list m-top-m m-bottom-xl p-right-l">
+										<li><a href="#">SHEETROCK Plasterboard</a></li>
+										<li><a href="#">Technical Boards</a></li>
+									</ul>
+									<!-- end content -->
+								</div>
+							</div>
+							<!-- end nested row & column -->
+						</div>
+						<!-- end column 5 -->
+						<!-- column 6 -->
+						<div class="col-xs-4 col-sm-4 col-md-3 p-side-m m-bottom-xl">
+							<!-- nested row & column -->
+							<div class="row m-no">
+								<div class="col-xs-12 p-no">
+									<!-- content -->
+									<h5 class="mega-dropdown-menu-head flex-row ht6 bold color-primary-yellow uppercase">
+										<a href="#" class="flex-row flex-grow-1">
+											<span>INSULATION</span>
+											<span class="align-self-right glyphicon glyphicon-menu-right"></span>
+										</a>
+									</h5>
+									<!-- end content -->
+								</div>
+							</div>
+							<!-- end nested row & column -->
+						</div>
+						<!-- end column 6 -->
+						<!-- column 7 -->
+						<div class="col-xs-4 col-sm-4 col-md-3 p-side-m m-bottom-xl">
+							<!-- nested row & column -->
+							<div class="row m-no">
+								<div class="col-xs-12 p-no">
+									<!-- content -->
+									<h5 class="mega-dropdown-menu-head flex-row ht6 bold color-primary-yellow uppercase">
+										<a href="#" class="flex-row flex-grow-1">
+											<span>INDUSTRIAL PLASTER</span>
+											<span class="align-self-right glyphicon glyphicon-menu-right"></span>
+										</a>
+									</h5>
+									<!-- end content -->
+								</div>
+							</div>
+							<!-- end nested row & column -->
+						</div>
+						<!-- end column 7 -->
+					</div>
+				</div>
+				<!-- end mega dropdown menu -->
+
+			</li>
+			<li class="nav-dropdown-wrapper mega-dropdown">
+				<a href="#">SOLUTION</a>
+
+				<!-- mega dropdown menu -->
+				<div class="mega-dropdown-menu dropdown-show">
+					<div class="row row-eq-height row-wrap m-no p-vertical-5xl p-side-4xl">
+
+						<!-- SPLIT: mobile & tablet 8 by 4, desktop 9 by 3  -->
+						<div class="col-xs-8 col-sm-8 col-md-9 p-no p-side-l" style="border-right: 1px solid white;">
+							<div class="row row-eq-height row-wrap m-no">
+								<!-- column 1 -->
+								<div class="col-xs-6 col-sm-6 col-md-4 p-side-m m-bottom-xl mega-dropdown-separator">
+									<!-- nested row & column -->
+									<div class="row m-no">
+										<div class="col-xs-12 p-no">
+											<!-- content -->
+											<h5 class="mega-dropdown-menu-head flex-row align-bottom ht6 bold color-primary-yellow uppercase m-bottom-xl">
+												<a href="#" class="flex-row flex-grow-1 align-bottom">
+													<span>ARCHITECTS / DESIGNERS</span>
+													<span class="align-self-right glyphicon glyphicon-menu-right"></span>
+												</a>
+											</h5>
+											<!-- end content -->
+										</div>
+									</div>
+									<!-- end nested row & column -->
+								</div>
+								<!-- end column 1 -->
+								<!-- column 2 -->
+								<div class="col-xs-6 col-sm-6 col-md-4 p-side-m m-bottom-xl mega-dropdown-separator">
+									<!-- nested row & column -->
+									<div class="row m-no">
+										<div class="col-xs-12 p-no">
+											<!-- content -->
+											<h5 class="mega-dropdown-menu-head flex-row align-bottom ht6 bold color-primary-yellow uppercase m-bottom-xl">
+												<a href="#" class="flex-row flex-grow-1 align-bottom">
+													<span>BUILDERS / INSTALLER</span>
+													<span class="align-self-right glyphicon glyphicon-menu-right"></span>
+												</a>
+											</h5>
+											<!-- end content -->
+										</div>
+									</div>
+									<!-- end nested row & column -->
+								</div>
+								<!-- end column 2 -->
+								<!-- column 3 -->
+								<div class="col-xs-6 col-sm-6 col-md-4 p-side-m m-bottom-xl mega-dropdown-separator">
+									<!-- nested row & column -->
+									<div class="row m-no">
+										<div class="col-xs-12 p-no">
+											<!-- content -->
+											<h5 class="mega-dropdown-menu-head flex-row align-bottom ht6 bold color-primary-yellow uppercase m-bottom-xl">
+												<a href="#" class="flex-row flex-grow-1 align-bottom">
+													<span>HOMEOWNER</span>
+													<span class="align-self-right glyphicon glyphicon-menu-right"></span>
+												</a>
+											</h5>
+											<!-- end content -->
+										</div>
+									</div>
+									<!-- end nested row & column -->
+								</div>
+								<!-- end column 3 -->
+								<!-- column 4 -->
+								<div class="col-xs-6 col-sm-6 col-md-4 p-side-m m-bottom-xl mega-dropdown-separator">
+									<!-- nested row & column -->
+									<div class="row m-no">
+										<div class="col-xs-12 p-no">
+											<!-- content -->
+											<h5 class="mega-dropdown-menu-head flex-row align-bottom ht6 bold color-primary-yellow uppercase m-bottom-xl">
+												<a href="#" class="flex-row flex-grow-1 align-bottom">
+													<span>CASE STUDIES /<br>PROJECT PREFERENCES</span>
+													<span class="align-self-right glyphicon glyphicon-menu-right"></span>
+												</a>
+											</h5>
+											<!-- end content -->
+										</div>
+									</div>
+									<!-- end nested row & column -->
+								</div>
+								<!-- end column 4 -->
+								<!-- column 5 -->
+								<div class="col-xs-6 col-sm-6 col-md-4 p-side-m m-bottom-xl mega-dropdown-separator">
+									<!-- nested row & column -->
+									<div class="row m-no">
+										<div class="col-xs-12 p-no">
+											<!-- content -->
+											<h5 class="mega-dropdown-menu-head flex-row align-bottom ht6 bold color-primary-yellow uppercase m-bottom-xl">
+												<a href="#" class="flex-row flex-grow-1 align-bottom">
+													<span>TESTIMONIALS</span>
+													<span class="align-self-right glyphicon glyphicon-menu-right"></span>
+												</a>
+											</h5>
+											<!-- end content -->
+										</div>
+									</div>
+									<!-- end nested row & column -->
+								</div>
+								<!-- end column 5 -->
+								<!-- column 6 -->
+								<div class="col-xs-6 col-sm-6 col-md-4 p-side-m m-bottom-xl mega-dropdown-separator">
+									<!-- nested row & column -->
+									<div class="row m-no">
+										<div class="col-xs-12 p-no">
+											<!-- content -->
+											<h5 class="mega-dropdown-menu-head flex-row align-bottom ht6 bold color-primary-yellow uppercase m-bottom-xl">
+												<a href="#" class="flex-row flex-grow-1 align-bottom">
+													<span>GALLERY / COLLECTIONS</span>
+													<span class="align-self-right glyphicon glyphicon-menu-right"></span>
+												</a>
+											</h5>
+											<!-- end content -->
+										</div>
+									</div>
+									<!-- end nested row & column -->
+								</div>
+								<!-- end column 6 -->
+
+								<!-- column separator -->
+								<div class="col-xs-12 col-sm-12 col-md-12 p-side-no p-side-no m-top-l m-bottom-3xl">
+									<!-- nested row & column -->
+									<div class="row m-no">
+										<div class="col-xs-12 p-side-m">
+											<!-- content -->
+											<hr class="m-no">
+											<!-- end content -->
+										</div>
+									</div>
+									<!-- end nested row & column -->
+								</div>
+								<!-- end column separator -->
+
+								<!-- LATEST PROMOTION BLOCK -->
+								<div class="col-xs-12 col-sm-12 col-md-12 p-no">
+
+									<div class="row m-no">
+										<div class="col-xs-12 col-sm-12 col-md-12 m-bottom-m">
+											<h5 class="mega-dropdown-menu-side ht6 uppercase">
+												<span>LATEST PROMOTION</span>
+											</h5>
+										</div>
+									</div>
+
+									<!-- nested row & column -->
+									<div class="flex-row row m-no">
+										<!-- column 1-->
+										<div class="col-xs-6 col-sm-6 col-md-4 m-bottom-xl m-sm-bottom-xl m-md-bottom-no">
+											<div class="bg-white p-xs">
+												<a href="#">
+													<div class="m-bottom-xs">
+														<img class="img-responsive" src="https://dummyimage.com/600x250/000000/fff" alt="">
+													</div>
+													<p class="fs-2 uppercase text-center color-darker-grey m-bottom-xxs"><strong>Lorem ipsum dolor sit amet</strong></p>
+													<p class="fs-3 text-center color-darker-grey m-no">consectetuer adipiscing elit.</p>
+												</a>
+											</div>
+										</div>
+										<!-- column 1-->
+
+										<!-- column 2-->
+										<div class="col-xs-6 col-sm-6 col-md-4 m-bottom-xl m-sm-bottom-xl m-md-bottom-no">
+											<div class="bg-white p-xs">
+												<a href="#">
+													<div class="m-bottom-xs">
+														<img class="img-responsive" src="https://dummyimage.com/600x250/000000/fff" alt="">
+													</div>
+													<p class="fs-2 uppercase text-center color-darker-grey m-bottom-xxs"><strong>Lorem ipsum dolor sit amet</strong></p>
+													<p class="fs-3 text-center color-darker-grey m-no">consectetuer adipiscing elit.</p>
+												</a>
+											</div>
+										</div>
+										<!-- column 2-->
+
+										<!-- column 3-->
+										<div class="col-xs-6 col-sm-6 col-md-4 m-bottom-xl m-sm-bottom-xl m-md-bottom-no">
+											<div class="bg-white p-xs">
+												<a href="#">
+													<div class="m-bottom-xs">
+														<img class="img-responsive" src="https://dummyimage.com/600x250/000000/fff" alt="">
+													</div>
+													<p class="fs-2 uppercase text-center color-darker-grey m-bottom-xxs"><strong>Lorem ipsum dolor sit amet</strong></p>
+													<p class="fs-3 text-center color-darker-grey m-no">consectetuer adipiscing elit.</p>
+												</a>
+											</div>
+										</div>
+										<!-- column 3-->
+
+									</div>
+									<!-- end nested row & column -->
+
+								</div>
+								<!-- end LATEST PROMOTION BLOCK -->
+
+							</div>
+						</div>
+						<div class="col-xs-4 col-sm-4 col-md-3 p-side-3xl">
+
+							<h5 class="mega-dropdown-menu-side ht6 uppercase">
+									<span>Featured</span>
+								</h5>
+							<ul class="mega-dropdown-menu-sidelist m-top-m m-bottom-xl p-right-l">
+								<li class="flex-row flex-grow-1 align-bottom">
+									<a href="#" class="flex-row flex-grow-1 align-bottom">
+										<span>USG Boral Introduced Cutting-Edge Sheetrock Technology in Malaysia</span>
+										<span class="align-self-right glyphicon glyphicon-menu-right"></span>
+									</a>
+								</li>
+								<li class="flex-row flex-grow-1 align-bottom">
+									<a href="#" class="flex-row flex-grow-1 align-bottom">
+										<span>USG Boral Malaysia kicks off USG Boral Build programme with EPIC Homes</span>
+										<span class="align-self-right glyphicon glyphicon-menu-right"></span>
+									</a>
+								</li>
+								<li class="flex-row flex-grow-1 align-bottom">
+									<a href="#" class="flex-row flex-grow-1 align-bottom">
+										<span>USG Boral Media Briefing</span>
+										<span class="align-self-right glyphicon glyphicon-menu-right"></span>
+									</a>
+								</li>
+								<li class="flex-row flex-grow-1 align-bottom">
+									<a href="#" class="flex-row flex-grow-1 align-bottom">
+										<span>Supporting lifestyle innovators once again at the iProperty People's Choice Awards</span>
+										<span class="align-self-right glyphicon glyphicon-menu-right"></span>
+									</a>
+								</li>
+							</ul>
+
+						</div>
+						<!-- end SPLIT: mobile & tablet 9 by 3, desktop 10 by 2  -->
+
+					</div>
+				</div>
+				<!-- end mega dropdown menu -->
+
+			</li>
+			<li class="nav-dropdown-wrapper mega-dropdown">
+				<a href="#">INSPIRATION</a>
+
+			</li>
+			<li class="nav-dropdown-wrapper mega-dropdown">
+				<a href="#">RESOURCE &amp; TOOLS</a>
+
+			</li>
+			<li class="nav-dropdown-wrapper mega-dropdown">
+				<a href="#">about usg boral</a>
+
+			</li>
+			<li class="nav-dropdown-wrapper mega-dropdown">
+				<a href="#">what’s new</a>
+
+			</li>
+			<li class="nav-dropdown-wrapper mega-dropdown">
+				<a href="#">contact us</a>
+			</li>
+		</ul>
+	</div>
+	<!-- end second nav -->
+
+</div>
+<!-- end desktop-nav -->
+
+<!-- mobile-nav -->
+<!-- visible-xs will overwrite flex-row -->
+<div class="mobile-nav flex-row justify-end hidden-sm hidden-md hidden-lg">
+
+	<!-- map -->
+	<div class="map p-xs">
+		<a href="#" class="glyphicon glyphicon-map-marker color-dark-2-grey icon-size-xs"></a>
+	</div>
+	<!-- end map -->
+
+	<!-- search -->
+	<div class="search p-xs">
+		<a href="#" data-search-pop-up class="glyphicon glyphicon-search color-dark-2-grey icon-size-xs"></a>
+	</div>
+	<!-- end search -->
+
+	<span class="vertical-rule m-left-xs"></span>
+
+	<!-- hamburger button -->
+	<div class="hamburger p-vertical-m p-left-m">
+		<a href="#" class="glyphicon glyphicon-align-justify color-dark-2-grey icon-size-xs"></a>
+	</div>
+	<!-- end hamburger button -->
+
+</div>
+<!-- end mobile-nav -->

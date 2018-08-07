@@ -1,0 +1,12 @@
+<sly data-sly-test="${wcmmode.edit || wcmmode.design}">
+	Edit here for Freeform Image Component
+</sly>
+
+<style>
+	${properties.cssoverwrite @ context='unsafe'}
+</style>
+
+<div class="freeform-image ${properties.classid}">
+	<img class="img-responsive" src="${properties.imgPath @ context='unsafe'}" alt="${properties.thumbnail @ context='unsafe'}" > 
+</div>
+<div class="clearfix"></div>
