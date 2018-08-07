@@ -1,147 +1,146 @@
 <sly data-sly-test="${wcmmode.edit || wcmmode.design}">
-	Edit here for Browsing History Component
-</sly>
-
-	<div class="container m-vertical-4xxl  m-sm-vertical-5xl">
-		<div class="row">
-			<div class="col-xs-12 m-bottom-xs">
-				<h2 class="ht6 color-darker-grey ">Your browse history</h2>
-			</div>
-		</div>
-
-		<!-- carousel items -->
-		<div class="row">
-			<div class="col-xs-12">
-				<div class="feature-card-wrapper">
-					<!-- slick div -->
-					<div class="browse-history-result">
-					</div>
-					<!-- slick div end -->
-				</div>   <!-- end feature-card-wrapper -->
-
-			
-
-				<script id="browseHistoryTemplate" type="text/x-handlebars-template">
-					{{#each this}}
-					<div class="browse-history-thumb p-xl p-bottom-no">
-						<a href="{{pagePropertiesList.0.uri}}.html" target="_blank">
-							<div class="box-size-m box-type-2 bg-white p-md-xs p-xs">
-								<div class="center width-full">
-									<div class="box-inner-img">
-										<img src="{{pagePropertiesList.0.pageImage}}" alt="">
-									</div>
-									<h2 class="m-top-m fs-1 color-darker-grey text-center bold">{{pagePropertiesList.0.pageTitle}}</h2>
-								</div>
-								<span class="bg-box-hover"></span>
-							</div>
-						</a>
-					</div>
-					{{/each}}
-				</script>
-
-			</div>
-		</div>
-		<!-- carousel item end -->
-	</div>
-
-<sly data-sly-use.clientLib="/libs/granite/sightly/templates/clientlib.html" data-sly-call="${clientLib.js @ categories='uiux.slick'}" data-sly-unwrap/>
-<script>
-
-(function(){
-    "use strict";
-    //===========================
-    // browser history
-    //===========================
-    $(document).ready(function(){
-        var url = $('.cta-bookmark').attr('href').replace('.html', '.properties.json');
-        var currOnStageMainResultData = [];
+    Edit here for Browsing History Component
+  </sly>
+  
+    <div class="container m-vertical-4xxl  m-sm-vertical-5xl browse-history-wrap hidden">
+      <div class="row">
+        <div class="col-xs-12 m-bottom-xs">
+          <h2 class="ht6 color-darker-grey ">Your browse history</h2>
+        </div>
+      </div>
+  
+      <!-- carousel items -->
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="feature-card-wrapper">
+            <!-- slick div -->
+            <div class="browse-history-result">
+            </div>
+            <!-- slick div end -->
+          </div>   <!-- end feature-card-wrapper -->
+  
         
-        if($('.browse-history-result').length > 0){
-            //addNewBrowseHistory(url);
-
-            var browseHistoryUrls = JSON.parse(localStorage.getItem('browseHistory'));
-
-            getAll(browseHistoryUrls).done(function(results) {
-                currOnStageMainResultData = results;
-                console.log(currOnStageMainResultData);
-                if(currOnStageMainResultData.length > 0){
-                    var html = $('#browseHistoryTemplate').html();
-                    var template = Handlebars.compile(html);
-                    console.log(template(currOnStageMainResultData));
-                    $('.browse-history-result').append(template(currOnStageMainResultData));
-                    $('.browse-history-result').slick();
-                }
-            });
-
-        }
-
-        $(".browse-history-result").slick({
-						"dots": false,
-						"infinite": true,
-						"speed": 300,
-						"slidesToShow": 5,
-						"slidesToScroll": 1,
-						"responsive": [
-							{
-								"breakpoint": 992,
-								"settings": {
-									"slidesToShow": 4,
-									"dots":true
-								}
-							},
-							{
-								"breakpoint": 768,
-								"settings": {
-									"slidesToShow": 3,
-									"dots":true
-								}
-							},
-							{
-								"breakpoint": 600,
-								"settings": {
-									"slidesToShow": 1,
-									"dots":true
-								}
-							}
-						]
-					});
-
-
-
-    });
-
-
-
-})();
-
-function getAll(requests) {
-        var count = requests.length;
-        var results = [];
-        var deferreds = [];
-        var all_done = $.Deferred();
-
-        for(var i=0; i < requests.length; i++) {
-            var deferred = $.ajax({
-                url: requests[i],
-                type: "GET",
-                cache: false,
-            })
-            .done(function(data) {
-                results.push(data);
-            })
-            //.error(function() {
-            //	console.log("error during retrieve localstorage for browse history");
-            //})
-            .always(function() {
-                count--;
-                
-                if(count === 0) {
-                    all_done.resolve(results);    
-                }
-            });
-            deferreds.push(deferred);
-        } 
-        return all_done.promise();
-    }
-
-</script>
+  
+          <script id="browseHistoryTemplate" type="text/x-handlebars-template">
+            {{#each this}}
+            <div class="browse-history-thumb p-xl p-bottom-no">
+              <a href="{{pagePropertiesList.0.uri}}.html" target="_blank">
+                <div class="box-size-m box-type-2 bg-white p-md-xs p-xs">
+                  <div class="center width-full">
+                    <div class="box-inner-img">
+                      <img src="{{pagePropertiesList.0.pageImage}}" alt="">
+                    </div>
+                    <h2 class="m-top-m fs-1 color-darker-grey text-center bold">{{pagePropertiesList.0.pageTitle}}</h2>
+                  </div>
+                  <span class="bg-box-hover"></span>
+                </div>
+              </a>
+            </div>
+            {{/each}}
+          </script>
+  
+        </div>
+      </div>
+      <!-- carousel item end -->
+    </div>
+  
+  <sly data-sly-use.clientLib="/libs/granite/sightly/templates/clientlib.html" data-sly-call="${clientLib.js @ categories='uiux.slick'}" data-sly-unwrap/>
+  <script>
+  
+  (function(){
+      "use strict";
+      //===========================
+      // browser history
+      //===========================
+      $(document).ready(function(){
+          var currOnStageMainResultData = [];
+          
+          if($('.browse-history-result').length > 0){
+  
+              var browseHistoryUrls = JSON.parse(localStorage.getItem('browseHistory'));
+  
+              getAll(browseHistoryUrls).done(function(results) {
+                  currOnStageMainResultData = results;
+                  console.log(currOnStageMainResultData);
+                  if(currOnStageMainResultData.length > 0){
+                      var html = $('#browseHistoryTemplate').html();
+                      var template = Handlebars.compile(html);
+                      console.log(template(currOnStageMainResultData));
+                      $('.browse-history-wrap').removeClass('hidden');
+                      $('.browse-history-result').append(template(currOnStageMainResultData));
+                      $(".browse-history-result").slick({
+                        "dots": false,
+                        "infinite": true,
+                        "speed": 300,
+                        "slidesToShow": 5,
+                        "slidesToScroll": 1,
+                        "responsive": [
+                          {
+                            "breakpoint": 992,
+                            "settings": {
+                              "slidesToShow": 4,
+                              "dots":true
+                            }
+                          },
+                          {
+                            "breakpoint": 768,
+                            "settings": {
+                              "slidesToShow": 3,
+                              "dots":true
+                            }
+                          },
+                          {
+                            "breakpoint": 600,
+                            "settings": {
+                              "slidesToShow": 1,
+                              "dots":true
+                            }
+                          }
+                        ]
+                      });
+                  }
+              });
+  
+          }
+  
+          
+  
+  
+  
+      });
+  
+  
+  
+  })();
+  
+  function getAll(requests) {
+          var count = requests.length;
+          var results = [];
+          var deferreds = [];
+          var all_done = $.Deferred();
+  
+          for(var i=0; i < requests.length; i++) {
+              var deferred = $.ajax({
+                  url: requests[i],
+                  type: "GET",
+                  cache: false,
+              })
+              .done(function(data) {
+                  results.push(data);
+              })
+              //.error(function() {
+              //	console.log("error during retrieve localstorage for browse history");
+              //})
+              .always(function() {
+                  count--;
+                  
+                  if(count === 0) {
+                      all_done.resolve(results);    
+                  }
+              });
+              deferreds.push(deferred);
+          } 
+          return all_done.promise();
+      }
+  
+  </script>
