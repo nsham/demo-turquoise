@@ -174,7 +174,7 @@
 
             $(document).on('click', '.search-result-container .related-search a', function(e){
                 e.preventDefault();
-                $('#search-form input').val($(this).html());
+                $('#search-form input').val($(this).text());
                 $('#search-form button[type="submit"]').click();
                 scrollTop();
             });
@@ -347,11 +347,19 @@
                     }
 
                     //populate search related listing
-                    //if(resultData.searches_related.length > 0){
+                    var relatedSearchArray = [];
+                    if($('#search-form').find('.autocomplete li').length > 0){
+                        for ( var i = 0; i <= 5; i++ ) {
+                            relatedSearchArray.push($($('#search-form .autocomplete li')[i]).html());
+                        }
+                        var relatedObj = {
+                            keyword: resultData.keyword,
+                            searches_related: relatedSearchArray
+                        }
                         var relatedHtml = $('#templSearchRelated').html();
                         var temptRelatedHtml = Handlebars.compile(relatedHtml);
-                        $('.related-search').html(temptRelatedHtml(resultData));
-                    //}
+                        $('.related-search').html(temptRelatedHtml(relatedObj));
+                    }
 
                     switch (currCategory) {
                         case "content":
@@ -379,6 +387,8 @@
                     if($.ssoManager.isLogin){
                         $('.cta-bookmark, .cta-add-submittal').removeClass('disabled');
                     }
+
+
 
                 }else{
                     $('.search-result-container').addClass('hidden');
