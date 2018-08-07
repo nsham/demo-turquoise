@@ -26,27 +26,6 @@
                 <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.</p>
             </div>
             <div class="col-xs-12 col-sm-4 col-md-4">
-                
-                <div class="sample-orders-cart-sort">
-                    <div>
-                        <span>view by </span>
-                        <div class="dropdown dp-form d-small">
-                            <button class="btn btn-default color-dark-grey dropdown-toggle text-left dp-clickable" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="dp-text">Latest to oldest</span>
-                                <input type="hidden" name="selectSortType" value="latest">
-                                <span class="color-primary-green glyphicon glyphicon-menu-down right"></span>
-                            </button>
-                            <ul class="dropdown-menu dp-list" aria-labelledby="dropdownMenu1">
-                                <li>
-                                    <a data-sortby="latest">Latest to oldest</a>
-                                </li>
-                                <li>
-                                    <a data-sortby="oldest">Oldest to latest</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
 
             </div>
         </div>
@@ -54,6 +33,31 @@
 
     <!-- ORDER History Wrapper-->
     <div class="container m-sm-top-l order-history-wrapper p-l">
+        <div class="row">
+            <div class="col-xs-12 col-sm-8"></div>
+            <div class="col-xs-12 col-sm-4 m-bottom-l">
+                    <div class="sample-orders-cart-sort">
+                            <div>
+                                <span>view by </span>
+                                <div class="dropdown dp-form d-small">
+                                    <button class="btn btn-default color-dark-grey dropdown-toggle text-left dp-clickable" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <span class="dp-text">Latest to oldest</span>
+                                        <input type="hidden" name="selectSortType" value="latest">
+                                        <span class="color-primary-green glyphicon glyphicon-menu-down right"></span>
+                                    </button>
+                                    <ul class="dropdown-menu dp-list" aria-labelledby="dropdownMenu1">
+                                        <li>
+                                            <a data-sortby="latest">Latest to oldest</a>
+                                        </li>
+                                        <li>
+                                            <a data-sortby="oldest">Oldest to latest</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+            </div>
+        </div>
         <div class="row bg-primary-green rounded-top p-m m-bottom-m order-header">
             <div class="col-xs-12 col-sm-3 uppercase color-white text-center">
                 <h6 class="ht6">Order No.</h6>
@@ -166,3 +170,43 @@
 </script>
 <!-- /END Sample Order History Template -->
 
+
+
+<!-- Confirm cancel order Modal -->
+<div id="cancelSampleOrderModal" class="modal fade sample-orders-modal" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="removeSampleOrderModalLabel">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center" role="document" width="750px">
+            <div class="modal-content">
+                <div class="modal-body m-vertical-s">
+                    <div class="row">
+                        <div class="col-md-12" align="center">
+                            <div class="svg-box">
+                                <svg class="circular yellow-stroke">
+                                    <circle class="path" cx="75" cy="75" r="50" fill="none" stroke-width="5" stroke-miterlimit="10" />
+                                </svg>
+                                <svg class="alert-sign yellow-stroke">
+                                    <g transform="matrix(1,0,0,1,-615.516,-257.346)">
+                                        <g transform="matrix(0.56541,-0.56541,0.56541,0.56541,93.7153,495.69)">
+                                            <path class="line" d="M634.087,300.805L673.361,261.53" fill="none" />
+                                        </g>
+                                        <g transform="matrix(2.27612,-2.46519e-32,0,2.27612,-792.339,-404.147)">
+                                            <circle class="dot" cx="621.52" cy="316.126" r="1.318" />
+                                        </g>
+                                    </g>
+                                </svg>
+                            </div>
+                            <h4 class="ht4 uppercase color-primary-green">Are you sure?</h4>
+                            <p class="color-dark-grey">Your order request will be cancelled.</p>
+                            <br>
+                            <p class="text-center m-bottom-l">
+                                <button data-dismiss="modal" class="btn btn-brand-default m-right-l">Cancel</button>
+                                <button class="btn btn-brand-default button-red cta-confirm-cancel-order">Yes, Cancel it!</button>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /END Confirm cancel order Modal -->
