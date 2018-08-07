@@ -3,17 +3,15 @@
 </sly>
 
 
-<div class="container-fluid ${properties.bgcolor}">
+<div class="container-fluid p-no ${properties.bgcolor}">
     <sly data-sly-test.istitle="${properties.title}">
-        <div class="row m-vertical-l m-sm-vertical xl" data-scroll="${currentNode.name}" >
+    	<div class="m-vertical-l m-sm-vertical xl" data-scroll="${currentNode.name}" >
     </sly>
     <sly data-sly-test="$!istitle}">
-        <div class="container p-no sub-nav-hero" >
+		<div class="container sub-nav-hero" >
     </sly>
         <div class="row m-no">
-            <div class="col-xs-12">
-                <sly data-sly-resource="${'par' @ resourceType='foundation/components/parsys'}"/>
-            </div>
+              <sly data-sly-resource="${'par' @ resourceType='foundation/components/parsys'}"/>
         </div>
     </div>
 </div>
