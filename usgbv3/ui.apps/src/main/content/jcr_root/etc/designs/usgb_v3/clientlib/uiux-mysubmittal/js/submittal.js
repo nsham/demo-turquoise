@@ -28,7 +28,7 @@
                             email: userInfo.email.address
                         }
                     };
-                    //$.extend(dt, _data);
+                    //$.extend(dt, _data); 
 
                     /***START AJAX CALL TO /bin/sso*****/ ///
 
@@ -60,6 +60,14 @@
                         },
                         complete: function () {
                             //$('.loader').fadeOut("slow");
+                        }
+                    });
+
+                    $(document).on('change', '[data-check="all"]', function(){
+                        if($(this).prop('checked') == true){
+                            $('.document-item').prop('checked', true);   
+                        } else {
+                            $('.document-item').prop('checked', false); 
                         }
                     });
         
