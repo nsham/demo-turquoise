@@ -16,6 +16,7 @@
     $(document).ready(function(){
 
         AutoComplete({
+            Limit: 11,
             EmptyMessage: "No item found",
             QueryArg: "text",
             _Render: function(response) {
@@ -77,7 +78,7 @@
                 $(this).closest('li').addClass('active');
                 val = $(this).attr('data-category');
                 currCategory = val;
-                if($('.search-result-container').is(':visible') || $('#search-form input').val().indexOf(searchedText) >= 0){
+                if($('.search-result-container').is(':visible') && $('#search-form input').val().indexOf(searchedText) >= 0){
                     getResult();
                     scrollToTarget('.search-category-controller-container');
                 }
@@ -112,8 +113,8 @@
                     paginationResult (currOnStageMainResultData);
                 }
                 scrollToTarget('.search-category-controller-container');
-                if($('.filter-icon').is('visible')){
-                    $('.close-filter-mobile-content').click();
+                if($('.filter-icon').is(':visible')){
+                    $('.close-filter-mobile-content a').click();
                 }
             });
 
