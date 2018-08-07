@@ -30,6 +30,7 @@ Edit here for Product Detail Description Component
         <div class="row">
             <div class="col-xs-12">
                 <a href="#" class="request-btn col-xs-12 col-sm-5 btn btn-lg btn-brand-default button-green">${'Request Sample' @ i18n}</a>
+                <a href="#" class="add-to-cart"></a>
             </div>
         </div>
     </sly>
@@ -97,8 +98,8 @@ Edit here for Product Detail Description Component
 
         	<sly data-sly-test="${!currentStyle.hideShare}">
                 <div class="m-top-s top-line-dark-grey">
-                    <div class=" fs-3 m-top-s color-grey">${'Share this product:' @ i18n} &nbsp;
-                        <sly data-sly-resource="${'share-component' @ resourceType='usgbv3/components/content/share-component'}"/>
+                    <div class=" fs-3 m-top-m m-bottom-xs color-grey">${'Share this product:' @ i18n} &nbsp;
+						<sly data-sly-resource="${'share-component' @ resourceType='usgbv3/components/content/share-component'}"/>
                     </div>
                 </div>
        		</sly>
@@ -217,6 +218,8 @@ Edit here for Product Detail Description Component
 
 
 
+
+
 <script>
 
 (function(){
@@ -290,6 +293,8 @@ Edit here for Product Detail Description Component
 (function () {
     "use strict";
     $(document).ready(function () {
+
+
 		$(".compare-popup").hide();
         $(".compare-popup .btn-compare").hide();
         $(".compare-popup .instruction-text").hide();
@@ -303,6 +308,7 @@ Edit here for Product Detail Description Component
         var detailsData;
         var currInput;
         var getIndex1;
+        var popContent;
 
         var orderData=[];
 
@@ -358,15 +364,17 @@ Edit here for Product Detail Description Component
 
              //hide show popup
             $(".compare-popup .btn-menu-down").click(function () {
-                $(".popup-content").toggle();
-                $(".compare-popup .btn-compare").toggle();
-                $(".compare-popup .title").toggleClass("selected")
+
+				$(".compare-popup .btn-compare").toggle();
+                $(".compare-popup .title").toggleClass("selected");
 
                 //check to toggle compare-btn
-                //if (numberOfChecked <= 1) {
-                 //   $(".compare-popup .btn-compare").toggle();
-                 //   $(".instruction-text").toggle();
-                //}
+                console.log("pop",popContent);
+                if (popContent <= 1) {
+                  $(".compare-popup .btn-compare").hide();
+                 $(".instruction-text").fadeToggle(500);
+                }
+                $(".popup-content").fadeToggle(600);
             });
 
              // close btn on popup to remove content
@@ -374,6 +382,12 @@ Edit here for Product Detail Description Component
                 event.preventDefault();
                 currInput = $(this).closest('.each').attr("data-content-title");
                 $("[data-input-value ='" + currInput + "']").attr('checked', false);
+
+                $(this).closest(".each").animate({
+                    left: "200px",
+                    opacity:0.2
+
+              	}, 500 );
 
 				getIndex1
                 storeData.some(function (x, i) {
@@ -450,11 +464,15 @@ Edit here for Product Detail Description Component
            //console.log("currGetLink",getLink);
             // var getIndex1 = storeData.findIndex(x => x.url == data); 
 
+			//$(".compare-popup .each").fadeOut(500);
+			setTimeout(function () {
+                storeData.splice(getIndex1, 1);
+                addToDetailsToLocal();
+                getDetailsLocalCompare();
+                $("[data-input-value ='" + currInput + "']").prop('checked', false);
+            }, 500);
 
-            storeData.splice(getIndex1, 1);
-           	addToDetailsToLocal();
-           	getDetailsLocalCompare();
-           	$("[data-input-value ='" + currInput + "']").prop('checked', false);
+
 
         }
 
@@ -502,29 +520,27 @@ Edit here for Product Detail Description Component
         }
 
         function countPopContent(){
-            var popContent = $("[data-content-title]").length;
+            popContent = $("[data-content-title]").length;
+
+                 if (popContent > 0) {
+                    $(".compare-popup").fadeIn(500);
+                    $(".popup-content").fadeIn(500);
+                    $(".compare-popup .btn-menu-down").fadeIn(500);
+                } else {
+                    $(".compare-popup").fadeOut(700);
+                }
 
             	if (popContent > 1) {
-                    $(".compare-popup .btn-compare").show();
-                    $(".compare-popup").show();
-                    $(".compare-popup .instruction-text").hide();
+					$(".compare-popup").fadeIn(800);
+                    $(".compare-popup .popup-content .each").fadeIn(800);
+                    $(".compare-popup .btn-compare").fadeIn(500);
+                    $(".compare-popup .instruction-text").fadeOut(500);
 
                 } else {
-                    $(".compare-popup .btn-compare").hide();
-                    $(".compare-popup .instruction-text").show();
+                	$(".compare-popup .btn-compare").fadeOut(500);
+					$(".compare-popup .instruction-text").fadeIn(500);
                 }
 
-                if (popContent > 0) {
-                    $(".compare-popup .btn-menu-down").show();
-                    $(".popup-content").show();
-                } else {
-                    $(".compare-popup .instruction-text").hide();
-                    $(".compare-popup").show();
-                    $(".popup-content").hide();
-                    $(".compare-popup .btn-menu-down").hide();
-                    $(".compare-popup .btn-compare").hide();
-                    //localStorage.removeItem(categoryName);
-                }
 
             //console.log(popContent)
         }
@@ -538,8 +554,8 @@ Edit here for Product Detail Description Component
             var comparePopupHTML = $('#compare-popup-local').html();
             var temptcomparePopupHTML = Handlebars.compile(comparePopupHTML);
             $('.compare-popup-local').html(temptcomparePopupHTML(storeData));
-            $(".compare-popup").show();
-        
+           // $(".compare-popup").fadeIn(500);
+
             countPopContent();
         }
 
@@ -583,6 +599,50 @@ Edit here for Product Detail Description Component
 
 
     });
+})();
+
+
+
+
+(function(){
+    "use strict";
+    //===========================
+    // transtion Request
+    //===========================
+    $(document).ready(function(){
+
+
+        var count = 0;
+         $("body").on("click", ".request-btn", function (event) {
+
+            count++;
+            $("a.add-to-cart").addClass("size");
+            setTimeout(function() {
+                $("a.add-to-cart").addClass("hover");
+            }, 10);
+
+            setTimeout(function() {
+               $("a.cart > span").addClass("counter");
+                $("a.cart > span.counter").text(count);
+            }, 400);
+
+            setTimeout(function() {
+				$("a.add-to-cart").hide();
+                $("a.add-to-cart").removeClass("hover");
+                $("a.add-to-cart").removeClass("size");
+            }, 1100);
+            setTimeout(function() {
+            	$("a.add-to-cart").show();
+            },1500);
+            event.preventDefault();
+        });
+
+
+
+
+    });
+
+
 })();
 
 

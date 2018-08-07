@@ -31,7 +31,7 @@
     
 <!--     <filter root="/apps/usgbv3/components/content/header" /> -->
 <!--     <filter root="/apps/usgbv3/components/content/header-country-popup-component" /> -->
-    <filter root="/apps/usgbv3/components/content/header-megamenu" />
+<!--     <filter root="/apps/usgbv3/components/content/header-megamenu" /> -->
 <!--     <filter root="/apps/usgbv3/components/content/header-mobile-view-component" /> -->
 <!--     <filter root="/apps/usgbv3/components/content/header-search-popup-component" /> -->
 <!--     <filter root="/apps/usgbv3/components/content/hero-banner-component" /> -->
@@ -83,12 +83,53 @@
 <!--     <filter root="/apps/usgbv3/widgets" /> -->
     
 <!--     JS & CSS -->
-    <filter root="/etc/designs/usgb_v3" />
+<!--     <filter root="/etc/designs/usgb_v3/clientlib/uiux-less" /> -->
+<!--     <filter root="/etc/designs/usgb_v3/clientlib/bootstrap" /> -->
+<!--     <filter root="/etc/designs/usgb_v3/clientlib/imageeditor" /> -->
+<!--     <filter root="/etc/designs/usgb_v3/clientlib/sso" /> -->
+<!--     <filter root="/etc/designs/usgb_v3/clientlib/uiux-all-js" /> -->
+<!--     <filter root="/etc/designs/usgb_v3/clientlib/uiux-base" /> -->
+<!--     <filter root="/etc/designs/usgb_v3/clientlib/uiux-bookmark" /> -->
+<!--     <filter root="/etc/designs/usgb_v3/clientlib/uiux-compare" /> -->
+<!--     <filter root="/etc/designs/usgb_v3/clientlib/uiux-contactus" /> -->
+<!--     <filter root="/etc/designs/usgb_v3/clientlib/uiux-filtersort" /> -->
+<!--     <filter root="/etc/designs/usgb_v3/clientlib/uiux-gallery" /> -->
+<!--     <filter root="/etc/designs/usgb_v3/clientlib/uiux-global-landing" /> -->
+<!--     <filter root="/etc/designs/usgb_v3/clientlib/uiux-globalcontact" /> -->
+<!--     <filter root="/etc/designs/usgb_v3/clientlib/uiux-header" /> -->
+<!--     <filter root="/etc/designs/usgb_v3/clientlib/uiux-jquery" /> -->
+<!--     <filter root="/etc/designs/usgb_v3/clientlib/uiux-localstorage" /> -->
+<!--     <filter root="/etc/designs/usgb_v3/clientlib/uiux-main" /> -->
+<!--     <filter root="/etc/designs/usgb_v3/clientlib/uiux-mainbanner" /> -->
+<!--     <filter root="/etc/designs/usgb_v3/clientlib/uiux-mapoperate" /> -->
+<!--     <filter root="/etc/designs/usgb_v3/clientlib/uiux-mixmedia" /> -->
+<!--     <filter root="/etc/designs/usgb_v3/clientlib/uiux-mysubmittal" /> -->
+<!--     <filter root="/etc/designs/usgb_v3/clientlib/uiux-os-listing" /> -->
+<!--     <filter root="/etc/designs/usgb_v3/clientlib/uiux-productdetail" /> -->
+<!--     <filter root="/etc/designs/usgb_v3/clientlib/uiux-productlisting" /> -->
+<!--     <filter root="/etc/designs/usgb_v3/clientlib/uiux-search" /> -->
+<!--     <filter root="/etc/designs/usgb_v3/clientlib/uiux-share" /> -->
+<!--     <filter root="/etc/designs/usgb_v3/clientlib/uiux-sidescroll" /> -->
+<!--     <filter root="/etc/designs/usgb_v3/clientlib/uiux-slick" /> -->
+<!--     <filter root="/etc/designs/usgb_v3/clientlib/uiux-stickyicon" /> -->
+<!--     <filter root="/etc/designs/usgb_v3/clientlib/uiux-stickysidebar" /> -->
+<!--     <filter root="/etc/designs/usgb_v3/clientlib/uiux-tabtiles" /> -->
+<!--     <filter root="/etc/designs/usgb_v3/clientlib/uiux-video" /> -->
+<!--     <filter root="/etc/designs/usgb_v3/clientlib/uiux-where-to-buy" /> -->
     
     
 <!--     COUNTRY CONFIG & TAGS-->
-    <filter root="/etc/tags/usgbv3" />
-    <filter root="/etc/usgbCountryList" />
-    
-    
+<!--     <filter root="/etc/tags/usgbv3" /> -->
+<!--     <filter root="/etc/usgbCountryList" /> -->
+
+
+<!--     CUSTOM COMMIT	-->   
+    	<filter root="/etc/designs/usgb_v3/clientlib/uiux-less/css/components/_order-sample-transition.less" />
+    	<filter root="/apps/usgbv3/components/content/pd-description-component/pd-description-component.html" />
+    	<filter root="/etc/designs/usgb_v3/clientlib/uiux-productlisting/js/main.js" />
+    	<filter root="/etc/designs/usgb_v3/clientlib/uiux-compare/js/compare.js" />
+    	<filter root="/apps/usgbv3/components/content/browsing-history-component/browsing-history-component.html" />
+    	
+    	
+    	
 </workspaceFilter>
