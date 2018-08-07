@@ -3,10 +3,6 @@
 // ----------------------------------------------------------------------
 (function(){
 
-
-    //Check if Element exist on DOM
-    if($(".order-steps-wrapper").length>0){
-
     //Check if the Local storage for Sample Orders list is set
     var sampleOrderList = {};
     if(typeof(Storage) !== "undefined") {
@@ -37,7 +33,6 @@
         var afterSubmitOrderSummaryData = {};
 
 
-    
         //Check user SSO Login
         if(!$.ssoManager.isLogin){
             
@@ -113,28 +108,7 @@
 
 
                     //Step 2 Shipping Details Form
-                    shippingDetailsForm.validate({
-                        ignore: ".ignore",
-                        errorElement: "span",
-                        errorPlacement: function (error, element) {
-                            // Add the `help-block` class to the error element
-                            error.addClass("help-block");
-        
-                            if (element.prop("type") === "checkbox") {
-                                error.insertAfter(element.closest('.checkbox'));
-                            } else if (element.prop("tagName").toLowerCase() === "select") {
-                                error.insertAfter(element);
-                            } else {
-                                error.insertAfter(element.parent().find('label'));
-                            }
-                        },
-                        highlight: function (element, errorClass, validClass) {
-                            $(element).parents(".respond-msg").addClass("has-error").removeClass("has-success");
-                        },
-                        unhighlight: function (element, errorClass, validClass) {
-                            $(element).parents(".respond-msg").addClass("has-success").removeClass("has-error");
-                        }
-                    });
+                    shippingDetailsForm.validate();
 
                     $('#sampleOrderShippingFormSubmit').click(function (e) {
                         
@@ -477,9 +451,6 @@
         var options = { year: 'numeric', month: 'short', day: 'numeric' };
 
         return orderDate.toLocaleDateString("en-GB", options);
-
-    }
-
 
     }
 

@@ -28,10 +28,11 @@ import com.usgbv3.core.models.MegamenuModel;
 import com.usgbv3.core.utils.CountryUtils;
 
 
-public class MegamenuValuesComponent extends WCMUsePojo {
-	private static final Logger LOG = LoggerFactory.getLogger(MegamenuValuesComponent.class);
+public class FooterComponent extends WCMUsePojo {
+	private static final Logger LOG = LoggerFactory.getLogger(FooterComponent.class);
 	
 	private List<MegamenuModel> megamenuList;
+	private List<MegamenuModel> additionalMegamenuList;
 	private String error;
 	
 	
@@ -41,6 +42,14 @@ public class MegamenuValuesComponent extends WCMUsePojo {
 
 	public void setMegamenuList(List<MegamenuModel> megamenuList) {
 		this.megamenuList = megamenuList;
+	}
+
+	public List<MegamenuModel> getAdditionalMegamenuList() {
+		return additionalMegamenuList;
+	}
+
+	public void setAdditionalMegamenuList(List<MegamenuModel> additionalMegamenuList) {
+		this.additionalMegamenuList = additionalMegamenuList;
 	}
 
 	public String getError() {
@@ -55,13 +64,14 @@ public class MegamenuValuesComponent extends WCMUsePojo {
 	public void activate() throws Exception {		
 
 		megamenuList = new ArrayList<MegamenuModel>();
+		additionalMegamenuList = new ArrayList<MegamenuModel>();
 		error = "Start";
 		
 		try {
 			
 			Map<String, String> countryInfo = CountryUtils.retrieveUsgbCountrybyPath(getResourceResolver(), getCurrentPage().getPath());
 			
-			SearchResult resultPages = getMegamenuComponent(getCurrentPage().getPath());
+			SearchResult resultPages = getMegamenuComponent(countryInfo.get("sitePath").toString());
 			
 			Hit hit = resultPages.getHits().get(0);
 			

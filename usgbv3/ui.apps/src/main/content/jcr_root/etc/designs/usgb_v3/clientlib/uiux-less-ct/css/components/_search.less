@@ -9,8 +9,24 @@
 }
 
 .search-result-thumbnail{
-    .thumbs{
+    .thumbs, .c-video-popup{
         border: 1px solid #CCC;
+    }
+
+    .ico-play-video{
+        &:before{
+            position: relative;
+            z-index: 5;
+        }
+        &:after{
+            content: "";
+            position: absolute;
+            background-color: rgba(0,0,0,0.15);
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
     }
 }
 
@@ -23,4 +39,8 @@
             margin: 0 auto;
         }
     }
+}
+
+.container-tabs-content-type {
+    border-bottom: 1px solid #CCC;
 }

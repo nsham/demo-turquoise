@@ -2384,6 +2384,48 @@
 </div>
 <!-- END of PAGE CONTENT -->
 
+
+
+  <!--compare popup -->
+  <div id="compare-pop-detail-page" class="compare-popup">
+
+    <div class="title uppercase ">
+        Compare Product
+        <span class=" btn-menu-down glyphicon glyphicon-menu-down float-right  p-s  text-center"></span>
+    </div>
+    
+    <div class="inner-content">
+        <div class="popup-content c-auto-center-list">
+
+            <div class="compare-popup-local"> </div>
+
+            <!-- <div class="each  content-wrapper content1">
+                <div class="left img-content"> </div>
+                <div class="right title-content"> </div>
+                <button type="button" class="close-btn-box" aria-label="Close">
+                    <span class="bold" aria-hidden="true">×</span>
+                </button>
+            </div>
+            <hr> -->
+        </div>
+
+        <div class="each instruction-text ">
+            <p class="m-bottom-xl color-grey text-center ">Select another product to compare</p>
+        </div>
+
+        <div class="each btn-compare m-m">
+            <a href="/content/v3/usgboral/samplepage/product-compare.html">
+                <button class="btn width-full button-green btn-brand-default">compare selected</button>
+            </a>
+        </div>
+    </div>    
+
+</div>
+<!-- compare popup end -->
+
+
+
+
 <div id="add-bookmark-modal" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="addBookmarkModalLabel">
     <div class="vertical-alignment-helper">
         <div class="modal-dialog vertical-align-center" role="document" width="750px">
@@ -2582,6 +2624,8 @@
 (function () {
     "use strict";
     $(document).ready(function () {
+
+
 		$(".compare-popup").hide();
         $(".compare-popup .btn-compare").hide();
         $(".compare-popup .instruction-text").hide();
@@ -2595,6 +2639,8 @@
         var detailsData;
         var currInput;
         var getIndex1;
+        var popContent;
+        var countDown;
 
         var orderData=[];
 
@@ -2612,7 +2658,7 @@
             getJSONDetails();
 
             $(document).on("change", '[data-input-value]', function () {
-
+	
                 event.preventDefault();
                 getLink = $(this).data("input-value");
 
@@ -2636,36 +2682,49 @@
                 } else {
                     console.log("uncheck")
                      getIndex1
+                     var uncheckURL
                      storeData.some(function (x, i) {
                         if (x.url == getLink) {
                             getIndex1 = i;
+							uncheckURL = x.url;
                             return true;
                          }
+
             		});
 
-            		console.log("in1", getIndex1)
+                    var dataUncheck = $('[data-content-title="'+uncheckURL+'"]');
+                    dataUncheck.closest(".each").animate({
+                        left:"100px",
+                        opacity:0	
+                    }, 900);
+
+					//console.log("xURL",uncheckURL)
                     removeCompareDetails();
                 }
+
+                
+    
             });
 
-             //hide show popup
+
+            //hide show popup
             $(".compare-popup .btn-menu-down").click(function () {
-                $(".popup-content").toggle();
-                $(".compare-popup .btn-compare").toggle();
-                $(".compare-popup .title").toggleClass("selected")
-
-                //check to toggle compare-btn
-                //if (numberOfChecked <= 1) {
-                 //   $(".compare-popup .btn-compare").toggle();
-                 //   $(".instruction-text").toggle();
-                //}
+                minimisePopup();
+                clearTimeout(countDown);
             });
 
-             // close btn on popup to remove content
+
+            // close btn on popup to remove content
             $("body").on("click", ".close-btn-box", function () {
                 event.preventDefault();
                 currInput = $(this).closest('.each').attr("data-content-title");
                 $("[data-input-value ='" + currInput + "']").attr('checked', false);
+
+			 	clearTimeout(countDown);
+               	$(this).closest(".each").animate({
+                    left:"100px",
+                    opacity:0
+              	}, 600 );
 
 				getIndex1
                 storeData.some(function (x, i) {
@@ -2696,9 +2755,6 @@
                     array.push(orderElem);
                 } else {
                             array.push(orderElem);
-                            console.log("aarr1", array);
-                        
-
                             var output = [];
                             
                             array.forEach(function (value) {
@@ -2714,15 +2770,10 @@
                                 }
                             });
 
-                            
-                            console.log('output', output);
                             array = output;
-                            console.log("aarr2", array);
                         }
                 localStorage.setItem("sampleOrdersJson", JSON.stringify(array));
                 console.log('final', array);
-
-                
 
             });
 
@@ -2730,6 +2781,8 @@
 
         }
         if ($('#compare-pop-detail-page').length) productCompareDetailPage();
+
+
 
         function addNewSample(obj) {
             var array = JSON.parse(localStorage.getItem('sampleOrdersJson')) || [];
@@ -2741,19 +2794,19 @@
         function addToDetailsToLocal() {
             localStorage.setItem(currCategoryKey, JSON.stringify(storeData));
             getDetailsLocalCompare();
+            checkPopupState();
         }
 
 
         function removeCompareDetails() {
-           //console.log("currGetLink",getLink);
-            // var getIndex1 = storeData.findIndex(x => x.url == data); 
-
-
-            storeData.splice(getIndex1, 1);
-           	addToDetailsToLocal();
-           	getDetailsLocalCompare();
-           	$("[data-input-value ='" + currInput + "']").prop('checked', false);
-
+          
+            //checkPopupState();
+			setTimeout(function () {
+                clearTimeout(countDown);
+                storeData.splice(getIndex1, 1);
+                addToDetailsToLocal();
+                $("[data-input-value ='" + currInput + "']").prop('checked', false);
+            }, 800);
         }
 
 
@@ -2766,13 +2819,12 @@
                 storeData = JSON.parse(localStorage.getItem(currCategoryKey));
                 currStoreData = storeData;
                 console.log("currinLocal-", storeData);
-                loadCompare();
+                
 
 				if (storeData.length >= 3) {
                     //disbled all checks
                     $('input[type="checkbox"]').prop('disabled', true);
                     //enable only checked items to be uncheck
-
                 }
                 else {
                 	$('input[type="checkbox"]').prop('disabled', false);
@@ -2796,55 +2848,105 @@
                     //console.log("nomore");
                     localStorage.removeItem(currCategoryKey);
                 }
+
+                loadCompare();
             }
         }
 
-        function countPopContent(){
-            var popContent = $("[data-content-title]").length;
 
-            	if (popContent > 1) {
-                    $(".compare-popup .btn-compare").show();
-                    $(".compare-popup").show();
-                    $(".compare-popup .instruction-text").hide();
+        //minimise Popup if idle
 
-                } else {
-                    $(".compare-popup .btn-compare").hide();
-                    $(".compare-popup .instruction-text").show();
-                }
+        $( ".compare-popup" )
+          .mouseenter(function() {
+             console.log("enterrring");
+			checkPopupState();
+             clearTimeout(countDown);
+          })
+          .mouseleave(function() {
+            console.log("leave");
+            countDownPop();
+          });
 
-                if (popContent > 0) {
-                    $(".compare-popup .btn-menu-down").show();
-                    $(".popup-content").show();
-                } else {
-                    $(".compare-popup .instruction-text").hide();
-                    $(".compare-popup").show();
-                    $(".popup-content").hide();
-                    $(".compare-popup .btn-menu-down").hide();
-                    $(".compare-popup .btn-compare").hide();
-                    //localStorage.removeItem(categoryName);
-                }
 
-            //console.log(popContent)
+
+		function countDownPop(){
+           
+            console.log("counting")
+           countDown = setTimeout(function () {
+				minimisePopup();
+           }, 5000);
+           //clearTimeout(countDown);
         }
 
+        function checkPopupState(){
+            clearTimeout(countDown);
+            if($(".compare-popup .inner-content").is(":visible")){
+
+                console.log("true")
+            }else{
+                console.log("false")
+                $(".compare-popup .inner-content").slideToggle(900);
+                $(".compare-popup .title").toggleClass("selected");   
+                countDownPop();
+            }
+        }
+
+		function minimisePopup(){
+            $(".compare-popup .inner-content").slideToggle(900);
+            $(".compare-popup .title").toggleClass("selected");
+        }
+
+
+
+        function countPopContent(){
+            popContent = $("[data-content-title]").length;
+
+                 if (popContent > 0) {
+                    $(".compare-popup").fadeIn(800);
+                    $(".popup-content").fadeIn(800);
+                    $(".compare-popup .btn-menu-down").fadeIn(800);
+                } else {
+                    $(".compare-popup").fadeOut(10);
+                }
+
+            	if (popContent > 1) {
+                 	$(".compare-popup .instruction-text").fadeOut(10);
+					$(".compare-popup").fadeIn(800);
+                    $(".compare-popup .popup-content .each").fadeIn(800);
+                    $(".compare-popup .btn-compare").fadeIn(1300);
+                } else {
+                	$(".compare-popup .btn-compare").fadeOut(10);
+					$(".compare-popup .instruction-text").fadeIn(900);
+                }
+           
+            countDownPop();
+            console.log(popContent)
+        }
 
 
 
         function loadCompare() {
-        	console.log("currStoreData-", currStoreData);
+            //console.log("currStoreData-", currStoreData);
             //load the popup
             var comparePopupHTML = $('#compare-popup-local').html();
             var temptcomparePopupHTML = Handlebars.compile(comparePopupHTML);
             $('.compare-popup-local').html(temptcomparePopupHTML(storeData));
-            $(".compare-popup").show();
-        
+
             countPopContent();
+            $(".compare-popup .popup-content .each").css("opacity","0");
+           setTimeout(function () {
+                $(".compare-popup .popup-content .each").css({"top":"-5px","opacity":"0"}).animate({
+                	top: "0px",
+                	opacity: 1	
+            	}, 700);
+            }, 200);
+
         }
 
 
 
         function getJSONDetails() {
-            console.log('urlJSON', detailsJSON)
+            //console.log('urlJSON', detailsJSON)
             $.ajax({
                 url: detailsJSON,
                 type: "GET",
@@ -2852,10 +2954,10 @@
                 success: function (response) {
 
                     detailsData = response.pagePropertiesList[0];
-                    console.log("res", detailsData);
+                    //console.log("res", detailsData);
                     countryCode = detailsData.countryCode;
                     currCategoryKey = detailsData.categoryKey + "_" + countryCode;
-                    console.log("CK",currCategoryKey);
+                    //console.log("CK",currCategoryKey);
 
                     // var groupElem = {
                     //     "url": detailsData.pagePropertiesList[0].url,
@@ -2882,6 +2984,7 @@
 
     });
 })();
+
 
 
 

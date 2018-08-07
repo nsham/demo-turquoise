@@ -55,14 +55,16 @@
     <!-- SEARCH FORM END -->
 
     <!-- SUB-SEARCH-SECTION -->
-    <div class="container search-category-controller-container">
-        <div class="row m-vertical-xl">
-            <div class="col-xs-12 text-center text-sm-left">
-                <ul class="sub-search-section">
-                    <li class="active"><a href="#" data-category="content" data-result-amount="6">Content</a></li>
-                    <li><a href="#" data-category="doc_finder" data-result-amount="10">Document Finder</a></li>
-                    <!-- <li><a href="#" data-category="cad" data-result-amount="9">CAD Drawing</a></li> -->
-                </ul>
+    <div class="container-tabs-content-type m-vertical-xl">
+        <div class="container search-category-controller-container">
+            <div class="row">
+                <div class="col-xs-12 text-center text-sm-left">
+                    <ul class="sub-search-section clearfix">
+                        <li class="active"><a href="#" data-category="content" data-result-amount="6">Content</a></li>
+                        <li><a href="#" data-category="doc_finder" data-result-amount="10">Document Finder</a></li>
+                        <!-- <li><a href="#" data-category="cad" data-result-amount="9">CAD Drawing</a></li> -->
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
@@ -425,7 +427,7 @@
             {{/ifEquals}}
         </div>
         <div class="align-center align-md-bottom flex-row right width-full">
-            <a href="{{link}}" target="_blank" class="flex-basis-no flex-IE-grow-auto flex-grow-1 m-right-m">
+            <a href="{{link}}" target="_blank" class="flex-basis-no flex-IE-grow-auto flex-grow-1 m-right-m" {{#ifEquals this.type "video"}}data-fancybox=""{{/ifEquals}}>
                 <div class="content p-left-no p-md-left-l">
                     <p class="sub-headline fs-2 m-bottom-xs">{{category_header}}</p>
                     <h6 class="headline ht6 uppercase m-bottom-xxs">{{title}}</h6>
@@ -497,8 +499,8 @@
                         </div>
                         <div class="hidden-xs">
                             <span class="glyphicon glyphicon-plus m-right-xxs"></span>
-                            <span class="">
-                                <strong class="">Add to submittal</strong>
+                            <span>
+                                <strong>Add to submittal</strong>
                             </span>
                         </div>
                     </a>
@@ -555,8 +557,8 @@
                                 </div>
                                 <div class="hidden-xs">
                                     <span class="glyphicon glyphicon-plus m-right-xxs"></span>
-                                    <span class="">
-                                        <strong class="">Add to submittal</strong>
+                                    <span>
+                                        <strong>Add to submittal</strong>
                                     </span>
                                 </div>
                             </a>
@@ -597,7 +599,7 @@
                         {{/ifEquals}}
                     </div>
                     <div class="align-center align-md-bottom flex-row right width-full">
-                        <a href="{{link}}" target="_blank" class="flex-basis-no flex-IE-grow-auto flex-grow-1 m-right-m">
+                        <a href="{{link}}" target="_blank" class="flex-basis-no flex-IE-grow-auto flex-grow-1 m-right-m" {{#ifEquals this.type "video"}}data-fancybox=""{{/ifEquals}}>
                             <div class="content p-left-no p-md-left-l">
                                 <p class="sub-headline fs-2 m-bottom-xs">{{category_header}}</p>
                                 <h6 class="headline ht6 uppercase m-bottom-xxs">{{title}}</h6>
