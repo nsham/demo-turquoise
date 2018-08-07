@@ -6,14 +6,6 @@
         .each-child{
             padding:20px;
         }
-    > div{
-            border-bottom:1px #999999 solid;
-            margin-bottom:15px;
-            padding-bottom: 5px;
-        }
-        :last-child{
-            border-bottom:0;
-        }
     }
     .bg-green-btn{
         cursor: pointer;
@@ -61,6 +53,27 @@
         .radio-item:nth-child(1n){
             clear: both; 
             margin-bottom:10px;
+        }
+    }
+}
+
+.desktop-sidebar-placeholder{
+    .c-sidebar {
+        background: #f6f6f6;
+        margin-bottom: 15px;
+        >.each {
+            padding: 20px;
+            .each-child{
+                padding:20px;
+            }
+        > div{
+                border-bottom:1px #999999 solid;
+                margin-bottom:15px;
+                padding-bottom: 5px;
+            }
+            :last-child{
+                border-bottom:0;
+            }
         }
     }
 }
