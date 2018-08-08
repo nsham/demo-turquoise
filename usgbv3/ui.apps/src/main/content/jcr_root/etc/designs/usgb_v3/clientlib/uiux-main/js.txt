@@ -7,4 +7,5 @@ handlebars.js
 pagination.js
 scrollReveal.js
 autocomplete.js
+utils.js
 main.js
