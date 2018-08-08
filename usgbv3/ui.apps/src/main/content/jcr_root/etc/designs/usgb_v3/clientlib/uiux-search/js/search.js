@@ -78,7 +78,8 @@
                 $(this).closest('li').addClass('active');
                 val = $(this).attr('data-category');
                 currCategory = val;
-                if($('.search-result-container').is(':visible') && $('#search-form input').val().indexOf(searchedText) >= 0){
+                if(searchedText !== ""){
+                    $('#search-form input').val(searchedText);
                     getResult();
                     scrollToTarget('.search-category-controller-container');
                 }
@@ -89,6 +90,7 @@
                 console.log(currCategory, $('#search-form input').val());
                 searchedText = $('#search-form input').val();
                 if(searchedText !== ""){
+                    $('.container-tabs-content-type').removeClass('hidden');
                     getResult();
                 }
             });
@@ -174,7 +176,9 @@
 
             $(document).on('click', '.search-result-container .related-search a', function(e){
                 e.preventDefault();
-                $('#search-form input').val($(this).html());
+                $('#search-form input').val($(this).text());
+                $('#search-form').find('.autocomplete').html('');
+                $('#search-form .autocomplete').removeClass('open');
                 $('#search-form button[type="submit"]').click();
                 scrollTop();
             });
@@ -314,7 +318,7 @@
             //url: "/etc/designs/usgb_v3/clientlib/uiux-less-ct/js/json/search-content-result.json",
             //url: "/etc/designs/usgb_v3/clientlib/uiux-less-ct/js/json/search-doc-finder.json",
             url: "/bin/usgb/v3/search",
-            data: "text="+ searchedText + "&category=" + currCategory,
+            data: "text="+ escape(searchedText) + "&category=" + currCategory,
             type: "GET",
             cache: false,
             success: function(response) {
@@ -347,11 +351,27 @@
                     }
 
                     //populate search related listing
-                    //if(resultData.searches_related.length > 0){
+                    var relatedSearchArray = [];
+                    $('.related-search').html("");
+                    if($('#search-form').find('.autocomplete li').length > 0){
+                        for ( var i = 0; i < 5; i++ ) {
+                            relatedSearchArray.push($($('#search-form .autocomplete li')[i]).html());
+                        }
+                        var relatedObj = {
+                            keyword: resultData.keyword,
+                            searches_related: relatedSearchArray
+                        }
                         var relatedHtml = $('#templSearchRelated').html();
                         var temptRelatedHtml = Handlebars.compile(relatedHtml);
-                        $('.related-search').html(temptRelatedHtml(resultData));
-                    //}
+                        $('.related-search').html(temptRelatedHtml(relatedObj));
+
+                        if(resultData.keyword.replace(/\s/g, '').toLowerCase().indexOf($($('.related-searches-result')[0]).text().replace(/\s/g, '').toLowerCase()) >= 0){
+                            $('.related-search').addClass('hidden');
+                        } else {
+                            $('.related-search').removeClass('hidden');
+                        }
+                    }
+
 
                     switch (currCategory) {
                         case "content":
@@ -360,6 +380,8 @@
                                 var subResultDocFinderHtml = $('#templSubSearchResult_docFinder').html();
                                 var temptSubResultDocFinderHtml = Handlebars.compile(subResultDocFinderHtml);
                                 $($('.sub-search-result-wrapper')[0]).html(temptSubResultDocFinderHtml(resultData));
+                            } else {
+                                $($('.sub-search-result-wrapper')[0]).html("");
                             }
                             break; 
                         case "doc_finder":
@@ -367,7 +389,7 @@
                             if(response.content.length > 0){
                                 var subResultContentHtml = $('#templSubSearchResult_content').html();
                                 var temptSubResultContentHtml = Handlebars.compile(subResultContentHtml);
-                                $($('.sub-search-result-wrapper')[0]).html(temptSubResultContentHtml(resultData));
+                                $($('.sub-search-result-wrapper')[0]).html("");
                             }
                             break;
                         case "cad":
@@ -379,6 +401,8 @@
                     if($.ssoManager.isLogin){
                         $('.cta-bookmark, .cta-add-submittal').removeClass('disabled');
                     }
+
+
 
                 }else{
                     $('.search-result-container').addClass('hidden');
@@ -445,6 +469,20 @@
                     return 0;
                 });
                 break; 
+        }
+    }
+
+    function triggerEvent(el, type) {
+        if ('createEvent' in document) {
+            // modern browsers, IE9+
+            var e = document.createEvent('HTMLEvents');
+            e.initEvent(type, false, true);
+            el.dispatchEvent(e);
+        } else {
+            // IE 8
+            var e = document.createEventObject();
+            e.eventType = type;
+            el.fireEvent('on' + e.eventType, e);
         }
     }
 

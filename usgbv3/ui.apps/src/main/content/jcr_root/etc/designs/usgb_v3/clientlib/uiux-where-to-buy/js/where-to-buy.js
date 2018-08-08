@@ -278,6 +278,9 @@
                     currSenario = "";
                     console.log(wtbAutocompleteData,value);
                     //wtbAutocompleteData, variable created at the autocomplte.js
+                    if(wtbAutocompleteData.Items.length > 0){
+                        selectionFlag = true;
+                    }
                     if(selectionFlag == true){
                         for(var i=0; i<wtbAutocompleteData.Items.length; i++){
                             var key = findKey(wtbAutocompleteData.Items[i], value);
@@ -673,6 +676,9 @@
                     } else {
                         $('.cta-search-detail-on').removeClass('active');
                         $('.btn-filter').addClass('disabled');
+                        $('#no-result-modal').modal('show');
+                        $('#input-search-location').val('');
+                        $('.wtb-search-bar .autocomplete').remove();
                     }
                 },
                 beforeSend: function () {

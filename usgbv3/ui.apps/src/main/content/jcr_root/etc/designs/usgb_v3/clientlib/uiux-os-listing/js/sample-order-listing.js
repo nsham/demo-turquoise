@@ -3,11 +3,19 @@
 // ----------------------------------------------------------------------
 (function(){
 
+
+    //Check if Element exist on DOM
+    if($(".order-steps-wrapper").length>0){
+
+        console.log(localStorage);
+
     //Check if the Local storage for Sample Orders list is set
     var sampleOrderList = {};
+    var localStorageSampleOrderName = "sampleOrdersJson";
+    
     if(typeof(Storage) !== "undefined") {
-        if (localStorage.sampleOrdersList) {
-            sampleOrderList = JSON.parse(localStorage.getItem('sampleOrdersList'));
+        if (localStorage.sampleOrdersJson) {
+            sampleOrderList = JSON.parse(localStorage.getItem(localStorageSampleOrderName));
             console.log(sampleOrderList);
         }
     }
@@ -33,6 +41,7 @@
         var afterSubmitOrderSummaryData = {};
 
 
+    
         //Check user SSO Login
         if(!$.ssoManager.isLogin){
             
@@ -108,7 +117,28 @@
 
 
                     //Step 2 Shipping Details Form
-                    shippingDetailsForm.validate();
+                    shippingDetailsForm.validate({
+                        ignore: ".ignore",
+                        errorElement: "span",
+                        errorPlacement: function (error, element) {
+                            // Add the `help-block` class to the error element
+                            error.addClass("help-block");
+        
+                            if (element.prop("type") === "checkbox") {
+                                error.insertAfter(element.closest('.checkbox'));
+                            } else if (element.prop("tagName").toLowerCase() === "select") {
+                                error.insertAfter(element);
+                            } else {
+                                error.insertAfter(element.parent().find('label'));
+                            }
+                        },
+                        highlight: function (element, errorClass, validClass) {
+                            $(element).parents(".respond-msg").addClass("has-error").removeClass("has-success");
+                        },
+                        unhighlight: function (element, errorClass, validClass) {
+                            $(element).parents(".respond-msg").addClass("has-success").removeClass("has-error");
+                        }
+                    });
 
                     $('#sampleOrderShippingFormSubmit').click(function (e) {
                         
@@ -141,8 +171,11 @@
                             }
 
                             //Function to setup the sample ordes form array objects
-                            formData.order_sample = setFormDataOrderObject("sampleOrdersList");
+                            formData.order_sample = setFormDataOrderObject(localStorageSampleOrderName);
 
+                            console.log(formData);
+
+                            
                             $.ajax({
                                 url: "/bin/sso/orderSample/submit",
                                 data: JSON.stringify(formData),
@@ -188,6 +221,8 @@
 
                                         updateViewTemplate($('#submitOrderSummaryTemplate').html(), afterSubmitOrderSummaryData, $('.ship-to-summary') );
 
+                                        localStorage.removeItem(localStorageSampleOrderName);
+
                                     } else {
 
                                         //Sample order Form Submission failed
@@ -209,119 +244,128 @@
 
                             });
                             
+                            
                         }
 
                     });
 
-                }
-        }
+                    if(sampleOrderList.length>0){
+
+                        //Get all Sample orders product details and pass to Template
+                        getAllSampleOrdersData(sampleOrderList).done(function(results) {
+                            console.log(results);
+
+                            afterSubmitOrderSummaryData.ordersList = results;
+                            updateViewTemplate($('#sampleOrderTemplate').html(), results, $('.sample-orders-container') );
+
+                            var sampleQuantityCtrlSub = $(".sample-quantity .quantity-ctrl.dec-quantity");
+                            var sampleQuantityCtrlAdd = $(".sample-quantity .quantity-ctrl.inc-quantity");
+                            var sampleRemoveBtn = $(".sample-remove .remove-selected-sample");
+
+                            //Subtract Sample quantity
+                            sampleQuantityCtrlSub.on("click", function(event){
+
+                                event.preventDefault();
+                                var quantityObject = $(this).next();
+                                var quantityObjectValue = parseInt(quantityObject.val());
+                                var productUrl = $(this).parent().parent().data("producturl");
+
+                                if(quantityObjectValue > 1){
+
+                                    if(addSubtractSampleOrder(-1, productUrl, localStorageSampleOrderName)){
+                                        var orderIndex = afterSubmitOrderSummaryData.ordersList.findIndex(i => i.productUrl == productUrl);
+                                        if( orderIndex > -1){
+                                            afterSubmitOrderSummaryData.ordersList[orderIndex].quantity = parseInt(afterSubmitOrderSummaryData.ordersList[orderIndex].quantity) - 1;
+                                        }
+                                    }
+
+                                    quantityObjectValue = quantityObjectValue-1;
+                                    quantityObject.val(quantityObjectValue);
+                                }
+
+                            });
+
+                            //Add Sample quantity
+                            sampleQuantityCtrlAdd.on("click", function(event){
+
+                                event.preventDefault();
+                                var quantityObject = $(this).prev();
+                                var quantityObjectValue = parseInt(quantityObject.val());
+                                var productUrl = $(this).parent().parent().data("producturl");
+
+                                if(addSubtractSampleOrder(1, productUrl, localStorageSampleOrderName)){
+
+                                    var orderIndex = afterSubmitOrderSummaryData.ordersList.findIndex(i => i.productUrl == productUrl);
+                                    if( orderIndex > -1){
+                                        afterSubmitOrderSummaryData.ordersList[orderIndex].quantity = parseInt(afterSubmitOrderSummaryData.ordersList[orderIndex].quantity) + 1;
+                                    }
+
+                                }
+                                
+
+                                quantityObjectValue = quantityObjectValue+1;
+                                quantityObject.val(quantityObjectValue);
+
+                            });
+
+                            //Remove Order sample
+                            var orderToRemoveObject = {};
+                            var confirmRemoveOrderModal = $('#removeSampleOrderModal');
+                            var confirmRemoveOrderCta = confirmRemoveOrderModal.find(".cta-confirm-remove-order");
+                            
+                            sampleRemoveBtn.on("click", function(event){
+                                
+                                event.preventDefault();
+
+                                confirmRemoveOrderModal.modal('show');
+
+                                orderToRemoveObject.productUrlRemove = $(this).parent().parent().data("producturl");
+                                orderToRemoveObject.itemRowObject = $($(this).parent()).parent();
+
+                            });
+
+                            confirmRemoveOrderCta.on("click", function(event){
+
+                                removeSampleOrder(orderToRemoveObject.productUrlRemove, localStorageSampleOrderName, function(sampleOrderArrayLength){
+                                    
+                                    var orderIndex = afterSubmitOrderSummaryData.ordersList.findIndex(i => i.productUrl == orderToRemoveObject.productUrlRemove);
+                                    if( orderIndex > -1){
+                                        afterSubmitOrderSummaryData.ordersList.splice(orderIndex, 1);
+                                    }
+
+                                    orderToRemoveObject.itemRowObject.remove();
+                                    orderToRemoveObject = {};
+
+                                    confirmRemoveOrderModal.modal('hide');
+                                    
+                                    //Check local storage Object if empty
+                                    if(sampleOrderArrayLength <= 0){
+                                        cartEmptyNotificationWrapper.show();
+                                        orderSelectBtn.hide();
+                                    }
 
 
-       
-        //Get all Sample orders product details and pass to Template
-        getAllSampleOrdersData(sampleOrderList).done(function(results) {
-            console.log(results);
+                                });
 
-            afterSubmitOrderSummaryData.ordersList = results;
-            updateViewTemplate($('#sampleOrderTemplate').html(), results, $('.sample-orders-container') );
+                            });
 
-            var sampleQuantityCtrlSub = $(".sample-quantity .quantity-ctrl.dec-quantity");
-            var sampleQuantityCtrlAdd = $(".sample-quantity .quantity-ctrl.inc-quantity");
-            var sampleRemoveBtn = $(".sample-remove .remove-selected-sample");
+                            confirmRemoveOrderModal.on('hidden.bs.modal', function (e) {
+                                orderToRemoveObject = {};
+                            })
+                            
 
-            //Subtract Sample quantity
-            sampleQuantityCtrlSub.on("click", function(event){
+                        });
 
-                event.preventDefault();
-                var quantityObject = $(this).next();
-                var quantityObjectValue = parseInt(quantityObject.val());
-                var productUrl = $(this).parent().parent().data("producturl");
+                    } else {
 
-                if(quantityObjectValue > 1){
-
-                    if(addSubtractSampleOrder(-1, productUrl, "sampleOrdersList")){
-                        var orderIndex = afterSubmitOrderSummaryData.ordersList.findIndex(i => i.productUrl == productUrl);
-                        if( orderIndex > -1){
-                            afterSubmitOrderSummaryData.ordersList[orderIndex].quantity = parseInt(afterSubmitOrderSummaryData.ordersList[orderIndex].quantity) - 1;
-                        }
-                    }
-
-                    quantityObjectValue = quantityObjectValue-1;
-                    quantityObject.val(quantityObjectValue);
-                }
-
-            });
-
-            //Add Sample quantity
-            sampleQuantityCtrlAdd.on("click", function(event){
-
-                event.preventDefault();
-                var quantityObject = $(this).prev();
-                var quantityObjectValue = parseInt(quantityObject.val());
-                var productUrl = $(this).parent().parent().data("producturl");
-
-                if(addSubtractSampleOrder(1, productUrl, "sampleOrdersList")){
-
-                    var orderIndex = afterSubmitOrderSummaryData.ordersList.findIndex(i => i.productUrl == productUrl);
-                    if( orderIndex > -1){
-                        afterSubmitOrderSummaryData.ordersList[orderIndex].quantity = parseInt(afterSubmitOrderSummaryData.ordersList[orderIndex].quantity) + 1;
-                    }
-
-                }
-                
-
-                quantityObjectValue = quantityObjectValue+1;
-                quantityObject.val(quantityObjectValue);
-
-            });
-
-            //Remove Order sample
-            var orderToRemoveObject = {};
-            var confirmRemoveOrderModal = $('#removeSampleOrderModal');
-            var confirmRemoveOrderCta = confirmRemoveOrderModal.find(".cta-confirm-remove-order");
-            
-            sampleRemoveBtn.on("click", function(event){
-                
-                event.preventDefault();
-
-                confirmRemoveOrderModal.modal('show');
-
-                orderToRemoveObject.productUrlRemove = $(this).parent().parent().data("producturl");
-                orderToRemoveObject.itemRowObject = $($(this).parent()).parent();
-
-            });
-
-            confirmRemoveOrderCta.on("click", function(event){
-
-                removeSampleOrder(orderToRemoveObject.productUrlRemove, "sampleOrdersList", function(sampleOrderArrayLength){
-                    
-                    var orderIndex = afterSubmitOrderSummaryData.ordersList.findIndex(i => i.productUrl == orderToRemoveObject.productUrlRemove);
-                    if( orderIndex > -1){
-                        afterSubmitOrderSummaryData.ordersList.splice(orderIndex, 1);
-                    }
-
-                    orderToRemoveObject.itemRowObject.remove();
-                    orderToRemoveObject = {};
-
-                    confirmRemoveOrderModal.modal('hide');
-                    
-                    //Check local storage Object if empty
-                    if(sampleOrderArrayLength <= 0){
                         cartEmptyNotificationWrapper.show();
                         orderSelectBtn.hide();
-                    }
 
+                    } 
 
-                });
-
-            });
-
-            confirmRemoveOrderModal.on('hidden.bs.modal', function (e) {
-                orderToRemoveObject = {};
-            })
-            
-
-        });
+                }
+        } 
+    
         
 
     });
@@ -337,7 +381,9 @@
 
         sampleOrderList.forEach(function(sampleProduct, index, array){
 
-            $.get(sampleProduct.productUrl, function(){})
+            var productUrlJson = sampleProduct.productUrl.replace(".html", ".properties.json")
+
+            $.get(productUrlJson, function(){})
             .done(function(data){
                 data.quantity = sampleProduct.quantity;
                 data.productUrl = sampleProduct.productUrl;
@@ -427,11 +473,18 @@
 
         sampleOrderLocalStorageJson.forEach(function(sampleProduct, index, array){
 
+            var productPathUrlArray = sampleProduct.productUrl.split("/");
+            var productUri = "";
+
+            for(i=1; i<productPathUrlArray.length-1; i++){
+                productUri = productUri + "/" + productPathUrlArray[i];
+            }
+
             formDataOrderArrayObject[index] = {
                 "product": {
                     "product_name": sampleProduct.productName,
                     "product_url": sampleProduct.productUrl,
-                    "product_path": "/content/usgboral/en_my/products/wall/technical/impactstop"
+                    "product_path": productUri
                 },
                 "quantity": sampleProduct.quantity
             }
@@ -451,6 +504,9 @@
         var options = { year: 'numeric', month: 'short', day: 'numeric' };
 
         return orderDate.toLocaleDateString("en-GB", options);
+
+    }
+
 
     }
 
