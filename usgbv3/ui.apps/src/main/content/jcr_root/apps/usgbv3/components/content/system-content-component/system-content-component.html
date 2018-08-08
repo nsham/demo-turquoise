@@ -86,15 +86,13 @@
 							<!-- end modal header -->
 							<!-- modal content -->
 							
-                            <div class="modal-content p-vertical-l ">
+                            <div class="modal-content p-vertical-l overflow-hidden">
 								<!-- modal body -->
 								<div class="modal-body">
 									<div class="col-xs-12 col-sm-6 order-1 order-sm-2 p-top-no p-sm-top-xs p-bottom-m p-sm-bottom-no">
 										<img class="img-responsive hs-img" src="${systemPage.page.properties.pageImage @ context='unsafe'}">
 									</div>
-								</div>
-								
-								<div class="col-xs-12 col-sm-6 order-2 order-sm-2">
+									<div class="col-xs-12 col-sm-6 order-2 order-sm-2">
 									<h2 class="ht4 m-sm-bottom-m m-bottom-s top-no hs-title">${systemPage.page.title @ context='unsafe'}</h2>
 									${systemPage.page.description @ context='html'}
 
@@ -103,7 +101,10 @@
 									<p class="text-left ">
 										<a href="${systemPage.page.link @ context='unsafe'}.html" target="${properties.targettype == properties.hiddentarget ? properties.targetName : properties.targettype}" class="btn btn-brand-default button-green">Find out more</a>
 									</p>
+									</div>
 								</div>
+								
+								
                             </div>
                     </div>
                 </div>
