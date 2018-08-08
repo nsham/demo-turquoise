@@ -89,7 +89,18 @@
 <!-- Sample Order History Template -->
 <script id="orderHistoryTemplate" type="text/x-handlebars-template">
 
-    {{#each this}}
+    {{#if this.orderHistoryEmpty}}
+
+        <div class="row">
+            <div class="col">
+                <div class="cart-empty text-center m-top-l">
+                    <h4 class="color-grey">Sample Orders History Empty.</h4>
+                </div>
+            </div>
+        </div>
+
+    {{else}}
+        {{#each this.orderSamplesList}}
         <div class="row order-item accordionfc">
             <div class="col-xs-12 col-sm-12">
 
@@ -165,7 +176,8 @@
 
             </div>
         </div>
-    {{/each}}
+        {{/each}}
+    {{/if}} 
 
 </script>
 <!-- /END Sample Order History Template -->
