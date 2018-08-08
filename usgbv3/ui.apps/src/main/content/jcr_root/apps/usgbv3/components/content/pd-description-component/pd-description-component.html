@@ -15,7 +15,7 @@
         </div>
     
         <sly data-sly-test="${!currentStyle.hideBookmark}">
-            <a href="${currentPage.path}.html" class="col-xs-4 color-darker-grey fs-3 p-no m-bottom-m hidden-xs cta-bookmark">
+            <a href="${currentPage.path}.html" class="col-xs-4 color-darker-grey fs-3 p-no m-bottom-m hidden-xs cta-bookmark disabled">
                 <span class="glyphicon glyphicon-heart p-right-s"></span>${'Add to my bookmark' @ i18n}
             </a>
         </sly>
@@ -29,7 +29,7 @@
         <sly data-sly-test="${currentPage.properties.enableOrderSample }">
             <div class="row">
                 <div class="col-xs-12">
-                    <a href="#" class="request-btn col-xs-12 col-sm-5 btn btn-lg btn-brand-default button-green">${'Request Sample' @ i18n}</a>
+                    <a href="#" class="request-btn col-xs-12 col-sm-5 btn btn-lg btn-brand-default button-green disabled">${'Request Sample' @ i18n}</a>
                     <a href="#" class="add-to-cart"></a>
                 </div>
             </div>
@@ -219,25 +219,206 @@
     
         </div>
         <!-- compare popup end -->
+
+
+        <div id="add-submittal-modal" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="addSubmittalModalLabel">
+            <div class="vertical-alignment-helper">
+                <div class="modal-dialog vertical-align-center" role="document" width="750px">
+                    <div class="modal-content">
+                        <div class="modal-body m-vertical-s">
+                            <div class="row">
+                                <div class="col-md-12" align="center">
+                                    <div class="svg-box icon-correct">
+                                        <svg class="circular green-stroke">
+                                            <circle class="path" cx="75" cy="75" r="50" fill="none" stroke-width="5" stroke-miterlimit="10" />
+                                        </svg>
+                                        <svg class="checkmark green-stroke">
+                                            <g transform="matrix(0.79961,8.65821e-32,8.39584e-32,0.79961,-489.57,-205.679)">
+                                                <path class="checkmark__check" fill="none" d="M616.306,283.025L634.087,300.805L673.361,261.53" />
+                                            </g>
+                                        </svg>
+                                    </div>
+                                    <h4 class="ht4 uppercase color-primary-green m-bottom-l">Successful!</h4>
+                                    <p class="color-dark-grey">Added To My Submittal</p>
+                                    <br>
+                                    <p class="text-center m-bottom-l">
+                                        <button data-dismiss="modal" class="btn btn-brand-default button-green">CLOSE</button>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="add-bookmark-modal" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="addBookmarkModalLabel">
+            <div class="vertical-alignment-helper">
+                <div class="modal-dialog vertical-align-center" role="document" width="750px">
+                    <div class="modal-content">
+                        <div class="modal-body m-vertical-s">
+                            <div class="row">
+                                <div class="col-md-12" align="center">
+                                    <div class="svg-box">
+                                        <svg class="circular yellow-stroke">
+                                            <circle class="path" cx="75" cy="75" r="50" fill="none" stroke-width="5" stroke-miterlimit="10" />
+                                        </svg>
+                                        <svg class="alert-sign yellow-stroke">
+                                            <g transform="matrix(1,0,0,1,-615.516,-257.346)">
+                                                <g transform="matrix(0.56541,-0.56541,0.56541,0.56541,93.7153,495.69)">
+                                                    <path class="line" d="M634.087,300.805L673.361,261.53" fill="none" />
+                                                </g>
+                                                <g transform="matrix(2.27612,-2.46519e-32,0,2.27612,-792.339,-404.147)">
+                                                    <circle class="dot" cx="621.52" cy="316.126" r="1.318" />
+                                                </g>
+                                            </g>
+                                        </svg>
+                                    </div>
+                                    <h4 class="ht4 uppercase color-primary-green">Favourites!</h4>
+                                    <p class="color-dark-grey">Product already added</p>
+                                    <br>
+                                    <p class="text-center m-bottom-l">
+                                        <button data-dismiss="modal" class="btn btn-brand-default button-green">CLOSE</button>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="signin-modal" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="signinModalLabel">
+            <div class="vertical-alignment-helper">
+                <div class="modal-dialog vertical-align-center" role="document" width="750px">
+                    <div class="modal-content">
+                        <div class="modal-body m-vertical-s">
+                            <div class="row">
+                                    <div class="col-md-12" align="center">
+                                        <div class="svg-box">
+                                            <svg class="circular yellow-stroke">
+                                                <circle class="path" cx="75" cy="75" r="50" fill="none" stroke-width="5" stroke-miterlimit="10" />
+                                            </svg>
+                                            <svg class="alert-sign yellow-stroke">
+                                                <g transform="matrix(1,0,0,1,-615.516,-257.346)">
+                                                    <g transform="matrix(0.56541,-0.56541,0.56541,0.56541,93.7153,495.69)">
+                                                        <path class="line" d="M634.087,300.805L673.361,261.53" fill="none" />
+                                                    </g>
+                                                    <g transform="matrix(2.27612,-2.46519e-32,0,2.27612,-792.339,-404.147)">
+                                                        <circle class="dot" cx="621.52" cy="316.126" r="1.318" />
+                                                    </g>
+                                                </g>
+                                            </svg>
+                                        </div>
+                                        <h4 class="ht4 uppercase color-primary-green">Sign in?</h4>
+                                        <p class="color-dark-grey">Please login to enable this feature.</p>
+                                        <br>
+                                        <p class="text-center m-bottom-l">
+                                            <button class="btn btn-brand-default button-green cta-login">Login Now</button>
+                                            <button data-dismiss="modal" class="btn btn-brand-default button-green">CLOSE</button>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
     
-    
-    
-    
-    
+
     <script>
     
     (function(){
         "use strict";
         //===========================
-        // add bookmark
+        // check login, add bookmark, add Submittal
         //===========================
         $(document).ready(function(){
+            // check login
+            var dt = {};
+
+            if($.ssoManager.isLogin){
+                if (typeof $.ssoManager.sso.userInfo() !== 'undefined' &&
+                    typeof $.ssoManager.sso.userInfo().responseJSON !== 'undefined' &&
+                    ($.ssoManager.sso.userInfo().responseJSON).hasOwnProperty('id')) {
+                    var userInfo = $.ssoManager.sso.userInfo().responseJSON;
+
+                    //var dt = { user_info: {user_id: userInfo.id} };
+                    dt = {
+                        user_info: {
+                            user_id: userInfo.id,
+                            display_name: userInfo.profile.display_name,
+                            country: $.ssoManager.countryCode,
+                            first_name: userInfo.profile.first_name,
+                            last_name: userInfo.profile.last_name,
+                            email: userInfo.email.address
+                        }
+                    };
+                }
+                
+                $('.cta-bookmark, .cta-add-submittal, .request-btn').removeClass('disabled');
+            }
+
+            // login
+            $(document).on('click', '.cta-login', function(e){
+                e.preventDefault();
+                $('.pre-login-nav a').click();
+            });
+            
+            // add bookmark
             $(document).on('click', '.cta-bookmark', function(e){
                 e.preventDefault();
-                $('#add-bookmark-modal').modal('show');
-                var url = $(this).attr('href').replace(".html", ".properties.json");
-                addNewBookmark(url);
+                if(!$(this).hasClass('disabled')){
+                    $('#add-bookmark-modal').modal('show');
+                    var url = $(this).attr('href').replace(".html", ".properties.json");
+                    addNewBookmark(url);
+                } else {
+                    $('#signin-modal').modal('show');
+                }
             });
+
+            // add submittal
+            $(document).on('click', '.cta-add-submittal', function(e){
+                e.preventDefault();
+                if(!$(this).hasClass('disabled')){
+                    var url = $(this).attr('href');
+                    var data = {
+                        document_list: [
+                            {
+                                document_id: "",
+                                document_name: $(this).closest('.each').find('.right .headline').html(),
+                                document_path: $(this).closest('.each').find('.right a').attr('href'),
+                                document_url: window.location.origin + $(this).closest('.each').find('.right a').attr('href')
+                            }
+                        ],
+                        user_info: dt.user_info
+                    }
+                    $.ajax({
+                        url: url + ".json",
+                        type: "GET",
+                        cache: false,
+                        success: function(response) {
+                            $('#add-submittal-modal').modal('show');
+                            var uuid = response["jcr:uuid"];
+                            data.document_list[0].document_id = uuid;
+                            $.ajax({
+                                url: "/bin/sso/mySubmittal/add",
+                                data: JSON.stringify(data),
+                                type: "POST",
+                                dataType: 'json',
+                                contentType: "application/json",
+                                cache: false,
+                                success: function(response) {
+                                    console.log('add submittal status', response);
+                                }
+                            });
+                        }
+                    });
+                } else {
+                    $('#signin-modal').modal('show');
+                }
+            });
+
         });
     
         function addNewBookmark(url) {
@@ -317,7 +498,7 @@
     
             var orderData=[];
     
-           //var tempURL = "/etc/designs/usgb_v3/clientlib/uiux-all-js/js/json/product-compare-one.html";
+            //var tempURL = "/etc/designs/usgb_v3/clientlib/uiux-all-js/js/json/product-compare-one.html";
     
             //get browser url
             var pathname = window.location.pathname;
@@ -342,21 +523,21 @@
     
                         var groupElem = {
                             "url": detailsData.uri+".html",
-                           "img": detailsData.pageImage,
+                            "img": detailsData.pageImage,
                             "title": detailsData.pageTitle,
                             "checked": checkStatus,
                             "countryCode": countryCode
                         }
     
-                           storeData.push(groupElem);
+                        storeData.push(groupElem);
                         //console.log("whencheck",groupElem);
                         addToDetailsToLocal();
     
                     } else {
                         console.log("uncheck")
-                         getIndex1
-                         var uncheckURL
-                         storeData.some(function (x, i) {
+                        // getIndex1
+                        var uncheckURL
+                        storeData.some(function (x, i) {
                             if (x.url == getLink) {
                                 getIndex1 = i;
                                 uncheckURL = x.url;
@@ -414,39 +595,39 @@
     
     
                  // request btn
-                $("body").on("click", ".request-btn", function () {
-                    console.log("req btn");
-                    var url = detailsData.uri + ".html";
-                    var array = JSON.parse(localStorage.getItem('sampleOrdersJson')) || [];
-                    //console.log('current page product', detailsData);
-                    var orderElem = {
-                        productName: detailsData.pageTitle,
-                        productUrl: detailsData.uri + ".html",
-                        quantity: 1
-                    }
-                    if(array.length == 0){
-                        array.push(orderElem);
-                    } else {
-                                array.push(orderElem);
-                                var output = [];
-                                
-                                array.forEach(function (value) {
-                                    var existing = output.filter(function (v, i) {
-                                        return v.productUrl == value.productUrl;
+                $("body").on("click", ".request-btn", function (e) {
+                    e.preventDefault();
+                    if(!$(this).hasClass('disabled')){
+                        var url = detailsData.uri + ".html";
+                        var array = JSON.parse(localStorage.getItem('sampleOrdersJson')) || [];
+                        var orderElem = {
+                            productName: detailsData.pageTitle,
+                            productUrl: detailsData.uri + ".html",
+                            quantity: 1
+                        }
+                        if(array.length == 0){
+                            array.push(orderElem);
+                        } else {
+                                    array.push(orderElem);
+                                    var output = [];
+                                    
+                                    array.forEach(function (value) {
+                                        var existing = output.filter(function (v, i) {
+                                            return v.productUrl == value.productUrl;
+                                        });
+                                        if (existing.length) {
+                                            var existingIndex = output.indexOf(existing[0]);
+                                            output[existingIndex].quantity = output[existingIndex].quantity + value.quantity;
+                                        } else {
+                                            value.quantity = value.quantity;
+                                            output.push(value);
+                                        }
                                     });
-                                    if (existing.length) {
-                                        var existingIndex = output.indexOf(existing[0]);
-                                        output[existingIndex].quantity = output[existingIndex].quantity + value.quantity;
-                                    } else {
-                                        value.quantity = value.quantity;
-                                        output.push(value);
-                                    }
-                                });
-    
-                                array = output;
-                            }
-                    localStorage.setItem("sampleOrdersJson", JSON.stringify(array));
-                    console.log('final', array);
+        
+                                    array = output;
+                                }
+                        localStorage.setItem("sampleOrdersJson", JSON.stringify(array));
+                    }
     
                 });
     
