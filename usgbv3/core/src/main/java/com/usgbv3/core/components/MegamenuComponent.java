@@ -6,6 +6,7 @@ import java.util.List;
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
 
+import org.apache.sling.api.resource.ValueMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -71,14 +72,17 @@ public class MegamenuComponent extends WCMUsePojo {
 		
 		if(getProperties().containsKey("pagePath" + tabNo)) {
 			
-			if(getProperties().containsKey("disableMenu" + tabNo)) {
-				return null;
-			}
 			String path = (String) getProperties().get("pagePath" + tabNo);
 			String styleType = (String) getProperties().get("styleType" + tabNo);
 			
 			error = error + " path = " + path;
 			Page parentPage = getPageManager().getPage(path);
+			
+			ValueMap parentPageProperties = parentPage.getProperties();
+			
+			if(parentPageProperties.containsKey("excludeHeader")) {
+				return null;
+			}
 			
 			tabMegamenu.setPagePath(path);
 			tabMegamenu.setLink(path + ".html");
@@ -183,6 +187,12 @@ public class MegamenuComponent extends WCMUsePojo {
 		List<Page> listOfPages =  Lists.newArrayList(menuPage.listChildren());
 		
 		for(Page subPage : listOfPages) {
+			
+			ValueMap subPageProperties = subPage.getProperties();
+			
+			if(subPageProperties.containsKey("excludeHeader")) {
+				continue;
+			}
 			
 			MegamenuChildModel megasubPage = new MegamenuChildModel();
 			megasubPage.setTitle(subPage.getTitle());
