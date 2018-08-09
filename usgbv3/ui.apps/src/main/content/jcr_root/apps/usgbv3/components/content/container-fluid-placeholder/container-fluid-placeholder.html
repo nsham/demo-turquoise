@@ -3,7 +3,7 @@
 </sly>
 
 
-<div class="container-fluid p-no ${properties.bgcolor}">
+<div class="container-fluid p-no ${properties.bgcolor} ${properties.hideDestop ? 'hidden-lg hidden-md' : '' } ${properties.hideMobile ? 'hidden-sm hidden-xs' : '' }">
     <sly data-sly-test.istitle="${properties.title}">
     	<div class="m-vertical-l m-sm-vertical xl" data-scroll="${currentNode.name}" >
     </sly>

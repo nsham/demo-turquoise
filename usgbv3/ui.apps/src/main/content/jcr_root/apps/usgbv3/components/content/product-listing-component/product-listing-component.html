@@ -17,7 +17,19 @@
                     	<sly data-sly-list.product="${component.parentListingList}">
 
                             <div class="each bg-green-btn rounded-top">
-                                <a href="${product.link @ context='unsafe'}.html" class="color-dark-grey bold ht6 uppercase m-bottom-xs">${product.title @ context='unsafe'}</a>
+
+                                <sly data-sly-test.isCurrentPage="${product.name == currentPage.name}">
+									<a href="${product.link @ context='unsafe'}.html" class="color-primary-green bold ht6 uppercase m-bottom-xs">
+                                        ${product.title @ context='unsafe'}
+                                    </a>
+                                </sly>
+                                <sly data-sly-test="${!isCurrentPage}">
+									<a href="${product.link @ context='unsafe'}.html" class="color-dark-grey bold ht6 uppercase m-bottom-xs">
+                                        ${product.title @ context='unsafe'}
+                                    </a>
+                                </sly>
+
+
                             </div>
 
                         </sly>
@@ -387,6 +399,27 @@
 
 	</div>
 	<!-- compare popup end -->
+
+	<!-- Shoutout start -->
+		<div class="shoutout-hidden hidden ">
+        <a href="${properties.link @ context='unsafe'}.html" class="height-full" style="background: url(${properties.imgPath @ context='unsafe' }) center center no-repeat; background-size:cover; width: -webkit-fill-available;" >
+                                
+			<div class="bg-overlay">
+                <div class="banner-big">
+                    <div class="content-area p-3xl text-md-center ">
+                        <div class="ht5 uppercase color-white p-bottom-l">
+                        	${properties.title @ context='html'}
+                        </div>
+                        <div class="color-white">
+							${properties.description @ context='html'}
+                        </div>
+                    
+                    </div>
+                </div>
+			</div>
+		</a>
+	</div>
+    <!-- Shoutout end -->
 
 
 <sly data-sly-use.clientLib="/libs/granite/sightly/templates/clientlib.html" data-sly-call="${clientLib.js @ categories='uiux.stickysidebar'}" data-sly-unwrap/>
