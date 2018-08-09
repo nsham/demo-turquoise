@@ -140,6 +140,13 @@
                         }
                     });
 
+                    // update dropdown for selected value dropdown
+                    for(var i=0; i<$('.drop-down-select').length; i++){
+                        if($($('.drop-down-select')[i]).val() !== ""){
+                            $($('.drop-down-select')[i]).closest('.float-label').find('label').addClass('open');
+                        }
+                    }
+
                     $('#sampleOrderShippingFormSubmit').click(function (e) {
                         
                         e.preventDefault();

@@ -39,20 +39,28 @@
                     <div class="sample-orders-cart-sort">
                             <div>
                                 <span>view by </span>
-                                <div class="dropdown dp-form d-small">
-                                    <button class="btn btn-default color-dark-grey dropdown-toggle text-left dp-clickable" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <span class="dp-text">Latest to oldest</span>
-                                        <input type="hidden" name="selectSortType" value="latest">
-                                        <span class="color-primary-green glyphicon glyphicon-menu-down right"></span>
-                                    </button>
-                                    <ul class="dropdown-menu dp-list" aria-labelledby="dropdownMenu1">
-                                        <li>
-                                            <a data-sortby="latest">Latest to oldest</a>
-                                        </li>
-                                        <li>
-                                            <a data-sortby="oldest">Oldest to latest</a>
-                                        </li>
-                                    </ul>
+                                <div class="search-filter-sort justify-end">
+                                    <div class="dropdown dp-form d-small">
+                                        <button class="btn btn-default color-dark-grey dropdown-toggle text-left dp-clickable" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <span class="dp-text">Latest to oldest</span>
+                                            <input type="hidden" name="selectSortType" value="latest">
+                                            <span class="color-primary-green glyphicon glyphicon-menu-down right"></span>
+                                        </button>
+                                        <ul class="dropdown-menu dp-list" aria-labelledby="dropdownMenu1">
+                                            <li>
+                                                <a data-sortby="latest">Latest to oldest</a>
+                                            </li>
+                                            <li>
+                                                <a data-sortby="oldest">Oldest to latest</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="dropdown dp-form-mobile dropdown-menu-right m-vertical-m d-small">
+                                        <select class="btn-default">
+                                            <option value="latest">Latest to oldest</option>
+                                            <option value="oldest">Oldest to latest</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -107,18 +115,18 @@
                 <div class="row order-item-info">
                     <div class="col-xs-12 col-sm-3">
                         <div class="order-no">
-                            <span>{{order_id}}</span>
+                            <span><strong class="visible-xs">Order No:</strong> {{order_id}}</span>
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-3">
                         <div class="order-date">
-                            <span>{{display_date}}</span>
+                            <span><strong class="visible-xs">Order Date:</strong> {{display_date}}</span>
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-3"></div>
                     <div class="col-xs-12 col-sm-3">
                         <div class="order-status heading fs-2 collapsed" data-target="#{{order_id}}" data-toggle="collapse" aria-expanded="false">
-                            <span>{{status}}</span>
+                            <span><strong class="visible-xs">Order Status:</strong> {{status}}</span>
                             <span class="glyphicon glyphicon-minus"></span>
                             <span class="glyphicon glyphicon-plus"></span>
                         </div>
