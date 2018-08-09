@@ -35,7 +35,7 @@
                     //console.log("data1-", data);
 
                     getJSONarr = data.map(function (getJSONarr) {
-                        return getJSONarr.url.split(".").reverse()[1] + ".properties.json";
+                        return getJSONarr.url.split(".").reverse()[1] + ".properties_v3.json";
                     });
 
 

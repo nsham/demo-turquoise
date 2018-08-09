@@ -370,7 +370,7 @@
                 e.preventDefault();
                 if(!$(this).hasClass('disabled')){
                     $('#add-bookmark-modal').modal('show');
-                    var url = $(this).attr('href').replace(".html", ".properties.json");
+                    var url = $(this).attr('href').replace(".html", ".properties_v3.json");
                     addNewBookmark(url);
                 } else {
                     $('#signin-modal').modal('show');
@@ -442,7 +442,7 @@
         // Browse history
         //===========================
         $(document).ready(function(){
-            var url = $('.cta-bookmark').attr('href').replace('.html', '.properties.json');
+            var url = $('.cta-bookmark').attr('href').replace('.html', '.properties_v3.json');
     
             addNewBrowseHistory(url);
         });
@@ -502,7 +502,7 @@
     
             //get browser url
             var pathname = window.location.pathname;
-            var pagename = pathname.split(".").reverse()[1] + ".properties.json";
+            var pagename = pathname.split(".").reverse()[1] + ".properties_v3.json";
             //pass url to load json
             var detailsJSON
     
