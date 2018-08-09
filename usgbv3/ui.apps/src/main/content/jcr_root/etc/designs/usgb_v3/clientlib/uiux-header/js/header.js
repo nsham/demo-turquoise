@@ -426,10 +426,23 @@ jQuery(document).ready(function($){
         $(".header .hamburger").on("click", function () {
             var $hamburgerContent = $('.hamburger-content');
 
+           
             if ($hamburgerContent.hasClass('hidden')) {
                 $hamburgerContent.removeClass('hidden');
+                $hamburgerContent.css("left","800px");
+                $hamburgerContent.animate({
+      				left:"0px"
+    			},800);
             } else {
-                $hamburgerContent.addClass('hidden');
+
+                 $hamburgerContent.animate({
+      				left:"800px"
+
+                 },1000, function(){
+                     $hamburgerContent.addClass('hidden');
+                 });
+
+
             }
 
             defaultScrollUpdate(".hamburger-content");
@@ -732,3 +745,26 @@ jQuery(document).ready(function($){
 
     });
 })();
+
+/*defaultScrollUpdate====================*/
+function defaultScrollUpdate(element) {
+
+    var mobileExpandStateMonitor = setInterval(function () {
+        //if hidden show scrollbar
+        if ($(element).hasClass('hidden')) {
+
+            $('html, body').removeClass('disable-scroll');
+
+        } else {
+            //else hide scrollbar
+            $('html, body').addClass('disable-scroll');
+        }
+    }, 200);
+
+    //stop after running for 1 sec, prevent running in background
+    setTimeout(function () {
+        clearInterval(mobileExpandStateMonitor);
+    }, 1000);
+
+};
+/*end defaultScrollUpdate====================*/

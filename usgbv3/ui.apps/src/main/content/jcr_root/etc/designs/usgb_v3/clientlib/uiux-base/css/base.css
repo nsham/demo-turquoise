@@ -37,8 +37,8 @@
     position: absolute;
     left: 50%;
     top: 50%;
-    height: 100%;
-    width: auto;
+    height: auto;
+    width: 100%;
     transform: translate(-50%, -50%); }
 
 .box-type-1:hover .bg-box-hover {

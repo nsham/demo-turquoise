@@ -902,10 +902,22 @@ function hookHeadScript(url, async, defer, callback) {
         $(".header .hamburger").on("click", function () {
             var $hamburgerContent = $('.hamburger-content');
 
+            
             if ($hamburgerContent.hasClass('hidden')) {
                 $hamburgerContent.removeClass('hidden');
+                $hamburgerContent.css("left","800px");
+                $hamburgerContent.animate({
+      				left:"0px"
+    			},800);
             } else {
-                $hamburgerContent.addClass('hidden');
+
+                 $hamburgerContent.animate({
+      				left:"800px"
+
+                 },1000, function(){
+                     $hamburgerContent.addClass('hidden');
+                 });
+
             }
 
             defaultScrollUpdate(".hamburger-content");

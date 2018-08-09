@@ -1,682 +1,413 @@
-<!-- PAGE CONTENT -->
-<div class="page-content">
-
-	<!-- SECTION 1 -->
-	<div class="container-fluid">
-		<div class="row relative">
-
-			<div style="background:transparent url('/content/dam/USGBoral/Global/Website/Images/component/allsample/bg-carousel-banner.jpg') center right no-repeat; background-size:cover;"
-			    data-img-mobile="background:transparent url('/content/dam/USGBoral/Global/Website/Images/component/allsample/m-bg-carousel-banner.jpg') bottom right no-repeat; background-size:cover;">
-				<div class="container">
-					<div class="row p-top-5xl p-bottom-5xl m-no">
-						<div class="col-xs-12">
-							<div class="banner-small">
-								<div class=" relative m-left-s m-sm-left-3xl text-left ">
-									<h2 class="ht1 uppercase color-white sanimated sfadeInDown">
-										<span class="yellow-label"></span>
-										TESTt ACOUSTIC PANELS & CEILING TILES</h2>
-									<p class="color-white sanimated sfadeInUp delay-500-ms"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod empor incididunt ut labore et dtolore magna
-										aliqua.
-									</p>
+<sly data-sly-test="${wcmmode.edit || wcmmode.design}">
+		Edit here for Product Listing Component
+	</sly>
+	<style>
+		${properties.cssoverwrite @ context='unsafe'}
+	</style>
+	
+	
+	<div class="container" data-sly-use.component="com.usgbv3.core.components.ProductListingComponent">
+			<div class="row m-bottom-xxl m-top-s  product-listing-sidebar ">
+				<!-- set p-left-no, avoid sticy width's glitch -->
+				<div class="col-xs-12 col-sm-3 col-md-3 hidden-xs p-left-no make-sticky">
+					<div class="make-sticky_inner">
+	
+						<!-- c-sidebar -->
+						<div class="c-sidebar rounded-corners">
+							<sly data-sly-list.product="${component.parentListingList}">
+	
+								<div class="each bg-green-btn rounded-top">
+									<a href="${product.link @ context='unsafe'}.html" class="color-dark-grey bold ht6 uppercase m-bottom-xs">${product.title @ context='unsafe'}</a>
+								</div>
+	
+							</sly>
+	
+						</div>
+	
+	
+						<!-- handlebar product-listing-filter-wrapper -->
+						<script id="product-listing-filter" type="text/x-handlebars-template">
+	
+							<h5 class="color-dark-grey bold ht6 uppercase m-bottom-xs">{{category_title}}</h5>
+	
+							<div class="search-filter-sort">
+								<div class="refine-search  dropdown dp-form dropdown-menu-right d-small">
+									<button class=" btn btn-default color-dark-grey dropdown-toggle text-left dp-clickable" type="button" id="dropdownMenu1"
+										data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										<span class="dp-text">Select Filtering Category</span>
+										<input type="hidden" name="" value="">
+										<span class="color-primary-green glyphicon glyphicon-menu-down right"></span>
+									</button>
+	
+									<ul class="dropdown-menu dp-list refine-list" aria-labelledby="dropdownMenu1">
+										{{#each category_child}}
+										<li>
+											<a data-search-val="{{key}}" data-val="{{value}}">{{value}}</a>
+										</li>
+										{{/each}}
+									</ul>
+								</div>
+	
+								<div class="dropdown refine-mobile  visible-xs dropdown-menu-right m-vertical-m d-small">
+									<select class="btn-default">Select Filtering Category {{#each category_child}}
+										<option value="{{key}}" data-val="{{value}}">{{value}}</option>
+										{{/each}}
+	
+									</select>
 								</div>
 							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="ico-indicator">
-					<img src="/content/dam/USGBoral/Global/Website/Images/component/allsample/indicator-btn.png">
-				</div>
-
-			</div>
-		</div>
-	</div>
-	<!-- SECTION 1 END -->
-
-
-	<!-- comapre popup from  -->
-	<script id="compare-popup-local" type="text/x-handlebars-template">
-
-		{{#each this}}
-		<div class='each content-wrapper' data-content-title="{{url}}"><a href="{{url}}" target='_blank'><div class='left img-content'> <img src="{{img}}"> </div> <div class='right title-content'data-content-value="">{{title}}</div></a><button class='close-btn-box'><span class='bold'>x</span></button><hr class='col-xs-12 m-no m-top-m'></div>
-
-		{{/each}}
-
-
-	</script>
-	<!-- compare popup from local -->
-
-
-
-	<!--compare popup --> 
-	<div class="compare-popup">
-
-		<div class="title uppercase ">
-			Compare Product
-			<span class=" btn-menu-down glyphicon glyphicon-menu-down float-right  p-s  text-center"></span>
-		</div>
-		
-		<div class="inner-content">
-			<div class="popup-content c-auto-center-list">
-				<div class="compare-popup-local"> </div>
 	
-				<!-- <div class="each  content-wrapper content1">
-					<div class="left img-content"> </div>
-					<div class="right title-content"> </div>
-					<button type="button" class="close-btn-box" aria-label="Close">
-						<span class="bold" aria-hidden="true">×</span>
-					</button>
-				</div>
-				<hr> -->
-			</div>
-			<div class="each instruction-text ">
-				<p class="m-bottom-xl color-grey text-center ">Select another product to compare</p>
-			</div>
-			<div class="each btn-compare m-m">
-				<a href="/content/v3/usgboral/samplepage/product-compare.html" ><button  class="btn width-full button-green btn-brand-default">compare selected</button></a>
-			</div>
-		</div>
-
-
-	</div>
-	<!-- compare popup end -->
-
-
-	<!-- BREADCUMB-BOX -->
-	<div class="container ">
-		<div class="row m-vertical-m">
-			<div class="col-xs-12">
-				<div class="col-sm-6 breadcrumb-box  hidden-xs">
-					<ol class="breadcrumb m-no p-no bg-white">
-						<li>Products</li>
-						<li>Ceilings</li>
-						<li class="active">
-							<b>Acoustic Panels & Ceiling Tiles</b>
-						</li>
-					</ol>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- BREADCUMB-BOX END -->
-
-
-	<!-- section 2 -->
-	<div class="container">
-		<div class="row m-bottom-xxl m-top-s  product-listing-sidebar ">
-			<!-- set p-left-no, avoid sticy width's glitch -->
-			<div class="col-xs-12 col-sm-3 col-md-3 hidden-xs p-left-no make-sticky">
-				<div class="make-sticky_inner">
-
-					<!-- c-sidebar -->
-					<div class="c-sidebar rounded-corners">
-						<div class="each bg-green-btn rounded-top">
-							<a href="#" class="color-dark-grey bold ht6 uppercase m-bottom-xs">Application highlight</a>
-						</div>
-						<hr class="m-no" />
-						<div class="each bg-green-btn">
-							<a href="#" class="color-dark-grey bold ht6 uppercase m-bottom-xs">Acoustic Suspension Systems</a>
-						</div>
-						<hr class="m-no" />
-						<div class="each bg-green-btn">
-							<a href="#" class="color-dark-grey bold ht6 uppercase m-bottom-xs">Systems Integrated Systems</a>
-						</div>
-						<hr class="m-no" />
-						<div class="each bg-green-btn">
-							<a href="#" class="color-dark-grey bold ht6 uppercase m-bottom-xs">Specialty Ceilings</a>
-						</div>
-						<hr class="m-no" />
-						<div class="each bg-green-btn">
-							<a href="#" class="color-dark-grey bold ht6 uppercase m-bottom-xs">Metal Ceilings</a>
-						</div>
-						<hr class="m-no" />
-						<div class="each bg-green-btn rounded-bottom">
-							<a href="#" class="color-dark-grey bold ht6 uppercase m-bottom-xs">Asona Acoustic Range</a>
-						</div>
-
-					</div>
-
-
-					<!-- handlebar product-listing-filter-wrapper -->
-					<script id="product-listing-filter" type="text/x-handlebars-template">
-
-						<h5 class="color-dark-grey bold ht6 uppercase m-bottom-xs">{{category_title}}</h5>
-
-						<div class="search-filter-sort">
-							<div class="refine-search  dropdown dp-form dropdown-menu-right d-small">
-								<button class=" btn btn-default color-dark-grey dropdown-toggle text-left dp-clickable" type="button" id="dropdownMenu1"
-								    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-									<span class="dp-text">Select Filtering Category</span>
-									<input type="hidden" name="" value="">
-									<span class="color-primary-green glyphicon glyphicon-menu-down right"></span>
-								</button>
-
-								<ul class="dropdown-menu dp-list refine-list" aria-labelledby="dropdownMenu1">
-									{{#each category_child}}
-									<li>
-										<a data-search-val="{{key}}" data-val="{{value}}">{{value}}</a>
-									</li>
-									{{/each}}
-								</ul>
-							</div>
-
-							<div class="dropdown refine-mobile  visible-xs dropdown-menu-right m-vertical-m d-small">
-								<select class="btn-default">Select Filtering Category {{#each category_child}}
-									<option value="{{key}}" data-val="{{value}}">{{value}}</option>
-									{{/each}}
-
-								</select>
-							</div>
-						</div>
-
-						{{#each category_child}}
-						<div class="checkbox-wrapper {{key}}-wrapper" data-checkbox-wrapper="{{key}}">
-							<div class="radio radio-split-two">
-								{{#each child }}
-								<div class="radio-item">
-									<div class="item-inner">
-										<label class=" container-checkbox fs-3">
-											{{value}}
-											<input type="checkbox" data-label="{{value}}" name="{{../key}}" value={{key}} data-checkname="{{key}}">
-											<span class="checkmark fs-3"></span>
-										</label>
+							{{#each category_child}}
+							<div class="checkbox-wrapper {{key}}-wrapper" data-checkbox-wrapper="{{key}}">
+								<div class="radio radio-split-two">
+									{{#each child }}
+									<div class="radio-item">
+										<div class="item-inner">
+											<label class=" container-checkbox fs-3">
+												{{value}}
+												<input type="checkbox" data-label="{{value}}" name="{{../key}}" value={{key}} data-checkname="{{key}}">
+												<span class="checkmark fs-3"></span>
+											</label>
+										</div>
 									</div>
+									{{/each}}
+								</div>
+							</div>
+							{{/each}}
+							<hr class="m-no" />
+							<div class="each checkbox-button-wrapper">
+								{{#each category_child}}
+								<div data-checkbutton="{{key}}">
+									<p class=" m-no">{{value}}</p>
 								</div>
 								{{/each}}
 							</div>
-						</div>
-						{{/each}}
-						<hr class="m-no" />
-						<div class="each checkbox-button-wrapper">
-							{{#each category_child}}
-							<div data-checkbutton="{{key}}">
-								<p class=" m-no">{{value}}</p>
-							</div>
-							{{/each}}
-						</div>
-
-					</script>
-					<!-- handlebar product-listing-filter-wrapper end-->
-
-					<form id="product-listing-form" class="hidden">
-						<div class="c-sidebar m-top-m rounded-corners">
-
-							<div class="each product-listing-filter"></div>
-
-							<div class="each">
-								<button type="submit" class="  btn-apply-filter btn width-full button-green btn-brand-default">apply filter</button>
-							</div>
-
-						</div>
-					</form>
-
-					<!-- end c-sidebar -->
-
-				</div>
-			</div>
-			<!-- sidebar end -->
-
-
-
-			<!-- handlebar product-listing-result-wrapper -->
-			<script id="product-listing-result" type="text/x-handlebars-template">
-				{{#each this}}
-				<div class="each m-bottom-xxl p-side-m" data-title-value="" data-category="{{texture}},{{thickness}},{{lr_rating}}">
-					<div class=" bg-light-grey custom-block flex-column justify-space-between align-stretch">
-						<div class="thumbs flex-shrink-0">
-							<img src="{{img}}">
-						</div>
-						<h6 class="title ht6 uppercase text-center p-s">{{title}}
-						</h6>
-
-						<div class="checkbox-content">
-							<div class="radio">
-								<label class="container-checkbox fs-2">
-									Compare Products
-									<input type="checkbox" name="" data-input-value="{{link}}">
-									<span class="checkmark fs-2"></span>
-								</label>
-							</div>
-						</div>
-
-						<div class="addto text-center uppercase">
-							<a href="{{link}}" target="_blank">
-								<span class="fs-2">
-									<strong>View Product</strong>
-								</span>
-							</a>
-						</div>
-					</div>
-				</div>
-				{{/each}}
-
-			</script>
-			<!-- handlebar product-listing-result-wrapper end-->
-
-
-
-			<div class="col-xs-12 col-sm-9 col-md-9 make-sticky_limit">
-
-				<!-- SEARCH CONTENT -->
-				<div class="search-main-content listing-search-content">
-					<div class="search-filter-sort justify-end">
-						<!-- SORT BY -->
-						<div class="dropdown dp-form d-small m-bottom-3xl float-right" style="max-width: 280px;">
-							<button class="btn btn-default color-dark-grey dropdown-toggle text-left dp-clickable" type="button" data-toggle="dropdown"
-							    aria-haspopup="true" aria-expanded="false">
-								<span class="dp-text">A - Z</span>
-								<input type="hidden" name="selectSortType" value="a_z">
-								<span class="color-primary-green glyphicon glyphicon-menu-down right"></span>
-							</button>
-							<ul class="dropdown-menu dp-list" aria-labelledby="dropdownMenu1">
-								<li>
-									<a data-val="a_z">A - Z</a>
-								</li>
-								<li>
-									<a data-val="z_a">Z - A</a>
-								</li>
-								<li>
-									<a data-val="latest">Latest to oldest</a>
-								</li>
-								<li>
-									<a data-val="oldest">Oldest to latest</a>
-								</li>
-							</ul>
-						</div>
-
-						<div class="dropdown dp-form-mobile dropdown-menu-right m-vertical-m d-small">
-							<select class="btn-default">
-								<option value="a_z">A - Z</option>
-								<option value="z_a">Z - A</option>
-								<option value="latest">Latest to oldest</option>
-								<option value="oldest">Oldest to latest</option>
-							</select>
-						</div>
-						<!-- END SORT BY -->
-
-						<!-- filter -->
-						<a href="#" id="filter-icon-btn" class="filter-icon btn visible-xs btn-smd m-left-m">
-							<span class="color-primary-green glyphicon glyphicon-filter "></span>
-						</a>
-						<!-- end filter -->
-					</div>
-
-					<div class="inner product-listing-result"> </div>
-
-
-				</div>
-				<!-- END SEARCH CONTENT -->
-
-				<!-- SEARCH PAGINATION -->
-				<nav aria-label="Page navigation">
-					<ul id="pagination-container" class="pull-right"></ul>
-					<!-- <ul class="pagination pull-right m-top-no">
-						<li>
-							<a href="#" aria-label="Previous">
-								<span aria-hidden="true">&lt;</span>
-							</a>
-						</li>
-						<li>
-							<a href="#">1</a>
-						</li>
-						<li>
-							<a href="#">2</a>
-						</li>
-						<li>
-							<a href="#">3</a>
-						</li>
-						<li>
-							<a href="#">4</a>
-						</li>
-						<li>
-							<a href="#">5</a>
-						</li>
-						<li>
-							<a href="#" aria-label="Next">
-								<span aria-hidden="true">&gt;</span>
-							</a>
-						</li>
-					</ul> -->
-					<div class="clearfix"></div>
-
-				</nav>
-				<!-- END SEARCH PAGINATION -->
-
-				<!-- social icon -->
-				<div class="col-xs-12 ">
-					<hr />
-					<p class=" fs-3 m-top-s color-grey">Share this page: &nbsp;
-						<a href="" class="stacked-default icon-color-darker-grey">
-							<span class="fa-stack fa-lg">
-								<i class="fa fa-square fa-stack-2x"></i>
-								<i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
-							</span>
-						</a>
-						<a href="" class="stacked-default icon-color-darker-grey">
-							<span class="fa-stack fa-lg">
-								<i class="fa fa-square fa-stack-2x"></i>
-								<i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
-							</span>
-						</a>
-						<a href="" class="stacked-default icon-color-darker-grey">
-							<span class="fa-stack fa-lg">
-								<i class="fa fa-square fa-stack-2x"></i>
-								<i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
-							</span>
-						</a>
-					</p>
-				</div>
-				<!-- social end -->
-
-			</div>
-
-
-
-		</div>
-	</div>
-	<!-- section 2 end -->
-
-
-
-	<!-- SECTION 3-->
-	<div class="container-fluid bg-light-grey ">
-		<div class="row m-vertical-4xxl m-sm-vertical-5xl hidden-xs">
-			<div class="container">
-				<div class="row">
-					<div class="col-xs-12 m-bottom-xs">
-						<h2 class="ht4 uppercase text-center color-darker-grey">find out what WE have</h2>
-						<p class="text-center color-darker-grey">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempaor</p>
-					</div>
-				</div>
-
-				<div class="row  m-top-xl">
-					<ul class="icon-group-wrapper">
-						<li>
-							<p class="icon icon-120 icon-ceiling color-primary-green"></p>
-							<p class="m-top-l bold">Ceilings</p>
-						</li>
-						<li>
-							<p class="icon icon-120 icon-interior-lining color-primary-green"></p>
-							<p class="m-top-l bold">Interior Linings</p>
-						</li>
-						<li>
-							<p class="icon icon-120 icon-finishes color-primary-green"></p>
-							<p class="m-top-l bold">Finishes</p>
-						</li>
-						<li>
-							<p class="icon icon-120 icon-steel-framing color-primary-green"></p>
-							<p class="m-top-l bold">Steel Framing</p>
-						</li>
-						<li>
-							<p class="icon icon-120 icon-cornice color-primary-green"></p>
-							<p class="m-top-l bold">Cornice</p>
-						</li>
-						<li>
-							<p class="icon icon-120 icon-plasteringdiy color-primary-green"></p>
-							<p class="m-top-l bold">Plastering DIY</p>
-						</li>
-						<li>
-							<p class="icon icon-120 icon-insulation color-primary-green"></p>
-							<p class="m-top-l bold">Insulations</p>
-						</li>
-					</ul>
-				</div>
-
-			</div>
-		</div>
-	</div>
-	<!-- SECTION 3 END -->
-
-
-	<!-- SECTION 4-->
-	<div class="container-fluid bg-white">
-		<div class="row  m-vertical-4xxl m-sm-vertical-5xl ">
-			<div class="container">
-				<div class="row">
-					<div class="col-xs-12 m-bottom-xs">
-						<h2 class="ht6 color-darker-grey ">Your browsing history</h2>
-					</div>
-				</div>
-				<!-- carousel items -->
-				<div class="row">
-					<div class="feature-card-wrapper">
-						<!-- slick div -->
-						<div class="carousel-feature-card" data-slick='{
-						"dots": false,
-						"infinite": true,
-						"speed": 300,
-						"slidesToShow": 5,
-						"slidesToScroll": 1,
-						"responsive": [
-							{
-								"breakpoint": 992,
-								"settings": {
-									"slidesToShow": 4,
-									"dots":true
-								}
-							},
-							{
-								"breakpoint": 768,
-								"settings": {
-									"slidesToShow": 3,
-									"dots":true
-								}
-							},
-							{
-								"breakpoint": 600,
-								"settings": {
-									"slidesToShow": 1,
-									"dots":true
-								}
-							}
-						]
-					}'>
-							<!-- featured items start -->
-							<!-- 1 -->
-							<div class="col-sm-2 p-xl">
-								<a href="#" target="_blank">
-									<div class="box-size-m box-type-2 p-md-xs p-xs">
-										<div class="center width-full">
-											<div class="box-inner-img"></div>
-											<h2 class="m-top-m fs-1 color-darker-grey text-center bold">Multistop ™ 3HI - Multi Performance Plasterboard</h2>
-
-										</div>
-										<span class="bg-box-hover"> </span>
-									</div>
-								</a>
-							</div>
-							<!-- 1 end -->
-							<!-- 2 -->
-							<div class="col-sm-2 p-xl">
-								<a href="#" target="_blank">
-									<div class="box-size-m box-type-2 p-md-xs p-xs">
-										<div class="center width-full">
-											<div class="box-inner-img"></div>
-											<h2 class="m-top-m fs-1 color-darker-grey text-center bold">FIBEROCK® Aqua-Tough™ - MultiPerformance Gypsum Board</h2>
-										</div>
-										<span class="bg-box-hover"> </span>
-									</div>
-								</a>
-							</div>
-							<!-- 2 end -->
-							<!-- 3 -->
-							<div class="col-sm-2  p-xl">
-								<a href="#" target="_blank">
-									<div class="box-size-m box-type-2 p-md-xs p-xs">
-										<div class="center width-full">
-											<div class="box-inner-img"></div>
-											<h2 class="m-top-m fs-1 color-darker-grey text-center bold">Multistop ™ 3HI - Multi Performance Plasterboard</h2>
-										</div>
-										<span class="bg-box-hover"> </span>
-									</div>
-								</a>
-							</div>
-							<!-- 3 end -->
-							<!-- 4 -->
-							<div class="col-sm-2  p-xl">
-								<a href="#" target="_blank">
-									<div class="box-size-m box-type-2 p-md-xs p-xs">
-										<div class="center width-full">
-											<div class="box-inner-img"></div>
-											<h2 class="m-top-m fs-1 color-darker-grey text-center bold">DIY Plasterboard Accessories
-											</h2>
-										</div>
-										<span class="bg-box-hover"> </span>
-									</div>
-								</a>
-							</div>
-							<!-- 4 end -->
-							<!-- 5-->
-							<div class="col-sm-2  p-xl">
-								<a href="#" target="_blank">
-									<div class="box-size-m box-type-2 p-md-xs p-xs">
-										<div class="center width-full">
-											<div class="box-inner-img"></div>
-											<h2 class="m-top-m fs-1 color-darker-grey text-center bold">DIY Plasterboard Accessories
-											</h2>
-										</div>
-										<span class="bg-box-hover"> </span>
-									</div>
-								</a>
-							</div>
-							<!-- 5 end -->
-							<!-- featured items end -->
-						</div>
-						<!-- slick div end -->
-					</div>
-				</div>
-				<!-- carousel item end -->
-			</div>
-		</div>
-	</div>
-	<!-- SECTION 4 END -->
-
-
-	<!-- subscribe -->
-	<div class="container-fluid bg-light-grey">
-		<div class="container ">
-			<div class="row">
-				<div class="col-xs-12 m-top-5xl">
-					<h3 class="ht4 uppercase m-bottom-m text-center text-sm-left ">SUBSCRIBE OUR NEWSLETTER!</h3>
-				</div>
-			</div>
-		</div>
-		<div class="container">
-			<div class="row">
-				<div class="col-xs-12">
-					<!-- c-flex-items -->
-					<div class="c-flex-items m-bottom-4xxl m-sm-bottom-5xl">
-						<div class="item-stretch p-no p-sm-right-m   ">
-							<div class="text-center text-sm-left m-bottom-m m-sm-bottom-no">
-								<p class="m-bottom-no">
-									Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibhsit amet, consectetuer adipiscing elit, sed
-									diam nonu nibh.sectetuer adipiscing elit, ssectetuer adipiscing elit.
-								</p>
-							</div>
-						</div>
-
-						<div class="item-fix p-no text-center " style="min-width: 400px;">
-							<form>
-								<div class="form-group " style="min-width: 240px; display: inline-block;">
-									<input type="text" class="form-control" id="exampleInputName" placeholder="Email Me">
+	
+						</script>
+						<!-- handlebar product-listing-filter-wrapper end-->
+	
+						<form id="product-listing-form" class="hidden">
+							<div class="c-sidebar m-top-m rounded-corners">
+	
+								<div class="each product-listing-filter"></div>
+	
+								<div class="each">
+									<button type="submit" class="  btn-apply-filter btn width-full button-green btn-brand-default">apply filter</button>
 								</div>
-								<button type="submit" class="m-md-top-no m-left-s btn button-green btn-brand-default">Subscribe</button>
-							</form>
-						</div>
-
-					</div>
-					<!-- end c-flex-items -->
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- subscribe -->
-
-
-</div>
-<!-- END of PAGE CONTENT -->
-
-
-
-<!-- handlebar mobile product-listing-filter-wrapper -->
-<script id="m-product-listing-filter" type="text/x-handlebars-template">
-
-	<div class="top">
-		<p class="uppercase text-center m-no p-side-l fs-2">
-			<strong>{{category_title}}</strong>
-		</p>
-	</div>
-	<div class="m-top-m mobile-refine-search">
-		<div class="each m-vertical-xl">
-			<div class="search-filter-sort">
-				<div class="dropdown visible-xs dropdown-menu-right m-vertical-m d-small">
-					<select id="refine-search-mobile" class=" btn-default">
-						<option class="hidden" disabled selected>Select Filtering Category</option>
-						{{#each category_child}}
-						<option value="{{key}}" data-val="{{value}}">{{value}}</option>
-						{{/each}}
-					</select>
-				</div>
-			</div>
-
-			{{#each category_child}}
-			<div class="m-checkbox-wrapper mobile-{{key}}-wrapper" data-checkbox-wrapper="{{key}}">
-				{{#each child}}
-				<label class="container-checkbox mobile fs-2">
-					{{value}}
-					<input type="checkbox" data-label="{{value}}" name="{{../key}}" value="{{key}}" data-checkname="{{key}}">
-				</label>
-				{{/each}}
-			</div>
-			{{/each}}
-		</div>
-
-		<hr class="m-no" />
-
-		<div class=" mobile-checkbox-button-wrapper m-vertical-xl">
-			{{#each category_child}}
-			<div data-m-checkbutton="{{key}}">
-				<p class=" m-no">{{value}}</p>
-			</div>
-			{{/each}}
-		</div>
-	</div>
-
-
-</script>
-<!-- handlebar mobile product-listing-filter-wrapper end-->
-
-
-
-<!-- filter mobile content -->
-<div class="filter-mobile-content hidden">
-	<section class="section">
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col-xs-12">
-
-					<div class="close-filter-mobile-content p-l">
-						<a href="#" class="icon-color-darker-grey icon-size-xs glyphicon glyphicon-remove"></a>
-					</div>
-
-					<div class="search-filter m-bottom-xxl p-side-l">
-						<form id="m-product-listing-form">
-							<div class=" m-product-listing-filter"> </div>
-							<div class="m-vertical-xl">
-								<button id="test" type="submit" class=" btn width-full button-green btn-brand-default">apply filter</button>
+	
 							</div>
 						</form>
+	
+						<!-- end c-sidebar -->
+	
 					</div>
 				</div>
-
+				<!-- sidebar end -->
+	
+	
+	
+				<!-- handlebar product-listing-result-wrapper -->
+				<script id="product-listing-result" type="text/x-handlebars-template">
+					{{#each this}}
+					<div class="each m-bottom-xxl p-side-m" data-title-value="" data-category="{{texture}},{{thickness}},{{lr_rating}}">
+						<div class="bg-light-grey custom-block flex-column justify-space-between align-stretch width-full">
+							<div class="thumbs flex-shrink-0">
+								<img src="{{img}}">
+							</div>
+							<h6 class="title ht6 uppercase text-center p-s">{{title}}
+							</h6>
+	
+							<div class="checkbox-content">
+								<div class="radio">
+									<label class="container-checkbox fs-2">
+										Compare Products
+										<input type="checkbox" name="" data-input-value="{{link}}">
+										<span class="checkmark fs-2"></span>
+									</label>
+								</div>
+							</div>
+	
+							<div class="addto text-center uppercase">
+								<a href="{{link}}" target="_blank">
+									<span class="fs-2">
+										<strong>View Product</strong>
+									</span>
+								</a>
+							</div>
+						</div>
+					</div>
+					{{/each}}
+	
+				</script>
+				<!-- handlebar product-listing-result-wrapper end-->
+	
+	
+	
+				<div class="col-xs-12 col-sm-9 col-md-9 make-sticky_limit">
+	
+					<!-- SEARCH CONTENT -->
+					<div class="search-main-content listing-search-content">
+						<div class="search-filter-sort justify-end">
+							<!-- SORT BY -->
+							<div class="dropdown dp-form d-small m-bottom-3xl float-right" style="max-width: 280px;">
+								<button class="btn btn-default color-dark-grey dropdown-toggle text-left dp-clickable" type="button" data-toggle="dropdown"
+									aria-haspopup="true" aria-expanded="false">
+									<span class="dp-text">A - Z</span>
+									<input type="hidden" name="selectSortType" value="a_z">
+									<span class="color-primary-green glyphicon glyphicon-menu-down right"></span>
+								</button>
+								<ul class="dropdown-menu dp-list" aria-labelledby="dropdownMenu1">
+									<li>
+										<a data-val="a_z">A - Z</a>
+									</li>
+									<li>
+										<a data-val="z_a">Z - A</a>
+									</li>
+									<li>
+										<a data-val="latest">Latest to oldest</a>
+									</li>
+									<li>
+										<a data-val="oldest">Oldest to latest</a>
+									</li>
+								</ul>
+							</div>
+	
+							<div class="dropdown dp-form-mobile dropdown-menu-right m-vertical-m d-small">
+								<select class="btn-default">
+									<option value="a_z">A - Z</option>
+									<option value="z_a">Z - A</option>
+									<option value="latest">Latest to oldest</option>
+									<option value="oldest">Oldest to latest</option>
+								</select>
+							</div>
+							<!-- END SORT BY -->
+	
+							<!-- filter -->
+							<a href="#" id="filter-icon-btn" class="filter-icon btn visible-xs btn-smd m-left-m">
+								<span class="color-primary-green glyphicon glyphicon-filter "></span>
+							</a>
+							<!-- end filter -->
+						</div>
+	
+						<div class="inner product-listing-result"> </div>
+	
+	
+					</div>
+					<!-- END SEARCH CONTENT -->
+	
+					<!-- SEARCH PAGINATION -->
+					<nav aria-label="Page navigation">
+						<ul id="pagination-container" class="pull-right"></ul>
+						<!-- <ul class="pagination pull-right m-top-no">
+							<li>
+								<a href="#" aria-label="Previous">
+									<span aria-hidden="true">&lt;</span>
+								</a>
+							</li>
+							<li>
+								<a href="#">1</a>
+							</li>
+							<li>
+								<a href="#">2</a>
+							</li>
+							<li>
+								<a href="#">3</a>
+							</li>
+							<li>
+								<a href="#">4</a>
+							</li>
+							<li>
+								<a href="#">5</a>
+							</li>
+							<li>
+								<a href="#" aria-label="Next">
+									<span aria-hidden="true">&gt;</span>
+								</a>
+							</li>
+						</ul> -->
+						<div class="clearfix"></div>
+	
+					</nav>
+					<!-- END SEARCH PAGINATION -->
+	
+					<!-- social icon -->
+					<div class="col-xs-12 ">
+						<hr />
+						<div class=" fs-3 m-top-m m-bottom-xs color-grey">${'Share this product:' @ i18n} &nbsp;
+							<sly data-sly-resource="${'share-component' @ resourceType='usgbv3/components/content/share-component'}"/>
+						 </div>
+					</div>
+					<!-- social end -->
+	
+				</div>
+	
+	
+	
 			</div>
 		</div>
-
-	</section>
-
-</div>
-<!-- filter mobile content -->
-
-
-<sly data-sly-use.clientLib="/libs/granite/sightly/templates/clientlib.html" data-sly-call="${clientLib.js @ categories='uiux.alljs'}"
-    data-sly-unwrap/>
+	
+	<!-- handlebar mobile product-listing-filter-wrapper -->
+	<script id="m-product-listing-filter" type="text/x-handlebars-template">
+	
+		<div class="top">
+			<p class="uppercase text-center m-no p-side-l fs-2">
+				<strong>{{category_title}}</strong>
+			</p>
+		</div>
+		<div class="m-top-m mobile-refine-search">
+			<div class="each m-vertical-xl">
+				<div class="search-filter-sort">
+					<div class="dropdown visible-xs dropdown-menu-right m-vertical-m d-small">
+						<select id="refine-search-mobile" class=" btn-default">
+							<option class="hidden" disabled selected>Select Filtering Category</option>
+							{{#each category_child}}
+							<option value="{{key}}" data-val="{{value}}">{{value}}</option>
+							{{/each}}
+						</select>
+					</div>
+				</div>
+	
+				{{#each category_child}}
+				<div class="m-checkbox-wrapper mobile-{{key}}-wrapper" data-checkbox-wrapper="{{key}}">
+					{{#each child}}
+					<label class="container-checkbox mobile fs-2">
+						{{value}}
+						<input type="checkbox" data-label="{{value}}" name="{{../key}}" value="{{key}}" data-checkname="{{key}}">
+					</label>
+					{{/each}}
+				</div>
+				{{/each}}
+			</div>
+	
+			<hr class="m-no" />
+	
+			<div class=" mobile-checkbox-button-wrapper m-vertical-xl">
+				{{#each category_child}}
+				<div data-m-checkbutton="{{key}}">
+					<p class=" m-no">{{value}}</p>
+				</div>
+				{{/each}}
+			</div>
+		</div>
+	
+	
+	</script>
+	<!-- handlebar mobile product-listing-filter-wrapper end-->
+	
+	
+	
+	<!-- filter mobile content -->
+	<div class="filter-mobile-content hidden">
+		<section class="section">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-xs-12">
+	
+						<div class="close-filter-mobile-content p-l">
+							<a href="#" class="icon-color-darker-grey icon-size-xs glyphicon glyphicon-remove"></a>
+						</div>
+	
+						<div class="search-filter m-bottom-xxl p-side-l">
+							<form id="m-product-listing-form">
+								<div class=" m-product-listing-filter"> </div>
+								<div class="m-vertical-xl">
+									<button id="test" type="submit" class=" btn width-full button-green btn-brand-default">apply filter</button>
+								</div>
+							</form>
+						</div>
+					</div>
+	
+				</div>
+			</div>
+	
+		</section>
+	
+	</div>
+	<!-- filter mobile content -->
+	
+	
+	<!-- comapre popup from  -->
+		<script id="compare-popup-local" type="text/x-handlebars-template">
+	
+			{{#each this}}
+			<div class='each content-wrapper' data-content-title="{{url}}"><a href="{{url}}" target='_blank'><div class='img-content '> <img src="{{img}}"> </div> <div class='right-content  title-content'data-content-value="">{{title}}</div></a><button class='close-btn-box'><span class='bold'>x</span></button><hr class='col-xs-12 m-no m-top-m'></div>
+	
+			{{/each}}
+	
+	
+		</script>
+		<!-- compare popup from local -->
+	
+	
+	
+		<!--compare popup --> 
+		<div class="compare-popup">
+	
+			<div class="title uppercase ">
+				Compare Product
+				<span class=" btn-menu-down glyphicon glyphicon-menu-down float-right  p-s  text-center"></span>
+			</div>
+			<div class="inner-content">
+	
+				<div class="popup-content c-auto-center-list">
+	
+					<div class="compare-popup-local"> </div>
+		
+		
+					<!-- <div class="each  content-wrapper content1">
+						<div class="left img-content"> </div>
+						<div class="right title-content"> </div>
+						<button type="button" class="close-btn-box" aria-label="Close">
+							<span class="bold" aria-hidden="true">×</span>
+						</button>
+					</div>
+					<hr> -->
+				</div>
+				<div class="each instruction-text ">
+					<p class="m-bottom-xl color-grey text-center ">Select another product to compare</p>
+				</div>
+				<div class="each btn-compare m-m">
+					<a href="/content/v3/usgboral/samplepage/product-compare.html" ><button  class="btn width-full button-green btn-brand-default">compare selected</button></a>
+				</div>
+			</div>    
+	
+		</div>
+		<!-- compare popup end -->
+	
+		<!-- Shoutout start -->
+			<div class="shoutout-hidden hidden ">
+			<a href="${properties.link @ context='unsafe'}.html" class="height-full" style="background: url(${properties.imgPath @ context='unsafe' }) center center no-repeat; background-size:cover; width: -webkit-fill-available;" >
+									
+				<div class="bg-overlay">
+					<div class="banner-big">
+						<div class="content-area p-3xl text-md-center ">
+							<div class="ht5 uppercase color-white p-bottom-l">
+								${properties.title @ context='html'}
+							</div>
+							<div class="color-white">
+								${properties.description @ context='html'}
+							</div>
+						
+						</div>
+					</div>
+				</div>
+			</a>
+		</div>
+		<!-- Shoutout end -->
+	
+	<sly data-sly-use.clientLib="/libs/granite/sightly/templates/clientlib.html" data-sly-call="${clientLib.js @ categories='uiux.stickysidebar'}" data-sly-unwrap/>
+	<sly data-sly-use.clientLib="/libs/granite/sightly/templates/clientlib.html" data-sly-call="${clientLib.js @ categories='uiux.productlisting'}" data-sly-unwrap/>
+	
+	
+	<script>
+	
+	$(document).ready(function () {
+	
+	
+			productListingResultString(${component.productListingJson @ context='unsafe'});
+	
+		});
+	
+	
+	</script>
+	
