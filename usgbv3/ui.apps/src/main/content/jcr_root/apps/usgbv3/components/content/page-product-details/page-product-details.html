@@ -2515,7 +2515,7 @@
             $(document).on('click', '.cta-bookmark', function (e) {
                 e.preventDefault();
                 $('#add-bookmark-modal').modal('show');
-                var url = $(this).attr('href').replace(".html", ".properties.json");
+                var url = $(this).attr('href').replace(".html", ".properties_v3.json");
                 addNewBookmark(url);
             });
         });
@@ -2541,7 +2541,7 @@
         // browser history
         //===========================
         $(document).ready(function () {
-            var url = $('.cta-bookmark').attr('href').replace('.html', '.properties.json');
+            var url = $('.cta-bookmark').attr('href').replace('.html', '.properties_v3.json');
             var currOnStageMainResultData = [];
 
             if ($('.page-product-details').length > 0) {
@@ -2648,7 +2648,7 @@
 
         //get browser url
         var pathname = window.location.pathname;
-        var pagename = pathname.split(".").reverse()[1] + ".properties.json";
+        var pagename = pathname.split(".").reverse()[1] + "..properties_v3.json";
         //pass url to load json
         var detailsJSON
 

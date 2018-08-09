@@ -381,7 +381,7 @@
 
         sampleOrderList.forEach(function(sampleProduct, index, array){
 
-            var productUrlJson = sampleProduct.productUrl.replace(".html", ".properties.json")
+            var productUrlJson = sampleProduct.productUrl.replace(".html", ".properties_v3.json")
 
             $.get(productUrlJson, function(){})
             .done(function(data){

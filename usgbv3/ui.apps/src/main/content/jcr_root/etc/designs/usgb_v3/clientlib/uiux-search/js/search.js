@@ -188,7 +188,7 @@
                 e.preventDefault();
                 if(!$(this).hasClass('disabled')){
                     $('#add-bookmark-modal').modal('show');
-                    var url = $(this).attr('href').replace(".html", ".properties.json");
+                    var url = $(this).attr('href').replace(".html", ".properties_v3.json");
                     addNewBookmark(url);
                 } else {
                     $('#signin-modal').modal('show');
