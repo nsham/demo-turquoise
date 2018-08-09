@@ -133,9 +133,7 @@ public class FooterComponent extends WCMUsePojo {
 		
 		if(hitProperties.containsKey("pagePath" + tabNo)) {
 			
-			if(hitProperties.containsKey("disableMenu" + tabNo)) {
-				return null;
-			}
+			
 			String path = (String) hitProperties.get("pagePath" + tabNo);
 			String styleType = (String) hitProperties.get("styleType" + tabNo);
 			

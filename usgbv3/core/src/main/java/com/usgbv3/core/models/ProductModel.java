@@ -6,7 +6,8 @@ import java.util.List;
 import com.day.cq.tagging.Tag;
 
 public class ProductModel {
-	
+
+	private String name;
 	private String title;
 	private String description;
 	private String image;
@@ -16,8 +17,15 @@ public class ProductModel {
 	private String createdDate;
 	private Tag tag;
 	private List<Tag> tagList;
-	private String toStringTags;
 	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public String getTitle() {
 		return title;
 	}
@@ -84,25 +92,6 @@ public class ProductModel {
 		}
 		
 		this.tagList = tagList;
-	}
-	
-	public String toStringTags() {
-		String result = "";
-		
-		for(Tag tag : tagList) {
-			result = result + "data-"+ tag.getParent().getName() + "='" + tag.getName() + "' ";
-		}
-		
-		return result;
-	}
-
-	public String getToStringTags() {
-		String result = "";
-		
-		for(Tag tag : tagList) {
-			result = result + "data-"+ tag.getParent().getName() + "='" + tag.getName() + "' ";
-		}
-		return result;
 	}
 
 	public String getCreatedDate() {

@@ -9,6 +9,7 @@ public class MegamenuModel {
 	private String styleType;
 	private String link;
 	private String title;
+	private String name;
 	private String rightSectionTitle;
 	private String bottomSectionTitle;
 	private List<ArticleModel> sidePanel;
@@ -46,6 +47,14 @@ public class MegamenuModel {
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getRightSectionTitle() {

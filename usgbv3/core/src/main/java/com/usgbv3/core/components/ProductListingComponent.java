@@ -137,6 +137,8 @@ public class ProductListingComponent extends WCMUsePojo {
 		ValueMap pageProperties = page.getProperties();
 		
 		try {
+			
+			product.setName(page.getName());
 			product.setTitle(page.getTitle());
 			product.setLink(page.getPath());
 			product.setDescription(page.getDescription());
@@ -151,7 +153,7 @@ public class ProductListingComponent extends WCMUsePojo {
 			}			
 			
 
-			Calendar calendar = pageProperties.get("jcr:created", Calendar.class);
+			Calendar calendar = pageProperties.get("cq:lastModified", Calendar.class);
 			Date date = (Date) calendar.getTime();
 			product.setCreatedDate(formatter.format(date));
 			
