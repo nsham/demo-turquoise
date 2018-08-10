@@ -2080,7 +2080,7 @@ $(window).on('load', function () {
                 event.preventDefault();
                 clearTimeout(countDown);
                 getCard = $(this);
-                getLink = $(this).closest(".each").find("a").attr("href");
+                getLink = $(this).closest(".each").attr("href");
                 getElement();
                 checkStatus = $(this).closest(".each").find(".container-checkbox input").prop("checked");
 
