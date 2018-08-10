@@ -140,6 +140,13 @@
                         }
                     });
 
+                    // update dropdown for selected value dropdown
+                    for(var i=0; i<$('.drop-down-select').length; i++){
+                        if($($('.drop-down-select')[i]).val() !== ""){
+                            $($('.drop-down-select')[i]).closest('.float-label').find('label').addClass('open');
+                        }
+                    }
+
                     $('#sampleOrderShippingFormSubmit').click(function (e) {
                         
                         e.preventDefault();
@@ -381,7 +388,7 @@
 
         sampleOrderList.forEach(function(sampleProduct, index, array){
 
-            var productUrlJson = sampleProduct.productUrl.replace(".html", ".properties.json")
+            var productUrlJson = sampleProduct.productUrl.replace(".html", ".properties_v3.json")
 
             $.get(productUrlJson, function(){})
             .done(function(data){

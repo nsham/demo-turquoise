@@ -65,37 +65,40 @@ public class ProductCharacteristicComponent extends WCMUsePojo {
 		
 		try {
 			
-			if(rawNode.getProperty("title") != null && !(rawNode.getProperty("title").getString().isEmpty())){
+			if(rawNode.hasProperty("title")){
 				
 				product.setTitle(rawNode.getProperty("title").getString());
 			}
 			
-			if(rawNode.getProperty("description") != null && !(rawNode.getProperty("description").getString().isEmpty())){
+			if(rawNode.hasProperty("description")){
 				
 				product.setDescription(rawNode.getProperty("description").getString());
 			}
 			
-			if(rawNode.getProperty("icon") != null && !(rawNode.getProperty("icon").getString().isEmpty())){
+			if(rawNode.hasProperty("icon")){
 				
 				product.setIcon(rawNode.getProperty("icon").getString());
 			}
 			
 			if(rawNode.hasProperty("linkType")) {
 				
-				String linkType = rawNode.getProperty("linkType").toString();
+				String linkType = rawNode.getProperty("linkType").getString();
 				product.setLinkType(linkType);
 				
-				if("asset".equalsIgnoreCase(linkType) && rawNode.getProperty("imgPath") != null && !(rawNode.getProperty("imgPath").getString().isEmpty())) {
+				if("asset".equals(linkType) && rawNode.hasProperty("imgPath")) {
 					
 					product.setLink(rawNode.getProperty("imgPath").getString());
 					
-				}else if("page".equalsIgnoreCase(linkType) && rawNode.getProperty("link") != null && !(rawNode.getProperty("link").getString().isEmpty())) {
+				}else if("page".equals(linkType) && rawNode.hasProperty("linkPath")) {
 
-					product.setLink(rawNode.getProperty("link").getString());
+					product.setLink(rawNode.getProperty("linkPath").getString() + ".html");
 					
-				}else if("externalURL".equalsIgnoreCase(linkType) && rawNode.getProperty("externalUrl") != null && !(rawNode.getProperty("externalUrl").getString().isEmpty())) {
-
-					product.setLink(rawNode.getProperty("externalUrl").getString());
+				}else if("externalURL".equals(linkType) && rawNode.hasProperty("externalUrl")) {
+					String external = rawNode.getProperty("externalUrl").getString();
+					if(!external.startsWith("http")) {
+						external = "http://" + external;
+					}
+					product.setLink(external);
 					
 				}else {
 

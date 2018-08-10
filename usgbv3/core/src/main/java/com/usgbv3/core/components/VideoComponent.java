@@ -96,50 +96,63 @@ public class VideoComponent extends WCMUsePojo {
 			thumbnail = damThumb;
 			
 		}else {
+		}
 
-			if("youtube".equalsIgnoreCase(videoType)) {
-				
-				String youtubeUrl = (String) getProperties().get("youtube");
-				youtubeID = extractVideoIdFromUrl(youtubeUrl);
-				thumbnail = "http://img.youtube.com/vi/" + youtubeID + "/maxresdefault.jpg";
+		if("youtube".equalsIgnoreCase(videoType)) {
+			
+			String youtubeUrl = (String) getProperties().get("youtube");
+			youtubeID = extractVideoIdFromUrl(youtubeUrl);
+			
+			if(damThumb != null && !damThumb.isEmpty()) {
+				thumbnail = damThumb;
 				
 			}else {
-				try {
-					String videoDam = (String) getProperties().get("videoDam");
-					if(videoDam != null && !videoDam.isEmpty()) {
-
-						Resource res = getResourceResolver().getResource(videoDam);
-						Asset asset = res.adaptTo(Asset.class);
-						
-						//get the video thumbnail
-						Rendition renditionThumnail = asset.getRendition("cq5dam.thumbnail.319.319.png");
-						thumbnail = renditionThumnail.getPath();
-						
-						//get the MP4 video
-						Rendition renditionMP4 = asset.getRendition("cq5dam.video.iehq.mp4");
-						videoMP4 = renditionMP4.getPath();
-						
-						//get the OGG video
-						Rendition renditionOGG = asset.getRendition("cq5dam.video.firefoxhq.ogg");
-						videoOGG = renditionOGG.getPath();
-						
-						videoOri = videoDam;
-						
-					}else {
-						thumbnail = "";
-						videoMP4 = "";
-						videoOGG = "";
-						videoOri = "";
-					}
-					
-				}catch (Exception e) {
-					error = e.getMessage();
-				}
-				
-				
+				thumbnail = "http://img.youtube.com/vi/" + youtubeID + "/maxresdefault.jpg";
 			}
 			
+			
+		}else {
+			try {
+				String videoDam = (String) getProperties().get("videoDam");
+				if(videoDam != null && !videoDam.isEmpty()) {
+
+					Resource res = getResourceResolver().getResource(videoDam);
+					Asset asset = res.adaptTo(Asset.class);
+					
+					//get the video thumbnail
+					if(damThumb != null && !damThumb.isEmpty()) {
+						thumbnail = damThumb;
+						
+					}else {
+						Rendition renditionThumnail = asset.getRendition("cq5dam.thumbnail.319.319.png");
+						thumbnail = renditionThumnail.getPath();
+					}
+					
+					
+					//get the MP4 video
+					Rendition renditionMP4 = asset.getRendition("cq5dam.video.iehq.mp4");
+					videoMP4 = renditionMP4.getPath();
+					
+					//get the OGG video
+					Rendition renditionOGG = asset.getRendition("cq5dam.video.firefoxhq.ogg");
+					videoOGG = renditionOGG.getPath();
+					
+					videoOri = videoDam;
+					
+				}else {
+					thumbnail = "";
+					videoMP4 = "";
+					videoOGG = "";
+					videoOri = "";
+				}
+				
+			}catch (Exception e) {
+				error = e.getMessage();
+			}
+			
+			
 		}
+			
 		
 		
 		

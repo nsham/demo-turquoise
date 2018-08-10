@@ -902,10 +902,22 @@ function hookHeadScript(url, async, defer, callback) {
         $(".header .hamburger").on("click", function () {
             var $hamburgerContent = $('.hamburger-content');
 
+            
             if ($hamburgerContent.hasClass('hidden')) {
                 $hamburgerContent.removeClass('hidden');
+                $hamburgerContent.css("left","800px");
+                $hamburgerContent.animate({
+      				left:"0px"
+    			},800);
             } else {
-                $hamburgerContent.addClass('hidden');
+
+                 $hamburgerContent.animate({
+      				left:"800px"
+
+                 },1000, function(){
+                     $hamburgerContent.addClass('hidden');
+                 });
+
             }
 
             defaultScrollUpdate(".hamburger-content");
@@ -1706,7 +1718,7 @@ $(window).on('load', function () {
                     //console.log("data1-", data);
 
                     getJSONarr = data.map(function (getJSONarr) {
-                        return getJSONarr.url.split(".").reverse()[1] + ".properties.json";
+                        return getJSONarr.url.split(".").reverse()[1] + ".properties_v3.json";
                     });
 
 
@@ -2040,6 +2052,7 @@ $(window).on('load', function () {
             var findElem;
             var currInput;
             var storePopup; //localstorage arr
+            var countDown;
 
 
             //populate comparePopup
@@ -2065,7 +2078,7 @@ $(window).on('load', function () {
             $(document).on("change", '.listing-search-content .container-checkbox input[type="checkbox"]', function () {
 
                 event.preventDefault();
-
+                clearTimeout(countDown);
                 getCard = $(this);
                 getLink = $(this).closest(".each").find("a").attr("href");
                 getElement();
@@ -2092,27 +2105,25 @@ $(window).on('load', function () {
 
                 } else {
 
+                    var dataUncheck = $('[data-content-title="' + getLink + '"]');
+                    dataUncheck.closest(".each").animate({
+                        left: "100px",
+                        opacity: 0
+                    }, 900);
                     removeCompareLocalStorage(inputVal);
-                    //check popup if has the value
-                    // if ($("[data-content-title='" + inputVal + "']").has("[data-content-value='" + inputVal + "']")) {
-                    //     $("[data-content-title='" + inputVal + "']").remove();
-                    // }
                 }
-                checkNumberOfCheckbox();
-
             });
 
 
             //hide show popup
-            $(".compare-popup .btn-menu-down").click(function () {
-                $(".popup-content").toggle();
-                $(".compare-popup .btn-compare").toggle();
-                $(".compare-popup .title").toggleClass("selected")
-
-                //check to toggle compare-btn
-                if (numberOfChecked <= 1) {
-                    $(".compare-popup .btn-compare").toggle();
-                    $(".instruction-text").toggle();
+            $("body").on("click", ".compare-popup .title", function () {
+                minimisePopup();
+                clearTimeout(countDown);
+                if ($(".compare-popup .title").hasClass("selected")) {
+                    console.log("click true")
+                } else {
+                    console.log("click false")
+                    countDownPop();
                 }
             });
 
@@ -2135,26 +2146,30 @@ $(window).on('load', function () {
 
 
                 if (numberOfChecked > 1) {
-                    $(".compare-popup .btn-compare").show();
-                    $(".compare-popup").show();
-                    $(".compare-popup .instruction-text").hide();
+                    $(".compare-popup .instruction-text").fadeOut(10);
+                    $(".compare-popup .popup-content .each").fadeIn(1000);
+                    $(".compare-popup .btn-compare").fadeIn(800);
 
                 } else {
-                    $(".compare-popup .btn-compare").hide();
-                    $(".compare-popup .instruction-text").show();
+                    $(".compare-popup .btn-compare").fadeOut(10);
+                    $(".compare-popup .instruction-text").fadeIn(800);
                 }
 
                 if (numberOfChecked > 0) {
-                    $(".compare-popup .btn-menu-down").show();
-                    $(".popup-content").show();
+                    $(".compare-popup").fadeIn(800);
+                    $(".compare-popup .btn-menu-down").fadeIn(800);
+                    $(".popup-content").fadeIn(800);
                 } else {
-                    $(".compare-popup .instruction-text").hide();
-                    $(".compare-popup").show();
-                    $(".popup-content").hide();
-                    $(".compare-popup .btn-menu-down").hide();
-                    $(".compare-popup .btn-compare").hide();
-
+                    $(".compare-popup .instruction-text").fadeOut(10);
+                    $(".compare-popup").fadeOut(800);
+                    $(".popup-content").fadeOut(10);
+                    $(".compare-popup .btn-menu-down").fadeOut(10);
+                    $(".compare-popup .btn-compare").fadeOut(10);
                 }
+
+                clearTimeout(countDown);
+                checkPopupState();
+                //countDownPop();
             }
 
 
@@ -2163,6 +2178,10 @@ $(window).on('load', function () {
                 event.preventDefault();
                 currInput = $(this).closest('.each').attr("data-content-title");
                 $("[data-input-value ='" + currInput + "']").prop('checked', false);
+                $(this).closest('.each').animate({
+                    left: "100px",
+                    opacity: 0
+                }, 600);
                 removeCompareLocalStorage(currInput);
             });
 
@@ -2187,15 +2206,12 @@ $(window).on('load', function () {
                     }
                 });
 
-                //console.log("in1", getIndex1)
-                storeData.splice(getIndex1, 1);
+                setTimeout(function () {
+                    storeData.splice(getIndex1, 1);
+                    storeCompareLocalStorage();
+                    $("[data-input-value ='" + currInput + "']").attr('checked', false);
+                }, 500);
 
-                // storePopup = storeData;
-                //localStorage.setItem(categoryName, JSON.stringify(storeData));
-                //console.log("rremove", storeData)
-                storeCompareLocalStorage();
-                checkNumberOfCheckbox();
-                $("[data-input-value ='" + currInput + "']").attr('checked', false);
             }
 
 
@@ -2223,7 +2239,7 @@ $(window).on('load', function () {
                     var temptcomparePopupHTML = Handlebars.compile(comparePopupHTML);
                     $('.compare-popup-local').html(temptcomparePopupHTML(storeData));
 
-                    $(".compare-popup").show();
+
 
 
                     //target checked true and checkback the card
@@ -2237,8 +2253,58 @@ $(window).on('load', function () {
                         $(selectedCard).prop("checked", true);
                         $('.listing-search-content .container-checkbox input:checkbox:checked').prop('disabled', false);
                     });
+
+
+                    $(".compare-popup .popup-content .each").css("opacity", "0");
+                    setTimeout(function () {
+                        $(".compare-popup .popup-content .each").css({
+                            "top": "-5px",
+                            "opacity": "0"
+                        }).animate({
+                            top: "0px",
+                            opacity: 1
+                        }, 700);
+                    }, 200);
                     checkNumberOfCheckbox();
                 }
+            }
+            //minimise Popup if idle   
+            $(".compare-popup .inner-content")
+                .mouseenter(function () {
+                    console.log("enterrring");
+                    clearTimeout(countDown);
+                    //checkPopupState();
+                })
+                .mouseleave(function () {
+                    console.log("mouseleave");
+                    clearTimeout(countDown);
+                    countDownPop();
+                });
+
+
+            function countDownPop() {
+                console.log("counting")
+                countDown = setTimeout(function () {
+                    minimisePopup();
+                }, 5000);
+            }
+
+            function checkPopupState() {
+                clearTimeout(countDown);
+                if ($(".compare-popup .inner-content").is(":visible")) {
+                    console.log("true")
+                    countDownPop();
+                } else {
+                    console.log("false")
+                    $(".compare-popup .inner-content").slideToggle(800);
+                    $(".compare-popup .title").toggleClass("selected");
+                    countDownPop();
+                }
+            }
+
+            function minimisePopup() {
+                $(".compare-popup .inner-content").slideToggle(900);
+                $(".compare-popup .title").toggleClass("selected");
             }
 
 
@@ -2320,7 +2386,7 @@ $(window).on('load', function () {
             }
 
             function productListingResultString(data) {
-                console.log("productListingResultString in");
+                //console.log("productListingResultString in");
                 productData = data
                 currProductData = productData.product_result
 
@@ -2421,15 +2487,15 @@ $(window).on('load', function () {
                         break;
                     case "latest":
                         currOnStageMainResultData.sort(function (a, b) {
-                            if (a.created_date > b.created_date) return -1;
-                            if (a.created_date < b.created_date) return 1;
+                            if (Number(a.created_date) > Number(b.created_date)) return -1;
+                            if (Number(a.created_date) < Number(b.created_date)) return 1;
                             return 0;
                         });
                         break;
                     case "oldest":
                         currOnStageMainResultData.sort(function (a, b) {
-                            if (a.created_date < b.created_date) return -1;
-                            if (a.created_date > b.created_date) return 1;
+                            if (Number(a.created_date) < Number(b.created_date)) return -1;
+                            if (Number(a.created_date) > Number(b.created_date)) return 1;
                             return 0;
                         });
                         break;
@@ -2456,15 +2522,15 @@ $(window).on('load', function () {
                         break;
                     case "latest":
                         currOnStageMainResultData.sort(function (a, b) {
-                            if (a.created_date > b.created_date) return -1;
-                            if (a.created_date < b.created_date) return 1;
+                            if (Number(a.created_date) > Number(b.created_date)) return -1;
+                            if (Number(a.created_date) < Number(b.created_date)) return 1;
                             return 0;
                         });
                         break;
                     case "oldest":
                         currOnStageMainResultData.sort(function (a, b) {
-                            if (a.created_date < b.created_date) return -1;
-                            if (a.created_date > b.created_date) return 1;
+                            if (Number(a.created_date) < Number(b.created_date)) return -1;
+                            if (Number(a.created_date) > Number(b.created_date)) return 1;
                             return 0;
                         });
                         break;
@@ -2540,6 +2606,7 @@ $(window).on('load', function () {
             function checkForShoutout() {
                 if (shoutout == true) {
                     $('.product-listing-result').prepend("<div class='each m-bottom-xxl p-side-m shoutout-txt'><div  class='bg-light-grey width-full custom-block flex-column justify-center align-stretch'><h6 class='title ht6 uppercase text-center p-s'>SHOUT SHOUT SHOUT</h6></div></div>");
+                    $('.shoutout-txt > .custom-block').html($('.shoutout-hidden').html());
                 }
             }
 

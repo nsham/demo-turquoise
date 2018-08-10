@@ -50,7 +50,7 @@
 
             $(document).on('click', '.cta-trigger-remove', function(e){
                 e.preventDefault();
-                var url = $(this).closest('.each').find('.thumbs a').attr('href').replace('.html', '.properties.json');
+                var url = $(this).closest('.each').find('.thumbs a').attr('href').replace('.html', '.properties_v3.json');
                 $('#bookmark-remove-modal').attr('data-url', url);
                 $('#bookmark-remove-modal').modal('show');
             });
@@ -58,7 +58,7 @@
             $(document).on('click', '.cta-remove-bookmark', function(e){
                 e.preventDefault();
                 var url = $(this).closest('.modal').attr('data-url');
-                var targetUrl = $(this).closest('.modal').attr('data-url').replace('.properties.json', '.html');
+                var targetUrl = $(this).closest('.modal').attr('data-url').replace('.properties_v3.json', '.html');
                 removeBookmark(url);
                 $('#bookmark-remove-modal').modal('hide');
                 $('a[href="'+ targetUrl + '"]').closest('.each').remove();

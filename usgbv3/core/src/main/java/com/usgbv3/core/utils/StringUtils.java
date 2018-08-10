@@ -173,5 +173,20 @@ public class StringUtils {
 		}
 		return null;
 	}
+	
+	/* Decode by reversing the initial order of replacements */
+	public static String unescape(String value) {
+		
+		return value = value.replaceAll("\\x3E", ">")
+		        .replaceAll("\\x3C", "<")
+		        .replaceAll("\\x22", "\"")
+		        .replaceAll("\\x27", "\'")
+		        .replaceAll("\\pp", "%")
+		        .replaceAll("\\x26", "&") /* These 5 replacements protect from HTML/XML. */
+		        .replaceAll("\\u00A0", "\u00A0") /* Useful but not absolutely necessary. */
+		        .replaceAll("\\n", "\n")
+		        .replaceAll("\\t", "\t") /* These 2 replacements protect whitespaces. */
+		        .replaceAll("\\", "");
+	}
 
 }

@@ -12,6 +12,12 @@ function recaptchaCallback() {
 
     $(document).ready(function () {
         if($('.floating-type-form').length > 0){
+            for(var i=0; i<$('.drop-down-select').length; i++){
+                if($($('.drop-down-select')[i]).val() !== ""){
+                    $($('.drop-down-select')[i]).closest('.float-label').find('label').addClass('open');
+                }
+            }
+
             $(document).on('change', '.floating-type-form .drop-down-select', function (e) {
                 var labelDropDown = $(this).closest('.float-label').find('label');
                 if ($(this).val() == "") {

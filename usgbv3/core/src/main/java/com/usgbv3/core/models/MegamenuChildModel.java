@@ -6,10 +6,19 @@ import java.util.List;
 public class MegamenuChildModel {
 	
 	private String title;
+	private String name;
 	private String description;
 	private String link;
 	private List<MegamenuChildModel> child;
 	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public String getTitle() {
 		return title;
 	}

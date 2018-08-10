@@ -55,6 +55,7 @@ import com.usgbv3.core.models.SearchContentModel;
 import com.usgbv3.core.services.RestletService;
 import com.usgbv3.core.services.SSOConfigurationService;
 import com.usgbv3.core.utils.CountryUtils;
+import com.usgbv3.core.utils.StringUtils;
 
 
 //localhost:4502/bin/usgb/v3/search
@@ -113,7 +114,9 @@ public class SearchServlet extends BaseAllMethodsServlet {
 		        String countryHomePagePath = pageURL;
 		        Map<String, String> countryInfo = CountryUtils.retrieveUsgbCountrybyPath(request.getResourceResolver(), countryHomePagePath);
 		        
-				String keyword = request.getRequestParameter("text").toString();
+//				String rawkeyword = request.getRequestParameter("text").toString();
+//				String keyword = StringUtils.unescape(rawkeyword);
+		        String keyword = request.getRequestParameter("text").toString();
 				String category = request.getRequestParameter("category").toString();
 				JSONObject jsonObj = new JSONObject();
 

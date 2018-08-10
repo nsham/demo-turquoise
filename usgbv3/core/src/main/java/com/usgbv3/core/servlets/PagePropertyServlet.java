@@ -42,9 +42,9 @@ import java.util.Map;
 property={
         Constants.SERVICE_DESCRIPTION + "=Retrieve Page Properties",
         "sling.servlet.methods=" + HttpConstants.METHOD_GET,
-        "sling.servlet.paths="+ "/bin/usgb/pageproperty",
+        "sling.servlet.paths="+ "/bin/usgb/v3/pageproperty",
         "sling.servlet.resourceTypes="+ "cq:Page",
-        "sling.servlet.selectors="+ "properties",
+        "sling.servlet.selectors="+ "properties_v3",
         "sling.servlet.extensions="+ "json"
 })
 public class PagePropertyServlet  extends BaseAllMethodsServlet {
@@ -54,7 +54,7 @@ public class PagePropertyServlet  extends BaseAllMethodsServlet {
 	 */
 	private static final long serialVersionUID = -8811236444436438274L;
 
-	private static final Logger LOG = LoggerFactory.getLogger(ContactUSBasicServlet.class);
+	private static final Logger LOG = LoggerFactory.getLogger(PagePropertyServlet.class);
 
 	private static final String JSON_KEY_PAGE_PROPERTIES_lIST = "pagePropertiesList";
 	private static final String MASTERTEMPLATE3 = "mastertemplate3";
@@ -79,8 +79,8 @@ public class PagePropertyServlet  extends BaseAllMethodsServlet {
 	        if(request.getRequestURI() != null){
 	            try {
 	                String refererURI = request.getRequestURI();
-	                if(refererURI != null && refererURI.endsWith(".properties.json")){
-	                    pageURL = refererURI.replace(".properties.json", "");
+	                if(refererURI != null && refererURI.endsWith(".properties_v3.json")){
+	                    pageURL = refererURI.replace(".properties_v3.json", "");
 	                }
 	            } catch (Exception e) {
 	                LOG.error("URI SyntaxExvception is :"+e);
@@ -119,7 +119,9 @@ public class PagePropertyServlet  extends BaseAllMethodsServlet {
 	        if(contentPage != null) {
 	        	
 	        	JSONArray pagePropertiesListArray = new JSONArray();
+	    		LOG.info("getBasicInfo START " );
 	        	pagePropertiesListArray.put(getBasicInfo(contentPage));
+	    		LOG.info("getAdvanceInfo START " );
 	        	pagePropertiesListArray.put(getAdvanceInfo(resourceResolver, contentPage));
 				
 	        	pagePropertiesListArray = mergeAll(pagePropertiesListArray);
@@ -189,13 +191,14 @@ public class PagePropertyServlet  extends BaseAllMethodsServlet {
     	JSONObject basicInfoObject = new JSONObject();
     	
     	try {
-
+    		LOG.info("getAdvanceInfo START " );
     		Map<String, String> countryInfo = CountryUtils.retrieveUsgbCountrybyPath(resourceResolver, contentPage.getPath());
-    		
+    		LOG.info("countryInfo = " + countryInfo.toString());
     		if(countryInfo != null) {
     			basicInfoObject.put("countryCode", countryInfo.get("countryCode"));
     		}
-    		
+
+    		LOG.info("getPageTemplate = " + getPageTemplate(contentPage));
         	if(getPageTemplate(contentPage).equalsIgnoreCase(MASTERTEMPLATE3)) {
         		
         		ValueMap pageProperties = contentPage.getProperties();
@@ -232,7 +235,7 @@ public class PagePropertyServlet  extends BaseAllMethodsServlet {
         	}
 			
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
+			LOG.info("getAdvanceInfo JSONException = " + e.getMessage());
 			e.printStackTrace();
 		}
     	

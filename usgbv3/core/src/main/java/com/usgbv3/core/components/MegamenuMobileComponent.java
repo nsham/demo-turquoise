@@ -31,11 +31,10 @@ import com.usgbv3.core.models.MegamenuModel;
 import com.usgbv3.core.utils.CountryUtils;
 
 
-public class FooterComponent extends WCMUsePojo {
-	private static final Logger LOG = LoggerFactory.getLogger(FooterComponent.class);
+public class MegamenuMobileComponent extends WCMUsePojo {
+	private static final Logger LOG = LoggerFactory.getLogger(MegamenuMobileComponent.class);
 	
 	private List<MegamenuModel> megamenuList;
-	private List<MegamenuModel> additionalFooterList;
 	private String error;
 	
 	
@@ -45,14 +44,6 @@ public class FooterComponent extends WCMUsePojo {
 
 	public void setMegamenuList(List<MegamenuModel> megamenuList) {
 		this.megamenuList = megamenuList;
-	}
-
-	public List<MegamenuModel> getAdditionalFooterList() {
-		return additionalFooterList;
-	}
-
-	public void setAdditionalFooterList(List<MegamenuModel> additionalFooterList) {
-		this.additionalFooterList = additionalFooterList;
 	}
 
 	public String getError() {
@@ -67,7 +58,6 @@ public class FooterComponent extends WCMUsePojo {
 	public void activate() throws Exception {		
 
 		megamenuList = new ArrayList<MegamenuModel>();
-		additionalFooterList = new ArrayList<MegamenuModel>();
 		error = "Start";
 		
 		try {
@@ -88,7 +78,6 @@ public class FooterComponent extends WCMUsePojo {
 				}
 			}
 			
-			additionalFooterList = getAdditionalFooter();
 			
 		}catch (Exception e) {
 			error = error + " Exception " + e.getMessage();
@@ -142,13 +131,14 @@ public class FooterComponent extends WCMUsePojo {
 			
 			ValueMap pageProperties = parentPage.getProperties();
 			
-			if(pageProperties.containsKey("excludeFooter")) {
+			if(pageProperties.containsKey("excludeHeader")) {
 				return null;
 			}
 			
 			tabMegamenu.setPagePath(path);
 			tabMegamenu.setLink(path + ".html");
 			tabMegamenu.setTitle(parentPage.getTitle());
+			tabMegamenu.setName(parentPage.getName());
 			tabMegamenu.setStyleType(styleType);
 			
 				
@@ -177,11 +167,12 @@ public class FooterComponent extends WCMUsePojo {
 			
 			ValueMap pageProperties = subPage.getProperties();
 			
-			if(pageProperties.containsKey("excludeFooter")) {
+			if(pageProperties.containsKey("excludeHeader")) {
 				continue;
 			}
 			
 			MegamenuChildModel megasubPage = new MegamenuChildModel();
+			megasubPage.setName(subPage.getName());
 			megasubPage.setTitle(subPage.getTitle());
 			megasubPage.setLink(subPage.getPath());
 			megasubPage.setDescription(subPage.getDescription());
@@ -199,50 +190,6 @@ public class FooterComponent extends WCMUsePojo {
 		
 		return subMegamenu;
 	}
-	
-	public List<MegamenuModel> getAdditionalFooter(){
-		
-		List<MegamenuModel> addFooter = new ArrayList<MegamenuModel>();
-		
-		try {
-			
-			String[] addMenuList = getProperties().get("addMenu", String[].class);
-			
-			for(String addMenu : addMenuList) {
-				
-				JSONObject jsonFooter = new JSONObject(addMenu);
-				
-				MegamenuModel footer = new MegamenuModel();
-				List<MegamenuChildModel> subFooter = new ArrayList<MegamenuChildModel>();
-				footer.setTitle(jsonFooter.getString("addMenuTitle"));
-				
-				JSONArray subMenuList = jsonFooter.getJSONArray("subMenu");
-				
-				for (int i = 0 ; i < subMenuList.length(); i++) {
-					MegamenuChildModel subMenu = new MegamenuChildModel();
-					JSONObject subMenuObj = subMenuList.getJSONObject(i);
-					
-					if(subMenuObj.has("subMenuTitle")) {
-						subMenu.setTitle(subMenuObj.getString("subMenuTitle"));
-					}
-					
-					if(subMenuObj.has("subMenuPath")) {
-						subMenu.setLink(subMenuObj.getString("subMenuPath"));
-					}
-					subFooter.add(subMenu);
-				}
-				
-				footer.setChild(subFooter);
-				addFooter.add(footer);
-			}
-			
-		}catch (Exception e) {
-			error = error + "Exception getAdditionalFooter : " + e.getMessage();
-		}
-		
-		
-		return addFooter;
-	}
-    
+	    
 
 }
