@@ -13,9 +13,16 @@
 }
 
 .order-steps-wrapper .steps-header {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-direction: row;
-    justify-content: center;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+            justify-content: center;
 }
 
 .order-steps-wrapper .steps-header>div {
@@ -25,7 +32,7 @@
 .steps-header .steps {
     position: relative;
     display: inline-block;
-    padding: 10px 60px 9px 80px;
+    padding: 10px 20px 9px 30px;
     background-color: #F6F6F6;
     color: #333;
     display: -webkit-box;
@@ -127,90 +134,32 @@
     display: block;
 }
 
-.step-1-select-wrapper table .sample-img {
-    width: 15%;
-}
-
-.step-1-select-wrapper table .sample-img img {
-    width: 100%;
-}
-
-.step-1-select-wrapper table .sample-desc {
-    width: 50%;
-}
-
-.step-1-select-wrapper table .sample-quantity {
-    width: 20%;
-}
-
-.step-1-select-wrapper table .sample-quantity .quantity-ctrl {
-    display: inline-block;
-    padding: 5px 15px;
-    background-color: #F6F6F6;
-    color: #333;
-}
-
-.step-1-select-wrapper table .sample-quantity .quantity-ctrl:hover {
-    color: #009b3a;
-}
-
-.step-1-select-wrapper table .sample-quantity input {
-    display: inline-block;
-    vertical-align: initial;
-    width: 40px;
-    text-align: center;
-}
-
-.step-1-select-wrapper table .sample-remove {
-    width: 20%;
-}
-
-.step-1-select-wrapper table .sample-remove a {
-    color: #333;
-}
-
-.step-1-select-wrapper table .sample-remove a:hover {
-    color: #009b3a;
-}
-
-.step-1-select-wrapper table .sample-remove a .fa {
-    padding-right: 10px;
-}
-
-.step-1-select-wrapper table .sample-desc .title {
-    font-weight: bold;
-}
-
-.step-1-select-wrapper .cart-empty {
-    display: none;
-}
-
 .steps-inner-wrapper .step-ctrls {
     display: flex;
     flex-direction: row;
     justify-content: center
 }
 
-.step-3-order-summary-wrapper .ship-to-summary .order-date-no {
-    text-align: right;
-}
+// .step-3-order-summary-wrapper .ship-to-summary .order-date-no {
+//     text-align: right;
+// }
 
-.step-3-order-summary-wrapper table .sample-img {
-    width: 20%;
-}
+// .step-3-order-summary-wrapper .sample-img {
+//     width: 20%;
+// }
 
-.step-3-order-summary-wrapper table .sample-img img {
-    width: 100%;
-}
+// .step-3-order-summary-wrapper .sample-img img {
+//     width: 100%;
+// }
 
-.step-3-order-summary-wrapper table .sample-desc {
-    width: 60%;
-}
+// .step-3-order-summary-wrapper .sample-desc {
+//     width: 60%;
+// }
 
-.step-3-order-summary-wrapper table .sample-quantity {
-    width: 20%;
-    text-align: center;
-}
+// .step-3-order-summary-wrapper .sample-quantity {
+//     width: 20%;
+//     text-align: center;
+// }
 
 .sample-orders-modal {
     .modal-dialog {
@@ -222,12 +171,84 @@
     }
 }
 
+.step-1-select-wrapper,
+.step-3-order-summary-wrapper {
+    .sample-img{
+        width: 15%;
+    }
+    .sample-desc{
+        width: 50%;
+    }
+    .sample-quantity{
+        width: 20%;
+        .quantity-amount{
+            width: 40px;
+            margin: 0 5px;
+            text-align: center;
+        }
+    }
+    .sample-remove{
+        width: 15%;
+    }
+    .align-content-center{
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+    }
+    .cart-empty {
+        display: none;
+    }
+    
+}
+
+.step-3-order-summary-wrapper {
+    .sample-desc{
+        width: 70%;
+    }
+}
+
+.sample-orders-container{
+    & > div{
+        border-bottom: 1px solid #d2d2d2;
+    }
+    .sample-img,
+    .sample-desc,
+    .sample-quantity,
+    .sample-remove{
+        float: left;
+        padding: 15px;
+    }
+}
+
+
+.step-1-select-wrapper .sample-quantity .quantity-ctrl {
+    display: inline-block;
+    padding: 5px 15px;
+    background-color: #F6F6F6;
+    color: #333;
+    &:hover {
+        color: #009b3a;
+    }
+}
+
+
+.orders-history-wrapper .order-item-info{
+    cursor: pointer;
+}
+
+
 @media only screen and (max-width: 769px) {
     .steps-header .steps {
         padding: 10px 0px 9px 35px;
     }
     .steps-header .steps.active {
-        padding: 10px 50px 9px 50px;
+        padding: 10px 10px 9px 30px;
     }
     .steps-header .steps .step-no {
         border: none;
@@ -250,66 +271,21 @@
     .order-steps-wrapper table tr td {
         padding: 10px;
     }
-    .step-1-select-wrapper table tbody .sample-img {
-        vertical-align: top;
-        padding-top: 23px;
-    }
-    .step-1-select-wrapper table tbody .sample-desc {
-        display: block;
-        width: 159%;
-        padding-bottom: 30px;
-    }
-    .step-1-select-wrapper table .sample-quantity {
-        text-align: center;
-        width: initial;
-    }
-    .step-1-select-wrapper table .sample-quantity span {
-        display: none;
-    }
-    .step-1-select-wrapper table tbody .sample-quantity {
-        display: inline-block;
-        width: 178%;
-        text-align: left;
-        margin-bottom: 30px;
-    }
-    .step-1-select-wrapper table .sample-quantity .quantity-ctrl {
-        display: inline-block;
-        width: 40px;
-        margin: auto;
-    }
-    .step-1-select-wrapper table tbody .sample-remove {
-        width: initial;
-        float: right;
-        margin-right: -80px;
-        margin-top: -90px;
-        margin-bottom: 30px;
-        /*
-        display: inline-block;
-        width: initial;
-        position: absolute;
-        right: 10px;
-        bottom: 0;
-        */
-    }
-    .step-1-select-wrapper table .sample-remove a .fa {
-        font-size: 28px;
-        color: #fff;
-        background-color: #009b3a;
-        padding: 10px 15px;
-        border-radius: 10px;
-    }
-    .step-1-select-wrapper table .sample-remove a:hover .fa {
-        color: #009b3a;
-        background-color: #fff;
-    }
+    
     .step-3-order-summary-wrapper .ship-to-summary .order-date-no {
         text-align: left;
         margin-bottom: 20px;
     }
 
+    .step-1-select-wrapper .sample-quantity .quantity-amount{
+        width: 30px;
+        height: 33px;
+    }
+
     .orders-history-wrapper .accordionfc:after{
         border-top: 1px solid #eee;
     }
+
 }
 
 @media only screen and (max-width: 576px) {
@@ -331,30 +307,61 @@
     .steps-header .steps.active>div.step-title {
         display: none;
     }
-    .step-1-select-wrapper table tbody .sample-img img {
-        width: 100%;
-    }
-    .step-1-select-wrapper table tbody .sample-desc {
-        width: 168%;
-    }
-    .step-1-select-wrapper table tbody .sample-remove {
-        bottom: 23px;
-    }
+    
     .steps-inner-wrapper .step-ctrls {
         flex-direction: column;
     }
     .step-2-shipping-wrapper form .float-label {
         margin-bottom: 20px;
     }
-    .step-3-order-summary-wrapper table .sample-desc {
-        width: 135%;
+
+    .step-1-select-wrapper,
+    .step-3-order-summary-wrapper {
+        .align-content-center{
+            display: block;
+        }
     }
-    .step-3-order-summary-wrapper table .sample-img {
-        vertical-align: top;
-        padding-top: 23px;
+
+    
+    .step-1-select-wrapper,
+    .step-3-order-summary-wrapper {
+        position: relative;
+        .sample-img{
+            width: 15%;
+            padding: 15px 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .sample-desc{
+            width: 85%;
+            padding: 15px;
+            margin-left: 15%;
+        }
+        .sample-quantity{
+            width: 165px;
+            padding: 0 15px 15px;
+            margin-left: 15%;
+        }
+        .sample-remove{
+            width: 40px;
+            padding: 0 15px 15px;
+        }
+        table{
+            .sample-img{
+                padding: 15px;
+                position: static;
+            }
+            .sample-quantity span{
+                display: none;
+            }
+        }
     }
-    .step-3-order-summary-wrapper table .sample-img img {
-        width: 100%;
+
+    .step-3-order-summary-wrapper {
+        .sample-desc{
+            padding-bottom: 0;
+        }
     }
 }
 
@@ -364,9 +371,6 @@
     }
     .steps-header .steps>div span {
         font-size: 10px;
-    }
-    .step-1-select-wrapper table tbody .sample-remove {
-        right: 40px;
     }
 }
 
