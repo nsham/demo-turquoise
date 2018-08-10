@@ -216,20 +216,12 @@
 }
 
 .modal-video-popup{
-    &.in{
-        display: -webkit-box !important;
-        display: -ms-flexbox !important;
-        display: flex !important;
-        -webkit-box-pack: center;
-        -ms-flex-pack: center;
-        justify-content: center;
-        -webkit-box-align: center;
-        -ms-flex-align: center;
-        align-items: center;
-    }
     .modal-dialog{
-        margin: 0px;
+        margin: 0 auto;
         padding: 10px;
+        @media(min-width:768px){
+            top:10%;
+        }
     }
 
     .modal-dialog .modal-content .modal-header{

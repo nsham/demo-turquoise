@@ -4,12 +4,15 @@
 (function () {
   "use strict";
   $(document).ready(function () {
+    var videoSrc = $(".modal-video-popup iframe").attr("src");
+
       if ($('.cta-video-popup').length > 0) {
           $('.cta-video-popup').on('click', function () {
               switch ($(this).data('video-type')) {
                   case "youtube":
                       //console.log('click youtube video-id : ' + $(this).data('video-id'));
-                      togglePopupYoutubeVideo($(this).data('video-id'),'');
+                      $(".modal-video-popup iframe").attr("src", videoSrc+"?autoplay=1");
+                      //togglePopupYoutubeVideo($(this).data('video-id'),'');
                       $(this).parent().find('.modal').attr('data-video', 'youtube');
                       break;
 
@@ -23,10 +26,13 @@
 
 
           $('.modal-video-popup .close').on('click', function () {
-              switch ($(this).closest('.modal').data('video')) {
+              switch ($(this).closest('.modal').attr('data-video')) {
                   case "youtube":
                       //console.log('close youtube video-id : ' + $(this).closest('.modal').data('video-id'));
-                      togglePopupYoutubeVideo($(this).closest('.modal').data('video-id'),'hide');
+
+                      //$(".modal-video-popup iframe").attr("src", null);
+                      $(".modal-video-popup iframe").attr("src", videoSrc);
+                      //togglePopupYoutubeVideo($(this).closest('.modal').data('video-id'),'hide');
                       break;
 
                   case "assetVideo":
@@ -48,15 +54,15 @@
       }
   }
 
-  function togglePopupYoutubeVideo(id,state) {
-      // if state == 'hide', hide. Else: show video
-      var func;
-      var div = document.getElementById(id);
-      var iframe = div.getElementsByTagName("iframe")[0].contentWindow;
-      div.style.display = state == 'hide' ? 'none' : '';
-      func = state == 'hide' ? 'pauseVideo' : 'playVideo';
-      iframe.postMessage('{"event":"command","func":"' + func + '","args":""}', '*');
-  }
+//   function togglePopupYoutubeVideo(id,state) {
+//       // if state == 'hide', hide. Else: show video
+//       var func;
+//       var div = document.getElementById(id);
+//       var iframe = div.getElementsByTagName("iframe")[0].contentWindow;
+//       div.style.display = state == 'hide' ? 'none' : '';
+//       func = state == 'hide' ? 'pauseVideo' : 'playVideo';
+//       iframe.postMessage('{"event":"command","func":"' + func + '","args":""}', '*');
+//   }
 
 })();
 
