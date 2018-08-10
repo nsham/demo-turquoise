@@ -274,7 +274,7 @@ public class GetGalleryDetails  extends SlingSafeMethodsServlet {
         }
 
         tempJsonObject.addProperty("type", tagName);
-        tempJsonObject.addProperty("link", childPage.getPath());
+        tempJsonObject.addProperty("link", childPage.getPath() + ".html");
 
         return tempJsonObject;
     }
