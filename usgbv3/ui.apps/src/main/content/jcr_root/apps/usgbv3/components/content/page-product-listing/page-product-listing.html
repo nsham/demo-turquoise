@@ -109,7 +109,7 @@
 				<!-- handlebar product-listing-result-wrapper -->
 				<script id="product-listing-result" type="text/x-handlebars-template">
 					{{#each this}}
-					<div class="each m-bottom-xxl p-side-m" data-title-value="" data-category="{{texture}},{{thickness}},{{lr_rating}}">
+					<a href="{{link}}" target="_blank" class="each m-bottom-xxl p-side-m" data-title-value="" data-category="{{texture}},{{thickness}},{{lr_rating}}">
 						<div class="bg-light-grey custom-block flex-column justify-space-between align-stretch width-full">
 							<div class="thumbs flex-shrink-0">
 								<img src="{{img}}">
@@ -128,14 +128,14 @@
 							</div>
 	
 							<div class="addto text-center uppercase">
-								<a href="{{link}}" target="_blank">
+								<div class="green-btn-bg">
 									<span class="fs-2">
 										<strong>View Product</strong>
 									</span>
-								</a>
+								</div>
 							</div>
 						</div>
-					</div>
+					</a>
 					{{/each}}
 	
 				</script>
