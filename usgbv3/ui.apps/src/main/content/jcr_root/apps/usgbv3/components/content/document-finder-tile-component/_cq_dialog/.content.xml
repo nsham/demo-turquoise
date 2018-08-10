@@ -78,7 +78,7 @@
                                     <color-grey
                                         jcr:primaryType="nt:unstructured"
                                         name="color-grey"
-                                        value="#CCCCCC"/>
+                                        value="#DDDDDD"/>
                                     <color-dark-grey
                                         jcr:primaryType="nt:unstructured"
                                         name="color-dark-grey"

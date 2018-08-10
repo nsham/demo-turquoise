@@ -25,7 +25,7 @@
                         <items
                             jcr:primaryType="nt:unstructured"
                             sling:resourceSuperType="usgbv3/components/structure/common/customdialog/customrichtext/item">
-                            <bgColor
+                            <bgcolor
                                 jcr:primaryType="nt:unstructured"
                                 sling:orderBefore="[customrichtext]"
                                 sling:resourceType="usgb/widgets/colorpicker"
@@ -85,7 +85,7 @@
                                     <color-grey
                                         jcr:primaryType="nt:unstructured"
                                         name="color-grey"
-                                        value="#CCCCCC"/>
+                                        value="#DDDDDD"/>
                                     <color-dark-grey
                                         jcr:primaryType="nt:unstructured"
                                         name="color-dark-grey"
@@ -99,7 +99,7 @@
                                         name="color-black"
                                         value="#000000"/>
                                 </mappings>
-                            </bgColor>
+                            </bgcolor>
                             <assetType
                                 granite:class="cq-dialog-dropdown-showhide"
                                 jcr:primaryType="nt:unstructured"

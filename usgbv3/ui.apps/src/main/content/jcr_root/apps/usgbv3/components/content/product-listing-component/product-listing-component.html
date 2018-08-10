@@ -15,9 +15,8 @@
                         <!-- c-sidebar -->
                         <div class="c-sidebar rounded-corners">
                             <sly data-sly-list.product="${component.parentListingList}">
-    
-                                <div class="each bg-green-btn rounded-top">
-    
+
+								<div class="each bg-green-btn ${component.parentListingList.size == productList.count ? 'rounded-bottom' : 'rounded-top'}">
                                     <sly data-sly-test.isCurrentPage="${product.name == currentPage.name}">
                                         <a href="${product.link @ context='unsafe'}.html" class="color-primary-green bold ht6 uppercase m-bottom-xs">
                                             ${product.title @ context='unsafe'}
@@ -372,7 +371,7 @@
                         <div class=" img-content"> </div>
                         <div class="right-content title-content"> </div>
                         <button type="button" class="close-btn-box" aria-label="Close">
-                            <span class="bold" aria-hidden="true">Ã—</span>
+                            <span class="bold" aria-hidden="true">×</span>
                         </button>
                     </div>
                     <hr> -->
@@ -408,7 +407,7 @@
             </a>
         </div>
         <!-- Shoutout end -->
-    
+
     
     <sly data-sly-use.clientLib="/libs/granite/sightly/templates/clientlib.html" data-sly-call="${clientLib.js @ categories='uiux.stickysidebar'}" data-sly-unwrap/>
     <sly data-sly-use.clientLib="/libs/granite/sightly/templates/clientlib.html" data-sly-call="${clientLib.js @ categories='uiux.productlisting'}" data-sly-unwrap/>
@@ -418,7 +417,6 @@
     
     $(document).ready(function () {
     
-            console.log(${component.productListingJson @ context='unsafe'});
     
             productListingResultString(${component.productListingJson @ context='unsafe'});
     
