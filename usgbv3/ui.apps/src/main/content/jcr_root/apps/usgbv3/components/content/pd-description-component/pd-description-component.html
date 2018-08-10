@@ -5,8 +5,8 @@
     <style>
         ${properties.cssoverwrite @ context='unsafe'}
     </style>
-    
-    <div class="${properties.classid }" >
+
+    <div class="${properties.classid }" data-sly-use.countryInfo="com.usgbv3.core.components.CountryInfoComponent">
         <h2 class="color-darker-grey uppercase ht5">
             ${properties.title @ context='html'}
         </h2>
@@ -19,7 +19,7 @@
                 <span class="glyphicon glyphicon-heart p-right-s"></span>${'Add to my bookmark' @ i18n}
             </a>
         </sly>
-    
+
         <sly data-sly-test="${!currentStyle.hidePrint}">
             <a href="#" onclick="window.print();" class="col-xs-6 color-darker-grey fs-3 p-no m-bottom-m hidden-xs">
                 <span class="glyphicon glyphicon-print p-right-s"></span>${'Print' @ i18n}
@@ -211,8 +211,8 @@
                 </div>
     
                 <div class="each btn-compare m-m">
-                    <a href="/content/v3/usgboral/samplepage/product-compare.html">
-                        <button class="btn width-full button-green btn-brand-default">compare selected</button>
+                    <a href="#">
+                        <button onclick="redirectToCompare();" class="btn width-full button-green btn-brand-default">compare selected</button>
                     </a>
                 </div>
             </div>    
@@ -819,6 +819,18 @@
     })();
 
 
+    function redirectToCompare(){
+
+        var compareUrl = $(".compare-popup-local").find(".content-wrapper").first().find("a").attr('href');
+        $.ajax({
+            url: compareUrl.replace(".html", "") + ".properties_v3.json",
+        success : function(data) {
+    
+            window.location.href = "${countryInfo.countryInfo.sitePath @ context='unsafe'}" + "/compare.html?category=" + data.pagePropertiesList[0].categoryKey + "&countrycode=" + data.pagePropertiesList[0].countryCode;
+            }
+        });
+
+    }
 
 
 </script>

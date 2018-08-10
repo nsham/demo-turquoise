@@ -193,9 +193,13 @@ public class PagePropertyServlet  extends BaseAllMethodsServlet {
     	try {
     		LOG.info("getAdvanceInfo START " );
     		Map<String, String> countryInfo = CountryUtils.retrieveUsgbCountrybyPath(resourceResolver, contentPage.getPath());
-    		LOG.info("countryInfo = " + countryInfo.toString());
+//    		LOG.info("countryInfo = " + countryInfo.toString());
     		if(countryInfo != null) {
     			basicInfoObject.put("countryCode", countryInfo.get("countryCode"));
+    			
+    			JSONObject pageCategory = getPageCategory(resourceResolver, countryInfo.get("sitePath"), contentPage.getPath());
+    			basicInfoObject.put("pageCategoryKey", pageCategory.get("key").toString());
+        		basicInfoObject.put("pageCategoryName", pageCategory.get("name").toString());
     		}
 
     		LOG.info("getPageTemplate = " + getPageTemplate(contentPage));
@@ -205,10 +209,10 @@ public class PagePropertyServlet  extends BaseAllMethodsServlet {
         		
         		basicInfoObject.put("categoryName", MASTERTEMPLATE3);
         		
-        		JSONObject pageCategory = getPageCategory(resourceResolver, countryInfo.get("sitePath") + PRODUCT_PREFIX, contentPage.getPath());
+        		JSONObject productCategory = getPageCategory(resourceResolver, countryInfo.get("sitePath") + PRODUCT_PREFIX, contentPage.getPath());
         		
-        		basicInfoObject.put("categoryKey", pageCategory.get("key").toString());
-        		basicInfoObject.put("categoryName", pageCategory.get("name").toString());
+        		basicInfoObject.put("categoryKey", productCategory.get("key").toString());
+        		basicInfoObject.put("categoryName", productCategory.get("name").toString());
         		
         		JSONArray comparisonPropertiesList = new JSONArray();
         		JSONObject comparisonProperties = new JSONObject();
