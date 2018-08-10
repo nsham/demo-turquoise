@@ -97,11 +97,21 @@ public class MegamenuComponent extends WCMUsePojo {
 					tabMegamenu.setChild(megamenuChild);
 				}
 				
+				if("style2".equalsIgnoreCase(styleType)) {
+					
+					if(getProperties().containsKey("style2noLanding" + tabNo)) {
+						tabMegamenu.setNoLandingPage(true);
+					}
+				}
 				if("style3".equalsIgnoreCase(styleType)) {
 
 					Node currentNode = getResource().adaptTo(Node.class);
 					
 					try {
+						
+						if(getProperties().containsKey("style3noLanding" + tabNo)) {
+							tabMegamenu.setNoLandingPage(true);
+						}
 						
 						NodeIterator ni =  currentNode.getNodes() ; 
 						

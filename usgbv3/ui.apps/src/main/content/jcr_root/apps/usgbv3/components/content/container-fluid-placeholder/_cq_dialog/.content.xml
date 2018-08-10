@@ -43,7 +43,7 @@
                                 sling:resourceType="granite/ui/components/foundation/form/checkbox"
                                 allowBulkEdit="{Boolean}true"
                                 name="./hideDestop"
-                                text="Hide From Destop"
+                                text="Hide From Desktop"
                                 value="true"/>
                             <hideMobile
                                 jcr:primaryType="nt:unstructured"

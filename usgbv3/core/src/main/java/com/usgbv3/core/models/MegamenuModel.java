@@ -10,6 +10,7 @@ public class MegamenuModel {
 	private String link;
 	private String title;
 	private String name;
+	private boolean isNoLandingPage;
 	private String rightSectionTitle;
 	private String bottomSectionTitle;
 	private List<ArticleModel> sidePanel;
@@ -55,6 +56,14 @@ public class MegamenuModel {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public boolean isNoLandingPage() {
+		return isNoLandingPage;
+	}
+
+	public void setNoLandingPage(boolean isNoLandingPage) {
+		this.isNoLandingPage = isNoLandingPage;
 	}
 
 	public String getRightSectionTitle() {
