@@ -2605,7 +2605,7 @@ $(window).on('load', function () {
 
             function checkForShoutout() {
                 if (shoutout == true) {
-                    $('.product-listing-result').prepend("<div class='each m-bottom-xxl p-side-m shoutout-txt'><div  class='bg-light-grey width-full custom-block flex-column justify-center align-stretch'><h6 class='title ht6 uppercase text-center p-s'>SHOUT SHOUT SHOUT</h6></div></div>");
+                    $('.product-listing-result').prepend("<div class=' m-bottom-xxl p-side-m shoutout-txt'><div  class='bg-light-grey width-full custom-block flex-column justify-center align-stretch'><h6 class='title ht6 uppercase text-center p-s'>SHOUT SHOUT SHOUT</h6></div></div>");
                     $('.shoutout-txt > .custom-block').html($('.shoutout-hidden').html());
                 }
             }
