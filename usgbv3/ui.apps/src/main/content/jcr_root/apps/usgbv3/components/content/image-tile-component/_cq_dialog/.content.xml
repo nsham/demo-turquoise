@@ -89,19 +89,19 @@
                                     <color-light-grey
                                         jcr:primaryType="nt:unstructured"
                                         name="color-light-grey"
-                                        value="#CCCCCC"/>
+                                        value="#F6F6F6"/>
                                     <color-grey
                                         jcr:primaryType="nt:unstructured"
                                         name="color-grey"
-                                        value="#999999"/>
+                                        value="#DDDDDD"/>
                                     <color-dark-grey
                                         jcr:primaryType="nt:unstructured"
                                         name="color-dark-grey"
-                                        value="#666666"/>
+                                        value="#5F6062"/>
                                     <color-deep-dark-grey
                                         jcr:primaryType="nt:unstructured"
                                         name="color-deep-dark-grey"
-                                        value="#333333"/>
+                                        value="#353535"/>
                                     <color-black
                                         jcr:primaryType="nt:unstructured"
                                         name="color-black"
