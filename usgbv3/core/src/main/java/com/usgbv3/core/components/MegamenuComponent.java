@@ -200,6 +200,7 @@ public class MegamenuComponent extends WCMUsePojo {
 			
 			ValueMap subPageProperties = subPage.getProperties();
 			
+			//Skip if excludeHeader at pageproperties is ticked
 			if(subPageProperties.containsKey("excludeHeader")) {
 				continue;
 			}

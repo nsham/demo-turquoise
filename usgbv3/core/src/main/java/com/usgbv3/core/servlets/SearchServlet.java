@@ -183,8 +183,14 @@ public class SearchServlet extends BaseAllMethodsServlet {
 				
 				int hitNo = 0;
 				for(Hit hit : resultPages.getHits()){
-					totalMatchforContent++;
 					ValueMap hitProperties = hit.getProperties();
+					
+					//Skip if excludeSearch at pageproperties is ticked
+					if(hitProperties.containsKey("excludeSearch")) {
+						continue;
+					}
+					totalMatchforContent++;
+					
 					JSONObject searchContentJson = new JSONObject();
 //					SearchContentModel searchContent = new SearchContentModel();
 					
@@ -997,6 +1003,12 @@ public class SearchServlet extends BaseAllMethodsServlet {
 				int hitNo = 0;
 				for(Hit hit : resultPages.getHits()){
 					ValueMap hitProperties = hit.getProperties();
+					
+					//Skip if excludeSearch at pageproperties is ticked
+					if(hitProperties.containsKey("excludeSearch")) {
+						continue;
+					}
+					
 					JSONObject searchContentJson = new JSONObject();
 //					SearchContentModel searchContent = new SearchContentModel();
 					

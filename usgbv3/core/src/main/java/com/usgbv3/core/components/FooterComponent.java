@@ -142,6 +142,7 @@ public class FooterComponent extends WCMUsePojo {
 			
 			ValueMap pageProperties = parentPage.getProperties();
 			
+			//Skip if excludeFooter at pageproperties is ticked
 			if(pageProperties.containsKey("excludeFooter")) {
 				return null;
 			}
