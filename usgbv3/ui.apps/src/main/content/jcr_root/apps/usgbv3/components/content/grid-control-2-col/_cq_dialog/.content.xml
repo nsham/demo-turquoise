@@ -41,7 +41,7 @@
                             <column1animation
                                 jcr:primaryType="nt:unstructured"
                                 sling:resourceType="granite/ui/components/foundation/form/select"
-                                fieldLabel="Column 3 Animation"
+                                fieldLabel="Column 1 Animation"
                                 name="./dcolumn1animation">
                                 <datasource
                                     jcr:primaryType="nt:unstructured"

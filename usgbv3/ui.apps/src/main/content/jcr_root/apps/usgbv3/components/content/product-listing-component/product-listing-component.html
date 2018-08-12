@@ -16,7 +16,7 @@
                         <div class="c-sidebar rounded-corners">
                             <sly data-sly-list.product="${component.parentListingList}">
 
-                                <div class="each bg-green-btn rounded-top">
+                                <div class="each bg-green-btn ${component.parentListingList.size == productList.count ? 'rounded-bottom' : 'rounded-top'}">
     
                                     <sly data-sly-test.isCurrentPage="${product.name == currentPage.name}">
                                         <a href="${product.link @ context='unsafe'}.html" class="color-primary-green bold ht6 uppercase m-bottom-xs">
