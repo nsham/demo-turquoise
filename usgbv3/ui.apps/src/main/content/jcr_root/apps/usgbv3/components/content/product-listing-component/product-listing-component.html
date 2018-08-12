@@ -16,7 +16,7 @@
                         <div class="c-sidebar rounded-corners">
                             <sly data-sly-list.product="${component.parentListingList}">
 
-                                <div class="each bg-green-btn ${component.parentListingList.size == productList.count ? 'rounded-bottom' : 'rounded-top'}">
+                                <div class="each bg-green-btn ${productList.first ? 'rounded-top' : (productList.last ? 'rounded-bottom' : '') }">
     
                                     <sly data-sly-test.isCurrentPage="${product.name == currentPage.name}">
                                         <a href="${product.link @ context='unsafe'}.html" class="color-primary-green bold ht6 uppercase m-bottom-xs">
@@ -409,7 +409,7 @@
         </div>
         <!-- Shoutout end -->
     
-    
+
     <sly data-sly-use.clientLib="/libs/granite/sightly/templates/clientlib.html" data-sly-call="${clientLib.js @ categories='uiux.stickysidebar'}" data-sly-unwrap/>
     <sly data-sly-use.clientLib="/libs/granite/sightly/templates/clientlib.html" data-sly-call="${clientLib.js @ categories='uiux.productlisting'}" data-sly-unwrap/>
     

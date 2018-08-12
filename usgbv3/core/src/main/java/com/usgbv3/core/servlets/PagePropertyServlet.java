@@ -1,6 +1,12 @@
 package com.usgbv3.core.servlets;
 
 
+import com.day.cq.dam.api.Asset;
+import com.day.cq.search.PredicateGroup;
+import com.day.cq.search.Query;
+import com.day.cq.search.QueryBuilder;
+import com.day.cq.search.result.Hit;
+import com.day.cq.search.result.SearchResult;
 import com.day.cq.wcm.api.Page;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -14,6 +20,7 @@ import com.usgbv3.core.utils.StringUtils;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.SlingHttpServletResponse;
 import org.apache.sling.api.request.RequestParameter;
+import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.api.resource.ValueMap;
 import org.apache.sling.api.servlets.HttpConstants;
@@ -27,6 +34,9 @@ import org.osgi.service.component.annotations.Reference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.jcr.Node;
+import javax.jcr.NodeIterator;
+import javax.jcr.Session;
 import javax.servlet.Servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -34,6 +44,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -65,6 +76,9 @@ public class PagePropertyServlet  extends BaseAllMethodsServlet {
 
     @Reference
     CaptchaService captchaService;
+
+	@Reference
+    private QueryBuilder builder;
 
     @Override
     protected void doGet(SlingHttpServletRequest request, SlingHttpServletResponse response)
@@ -235,7 +249,11 @@ public class PagePropertyServlet  extends BaseAllMethodsServlet {
         		comparisonPropertiesList.put(comparisonProperties);
         		basicInfoObject.put("comparisonProperties", comparisonPropertiesList);
         		
-
+        		JSONArray resourceList = new JSONArray();
+        		resourceList = getResourceList(resourceResolver, contentPage.getPath());
+        		if(resourceList.length() > 0) {
+        			basicInfoObject.put("resourceList", resourceList);
+        		}
         	}
 			
 		} catch (JSONException e) {
@@ -345,6 +363,72 @@ public class PagePropertyServlet  extends BaseAllMethodsServlet {
 		
 		return mergeArray;
 		
+	}
+	
+	public JSONArray getResourceList(ResourceResolver resourceResolver, String currentPath) {
+		
+		JSONArray resourceList = new JSONArray();
+		
+		try {
+			
+			SearchResult resultPages = queryResourceList(resourceResolver, currentPath);
+			int totalMatchforPage = (int) resultPages.getTotalMatches();
+			
+			if(totalMatchforPage > 0){
+				
+				for(Hit hit : resultPages.getHits()){
+					
+					Node hitProperties = hit.getNode();
+					NodeIterator ni =  hitProperties.getNodes() ; 
+					while (ni.hasNext()) {
+				        Node child = (Node)ni.nextNode(); 
+				         
+				        
+				        NodeIterator ni2 =  child.getNodes() ; 
+				        while (ni2.hasNext()) {
+					        Node child2 = (Node)ni2.nextNode(); 
+					        
+					        if(child2.hasProperty("docPath")) {
+
+						        JSONObject resource = new JSONObject();
+						        
+						        Resource res = resourceResolver.getResource(child2.getProperty("docPath").getString());
+								Asset asset = res.adaptTo(Asset.class);
+								
+								resource.put("title", asset.getMetadataValue("dc:title"));
+						        resource.put("docSrc", child2.getProperty("docPath").getString());
+						        resourceList.put(resource);
+					        }
+					        
+					        
+				        }
+				    }
+				}
+			}
+		}catch (Exception e) {
+			LOG.info("getResourceList Exception : " + e.getMessage());
+		}
+		
+		
+		return resourceList;
+	}
+	
+	public SearchResult queryResourceList(ResourceResolver resourceResolver, String path) {
+
+		Session session = resourceResolver.adaptTo(Session.class);
+		Map<String, String> queryMap = new HashMap<String, String>();
+
+		queryMap.put("path", path);
+		queryMap.put("1_property", "sling:resourceType");
+		queryMap.put("1_property.value", "usgbv3/components/content/resources-component");
+		queryMap.put("orderby", "@jcr:score");
+		queryMap.put("orderby.sort", "desc");
+		LOG.info("builder = " + builder);
+		
+		Query query = builder.createQuery(PredicateGroup.create(queryMap), session);
+		SearchResult result = query.getResult();
+		
+		return result;
 	}
     	
     	
