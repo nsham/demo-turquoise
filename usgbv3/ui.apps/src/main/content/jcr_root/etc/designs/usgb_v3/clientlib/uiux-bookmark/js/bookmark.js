@@ -43,6 +43,12 @@
                 originalDataReversed = clone.reverse();
                 currOnStageMainResultData = originalData;
                 if(currOnStageMainResultData.length > 0){
+                    // sorting by default: a-z
+                    currOnStageMainResultData.sort(function(a, b){
+                        if(a.pagePropertiesList[0].pageTitle.toLowerCase() < b.pagePropertiesList[0].pageTitle.toLowerCase()) return -1;
+                        if(a.pagePropertiesList[0].pageTitle.toLowerCase() > b.pagePropertiesList[0].pageTitle.toLowerCase()) return 1;
+                        return 0;
+                    });
                     paginationResult(currOnStageMainResultData);
                     getShareKey();
                 }
@@ -125,6 +131,19 @@
                         if(a.pagePropertiesList[0].pageTitle.toLowerCase() > b.pagePropertiesList[0].pageTitle.toLowerCase()) return 1;
                         return 0;
                     });
+                    break;
+                case "z_a":
+                    currOnStageMainResultData.sort(function(a, b){
+                        if(a.pagePropertiesList[0].pageTitle.toLowerCase() > b.pagePropertiesList[0].pageTitle.toLowerCase()) return -1;
+                        if(a.pagePropertiesList[0].pageTitle.toLowerCase() < b.pagePropertiesList[0].pageTitle.toLowerCase()) return 1;
+                        return 0;
+                    });
+                    break;
+                case "latest":
+                    currOnStageMainResultData = originalData;
+                    break;
+                case "oldest":
+                    currOnStageMainResultData = originalDataReversed;
                     break;
                 case "categorize":
                     currOnStageMainResultData.sort(function(a, b){
