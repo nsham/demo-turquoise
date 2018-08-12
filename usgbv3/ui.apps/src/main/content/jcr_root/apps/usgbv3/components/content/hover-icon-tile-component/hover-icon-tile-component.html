@@ -1,4 +1,4 @@
-<sly data-sly-test="${wcmmode.edit || wcmmode.design}">
+<sly data-sly-test="${wcmmode.edit || wcmmode.design}"></sly>
 	Edit here for Hover Icon Tile Component
 </sly>
 
@@ -58,7 +58,7 @@
                         <div class="color-darker-grey">${properties.description @ context='html'}</div>  
                     </div>
                 </div>
-            
+
 
             </div>
         </a>
@@ -79,3 +79,30 @@
         <!-- MOBILE VERSION END -->
 
 </div>
+
+<script>
+
+    (function () {
+        "use strict";
+        //===========================
+        //Hover auto height
+        //===========================
+        $(document).ready(function () {
+            
+            var boxHover = $(this,".bg-box-hover").find(".sub-text");
+            $(".box-type-4").mouseenter(function(){
+                boxHover.css("height","0px").delay(400).css("height","auto");
+             });
+             
+           $(".box-type-4").mouseout(function(){
+               boxHover.animate({
+                    height: "auto",
+                  },200);
+              });
+
+
+        });
+    })();
+
+
+</script>
