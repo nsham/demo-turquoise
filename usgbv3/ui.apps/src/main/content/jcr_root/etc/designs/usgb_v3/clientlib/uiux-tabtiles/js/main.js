@@ -40,8 +40,14 @@
             $("#loadMore").fadeIn(500);
             $(".fade-bg").fadeIn(500);
             var getDivHeight = $(".content-wrapper").height();
-            var newDivHeight = getDivHeight + 380;
-            $('.content-wrapper').css('height', newDivHeight);
+            var cardHeight = $('[data-category]').height();
+            var newDivHeight = getDivHeight + cardHeight;
+            //$('.content-wrapper').css('height', newDivHeight);
+            $('.content-wrapper').css({
+                'transition': 'height 1.2s',
+                'height': newDivHeight
+            });
+            $('[data-category=' + getID + ']').matchHeight();
         }
 
 
