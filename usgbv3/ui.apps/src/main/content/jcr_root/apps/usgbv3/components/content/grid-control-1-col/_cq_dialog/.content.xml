@@ -43,11 +43,7 @@
                             <column1animation
                                 jcr:primaryType="nt:unstructured"
                                 sling:resourceType="granite/ui/components/foundation/form/select"
-<<<<<<< HEAD
                                 fieldLabel="Column 3 Animation"
-=======
-                                fieldLabel="Column 1 Animation Delay"
->>>>>>> branch 'development' of https://github.com/usgboral/USGBoral_V3.git
                                 name="./dcolumn1animation">
                                 <datasource
                                     jcr:primaryType="nt:unstructured"
@@ -200,7 +196,6 @@
                     </column>
                 </items>
             </mobile>
-<<<<<<< HEAD
             <customcss
                 jcr:primaryType="nt:unstructured"
                 jcr:title="Custom CSS"
@@ -227,8 +222,6 @@
                     </column>
                 </items>
             </customcss>
-=======
->>>>>>> branch 'development' of https://github.com/usgboral/USGBoral_V3.git
         </items>
     </content>
 </jcr:root>
