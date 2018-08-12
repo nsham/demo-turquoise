@@ -19,8 +19,14 @@
 
         					  <sly data-sly-test.assetExist="${item.properties.imgPath || item.properties.mblImgPath || item.properties.videoDam}">
                               	<sly data-sly-test.enablevideo="${item.properties.enableVideo}">
-                                    <a href="${item.properties.link}.html" target="${properties.targettype == properties.hiddentarget ? properties.targetName : properties.targettype}" class="hero-banner-wrapper" style="background: rgb(0, 0, 0); width: 1349px;"
-                                        data-img-mobile="background:#000" >
+        							<sly data-sly-test.urlAssetExist="${item.properties.link}">
+										<a href="${item.properties.link}.html" target="${properties.targettype == properties.hiddentarget ? properties.targetName : properties.targettype}" class="hero-banner-wrapper" style="background: rgb(0, 0, 0); width: 1349px;"
+                                        	data-img-mobile="background:#000" >
+        							</sly>
+        							<sly data-sly-test="${!urlAssetExist}">
+										<a class="hero-banner-wrapper" style="background: rgb(0, 0, 0); width: 1349px;" data-img-mobile="background:#000" >
+        							</sly>
+
 
                                         <video width="90%" heigth:="100%" autoplay="" nocontrols="" video="" loop="" id="theVideo" muted onloadedmetadata="this.muted=true">
                                             <source src="${item.properties.videoDam}" type="video/mp4">
@@ -28,24 +34,45 @@
 
                                 </sly>
                                 <sly data-sly-test="${!enablevideo}">
-                                    <sly data-sly-test.imgExist="${item.properties.imgPath} >
+        							<sly data-sly-test.urlAssetExist2="${item.properties.link}">
+										<sly data-sly-test.imgExist="${item.properties.imgPath}" >
                             			<a href="${item.properties.link}.html" target="${properties.targettype == properties.hiddentarget ? properties.targetName : properties.targettype}" class="hero-banner-wrapper mobile-image-enabled" 
                                             style="background:transparent url(${item.properties.imgPath @ context='unsafe'}) center right no-repeat; background-size:cover;"
                                             data-img-mobile="background:transparent url(${item.properties.mblImgPath ? item.properties.mblImgPath : item.properties.imgPath @ context='unsafe'}) bottom right no-repeat; background-size:cover;" >
+                                        </sly>
+                                        <sly data-sly-test="${!imgExist}" >
+                                            <a href="${item.properties.link}.html" target="${properties.targettype == properties.hiddentarget ? properties.targetName : properties.targettype}" class="hero-banner-wrapper mobile-image-enabled" 
+                                                style="background-color: ${item.properties.bgColor @ context='unsafe'}; "
+                                                data-img-mobile="background:transparent url(${item.properties.mblImgPath ? item.properties.mblImgPath : item.properties.imgPath @ context='unsafe'}) bottom right no-repeat; background-size:cover;" >
+                                        </sly>
                                     </sly>
-                                    <sly data-sly-test="${!imgExist} >
-                            			<a href="${item.properties.link}.html" target="${properties.targettype == properties.hiddentarget ? properties.targetName : properties.targettype}" class="hero-banner-wrapper mobile-image-enabled" 
-                                            style="background-color: ${item.properties.bgColor @ context='unsafe'}; "
-                                            data-img-mobile="background:transparent url(${item.properties.mblImgPath ? item.properties.mblImgPath : item.properties.imgPath @ context='unsafe'}) bottom right no-repeat; background-size:cover;" >
-                                    </sly>
+                                    <sly data-sly-test="${!urlAssetExist2}">
+                                        <sly data-sly-test.imgExist2="${item.properties.imgPath}" >
+                                            <a class="hero-banner-wrapper mobile-image-enabled" 
+                                                style="background:transparent url(${item.properties.imgPath @ context='unsafe'}) center right no-repeat; background-size:cover;"
+                                                data-img-mobile="background:transparent url(${item.properties.mblImgPath ? item.properties.mblImgPath : item.properties.imgPath @ context='unsafe'}) bottom right no-repeat; background-size:cover;" >
+                                        </sly>
+                                        <sly data-sly-test="${!imgExist2}" >
+                                            <a class="hero-banner-wrapper mobile-image-enabled" 
+                                                style="background-color: ${item.properties.bgColor @ context='unsafe'}; "
+                                                data-img-mobile="background:transparent url(${item.properties.mblImgPath ? item.properties.mblImgPath : item.properties.imgPath @ context='unsafe'}) bottom right no-repeat; background-size:cover;" >
+                                        </sly>
+        							</sly>
+
 
 
 
                                 </sly>
         					  </sly>
         					  <sly data-sly-test="${!assetExist}">
-        						<a href="${item.properties.link}.html" target="${properties.targettype == properties.hiddentarget ? properties.targetName : properties.targettype}" class="hero-banner-wrapper" 
-        								style="background-color: ${item.properties.bgColor @ context='unsafe'}" >
+        							<sly data-sly-test.urlAssetExist3="${item.properties.link}">
+										<a href="${item.properties.link}.html" target="${properties.targettype == properties.hiddentarget ? properties.targetName : properties.targettype}" class="hero-banner-wrapper" 
+        									style="background-color: ${item.properties.bgColor @ context='unsafe'}" >
+        							</sly>
+        							<sly data-sly-test="${!urlAssetExist3}">
+										<a class="hero-banner-wrapper" style="background-color: ${item.properties.bgColor @ context='unsafe'}" >
+        							</sly>
+
         					  </sly>
                               <div class="${item.properties.opacity}">
                                   <div class="container">
