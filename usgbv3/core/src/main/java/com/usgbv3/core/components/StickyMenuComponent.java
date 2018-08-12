@@ -20,7 +20,7 @@ public class StickyMenuComponent extends WCMUsePojo {
 	private static final Logger LOG = LoggerFactory.getLogger(StickyMenuComponent.class);
 	
 	private List<ContainerFluidModel> containerFluidList;
-	private String containerFluidTemplate = "usgbv3/components/content/container-fluid-placeholder";
+	private String containerFluidTemplate = "usgbv3/components/content/pd-container-fluid-placeholder";
 	private String firstNode;
 	private String lastNode;
 	private String error;
