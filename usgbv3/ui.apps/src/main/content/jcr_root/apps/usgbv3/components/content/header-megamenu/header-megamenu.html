@@ -1,7 +1,3 @@
-<sly data-sly-test="${wcmmode.edit || wcmmode.design}">
-	Edit here for Freeform Text Component
-</sly>
-
 <style>
 	${properties.cssoverwrite @ context='unsafe'}
 </style>
@@ -13,7 +9,13 @@
         	<sly data-sly-list.megamenu="${component.megamenuList}">
 
 				<li class="nav-dropdown-wrapper mega-dropdown">
-					<a href="${megamenu.link @ context='unsafe'}.html">${megamenu.title}</a>
+                	<sly data-sly-test.noLanding="${megamenu.isNoLandingPage }">
+						<a >${megamenu.title}</a>
+                    </sly>
+                	<sly data-sly-test="${!noLanding }">
+						<a href="${megamenu.link @ context='unsafe'}.html">${megamenu.title}</a>
+                    </sly>
+
 
 					<sly data-sly-test="${megamenu.styleType == 'style2' }">
 

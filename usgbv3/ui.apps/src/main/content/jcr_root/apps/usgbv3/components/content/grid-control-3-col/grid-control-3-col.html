@@ -1,24 +1,15 @@
-<<<<<<< HEAD
-<div data-sly-use.logic="logic.js" class="row ${logic.mgnCls} ${logic.rowpadding} ${properties.gutter}">
-<div id="${properties.gc3bookmark}" class="col col-md-${properties.dcolumn1width} col-sm-${properties.tcolumn1width} col-xs-${properties.mcolumn1width} col-md-offset-${properties.doffset} col-sm-offset-${properties.toffset} col-xs-offset-${properties.moffset} ${logic.c1padding}">
+<style>
+	${properties.cssoverwrite @ context='unsafe'}
+</style>
+
+<div data-sly-use.logic="logic.js" class="row ${logic.mgnCls} ${properties.gutter} ${properties.classid }">
+	<div data-scroll-reveal="${properties.dcolumn1animation}" class="col col-md-${properties.dcolumn1width} col-sm-${properties.tcolumn1width} col-xs-${properties.mcolumn1width} col-md-offset-${properties.doffset} col-sm-offset-${properties.toffset} col-xs-offset-${properties.moffset} ${logic.c1padding}">
         <sly data-sly-resource="${ @path='par1', resourceType='foundation/components/parsys'}"></sly>
     </div>
-    <div class="col col-md-${properties.dcolumn2width} col-sm-${properties.tcolumn2width} col-xs-${properties.mcolumn2width} ${logic.c2padding}">
+    <div data-scroll-reveal="${properties.dcolumn2animation}" class="col col-md-${properties.dcolumn2width} col-sm-${properties.tcolumn2width} col-xs-${properties.mcolumn2width} ${logic.c2padding}">
         <sly data-sly-resource="${ @path='par2', resourceType='foundation/components/parsys'}"></sly>
     </div>
-    <div class="col col-md-${properties.dcolumn3width} col-sm-${properties.tcolumn3width} col-xs-${properties.mcolumn3width} ${logic.c3padding}">
+    <div data-scroll-reveal="${properties.dcolumn3animation}" class="col col-md-${properties.dcolumn3width} col-sm-${properties.tcolumn3width} col-xs-${properties.mcolumn3width} ${logic.c3padding}">
         <sly data-sly-resource="${ @path='par3', resourceType='foundation/components/parsys'}"></sly>
     </div>
-=======
-<div data-sly-use.logic="logic.js" class="row ${logic.mgnCls} ${logic.rowpadding} ${properties.gutter}">
-<div id="${properties.gc3bookmark}" class="col col-md-${properties.dcolumn1width} col-sm-${properties.tcolumn1width} col-xs-${properties.mcolumn1width} col-md-offset-${properties.doffset} col-sm-offset-${properties.toffset} col-xs-offset-${properties.moffset} ${logic.c1padding}">
-        <sly data-sly-resource="${ @path='par1', resourceType='foundation/components/parsys'}"></sly>
-    </div>
-    <div class="col col-md-${properties.dcolumn2width} col-sm-${properties.tcolumn2width} col-xs-${properties.mcolumn2width} ${logic.c2padding}">
-        <sly data-sly-resource="${ @path='par2', resourceType='foundation/components/parsys'}"></sly>
-    </div>
-    <div class="col col-md-${properties.dcolumn3width} col-sm-${properties.tcolumn3width} col-xs-${properties.mcolumn3width} ${logic.c3padding}">
-        <sly data-sly-resource="${ @path='par3', resourceType='foundation/components/parsys'}"></sly>
-    </div>
->>>>>>> 7c6b295501581433d4cd01e3a475439ca3b9cf67
 </div>

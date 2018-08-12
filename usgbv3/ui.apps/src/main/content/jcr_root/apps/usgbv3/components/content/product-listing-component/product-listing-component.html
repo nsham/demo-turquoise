@@ -1,12 +1,12 @@
 <sly data-sly-test="${wcmmode.edit || wcmmode.design}">
-        Edit here for Product Listing Component
-    </sly>
-    <style>
-        ${properties.cssoverwrite @ context='unsafe'}
-    </style>
+	Edit here for Product Listing Component
+</sly>
+<style>
+	${properties.cssoverwrite @ context='unsafe'}
+</style>
+
     
-    
-    <div class="container" data-sly-use.component="com.usgbv3.core.components.ProductListingComponent">
+    <div class="container ${properties.classid}" data-sly-use.component="com.usgbv3.core.components.ProductListingComponent" data-sly-use.countryInfo="com.usgbv3.core.components.CountryInfoComponent">
             <div class="row m-bottom-xxl m-top-s  product-listing-sidebar ">
                 <!-- set p-left-no, avoid sticy width's glitch -->
                 <div class="col-xs-12 col-sm-3 col-md-3 hidden-xs p-left-no make-sticky">
@@ -16,7 +16,8 @@
                         <div class="c-sidebar rounded-corners">
                             <sly data-sly-list.product="${component.parentListingList}">
 
-								<div class="each bg-green-btn ${component.parentListingList.size == productList.count ? 'rounded-bottom' : 'rounded-top'}">
+                                <div class="each bg-green-btn rounded-top">
+    
                                     <sly data-sly-test.isCurrentPage="${product.name == currentPage.name}">
                                         <a href="${product.link @ context='unsafe'}.html" class="color-primary-green bold ht6 uppercase m-bottom-xs">
                                             ${product.title @ context='unsafe'}
@@ -371,7 +372,7 @@
                         <div class=" img-content"> </div>
                         <div class="right-content title-content"> </div>
                         <button type="button" class="close-btn-box" aria-label="Close">
-                            <span class="bold" aria-hidden="true">×</span>
+                            <span class="bold" aria-hidden="true">Ã—</span>
                         </button>
                     </div>
                     <hr> -->
@@ -380,7 +381,7 @@
                     <p class="m-bottom-xl color-grey text-center ">Select another product to compare</p>
                 </div>
                 <div class="each btn-compare m-m">
-                    <a href="/content/v3/usgboral/samplepage/product-compare.html" ><button  class="btn width-full button-green btn-brand-default">compare selected</button></a>
+                    <a href="#" ><button onclick="redirectToCompare();" class="btn width-full button-green btn-brand-default">compare selected</button></a>
                 </div>
             </div>
     
@@ -407,21 +408,34 @@
             </a>
         </div>
         <!-- Shoutout end -->
-
+    
     
     <sly data-sly-use.clientLib="/libs/granite/sightly/templates/clientlib.html" data-sly-call="${clientLib.js @ categories='uiux.stickysidebar'}" data-sly-unwrap/>
     <sly data-sly-use.clientLib="/libs/granite/sightly/templates/clientlib.html" data-sly-call="${clientLib.js @ categories='uiux.productlisting'}" data-sly-unwrap/>
     
-    
     <script>
-    
+
     $(document).ready(function () {
-    
-    
+
+
             productListingResultString(${component.productListingJson @ context='unsafe'});
+
+
     
         });
+
+    function redirectToCompare(){
+
+        var compareUrl = $(".compare-popup-local").find(".content-wrapper").first().find("a").attr('href');
+        $.ajax({
+            url: compareUrl.replace(".html", "") + ".properties_v3.json",
+        success : function(data) {
     
-    
+            window.location.href = "${countryInfo.countryInfo.sitePath @ context='unsafe'}" + "/compare.html?category=" + data.pagePropertiesList[0].categoryKey + "&countrycode=" + data.pagePropertiesList[0].countryCode;
+            }
+        });
+
+    }
+
     </script>
     

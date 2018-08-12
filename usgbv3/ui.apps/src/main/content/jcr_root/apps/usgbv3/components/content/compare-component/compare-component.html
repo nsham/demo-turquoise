@@ -1,4 +1,12 @@
-<div class="page-product-compare">
+<sly data-sly-test="${wcmmode.edit || wcmmode.design}">
+	Edit here for Compare Component
+</sly>
+
+<style>
+	${properties.cssoverwrite @ context='unsafe'}
+</style>
+
+<div class="page-product-compare ${properties.classid }" data-sly-use.countryInfo="com.usgbv3.core.components.CountryInfoComponent">
 	<div class="container ">
 		<div class="row m-vertical-m hidden-xs">
 			<div class="c-flex-items col-xs-12">
@@ -20,7 +28,7 @@
 	<div class="container">
 		<div class="row m-top-xl m-sm-top-3xl">
 			<div class="col-xs-8 p-right-no">
-				<h2 class="ht4 uppercase color-darker-grey">Compare product</h2>
+				<h2 class="ht4 uppercase color-darker-grey">${properties.title @ context='html'}</h2>
 			</div>
 			<div class="col-xs-4 pull-right visible-xs">
 				<span class="fa-stack fa-1x">
@@ -33,9 +41,7 @@
 				</span>
 			</div>
 			<div class="col-xs-12 m-bottom-xs">
-				<p class="color-darker-grey">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis
-					natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque
-					eu, pretium quis, sem. Nulla consequat massa quis enim.</p>
+				<p class="color-darker-grey">${properties.description @ context='html'}</p>
 			</div>
 		</div>
 	</div>
@@ -109,7 +115,7 @@
 			{{/each}}
 
 			<div data-div-height="wrapper" class=" compare-one col-xs-4 col-cell p-no">
-				<a href="/content/v3/usgboral/samplepage/product-listing.html">
+				<a href="#" onclick="gotoCategoryPage();">
 					<div class="p-side-xl">
 						<div class="box-type-3 bg-light-grey ">
 							<div class="center width-full">
@@ -120,7 +126,7 @@
 										</div>
 									</div>
 								</div>
-								<h2 class="p-vertical-l color-darker-grey ht6 text-center uppercase">Add to compare11</h2>
+								<h2 class="p-vertical-l color-darker-grey ht6 text-center uppercase">${'Add to compare' @ i18n}</h2>
 							</div>
 						</div>
 					</div>
@@ -128,7 +134,7 @@
 			</div>
 
 			<div data-div-height="wrapper" class="compare-two col-xs-4 col-cell p-no">
-				<a href="/content/v3/usgboral/samplepage/product-listing.html">
+				<a href="#" onclick="gotoCategoryPage();">
 					<div class="p-side-xl">
 						<div class="box-type-3 bg-light-grey ">
 							<div class="center width-full">
@@ -139,14 +145,14 @@
 										</div>
 									</div>
 								</div>
-								<h2 class="p-vertical-l color-darker-grey ht6 text-center uppercase">Add to compare22</h2>
+								<h2 class="p-vertical-l color-darker-grey ht6 text-center uppercase">${'Add to compare' @ i18n} </h2>
 							</div>
 						</div>
 					</div>
 				</a>
 			</div>
 			<div data-div-height="wrapper" class="compare-three col-xs-4 col-cell p-no">
-				<a href="/content/v3/usgboral/samplepage/product-listing.html">
+				<a href="#" onclick="gotoCategoryPage();">
 					<div class="p-side-xl">
 						<div class="box-type-3 bg-light-grey ">
 							<div class="center width-full">
@@ -157,7 +163,7 @@
 										</div>
 									</div>
 								</div>
-								<h2 class="p-vertical-l color-darker-grey ht6 text-center uppercase">Add to compare33</h2>
+								<h2 class="p-vertical-l color-darker-grey ht6 text-center uppercase">${'Add to compare' @ i18n}</h2>
 							</div>
 						</div>
 					</div>
@@ -256,12 +262,17 @@
 	<div class="container">
 		<div class="row m-top-4xl m-bottom-4xl m-sm-bottom-5xl">
 			<hr>
-			<div class="col-xs-6 text-right">
-				<a href="#" class="btn btn-brand-default button-green">contact us</a>
-			</div>
-			<div class="col-xs-6">
-				<a href="#" class="btn btn-brand-default button-green">where to buy</a>
-			</div>
+            <sly data-sly-test="${properties.buttonText}">
+                <div class="col-xs-6 text-right">
+                    <a href="${properties.link}.html" target="${properties.targettype == properties.hiddentarget ? properties.targetName : properties.targettype}" class="btn btn-brand-default ${properties.buttonStyle }">${properties.buttonText }</a>
+                </div>
+            </sly>
+
+            <sly data-sly-test="${properties.buttonText2}">
+                <div class="col-xs-6">
+                    <a href="${properties.link2}.html" target="${properties.targettype == properties.hiddentarget ? properties.targetName : properties.targettype}" class="btn btn-brand-default ${properties.buttonStyle2 }">${properties.buttonText2 }</a>
+                </div>
+            </sly>
 		</div>
 	</div>
 	<!-- section 2 end -->
@@ -270,3 +281,16 @@
 
 
 <sly data-sly-use.clientLib="/libs/granite/sightly/templates/clientlib.html" data-sly-call="${clientLib.js @ categories='uiux.compare'}" data-sly-unwrap/>
+
+
+<script>
+
+    function gotoCategoryPage(){
+
+		var url_string = window.location.href
+        var url = new URL(url_string);
+        var category = url.searchParams.get("category");
+        window.location.href = "${countryInfo.countryInfo.sitePath @ context='unsafe'}/products/" +  category + ".html";
+    }
+
+</script>

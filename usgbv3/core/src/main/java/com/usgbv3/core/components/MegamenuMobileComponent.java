@@ -131,6 +131,7 @@ public class MegamenuMobileComponent extends WCMUsePojo {
 			
 			ValueMap pageProperties = parentPage.getProperties();
 			
+			//Skip if excludeHeader at pageproperties is ticked
 			if(pageProperties.containsKey("excludeHeader")) {
 				return null;
 			}
@@ -141,6 +142,16 @@ public class MegamenuMobileComponent extends WCMUsePojo {
 			tabMegamenu.setName(parentPage.getName());
 			tabMegamenu.setStyleType(styleType);
 			
+			if("style2".equalsIgnoreCase(styleType)) {
+				if(hitProperties.containsKey("style2noLanding" + tabNo)) {
+					tabMegamenu.setNoLandingPage(true);
+				}
+			}
+			if("style3".equalsIgnoreCase(styleType)) {
+				if(hitProperties.containsKey("style3noLanding" + tabNo)) {
+					tabMegamenu.setNoLandingPage(true);
+				}
+			}
 				
 			List<MegamenuChildModel> megamenuChild = setSubMegamenu(parentPage, styleType);
 			

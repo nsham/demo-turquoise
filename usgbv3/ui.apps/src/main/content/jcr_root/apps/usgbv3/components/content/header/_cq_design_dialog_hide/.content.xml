@@ -24,8 +24,6 @@
                                 sling:resourceType="granite/ui/components/coral/foundation/container"
                                 margin="{Boolean}false">
                                 <items jcr:primaryType="nt:unstructured">
-                                    <logo/>
-                                    <logo2/>
                                     <alt
                                         jcr:primaryType="nt:unstructured"
                                         sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
@@ -67,6 +65,8 @@
                                         name="./disabledOrderSample"
                                         text="Disabled Order Sample"
                                         value="true"/>
+                                    <logo/>
+                                    <logo2/>
                                 </items>
                             </content>
                         </items>
