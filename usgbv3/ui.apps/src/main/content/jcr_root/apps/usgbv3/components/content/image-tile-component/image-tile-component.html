@@ -11,12 +11,12 @@
     <div class="c-box-custom ">
         <sly data-sly-test.assetExist="${properties.imgPath || properties.mblImgPath}">
         	<sly data-sly-test.urlAssetExist="${properties.link}">
-				<sly data-sly-test.imgExist="${properties.imgPath} >
+				<sly data-sly-test.imgExist="${properties.imgPath}" >
 					<a href="${properties.link}.html" target="${properties.targettype == properties.hiddentarget ? properties.targetName : properties.targettype}" class="cta-hover-tile mobile-image-enabled height-full" 
             				style="background:transparent url(${properties.imgPath @ context='unsafe'}) center center no-repeat; background-size:cover;"
                             data-img-mobile="background:transparent url(${properties.mblImgPath ? properties.mblImgPath : properties.imgPath @ context='unsafe'}) bottom right no-repeat; background-size:cover;">
         		</sly>
-				<sly data-sly-test="${!imgExist} >
+				<sly data-sly-test="${!imgExist}" >
 					<a href="${properties.link}.html" target="${properties.targettype == properties.hiddentarget ? properties.targetName : properties.targettype}" class="cta-hover-tile mobile-image-enabled height-full" 
             				style="background-color: ${properties.bgColor @ context='unsafe'}; display:block; height:100%;"
                             data-img-mobile="background:transparent url(${properties.mblImgPath ? properties.mblImgPath : properties.imgPath @ context='unsafe'}) bottom right no-repeat; background-size:cover;">
@@ -24,12 +24,12 @@
 
             </sly>
             <sly data-sly-test="${!urlAssetExist}">
-				<sly data-sly-test.imgExist2="${properties.imgPath} >
+				<sly data-sly-test.imgExist2="${properties.imgPath}" >
 					<a class="cta-hover-tile mobile-image-enabled height-full" 
             				style="background:transparent url(${properties.imgPath @ context='unsafe'}) center center no-repeat; background-size:cover;"
                             data-img-mobile="background:transparent url(${properties.mblImgPath ? properties.mblImgPath : properties.imgPath @ context='unsafe'}) bottom right no-repeat; background-size:cover;">
         		</sly>
-				<sly data-sly-test="${!imgExist2} >
+				<sly data-sly-test="${!imgExist2}" >
 					<a class="cta-hover-tile mobile-image-enabled height-full" 
             				style="background-color: ${properties.bgColor @ context='unsafe'}; display:block; height:100%;"
                             data-img-mobile="background:transparent url(${properties.mblImgPath ? properties.mblImgPath : properties.imgPath @ context='unsafe'}) bottom right no-repeat; background-size:cover;">

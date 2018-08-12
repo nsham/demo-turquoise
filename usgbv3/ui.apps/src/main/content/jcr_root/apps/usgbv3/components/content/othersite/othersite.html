@@ -29,7 +29,7 @@
             <ul class="dropdown-menu dp-list ${properties.buttonstyle}" aria-labelledby="dropdownMenu1"
                 data-sly-use.othersite="com.usgbv3.core.components.OtherSiteComponent">
                 <li data-sly-repeat.export="${othersite.exportList}">
-                    <a href="${export.countrypath}" data-val="Australia">${export.countrytitle}</a>
+                    <a href="${export.countrypath @ extension='html'}" data-val="Australia">${export.countrytitle}</a>
                 </li>
             </ul>
         </div>
