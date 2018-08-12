@@ -57,6 +57,10 @@ function recaptchaCallback() {
     "use strict";
 
     $(document).ready(function () {
+        var getParam = new URLSearchParams(window.location.search);
+        var paramValue = getParam.get("enquiryType").replace(" ","_").toLowerCase();
+        $('[value="'+ paramValue +'"]').attr("selected","selected");
+
         if($('.floating-type-form').length > 0){
             for(var i=0; i<$('.drop-down-select').length; i++){
                 if($($('.drop-down-select')[i]).val() !== ""){
