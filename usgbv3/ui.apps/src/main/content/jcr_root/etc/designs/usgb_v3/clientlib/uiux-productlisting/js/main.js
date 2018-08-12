@@ -19,7 +19,7 @@
             function alignSticky(event) {
                 var scrollPos = $(document).scrollTop();
                 // console.log(scrollPos)
-                if (scrollPos <= 500 || scrollPos > 1000) {
+                if (scrollPos <= 500 || scrollPos > 800) {
                     stickySidebar.updateSticky();
                 }
             }

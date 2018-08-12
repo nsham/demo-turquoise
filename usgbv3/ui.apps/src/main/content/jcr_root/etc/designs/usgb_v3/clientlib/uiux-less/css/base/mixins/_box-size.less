@@ -1,273 +1,253 @@
 // ----------------------------------------------------------------------
-
-  // Box Sizes
-
+// Box Sizes
 // ----------------------------------------------------------------------
-
-.box-size-xs{
+.box-size-xs {
     position: relative;
-    min-height: 136px;      
-} 
+    min-height: 136px;
+}
 
 .box-size-s {
     position: relative;
-    min-height: 235px; 
-    .ht2{
+    min-height: 235px;
+    .ht2 {
         font-size: 30px;
     }
-    .ht5,.ht6{
+    .ht5,
+    .ht6 {
         font-size: 20px;
     }
 }
 
-.box-size-m{
+.box-size-m {
     position: relative;
     min-height: 245px;
-    .ht5,.ht6{ 
+    .ht5,
+    .ht6 {
         font-size: 20px;
     }
-} 
+}
 
-.box-size-m-2{
+.box-size-m-2 {
     position: relative;
     min-height: 320px;
-    .ht5,.ht6{
+    .ht5,
+    .ht6 {
         font-size: 20px;
     }
-} 
+}
 
-.box-size-l{
+.box-size-l {
     position: relative;
     min-height: 370px;
-} 
-
+}
 
 //** inner image size **/
-.box-inner-img{
+.box-inner-img {
     background: @color-primary-grey;
-    margin: auto; 
-    min-height:150px;     
+    margin: auto;
+    min-height: 150px;
     position: relative;
     overflow: hidden;
-
-    &.narrow{
-        min-height:130px;     
+    &.narrow {
+        min-height: 130px;
     }
-
-    img{
+    img {
         position: absolute;
         left: 50%;
         top: 50%;
         height: 100%;
         width: 100%;
-        -webkit-transform: translate(-50%,-50%);
-        -ms-transform: translate(-50%,-50%);
-        transform: translate(-50%,-50%);
+        -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
     }
 }
-
 
 //use only for gallery listing
 //** inner image size **/
-.box-inner-img-gallery{
+.box-inner-img-gallery {
     background: @color-primary-grey;
-    margin: auto; 
-    height:218px;   
-    min-width:246px;
+    margin: auto;
+    height: 218px;
+    min-width: 246px;
     position: relative;
     overflow: hidden;
-    img{
+    img {
         width: auto;
         position: absolute;
-        left:50%;
-        top:50%;
-         -webkit-transform: translate(-50%,-50%);
-        -ms-transform: translate(-50%,-50%);
-        transform: translate(-50%,-50%);
+        left: 50%;
+        top: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
     }
 }
 
-
 //**hover overlay green **/
-.box-type-1{
+.box-type-1 {
     height: auto;
-    &:hover{
-            .bg-box-hover{
-                background-color:rgba(0, 125, 44, 0.9);
-
-                .main-icon{
-                    font-family: 'usgbicon' !important;
-                    font-size:100px;
-                    color:@color-white;
-                    &.homeowner-icon:after{
-                        content: "\e923";
-                    }
-                    &.installation-guide-icon:after{
-                        content:"\e924";
-                    }
-                    &.firerating-icon:after{
-                        content:"\e925";
-                    }
-                    &.architect-designer-icon:after{
-                        content:"\e900";
-                    }
-                    &.builder-installers-icon:after{
-                        content:"\e901";
-                    }
-                    &.ceiling-icon:after{
-                        content:"\e902";
-                    }
-                    &.cornice-icon:after{
-                        content:"\e903";
-                    }
-                    &.finishes-icon:after{
-                        content:"\e904";
-                    }
-                    &.industrial-plaster-icon:after{
-                        content:"\e91c";
-                    }
-                    &.industrial-plaster-two-icon:after{
-                        content:"\e91d";
-                    }
-                    &.insulation-icon:after{
-                        content:"\e91e";
-                    }
-                    &.interior-lining-icon:after{
-                        content:"\e91f";
-                    }
-                    &.plasteringdiy-icon:after{
-                        content:"\e920";
-                    }
-                    &.steel-framing-icon:after{
-                        content:"\e921";
-                    }
-                } 
-
-                .text-hover{
-                    opacity: 1;
-
-                    .bottom-line{
-                            opacity: 1;
-                        }
+    &:hover {
+        .bg-box-hover {
+            background-color: rgba(0, 125, 44, 0.9);
+            .main-icon {
+                font-family: 'usgbicon' !important;
+                font-size: 100px;
+                color: @color-white;
+                &.homeowner-icon:after {
+                    content: "\e923";
                 }
-            }       
+                &.installation-guide-icon:after {
+                    content: "\e924";
+                }
+                &.firerating-icon:after {
+                    content: "\e925";
+                }
+                &.architect-designer-icon:after {
+                    content: "\e900";
+                }
+                &.builder-installers-icon:after {
+                    content: "\e901";
+                }
+                &.ceiling-icon:after {
+                    content: "\e902";
+                }
+                &.cornice-icon:after {
+                    content: "\e903";
+                }
+                &.finishes-icon:after {
+                    content: "\e904";
+                }
+                &.industrial-plaster-icon:after {
+                    content: "\e91c";
+                }
+                &.industrial-plaster-two-icon:after {
+                    content: "\e91d";
+                }
+                &.insulation-icon:after {
+                    content: "\e91e";
+                }
+                &.interior-lining-icon:after {
+                    content: "\e91f";
+                }
+                &.plasteringdiy-icon:after {
+                    content: "\e920";
+                }
+                &.steel-framing-icon:after {
+                    content: "\e921";
+                }
+            }
+            .text-hover {
+                opacity: 1;
+                .bottom-line {
+                    opacity: 1;
+                }
+            }
+        }
     }
-   
-    .va-middle{
+    .va-middle {
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
     }
-
-    .ha-center{
+    .ha-center {
         position: absolute;
         left: 50%;
         transform: translateX(-50%);
     }
-
 } //box-type-1 end
-
-
-
 /** hover with border green **/
-.box-type-2{
-        // border:3px solid @color-white;
-        border: 2px solid @color-primary-green;
-        @media (min-width:768px) {
-            border: none;
-        }
-        &:hover{
-            .bg-box-hover{
-                border: none;
-                @media (min-width:768px) {
-                    border:2px solid @color-primary-green;
-                }
-            }
-            h2{
-                text-decoration:none;
-            }
-        }
 
-        .green-tag{
-            position: absolute;
-            top: 20px;
-            left: 5px;
-            background:@color-primary-green;
-            z-index: 2;
-            p{
-                padding: 4px 15px 4px 20px;
-            }
-            &::before{
-                content: "";
-                position: absolute;
-                display: block;
-                border-style: solid;
-                border-color: #004b1d transparent transparent transparent;
-                bottom: -4px;
-                left: 2px;
-                border-width: 4px;
-                transform: rotate(-135deg);            
+.box-type-2 {
+    // border:3px solid @color-white;
+    border: 2px solid @color-primary-green;
+    @media (min-width: 768px) {
+        border: none;
+    }
+    &:hover {
+        .bg-box-hover {
+            border: none;
+            @media (min-width: 768px) {
+                border:2px solid @color-primary-green;
             }
         }
+        h2 {
+            text-decoration: none;
+        }
+    }
+    .green-tag {
+        position: absolute;
+        top: 20px;
+        left: 5px;
+        background: @color-primary-green;
+        z-index: 2;
+        p {
+            padding: 4px 15px 4px 20px;
+        }
+        &::before {
+            content: "";
+            position: absolute;
+            display: block;
+            border-style: solid;
+            border-color: #004b1d transparent transparent transparent;
+            bottom: -4px;
+            left: 2px;
+            border-width: 4px;
+            transform: rotate(-135deg);
+        }
+    }
 }
 
-.box-type-3{
+.box-type-3 {
     width: 230px;
-    @media (min-width:768px){
+    @media (min-width: 768px) {
         width:260px;
     }
-    @media (min-width:1024px){
-        width:auto;
+    @media (min-width:1024px) {
+        width: auto;
     }
 }
 
-
 //box hover - hides title text - show main text
-.box-type-4{
+.box-type-4 {
     position: relative;
-    .sub-text{
+    .sub-text {
         visibility: hidden;
     }
-    .bg-box-hover{
-        height: 90px;
-        background:@color-primary-green;
-        bottom:0;
-        top:auto;
+    .bg-box-hover {
+        height: 95px;
+        background: @color-primary-green;
+        bottom: 0;
+        top: auto;
         transition: 300ms ease 0ms;
         -moz-transition: 300ms ease 0ms;
         -webkit-transition: 300ms ease 0ms;
     }
-   &:hover{
-       .bg-box-hover{
-           background:@color-primary-yellow;
-           height: 120px;
-           transition: 700ms ease 0ms;
-          -moz-transition: 700ms ease 0ms;
-           -webkit-transition: 700ms ease 0ms;
-           .breakpoint(@min-bp-md){
-               height: 190px;
-           }
-           .breakpoint(@min-bp-lg){
-               height: 160px;
-           }
+    &:hover {
+        .bg-box-hover {
+            background: @color-primary-yellow;
+            height: auto;
+            transition: 500ms ease 0ms;
+            -moz-transition: 500ms ease 0ms;
+           -webkit-transition: 500ms ease 0ms;
+            .breakpoint(@min-bp-md) {
+                height: 190px;
+            }
+            .breakpoint(@min-bp-lg) {
+                height: 160px;
+            }
         }
-        .sub-text{
-            // display: block;
-            visibility: visible;
-            transition:  visibility 10ms ease 200ms;
-            -moz-transition:  visibility  10ms ease 200ms;
-           -webkit-transition:  visibility  10ms ease 200ms;
+        .sub-text {
+            display: block;
+            visibility: visible; 
+            transition:  visibility 10ms ease 150ms;
+            -moz-transition:  visibility  10ms ease 150ms;
+           -webkit-transition:  visibility  10ms ease 150ms;
         }
-        .main-text{
+        .main-text {
             display: none;
         }
-
-     }
-  
+    }
 }
-
-
-
 
 .box-type-4 {
     overflow: hidden;
@@ -285,11 +265,11 @@
     transition: all 0.3s;
 }
 
-.box-type-4 .main .main-text span{
+.box-type-4 .main .main-text span {
     transition: all 0.3s;
 }
 
-.box-type-4:hover .main .main-text span{
+.box-type-4:hover .main .main-text span {
     opacity: 0;
 }
 
@@ -309,26 +289,18 @@
     opacity: 1;
 }
 
-
-
 // .box-type-5{
-
 //     .title{
-
 //         -webkit-transition: all 0.5s;
 //         -o-transition: all 0.5s;
 //         transition: all 0.5s;
 //         color: white;
 //         width: 100%;
-
 //         >*{
 //             display: block;
 //         }
-
 //     }
-
 //     .content{
-
 //         position: absolute;
 //         width: 100%;
 //         bottom: 0;
@@ -336,160 +308,115 @@
 //         -webkit-transition: all 0.5s;
 //         -o-transition: all 0.5s;
 //         transition: all 0.5s;
-
 //     }
-
 //     .description{
-
 //         -webkit-transition: all 1s;
 //         -o-transition: all 1s;
 //         transition: all 1s;
 //         /* height: 0px; */
 //         overflow: hidden;
 //         max-height: 0;
-
 //     }
-
 //     &:hover{
-
 //         .title{
 //             color:#353535;
 //             // width: 0;
-
 //         }
-
 //         .content{
 //             background: #fed100;
 //         }
-
 //         .description{
 //             /* height: 100px; */
 //             max-height: 300px;
 //         } 
-
 //     }
-
 // }
-
-
-
-
-
-
-
-.box-type-5{
+.box-type-5 {
     .title {
         -webkit-transition: all 0.5s;
         -o-transition: all 0.5s;
         transition: all 0.5s;
         color: white;
         width: 100%;
-
-        > *:first-child {
+        >*:first-child {
             display: block;
         }
-
-        > *:nth-child(2) {
+        >*:nth-child(2) {
             display: none;
         }
-
-
-        .title1{
-          width:100%
+        .title1 {
+            width: 100%
         }
-
-        .title2{
-           display:none;
-           opacity:0;
+        .title2 {
+            display: none;
+            opacity: 0;
         }
-
     }
-
     .content {
-      position: absolute;
-      width: 100%;
-      bottom: 0;
-      background-color: #009b3a;
-      -webkit-transition: all 0.5s;
-      -o-transition: all 0.5s;
-      transition: all 0.5s;
+        position: absolute;
+        width: 100%;
+        bottom: 0;
+        background-color: #009b3a;
+        -webkit-transition: all 0.5s;
+        -o-transition: all 0.5s;
+        transition: all 0.5s;
     }
-
     .description {
-      -webkit-transition: all 0.5s;
-      -o-transition: all 0.5s;
-      transition: all 0.5s;
-      overflow: hidden;
-      max-height: 0;
+        -webkit-transition: all 0.5s;
+        -o-transition: all 0.5s;
+        transition: all 0.5s;
+        overflow: hidden;
+        max-height: 0;
     }
-
 }
 
-
-.box-type-5:hover{
-
-     .title1{
-        overflow:hidden;
-        height:0;
-     }
-
-     .title2{
-        display:block;
-        opacity:1;
-     }
-
-     .title {
-       color: #353535;
-     }
-
-     .content {
-       background: #fed100;
-     }
-
-     .description {
-       max-height: 300px;
-     }
+.box-type-5:hover {
+    .title1 {
+        overflow: hidden;
+        height: 0;
+    }
+    .title2 {
+        display: block;
+        opacity: 1;
+    }
+    .title {
+        color: #353535;
+    }
+    .content {
+        background: #fed100;
+    }
+    .description {
+        max-height: 300px;
+    }
 }
-
-
-
-
-
-
-
-
-
 
 // individual elements
-.text-hover{
+.text-hover {
     font-size: 14px;
     opacity: 0;
-    .bottom-line{
+    .bottom-line {
         width: 40px;
         height: 4px;
-        background:@color-white;
+        background: @color-white;
         opacity: 0;
     }
 }
 
-
-.bg-box-hover{
+.bg-box-hover {
     position: absolute;
-    bottom:0;
+    bottom: 0;
     top: 0;
     left: 0;
     right: 0;
     z-index: 5;
     transition: all ease 300ms;
-
 }
 
-.box-text{
-    width:100%;
+.box-text {
+    width: 100%;
     height: auto;
     position: absolute;
 }
-
 
 ///rounded corner for box
 //move to component -base-mixin-new
@@ -499,12 +426,6 @@
 // .rounded-top{
 //     .roundedTop(10);
 // }
-
 // .rounded-bottom{
 //     .roundedBottom(10);
 // }
-
-
-
-
- 
