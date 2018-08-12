@@ -13,7 +13,7 @@
         			data-img-mobile="background:transparent url(${properties.mblImgPath ? properties.mblImgPath : properties.imgPath @ context='unsafe'}) bottom right no-repeat; background-size:cover;">
 	</sly>
     <sly data-sly-test="${!assetExist}">
-		<div class="box-size-l cta-hover-tile" style="z-index:1; background-color: ${properties.bgColor @ context='unsafe'};"  data-scroll-reveal="wait 0.2s, then enter over 500ms after 0.3s"  >
+		<div class="box-size-l cta-hover-tile" style="z-index:1; background-color: ${properties.bgColor @ context='unsafe'};" >
     </sly>
 		<!-- bg-overlay start -->
         <div class="${properties.opacity}">

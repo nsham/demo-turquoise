@@ -40,6 +40,15 @@
                                 name="./dhidepadding"
                                 text="Hide Column Padding"
                                 value="true"/>
+                            <column1animation
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/foundation/form/select"
+                                fieldLabel="Column 1 Animation Delay"
+                                name="./dcolumn1animation">
+                                <datasource
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="usgbv3/components/structure/common/datasources/animationtime"/>
+                            </column1animation>
                             <offset
                                 jcr:primaryType="nt:unstructured"
                                 sling:resourceType="granite/ui/components/foundation/form/select"
@@ -211,36 +220,6 @@
                     </column>
                 </items>
             </mobile>
-            <styling
-                jcr:primaryType="nt:unstructured"
-                jcr:title="Styling"
-                sling:resourceType="granite/ui/components/foundation/section">
-                <layout
-                    jcr:primaryType="nt:unstructured"
-                    sling:resourceType="granite/ui/components/foundation/layouts/fixedcolumns"/>
-                <items jcr:primaryType="nt:unstructured">
-                    <column
-                        jcr:primaryType="nt:unstructured"
-                        sling:resourceType="granite/ui/components/foundation/container">
-                        <items jcr:primaryType="nt:unstructured">
-                            <css
-                                jcr:primaryType="nt:unstructured"
-                                jcr:title="Advanced Styling"
-                                sling:resourceType="granite/ui/components/foundation/form/fieldset">
-                                <items jcr:primaryType="nt:unstructured">
-                                    <cssClass
-                                        jcr:primaryType="nt:unstructured"
-                                        sling:resourceType="granite/ui/components/foundation/form/textfield"
-                                        fieldLabel="CSS Class"
-                                        name="./cssClass"/>
-                                    <disclaimer/>
-                                    <id/>
-                                </items>
-                            </css>
-                        </items>
-                    </column>
-                </items>
-            </styling>
         </items>
     </content>
 </jcr:root>
