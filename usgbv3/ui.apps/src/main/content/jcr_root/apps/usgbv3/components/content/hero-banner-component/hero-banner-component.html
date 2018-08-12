@@ -9,10 +9,22 @@
 <div class="video-banner-wrapper ${properties.classid }">
 	<div class="row relative video-content">
 
-        <sly data-sly-test.assetExist="${properties.imgPath || properties.videoDam}" >
+        <sly data-sly-test.assetExist="${properties.imgPath || properties.videoDam || properties.mblImgPath}" >
         	<sly data-sly-test.imageAsset="${properties.assetType == properties.hiddenImage}" >
-				<div class="mobile-image-enabled" style="background:transparent url(${properties.imgPath @ context='unsafe'}) center right no-repeat; background-size:cover;" 
+
+        		<sly data-sly-test.imgExist="${properties.imgPath} >
+
+					<div class="mobile-image-enabled" style="background:transparent url(${properties.imgPath @ context='unsafe'}) center right no-repeat; background-size:cover;" 
         			data-img-mobile="background:transparent url(${properties.mblImgPath ? properties.mblImgPath : properties.imgPath @ context='unsafe'}) bottom right no-repeat; background-size:cover;">
+
+        		</sly>
+        		<sly data-sly-test="${!imgExist} >
+
+					<div class="mobile-image-enabled" style="background-color: ${properties.bgColor @ context='unsafe'};" 
+        			data-img-mobile="background:transparent url(${properties.mblImgPath ? properties.mblImgPath : properties.imgPath @ context='unsafe'}) bottom right no-repeat; background-size:cover;">
+
+        		</sly>
+
             </sly>
             <sly data-sly-test="${!imageAsset}" >
 				<div style="background:#000;" data-img-mobile="background:#000;">
