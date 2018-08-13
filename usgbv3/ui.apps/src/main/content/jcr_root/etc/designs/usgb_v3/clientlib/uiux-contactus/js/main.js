@@ -110,7 +110,7 @@ function recaptchaCallback() {
                     console.log("successs submit");
 
                     $.ajax({ //ajax form submit
-                        url: '/bin/usg/contactusbasic',
+                        url: '/bin/usgb/v3/contactusbasic',
                         type: 'GET',
                         data: "data="+JSON.stringify($("form").serializeObject()),
                         dataType: 'json',
@@ -171,7 +171,7 @@ function recaptchaCallback() {
                     console.log("successs submit");
 
                     $.ajax({ //ajax form submit
-                        url: '/bin/usg/contactusadvanced',
+                        url: '/bin/usgb/v3/contactusadvanced',
                         type: 'GET',
                         data: "data="+JSON.stringify($("form").serializeObject()),
                         dataType: 'json',
