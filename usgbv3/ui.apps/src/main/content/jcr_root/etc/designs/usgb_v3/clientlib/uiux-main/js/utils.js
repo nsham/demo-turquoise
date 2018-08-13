@@ -29,7 +29,7 @@ var uniqueArray = function (arrArg) {
 
 
 
-function escape(s) {
+function escapeString(s) {
     return ('' + s) /* Forces the conversion to string. */
         .replace(/\\/g, '\\\\') /* This MUST be the 1st replacement. */
         .replace(/\t/g, '\\t') /* These 2 replacements protect whitespaces. */
@@ -43,7 +43,7 @@ function escape(s) {
         .replace(/>/g, '\\x3E');
 }
 
-function unescape(s) {
+function unescapeString(s) {
     /*
     Note: this can be implemented more efficiently by a loop searching for
     backslashes, from start to end of source string, and parsing and

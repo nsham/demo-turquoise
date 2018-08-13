@@ -90,7 +90,6 @@
                 console.log(currCategory, $('#search-form input').val());
                 searchedText = $('#search-form input').val();
                 if(searchedText !== ""){
-                    $('.container-tabs-content-type').removeClass('hidden');
                     getResult();
                 }
             });
@@ -318,7 +317,7 @@
             //url: "/etc/designs/usgb_v3/clientlib/uiux-less-ct/js/json/search-content-result.json",
             //url: "/etc/designs/usgb_v3/clientlib/uiux-less-ct/js/json/search-doc-finder.json",
             url: "/bin/usgb/v3/search",
-            data: "text="+ escape(searchedText) + "&category=" + currCategory,
+            data: "text="+ escapeString(searchedText) + "&category=" + currCategory,
             type: "GET",
             cache: false,
             success: function(response) {
@@ -330,6 +329,7 @@
                 $('.result-caption .current-category').html($('[data-category="'+currCategory+'"]').html());
 
                 if(response.result){
+                    $('.container-tabs-content-type').removeClass('hidden');
                     $('.no-search-result-container').addClass('hidden');
                     $('.search-result-container').removeClass('hidden');
 
