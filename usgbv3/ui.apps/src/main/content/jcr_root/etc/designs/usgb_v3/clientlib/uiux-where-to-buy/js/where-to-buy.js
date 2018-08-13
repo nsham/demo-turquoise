@@ -369,7 +369,7 @@
 
             if($("#input-search-location").length){
                 $.ajax({
-                    url: "/bin/usg/getAllStates",
+                    url: "/bin/usgb/v3/getAllStates",
                     data: "country="+ countryCode,
                     type: "GET",
                     cache: false,
@@ -584,7 +584,7 @@
             console.log("jsonDataToCall", jsonDataToCall);
 
             $.ajax({
-                url: "/bin/usg/storeSearch",
+                url: "/bin/usgb/v3/storeSearch",
                     
                 data:   function(){
                             if(currSenario.indexOf('proximity') >= 0){

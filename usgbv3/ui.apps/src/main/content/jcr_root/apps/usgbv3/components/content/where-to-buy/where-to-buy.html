@@ -23,7 +23,7 @@
                         </div>
                         <div class="input-group search-group">
                             <div class="relative width-full">
-                                <input type="text" id="input-search-location" name="search_text" data-autocomplete="/bin/usg/storeAutoComplete" data-autocomplete-minchars="3" class="form-control placeholder" placeholder="City, postcode, Store name or address">
+                                <input type="text" id="input-search-location" name="search_text" data-autocomplete="/bin/usgb/v3/storeAutoComplete" data-autocomplete-minchars="3" class="form-control placeholder" placeholder="City, postcode, Store name or address">
                             </div>
     
     
@@ -177,10 +177,6 @@
 </script>
 
 
-<sly data-sly-use.clientLib="/libs/granite/sightly/templates/clientlib.html" data-sly-call="${clientLib.js @ categories='uiux.alljs'}"
-    data-sly-unwrap/>
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDylpywGh8XxHMztw-kBRtXCnqyAHZqPwQ"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA1tQQEZ2xfKP5_WKodxbN7NhB6BIJhYB4"></script>
 <sly data-sly-use.clientLib="/libs/granite/sightly/templates/clientlib.html" data-sly-call="${clientLib.all @ categories='uiux.wheretobuy'}" data-sly-unwrap/>
-<!--<script src="/etc/designs/usgb_v3/clientlib/uiux-less-ct/js/vendors/autocomplete.js"></script>
-<script src="/etc/designs/usgb_v3/clientlib/uiux-less-ct/js/vendors/markerclusterer.js"></script>
-<script src="/etc/designs/usgb_v3/clientlib/uiux-less-ct.js"></script>-->
+
