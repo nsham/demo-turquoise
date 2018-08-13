@@ -100,7 +100,7 @@ public class StoreLocatorServiceImpl implements StoreLocatorService{
             queryMap.put("type", "nt:unstructured");
             queryMap.put("path", completePageURL);
             queryMap.put("property", "sling:resourceType");
-            queryMap.put("property.1_value", "usgbv3/components/content/where-to-buy");
+            queryMap.put("property.1_value", "usgbv3/components/content/where-to-buy-component");
 
             // logging the query
             GenericUtils.logQuery(LOG, queryMap);
@@ -651,7 +651,7 @@ public class StoreLocatorServiceImpl implements StoreLocatorService{
             queryMap.put("type", "nt:unstructured");
             queryMap.put("path", pageURL);
             queryMap.put("property", "sling:resourceType");
-            queryMap.put("property.1_value", "usgbv3/components/content/where-to-buy");
+            queryMap.put("property.1_value", "usgbv3/components/content/where-to-buy-component");
 
             GenericUtils.logQuery(LOG, queryMap);
             Session session = resourceResolver.adaptTo(Session.class);

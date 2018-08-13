@@ -6,12 +6,9 @@
 	${properties.cssoverwrite @ context='unsafe'}
 </style>
 
-<script type="text/javascript" src="/etc/designs/usgb_v3/clientlib/uiux-all-js.js"></script>
-
-
 <sly data-sly-use.component="com.usgbv3.core.components.LeftCircleTileComponent">
     <!-- testimonial carousel -->
-    <div class="row m-top-3xl m-sm-top-4xl m-bottom-4xl m-sm-bottom-5xl" >
+    <div class="row m-top-3xl m-sm-top-4xl m-bottom-4xl m-sm-bottom-5xl ${properties.classid @ context='unsafe'}" >
         <div class="left-circle-tile" data-sly-list.articleList="${component.articleList}">
             <!-- featured items start -->
             <div class="slide" >
@@ -36,3 +33,5 @@
     </div>
     <!-- testimonial carousel -->
 </sly>
+
+<sly data-sly-use.clientLib="/libs/granite/sightly/templates/clientlib.html" data-sly-call="${clientLib.js @ categories='uiux.leftcircletile'}" data-sly-unwrap/>

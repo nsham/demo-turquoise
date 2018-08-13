@@ -40,7 +40,7 @@ import java.util.Map;
         property={
                 Constants.SERVICE_DESCRIPTION + "=Get GEO country content data",
                 "sling.servlet.methods=" + HttpConstants.METHOD_GET,
-                "sling.servlet.paths="+ "/bin/usg/getGeoCountryContent"
+                "sling.servlet.paths="+ "/bin/usgb/v3/getGeoCountryContent"
         })
 public class GetGeoLocationCountryLandingContent extends SlingSafeMethodsServlet {
 
