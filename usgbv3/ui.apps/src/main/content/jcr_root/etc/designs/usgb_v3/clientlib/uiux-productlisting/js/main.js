@@ -1,7 +1,6 @@
 
 
 
-
             // readjust sticky side bar
             var stickySidebar = new StickySidebar('.make-sticky', {
                 topSpacing: 105,
@@ -14,24 +13,29 @@
             });
 
 
-            $(document).on("scroll", alignSticky);
+
+
+			$(document).on("scroll", alignSticky);
 
             function alignSticky(event) {
-                var scrollPos = $(document).scrollTop();
-                // console.log(scrollPos)
-                if (scrollPos <= 500 || scrollPos < 800) {
+               var scrollPos = $(document).scrollTop();
+               //console.log(scrollPos)
+               if (scrollPos <= 500 || scrollPos < 800) {
+                    stickySidebar.updateSticky();
+               }
+
+                if ( scrollPos > 1300) {
+                   stickySidebar.destroy();
+                }else{
                     stickySidebar.updateSticky();
                 }
-                if ( scrollPos > 900) {
-                    stickySidebar.destroy();
-                 }
- 
+
             }
 
 
 
             //////COMPARE POPUP start//////
-            $(".compare-popup").hide()
+            $(".compare-popup").hide();
             $(".popup-content .content-wrapper").hide();
             $(".compare-popup .btn-compare").hide();
             $(".compare-popup .instruction-text").hide();
@@ -124,9 +128,9 @@
                     minimisePopup();
                     clearTimeout(countDown);
                     if($(".compare-popup .title").hasClass("selected")){
-                        console.log("click true")
+                        //console.log("click true")
                     }else{
-                        console.log("click false")
+                        //console.log("click false")
                         countDownPop();
                     }
             });
@@ -273,19 +277,19 @@
             //minimise Popup if idle   
             $( ".compare-popup .inner-content" )
               .mouseenter(function() {
-                console.log("enterrring");
+                //console.log("enterrring");
                 clearTimeout(countDown);
                 //checkPopupState();
               })
               .mouseleave(function() {
-                console.log("mouseleave");
+                //console.log("mouseleave");
                 clearTimeout(countDown);
                 countDownPop();
               });
     
     
             function countDownPop(){
-                console.log("counting")
+                //console.log("counting")
                 countDown = setTimeout(function () {
                     minimisePopup();
                 }, 5000);
@@ -294,10 +298,10 @@
             function checkPopupState(){
                 clearTimeout(countDown);
                 if($(".compare-popup .inner-content").is(":visible")){
-                    console.log("true")
+                    //console.log("true")
                     countDownPop();
                 }else{
-                    console.log("false")
+                    //console.log("false")
                     $(".compare-popup .inner-content").slideToggle(800);
                     $(".compare-popup .title").toggleClass("selected");   
                     countDownPop();
@@ -429,10 +433,11 @@
                         categoryName = productData.category_key + "_" + productData.country_key;
                         countryCode = productData.country_key;
 
-
+                        $(".compare-popup").hide();
                         hideAllWrappers();
                         renderProductListingResult();
                         retrieveCompare();
+                        
 
 
             }
@@ -614,6 +619,8 @@
                 }
             }
 
+          
+
             function scrollTop_one(target) {
                 if (target) {
                     $(target).stop().animate({
@@ -689,7 +696,7 @@
                 // pass checked to button
                 if ($('.' + dataSearchVal + '-wrapper  input[data-checkname=' + checkname + ']').is(':checked')) {
 
-                    $('[data-checkbutton=' + dataSearchVal + ']').append("<div data-selection=" + checkname + " class='bg-grey m-xs bold btn btn-xs'>" + checkboxName + "<span class='btn-close fs-1 p-left-s'>&times;</span></div>");
+                    $('[data-checkbutton=' + dataSearchVal + ']').append("<div data-selection=" + checkname + " class='bg-light-2-grey m-xs bold btn btn-xs'>" + checkboxName + "<span class='btn-close fs-1 p-left-s'>&times;</span></div>");
                     // remove duplicates
 
                     if ($('[data-selection=' + checkname + ']').length > 1) {
@@ -749,7 +756,7 @@
 
                 if ($('.mobile-' + mdataSearchVal + '-wrapper label input[data-checkname=' + checkname + ']').is(':checked')) {
 
-                    $('.mobile-checkbox-button-wrapper > [data-m-checkbutton=' + mdataSearchVal + ']').append("<div data-selection=" + checkname + " class='bg-grey m-xs bold btn btn-xs'>" + checkboxName + "<span class='btn-close fs-1 p-left-s'>&times;</span></div>");
+                    $('.mobile-checkbox-button-wrapper > [data-m-checkbutton=' + mdataSearchVal + ']').append("<div data-selection=" + checkname + " class='bg-light-2-grey m-xs bold btn btn-xs'>" + checkboxName + "<span class='btn-close fs-1 p-left-s'>&times;</span></div>");
                     //remove duplicates
                     if ($('[data-selection=' + checkname + ']').length > 1) {
                         $('[data-selection=' + checkname + ']').last().remove();
