@@ -500,7 +500,7 @@
         
         // This function creates each marker and it sets their Info Window content
         function createMarker(latlng, companyName, address1, address2, phoneNumber, email, directionUrl){
-            var var_pin = '/content/dam/USGBoral/Global/Website/Images/component/allsample/marker.png';
+            var var_pin = '/content/dam/USGBoral/Global/Website/Images/v3/component/marker.png';
             var marker = new google.maps.Marker({
                 map: map,
                 position: latlng,
@@ -538,7 +538,7 @@
                 
                 // opening the Info Window in the current map and at the current marker location.
                 infoWindow.open(map, marker);
-                marker.setIcon('/content/dam/USGBoral/Global/Website/Images/component/allsample/marker-active.png');
+                marker.setIcon('/content/dam/USGBoral/Global/Website/Images/v3/component/marker-active.png');
 
 
                 // scroll to target info
@@ -554,13 +554,13 @@
             google.maps.event.addListener(map, 'click', function () {
                 infoWindow.close();
                 //Change the marker icon
-                marker.setIcon('/content/dam/USGBoral/Global/Website/Images/component/allsample/marker.png');
+                marker.setIcon('/content/dam/USGBoral/Global/Website/Images/v3/component/marker.png');
             });
 
             google.maps.event.addListener(infoWindow, 'closeclick', function () {
                 infoWindow.close();
                 // then, remove the infowindows name from the array
-                marker.setIcon('/content/dam/USGBoral/Global/Website/Images/component/allsample/marker.png');
+                marker.setIcon('/content/dam/USGBoral/Global/Website/Images/v3/component/marker.png');
             });
             
         }
@@ -661,7 +661,7 @@
                         if(response.hasOwnProperty('proximityResult')){
                             proximityLocationMarker = new google.maps.Marker({
                                 position: currLocation,
-                                icon: '/content/dam/USGBoral/Global/Website/Images/component/allsample/icon_marker_yellow.png',
+                                icon: '/content/dam/USGBoral/Global/Website/Images/v3/component/icon_marker_yellow.png',
                                 map: map
                             });
                             map.setCenter(pos);
@@ -705,7 +705,7 @@
         function geolocation(callback){
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(function(position) {
-                    var var_pin = '/content/dam/USGBoral/Global/Website/Images/component/allsample/icon_marker_red.png';
+                    var var_pin = '/content/dam/USGBoral/Global/Website/Images/v3/component/icon_marker_red.png';
                     currUserLocationMarker = new google.maps.Marker({
                         map: map,
                         icon: var_pin
