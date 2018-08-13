@@ -768,6 +768,7 @@ jQuery(document).ready(function($){
                 $("a.cart > .pop-notification").removeClass("width-none");
                 $("a.cart > .pop-notification").addClass("counter");
                 $("a.cart > .pop-notification.counter").text(countSample);
+                $(".header>.wrapper").addClass("desktop-mobile-slide-down");
                 
             }
            

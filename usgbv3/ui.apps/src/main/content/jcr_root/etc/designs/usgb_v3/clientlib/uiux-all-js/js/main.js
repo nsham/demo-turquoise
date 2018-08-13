@@ -1767,9 +1767,10 @@ $(window).on('load', function () {
 
 
                     $('[data-div-height="physicalProperties"]').matchHeight();
+                    $('[data-div-height="featureAndBenefits"]').matchHeight();
                     $('[data-div-height="applications"]').matchHeight();
-                    $('[data-div-height="sustainability"]').matchHeight();
                     $('[data-div-height="resourceList"]').matchHeight();
+                    $('[data-div-height="sustainability"]').matchHeight();
                     $('[data-div-height="wrapper"]').matchHeight();
 
                 });
@@ -2927,10 +2928,11 @@ $(window).on('load', function () {
             $("#loadMore").fadeIn(500);
             $(".fade-bg").fadeIn(500);
             var getDivHeight = $(".content-wrapper").height();
-            var newDivHeight = getDivHeight + 380;
+            var cardHeight = $('[data-category]').height();
+            var newDivHeight = getDivHeight + cardHeight;
             //$('.content-wrapper').css('height', newDivHeight);
             $('.content-wrapper').css({
-                'transition': 'height 1.5s',
+                'transition': 'height 1.2s',
                 'height': newDivHeight
             });
             $('[data-category=' + getID + ']').matchHeight();

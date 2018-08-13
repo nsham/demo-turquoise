@@ -24,7 +24,7 @@
     });
 
 	function detectVideo() {
-		//theVideo.play();
+		theVideo.play();
 	}
 
 	if ($('.hero-banner-wrapper video').length){

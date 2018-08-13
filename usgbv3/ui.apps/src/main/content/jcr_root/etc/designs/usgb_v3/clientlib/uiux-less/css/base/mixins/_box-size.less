@@ -221,7 +221,12 @@
         transition: 300ms ease 0ms;
         -moz-transition: 300ms ease 0ms;
         -webkit-transition: 300ms ease 0ms;
+
+        &.no-description{
+			background: @color-primary-green;
+        }
     }
+
     &:hover {
         .bg-box-hover {
             background: @color-primary-yellow;
@@ -234,8 +239,13 @@
             }
             .breakpoint(@min-bp-lg) {
                 height: 160px;
-            }
+           }
         }
+
+        .no-description{
+            min-height:95px;
+        }
+
         .sub-text {
             display: block;
             visibility: visible; 
@@ -246,8 +256,13 @@
         .main-text {
             display: none;
         }
+
     }
+
+
+
 }
+
 
 .box-type-4 {
     overflow: hidden;
