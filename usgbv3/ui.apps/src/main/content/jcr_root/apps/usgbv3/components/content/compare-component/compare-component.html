@@ -68,7 +68,7 @@
 					{{#each pagePropertiesList}}
 	
 					<div class="p-xl m-top-l">
-						<h2 class=" title ht6 uppercase color-darker-grey">physicalProperties</h2>
+						<h2 class=" title ht6 uppercase color-darker-grey">${'Physical Properties' @ i18n}</h2>
 	
 	
 					</div>
@@ -83,7 +83,7 @@
 					</div>
 	
 					<div class="p-xl m-top-l">
-						<h2 class=" title ht6 uppercase color-darker-grey">featuresAndBenefits</h2>
+						<h2 class=" title ht6 uppercase color-darker-grey">${'Features & Benefits' @ i18n}</h2>
 					</div>
 					<hr class="m-no">
 					<div data-div-height="featuresAndBenefits" class=" applicationsp-side-xl p-m ">
@@ -94,7 +94,7 @@
 						{{/if}}
 					</div>
 					<div class="p-xl m-top-l">
-						<h2 class=" title ht6 uppercase color-darker-grey">applications</h2>
+						<h2 class=" title ht6 uppercase color-darker-grey">${'Applications' @ i18n}</h2>
 					</div>
 					<hr class="m-no">
 					<div data-div-height="applications" class="p-side-xl p-m ">
@@ -105,7 +105,7 @@
 						{{/if}}
 					</div>
 					<div class="p-xl m-top-l">
-						<h2 class=" title ht6 uppercase color-darker-grey">sustainability</h2>
+						<h2 class=" title ht6 uppercase color-darker-grey">${'Sustainability' @ i18n}</h2>
 					</div>
 					<hr class="m-no">
 					<div data-div-height="sustainability" class="p-side-xl p-m ">
@@ -116,7 +116,7 @@
 						{{/if}}
 					</div>
 					<div class="p-xl m-top-l"> 
-						<h2 class=" title ht6 uppercase color-darker-grey">resources</h2>
+						<h2 class=" title ht6 uppercase color-darker-grey">${'Resources' @ i18n}</h2>
 	
 					</div>
 					<hr class="m-no">
@@ -212,7 +212,7 @@
 	
 						<div class="default-col m-top-m">
 							<div data-div-height="wrapper" class=" col-xs-4 col-cell p-no">
-								<a href="/content/v3/usgboral/samplepage/product-listing.html">
+								<a href="#" onclick="gotoCategoryPage();">
 									<div class="p-side-xl">
 										<div class="box-type-3 bg-light-grey ">
 											<div class="center width-full">
@@ -223,7 +223,7 @@
 														</div>
 													</div>
 												</div>
-												<h2 class="p-vertical-l color-darker-grey ht6 text-center uppercase">Add to compare1</h2>
+												<h2 class="p-vertical-l color-darker-grey ht6 text-center uppercase">${'Add to compare' @ i18n}</h2>
 											</div>
 										</div>
 									</div>
@@ -231,7 +231,7 @@
 							</div>
 	
 							<div data-div-height="wrapper" class=" col-xs-4 col-cell p-no">
-								<a href="/content/v3/usgboral/samplepage/product-listing.html">
+								<a href="#" onclick="gotoCategoryPage();">
 									<div class="p-side-xl">
 										<div class="box-type-3 bg-light-grey ">
 											<div class="center width-full">
@@ -242,7 +242,7 @@
 														</div>
 													</div>
 												</div>
-												<h2 class="p-vertical-l color-darker-grey ht6 text-center uppercase">Add to compare2 </h2>
+												<h2 class="p-vertical-l color-darker-grey ht6 text-center uppercase">${'Add to compare' @ i18n}</h2>
 											</div>
 										</div>
 									</div>
@@ -250,7 +250,7 @@
 							</div>
 	
 							<div data-div-height="wrapper" class=" col-xs-4 col-cell p-no">
-								<a href="/content/v3/usgboral/samplepage/product-listing.html">
+								<a href="#" onclick="gotoCategoryPage();">
 									<div class="p-side-xl">
 										<div class="box-type-3 bg-light-grey ">
 											<div class="center width-full">
@@ -261,7 +261,7 @@
 														</div>
 													</div>
 												</div>
-												<h2 class="p-vertical-l color-darker-grey ht6 text-center uppercase">Add to compare3 </h2>
+												<h2 class="p-vertical-l color-darker-grey ht6 text-center uppercase">${'Add to compare' @ i18n}</h2>
 											</div>
 										</div>
 									</div>
@@ -289,7 +289,7 @@
 						<a href="${properties.link}.html" target="${properties.targettype == properties.hiddentarget ? properties.targetName : properties.targettype}" class="btn btn-brand-default ${properties.buttonStyle }">${properties.buttonText }</a>
 					</div>
 				</sly>
-	
+
 				<sly data-sly-test="${properties.buttonText2}">
 					<div class="col-xs-6">
 						<a href="${properties.link2}.html" target="${properties.targettype == properties.hiddentarget ? properties.targetName : properties.targettype}" class="btn btn-brand-default ${properties.buttonStyle2 }">${properties.buttonText2 }</a>
@@ -316,4 +316,3 @@
 		}
 	
 	</script>
-	
