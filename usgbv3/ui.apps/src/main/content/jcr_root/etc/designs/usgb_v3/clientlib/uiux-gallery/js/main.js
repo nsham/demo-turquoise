@@ -93,7 +93,7 @@
                 console.log("ext-",ext);
                 $.ajax({
                     //url: "/etc/designs/usgb_v3/clientlib/uiux-all-js/js/json/gallery-filter.json",
-                    url: "/bin/usg/galleryDetails?pageurl="+pagename,
+                    url: "/bin/usgb/v3/galleryDetails?pageurl="+pagename,
                     type: "GET",
                     cache: false,
                     success: function (response) {
