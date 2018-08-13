@@ -60,9 +60,9 @@
         
                         <sly data-sly-list.resourceCategory="${component.resourceList}">
         
-                            <div data-resource-category="${resourceCategory.tag.name @ context='unsafe'}" class="accordion-item">
+                            <div data-resource-category="${resourceCategory.tag.name @ context='unsafe'}" class="accordion-item ">
         
-                                <div class="bg-light-grey p-m panel-heading rounded-corners m-bottom-xl m-md-bottom-m ${resourceCategoryList.first ? '' : 'collapsed'}" data-toggle="collapse" data-parent="#accordion"
+                                <div class=" bg-light-grey p-m panel-heading rounded-corners m-bottom-xl m-md-bottom-m ${resourceCategoryList.first ? '' : 'collapsed'}" data-toggle="collapse" data-parent="#accordion"
                                     data-target="#${resourceCategory.tag.name @ context='unsafe'}">
                                     <h2 class="ht6 accordion-toggle bold color-darker-grey">${resourceCategory.tag.title @ context='unsafe'} </h2>
                                 </div>
