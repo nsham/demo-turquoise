@@ -147,6 +147,51 @@
                             }
                             this.Input.setAttribute("data-autocomplete-old-value", this.Input.value);
                             selectionFlag = true;
+                        },
+                        _Post: function(response) {
+                            try {
+                                var returnResponse = [];
+                                //JSON return
+                                var json = JSON.parse(response);
+                                if(response.indexOf("Items") >= 0){
+                                    // fix for where to buy component
+                                    wtbAutocompleteData = json;
+                                    var responseHotFix = json;
+                                    var data = responseHotFix.Items;
+                                    var autocompleteData = data;
+                                    
+                                    json = Object.keys(autocompleteData).map(function(e) {
+                                        for (var key in autocompleteData[e]){
+                                            if(autocompleteData[e].hasOwnProperty(key)) {
+                                                return autocompleteData[e][key];
+                                            }
+                                        }
+                                    });
+                                }
+                                
+                                if (Object.keys(json).length === 0) {
+                                    return "";
+                                }
+                
+                                if (Array.isArray(json)) {
+                                    for (var i = 0; i < Object.keys(json).length; i++) {
+                                        returnResponse[returnResponse.length] = { "Value": json[i], "Label": this._Highlight(json[i]) };
+                                    }
+                                }
+                                else {
+                                    for (var value in json) {
+                                        returnResponse.push({
+                                            "Value": value,
+                                            "Label": this._Highlight(json[value])
+                                        });
+                                    }
+                                }
+                                return returnResponse;
+                            }
+                            catch (event) {
+                                //HTML return
+                                return response;
+                            }
                         }
                     }, "#input-search-location");
 
