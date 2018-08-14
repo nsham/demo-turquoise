@@ -213,7 +213,7 @@
                 var target = $(this);
 
                 //clear data from autocomplete
-                wtbAutocompleteData.Items = undefined;
+                //wtbAutocompleteData.Items = undefined;
                 
                 if ($(this).val()) {
                     $('.wtb-search-bar').addClass('add-bg');
@@ -224,14 +224,6 @@
                     $('.filter-list-item').removeClass('open');
                 }
             });
-
-            // $('#input-search-location').on('keyup', function (e) {
-            //     if (e.which == 13) {
-            //         $('.wtb-search-bar').addClass('add-bg');
-            //         $('.search-bar-toggle-button').addClass('open');
-            //         $('#map-search-controller .btn-search').click();
-            //     }
-            // });
 
             $(document).on('change keyup','#filter-list-controller .checkbox, #filter-list-controller .radio', function(e){
                 e.preventDefault();
@@ -873,8 +865,6 @@
     Handlebars.registerHelper('ifEquals', function(arg1, arg2, options) {
         return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
     });
-
-   
 
     
 })();
