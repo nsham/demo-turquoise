@@ -26,7 +26,7 @@ import java.util.*;
 		property={
 				Constants.SERVICE_DESCRIPTION + "=Get store search Store Locator",
 				"sling.servlet.methods=" + HttpConstants.METHOD_GET,
-				"sling.servlet.paths="+ "/bin/usgb/shareService"
+				"sling.servlet.paths="+ "/bin/usgb/v3/shareService"
 		})
 public class ShareServlet extends BaseAllMethodsServlet {
 

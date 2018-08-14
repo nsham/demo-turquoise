@@ -29,7 +29,7 @@ import java.util.Set;
         property={
                 Constants.SERVICE_DESCRIPTION + "=Get Auto Complete Store Locator",
                 "sling.servlet.methods=" + HttpConstants.METHOD_GET,
-                "sling.servlet.paths="+ "/bin/usg/storeAutoComplete"
+                "sling.servlet.paths="+ "/bin/usgb/v3/storeAutoComplete"
         })
 public class GetAutoSearchStoreSearch extends SlingSafeMethodsServlet {
     private static Logger LOG = LoggerFactory.getLogger(GetAutoSearchStoreSearch.class);
@@ -46,8 +46,10 @@ public class GetAutoSearchStoreSearch extends SlingSafeMethodsServlet {
         if(textParameter != null && request.getHeader("referer") != null){
             try {
                 String refererURI = StringUtils.getReferrerURIfromRequest(request);
+                LOG.info("refererURI = " + refererURI);
                 jsonResponse = storeLocatorService.getAutoSearch(refererURI
                         , textParameter.getString(), request.getResourceResolver(),false);
+                
             } catch (URISyntaxException e) {
                 LOG.error("URI SyntaxExvception is :"+e);
             }

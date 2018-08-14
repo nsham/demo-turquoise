@@ -90,6 +90,39 @@
 
             <sly data-sly-resource="${'megamenu' @ resourceType='usgbv3/components/content/header-megamenu'}"/>
 
+
+            <!-- mobile-nav -->
+            <!-- visible-xs will overwrite flex-row -->
+            <div class="mobile-nav flex-row justify-end hidden-sm hidden-md hidden-lg">
+            
+                <!-- map -->
+        		<sly data-sly-test="${!properties.disabledWtb }">
+                    <div class="map p-xs">
+                        <a href="${countryInfo.countryInfo.wtbUrl @ context='unsafe'}.html" class="glyphicon glyphicon-map-marker color-dark-2-grey icon-size-xs"></a>
+                    </div>
+        		</sly>
+                <!-- end map -->
+            
+                <!-- search -->
+        		<sly data-sly-test="${!properties.disabledSearch }">
+                    <div class="search p-xs">
+                        <a href="#" data-search-pop-up class="glyphicon glyphicon-search color-dark-2-grey icon-size-xs"></a>
+                    </div>
+        		</sly>
+                <!-- end search -->
+            
+                <span class="vertical-rule m-left-xs"></span>
+            
+                <!-- hamburger button -->
+                <div class="hamburger p-vertical-m p-left-m">
+                    <a href="#" class="cart glyphicon glyphicon-align-justify color-dark-2-grey icon-size-xs">
+                        <span class="pop-notification width-none"></span>
+                     </a>
+                </div>
+                <!-- end hamburger button -->
+            
+            </div>
+            <!-- end mobile-nav -->
         </div>
 
         <div class="bottom">
@@ -118,7 +151,7 @@
                             <a href="#" class="icon-min-width btn btn-sm btn-brand-default icon-bg color-white">
                                 <span class=" glyphicon glyphicon-earphone"></span>
                             </a>
-                            <a href="#" class="icon-min-width btn btn-sm btn-brand-default icon-bg color-white">
+                            <a href="${countryInfo.countryInfo.wtbUrl @ context='unsafe'}.html" class="icon-min-width btn btn-sm btn-brand-default icon-bg color-white">
                                 <span class=" glyphicon glyphicon-map-marker"></span>
                             </a>
                         </div>

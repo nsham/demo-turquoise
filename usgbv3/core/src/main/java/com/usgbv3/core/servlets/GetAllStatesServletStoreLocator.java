@@ -42,7 +42,7 @@ import java.io.PrintWriter;
            property={
                    Constants.SERVICE_DESCRIPTION + "=Get All States",
                    "sling.servlet.methods=" + HttpConstants.METHOD_GET,
-                   "sling.servlet.paths="+ "/bin/usg/getAllStates"
+                   "sling.servlet.paths="+ "/bin/usgb/v3/getAllStates"
            })
 public class GetAllStatesServletStoreLocator extends SlingSafeMethodsServlet {
 

@@ -24,7 +24,7 @@ import java.net.URISyntaxException;
         property={
                 Constants.SERVICE_DESCRIPTION + "=Get store search Store Locator",
                 "sling.servlet.methods=" + HttpConstants.METHOD_GET,
-                "sling.servlet.paths="+ "/bin/usg/storeSearch"
+                "sling.servlet.paths="+ "/bin/usgb/v3/storeSearch"
         })
 public class GetStoreLocator extends SlingSafeMethodsServlet {
     private static Logger LOG = LoggerFactory.getLogger(GetStoreLocator.class);
