@@ -58,7 +58,7 @@ function recaptchaCallback() {
 
     $(document).ready(function () {
         var getParam = new URLSearchParams(window.location.search);
-        var paramValue = getParam.get("enquiryType").replace(" ","_").toLowerCase();
+        var paramValue = getParam.get("enquiryType") !== null? getParam.get("enquiryType").replace(" ","_").toLowerCase(): "";
         $('[value="'+ paramValue +'"]').attr("selected","selected");
 
         if($('.floating-type-form').length > 0){
@@ -184,13 +184,13 @@ function recaptchaCallback() {
                             required: true,
                             digits: true
                         },
-                        occupation_select: "required",
+                        occupation: "required",
                         i_work_with: "required",
                         i_am_interested: "required"
                     },
                     messages: {
                         contact: "Please fill in your contact number",
-                        occupationselect: "Please select one",
+                        occupation: "Please select one",
                         i_work_with: "Please select one",
                         i_am_interested: "Please select one"
                     },
