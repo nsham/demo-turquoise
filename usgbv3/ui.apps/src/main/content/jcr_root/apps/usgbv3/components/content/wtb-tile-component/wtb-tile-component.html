@@ -34,7 +34,7 @@
 
     						<sly data-sly-list.state="${component.stateList}">
 								<li>
-    								<a href="${component.countryInfo.wtbUrl @ context='unsafe'}.html?text=${state @ context='unsafe'}" data-val="${state @ context='unsafe'}">${state @ context='html'}</a>
+    								<a href="${component.countryInfo.wtbUrl @ context='unsafe'}.html?text=${state @ context='unsafe'}&state=true" data-val="${state @ context='unsafe'}">${state @ context='html'}</a>
                                 </li>
     						</sly>
 
