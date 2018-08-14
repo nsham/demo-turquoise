@@ -137,7 +137,7 @@ public class MegamenuMobileComponent extends WCMUsePojo {
 			}
 			
 			tabMegamenu.setPagePath(path);
-			tabMegamenu.setLink(path + ".html");
+			tabMegamenu.setLink(path);
 			tabMegamenu.setTitle(parentPage.getTitle());
 			tabMegamenu.setName(parentPage.getName());
 			tabMegamenu.setStyleType(styleType);

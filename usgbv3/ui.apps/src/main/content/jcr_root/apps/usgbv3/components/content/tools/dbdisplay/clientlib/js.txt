@@ -1,0 +1,13 @@
+#base=js
+
+dbdisplay.js
+jquery.dataTables.js
+dataTables.fixedColumns.js
+dataTables.buttons.js
+buttons.colVis.js
+
+buttons.flash.js
+jszip.js
+vfs_fonts.js
+buttons.print.js
+buttons.html5.js

@@ -148,7 +148,7 @@ public class FooterComponent extends WCMUsePojo {
 			}
 			
 			tabMegamenu.setPagePath(path);
-			tabMegamenu.setLink(path + ".html");
+			tabMegamenu.setLink(path);
 			tabMegamenu.setTitle(parentPage.getTitle());
 			tabMegamenu.setStyleType(styleType);
 			

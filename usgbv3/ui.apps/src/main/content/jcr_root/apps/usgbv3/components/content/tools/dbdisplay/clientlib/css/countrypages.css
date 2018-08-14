@@ -1,0 +1,25 @@
+
+th, td { white-space: nowrap; }
+div.dataTables_wrapper {
+    margin: 0 auto;
+}
+
+div.ColVis {
+    float: left;
+}
+
+.countryDropdown {
+	border: 1px solid #e1e1e1;
+	padding: 7px 6px;
+	width: 275px;
+}
+
+
+
+.countryDropdown:focus {
+	border-color: #008112;
+}
+
+.coral-Icon--admin {
+    content: "\f389";
+}
