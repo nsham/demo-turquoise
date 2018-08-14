@@ -249,8 +249,8 @@ public class GetGalleryDetails  extends SlingSafeMethodsServlet {
             tempJsonObject.addProperty("num", mixedMediaCountInPage);
         }
 
-        if(pageProperties.containsKey("socialImage")){
-            tempJsonObject.addProperty("img", pageProperties.get("socialImage").toString());
+        if(pageProperties.containsKey("pageImage")){
+            tempJsonObject.addProperty("img", pageProperties.get("pageImage").toString());
         }
         if(pageProperties.containsKey("jcr:title")) {
             tempJsonObject.addProperty("title", pageProperties.get("jcr:title").toString());
