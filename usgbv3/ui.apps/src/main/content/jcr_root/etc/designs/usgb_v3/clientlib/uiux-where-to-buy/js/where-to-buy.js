@@ -115,6 +115,65 @@
 
             initialize();
 
+            AutoComplete({
+                EmptyMessage: "No item found",
+                QueryArg: "text",
+                _Select: function(item) {
+                    if (item.hasAttribute("data-autocomplete-value")) {
+                        this.Input.value = item.getAttribute("data-autocomplete-value");
+                    } else {
+                        this.Input.value = item.innerHTML;
+                    }
+                    this.Input.setAttribute("data-autocomplete-old-value", this.Input.value);
+                    selectionFlag = true;
+                },
+                _Post: function(response) {
+                    try {
+                        var returnResponse = [];
+                        //JSON return
+                        var json = JSON.parse(response);
+                        if(response.indexOf("Items") >= 0){
+                            // fix for where to buy component
+                            wtbAutocompleteData = json;
+                            var responseHotFix = json;
+                            var data = responseHotFix.Items;
+                            var autocompleteData = data;
+                            
+                            json = Object.keys(autocompleteData).map(function(e) {
+                                for (var key in autocompleteData[e]){
+                                    if(autocompleteData[e].hasOwnProperty(key)) {
+                                        return autocompleteData[e][key];
+                                    }
+                                }
+                            });
+                        }
+                        
+                        if (Object.keys(json).length === 0) {
+                            return "";
+                        }
+        
+                        if (Array.isArray(json)) {
+                            for (var i = 0; i < Object.keys(json).length; i++) {
+                                returnResponse[returnResponse.length] = { "Value": json[i], "Label": this._Highlight(json[i]) };
+                            }
+                        }
+                        else {
+                            for (var value in json) {
+                                returnResponse.push({
+                                    "Value": value,
+                                    "Label": this._Highlight(json[value])
+                                });
+                            }
+                        }
+                        return returnResponse;
+                    }
+                    catch (event) {
+                        //HTML return
+                        return response;
+                    }
+                }
+            }, "#input-search-location");
+
             $(document).on('click','.wtb-search-bar .option', function(e){
                 e.preventDefault();
                 
@@ -135,66 +194,6 @@
                 var target = $(this);
                 if ($(this).val()) {
                     $('.wtb-search-bar').addClass('add-bg');
-
-                    AutoComplete({
-                        EmptyMessage: "No item found",
-                        QueryArg: "text",
-                        _Select: function(item) {
-                            if (item.hasAttribute("data-autocomplete-value")) {
-                                this.Input.value = item.getAttribute("data-autocomplete-value");
-                            } else {
-                                this.Input.value = item.innerHTML;
-                            }
-                            this.Input.setAttribute("data-autocomplete-old-value", this.Input.value);
-                            selectionFlag = true;
-                        },
-                        _Post: function(response) {
-                            try {
-                                var returnResponse = [];
-                                //JSON return
-                                var json = JSON.parse(response);
-                                if(response.indexOf("Items") >= 0){
-                                    // fix for where to buy component
-                                    wtbAutocompleteData = json;
-                                    var responseHotFix = json;
-                                    var data = responseHotFix.Items;
-                                    var autocompleteData = data;
-                                    
-                                    json = Object.keys(autocompleteData).map(function(e) {
-                                        for (var key in autocompleteData[e]){
-                                            if(autocompleteData[e].hasOwnProperty(key)) {
-                                                return autocompleteData[e][key];
-                                            }
-                                        }
-                                    });
-                                }
-                                
-                                if (Object.keys(json).length === 0) {
-                                    return "";
-                                }
-                
-                                if (Array.isArray(json)) {
-                                    for (var i = 0; i < Object.keys(json).length; i++) {
-                                        returnResponse[returnResponse.length] = { "Value": json[i], "Label": this._Highlight(json[i]) };
-                                    }
-                                }
-                                else {
-                                    for (var value in json) {
-                                        returnResponse.push({
-                                            "Value": value,
-                                            "Label": this._Highlight(json[value])
-                                        });
-                                    }
-                                }
-                                return returnResponse;
-                            }
-                            catch (event) {
-                                //HTML return
-                                return response;
-                            }
-                        }
-                    }, "#input-search-location");
-
                 } else {  
                     $('.wtb-search-bar').removeClass('add-bg').removeClass('open');
                     $('.state-wrap').removeClass('open');
@@ -323,7 +322,7 @@
                     currSenario = "";
                     console.log(wtbAutocompleteData,value);
                     //wtbAutocompleteData, variable created at the autocomplte.js
-                    if(wtbAutocompleteData.Items.length > 0){
+                    if(wtbAutocompleteData.Items !== undefined && wtbAutocompleteData.Items.length > 0){
                         selectionFlag = true;
                     }
                     if(selectionFlag == true){
@@ -474,14 +473,11 @@
                 mapTypeId: 'roadmap',
                 mapTypeControl: false
             };
-            
-
-            infoWindow = new google.maps.InfoWindow;
         
             map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
         
             // a new Info Window is created
-            infoWindow = new google.maps.InfoWindow();
+            infoWindow = new google.maps.InfoWindow({ maxWidth: 320 });
             // Event that closes the Info Window with a click on the map
             // google.maps.event.addListener(map, 'click', function() {
             // infoWindow.close();
@@ -559,13 +555,13 @@
                 // Creating the content to be inserted in the infowindow
                 var iwContent =
                     '<div id="iw_container">' +
-                    '<div class="iw_title">' + companyName + '</div>' +
+                    '<div class="iw_title m-top-l">' + companyName + '</div>' +
                     '<div class="iw_content">' +
                     address1 + '<br />' +
                     address2 + '<br /><br />' +
                     '<div class="fa fa-phone icon-size-xs p-right-m"></div>' + phoneNumber + '<br /><br />' +
                     (email!==undefined? ('<div class="fa fa-envelope icon-size-xs p-right-m"></div>' + email + '<br /><br />') : "") +
-                    '<a href="' + directionUrl + '" target="_blank"> <div class="rounded-corners bg-primary-green p-s text-center color-white bold"> Get Direction </div></a>' + '</div></div>';
+                    '<a href="https://www.google.com/maps?daddr='+ latlng +'" target="_blank"> <div class="rounded-corners bg-primary-green p-s text-center color-white bold"> Get Direction </div></a>' + '</div></div>';
 
                 // pan to clicked marker
                 var divHeightOfTheMap = document.getElementById('map-canvas').clientHeight;
@@ -745,6 +741,9 @@
             map.setZoom(17);
             map.setCenter(markers[index].position);
             google.maps.event.trigger(markers[index], 'click');
+            if (!window.matchMedia("(min-width: 768px)").matches) {
+                $('.cta-search-detail-off').click();
+            }
         }
 
         function geolocation(callback){
