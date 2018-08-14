@@ -342,6 +342,9 @@
                     }
                     resetFilter();
                     loadStoreListResult();
+
+                    //clear data from autocomplete
+                    wtbAutocompleteData.Items = undefined;
                     
                 }
             });
