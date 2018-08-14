@@ -35,7 +35,7 @@ import java.util.*;
         property={
                 Constants.SERVICE_DESCRIPTION + "=Get Gallery Detils",
                 "sling.servlet.methods=" + HttpConstants.METHOD_GET,
-                "sling.servlet.paths="+ "/bin/usg/galleryDetails"
+                "sling.servlet.paths="+ "/bin/usgb/v3/galleryDetails"
         })
 public class GetGalleryDetails  extends SlingSafeMethodsServlet {
 
@@ -274,7 +274,7 @@ public class GetGalleryDetails  extends SlingSafeMethodsServlet {
         }
 
         tempJsonObject.addProperty("type", tagName);
-        tempJsonObject.addProperty("link", childPage.getPath());
+        tempJsonObject.addProperty("link", childPage.getPath() + ".html");
 
         return tempJsonObject;
     }

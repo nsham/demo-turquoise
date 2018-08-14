@@ -1,4 +1,3 @@
 #base=js
-autocomplete.js
 markerclusterer.js
 where-to-buy.js

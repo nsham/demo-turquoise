@@ -10,92 +10,42 @@
             <div class="container height-full">
                 <div class="height-full row">
                     <div class="col-xs-12 height-full p-top-6xl " >
+                        <div class="ht4 color-white text-center">${'PLEASE SELECT YOUR COUNTRY OR REGION' @ i18n}</div>
+                        <div class="ht5 color-white text-center p-m">${'Country Selection Title' @ i18n}</div>
 
-                        <div class="region-landing--country-list ">
+                        <div class="region-landing--country-list " data-sly-use.component="com.usgbv3.core.components.CountryPopupComponent">
+
                             <ul>
                                 <li>
-                                    <img src="/content/dam/USGBoral/Global/Website/Images/component/allsample/global-landing/australia.png" alt="australia" class="m-right-m">
+                                    <img src="/content/dam/USGBoral/Global/Website/Images/v3/global-landing/globe-green.png" alt="Global" class="m-right-m">
                                     <div>
-                                        <h6 class="ht6 uppercase color-white">Australia</h6>
-                                        <a href="#" target="_blank" class="fs-2 color-white">English</a>
+                                        <h6 class="ht6 uppercase color-white">Global</h6>
+                                        <a href="/content/usgboral.html?redirect=global" target="_blank" class="fs-2 color-white">English</a>
                                     </div>
                                 </li>
-                                <li>
-                                    <img src="/content/dam/USGBoral/Global/Website/Images/component/allsample/global-landing/china.png" alt="china" class="m-right-m">
-                                    <div>
-                                        <h6 class="ht6 uppercase color-white">China</h6>
-                                        <a href="#" target="_blank" class="fs-2 color-white">Consectetuer adipiscing elit.</a>
-                                    </div>
-                                </li>
-                                <li>
-                                    <img src="/content/dam/USGBoral/Global/Website/Images/component/allsample/global-landing/korea.png" alt="korea" class="m-right-m">
-                                    <div>
-                                        <h6 class="ht6 uppercase color-white">Korea</h6>
-                                        <a href="#" target="_blank" class="fs-2 color-white">Consectetuer adipi</a>
-                                    </div>
-                                </li>
-                                <li>
-                                    <img src="/content/dam/USGBoral/Global/Website/Images/component/allsample/global-landing/middle-east.png" alt="Middle East" class="m-right-m">
-                                    <div>
-                                        <h6 class="ht6 uppercase color-white">Middle east</h6>
-                                        <a href="#" target="_blank" class="fs-2 color-white">English</a>
-                                    </div>
-                                </li>
-                                <li>
-                                    <img src="/content/dam/USGBoral/Global/Website/Images/component/allsample/global-landing/new-zealand.png" alt="New Zealand" class="m-right-m">
-                                    <div>
-                                        <h6 class="ht6 uppercase color-white">New Zealand</h6>
-                                        <a href="#" target="_blank" class="fs-2 color-white">English</a>
-                                    </div>
-                                </li>
-                                <li>
-                                    <img src="/content/dam/USGBoral/Global/Website/Images/component/allsample/global-landing/vietnam.png" alt="Vietnam" class="m-right-m">
-                                    <div>
-                                        <h6 class="ht6 uppercase color-white">Vietnam</h6>
-                                        <a href="#" target="_blank" class="fs-2 color-white">Consectetuer adipi</a>
-                                    </div>
-                                </li>
-                                <li>
-                                    <img src="/content/dam/USGBoral/Global/Website/Images/component/allsample/global-landing/singapore.png" alt="Singapore" class="m-right-m">
-                                    <div>
-                                        <h6 class="ht6 uppercase color-white">Singapore</h6>
-                                        <a href="#" target="_blank" class="fs-2 color-white">English</a>
-                                    </div>
-                                </li>
-                                <li>
-                                    <img src="/content/dam/USGBoral/Global/Website/Images/component/allsample/global-landing/malaysia.png" alt="Malaysia" class="m-right-m">
-                                    <div>
-                                        <h6 class="ht6 uppercase color-white">Malaysia</h6>
-                                        <a href="#" target="_blank" class="fs-2 color-white">English</a>
-                                    </div>
-                                </li>
-                                <li>
-                                    <img src="/content/dam/USGBoral/Global/Website/Images/component/allsample/global-landing/philippines.png" alt="Philippines" class="m-right-m">
-                                    <div>
-                                        <h6 class="ht6 uppercase color-white">Philippines</h6>
-                                        <a href="#" target="_blank" class="fs-2 color-white">English</a>
-                                    </div>
-                                </li>
-                                <li>
-                                    <img src="/content/dam/USGBoral/Global/Website/Images/component/allsample/global-landing/thailand.png" alt="Thailand" class="m-right-m">
-                                    <div>
-                                        <h6 class="ht6 uppercase color-white">Thailand</h6>
-                                        <ul class="languages">
-                                            <li><a href="#" target="_blank" class="fs-2 color-white">English</a></li>
-                                            <li><a href="#" target="_blank" class="fs-2 color-white">Thai</a></li>
-                                        </ul>
-                                    </div>
-                                </li>
-                                <li>
-                                    <img src="/content/dam/USGBoral/Global/Website/Images/component/allsample/global-landing/indonesia.png" alt="Indonesia" class="m-right-m">
-                                    <div>
-                                        <h6 class="ht6 uppercase color-white">Indonesia</h6>
-                                        <ul class="languages">
-                                            <li><a href="#" target="_blank" class="fs-2 color-white">English</a></li>
-                                            <li><a href="#" target="_blank" class="fs-2 color-white">Bahasa Indonesia</a></li>
-                                        </ul>
-                                    </div>
-                                </li>
+                                <sly data-sly-list.country="${component.countryModelList}">
+                                    <li>
+                                        <img src="${country.damPath}" alt="${country.countryTitle}" class="m-right-m">
+                                        <div>
+                                            <h6 class="ht6 uppercase color-white">${country.countryTitle}</h6>
+
+                                            <sly data-sly-test.multiLanguage="${country.languageList.size > 1}">
+												<ul class="languages">
+													<sly data-sly-list.language="${country.languageList}">
+														<li><a href="${language.languagePath}.html" target="_blank" class="fs-2 color-white">${language.languageTitle}</a></li>
+                                                    </sly>
+                                                </ul>
+                                            </sly>
+                                            <sly data-sly-test="${!multiLanguage}">
+
+                                                <sly data-sly-list.language="${country.languageList}">
+													<a href="${language.languagePath}.html" target="_blank" class="fs-2 color-white">${language.languageTitle}</a>
+                                                </sly>
+                                            </sly>
+
+                                        </div>
+                                    </li>
+                                </sly>
                             </ul>
                         </div>
 

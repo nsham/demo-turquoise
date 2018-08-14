@@ -20,10 +20,10 @@
 		<div class="item-fix p-no text-center">
         	<sly data-sly-test.linkExist="${properties.link}">
                 <a href="${properties.link @ context='unsafe'}.html" target="${properties.targettype == properties.hiddentarget ? properties.targetName : properties.targettype}"
-                    class="btn btn-brand-default m-bottom-l ${properties.buttonStyle }">${properties.buttonText}</a>
+                    class="btn btn-brand-default m-bottom-l m-sm-bottom-no ${properties.buttonStyle }">${properties.buttonText}</a>
             </sly>
             <sly data-sly-test.="${!linkExist}">
-                <a class="btn btn-brand-default m-bottom-l ${properties.buttonStyle }">${properties.buttonText}</a>
+                <a class="btn btn-brand-default m-bottom-l m-sm-bottom-no ${properties.buttonStyle }">${properties.buttonText}</a>
             </sly>
         </div>
      </sly>

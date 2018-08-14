@@ -13,7 +13,7 @@
         			data-img-mobile="background:transparent url(${properties.mblImgPath ? properties.mblImgPath : properties.imgPath @ context='unsafe'}) bottom right no-repeat; background-size:cover;">
 	</sly>
     <sly data-sly-test="${!assetExist}">
-		<div class="box-size-l cta-hover-tile" style="z-index:1; background-color: ${properties.bgColor @ context='unsafe'};"  data-scroll-reveal="wait 0.2s, then enter over 500ms after 0.3s"  >
+		<div class="box-size-l cta-hover-tile" style="z-index:1; background-color: ${properties.bgColor @ context='unsafe'};" >
     </sly>
 		<!-- bg-overlay start -->
         <div class="${properties.opacity}">
@@ -40,7 +40,7 @@
                         <h2 class="ht5 color-white uppercase m-bottom-m">${'Contact USG Boral' @ i18n}</h2>
 
 
-                            <div class="dropdown dp-form width-full m-bottom-m" style="min-width: 250px; display: inline-block;" data-sly-use.component="com.usgbv3.core.components.ContactUsTileComponent" >
+                            <div class="dropdown dp-form width-full m-bottom-m hidden-xs" style="min-width: 250px; display: inline-block;" data-sly-use.component="com.usgbv3.core.components.ContactUsTileComponent" >
 
                                 <button class="btn btn-default color-dark-grey dropdown-toggle text-left dp-clickable" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <span class="dp-text">${'Select Enquiry Type' @ i18n}</span>
@@ -59,8 +59,22 @@
                                         </li>
                                     </sly>
 
-                                </ul>
+                                </ul>                                
                             </div>
+
+                            <div class="dropdown dp-form-mobile visible-xs dropdown-menu-right m-vertical-m d-small" style="min-width: 250px; display: inline-block;" data-sly-use.component="com.usgbv3.core.components.ContactUsTileComponent">
+
+                                <select class="btn-default">
+                                    <option class="hidden" disabled="" selected=""> ${'Select Enquiry Type' @ i18n}</option>
+                                    <sly data-sly-list.enquiryType="${component.inquiryTypeList}">
+                                       
+                                        <option value="${enquiryType @ context='unsafe'}">
+                                                ${enquiryType @ context='unsafe'}
+                                        </option>
+                                    </sly>
+                                </select>
+                            </div>
+
                             <button name="contactUsSubmit" class="btn btn-brand-default ${properties.buttonStyle1 } m-md-top-no m-top-s">${'CONTACT US' @ i18n}</button>
 
     
@@ -77,18 +91,26 @@
 
 	<script>
 		$(document).on("click", '.contact-us-tile-option .dp-form .dp-list a', function () {
-
             var dataVal = $(this).data("val");
             console.log("dataVal : " + dataVal);
             //console.log("system-content-box : " + $('.system-content-box[data-system-category="'+dataVal+'"]').length);
-
-
             var $dpText = $(this).parent().parent().parent().find($('.dp-text'));
-
 			$dpText.html(dataVal);
             $('input[name=contactUsEnquirytype]').val(dataVal);
-
         });
+
+        $(document).on("click", '.dp-form-mobile select', function () {
+            var dataVal = $(this).val();
+        
+            console.log("MdataVal : " + dataVal);
+            //console.log("system-content-box : " + $('.system-content-box[data-system-category="'+dataVal+'"]').length);
+            var $dpText = $(this).parent().parent().parent().find($('.dp-text'));
+			$dpText.html(dataVal);
+            $('input[name=contactUsEnquirytype]').val(dataVal);
+        });
+
+
+
 
 		$(document).on("click", 'button[name=contactUsSubmit]', function () {
 

@@ -1767,9 +1767,10 @@ $(window).on('load', function () {
 
 
                     $('[data-div-height="physicalProperties"]').matchHeight();
+                    $('[data-div-height="featureAndBenefits"]').matchHeight();
                     $('[data-div-height="applications"]').matchHeight();
-                    $('[data-div-height="sustainability"]').matchHeight();
                     $('[data-div-height="resourceList"]').matchHeight();
+                    $('[data-div-height="sustainability"]').matchHeight();
                     $('[data-div-height="wrapper"]').matchHeight();
 
                 });
@@ -2024,9 +2025,13 @@ $(window).on('load', function () {
             function alignSticky(event) {
                 var scrollPos = $(document).scrollTop();
                 // console.log(scrollPos)
-                if (scrollPos <= 500 || scrollPos > 1000) {
+                if (scrollPos <= 500 || scrollPos < 800) {
                     stickySidebar.updateSticky();
                 }
+                if ( scrollPos > 900) {
+                    stickySidebar.destroy();
+                 }
+ 
             }
 
 
@@ -2080,7 +2085,7 @@ $(window).on('load', function () {
                 event.preventDefault();
                 clearTimeout(countDown);
                 getCard = $(this);
-                getLink = $(this).closest(".each").find("a").attr("href");
+                getLink = $(this).closest(".each").attr("href");
                 getElement();
                 checkStatus = $(this).closest(".each").find(".container-checkbox input").prop("checked");
 
@@ -2605,7 +2610,7 @@ $(window).on('load', function () {
 
             function checkForShoutout() {
                 if (shoutout == true) {
-                    $('.product-listing-result').prepend("<div class='each m-bottom-xxl p-side-m shoutout-txt'><div  class='bg-light-grey width-full custom-block flex-column justify-center align-stretch'><h6 class='title ht6 uppercase text-center p-s'>SHOUT SHOUT SHOUT</h6></div></div>");
+                    $('.product-listing-result').prepend("<div class=' m-bottom-xxl p-side-m shoutout-txt'><div  class='bg-light-grey width-full custom-block flex-column justify-center align-stretch'><h6 class='title ht6 uppercase text-center p-s'>SHOUT SHOUT SHOUT</h6></div></div>");
                     $('.shoutout-txt > .custom-block').html($('.shoutout-hidden').html());
                 }
             }
@@ -2923,10 +2928,11 @@ $(window).on('load', function () {
             $("#loadMore").fadeIn(500);
             $(".fade-bg").fadeIn(500);
             var getDivHeight = $(".content-wrapper").height();
-            var newDivHeight = getDivHeight + 380;
+            var cardHeight = $('[data-category]').height();
+            var newDivHeight = getDivHeight + cardHeight;
             //$('.content-wrapper').css('height', newDivHeight);
             $('.content-wrapper').css({
-                'transition': 'height 1.5s',
+                'transition': 'height 1.2s',
                 'height': newDivHeight
             });
             $('[data-category=' + getID + ']').matchHeight();

@@ -1,22 +1,57 @@
+<sly data-sly-test="${wcmmode.edit || wcmmode.design}">
+	Edit here for Footer Component
+</sly>
+
+<style>
+	${properties.cssoverwrite @ context='unsafe'}
+</style>
 
 
 <!-- FOOTER -->
-<footer class="footer container-fluid">
+<footer class="footer container-fluid ${properties.classid}" data-sly-use.countryInfo="com.usgbv3.core.components.CountryInfoComponent">
    <div class="container p-top-3xl">
       <!-- row 1 -->
       <div class="row m-no hidden-xs">
-         <div class="col-xs-9 p-no" data-sly-use.component="com.usgbv3.core.components.MegamenuValuesComponent">
+         <div class="col-xs-9 p-no" data-sly-use.component="com.usgbv3.core.components.FooterComponent">
             <sly data-sly-list.megamenu="${component.megamenuList}">
 
                 <div class="col-sm-3">
-                   <h2 class="color-white uppercase footer-title fs-2">
-                      <span class="yellow-label"></span>${megamenu.title @ context='html'}
-                   </h2>
-                   <ul>
+                	<sly data-sly-test.noLanding="${megamenu.isNoLandingPage }">
+						<a >
+                    </sly>
+                	<sly data-sly-test="${!noLanding }">
+						<a href="${megamenu.link @ context='unsafe'}">
+                    </sly>
+
+                       <h2 class="color-white uppercase footer-title fs-2">
+                          <span class="yellow-label"></span>${megamenu.title @ context='html'}
+                       </h2>
+                    </a>
+                   <ul class="m-bottom-l">
                    	  <sly data-sly-list.megamenuchild="${megamenu.child}">
 
 						<li>
-                        	<a href="#">${megamenuchild.title @ context='html'}</a>
+                        	<a href="${megamenuchild.link @ context='unsafe'}.html">${megamenuchild.title @ context='html'}</a>
+                        </li>
+
+                      </sly>
+
+                   </ul>
+                </div>
+
+            </sly>
+
+            <sly data-sly-list.additionalFooter="${component.additionalFooterList}">
+
+                <div class="col-sm-3">
+                   <h2 class="color-white uppercase footer-title fs-2">
+                      <span class="yellow-label"></span>${additionalFooter.title @ context='html'}
+                   </h2>
+                   <ul>
+                   	  <sly data-sly-list.addFooterchild="${additionalFooter.child}">
+
+						<li>
+                        	<a href="${addFooterchild.link @ context='unsafe'}.html">${addFooterchild.title @ context='html'}</a>
                         </li>
 
                       </sly>
@@ -41,7 +76,7 @@
                         <sly data-sly-list.enquiryType="${footercontactus.inquiryTypeList}">
                            <li >
                               <a data-val="${enquiryType @ context='unsafe'}">
-                              ${enquiryType @ context='unsafe'}
+                              	${enquiryType @ context='unsafe'}
                               </a>
                            </li>
                         </sly>
@@ -61,11 +96,11 @@
                      	<span class=" color-dark-grey glyphicon glyphicon-menu-hamburger p-no m-no"></span>  
                      </div>
 
-                    <ul class="dropdown-menu dp-list" aria-labelledby="dropdownMenu1" style="z-index:100" >
+                    <ul class="dropdown-menu dp-list" aria-labelledby="dropdownMenu1" >
                     
                         <sly data-sly-list.state="${wtbComponent.stateList}">
                             <li>
-                            	<a href="${component.countryInfo.wtbUrl @ context='unsafe'}.html?text=${state @ context='unsafe'}" data-val="${state @ context='unsafe'}">${state @ context='html'}</a>
+                            	<a href="${countryInfo.countryInfo.wtbUrl @ context='unsafe'}.html?text=${state @ context='unsafe'}" data-val="${state @ context='unsafe'}">${state @ context='html'}</a>
                             </li>
                         </sly>
                     
@@ -91,10 +126,11 @@
       </div>
       <!-- row 2 -->
       <div class="row">
-         <div class="country-dropdown nav-dropdown-wrapper dropdown m-bottom-m" data-sly-use.countryComponent="com.usgbv3.core.components.CountryListComponent">${countryComponent.countryCode}
+         <div class="country-dropdown nav-dropdown-wrapper dropdown m-bottom-m">
             <a href="#" class="dropdown-toggle" data-countries-pop-up>
                <div class="fs-3 country-wrapper color-white ">
-                  <img class="flag-icon" src="images/my-icon.png"> Malaysia / english
+                  <img class="flag-icon" src="${countryInfo.countryInfo.logo @ context='unsafe'}" alt="${countryInfo.countryInfo.countryName @ context='unsafe'}"> 
+                      ${countryInfo.countryInfo.countryName @ context='html'} / ${countryInfo.countryInfo.languageFull @ context='html'}
                   <span class="m-left-xxs glyphicon glyphicon-menu-right"></span>
                </div>
             </a>

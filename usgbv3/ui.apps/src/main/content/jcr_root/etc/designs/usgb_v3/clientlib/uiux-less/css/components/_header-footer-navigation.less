@@ -172,6 +172,11 @@
                 }
 
             }
+
+            .flag-icon{
+                border: 1px solid @color-darker-grey;
+                border-radius: 47px;
+            }
         }
 
 
@@ -187,6 +192,9 @@
                 width: 200px;
                 left: 0;
                 right: 0;
+                -webkit-box-shadow: 0px 11px 20px -1px rgba(0, 0, 0, 0.29);
+                -moz-box-shadow: 0px 11px 20px -1px rgba(0, 0, 0, 0.29);
+                box-shadow: 0px 11px 20px -1px rgba(0, 0, 0, 0.29);
                 li{
                     padding: 10px; 
                     &:hover{
@@ -289,13 +297,15 @@
 
 
 //flag 
-.country-dropdown{
-    .country-wrapper{
+.country-dropdown {
+    .country-wrapper {
         position: relative;
         top: -4px;
         left: -1px;
-        .flag-icon{
+        .flag-icon {
             padding-right: 5px;
+            border: 1px solid @color-darker-grey;
+            border-radius: 47px;
         }
     }
 }

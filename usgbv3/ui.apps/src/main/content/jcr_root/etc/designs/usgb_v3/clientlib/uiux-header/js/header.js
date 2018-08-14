@@ -746,6 +746,46 @@ jQuery(document).ready(function($){
     });
 })();
 
+
+
+
+// ----------------------------------------------------------------------
+// Order Sample Notification
+// ----------------------------------------------------------------------
+(function () {
+    "use strict";
+    $(document).ready(function () {
+
+		$("a.cart > .pop-notification").addClass("width-none");
+        setTimeout(function () {
+
+            if (localStorage.getItem('sampleOrdersJson') === null) {
+                console.log("orderSampleEmpty")
+            } else {
+                var array = JSON.parse(localStorage.getItem('sampleOrdersJson'));
+                console.log("sampleORder", array.length );
+                var countSample = array.length;
+                $("a.cart > .pop-notification").removeClass("width-none");
+                $("a.cart > .pop-notification").addClass("counter");
+                $("a.cart > .pop-notification.counter").text(countSample);
+                $(".header>.wrapper").addClass("desktop-mobile-slide-down");
+                
+            }
+           
+        }, 1000);
+
+                    
+      
+    });
+})();
+
+
+
+
+// ----------------------------------------------------------------------
+// REusable code
+// ------------------------------------------------------------------
+
 /*defaultScrollUpdate====================*/
 function defaultScrollUpdate(element) {
 
@@ -768,3 +808,4 @@ function defaultScrollUpdate(element) {
 
 };
 /*end defaultScrollUpdate====================*/
+

@@ -8,8 +8,8 @@
 
 <div class="${properties.classid @ context='unsafe'} ${properties.hideDestop ? 'hidden-lg hidden-md' : '' } ${properties.hideMobile ? 'hidden-sm hidden-xs' : '' }" >
 	<sly data-sly-test.style1="${properties.styleType == properties.hiddenstyle1}">
-		<sly data-sly-test.urlExist="${properties.pageUrl}">
-        	<a class="hidden-xs" href="${properties.pageUrl}.html" target="${properties.targettype == properties.hiddentarget ? properties.targetName : properties.targettype}">
+		<sly data-sly-test.urlExist="${properties.link}">
+        	<a class="hidden-xs" href="${properties.link}.html" target="${properties.targettype == properties.hiddentarget ? properties.targetName : properties.targettype}">
 		</sly>
 		<sly data-sly-test="${!urlExist}">
 			<a class="hidden-xs" >
@@ -38,8 +38,8 @@
 
     <sly data-sly-test="${!style1}">
 		<!-- DESTOP VERSION START -->
-		<sly data-sly-test.urlExist="${properties.pageUrl}">
-			<a class="hidden-xs" href="${properties.pageUrl}.html" target="${properties.targettype == properties.hiddentarget ? properties.targetName : properties.targettype}" >
+		<sly data-sly-test.urlExist="${properties.link}">
+			<a class="hidden-xs" href="${properties.link}.html" target="${properties.targettype == properties.hiddentarget ? properties.targetName : properties.targettype}" >
 		</sly>
 		<sly data-sly-test="${!urlExist}">
 			<a class="hidden-xs" >
@@ -49,8 +49,8 @@
                 <div class="center width-full">
                     <div class="box-inner-img"><img src="${properties.imgPath @ context='unsafe'}" /></div>
                 </div>
-    
-                <div class="bg-box-hover">
+
+        		<div class="bg-box-hover ${properties.description ? '' : 'no-description' }">
                     <h2 class="main-text p-top-l color-white ht5 text-center uppercase">${properties.title @ context='html'}</h2>
 
                     <div class="sub-text p-m">
@@ -58,7 +58,7 @@
                         <div class="color-darker-grey">${properties.description @ context='html'}</div>  
                     </div>
                 </div>
-            
+
 
             </div>
         </a>
@@ -69,13 +69,62 @@
 
 
 		<!-- MOBILE VERSION START -->
-        <div class="visible-xs m-bottom-s" style="z-index:1; background:transparent url(${properties.imgPath @ context='unsafe'}) center center no-repeat; background-size:cover;">
+        <sly data-sly-test.urlExist="${properties.link}">
+			<a class="visible-xs m-bottom-s" href="${properties.link}.html" target="${properties.targettype == properties.hiddentarget ? properties.targetName : properties.targettype}" 
+        		style="z-index:1; background:transparent url(${properties.imgPath @ context='unsafe'}) center center no-repeat; background-size:cover;">
+		</sly>
+		<sly data-sly-test="${!urlExist}">
+			<a class="visible-xs m-bottom-s" style="z-index:1; background:transparent url(${properties.imgPath @ context='unsafe'}) center center no-repeat; background-size:cover;" >
+		</sly>
+        
 			<div class="bg-overlay"> 
 				<div class="p-s text-center">
 					<h2 class="ht5 color-white uppercase p-top-s">${properties.title @ context='html'}</h2>
 				</div>  
 			</div>     
-		</div>
+		</a>
         <!-- MOBILE VERSION END -->
 
 </div>
+
+<script>
+
+    (function () {
+        "use strict";
+        //===========================
+        //Hover auto height
+        //===========================
+        $(document).ready(function () {
+<<<<<<< HEAD
+            
+        //     var boxHover = $(this,".bg-box-hover").find(".sub-text");
+        //     $(".box-type-4").mouseenter(function(){
+        //         boxHover.css("height","0px").delay(400).css("height","auto");
+        //      });
+             
+        //    $(".box-type-4").mouseout(function(){
+        //        boxHover.animate({
+        //             height: "auto",
+        //           },200);
+        //       });
+=======
+
+            // var boxHover = $(this,".bg-box-hover").find(".sub-text");
+            //$(".box-type-4").mouseenter(function(){
+
+            //    boxHover.css("height","0px").delay(400).css("height","auto");
+            // });
+
+          // $(".box-type-4").mouseout(function(){
+           //    boxHover.animate({
+           //         height: "auto",
+            //      },200);
+            //  }); 
+>>>>>>> 2f3847c5cccd945fd79cbaecab2b5c1f803967a1
+
+
+        });
+    })();
+
+
+</script>

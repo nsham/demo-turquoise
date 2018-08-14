@@ -11,6 +11,10 @@ function recaptchaCallback() {
     "use strict";
 
     $(document).ready(function () {
+        var getParam = new URLSearchParams(window.location.search);
+        var paramValue = getParam.get("enquiryType").replace("%20","_").toLowerCase();
+        $('[value="'+ paramValue +'"]').attr("selected","selected");
+        
         if($('.floating-type-form').length > 0){
             for(var i=0; i<$('.drop-down-select').length; i++){
                 if($($('.drop-down-select')[i]).val() !== ""){
@@ -106,7 +110,7 @@ function recaptchaCallback() {
                     console.log("successs submit");
 
                     $.ajax({ //ajax form submit
-                        url: '/bin/usg/contactusbasic',
+                        url: '/bin/usgb/v3/contactusbasic',
                         type: 'GET',
                         data: "data="+JSON.stringify($("form").serializeObject()),
                         dataType: 'json',
@@ -133,13 +137,13 @@ function recaptchaCallback() {
                         required: true,
                         digits: true
                     },
-                    occupation_select: "required",
+                    occupation: "required",
                     i_work_with: "required",
                     i_am_interested: "required"
                 },
                 messages: {
                     contact: "Please fill in your contact number",
-                    occupationselect: "Please select one",
+                    occupation: "Please select one",
                     i_work_with: "Please select one",
                     i_am_interested: "Please select one"
                 },
@@ -167,7 +171,7 @@ function recaptchaCallback() {
                     console.log("successs submit");
 
                     $.ajax({ //ajax form submit
-                        url: '/bin/usg/contactusadvanced',
+                        url: '/bin/usgb/v3/contactusadvanced',
                         type: 'GET',
                         data: "data="+JSON.stringify($("form").serializeObject()),
                         dataType: 'json',

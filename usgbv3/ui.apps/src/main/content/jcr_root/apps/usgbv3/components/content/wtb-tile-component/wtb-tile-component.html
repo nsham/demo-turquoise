@@ -6,33 +6,68 @@
 	${properties.cssoverwrite @ context='unsafe'}
 </style>
 
-<div class="${properties.classid }">
+
+<div class="${properties.classid }" >
 	<sly data-sly-test.assetExist="${properties.imgPath}">
     	<div class="box-size-l  cta-hover-tile flexi-grow-1" style="background:transparent url(${properties.imgPath @ context='unsafe'}) center center no-repeat; background-size:cover;" data-scroll-reveal="wait 0.2s, then enter over 500ms after 0.6s" >
 	</sly>
     <sly data-sly-test="${!assetExist}">
-		<div class="box-size-l  cta-hover-tile flexi-grow-1" style="background-color: ${properties.bgColor @ context='unsafe'}; background-size:cover;" data-scroll-reveal="wait 0.2s, then enter over 500ms after 0.6s" >
+		<div class="box-size-l  cta-hover-tile flexi-grow-1" style="background-color: ${properties.bgColor @ context='unsafe'}; background-size:cover;" >
 	</sly>
 		<!-- bg-overlay start -->
-        <div class="bg-overlay">
+        <div class="${properties.opacity}">
             <div class="p-side-xxl p-vertical-5xl">
                 <div class="text-center text-sm-center text-md-left">
                     <h2 class="ht4 color-white uppercase">${properties.title @ context='html'}</h2>
                     <div class="color-white">${properties.description @ context='html'}</div>
             	</div>
-                <form>
-                    <div class="search-box color-dark-grey two-icons">
-                        <input class="" placeholder="City, Postcode, Store name or address" aria-label="Text input with multiple buttons">
-                        <div class="mini-nav">
+
+                    <div class="search-box color-dark-grey two-icons" data-sly-use.component="com.usgbv3.core.components.WhereToBuyTileComponent">
+                        <input name="wtb-search-box" class="" placeholder="Enter Your Location" aria-label="Text input with multiple buttons">
+                        <div class="mini-nav" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         	<span class=" color-dark-grey glyphicon glyphicon-menu-hamburger p-no m-no"></span>  
                         </div>
-                        <button type="submit" class=" search-btn">
+
+
+
+                        <ul class="dropdown-menu dp-list" aria-labelledby="dropdownMenu1" style="z-index:100" >
+
+    						<sly data-sly-list.state="${component.stateList}">
+								<li>
+    								<a href="${component.countryInfo.wtbUrl @ context='unsafe'}.html?text=${state @ context='unsafe'}" data-val="${state @ context='unsafe'}">${state @ context='html'}</a>
+                                </li>
+    						</sly>
+
+    					</ul>
+                        <button class="search-btn wtb">
                         	<span class="color-dark-grey glyphicon glyphicon-search p-no m-no"></span>
                         </button>
                     </div>
-                </form>
+
             </div>
         </div>
         <!--bg-overlay end  -->
 	</div>
 </div>
+
+
+<sly data-sly-use.component3="com.usgbv3.core.components.WhereToBuyTileComponent" >
+
+	<script>
+		$(".search-btn.wtb").on( "click", function() {
+          var wtbVal = $("input[name=wtb-search-box]").val();
+
+            if(wtbVal){
+                var wtbUrl = "${component3.countryInfo.wtbUrl @ context='scriptString'}";
+                var openType = "${properties.targettype == properties.hiddentarget ? properties.targetName : properties.targettype @ context='scriptString'}";
+            	window.open(wtbUrl + ".html?text=" + wtbVal, openType)
+				//window.location.href = wtbUrl + ".html?text=" + wtbVal;
+                //alert(searchUrl);
+            }else{
+				alert("value is empty");
+            }
+
+        });
+
+    </script>
+</sly>

@@ -25,14 +25,14 @@
 
     <div class="container m-vertical-m">
         <div class="row">
-            <form id="contactUsForm1" class="floating-type-form form-validate" method="post" name="htmlform" action="/bin/usg/contactusbasic">
+            <form id="contactUsForm1" class="floating-type-form form-validate" method="post" name="htmlform" action="/bin/usgb/v3/contactusbasic">
                 <div class="col-sm-offset-1 col-xs-offset-0 col-sm-5 col-xs-12">
                     <div class="float-label respond-msg" >
                         <label class="uppercase ">Enquiry Type </label>
                         <span class="dropdown-arrow color-primary-green glyphicon glyphicon-menu-down fs-1"></span>
                         <select name="dropdownselect" for="dropdownselect" class="drop-down-select form-control"
                                 type="select" >
-                            <option></option>
+                            <option style="visibility:hidden;display:none;"></option>
                             <option data-sly-repeat.key="${contactus.enquiryType}" value="${key}">${contactus.enquiryType[key]}</option>
                         </select>
                     </div>

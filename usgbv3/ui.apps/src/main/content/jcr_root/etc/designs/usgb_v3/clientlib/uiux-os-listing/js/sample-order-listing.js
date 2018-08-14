@@ -101,12 +101,34 @@
 
                     });
 
+                    $(document).on("click", '.step-2-select', function(event){
+                        if(!$('.step-3-select').hasClass('active') && sampleOrderList.length > 0){
+                            //Hide all steps
+                            stepWrapper.removeClass("step-active");
+                            stepHeaderWrapper.removeClass("current-step");
+
+                            //Show next step Shipping details
+                            stepShippingDetailsWrapper.addClass("step-active");
+                            stepHeaderShippingDetails.addClass("active");
+                            stepHeaderShippingDetails.addClass("current-step");
+                        }
+                    });
+
+                    $(document).on("click", '.step-1-select', function(event){
+                        if(!$('.step-3-select').hasClass('active') && sampleOrderList.length > 0){
+                            //Hide all steps
+                            stepWrapper.removeClass("step-active");
+                            stepHeaderShippingDetails.removeClass("active");
+
+                            //Show next step Shipping details
+                            stepOrderSelectWrapper.addClass("step-active");
+                        }
+                    });
 
                     //Back to Step 1 Order select Button
                     var backToOrderSelectBtn = $(".order-steps-wrapper .back-to-order-select");
 
                     backToOrderSelectBtn.on("click", function(event){
-                        
                         //Hide all steps
                         stepWrapper.removeClass("step-active");
                         stepHeaderShippingDetails.removeClass("active");
@@ -114,7 +136,6 @@
                         //Show next step Shipping details
                         stepOrderSelectWrapper.addClass("step-active");
                     });
-
 
                     //Step 2 Shipping Details Form
                     shippingDetailsForm.validate({
@@ -227,6 +248,10 @@
                                         console.log(afterSubmitOrderSummaryData);
 
                                         updateViewTemplate($('#submitOrderSummaryTemplate').html(), afterSubmitOrderSummaryData, $('.ship-to-summary') );
+
+                                        if($('.recipient-remarks-output').html().replace(" ", "") == ""){
+                                            $('.recipient-remarks-output').html('-');
+                                        }
 
                                         localStorage.removeItem(localStorageSampleOrderName);
 

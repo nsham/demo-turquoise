@@ -74,26 +74,25 @@
                                     <color-light-grey
                                         jcr:primaryType="nt:unstructured"
                                         name="color-light-grey"
-                                        value="#CCCCCC"/>
+                                        value="#F6F6F6"/>
                                     <color-grey
                                         jcr:primaryType="nt:unstructured"
                                         name="color-grey"
-                                        value="#999999"/>
+                                        value="#DDDDDD"/>
                                     <color-dark-grey
                                         jcr:primaryType="nt:unstructured"
                                         name="color-dark-grey"
-                                        value="#666666"/>
+                                        value="#5F6062"/>
                                     <color-deep-dark-grey
                                         jcr:primaryType="nt:unstructured"
                                         name="color-deep-dark-grey"
-                                        value="#333333"/>
+                                        value="#353535"/>
                                     <color-black
                                         jcr:primaryType="nt:unstructured"
                                         name="color-black"
                                         value="#000000"/>
                                 </mappings>
                             </bgcolor>
-                            <imgPath/>
                             <title
                                 jcr:primaryType="nt:unstructured"
                                 sling:orderBefore="[customrichtext]"
@@ -105,7 +104,6 @@
                                 jcr:primaryType="nt:unstructured"
                                 fieldLabel="description"
                                 name="./description"/>
-                            <buttonText/>
                             <buttonStyle
                                 jcr:primaryType="nt:unstructured"
                                 sling:resourceType="granite/ui/components/foundation/form/select"
@@ -139,6 +137,8 @@
                                     jcr:primaryType="nt:unstructured"
                                     sling:resourceType="usgbv3/components/structure/common/datasources/opacity"/>
                             </opacity>
+                            <imgPath/>
+                            <buttonText/>
                         </items>
                     </column>
                 </items>

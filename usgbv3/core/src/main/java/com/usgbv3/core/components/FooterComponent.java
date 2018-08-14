@@ -142,14 +142,26 @@ public class FooterComponent extends WCMUsePojo {
 			
 			ValueMap pageProperties = parentPage.getProperties();
 			
+			//Skip if excludeFooter at pageproperties is ticked
 			if(pageProperties.containsKey("excludeFooter")) {
 				return null;
 			}
 			
 			tabMegamenu.setPagePath(path);
-			tabMegamenu.setLink(path + ".html");
+			tabMegamenu.setLink(path);
 			tabMegamenu.setTitle(parentPage.getTitle());
 			tabMegamenu.setStyleType(styleType);
+			
+			if("style2".equalsIgnoreCase(styleType)) {
+				if(hitProperties.containsKey("style2noLanding" + tabNo)) {
+					tabMegamenu.setNoLandingPage(true);
+				}
+			}
+			if("style3".equalsIgnoreCase(styleType)) {
+				if(hitProperties.containsKey("style3noLanding" + tabNo)) {
+					tabMegamenu.setNoLandingPage(true);
+				}
+			}
 			
 				
 			List<MegamenuChildModel> megamenuChild = setSubMegamenu(parentPage, styleType);

@@ -7,6 +7,8 @@
     "use strict";
     //get from local storage
     var data = JSON.parse(localStorage.getItem('bookmarkStore'));
+    var originalData = [];
+    var originalDataReversed = [];
     var currOnStageMainResultData = [];
     var storeKey = "";
     var gettedSharedKey = "";
@@ -36,8 +38,17 @@
 
             //after ajax get all data in array, run pagination
             getAll(data).done(function(results) {
-                currOnStageMainResultData = results;
+                originalData = results;
+                var clone = results.slice();
+                originalDataReversed = clone.reverse();
+                currOnStageMainResultData = originalData;
                 if(currOnStageMainResultData.length > 0){
+                    // sorting by default: a-z
+                    currOnStageMainResultData.sort(function(a, b){
+                        if(a.pagePropertiesList[0].pageTitle.toLowerCase() < b.pagePropertiesList[0].pageTitle.toLowerCase()) return -1;
+                        if(a.pagePropertiesList[0].pageTitle.toLowerCase() > b.pagePropertiesList[0].pageTitle.toLowerCase()) return 1;
+                        return 0;
+                    });
                     paginationResult(currOnStageMainResultData);
                     getShareKey();
                 }
@@ -84,10 +95,23 @@
                         return 0;
                     });
                     break;
+                case "z_a":
+                    currOnStageMainResultData.sort(function(a, b){
+                        if(a.pagePropertiesList[0].pageTitle.toLowerCase() > b.pagePropertiesList[0].pageTitle.toLowerCase()) return -1;
+                        if(a.pagePropertiesList[0].pageTitle.toLowerCase() < b.pagePropertiesList[0].pageTitle.toLowerCase()) return 1;
+                        return 0;
+                    });
+                    break;
+                case "latest":
+                    currOnStageMainResultData = originalData;
+                    break;
+                case "oldest":
+                    currOnStageMainResultData = originalDataReversed;
+                    break;
                 case "categorize":
                     currOnStageMainResultData.sort(function(a, b){
-                        if(a.pagePropertiesList[0].categoryName.toLowerCase() < b.pagePropertiesList[0].categoryName.toLowerCase()) return -1;
-                        if(a.pagePropertiesList[0].categoryName.toLowerCase() > b.pagePropertiesList[0].categoryName.toLowerCase()) return 1;
+                        if(a.pagePropertiesList[0].pageCategoryName.toLowerCase() < b.pagePropertiesList[0].pageCategoryName.toLowerCase()) return -1;
+                        if(a.pagePropertiesList[0].pageCategoryName.toLowerCase() > b.pagePropertiesList[0].pageCategoryName.toLowerCase()) return 1;
                         return 0;
                     });
                     break;
@@ -108,10 +132,23 @@
                         return 0;
                     });
                     break;
+                case "z_a":
+                    currOnStageMainResultData.sort(function(a, b){
+                        if(a.pagePropertiesList[0].pageTitle.toLowerCase() > b.pagePropertiesList[0].pageTitle.toLowerCase()) return -1;
+                        if(a.pagePropertiesList[0].pageTitle.toLowerCase() < b.pagePropertiesList[0].pageTitle.toLowerCase()) return 1;
+                        return 0;
+                    });
+                    break;
+                case "latest":
+                    currOnStageMainResultData = originalData;
+                    break;
+                case "oldest":
+                    currOnStageMainResultData = originalDataReversed;
+                    break;
                 case "categorize":
                     currOnStageMainResultData.sort(function(a, b){
-                        if(a.pagePropertiesList[0].categoryName.toLowerCase() < b.pagePropertiesList[0].categoryName.toLowerCase()) return -1;
-                        if(a.pagePropertiesList[0].categoryName.toLowerCase() > b.pagePropertiesList[0].categoryName.toLowerCase()) return 1;
+                        if(a.pagePropertiesList[0].pageCategoryName.toLowerCase() < b.pagePropertiesList[0].pageCategoryName.toLowerCase()) return -1;
+                        if(a.pagePropertiesList[0].pageCategoryName.toLowerCase() > b.pagePropertiesList[0].pageCategoryName.toLowerCase()) return 1;
                         return 0;
                     });
                     break;
@@ -204,7 +241,7 @@
                 storeKey = response.key;
                 console.log(window.location.origin + '/bin/usgb/shareService?rType=get&key=' + storeKey);
                 $(".share-icons").jsSocials({
-                    url: window.location.href + "&key=" + storeKey,
+                    url: window.location.href + "?key=" + storeKey,
                     showLabel: false,
                     showCount: false,
                     text: "My USG Boral Bookmark",

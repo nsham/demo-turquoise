@@ -1,7 +1,6 @@
 
 
 
-
             // readjust sticky side bar
             var stickySidebar = new StickySidebar('.make-sticky', {
                 topSpacing: 105,
@@ -14,20 +13,29 @@
             });
 
 
-            $(document).on("scroll", alignSticky);
+
+
+			$(document).on("scroll", alignSticky);
 
             function alignSticky(event) {
-                var scrollPos = $(document).scrollTop();
-                // console.log(scrollPos)
-                if (scrollPos <= 500 || scrollPos > 1000) {
+               var scrollPos = $(document).scrollTop();
+               //console.log(scrollPos)
+               if (scrollPos <= 500 || scrollPos < 800) {
+                    stickySidebar.updateSticky();
+               }
+
+                if ( scrollPos > 1300) {
+                   stickySidebar.destroy();
+                }else{
                     stickySidebar.updateSticky();
                 }
+
             }
 
 
 
             //////COMPARE POPUP start//////
-            $(".compare-popup").hide()
+            $(".compare-popup").hide();
             $(".popup-content .content-wrapper").hide();
             $(".compare-popup .btn-compare").hide();
             $(".compare-popup .instruction-text").hide();
@@ -75,7 +83,7 @@
                 event.preventDefault();
                 clearTimeout(countDown);
                 getCard = $(this);
-                getLink = $(this).closest(".each").find("a").attr("href");
+                getLink = $(this).closest(".each").attr("href");
                 getElement();
                 checkStatus = $(this).closest(".each").find(".container-checkbox input").prop("checked");
 
@@ -120,9 +128,9 @@
                     minimisePopup();
                     clearTimeout(countDown);
                     if($(".compare-popup .title").hasClass("selected")){
-                        console.log("click true")
+                        //console.log("click true")
                     }else{
-                        console.log("click false")
+                        //console.log("click false")
                         countDownPop();
                     }
             });
@@ -269,19 +277,19 @@
             //minimise Popup if idle   
             $( ".compare-popup .inner-content" )
               .mouseenter(function() {
-                console.log("enterrring");
+                //console.log("enterrring");
                 clearTimeout(countDown);
                 //checkPopupState();
               })
               .mouseleave(function() {
-                console.log("mouseleave");
+                //console.log("mouseleave");
                 clearTimeout(countDown);
                 countDownPop();
               });
     
     
             function countDownPop(){
-                console.log("counting")
+                //console.log("counting")
                 countDown = setTimeout(function () {
                     minimisePopup();
                 }, 5000);
@@ -290,10 +298,10 @@
             function checkPopupState(){
                 clearTimeout(countDown);
                 if($(".compare-popup .inner-content").is(":visible")){
-                    console.log("true")
+                    //console.log("true")
                     countDownPop();
                 }else{
-                    console.log("false")
+                    //console.log("false")
                     $(".compare-popup .inner-content").slideToggle(800);
                     $(".compare-popup .title").toggleClass("selected");   
                     countDownPop();
@@ -425,10 +433,11 @@
                         categoryName = productData.category_key + "_" + productData.country_key;
                         countryCode = productData.country_key;
 
-
+                        $(".compare-popup").hide();
                         hideAllWrappers();
                         renderProductListingResult();
                         retrieveCompare();
+                        
 
 
             }
@@ -605,10 +614,12 @@
 
             function checkForShoutout() {
                 if (shoutout == true) {
-                    $('.product-listing-result').prepend("<div class='each m-bottom-xxl p-side-m shoutout-txt'><div  class='bg-light-grey width-full custom-block flex-column justify-center align-stretch'><h6 class='title ht6 uppercase text-center p-s'>SHOUT SHOUT SHOUT</h6></div></div>");
+                    $('.product-listing-result').prepend("<div class='m-bottom-xxl p-side-m shoutout-txt'><div  class='bg-light-grey width-full custom-block flex-column justify-center align-stretch'><h6 class='title ht6 uppercase text-center p-s'>SHOUT SHOUT SHOUT</h6></div></div>");
 					$('.shoutout-txt > .custom-block').html($('.shoutout-hidden').html());
                 }
             }
+
+          
 
             function scrollTop_one(target) {
                 if (target) {
@@ -685,7 +696,7 @@
                 // pass checked to button
                 if ($('.' + dataSearchVal + '-wrapper  input[data-checkname=' + checkname + ']').is(':checked')) {
 
-                    $('[data-checkbutton=' + dataSearchVal + ']').append("<div data-selection=" + checkname + " class='bg-grey m-xs bold btn btn-xs'>" + checkboxName + "<span class='btn-close fs-1 p-left-s'>&times;</span></div>");
+                    $('[data-checkbutton=' + dataSearchVal + ']').append("<div data-selection=" + checkname + " class='bg-light-2-grey m-xs bold btn btn-xs'>" + checkboxName + "<span class='btn-close fs-1 p-left-s'>&times;</span></div>");
                     // remove duplicates
 
                     if ($('[data-selection=' + checkname + ']').length > 1) {
@@ -745,7 +756,7 @@
 
                 if ($('.mobile-' + mdataSearchVal + '-wrapper label input[data-checkname=' + checkname + ']').is(':checked')) {
 
-                    $('.mobile-checkbox-button-wrapper > [data-m-checkbutton=' + mdataSearchVal + ']').append("<div data-selection=" + checkname + " class='bg-grey m-xs bold btn btn-xs'>" + checkboxName + "<span class='btn-close fs-1 p-left-s'>&times;</span></div>");
+                    $('.mobile-checkbox-button-wrapper > [data-m-checkbutton=' + mdataSearchVal + ']').append("<div data-selection=" + checkname + " class='bg-light-2-grey m-xs bold btn btn-xs'>" + checkboxName + "<span class='btn-close fs-1 p-left-s'>&times;</span></div>");
                     //remove duplicates
                     if ($('[data-selection=' + checkname + ']').length > 1) {
                         $('[data-selection=' + checkname + ']').last().remove();

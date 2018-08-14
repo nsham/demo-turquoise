@@ -22,7 +22,7 @@ import java.util.Enumeration;
         property = {
                 Constants.SERVICE_DESCRIPTION + "=Submit Basic contact us",
                 "sling.servlet.methods=" + HttpConstants.METHOD_GET,
-                "sling.servlet.paths=" + "/bin/usg/contactusadvanced"
+                "sling.servlet.paths=" + "/bin/usgb/v3/contactusadvanced"
         })
 public class ContactUSAdvancedServlet extends SlingSafeMethodsServlet {
 
