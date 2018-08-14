@@ -253,7 +253,7 @@
           -ms-transform: all ease 300ms;
               transform: all ease 300ms;
       height: auto;
-      z-index: 100;
+      z-index: 5;
 
       &:before{
           font-family: @font-awesome;
@@ -563,5 +563,84 @@
       -webkit-filter:blur(15px);
               filter:blur(15px);
     }
+  }
+}
+
+
+
+// ----------------------------------------------------------------------
+//   indicator
+// ----------------------------------------------------------------------
+
+.indicator-wrap {
+  background: #009b3a;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  border-radius: 50%;
+  width: 2.1em;
+  height: 2.1em;
+  margin: 0 auto;
+  position: absolute;
+  right:16px;
+  bottom:20px;
+  display:none;
+  z-index: 2;
+  @media(min-width:768px){
+    display:block;
+  }
+  .indicator {
+    -webkit-animation: indicator 0.5s infinite alternate;
+    animation: indicator 0.5s infinite alternate;
+  }
+
+  .fa {
+    display: block;
+    text-align: center;
+    color: #ffffff;
+    font: normal 20px 'FontAwesome';
+    line-height: 35px;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+  }
+  
+  .fa-angle-double-down:before {
+    content: "\f103";
+  }
+}
+
+@-webkit-keyframes indicator {
+  0% {
+    transform: translateY(5px);
+  }
+  100% {
+    transform: translateY(-5px);
+  }
+}
+
+@-moz-keyframes indicator {
+  0% {
+    transform: translateY(5px);
+  }
+  100% {
+    transform: translateY(-5px);
+  }
+}
+
+@-o-keyframes indicator {
+  0% {
+    transform: translateY(5px);
+  }
+  100% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes indicator {
+  0% {
+    transform: translateY(5px);
+  }
+  100% {
+    transform: translateY(-5px);
   }
 }
