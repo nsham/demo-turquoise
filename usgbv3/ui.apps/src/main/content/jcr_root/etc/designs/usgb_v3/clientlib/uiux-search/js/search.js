@@ -13,6 +13,9 @@
     var sort = "a_z";
     var dt = {};
 
+    var autoCompleteData = [];
+
+
     $(document).ready(function(){
 
         AutoComplete({
@@ -42,14 +45,23 @@
             }
         }, "#search-form input");
 
+        // get autocomplete data
+        $.ajax({
+            url: "/bin/usgb/v3/searchAutoComplete",
+            type: "GET",
+            cache: false,
+            success: function(response) {
+                autoCompleteData = response;
+                console.log('autoCompleteData', autoCompleteData);
+            }
+        });
+
         if($('.search-form').length > 0){
             if($.ssoManager.isLogin){
                 if (typeof $.ssoManager.sso.userInfo() !== 'undefined' &&
                     typeof $.ssoManager.sso.userInfo().responseJSON !== 'undefined' &&
                     ($.ssoManager.sso.userInfo().responseJSON).hasOwnProperty('id')) {
                     var userInfo = $.ssoManager.sso.userInfo().responseJSON;
-
-                    //var dt = { user_info: {user_id: userInfo.id} };
                     dt = {
                         user_info: {
                             user_id: userInfo.id,
@@ -63,6 +75,7 @@
                 }
             }
 
+            // if url has parameter
             if(urlParams.has('text')){
                 var text = urlParams.get('text');
                 $('#search-form input').val(text);
@@ -227,8 +240,24 @@
                                 cache: false,
                                 success: function(response) {
                                     console.log('add submittal status', response);
+                                },
+                                beforeSend: function () {
+                                    $('#loaderWrapper').fadeIn("fast");
+                                    $('body').addClass("modal-open");
+                                },
+                                complete: function () {
+                                    $('#loaderWrapper').fadeOut("fast");
+                                    $('body').removeClass("modal-open");
                                 }
                             });
+                        },
+                        beforeSend: function () {
+                            $('#loaderWrapper').fadeIn("fast");
+                            $('body').addClass("modal-open");
+                        },
+                        complete: function () {
+                            $('#loaderWrapper').fadeOut("fast");
+                            $('body').removeClass("modal-open");
                         }
                     });
                 } else {
@@ -353,25 +382,25 @@
                     //populate search related listing
                     var relatedSearchArray = [];
                     $('.related-search').html("");
-                    if($('#search-form').find('.autocomplete li').length > 0){
-                        for ( var i = 0; i < 5; i++ ) {
-                            relatedSearchArray.push($($('#search-form .autocomplete li')[i]).html());
-                        }
-                        var relatedObj = {
-                            keyword: resultData.keyword,
-                            searches_related: relatedSearchArray
-                        }
-                        var relatedHtml = $('#templSearchRelated').html();
-                        var temptRelatedHtml = Handlebars.compile(relatedHtml);
-                        $('.related-search').html(temptRelatedHtml(relatedObj));
 
-                        if(resultData.keyword.replace(/\s/g, '').toLowerCase().indexOf($($('.related-searches-result')[0]).text().replace(/\s/g, '').toLowerCase()) >= 0){
-                            $('.related-search').addClass('hidden');
-                        } else {
-                            $('.related-search').removeClass('hidden');
+                    for( var i = 0; i < autoCompleteData.length; i++ ) {
+                        if(autoCompleteData[i].toLowerCase().indexOf(searchedText) >= 0){
+                            relatedSearchArray.push(autoCompleteData[i]);
                         }
                     }
+                    var relatedObj = {
+                        keyword: resultData.keyword,
+                        searches_related: relatedSearchArray.splice(5, 5)
+                    }
+                    var relatedHtml = $('#templSearchRelated').html();
+                    var temptRelatedHtml = Handlebars.compile(relatedHtml);
+                    $('.related-search').html(temptRelatedHtml(relatedObj));
 
+                    if(resultData.keyword.replace(/\s/g, '').toLowerCase().indexOf($($('.related-searches-result')[0]).text().replace(/\s/g, '').toLowerCase()) >= 0 || relatedSearchArray.length == 0){
+                        $('.related-search').addClass('hidden');
+                    } else {
+                        $('.related-search').removeClass('hidden');
+                    }
 
                     switch (currCategory) {
                         case "content":
@@ -409,9 +438,13 @@
                     $('.no-search-result-container').removeClass('hidden');
                 }
             },
-            beforeSend: function() {
+            beforeSend: function () {
+                $('#loaderWrapper').fadeIn("fast");
+                $('body').addClass("modal-open");
             },
-            complete: function() {
+            complete: function () {
+                $('#loaderWrapper').fadeOut("fast");
+                $('body').removeClass("modal-open");
             }
         });
     }
