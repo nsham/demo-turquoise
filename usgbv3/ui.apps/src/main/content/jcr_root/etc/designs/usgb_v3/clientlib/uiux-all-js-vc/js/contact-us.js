@@ -216,7 +216,77 @@ function recaptchaCallback() {
 
                     submitHandler: function(form) {
                         console.log("successs submit", $("form").serializeObject());
+
+                        $.ajax({ //ajax form submit
+                            url: '/json/formvalidate.json',
+                            type: 'POST',
+                            data: JSON.stringify($("form").serializeObject()),
+                            dataType: 'json',
+                            contentType: false,
+                            cache: false,
+                            processData: false
+                        }).done(function (data) { //fetch server "json" messages when done
+                            console.log("successs submit3");
                 
+                            $('#thankyou-modal').modal('show');
+                            setTimeout(function(){
+                                location.reload()
+                            }, 8000);
+                            
+                        });
+                    
+                    }// end submit handler
+                }); 
+            }
+
+            if($("#careerForm").length > 0){
+                $("#careerForm").validate({
+                    ignore: ".ignore",
+                    rules: {
+                        name: "required",
+                        email: {
+                            required: true,
+                        },
+                        contact: {
+                            required: true,
+                            digits: true
+                        },
+                        chooseFile: "required",
+                        locationselect: "required",
+                        countryselect: "required",
+                        departmentselect: "required"
+                    },
+                    messages: {
+                        name: "Please enter your name",
+                        email: "Please enter a valid email address",
+                        countryselect: "Please select one",
+                        contact: "Please fill in your contact number",
+                        locationselect: "Please select one",
+                        departmentselect: "Please select one"
+                    },
+                    errorElement: "span",
+                    errorPlacement: function (error, element) {
+                        // Add the `help-block` class to the error element
+                        error.addClass("help-block");
+
+                        if (element.prop("type") === "checkbox") {
+                            error.insertAfter(element.closest('.checkbox'));
+                        } else if (element.prop("tagName").toLowerCase() === "select") {
+                            error.insertAfter(element);
+                        } else {
+                            error.insertAfter(element.parent().find('label'));
+                        }
+                    },
+                    highlight: function (element, errorClass, validClass) {
+                        $(element).parents(".respond-msg").addClass("has-error").removeClass("has-success");
+                    },
+                    unhighlight: function (element, errorClass, validClass) {
+                        $(element).parents(".respond-msg").addClass("has-success").removeClass("has-error");
+                    },
+
+                    submitHandler: function(form) {
+                        console.log("successs submit", $("form").serializeObject());
+
                         $.ajax({ //ajax form submit
                             url: '/json/formvalidate.json',
                             type: 'POST',
