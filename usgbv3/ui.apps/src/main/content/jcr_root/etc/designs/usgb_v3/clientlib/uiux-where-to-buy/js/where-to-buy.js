@@ -331,12 +331,16 @@
         
             $(document).on('click', '#map-search-controller .btn-search', function(e){
                 e.preventDefault();
+                console.log('searchedText', searchedText);
                 if($('#input-search-location').val() !== ""){
                     var value = $('#input-search-location').val();
                     currSenario = "";
                     console.log(wtbAutocompleteData,value);
                     //wtbAutocompleteData, variable created at the autocomplte.js
-                    if(wtbAutocompleteData.Items !== undefined && wtbAutocompleteData.Items.length > 0){
+                    // if(wtbAutocompleteData.Items !== undefined && wtbAutocompleteData.Items.length > 0){
+                    //     selectionFlag = true;
+                    // }
+                    if(wtbAutocompleteData.Items !== undefined && searchedText.indexOf(value) >= 0){
                         selectionFlag = true;
                     }
                     if(selectionFlag == true){
@@ -347,8 +351,8 @@
                                 choosenProximity = value;
                             } else if(key !== null){
                                 currSenario = key;
-                                searchedText = value;
                             }
+                            searchedText = value;
                         }
                         selectionFlag = false;
                     } else {
