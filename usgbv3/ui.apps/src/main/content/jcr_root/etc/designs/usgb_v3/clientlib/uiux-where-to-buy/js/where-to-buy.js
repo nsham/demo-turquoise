@@ -28,6 +28,8 @@
         var autocompleteData = {};
         var selectionFlag = false;
 
+        var urlParams = new URLSearchParams(window.location.search);
+
         var urlString = window.location.href;
         var url = new URL(urlString);
         var countryCode = [
@@ -174,6 +176,24 @@
                 }
             }, "#input-search-location");
 
+
+            //check parameter from url
+            if(urlParams.get('text')){
+                var value = urlParams.get('text');
+                $('.wtb-search-bar').addClass('add-bg');
+                $('.search-bar-toggle-button').addClass('open');
+                $('#input-search-location').val(value);
+                if(urlParams.get('state')){
+                    currSenario = "searchState";
+                    choosenState = value;
+                } else {
+                    searchedText = value;
+                }
+                resetFilter();
+                loadStoreListResult();
+            }
+
+
             $(document).on('click','.wtb-search-bar .option', function(e){
                 e.preventDefault();
                 
@@ -190,8 +210,11 @@
         
             $(document).on('change keyup','#input-search-location', function(e){
                 e.preventDefault();
-                //var num = Number($(this).attr('data-length-autocomplete-start'));
                 var target = $(this);
+
+                //clear data from autocomplete
+                //wtbAutocompleteData.Items = undefined;
+                
                 if ($(this).val()) {
                     $('.wtb-search-bar').addClass('add-bg');
                 } else {  
@@ -199,17 +222,8 @@
                     $('.state-wrap').removeClass('open');
                     $('.search-bar-toggle-button').removeClass('open');
                     $('.filter-list-item').removeClass('open');
-                    
                 }
             });
-
-            // $('#input-search-location').on('keyup', function (e) {
-            //     if (e.which == 13) {
-            //         $('.wtb-search-bar').addClass('add-bg');
-            //         $('.search-bar-toggle-button').addClass('open');
-            //         $('#map-search-controller .btn-search').click();
-            //     }
-            // });
 
             $(document).on('change keyup','#filter-list-controller .checkbox, #filter-list-controller .radio', function(e){
                 e.preventDefault();
@@ -342,7 +356,6 @@
                     }
                     resetFilter();
                     loadStoreListResult();
-                    
                 }
             });
             
@@ -420,14 +433,16 @@
                     success: function (response) {
                         console.log(response);
                         for(var i=0; i<response.length; i++){
-                            $('#map-search-controller .dropdown-menu').append('<div class="option">'+ response[i] +'</div>');
+                            $('#map-search-controller .dropdown-menu').append('<div class="option" data-value="'+ response[i].toLowerCase().replace(' ','-') +'">'+ response[i] +'</div>');
                         }
                     },
                     beforeSend: function () {
-                        //$('.loader').fadeIn("fast");
+                        $('#loaderWrapper').fadeIn("fast");
+                        $('body').addClass("modal-open");
                     },
                     complete: function () {
-                        //$('.loader').fadeOut("slow");
+                        $('#loaderWrapper').fadeOut("fast");
+                        $('body').removeClass("modal-open");
                     }
                 });
             }
@@ -484,13 +499,17 @@
             // });
             // Finally displayMarkers() function is called to begin the markers creation
 
+            markerCluster = new MarkerClusterer(map, markers, {
+                    imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m',
+                    maxZoom: 14
+                }
+            );
+
             if(markersData.length > 0){
                 displayMarkers(markersData);
             }
 
             geolocation();
-
-            
         }
 
         
@@ -723,10 +742,12 @@
                     }
                 },
                 beforeSend: function () {
-                    $('.loader').fadeIn("fast");
+                    $('#loaderWrapper').fadeIn("fast");
+                    $('body').addClass("modal-open");
                 },
                 complete: function () {
-                    $('.loader').fadeOut("slow");
+                    $('#loaderWrapper').fadeOut("fast");
+                    $('body').removeClass("modal-open");
                 }
             });
         }
@@ -804,6 +825,10 @@
                 markersData[i]["distance"] = Number(calculateDistance(currLocation.lat, currLocation.lng, markersData[i]["latitude"], markersData[i]["longitude"],"K").toFixed(3));
             }
 
+            markersData = markersData.filter(function(o){
+                return o.distance <= 100;
+            });
+
             console.log(markersData);
         }
     }
@@ -848,8 +873,6 @@
     Handlebars.registerHelper('ifEquals', function(arg1, arg2, options) {
         return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
     });
-
-   
 
     
 })();

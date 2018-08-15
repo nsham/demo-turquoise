@@ -28,9 +28,9 @@
 		<sly data-sly-list.tabtiles="${component.productList}">
 			<sly data-sly-list.page="${tabtiles.pages}">
 
-				<div class="col-sm-3 col-xs-12 p-no" data-category="${tabtiles.category.name @ context='unsafe'}">
+				<div class="col-sm-3 col-xs-12 p-no bg-white" data-category="${tabtiles.category.name @ context='unsafe'}">
                     <a href="${page.link @ context='unsafe'}.html" target="${properties.targettype == properties.hiddentarget ? properties.targetName : properties.targettype}">
-                        <div class=" content-box bg-white p-xs p-sm-m">
+                        <div class=" content-box  p-xs p-sm-m">
                             <div class="box-img">
                                 <img src="${page.image @ context='unsafe'}">
                             </div>
