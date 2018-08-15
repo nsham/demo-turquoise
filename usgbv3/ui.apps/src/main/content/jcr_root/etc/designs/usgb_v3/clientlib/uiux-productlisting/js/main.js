@@ -20,15 +20,15 @@
             function alignSticky(event) {
                var scrollPos = $(document).scrollTop();
                //console.log(scrollPos)
-               if (scrollPos <= 500 || scrollPos < 800) {
+               //if (scrollPos <= 500 || scrollPos < 800) {
                     stickySidebar.updateSticky();
-               }
+              // }
 
-                if ( scrollPos > 1300) {
+                //if ( scrollPos > 1300) {
                    stickySidebar.destroy();
-                }else{
-                    stickySidebar.updateSticky();
-                }
+                //}else{
+                 //   stickySidebar.updateSticky();
+               // }
 
             }
 
