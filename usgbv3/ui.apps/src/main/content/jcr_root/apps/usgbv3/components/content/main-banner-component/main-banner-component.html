@@ -92,7 +92,7 @@
     
                                                         ${item.properties.title @ context='html'}
                                                      </h2>
-                                                     <div class="color-white ${properties.enableAnimation ? 'sanimated sfadeInUp delay-500-ms' : '' } ${item.properties.contentAlignment == item.properties.hiddenCenter ? '' : 'width-half'} ">${item.properties.description @ context='html'}</div>
+                                                     <div class="color-white ${properties.enableAnimation ? 'sanimated sfadeInUp delay-500-ms' : '' } ${item.properties.contentAlignment == item.properties.hiddenCenter ? '' : 'width-full width-sm-half'} ">${item.properties.description @ context='html'}</div>
                                                      <sly data-sly-test="${item.properties.buttonText}">
                                                          <div class="btn btn-brand-default ${item.properties.buttonStyle } ${properties.enableAnimation ? 'sanimated sfadeInLeft delay-1000-ms' : '' }">${item.properties.buttonText}</div>
                                                      </sly>
