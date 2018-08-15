@@ -828,11 +828,12 @@
             for ( var i = 0; i < markersData.length; i++) {
                 markersData[i]["distance"] = Number(calculateDistance(currLocation.lat, currLocation.lng, markersData[i]["latitude"], markersData[i]["longitude"],"K").toFixed(3));
             }
-
-            markersData = markersData.filter(function(o){
-                return o.distance <= 100;
-            });
-
+            
+            if(currSenario.indexOf('proximity') >= 0){
+                markersData = markersData.filter(function(o){
+                    return o.distance <= 100;
+                });
+            }
             console.log(markersData);
         }
     }
