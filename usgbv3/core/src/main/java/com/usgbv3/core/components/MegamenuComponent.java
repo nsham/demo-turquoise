@@ -117,27 +117,6 @@ public class MegamenuComponent extends WCMUsePojo {
 						
 						while (ni.hasNext()) {
 					        Node child = (Node)ni.nextNode(); 
-					         if(child.getName().equals("rightSection" + tabNo)) {
-					        	 	
-					        	 	if(getProperties().containsKey("rightSectionTitle" + tabNo)) {
-					        	 		
-					        	 		tabMegamenu.setRightSectionTitle((String) getProperties().get("rightSectionTitle" + tabNo));
-					        	 	}
-
-									List<ArticleModel> sidePanel = new ArrayList<ArticleModel>();
-									NodeIterator ni2 =  child.getNodes() ; 
-									
-							        while (ni2.hasNext()) {
-							        	ArticleModel rightSection = new ArticleModel();
-								        Node child2 = (Node)ni2.nextNode(); 
-								        
-								        rightSection.setTitle(child2.getProperty("rightTitle" + tabNo).getString());
-								        rightSection.setLink(child2.getProperty("rightLink" + tabNo).getString());
-								        sidePanel.add(rightSection);
-							        }
-					        	 
-							        tabMegamenu.setSidePanel(sidePanel);
-					         }
 					         
 					         if(child.getName().equals("bottomSection" + tabNo)) {
 					        	 	
@@ -163,13 +142,29 @@ public class MegamenuComponent extends WCMUsePojo {
 					        	 
 						        tabMegamenu.setBottomPanel(bottomPanel);
 					         }
+					         
+					         if(child.getName().equals("rightSection" + tabNo)) {
+					        	 	
+					        	 	if(getProperties().containsKey("rightSectionTitle" + tabNo)) {
+					        	 		
+					        	 		tabMegamenu.setRightSectionTitle((String) getProperties().get("rightSectionTitle" + tabNo));
+					        	 	}
+
+									List<ArticleModel> sidePanel = new ArrayList<ArticleModel>();
+									NodeIterator ni2 =  child.getNodes() ; 
+									
+							        while (ni2.hasNext()) {
+							        	ArticleModel rightSection = new ArticleModel();
+								        Node child2 = (Node)ni2.nextNode(); 
+								        
+								        rightSection.setTitle(child2.getProperty("rightTitle" + tabNo).getString());
+								        rightSection.setLink(child2.getProperty("rightLink" + tabNo).getString());
+								        sidePanel.add(rightSection);
+							        }
+					        	 
+							        tabMegamenu.setSidePanel(sidePanel);
+					         }
 					        
-//					        NodeIterator ni2 =  child.getNodes() ; 
-//					        while (ni2.hasNext()) {
-//						        Node child2 = (Node)ni2.nextNode(); 
-//						        
-//						        mixMediaList.add(setMixMedia(child2));
-//					        }
 					    }
 						
 					}catch (Exception e) {
