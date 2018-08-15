@@ -650,6 +650,7 @@ jQuery(document).ready(function($){
                 setTimeout(function () {
                     $searchPopUp.addClass('active');
                     AutoComplete({
+                        Limit: 11,
                         EmptyMessage: "No item found",
                         QueryArg: "text",
                         _Render: function(response) {
@@ -662,14 +663,16 @@ jQuery(document).ready(function($){
                             if (this.DOMResults.hasChildNodes()) {
                                 this.DOMResults.removeChild(this.DOMResults.childNodes[0]);
                             }
-
+                            
                             this.DOMResults.appendChild(ul);
-            
+
                             for(var i=0; i<$('[data-autocomplete-value]').length; i++){
                                 if( $($('[data-autocomplete-value]')[i]).find('strong').length == 0){
-                                    $($('[data-autocomplete-value]')[i]).remove();
+                                    $($('[data-autocomplete-value]')[i]).addClass('remove');
                                 }
                             }
+
+                            $('.remove[data-autocomplete-value]').remove();
                         }
                     }, "#header-search-input");
                 }, 50);
