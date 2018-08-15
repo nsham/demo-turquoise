@@ -2,52 +2,6 @@
 // contact us
 // ----------------------------------------------------------------------
 
-// $("#contactUsForm1").validate({
-//     submitHandler: function (form) {
-//         console.log("successs submit");
-        
-//         proceed = true; //set proceed flat to true
-//         console.log("successs submit2");
-//         var post_url = '/json/storelist.json'; //get form action url
-//         var request_method = 'POST'; //get form GET/POST method
-//         var form_data = new FormData(this); //constructs key/value pairs representing fields and values
-
-//         console.log("post" + post_url);
-
-//         form_data.set("fullPath", window.location.href); // adding page url data
-//         form_data.set("formName", "page-content"); // adding page url data
-//         //$("#easyfinishForm").css("opacity", 0.2);
-//         // get current path
-//         var path = window.location.pathname;
-//         var index = path.lastIndexOf("/");
-//         if (index != -1) {
-//             var currentPath = path.substring(0, index);
-//             index = currentPath.lastIndexOf("/");
-//             currentPath = currentPath.substring(0, index);
-//             form_data.append("path", currentPath);
-//         }
-//         console.log(currentPath);
-
-//         $.ajax({ //ajax form submit
-//             url: post_url,
-//             type: request_method,
-//             data: form_data,
-//             dataType: "json",
-//             contentType: false,
-//             cache: false,
-//             processData: false
-//         }).done(function (data) { //fetch server "json" messages when done
-//             console.log("successs submit3");
-
-//             $('#contactUsForm1').hide();
-//             $('#contactUsForm2').removeClass('hidden');
-//         });
-       
-//     }
-// });
-
-
-
 function recaptchaCallback() {
     $('#hiddenRecaptcha').valid();
 };
