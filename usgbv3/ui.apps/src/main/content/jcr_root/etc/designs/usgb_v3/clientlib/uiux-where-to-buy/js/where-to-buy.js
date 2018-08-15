@@ -342,6 +342,8 @@
                     // }
                     if(wtbAutocompleteData.Items !== undefined && searchedText.indexOf(value) >= 0){
                         selectionFlag = true;
+                    } else if(value.indexOf("Use My Location") >= 0){
+                        currSenario = "searchUserLocation";
                     }
                     if(selectionFlag == true){
                         for(var i=0; i<wtbAutocompleteData.Items.length; i++){
