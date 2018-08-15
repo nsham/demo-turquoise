@@ -437,10 +437,12 @@
                         }
                     },
                     beforeSend: function () {
-                        //$('.loader').fadeIn("fast");
+                        $('#loaderWrapper').fadeIn("fast");
+                        $('body').addClass("modal-open");
                     },
                     complete: function () {
-                        //$('.loader').fadeOut("slow");
+                        $('#loaderWrapper').fadeOut("fast");
+                        $('body').removeClass("modal-open");
                     }
                 });
             }
@@ -740,10 +742,12 @@
                     }
                 },
                 beforeSend: function () {
-                    $('.loader').fadeIn("fast");
+                    $('#loaderWrapper').fadeIn("fast");
+                    $('body').addClass("modal-open");
                 },
                 complete: function () {
-                    $('.loader').fadeOut("slow");
+                    $('#loaderWrapper').fadeOut("fast");
+                    $('body').removeClass("modal-open");
                 }
             });
         }
@@ -820,6 +824,10 @@
             for ( var i = 0; i < markersData.length; i++) {
                 markersData[i]["distance"] = Number(calculateDistance(currLocation.lat, currLocation.lng, markersData[i]["latitude"], markersData[i]["longitude"],"K").toFixed(3));
             }
+
+            markersData = markersData.filter(function(o){
+                return o.distance <= 100;
+            });
 
             console.log(markersData);
         }

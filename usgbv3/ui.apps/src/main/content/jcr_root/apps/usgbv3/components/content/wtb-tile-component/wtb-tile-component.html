@@ -24,6 +24,12 @@
 
                     <div class="search-box color-dark-grey two-icons" data-sly-use.component="com.usgbv3.core.components.WhereToBuyTileComponent">
                         <input name="wtb-search-box" class="" placeholder="Enter Your Location" aria-label="Text input with multiple buttons">
+                        <select class="visible-xs selectpicker form-control" onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);" style="width: 10px; position: absolute; right: 0; top: 0px; z-index: 3; right: 50px; background-color: transparent; border: 0; -webkit-appearance: none;">
+                            <sly data-sly-list.state="${component.stateList}">
+                                <option value="${component.countryInfo.wtbUrl @ context='unsafe'}.html?text=${state @ context='unsafe'}&state=true" data-val="${state @ context='unsafe'}">${state @ context='html'}</option>
+                            </sly>
+                        </select>
+
                         <div class="mini-nav" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         	<span class=" color-dark-grey glyphicon glyphicon-menu-hamburger p-no m-no"></span>  
                         </div>
@@ -54,7 +60,7 @@
 <sly data-sly-use.component3="com.usgbv3.core.components.WhereToBuyTileComponent" >
 
 	<script>
-		$(".search-btn.wtb").on( "click", function() {
+		$(".wtb-tile-component .search-btn.wtb").on( "click", function() {
           var wtbVal = $("input[name=wtb-search-box]").val();
 
             if(wtbVal){
