@@ -288,42 +288,6 @@ public class SearchServlet extends BaseAllMethodsServlet {
 			LOG.info("videooo count = " + totalMatchforVideo);
 			if(totalMatchforVideo > 0){
 				
-				boolean addVideo = false;
-				LOG.info("addVideo = " + addVideo);
-				for (int i = 0 ; i < jsonArrayFilter.length(); i++) {
-					
-					
-					if("type".equalsIgnoreCase(jsonArrayFilter.getJSONObject(i).get("key").toString())) {
-						
-						
-						JSONArray videoList = (JSONArray) jsonArrayFilter.getJSONObject(i).get("child");
-						
-						JSONObject videoFilter = new JSONObject();
-						videoFilter.put("key", "video");
-						videoFilter.put("name", "Video");
-						videoList.put(videoFilter);
-						
-						jsonArrayFilter.getJSONObject(i).remove("child");
-						jsonArrayFilter.getJSONObject(i).put("child", videoList);
-						addVideo = true;
-						break;
-						
-					}
-				}
-				
-				if(!addVideo) {
-					
-					JSONObject jsonFilterType = new JSONObject();
-					jsonFilterType.put("key", "type");
-					jsonFilterType.put("title", "Type");
-					
-					JSONArray typeChild = new JSONArray();
-					JSONObject pageType = new JSONObject();
-					pageType.put("key", "video");
-					pageType.put("name", "Video");
-					typeChild.put(pageType);
-					jsonFilterType.put("child", typeChild);
-				}
 				
 				int hitVideoNo = 0;
 				for(Hit hit : resultVideo.getHits()){
@@ -356,6 +320,43 @@ public class SearchServlet extends BaseAllMethodsServlet {
 						}
 						LOG.info("VIDEO COMPARE = " + videoTitle.toLowerCase() + " | " + keyword);
 						if(videoTitle.toLowerCase().contains(keyword)) {
+							
+							// Setup the filter for video
+							boolean addVideo = false;
+							for (int i = 0 ; i < jsonArrayFilter.length(); i++) {
+								
+								
+								if("type".equalsIgnoreCase(jsonArrayFilter.getJSONObject(i).get("key").toString())) {
+									
+									
+									JSONArray videoList = (JSONArray) jsonArrayFilter.getJSONObject(i).get("child");
+									
+									JSONObject videoFilter = new JSONObject();
+									videoFilter.put("key", "video");
+									videoFilter.put("name", "Video");
+									videoList.put(videoFilter);
+									
+									jsonArrayFilter.getJSONObject(i).remove("child");
+									jsonArrayFilter.getJSONObject(i).put("child", videoList);
+									addVideo = true;
+									break;
+									
+								}
+							}
+							
+							if(!addVideo) {
+								
+								JSONObject jsonFilterType = new JSONObject();
+								jsonFilterType.put("key", "type");
+								jsonFilterType.put("title", "Type");
+								
+								JSONArray typeChild = new JSONArray();
+								JSONObject pageType = new JSONObject();
+								pageType.put("key", "video");
+								pageType.put("name", "Video");
+								typeChild.put(pageType);
+								jsonFilterType.put("child", typeChild);
+							}
 							
 							
 							totalMatchforContent++;

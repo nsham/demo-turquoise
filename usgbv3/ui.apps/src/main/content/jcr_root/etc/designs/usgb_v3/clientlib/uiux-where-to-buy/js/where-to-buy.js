@@ -490,18 +490,6 @@
 
         function initialize() {
 
-        
-        //     var mapOptions = {
-        //         center: new google.maps.LatLng(countryLat, countryLng),
-        //         zoom: 4,
-        //         mapTypeId: 'roadmap',
-        //         mapTypeControl: false
-                
-        //     };
-        //    map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-
-            ///TEST///
-            
             var myStyles =[
                 {
                     featureType: "poi",
@@ -514,44 +502,17 @@
             
 
             var mapOptions = {
-                zoom: 4,
                 center:  new google.maps.LatLng(countryLat, countryLng),
-                mapTypeControlOptions: {
-                    mapTypeIds: [google.maps.MapTypeId.ROADMAP, google.maps.MapTypeId.TERRAIN]
-                  },
+                zoom: 4,
                 mapTypeId:   'roadmap',
+                mapTypeControl: false,
                 styles: myStyles 
             };
 
-            
-            // var mapOptions = {
-                
-            //     center: new google.maps.LatLng(countryLat, countryLng),
-            //     zoom: 4,
-            //     mapTypeId: 'roadmap',
-            //     mapTypeControl: false
-            
-            // };
-
-
-            //var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-            //map.mapTypes.set('map_style', styledMap);
-            //map.setMapTypeId('map_style');
-
-            //map.mapTypes.set('mystyle', new google.maps.StyledMapType(myStyle, { name: 'My Style' }));
-
-
            map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
-
-            ///TEST END///
-       
-
-
-
-
-
         
+
             // a new Info Window is created
             infoWindow = new google.maps.InfoWindow({ maxWidth: 320 });
             // Event that closes the Info Window with a click on the map
