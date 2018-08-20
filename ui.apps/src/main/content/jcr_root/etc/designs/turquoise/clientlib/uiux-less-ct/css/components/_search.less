@@ -1,0 +1,46 @@
+.page-search-content .search-filter-sort{
+    -webkit-box-pack: flex-end;
+    -ms-flex-pack: flex-end;
+    justify-content: flex-end;
+}
+
+.search-filter-sort button{
+    height: 36px;
+}
+
+.search-result-thumbnail{
+    .thumbs, .c-video-popup{
+        border: 1px solid #CCC;
+    }
+
+    .ico-play-video{
+        &:before{
+            position: relative;
+            z-index: 5;
+        }
+        &:after{
+            content: "";
+            position: absolute;
+            background-color: rgba(0,0,0,0.15);
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+    }
+}
+
+.search-result-thumbnail--docFinder{
+    .thumbs{
+        padding: 35px 50px;
+		img{
+            max-width: 60px;
+            display: block;
+            margin: 0 auto;
+        }
+    }
+}
+
+.container-tabs-content-type {
+    border-bottom: 1px solid #CCC;
+}

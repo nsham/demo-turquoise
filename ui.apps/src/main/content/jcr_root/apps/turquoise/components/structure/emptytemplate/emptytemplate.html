@@ -1,0 +1,20 @@
+<!doctype html>
+<html >
+    <head>
+        <sly data-sly-include="partials/headlibs.html" data-sly-unwrap/>
+
+    </head>
+    <body class="page ${currentPage.template.name}">
+
+
+		<div class="clearfix" > </div>
+
+        <div>
+			<div class="page-content ">
+            	<sly data-sly-resource="${'par' @ resourceType='foundation/components/parsys'}"/>
+    		</div>
+        </div>
+
+        <sly data-sly-include="partials/footlibs.html" data-sly-unwrap/>
+    </body>
+</html>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="nt:unstructured"
+    sling:resourceType="usgb/components/content/grid-control-2-col"
+    backgroundcolor="bg-w"
+    dcolumn1width="6"
+    dcolumn2width="6"
+    doffset="0"
+    mcolumn1width="12"
+    mcolumn2width="12"
+    moffset="0"
+    tcolumn1width="6"
+    tcolumn2width="6"
+    toffset="0"/>

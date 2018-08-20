@@ -1,0 +1,17 @@
+<sly data-sly-test="${wcmmode.edit || wcmmode.design}">
+    Edit here for BG Placeholder Component
+</sly>
+
+
+<div class="container-fluid ${properties.bgcolor} p-top-${properties.paddingTop} p-bottom-${properties.paddingBottom} ${properties.hideDestop ? 'hidden-lg hidden-md' : '' } ${properties.hideMobile ? 'hidden-sm hidden-xs' : '' }">
+    <sly data-sly-test.istitle="${properties.title}">
+    	<div class="m-vertical-l m-sm-vertical xl" data-scroll="${currentNode.name}" >
+    </sly>
+    <sly data-sly-test="$!istitle}">
+		<div class="container sub-nav-hero" >
+    </sly>
+        <div class="row m-no">
+              <sly data-sly-resource="${'par' @ resourceType='foundation/components/parsys'}"/>
+        </div>
+    </div>
+</div>
