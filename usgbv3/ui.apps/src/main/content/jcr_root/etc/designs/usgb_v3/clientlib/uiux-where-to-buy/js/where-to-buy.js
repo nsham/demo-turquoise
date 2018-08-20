@@ -335,7 +335,7 @@
                 if($('#input-search-location').val() !== ""){
                     var value = $('#input-search-location').val();
                     currSenario = "";
-                    console.log(wtbAutocompleteData,value);
+                    console.log("wtbAuto", wtbAutocompleteData,value);
                     //wtbAutocompleteData, variable created at the autocomplte.js
                     // if(wtbAutocompleteData.Items !== undefined && wtbAutocompleteData.Items.length > 0){
                     //     selectionFlag = true;
@@ -486,16 +486,71 @@
             });
         }
 
+       
 
         function initialize() {
-            var mapOptions = {
-                center: new google.maps.LatLng(countryLat, countryLng),
-                zoom: 4,
-                mapTypeId: 'roadmap',
-                mapTypeControl: false
-            };
+
         
-            map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+        //     var mapOptions = {
+        //         center: new google.maps.LatLng(countryLat, countryLng),
+        //         zoom: 4,
+        //         mapTypeId: 'roadmap',
+        //         mapTypeControl: false
+                
+        //     };
+        //    map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+            ///TEST///
+            
+            var myStyles =[
+                {
+                    featureType: "poi",
+                    elementType: "labels",
+                    stylers: [
+                          { visibility: "off" }
+                    ]
+                }
+            ];
+            
+
+            var mapOptions = {
+                zoom: 4,
+                center:  new google.maps.LatLng(countryLat, countryLng),
+                mapTypeControlOptions: {
+                    mapTypeIds: [google.maps.MapTypeId.ROADMAP, google.maps.MapTypeId.TERRAIN]
+                  },
+                mapTypeId:   'roadmap',
+                styles: myStyles 
+            };
+
+            
+            // var mapOptions = {
+                
+            //     center: new google.maps.LatLng(countryLat, countryLng),
+            //     zoom: 4,
+            //     mapTypeId: 'roadmap',
+            //     mapTypeControl: false
+            
+            // };
+
+
+            //var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+            //map.mapTypes.set('map_style', styledMap);
+            //map.setMapTypeId('map_style');
+
+            //map.mapTypes.set('mystyle', new google.maps.StyledMapType(myStyle, { name: 'My Style' }));
+
+
+           map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+
+            ///TEST END///
+       
+
+
+
+
+
         
             // a new Info Window is created
             infoWindow = new google.maps.InfoWindow({ maxWidth: 320 });
@@ -881,6 +936,14 @@
         return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
     });
 
+
+
     
+
+
+
+
+
+
 })();
 
