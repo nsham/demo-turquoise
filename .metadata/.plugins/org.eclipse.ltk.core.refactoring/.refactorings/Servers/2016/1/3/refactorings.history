@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Copy 2 elements to &apos;usgb.core/src/main/java/com.usgb.core.models&apos;&#x0D;&#x0A;- Original project: &apos;Servers&apos;&#x0D;&#x0A;- Destination element: &apos;usgb.core/src/main/java/com.usgb.core.models&apos;&#x0D;&#x0A;- Original elements:&#x0D;&#x0A;     HeroTextBean.java&#x0D;&#x0A;     HeroTextComponent.java" description="Copy files" destination="=usgb.core/src\/main\/java&lt;com.usgb.core.models" element1="backup/HeroTextBean.java" element2="backup/HeroTextComponent.java" files="2" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1452586195638" units="0" version="1.0"/>
-</session>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/demo-turquoise.iml" filepath="$PROJECT_DIR$/.idea/demo-turquoise.iml" />
+      <module fileurl="file://$PROJECT_DIR$/core/turquoise.core.iml" filepath="$PROJECT_DIR$/core/turquoise.core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ui.apps/turquoise.ui.apps.iml" filepath="$PROJECT_DIR$/ui.apps/turquoise.ui.apps.iml" />
+    </modules>
+  </component>
+</project>
