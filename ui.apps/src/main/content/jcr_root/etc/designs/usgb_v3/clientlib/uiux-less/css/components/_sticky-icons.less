@@ -1,0 +1,61 @@
+// ----------------------------------------------------------------------
+// sticky icon
+// ----------------------------------------------------------------------
+.sticky-icons-button{
+    position: fixed;
+    z-index: 10;
+    right: 0;
+    bottom: 0;
+
+    .fa-5x{
+        font-size: 20px;
+    }
+}
+.sticky-icons-expander {
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    -webkit-transition: opacity 0.5s;
+     -o-transition: opacity 0.5s;
+     transition: opacity 0.5s;
+    &.active{
+    	opacity: 1;
+    }
+
+    .close-pop-up {
+        position: absolute;
+        top: auto;
+        bottom: 0;
+        right: 3px;
+        z-index: 100;
+        @media only screen and (min-width: @min-bp-sm) {
+            top: 0;
+            bottom: auto;
+            right: 0;
+        }
+    }
+
+    .sticky-content{
+        padding-bottom: 70px;
+        @media only screen and (min-width: @min-bp-sm) {
+            padding-bottom: 0px;
+        }
+
+        .sticky-content-scroller{
+            padding-top: 70px;
+            overflow: auto;
+
+            @media only screen and (min-width: @min-bp-sm) {
+                overflow: visible;
+                padding-bottom: 70px;
+                -webkit-transform: scale(1.3);
+                    -ms-transform: scale(1.3);
+                        transform: scale(1.3);
+            }
+        }
+    }
+}

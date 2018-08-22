@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:mix="http://www.jcp.org/jcr/mix/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="cq:Page">
+    <clientlib-site/>
+    <clientlib-all/>
+    <jcr:content
+        cq:lastModified="{Date}2018-08-14T15:59:59.202+08:00"
+        cq:lastModifiedBy="uiux_fe"
+        cq:lastReplicated="{Date}2018-08-16T12:00:58.475+08:00"
+        cq:lastReplicatedBy="admin"
+        cq:lastReplicationAction="Activate"
+        jcr:isCheckedOut="{Boolean}true"
+        jcr:mixinTypes="[cq:ReplicationStatus,mix:versionable]"
+        jcr:primaryType="nt:unstructured"
+        jcr:uuid="e9914d8e-f144-436e-82cc-3bb2878ed6c2">
+        <homepagetemplate jcr:primaryType="nt:unstructured">
+            <ipar-header
+                jcr:lastModified="{Date}2018-06-26T00:12:32.750+08:00"
+                jcr:lastModifiedBy="admin"
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="foundation/components/iparsys"
+                components="/apps/turquoise/components/content/header">
+                <section jcr:primaryType="nt:unstructured"/>
+                <header
+                    jcr:lastModified="{Date}2018-07-30T02:13:50.714+08:00"
+                    jcr:lastModifiedBy="admin"
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="turquoise/components/content/header"
+                    alt="USGB Logo"
+                    disabledSso="true"
+                    logo="/content/dam/USGBoral/global/website/image/logo/usgboral.png"
+                    logo2="/content/dam/USGBoral/global/website/image/logo/usgboral-2x.png"/>
+            </ipar-header>
+            <par
+                jcr:lastModified="{Date}2018-08-12T17:30:18.089+08:00"
+                jcr:lastModifiedBy="admin"
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="foundation/components/parsys"
+                components="[/libs/foundation/components/reference,group:UIUXComponents,group:UIUXComponents-BG]">
+                <section jcr:primaryType="nt:unstructured"/>
+            </par>
+            <ipar-footer
+                jcr:lastModified="{Date}2018-06-26T00:12:47.637+08:00"
+                jcr:lastModifiedBy="admin"
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="foundation/components/iparsys"
+                components="/apps/turquoise/components/content/footer">
+                <section jcr:primaryType="nt:unstructured"/>
+            </ipar-footer>
+        </homepagetemplate>
+        <mastertemplate jcr:primaryType="nt:unstructured">
+            <par
+                jcr:lastModified="{Date}2018-08-12T18:00:21.276+08:00"
+                jcr:lastModifiedBy="admin"
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="foundation/components/parsys"
+                components="[group:UIUXComponents,group:UIUXComponents-BG]">
+                <section jcr:primaryType="nt:unstructured"/>
+            </par>
+        </mastertemplate>
+        <mastertemplate2 jcr:primaryType="nt:unstructured">
+            <bannerpar
+                jcr:lastModified="{Date}2018-07-18T12:15:34.728+08:00"
+                jcr:lastModifiedBy="admin"
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="foundation/components/parsys"
+                components="/apps/turquoise/components/content/hero-banner-component">
+                <section jcr:primaryType="nt:unstructured"/>
+            </bannerpar>
+            <breadcrumb
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="turquoise/components/content/breadcrumb"
+                startLevel="3"/>
+            <par
+                jcr:lastModified="{Date}2018-08-14T15:59:59.191+08:00"
+                jcr:lastModifiedBy="uiux_fe"
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="foundation/components/parsys"
+                components="[/libs/foundation/components/reference,group:UIUXComponents,group:UIUXComponents-BG]">
+                <section jcr:primaryType="nt:unstructured"/>
+            </par>
+        </mastertemplate2>
+        <mastertemplate3 jcr:primaryType="nt:unstructured">
+            <breadcrumb
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="turquoise/components/content/breadcrumb"
+                startLevel="3"/>
+            <par
+                jcr:lastModified="{Date}2018-08-12T17:18:12.026+08:00"
+                jcr:lastModifiedBy="admin"
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="foundation/components/parsys"
+                components="[group:UIUXComponents,/apps/turquoise/components/content/pd-container-fluid-placeholder]">
+                <section jcr:primaryType="nt:unstructured"/>
+                <wtb-reference
+                    jcr:lastModified="{Date}2018-08-12T03:29:54.216+08:00"
+                    jcr:lastModifiedBy="admin"
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="turquoise/components/content/wtb-reference"
+                    path="/content/usgboral/en_au/where-to-buy/jcr:content/par/where-to-buy-component"/>
+            </par>
+            <pd-mandatory jcr:primaryType="nt:unstructured">
+                <sticky-menu-component jcr:primaryType="nt:unstructured">
+                    <sub-menu-par
+                        jcr:lastModified="{Date}2018-08-12T17:16:45.440+08:00"
+                        jcr:lastModifiedBy="admin"
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="foundation/components/parsys"
+                        components="[group:UIUXComponents,/apps/turquoise/components/content/pd-container-fluid-placeholder]">
+                        <section jcr:primaryType="nt:unstructured"/>
+                    </sub-menu-par>
+                </sticky-menu-component>
+                <pd-description-component
+                    jcr:lastModified="{Date}2018-08-09T19:19:28.839+08:00"
+                    jcr:lastModifiedBy="admin"
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="turquoise/components/content/pd-description-component">
+                    <wtb-reference
+                        jcr:created="{Date}2018-08-09T19:34:03.431+08:00"
+                        jcr:createdBy="admin"
+                        jcr:lastModified="{Date}2018-08-09T19:36:42.837+08:00"
+                        jcr:lastModifiedBy="admin"
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="turquoise/components/content/wtb-reference"
+                        path="/content/usgboral/en_au/where-to-buy/jcr:content/par/where-to-buy-component"/>
+                </pd-description-component>
+            </pd-mandatory>
+        </mastertemplate3>
+        <mastertemplate4 jcr:primaryType="nt:unstructured">
+            <sticky-body jcr:primaryType="nt:unstructured">
+                <left-par
+                    jcr:lastModified="{Date}2018-07-05T23:31:03.057+08:00"
+                    jcr:lastModifiedBy="admin"
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="foundation/components/parsys"
+                    components="group:UIUXComponents">
+                    <section jcr:primaryType="nt:unstructured"/>
+                </left-par>
+                <right-par
+                    jcr:lastModified="{Date}2018-07-22T20:55:49.093+08:00"
+                    jcr:lastModifiedBy="admin"
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="foundation/components/parsys"
+                    components="[/apps/turquoise/components/content/freeform-image-component,/apps/turquoise/components/content/freeform-text-component,/apps/turquoise/components/content/sp-product-pages-component,/apps/turquoise/components/content/sp-product-resources-component]">
+                    <section jcr:primaryType="nt:unstructured"/>
+                </right-par>
+            </sticky-body>
+            <breadcrumb
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="turquoise/components/content/breadcrumb"
+                startLevel="3"/>
+            <par
+                jcr:lastModified="{Date}2018-08-12T18:00:45.901+08:00"
+                jcr:lastModifiedBy="admin"
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="foundation/components/parsys"
+                components="[group:UIUXComponents,group:UIUXComponents-BG]">
+                <section jcr:primaryType="nt:unstructured"/>
+            </par>
+        </mastertemplate4>
+        <emptytemplate jcr:primaryType="nt:unstructured">
+            <par
+                jcr:lastModified="{Date}2018-07-29T16:40:55.409+08:00"
+                jcr:lastModifiedBy="admin"
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="foundation/components/parsys"
+                components="[/libs/dam/components/scene7/dynamicmedia,/apps/turquoise/components/content/mix-media-player-component]">
+                <section jcr:primaryType="nt:unstructured"/>
+            </par>
+        </emptytemplate>
+        <mastertemplate5 jcr:primaryType="nt:unstructured">
+            <bannerpar
+                jcr:lastModified="{Date}2018-08-14T14:38:10.320+08:00"
+                jcr:lastModifiedBy="uiux_fe"
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="foundation/components/parsys"
+                components="[/apps/turquoise/components/content/hero-banner-component,/apps/turquoise/components/content/main-banner-component]">
+                <section jcr:primaryType="nt:unstructured"/>
+            </bannerpar>
+            <breadcrumb
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="turquoise/components/content/breadcrumb"
+                startLevel="3"/>
+            <sticky-menu-component jcr:primaryType="nt:unstructured">
+                <sub-menu-par
+                    jcr:lastModified="{Date}2018-08-12T19:13:19.297+08:00"
+                    jcr:lastModifiedBy="admin"
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="foundation/components/parsys"
+                    components="[group:UIUXComponents,/apps/turquoise/components/content/pd-container-fluid-placeholder]">
+                    <section jcr:primaryType="nt:unstructured"/>
+                </sub-menu-par>
+            </sticky-menu-component>
+            <par
+                jcr:lastModified="{Date}2018-08-14T15:55:11.529+08:00"
+                jcr:lastModifiedBy="uiux_fe"
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="foundation/components/parsys"
+                components="[/libs/foundation/components/reference,group:UIUXComponents,/apps/turquoise/components/content/pd-container-fluid-placeholder]">
+                <section jcr:primaryType="nt:unstructured"/>
+            </par>
+        </mastertemplate5>
+    </jcr:content>
+</jcr:root>

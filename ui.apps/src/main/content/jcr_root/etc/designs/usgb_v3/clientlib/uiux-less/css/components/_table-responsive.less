@@ -1,0 +1,99 @@
+// ----------------------------------------------------------------------
+
+  // Table Responsive (Product Slider)
+
+// ----------------------------------------------------------------------
+
+//reset
+.table-responsive{
+    border:none;
+    margin:0;
+    padding:0;
+}
+
+
+//product page slider
+.slider-wrapper{
+    @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+        /* IE10+ CSS styles go here */
+        padding-bottom: 30px;
+    }
+
+    .pn-ProductNav_Link{
+       .group{
+            display: inline-block;
+            color: #333333;
+            font-size: 16px;
+       }
+    }
+    
+    .pn-ProductNav_Link + .pn-ProductNav_Link {
+        margin-left: 11px;
+        padding-left:11px;
+        border-left: 1px solid #eee;
+        @media (min-width:768px){
+            margin-left: 20px;
+            padding-left:20px;
+        }
+    }
+     &:hover{
+        -ms-overflow-style: -ms-autohiding-scrollbar;
+    }
+
+}
+
+.pn-rightArrow{
+    right: 5px;
+}
+.pn-leftArrow{
+    left: 5px;
+}
+.pn-ProductNav_Wrapper {
+    position: relative;
+    padding:0 25px;
+    width: 100%;
+    @media (min-width:768px) {
+        padding:0 40px;
+        width: 60%;
+    }
+}
+.pn-Advancer{
+    z-index: 98;
+}
+
+//////////////////
+//Align Items 
+//////////////////
+.s-items-middle{
+    position: absolute;
+    top: 40%;
+}
+
+.s-items-right{
+    position: absolute;
+    right: 0;
+}
+.s-items-left{
+    position: absolute;
+    left: 0;
+}
+
+/// slider with btns///
+.s-items-btn-middle{
+    top: 30px;
+}
+
+.s-items-btn-right{
+    position: absolute;
+    right: 0;
+}
+
+.s-items-btn-left{
+    position: absolute;
+    left: 0;
+}
+
+
+
+
+

@@ -1,0 +1,23 @@
+<template data-sly-template.reload="${@ isTouchAuthoring}">
+<script type="text/javascript" data-sly-test="${isTouchAuthoring}">
+    $(function () {
+    	if(!$.reloadWCMMode) {
+            var parent = window.parent;
+            
+            if( parent != window ){
+                var p$ = parent.jQuery;
+                var currentWcmMode = p$.cookie('wcmmode');
+                
+                p$(parent.document).on('cq-layer-activated', function (event) {
+                    var layerModeName = event.layer.toLowerCase();
+                    if(layerModeName != "preview") layerModeName = "edit";
+                    if(currentWcmMode != layerModeName) {
+                        parent.location.reload();
+                    }
+	            });
+            }
+		    $.reloadWCMMode = true;
+    	}
+    });
+</script>
+</template>

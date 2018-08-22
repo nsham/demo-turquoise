@@ -1,0 +1,13 @@
+.coral-Multifield-input .coral-Textfield{
+	width: 60%;
+}
+
+.coral-Multifield-input .coral-vanityDiv{
+	width: 35%;
+    display: inline-block;
+    padding-top: 10px;
+}
+.coral-Modal-backdrop {z-index:9998 !important;background-color:rgba(0,0,0,0.3) !important}
+/*.coral-Modal {z-index:9999 !important}*/
+
+.coral-Dialog.is-open {width: auto !important;}/*101017-added by Shahlan, for microsite Img with Txt component*/

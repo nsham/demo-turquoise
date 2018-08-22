@@ -1,0 +1,292 @@
+// ----------------------------------------------------------------------
+// Component: CTA Hover Slide Up Tile
+// ----------------------------------------------------------------------
+
+.cta-hover-slideup-tile{
+    position: relative;
+    display: block;
+    padding: 15px;
+    overflow: hidden;
+    &:hover{
+        .small-size .bg-tile-hover,
+        .big-size .bg-tile-hover{
+            background-color: rgba(0, 0, 0, 0.6);
+            top: 0;
+        }
+        .cta-hover-slideup-tile-label{
+            display: none;
+        }
+        .cta-hover-slideup-tile-label-complete{
+            display: block;
+        }
+    }
+    .big-size{
+        position: relative;
+        min-height: 200px;
+        @media(min-width: 992px){
+            min-height: 400px;
+            .bg-tile-hover{
+                top: 77%;
+            }
+        }
+    }
+    .small-size{
+        position: relative;
+        min-height: 200px;
+        .cta-hover-slideup-tile-label{
+            font-size: 16px;
+        }
+        .bg-tile-hover{
+            top: 65%;
+        }
+    }
+
+    .cta-hover-slideup-tile-text-group{
+        z-index: 10;
+    }
+    
+    .cta-hover-slideup-tile-label{
+        font-size: 16px;
+        line-height: 22px;
+        font-weight: 700;
+        display: block;
+        height: 45px;
+        overflow: hidden;
+        @media(min-width: 992px){
+            font-size: 22px;
+            line-height: 27px;
+            height: 60px;
+        }
+    }
+
+    .cta-hover-slideup-tile-label-complete{
+        display: none;
+        font-size: 18px;
+        line-height: 22px;
+        font-weight: 700;
+        @media(min-width: 992px){
+            font-size: 24px;
+            line-height: 28px;
+        }
+    }
+
+    .cta-hover-slideup-tile-link{
+        color: @color-primary-yellow;
+        display: block;
+        font-size: 12px;
+    }
+
+    .bg-tile-hover{
+        background-color: rgba(0, 0, 0, 0.3);
+        position: absolute;
+        top: 60%;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 5;
+        -webkit-transition: all ease 300ms;
+        -o-transition: all ease 300ms;
+        transition: all ease 300ms;
+        margin: -15px;
+        padding: 10px 15px;
+    }
+
+    /* Content Vertical Alignment */
+    .va-top{
+        position: absolute;
+        top: 0;
+    }
+
+    .va-middle{
+        position: absolute;
+        top: 50%;
+        -webkit-transform: translateY(-50%);
+            -ms-transform: translateY(-50%);
+                transform: translateY(-50%);
+    }
+
+    .va-bottom{
+        position: absolute;
+        bottom: 0;
+    }
+    /* END of Content Vertical Alignment */
+
+    /* Content Horizontal Alignment */
+    .ha-left{
+        position: absolute;
+        left: 0;
+    }
+
+    .ha-center{
+        position: absolute;
+        left: 50%;
+        -webkit-transform: translateX(-50%);
+            -ms-transform: translateX(-50%);
+                transform: translateX(-50%);
+    }
+
+    .ha-right{
+        position: absolute;
+        right: 0;
+    }
+    /* END of Content Horizontal Alignment */
+
+    /* Centerise Content*/
+    .center{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -webkit-transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+                transform: translate(-50%, -50%);
+        text-align: center;
+    }
+    /* END of Centerise Content*/
+}
+
+
+
+
+.mid-container .cta-hover-slideup-tile{
+    position: relative;
+    display: block;
+    padding: 15px;
+    overflow: hidden;
+    &:hover{
+        .small-size .bg-tile-hover,
+        .big-size .bg-tile-hover{
+            background-color: rgba(0, 0, 0, 0.6);
+            top: 0;
+        }
+        .cta-hover-slideup-tile-label{
+            display: none;
+        }
+        .cta-hover-slideup-tile-label-complete{
+            display: block;
+        }
+    }
+    .big-size{
+        position: relative;
+        min-height: 200px;
+        @media(min-width: 992px){
+            min-height: 330px;
+            .bg-tile-hover{
+                top: 77%;
+            }
+        }
+    }
+    .small-size{
+        position: relative;
+        min-height: 200px;
+        .cta-hover-slideup-tile-label{
+            font-size: 16px;
+        }
+        .bg-tile-hover{
+            top: 65%;
+        }
+    }
+
+    .cta-hover-slideup-tile-text-group{
+        z-index: 10;
+    }
+    
+    .cta-hover-slideup-tile-label{
+        font-size: 16px;
+        line-height: 22px;
+        font-weight: 700;
+        display: block;
+        height: 45px;
+        overflow: hidden;
+        @media(min-width: 992px){
+            font-size: 22px;
+            line-height: 27px;
+            height: 60px;
+        }
+    }
+
+    .cta-hover-slideup-tile-label-complete{
+        display: none;
+        font-size: 18px;
+        line-height: 22px;
+        font-weight: 700;
+        @media(min-width: 992px){
+            font-size: 24px;
+            line-height: 28px;
+        }
+    }
+
+    .cta-hover-slideup-tile-link{
+        color: @color-primary-yellow;
+        display: block;
+        font-size: 12px;
+    }
+
+    .bg-tile-hover{
+        background-color: rgba(0, 0, 0, 0.3);
+        position: absolute;
+        top: 60%;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 5;
+        -webkit-transition: all ease 300ms;
+        -o-transition: all ease 300ms;
+        transition: all ease 300ms;
+        margin: -15px;
+        padding: 10px 15px;
+    }
+
+    /* Content Vertical Alignment */
+    .va-top{
+        position: absolute;
+        top: 0;
+    }
+
+    .va-middle{
+        position: absolute;
+        top: 50%;
+        -webkit-transform: translateY(-50%);
+            -ms-transform: translateY(-50%);
+                transform: translateY(-50%);
+    }
+
+    .va-bottom{
+        position: absolute;
+        bottom: 0;
+    }
+ 
+
+    /* END of Content Vertical Alignment */
+
+    /* Content Horizontal Alignment */
+    .ha-left{
+        position: absolute;
+        left: 0;
+    }
+
+    .ha-center{
+        position: absolute;
+        left: 50%;
+        -webkit-transform: translateX(-50%);
+            -ms-transform: translateX(-50%);
+                transform: translateX(-50%);
+    }
+
+    .ha-right{
+        position: absolute;
+        right: 0;
+    }
+    /* END of Content Horizontal Alignment */
+
+    /* Centerise Content*/
+    .center{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -webkit-transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+                transform: translate(-50%, -50%);
+        text-align: center;
+    }
+    /* END of Centerise Content*/
+}

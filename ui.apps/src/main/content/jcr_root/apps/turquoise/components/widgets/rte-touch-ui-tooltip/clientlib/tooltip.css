@@ -1,0 +1,13 @@
+.eaem-touchui-tooltip::before {
+    content: "\f156";
+}
+a {
+    color: #22A8DA;
+    text-decoration: underline;
+}
+
+.lk2[data-toggle="popover"] {
+    text-decoration: none;
+    border-bottom-style: dashed;
+    border-bottom-width: thin;
+}

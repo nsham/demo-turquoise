@@ -1,0 +1,146 @@
+// ----------------------------------------------------------------------
+// Component: CTA Hover Tile
+// ----------------------------------------------------------------------
+
+.cta-hover-tile{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: block;
+    //padding: 15px;
+
+    .bg-overlay {
+        position: relative;
+    }
+
+    &.subhero{
+        .bg-overlay {
+            position: absolute;
+        }
+    }
+
+    &.box-size-l{
+        min-height: auto;
+    }
+
+    &:hover{
+        .bg-tile-hover{
+            background-color: @color-primary-green;
+            opacity: .8;
+        }
+        .bg-tile-hover-2{
+            background-color: @color-primary-green;
+            opacity: .8;
+        }
+    }
+    .big-size{
+        position: relative;
+        min-height: 100px;
+        @media(min-width: 992px){
+            min-height: 400px;
+        }
+        @media (max-width:768px) {
+            min-height:400px; 
+        }
+    }
+
+    .small-size{
+        position: relative;
+        min-height: 100px;
+    }
+    
+    .cta-hover-tile-label{
+        z-index: 10;
+        line-height: 1.5;
+        font-family: @noto;
+        font-weight: 400;
+        position: relative;
+        *{
+            margin-bottom: 0;
+        }
+    }
+
+    .bg-tile-hover{
+        background-color: @color-black;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 5;
+        opacity: .3;
+        -webkit-transition: all ease 300ms;
+        -o-transition: all ease 300ms;
+        transition: all ease 300ms;
+        margin: -15px;
+    }
+
+   
+    /* Content Vertical Alignment */
+    .va-top{
+        position: absolute;
+        top: 0;
+    }
+    /*
+    .va-middle{
+        
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+       
+    } */
+    
+    .va-sm-middle{
+        @media(min-width: 768px){
+            position: absolute;
+            top: 50%;
+            -webkit-transform: translateY(-50%);
+                -ms-transform: translateY(-50%);
+                    transform: translateY(-50%);
+        }
+    }
+    .va-bottom{
+        position: absolute;
+        bottom: 0;
+    }
+  
+    .va-md-bottom{
+        @media (min-width:1980px) {
+            position: absolute;
+            bottom: 0;
+        }
+    }
+    /* END of Content Vertical Alignment */
+
+    /* Content Horizontal Alignment */
+    .ha-left{
+        position: absolute;
+        left: 0;
+    }
+
+    .ha-center{
+        position: absolute;
+        left: 50%;
+        -webkit-transform: translateX(-50%);
+            -ms-transform: translateX(-50%);
+                transform: translateX(-50%);
+    }
+
+    .ha-right{
+        position: absolute;
+        right: 0;
+    }
+    /* END of Content Horizontal Alignment */
+
+    /* Centerise Content*/
+    .center{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -webkit-transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+                transform: translate(-50%, -50%);
+        text-align: center;
+    }
+    /* END of Centerise Content*/
+}

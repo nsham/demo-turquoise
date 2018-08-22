@@ -1,0 +1,7 @@
+.coral-FixedColumn-column {
+    width: 100%;
+}
+
+.coral-FixedColumn-column .htmlarea-field {
+    height: 100vh;
+}

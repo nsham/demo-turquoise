@@ -1,0 +1,69 @@
+.bg-gradient-green-x{
+	background: linear-gradient(to right, #5f0604, #f8614f);
+
+}
+
+.indicator-wrap{
+    background: #f8614f;
+}
+
+.color-secondary-blue{
+	#color : #b3d4fc;
+
+}
+
+.icon-color-green{
+	color: #f8614f;
+
+}
+
+.icon-color-green:hover,
+.icon-color-green:focus,
+.icon-color-green:active {
+  color: #000000;
+
+}
+
+.glyphicon{
+	color: #ff6154;
+}
+
+.no-bg-overlay:hover,
+.no-bg-overlay:focus,
+.no-bg-overlay:active {
+  transition: .5s ease;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+  top: 0;
+  left: 0;
+  position: relative;
+
+}
+
+.button-outline-red {
+    border: 2px solid #f8614f;
+    color: #f8614f;
+    border-color: #f8614f;
+    background-color: transparent;
+}
+
+.button-outline-red:hover {
+  background-color: #f8614f;
+  color: #000000 !important;
+}
+.button-outline-red:focus {
+  color: #f8614f;
+}
+.button-outline-red svg {
+  fill: #f8614f;
+}
+
+.round-image.border {
+    border: 6px solid #f8614f;
+}
+
+::placeholder{
+color: f8614f;
+opacity: 1;
+}
